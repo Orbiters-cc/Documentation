@@ -50,3 +50,8 @@ This is a high-level map of the Orbiters data model. It is not a full schema dum
 
 New models must avoid column-level `unique: true`. Use named indexes instead. New enum columns on no-alter tables need explicit migration blocks and enum value registration where applicable.
 
+<alpha>
+
+The MCB custom-base adoption and path-identity contract is documented in [ADR 0003 - MCB Custom Base Adoption And Path Identity](../decisions/0003-mcb-custom-base-adoption-and-path-identity.md). Canonical source identity is stored in `AvatarBaseSourceRevisions` and `AvatarBaseSourceFiles`. `McbAvatarInstances` scopes component observations by user and workspace, `McbPathBindings` stores lifecycle-managed project-relative path history tied to canonical source identity, and `McbInstanceEvents` records registration, lineage, and recovery decisions. The Unity component remains operationally authoritative and locally revalidates every server suggestion. The former unscoped `AvatarPathOverrides` model is not part of the runtime contract; an existing physical table may remain dormant until a separately reviewed destructive migration removes it.
+
+</alpha>
