@@ -43,6 +43,7 @@ MCB should recommend and preselect a branch when the evidence is exact. The crea
 | --- | --- | --- | --- |
 | Every live target hash matches one known avatar-base source revision | Original/default base | Hidden | Hidden |
 | Live hashes differ, but every `.originalbase` sidecar matches one known source revision | Already customized base | Hidden because valid keys already exist | Shown |
+| Original FBX hashes match, but a renderer owned by that base uses a mesh from another asset | Already customized base recommended, creator can choose | Hidden because the untouched original FBX can seed the key | Shown for the recommended branch |
 | Live hashes differ and a required original key is missing | Already customized base | Required | Shown |
 | More than one avatar base or source mapping is possible | No automatic choice | Blocked until resolved | Follows the resolved branch |
 | A new `Other` base is explicitly declared | Creator choice | Required only for an already-customized base | Follows the chosen branch |
@@ -50,6 +51,8 @@ MCB should recommend and preselect a branch when the evidence is exact. The crea
 Selecting `Winterpaw` by name is not sufficient evidence. MCB must compare the current hashes with Winterpaw's canonical source revision. When they match, it selects Winterpaw, recommends `Original/default base`, and does not show `.unitypackage` or raw-FBX inputs. When they do not match, source input remains required unless a valid `.originalbase` key already exists.
 
 Photoshoot remains branch-specific. It is shown only when the scene already contains the final shareable custom base.
+
+FBX hashes alone do not describe the final scene. MCB also compares base-owned renderer paths from the detected original FBX with the meshes assigned to those renderers in the scene. A mesh from another FBX or generated asset is customization evidence. MCB reports the affected renderers, recommends the already-customized branch, and preserves the creator's explicit scene-mode choice. Unrelated clothing renderers are ignored because their hierarchy paths are not owned by the detected base FBX.
 
 ## Canonical Avatar Base Fingerprints
 
@@ -155,6 +158,8 @@ This split is used because relative paths survive common project exports and imp
 
 Discovery may accept a minimal request-scoped override mapping from the current component. That mapping is a compatibility hint, not authorization. The evaluator must be a pure service, consume source and local files one-to-one, and return match provenance. It must not reuse one hash-only override or one local file for multiple source files.
 
+Discovery also accepts a separate hash inventory for `.originalbase` sidecars. Each entry uses the live target's project-relative path and the sidecar's hash; the sidecar filename itself is not published as an asset source path. This allows an applied custom FBX to remain compatible with assets built for its proven original base. Live files and source-key files share one consumed-target set, so one target cannot satisfy multiple required source slots.
+
 When canonical source hashes exist, failure to match them is authoritative. Compatibility must not fall back to path-only `projectRecognitionPatterns`, because a different or already-modified FBX can still occupy the expected path.
 
 The former unscoped `AvatarPathOverride` contract remains removed. Its replacement is deliberately split into `McbAvatarInstance`, `McbPathBinding`, and `McbInstanceEvent`, with named indexes, ownership scope, lifecycle state, and acceptance provenance. Existing deployments may still contain the old physical table; it remains dormant until a separately reviewed destructive migration removes it.
@@ -197,6 +202,8 @@ The feature is not complete until automated coverage includes:
 - public asset responses contain no creator-local path, GUID, backup token, or component tracking metadata;
 - instance sync rejects source bindings outside the selected accessible asset and scopes history to the authenticated owner;
 - recovery suggestions are complete, one-to-one, locally hash-verified, and explicitly accepted before use;
+- applied custom FBXs remain discoverable through matching `.originalbase` hashes without weakening live-file matching;
+- a base-owned SMR mesh swap recommends the already-customized flow while unrelated clothing renderers do not;
 - package export/import reaches a deterministic `ready` or `source key required` state.
 
 ## Implementation Order
@@ -225,7 +232,10 @@ The current implementation includes:
 - separate lineage, component, server-instance, installation, project, and workspace identities with duplicate-copy rotation;
 - owner-scoped server instance, path-binding, and event records with named natural-key indexes and deactivation semantics;
 - complete, one-to-one recovery suggestions that are revalidated against the current avatar and canonical source key before confirmation;
-- source-binding canonicalization against the selected accessible asset and explicit accepted/declined recovery provenance.
+- source-binding canonicalization against the selected accessible asset and explicit accepted/declined recovery provenance;
+- separate live-FBX and `.originalbase` discovery inventories with shared one-to-one target consumption;
+- scene renderer provenance that detects base-owned mesh swaps and keeps the creator's scene-mode choice explicit;
+- source-key UI that distinguishes a validated existing key from a required import and allows replacing the validated source.
 
 Still deferred:
 
