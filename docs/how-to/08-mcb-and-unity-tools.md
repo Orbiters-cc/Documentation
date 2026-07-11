@@ -58,4 +58,6 @@ If the tool cannot connect:
 
 The legacy `unity-wizard` routes and newer `mcb` routes overlap. Avoid adding new behavior to the legacy path unless the caller still depends on it.
 
+MCB UI Toolkit builds must not be re-entered by cache or network callbacks. User-info cache hits defer completion until after the current editor callback returns. Version rows request user metadata only when it is absent and subscribe separately to avatar-image completion. Asset thumbnails, banners, and author images update existing image controls through the bounded dynamic-content refresh instead of recursively rebuilding the complete inspector. Preserve this separation when adding asynchronous UI data.
+
 </audience>
