@@ -22,6 +22,14 @@ issue in a column without merging their source-of-truth rules.
 The user-facing action may still say **Submit an idea**. The underlying general
 product term is **Board**, and the canonical idea object is **Proposal**.
 
+The website groups these concepts under `/idea-box`. Its default workspace combines
+the active Board selector, proposal search and filters, Kanban columns, and a
+selected-item preview without navigating away. Product research remains available
+as a secondary Idea Box view, while `/boards/:id`, `/proposals/:id`, and
+`/research/:id` remain focused detail routes. Internal navigation uses React Router
+so switching between these surfaces does not reload the development bundle or
+repeat authentication refreshes.
+
 ## Data Model
 
 `Board` owns name, slug, description, type, visibility, columns, owner, and optional
@@ -113,6 +121,12 @@ The alpha REST surface includes:
 - `/proposals` for filtered listing, creation, and export;
 - `/proposals/:id` for content, updates, comments, and product decisions;
 - `/proposals/:id/github-link` for a staff-managed link to one synchronized issue.
+
+The Kanban workspace uses only fields returned by these routes. Scores, comments,
+visibility, author, placement, GitHub state, dates, and forecast values must never be
+filled with decorative sample data. The proposal detail page may rearrange those
+real fields into summary, activity, context, and related-information panels, but an
+unavailable metric is omitted rather than invented.
 
 GitHub-backed items are read-only. A request that changes their Project column is
 rejected until a separately reviewed write-sync phase exists. Linking a Proposal to

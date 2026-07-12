@@ -108,9 +108,35 @@ to the reviewed `general` domain, Website includes `website` and `operations`, a
 Tools includes `mcb`, `refit`, `unitgit`, and `xraygizmos`. MCP callers can apply the
 same category filter or request an exact domain.
 
+`/knowledge` is the discovery landing page rather than an automatic redirect to the
+first document. It presents those three groups, recently updated pages, quick-access
+routes, and full-text search. `/knowledge/:id` remains the focused document reader.
+
 It also provides `orbiters://knowledge/{id}`, `orbiters://research-reports/{id}`,
 and `orbiters://proposals/{id}` resource templates. A missing or unauthorized object
 is returned as absent, not leaked through a more descriptive authorization error.
+
+## Administrator MCP Setup
+
+The admin panel's **MCP Setup** tab is the connection handoff for local coding
+agents. It creates, lists, and revokes reveal-once `ORBITERS_MCP` tokens using the
+existing API-key storage. The raw value is displayed only in the creation response.
+
+For Codex, add the environment-specific endpoint to `config.toml` and keep the token
+outside that file:
+
+```toml
+[mcp_servers.orbiters]
+url = "https://dev.api.orbiters.cc/mcp"
+bearer_token_env_var = "ORBITERS_MCP_TOKEN"
+required = true
+```
+
+Set `ORBITERS_MCP_TOKEN` in the local agent environment to the reveal-once value.
+Production uses `https://api.orbiters.cc/mcp`. Other Streamable HTTP clients use the
+same endpoint and `Authorization: Bearer <token>` header. The source identifier
+`orbiters-mcp` in a Product Steward profile means that this permission-filtered MCP
+surface is available to the local run; it is not a filesystem path.
 
 ## Duplicate-Idea Guard
 

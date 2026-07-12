@@ -38,6 +38,15 @@ the matching `environment`. The backend resolves the active runtime environment 
 rejects attempts to authorize the other environment. Never reuse a production client
 secret in a developer database.
 
+The **Connect GitHub** button can start authorization only after GitHub has issued
+the client ID and secret; those values cannot be discovered by an OAuth redirect.
+When configuration is missing, the admin GitHub tab therefore shows a one-time
+setup card with links to GitHub OAuth App registration and Orbiters API Keys, plus a
+copyable exact callback URL. The development callback is
+`https://dev.api.orbiters.cc/github/oauth/callback`; production uses
+`https://api.orbiters.cc/github/oauth/callback`. Register those as separate OAuth
+Apps, then add the three environment-matched values before connecting.
+
 OAuth state is random, stored as a SHA-256 hash, expires after ten minutes, is bound
 to the initiating user, connection kind, and environment, and can be consumed only
 once. The callback is `/github/oauth/callback`.

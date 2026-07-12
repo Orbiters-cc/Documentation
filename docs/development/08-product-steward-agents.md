@@ -48,7 +48,9 @@ runs do not require server-side model inference.
 The `/admin/agents` routes require the `admin-agents` feature. An administrator can:
 
 1. Create or update a Product Steward and its visible User identity.
-2. Create the predefined MCB pilot profile through `/admin/agents/mcb-pilot`.
+2. Ensure the six standard Product Stewards exist through
+   `POST /admin/agents/seed-presets`: Orbiters Website / Platform, MCB, ReFit,
+   UnitGit, XRayGizmos, and Documentation (knowledge base).
 3. Issue a scoped, expiring, rate-limited token and reveal it once.
 4. Create an `AgentRun` with one explicit research objective.
 5. Copy the returned versioned research brief to a local agent.
@@ -68,6 +70,15 @@ ORBITERS_AGENT_TOKEN=orb_agent_example-not-a-real-token
 
 Never paste a real token into the brief, report, comment, source citation, shell
 history, or documentation.
+
+Preset seeding is idempotent and serialized with a PostgreSQL advisory transaction
+lock so duplicate agent Users are not created by concurrent administrator requests.
+An existing domain match keeps its sponsor and human-edited charter while receiving
+the stable preset marker. The administrator form calls the charter **Mission and
+decision scope**, accepts a suggested or custom target audience, and explains each
+allowed source. `orbiters-mcp` means the local agent reads the Knowledge Base,
+reports, comments, Proposals, decisions, Boards, and deployment reports through the
+configured MCP endpoint.
 
 ## Token Contract
 
@@ -137,8 +148,8 @@ Before writing recommendations, the agent must:
 7. Compare each recommendation with prior concepts and classify the relationship.
 8. Submit at most three high-value recommendations in one private report.
 
-The MCB pilot charter explicitly rejects large lists of small bugs, automatic issue
-creation, code changes, and unreviewed publishing.
+Every standard charter explicitly rejects large lists of small bugs, automatic
+issue creation, code changes, and unreviewed publishing.
 
 ## Product Research Report Contract
 
@@ -166,7 +177,7 @@ recommendation, or promote it to a private Proposal. Promotion is replay-safe an
 records an accepted decision. Human comments remain attached to the report and are
 returned to subsequent authorized runs.
 
-## MCB Pilot Acceptance Test
+## Product Steward Acceptance Test
 
 1. Create the MCB Product Steward and confirm its profile is visibly marked as an
    agent that cannot authenticate as a human.

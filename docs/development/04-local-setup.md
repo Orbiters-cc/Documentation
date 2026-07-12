@@ -53,6 +53,13 @@ Development:
 docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
 ```
 
+The development override builds the frontend's `development` stage, bind-mounts
+source, and keeps `/usr/src/app/node_modules` in an anonymous container volume. This
+prevents the host mount from hiding Linux dependencies. File watching uses Webpack
+polling on Windows. Do not replace internal React Router links with document `href`
+navigation: a full request downloads and recompiles the development bundle and makes
+otherwise-fast local pages appear slow.
+
 Production-shaped local run:
 
 ```bash
