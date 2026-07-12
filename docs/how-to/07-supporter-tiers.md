@@ -4,6 +4,11 @@ section: Creator Tools
 order: 43
 audience: creator, admin, dev
 stage: stable
+id: orbiters.how-to.supporter-tiers
+domain: website
+type: how-to
+owner: orbiters-product
+lastVerified: 2026-07-12
 ---
 
 # Supporter Tiers
@@ -39,4 +44,3 @@ Supporter-tier access grants public access only. It does not grant beta or alpha
 `accessPolicyService.findTierAccess` checks active `SupporterStatus` rows for tiers linked through `AssetTierAccess`, then returns public access when the requested scope is `public`.
 
 </audience>
-

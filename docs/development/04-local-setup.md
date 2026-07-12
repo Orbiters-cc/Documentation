@@ -4,6 +4,11 @@ section: Development
 order: 63
 audience: dev
 stage: stable
+id: orbiters.development.local-setup
+domain: website
+type: how-to
+owner: orbiters-engineering
+lastVerified: 2026-07-12
 ---
 
 # Local Setup
@@ -71,4 +76,3 @@ Linux or macOS:
 ```bash
 lsof -i :4200
 ```
-

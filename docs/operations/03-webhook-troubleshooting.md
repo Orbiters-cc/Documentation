@@ -4,6 +4,11 @@ section: Operations
 order: 52
 audience: creator, admin, dev
 stage: stable
+id: orbiters.operations.webhook-troubleshooting
+domain: operations
+type: runbook
+owner: orbiters-operations
+lastVerified: 2026-07-12
 ---
 
 # Webhook Troubleshooting
@@ -42,4 +47,3 @@ Gumroad and Lemon Squeezy use signed webhook flows. Jinxxy support depends on ac
 Webhook routes preserve the raw request body for signature validation. Provider modules own signature validation and webhook parsing. Do not validate signatures in route code unless the provider module delegates that exact concern.
 
 </audience>
-

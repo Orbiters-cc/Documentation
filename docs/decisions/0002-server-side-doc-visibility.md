@@ -4,6 +4,11 @@ section: Decisions
 order: 101
 audience: dev
 stage: stable
+id: orbiters.decision.server-side-doc-visibility
+domain: website
+type: decision
+owner: orbiters-engineering
+lastVerified: 2026-07-12
 ---
 
 # ADR 0002 - Server-Side Documentation Visibility
@@ -26,4 +31,3 @@ Filter documentation on the backend before the frontend receives Markdown. Page 
 - Frontend rendering remains simple.
 - Tests must cover both page-level and inline filtering.
 - Docs authors need to use frontmatter and inline tags consistently.
-

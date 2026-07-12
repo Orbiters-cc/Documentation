@@ -4,6 +4,11 @@ section: Operations
 order: 51
 audience: creator, mod, admin, dev
 stage: stable
+id: orbiters.operations.verification-and-appeals
+domain: operations
+type: runbook
+owner: orbiters-operations
+lastVerified: 2026-07-12
 ---
 
 # Verification and Appeals
@@ -44,4 +49,3 @@ Check these in order:
 Management routes under `/admin/verification` authorize either global admins or the creator owning the guild integration. Runtime verification reads guild-scoped presence state instead of the legacy global `User.verified` field.
 
 </audience>
-

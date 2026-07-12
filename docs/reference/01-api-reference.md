@@ -4,6 +4,11 @@ section: Reference
 order: 70
 audience: dev
 stage: stable
+id: orbiters.reference.api
+domain: website
+type: reference
+owner: orbiters-engineering
+lastVerified: 2026-07-12
 ---
 
 # API Reference
@@ -79,3 +84,22 @@ Admin routes use JWT auth and feature/rank gates depending on the area.
 
 Store webhook routes receive provider events. The `secret` segment identifies the store integration. Provider modules validate signatures and parse provider-specific payloads.
 
+<alpha>
+
+## Product Knowledge and Planning
+
+- `/knowledge` for permission-filtered Knowledge Base search and reads
+- `/mcp` for stateless, scoped MCP requests
+- `/github` for user GitHub identity linking
+- `/admin/github` for environment-specific read-only GitHub synchronization
+- `/admin/knowledge-base` for source, index, and MCP-token administration
+- `/boards` and `/proposals` for planning and moderation
+- `/forecasts` for private admin/developer projections
+- `/research-reports` for report review, comments, decisions, and promotion
+- `/admin/agents` for Product Steward profiles, tokens, briefs, and runs
+- `/agent/v1` for fixed scoped local-agent operations
+
+These endpoints are alpha and must not be exposed without their documented JWT,
+feature, audience, or scoped-token controls.
+
+</alpha>

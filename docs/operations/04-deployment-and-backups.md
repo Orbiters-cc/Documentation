@@ -4,11 +4,25 @@ section: Operations
 order: 53
 audience: admin, dev
 stage: stable
+id: orbiters.operations.deployment-and-backups
+domain: operations
+type: runbook
+owner: orbiters-operations
+lastVerified: 2026-07-12
 ---
 
 # Deployment and Backups
 
 Orbiters runs through Docker Compose, with Caddy routing traffic to frontend and backend services. Production deploys and backups are coordinated by GitHub Actions and scripts in the main repository.
+
+<alpha>
+
+The deploy script also appends versioned deterministic evidence for changed paths,
+documentation impact, backup checksum/upload, both schema preflight boots, images,
+synthetic checks, queue state, artifacts, and terminal outcome. See **Structured
+Deployment Reports** for interpretation and incident use.
+
+</alpha>
 
 ## Caddy Config
 
@@ -94,4 +108,3 @@ node scripts/orbiters-data.js hydrate --archive orbiters-prod.zip --env prod --f
 The production preflight runs backend database initialization with `EXIT_AFTER_DATABASE_INIT=true`, `SKIP_EXTERNAL_STARTUP=true`, `FAIL_FAST=true`, and `PORT=4200` against a cloned Postgres container. It should catch schema sync failures before touching the live database schema.
 
 </audience>
-

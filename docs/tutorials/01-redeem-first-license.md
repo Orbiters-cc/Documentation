@@ -4,6 +4,11 @@ section: Tutorials
 order: 20
 audience: public, user
 stage: stable
+id: orbiters.tutorial.redeem-first-license
+domain: website
+type: tutorial
+owner: orbiters-product
+lastVerified: 2026-07-12
 ---
 
 # Redeem Your First License
@@ -42,4 +47,3 @@ Check that you copied the full key and that you are redeeming the right asset. I
 - the visible error message.
 
 Do not post your full license key in a public channel.
-

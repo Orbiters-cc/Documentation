@@ -4,6 +4,11 @@ section: Architecture
 order: 91
 audience: dev
 stage: stable
+id: orbiters.architecture.runtime-flows
+domain: website
+type: explanation
+owner: orbiters-engineering
+lastVerified: 2026-07-12
 ---
 
 # Runtime Flows
@@ -68,4 +73,3 @@ sequenceDiagram
     Backend->>Backend: Filter audience and release stage
     Backend-->>Browser: Allowed page list or page content
 ```
-

@@ -4,6 +4,11 @@ section: Architecture
 order: 93
 audience: admin, dev
 stage: stable
+id: orbiters.architecture.storage-and-files
+domain: website
+type: explanation
+owner: orbiters-engineering
+lastVerified: 2026-07-12
 ---
 
 # Storage and Files
@@ -42,4 +47,3 @@ The periodic monitor builds usage summaries and saves snapshots. In normal mode,
 ## Health Check
 
 The R2 health check verifies config, backend egress IP, public bucket write/read/delete, private bucket write/read/delete, and private presigned URL fetch behavior.
-

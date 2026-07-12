@@ -80,8 +80,23 @@ section: Navigation section
 order: 100
 audience: public
 stage: stable
+id: orbiters.domain.unique-name
+domain: website
+type: how-to
+owner: orbiters-docs
+lastVerified: 2026-07-12
 ---
 ```
 
 Use explicit `slug:` only when the filename cannot produce the desired URL slug.
 
+`id` is a permanent lookup key. Do not reuse or rename it when a page moves. `domain`
+identifies the product area; `type` uses the Diataxis-oriented values `tutorial`,
+`how-to`, `reference`, `explanation`, `decision`, `runbook`, or `invariant`.
+`owner` names the team responsible for accuracy. Update `lastVerified` only after
+checking the page against current behavior.
+
+Run `node scripts/validate-docs.js` before submitting documentation changes. The
+validator rejects missing metadata, duplicate IDs or slugs, unknown audience/stage/
+domain/type values, broken relative Markdown links, malformed visibility blocks,
+and placeholder markers.

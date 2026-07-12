@@ -4,6 +4,11 @@ section: Creator Tools
 order: 40
 audience: creator, admin, dev
 stage: stable
+id: orbiters.how-to.configure-creator-assets
+domain: website
+type: how-to
+owner: orbiters-product
+lastVerified: 2026-07-12
 ---
 
 # Creator Assets
@@ -43,4 +48,3 @@ If an asset has a related Discord role, Orbiters queues a role grant when a user
 Discord role writes go through `OutboxJob` rows and `outboxService`. Purchase, redemption, webhook, and sync code should enqueue role operations rather than mutating Discord roles inline.
 
 </audience>
-

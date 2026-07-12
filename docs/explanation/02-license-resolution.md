@@ -4,6 +4,11 @@ section: Explanation
 order: 81
 audience: creator, admin, dev
 stage: stable
+id: orbiters.explanation.license-resolution
+domain: website
+type: explanation
+owner: orbiters-engineering
+lastVerified: 2026-07-12
 ---
 
 # License Resolution
@@ -41,4 +46,3 @@ Resolution can fail because:
 The hard live request budget is defined in `licenseResolutionService`. Keep provider probes deterministic in tests and stub remote clients.
 
 </audience>
-

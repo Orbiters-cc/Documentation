@@ -4,6 +4,11 @@ section: Explanation
 order: 80
 audience: public
 stage: stable
+id: orbiters.explanation.ecosystem
+domain: general
+type: explanation
+owner: orbiters-product
+lastVerified: 2026-07-12
 ---
 
 # Orbiters Ecosystem
@@ -33,4 +38,3 @@ Unity-facing tools call Orbiters to check account identity, discover assets, fet
 ## Staff And Developers
 
 Staff use admin and moderation tools to operate the system. Developers maintain backend services, frontend flows, provider integrations, deployment scripts, and documentation.
-

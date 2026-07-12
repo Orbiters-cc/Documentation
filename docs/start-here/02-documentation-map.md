@@ -4,6 +4,11 @@ section: Start Here
 order: 11
 audience: public
 stage: stable
+id: orbiters.start.documentation-map
+domain: general
+type: reference
+owner: orbiters-docs
+lastVerified: 2026-07-12
 ---
 
 # Documentation Map
@@ -59,4 +64,3 @@ Beta docs include upcoming workflows that are close enough to validate with crea
 Alpha docs include implementation notes and designs that can change quickly.
 
 </alpha>
-

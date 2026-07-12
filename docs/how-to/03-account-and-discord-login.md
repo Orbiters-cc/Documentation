@@ -4,6 +4,11 @@ section: How To
 order: 32
 audience: public, user
 stage: stable
+id: orbiters.how-to.account-and-discord-login
+domain: website
+type: how-to
+owner: orbiters-product
+lastVerified: 2026-07-12
 ---
 
 # Account and Discord Login
@@ -37,4 +42,3 @@ Discord server verification is not a single global flag. A user can be verified 
 OAuth login uses one Orbiters Discord application. Creator custom bots are gateway and REST clients only; they are not used for user OAuth.
 
 </audience>
-

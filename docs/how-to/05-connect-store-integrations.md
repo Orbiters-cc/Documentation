@@ -4,6 +4,11 @@ section: Creator Tools
 order: 41
 audience: creator, admin, dev
 stage: stable
+id: orbiters.how-to.connect-store-integrations
+domain: website
+type: how-to
+owner: orbiters-product
+lastVerified: 2026-07-12
 ---
 
 # Connect Store Integrations
@@ -68,4 +73,3 @@ Use a Lemon Squeezy API key. Store ID and webhook signing secret are optional. I
 Integrations store no foreign key to API key rows. Credentials are resolved at call time through `apiCredentialService` by `(type, ownerId)`. Key rotation should not break an integration; missing keys move the integration to `NEEDS_KEY`.
 
 </audience>
-

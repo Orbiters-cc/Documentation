@@ -4,6 +4,11 @@ section: Operations
 order: 50
 audience: mod, admin, dev
 stage: stable
+id: orbiters.operations.admin-and-moderation
+domain: operations
+type: runbook
+owner: orbiters-operations
+lastVerified: 2026-07-12
 ---
 
 # Admin and Moderation
@@ -55,4 +60,3 @@ The admin issue tools collect reports submitted from the frontend. Prioritize re
 `WebhookEvent` rows are deduplicated by store integration and external event ID. Already processed events are ignored on retry. Failed or incomplete events are reset to `RECEIVED` when the provider sends the same event again.
 
 </audience>
-

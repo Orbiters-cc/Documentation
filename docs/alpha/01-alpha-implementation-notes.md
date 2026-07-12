@@ -4,6 +4,11 @@ section: Alpha
 order: 210
 audience: dev
 stage: alpha
+id: orbiters.alpha.implementation-notes
+domain: website
+type: explanation
+owner: orbiters-engineering
+lastVerified: 2026-07-12
 ---
 
 # Alpha Implementation Notes
@@ -18,4 +23,3 @@ Use alpha pages for:
 - questions that need developer validation.
 
 Alpha pages should still be concrete. Do not use them as dumping grounds for placeholders.
-

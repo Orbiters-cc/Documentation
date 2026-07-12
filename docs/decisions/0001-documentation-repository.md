@@ -4,6 +4,11 @@ section: Decisions
 order: 100
 audience: dev
 stage: stable
+id: orbiters.decision.documentation-repository
+domain: website
+type: decision
+owner: orbiters-docs
+lastVerified: 2026-07-12
 ---
 
 # ADR 0001 - Documentation Repository
@@ -27,7 +32,8 @@ Move website and ecosystem documentation into a dedicated root `Documentation` r
 - Docker must mount the documentation repository into backend containers.
 - The parent repo needs submodule metadata that points to `https://github.com/Orbiters-cc/Documentation.git`.
 
-## Notes
+## Repository Boundary
 
-The remote documentation repository was empty when this structure was created locally. Do not push from an agent without an explicit user request.
-
+The Documentation repository is versioned independently. Application changes that
+alter user logic update and publish Documentation first, then record its new gitlink
+in the parent repository so CI and deployments resolve the reviewed content.

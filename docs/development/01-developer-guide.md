@@ -4,6 +4,11 @@ section: Development
 order: 60
 audience: dev
 stage: stable
+id: orbiters.development.developer-guide
+domain: website
+type: how-to
+owner: orbiters-engineering
+lastVerified: 2026-07-12
 ---
 
 # Developer Guide
@@ -54,4 +59,3 @@ The frontend uses `REACT_APP_BACKEND_URL` and calls direct paths such as `/docum
 ## Documentation
 
 Docs live in the root `Documentation` repository under `docs/`. The backend accepts `DOCUMENTATION_ROOT` for container and special local paths, but the default local path expects `Documentation/docs` beside `backend`.
-

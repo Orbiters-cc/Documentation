@@ -4,6 +4,11 @@ section: Architecture
 order: 90
 audience: dev
 stage: stable
+id: orbiters.architecture.overview
+domain: website
+type: explanation
+owner: orbiters-engineering
+lastVerified: 2026-07-12
 ---
 
 # Architecture Overview
@@ -41,4 +46,3 @@ flowchart LR
 - Backend testing must use alternate ports such as `4200`.
 - External vendors must be mocked in automated tests.
 - Documentation visibility is enforced server-side.
-

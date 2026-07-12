@@ -4,6 +4,11 @@ section: Reference
 order: 72
 audience: creator, admin, dev
 stage: stable
+id: orbiters.reference.store-providers
+domain: website
+type: reference
+owner: orbiters-engineering
+lastVerified: 2026-07-12
 ---
 
 # Store Provider Reference
@@ -42,4 +47,3 @@ Creators can rotate API keys without recreating integrations. Integrations resol
 Providers live under `backend/src/services/store/providers`. Each provider exposes normalized methods for account lookup, product sync, sale backfill, license probing, use counting when supported, webhook registration, signature validation, and webhook parsing.
 
 </audience>
-

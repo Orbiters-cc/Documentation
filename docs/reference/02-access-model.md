@@ -4,6 +4,11 @@ section: Reference
 order: 71
 audience: creator, admin, dev
 stage: stable
+id: orbiters.reference.access-model
+domain: website
+type: reference
+owner: orbiters-engineering
+lastVerified: 2026-07-12
 ---
 
 # Access Model Reference
@@ -51,4 +56,3 @@ Admin and moderation UI visibility can depend on feature access flags in additio
 Developer and owner ranks expand to creator, mod, admin, and dev audiences in documentation. Admin expands to mod and admin. Moderator expands to mod.
 
 </audience>
-

@@ -4,6 +4,11 @@ section: How To
 order: 30
 audience: public, user
 stage: stable
+id: orbiters.how-to.redeem-license-key
+domain: website
+type: how-to
+owner: orbiters-product
+lastVerified: 2026-07-12
 ---
 
 # Redeem a License Key
@@ -41,4 +46,3 @@ If a connected store sends a refund, chargeback, or license-disabled event that 
 The access decision is centralized in `accessPolicyService.canUserAccessAsset`. Do not duplicate redemption, enabled-state, scope, and supporter-tier checks inside individual routes.
 
 </audience>
-

@@ -4,6 +4,11 @@ section: Development
 order: 61
 audience: dev
 stage: stable
+id: orbiters.development.testing-strategy
+domain: website
+type: how-to
+owner: orbiters-engineering
+lastVerified: 2026-07-12
 ---
 
 # Testing Strategy
@@ -65,4 +70,3 @@ Add focused unit tests for:
 - provider webhook signature validation,
 - Payhip product JSON parsing,
 - creator store-link create, update, conflict, and delete behavior.
-

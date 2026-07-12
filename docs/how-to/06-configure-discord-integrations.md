@@ -4,6 +4,11 @@ section: Creator Tools
 order: 42
 audience: creator, admin, dev
 stage: stable
+id: orbiters.how-to.configure-discord-integrations
+domain: website
+type: how-to
+owner: orbiters-product
+lastVerified: 2026-07-12
 ---
 
 # Configure Discord Integrations
@@ -43,4 +48,3 @@ Verification rules and appeals are scoped per guild. A user can be verified in o
 `discordClientManager` is the only module that creates discord.js clients or calls `login()`. Other services resolve a guild-specific client through the manager.
 
 </audience>
-

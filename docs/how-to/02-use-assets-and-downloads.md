@@ -4,6 +4,11 @@ section: How To
 order: 31
 audience: public, user
 stage: stable
+id: orbiters.how-to.assets-and-downloads
+domain: website
+type: how-to
+owner: orbiters-product
+lastVerified: 2026-07-12
 ---
 
 # Assets and Downloads
@@ -39,4 +44,3 @@ If you can see the asset but cannot download a version, it usually means one of 
 Creators can stage versions by scope. Public versions are for normal users. Beta versions are for users granted beta or alpha scope. Alpha versions are for users granted alpha scope.
 
 Supporter-tier access grants public access only.
-

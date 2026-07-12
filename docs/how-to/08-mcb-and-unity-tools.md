@@ -4,6 +4,11 @@ section: Tools
 order: 44
 audience: public, user, creator, admin, dev
 stage: stable
+id: orbiters.how-to.mcb-and-unity-tools
+domain: mcb
+type: how-to
+owner: mcb-maintainers
+lastVerified: 2026-07-12
 ---
 
 # MCB and Unity Tools

@@ -4,6 +4,11 @@ section: Decisions
 order: 102
 audience: dev
 stage: alpha
+id: orbiters.decision.mcb-custom-base-path-identity
+domain: mcb
+type: decision
+owner: mcb-maintainers
+lastVerified: 2026-07-12
 ---
 
 # ADR 0003 - MCB Custom Base Adoption And Path Identity

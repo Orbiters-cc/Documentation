@@ -4,6 +4,11 @@ section: Architecture
 order: 92
 audience: dev
 stage: stable
+id: orbiters.architecture.data-model
+domain: website
+type: reference
+owner: orbiters-engineering
+lastVerified: 2026-07-12
 ---
 
 # Data Model Notes
@@ -53,5 +58,30 @@ New models must avoid column-level `unique: true`. Use named indexes instead. Ne
 <alpha>
 
 The MCB custom-base adoption and path-identity contract is documented in [ADR 0003 - MCB Custom Base Adoption And Path Identity](../decisions/0003-mcb-custom-base-adoption-and-path-identity.md). Canonical source identity is stored in `AvatarBaseSourceRevisions` and `AvatarBaseSourceFiles`. `McbAvatarInstances` scopes component observations by user and workspace, `McbPathBindings` stores lifecycle-managed project-relative path history tied to canonical source identity, and `McbInstanceEvents` records registration, lineage, and recovery decisions. The Unity component remains operationally authoritative and locally revalidates every server suggestion. The former unscoped `AvatarPathOverrides` model is not part of the runtime contract; an existing physical table may remain dormant until a separately reviewed destructive migration removes it.
+
+</alpha>
+
+<alpha>
+
+## Product Knowledge and Planning
+
+- `KnowledgeSource`: registered source configuration and index health.
+- `GitHubConnection`, `ExternalOAuthState`, `GitHubProjectSnapshot`, and
+  `ExternalIssueLink`: separated OAuth identity, read-only Project snapshots, and
+  stable issue linkage.
+- `Board`, `BoardMembership`, `BoardSubmissionPolicy`, and `BoardItem`: independent
+  planning containers, permissions, intake policy, and object placement.
+- `Proposal`, `ProposalComment`, and `ProductDecision`: Markdown product context,
+  discussion, and human outcomes.
+- `ForecastScenario` and `ForecastLineItem`: private saved projections with snapshot
+  assumptions.
+- `AgentProfile`, `AgentRun`, and `AgentMutation`: non-human product identity,
+  versioned research work, and idempotent API audit.
+- `ProductResearchReport`, `ResearchRecommendation`, and `ResearchReportComment`:
+  durable evidence, bounded recommendations, comments, similarity classification,
+  and review outcomes.
+
+These models use string-backed status fields and named indexes to avoid introducing
+new Postgres enum-alter hazards.
 
 </alpha>

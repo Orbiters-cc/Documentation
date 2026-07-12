@@ -4,6 +4,11 @@ section: Explanation
 order: 82
 audience: creator, admin, dev
 stage: stable
+id: orbiters.explanation.discord-role-automation
+domain: website
+type: explanation
+owner: orbiters-engineering
+lastVerified: 2026-07-12
 ---
 
 # Discord Role Automation
@@ -31,4 +36,3 @@ Before removing a role, Orbiters checks whether the user still has another enabl
 Outbox job types are `discord.role.grant` and `discord.role.revoke`. Stale in-progress jobs are recovered after worker interruption. Non-retryable Discord errors are marked failed.
 
 </audience>
-

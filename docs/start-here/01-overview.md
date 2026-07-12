@@ -4,6 +4,11 @@ section: Start Here
 order: 10
 audience: public
 stage: stable
+id: orbiters.start.overview
+domain: general
+type: explanation
+owner: orbiters-product
+lastVerified: 2026-07-12
 ---
 
 # Orbiters Overview
@@ -55,4 +60,3 @@ The website loads documentation from the root `Documentation` repository, not fr
 This means restricted text is not merely hidden in the browser. Unauthorized users do not receive that Markdown from `/documentation`.
 
 </audience>
-
