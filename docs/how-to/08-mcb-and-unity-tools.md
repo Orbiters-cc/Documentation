@@ -53,11 +53,15 @@ Custom Veins also follows these generated renderer bindings. Advanced native-mes
 
 Running ReFit from the custom-base options updates the affected mesh rows and progress controls in place. The complete MCB options panel stays mounted after ReFit finishes, so expanded sections and scroll position are preserved.
 
+Standalone ReFit also keeps its summary page mounted while processing. The ReFit button becomes an in-place progress bar with the current computation phase, and the editor remains responsive while the geometry work runs in the background.
+
 When MCB is installed, standalone ReFit operations register their generated asset mesh and original renderer state with MCB automatically. This makes the asset appear as re-fitted in MCB's ReFit frame, where it can be un-refitted back to its original mesh. The integration is enabled by default and can be disabled from ReFit's Settings page with **Synchronize ReFit assets with MCB**.
 
 Transferred blendshapes remain synchronized with matching avatar blendshapes during slider changes and version switching. MCB also recognizes standalone ReFit's default `refit_` prefix: for example, an asset blendshape named `refit_Smile` follows an avatar blendshape named `Smile`.
 
 The main ReFit page lists every active re-fitted asset in the loaded scenes. Each row provides **Reset** to restore the asset's complete original renderer state and **Select** to locate it in the hierarchy. MCB-tracked assets remain listed after editor reloads; standalone results that are not registered with MCB remain available for the current editor session.
+
+Resetting an MCB-tracked asset from standalone ReFit immediately updates an already-open MCB ReFit frame, including removing the `(re-fitted)` marker without reloading the frame.
 
 ## Creator Flow
 
