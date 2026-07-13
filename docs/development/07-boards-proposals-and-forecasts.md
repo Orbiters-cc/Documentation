@@ -54,10 +54,12 @@ detail headers contain identity, workflow, and ownership metadata only. Markdown
 content belongs in the readable overview below the tabs, not in a duplicate header
 preview or a page-specific background layer.
 
-On desktop, each Kanban column stays within the available viewport height and
-scrolls its own cards with a visually hidden scrollbar. The Board header and other
-columns remain in place while one long column scrolls. Smaller screens retain the
-page flow and horizontal Board scrolling needed to reach every column.
+At tablet and desktop widths, the Board is bounded to the available viewport and
+each Kanban column scrolls its own cards with a visually hidden scrollbar. A
+selected element stays in the right split pane and owns its vertical scroll, while
+the document body remains fixed. The Board header and other columns remain in place
+while one long column scrolls. Small phone screens retain normal page flow and
+horizontal Board scrolling needed to reach every column.
 
 Users with submission permission receive a visible **Add element** action in the
 workspace and at the bottom of appropriate columns. Board
