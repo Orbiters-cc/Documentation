@@ -8,7 +8,7 @@ id: orbiters.how-to.mcb-and-unity-tools
 domain: mcb
 type: how-to
 owner: mcb-maintainers
-lastVerified: 2026-07-12
+lastVerified: 2026-07-13
 ---
 
 # MCB and Unity Tools
@@ -45,6 +45,14 @@ When switching between an advanced native-mesh version and an FBX-patch version,
 
 Resetting to the default base also replaces generated DynamicNormals or advanced native body meshes with the original FBX body mesh.
 
+MCB identifies an applied advanced native-mesh version from the generated mesh assets that are bound to the avatar renderers. This keeps the version marked as current even when the source FBX bytes have not changed. The version row and its action button use the same applied-version state, so a version cannot appear current while also offering to apply itself again.
+
+Custom Veins also follows these generated renderer bindings. Advanced native-mesh versions remain supported when their imported metadata does not contain source renderer paths.
+
+## ReFit Assets
+
+Running ReFit from the custom-base options updates the affected mesh rows and progress controls in place. The complete MCB options panel stays mounted after ReFit finishes, so expanded sections and scroll position are preserved.
+
 ## Creator Flow
 
 Creators configure avatar base data, version metadata, banners, and package files from the creator asset tools. Users only see versions allowed by their access scope.
@@ -53,6 +61,8 @@ Creators configure avatar base data, version metadata, banners, and package file
 
 If the tool cannot connect:
 
+- imported version details and the currently applied local version remain visible while the backend is unavailable,
+- reconnecting refreshes remote access data without replacing the local advanced-mesh identity with the unchanged source FBX hash,
 - confirm the user is logged in,
 - confirm the backend URL points to the intended environment,
 - check that the asset has compatible avatar base data,
