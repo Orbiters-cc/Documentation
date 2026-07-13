@@ -57,6 +57,8 @@ When MCB is installed, standalone ReFit operations register their generated asse
 
 Transferred blendshapes remain synchronized with matching avatar blendshapes during slider changes and version switching. MCB also recognizes standalone ReFit's default `refit_` prefix: for example, an asset blendshape named `refit_Smile` follows an avatar blendshape named `Smile`.
 
+The main ReFit page lists every active re-fitted asset in the loaded scenes. Each row provides **Reset** to restore the asset's complete original renderer state and **Select** to locate it in the hierarchy. MCB-tracked assets remain listed after editor reloads; standalone results that are not registered with MCB remain available for the current editor session.
+
 ## Creator Flow
 
 Creators configure avatar base data, version metadata, banners, and package files from the creator asset tools. Users only see versions allowed by their access scope.
