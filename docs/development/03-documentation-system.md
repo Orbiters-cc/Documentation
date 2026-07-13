@@ -8,7 +8,7 @@ id: orbiters.development.documentation-system
 domain: website
 type: explanation
 owner: orbiters-docs
-lastVerified: 2026-07-12
+lastVerified: 2026-07-13
 ---
 
 # Documentation System
@@ -61,7 +61,8 @@ cleanup task.
 
 The Knowledge Base derives provenance, checksum, relations, backlinks, staleness,
 and full-text search from this canonical Markdown. Its permission-scoped MCP surface
-uses the same audience and release-stage rules. See **Knowledge Base and MCP**.
+uses the same audience and release-stage rules. See **Documentation and Knowledge
+MCP**.
 
 </alpha>
 

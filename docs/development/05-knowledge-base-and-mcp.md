@@ -1,5 +1,5 @@
 ---
-title: Knowledge Base and MCP
+title: Documentation and Knowledge MCP
 section: Development
 order: 64
 audience: dev
@@ -8,16 +8,17 @@ id: orbiters.development.knowledge-base-and-mcp
 domain: website
 type: reference
 owner: orbiters-engineering
-lastVerified: 2026-07-12
+lastVerified: 2026-07-13
 relations: orbiters.decision.knowledge-base-and-mcp, orbiters.development.documentation-system, orbiters.development.product-steward-agents
 ---
 
-# Knowledge Base and MCP
+# Documentation and Knowledge MCP
 
-The alpha Knowledge Base indexes reviewed Markdown from this repository and exposes
-the same permission-filtered context through REST and a stateless MCP endpoint. It
-also exposes product research history so an agent can compare a new recommendation
-with earlier reports, comments, proposals, and recorded decisions.
+The alpha documentation service indexes reviewed Markdown from this repository. The
+website presents it as **Documentation** for people, while REST and a stateless MCP
+endpoint expose structured, permission-filtered Knowledge for agents. MCP also
+exposes product research history so an agent can compare a new recommendation with
+earlier reports, comments, proposals, and recorded decisions.
 
 This is an alpha developer surface. It is not a promise that every planned source
 or admin screen is available in production.
@@ -59,7 +60,8 @@ backlinks to callers outside the new policy.
 
 ## REST Read Surface
 
-`GET /knowledge` searches visible documents. Supported query parameters are `q`,
+`GET /knowledge` is the structured Knowledge search used by agents and internal
+clients. Supported query parameters are `q`,
 `category`, `stage`, `domain`, `type`, `limit`, and `offset`. Results include score,
 provenance, backlinks, pagination, and staleness state.
 
@@ -67,8 +69,8 @@ provenance, backlinks, pagination, and staleness state.
 /knowledge/health` returns index build time and the valid-document count. Health
 does not grant access to restricted document bodies.
 
-The existing `/documentation` endpoints remain the website read path. Both systems
-use the same server-side audience and release-stage rules.
+The `/documentation` endpoints remain the human website read path. Both systems use
+the same server-side audience and release-stage rules.
 
 ## MCP Connection
 
@@ -108,9 +110,28 @@ to the reviewed `general` domain, Website includes `website` and `operations`, a
 Tools includes `mcb`, `refit`, `unitgit`, and `xraygizmos`. MCP callers can apply the
 same category filter or request an exact domain.
 
-`/knowledge` is the discovery landing page rather than an automatic redirect to the
-first document. It presents those three groups, recently updated pages, quick-access
-routes, and full-text search. `/knowledge/:id` remains the focused document reader.
+## Human Documentation Experience
+
+`/documentation` is the discovery landing page rather than an automatic redirect to
+the first document. It presents the three groups, recently updated pages,
+quick-access routes, and full-text search. `/documentation/:id` is the focused
+reader.
+
+The landing and reader use the website's normal typography, page background, cards,
+and hover treatment. Search sits directly in the page header without a separate
+black backdrop or decorative hero artwork. The reader uses a documentation layout:
+a section sidebar, article content, and an in-page outline when headings are
+available.
+
+Navigation is topic-scoped. Entering MCB, ReFit, UnitGit, XRayGizmos, Website, or
+General knowledge limits the sidebar to that topic. Selecting another page from the
+sidebar must preserve that scope; it must not repopulate unrelated topics. Returning
+to the landing or explicitly choosing another category changes the scope.
+
+Search results may cross visible topics. Opening a result carries the active query
+into the reader and highlights case-insensitive matches in visible article text.
+Highlights are presentation-only: they do not alter Markdown, code blocks, links,
+or indexed content, and clearing the query removes them.
 
 It also provides `orbiters://knowledge/{id}`, `orbiters://research-reports/{id}`,
 and `orbiters://proposals/{id}` resource templates. A missing or unauthorized object

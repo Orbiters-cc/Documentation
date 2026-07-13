@@ -8,7 +8,7 @@ id: orbiters.decision.github-connection-separation
 domain: website
 type: decision
 owner: orbiters-security
-lastVerified: 2026-07-12
+lastVerified: 2026-07-13
 relations: orbiters.development.github-connections, orbiters.decision.boards-and-proposals
 ---
 
@@ -36,8 +36,9 @@ tokens through the existing API key infrastructure.
 Because classic OAuth offers no read-only private-repository scope, do not add
 `repo` to `ADMIN_PROJECT`. Store a separately managed, environment-bound
 `GITHUB_REPOSITORY_READ` fine-grained token limited to the Orbiters repository with
-Issues and Projects read permissions. This keeps the OAuth consent narrow and makes
-private issue access independently rotatable.
+only Metadata and Issues read access. The OAuth credential remains responsible for
+Project reads. This keeps the OAuth consent narrow and makes private issue access
+independently rotatable.
 
 The backend calls GitHub REST and GraphQL directly. Development and production use
 separate OAuth application records and Project credentials. Alpha synchronization is

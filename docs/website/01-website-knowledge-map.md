@@ -8,8 +8,8 @@ id: orbiters.website.knowledge-map
 domain: website
 type: reference
 owner: orbiters-docs
-lastVerified: 2026-07-12
-relations: orbiters.start.overview, orbiters.reference.access-model, orbiters.reference.api
+lastVerified: 2026-07-13
+relations: orbiters.start.overview, orbiters.reference.access-model, orbiters.reference.api, orbiters.website.public-profile
 ---
 
 # Website Knowledge Map
@@ -26,6 +26,8 @@ belong in General knowledge.
   `orbiters.how-to.assets-and-downloads` for access and downloads.
 - Use `orbiters.reference.access-model` when access differs by ownership, supporter
   tier, role, or feature scope.
+- Use `orbiters.website.public-profile` for public identity, external account links,
+  created assets, and comment activity.
 
 ## Creator Workflows
 

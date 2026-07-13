@@ -8,7 +8,7 @@ id: orbiters.development.boards-proposals-and-forecasts
 domain: website
 type: reference
 owner: orbiters-engineering
-lastVerified: 2026-07-12
+lastVerified: 2026-07-13
 relations: orbiters.decision.boards-and-proposals, orbiters.development.github-connections, orbiters.development.product-steward-agents
 ---
 
@@ -22,13 +22,25 @@ issue in a column without merging their source-of-truth rules.
 The user-facing action may still say **Submit an idea**. The underlying general
 product term is **Board**, and the canonical idea object is **Proposal**.
 
-The website groups these concepts under `/idea-box`. Its default workspace combines
-the active Board selector, proposal search and filters, Kanban columns, and a
-selected-item preview without navigating away. Product research remains available
-as a secondary Idea Box view, while `/boards/:id`, `/proposals/:id`, and
-`/research/:id` remain focused detail routes. Internal navigation uses React Router
-so switching between these surfaces does not reload the development bundle or
-repeat authentication refreshes.
+The website groups these concepts under `/idea-box`. Its default workspace uses the
+full available page width. The page title, active Board selector, and proposal search
+share the top command row; filters and permissioned Board actions remain nearby.
+The Kanban columns are the workspace surfaces, with no enclosing card around the
+whole Board.
+
+Opening Idea Box does not preselect a card. The selected-item side preview appears
+only after the visitor explicitly chooses an idea or issue, and closing it returns
+the full width to the Kanban. Search and filter changes do not silently select the
+first result. Product research remains available as a secondary Idea Box view, while
+`/boards/:id`, `/proposals/:id`, and `/research/:id` remain focused detail routes.
+Internal navigation uses React Router so switching between these surfaces does not
+reload the development bundle or repeat authentication refreshes.
+
+Users with submission permission receive a visible **Add idea** or **Submit an
+idea** action in the workspace and at the bottom of appropriate columns. Board
+settings, export, move, remove, and overflow controls appear only when they perform
+the labeled action and the current user has permission. Column menus and card
+overflow buttons are not decorative.
 
 ## Data Model
 

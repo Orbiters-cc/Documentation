@@ -8,7 +8,7 @@ id: orbiters.development.github-connections
 domain: website
 type: reference
 owner: orbiters-engineering
-lastVerified: 2026-07-12
+lastVerified: 2026-07-13
 relations: orbiters.decision.github-connection-separation, orbiters.development.boards-proposals-and-forecasts, orbiters.reference.api-keys-and-credentials
 ---
 
@@ -37,6 +37,10 @@ production registrations when their callbacks differ, and store each record with
 the matching `environment`. The backend resolves the active runtime environment and
 rejects attempts to authorize the other environment. Never reuse a production client
 secret in a developer database.
+
+Leave **Enable Device Flow** disabled when registering both OAuth applications.
+Orbiters uses the normal browser redirect and callback flow; it does not request or
+poll GitHub device codes.
 
 The **Connect GitHub** button can start authorization only after GitHub has issued
 the client ID and secret; those values cannot be discovered by an OAuth redirect.
@@ -68,6 +72,11 @@ never used to read the Project or repository.
 Only a normal authenticated human account can start this flow. Agent users cannot
 use Discord or human OAuth login.
 
+This account connection is identity-only. It does not authorize Project sync, read
+private issues, or reuse the administrator credential. A working administrator
+connection therefore does not imply that a user's profile connection is linked, and
+disconnecting either one does not revoke the other.
+
 ## Administrator Project Connection
 
 The admin flow begins at `POST /admin/github/connect` and requires the
@@ -79,16 +88,23 @@ and are never returned by connection-status endpoints.
 The Orbiters repository is private. GitHub's classic `repo` OAuth scope includes
 write-capable access, so the Project link deliberately does not request it. Configure
 a `GITHUB_REPOSITORY_READ` API key for each environment with a fine-grained token
-limited to `blackorbit1/Orbiters`, Issues read access, and Projects read access. Its
-credentials are `GITHUB_REPOSITORY_READ_TOKEN`, `GITHUB_OWNER`, and
-`GITHUB_REPOSITORY`. The backend prefers OAuth for Project reads, can retry the
-Project read with the fine-grained token, and uses the fine-grained token for private
-issue listing. Without it, private issue sync fails with an explicit configuration
-error instead of broadening OAuth silently.
+limited to `blackorbit1/Orbiters`. Choose **Only select repositories**, select
+`Orbiters`, and grant only **Metadata: Read-only** and **Issues: Read-only** under
+Repository permissions. Its credentials are `GITHUB_REPOSITORY_READ_TOKEN`,
+`GITHUB_OWNER`, and `GITHUB_REPOSITORY`. The OAuth credential reads the Project; the
+fine-grained token lists private issues. Without the repository credential, private
+issue sync fails with an explicit configuration error instead of broadening OAuth
+silently.
+
+Seeing only `read:project` on the administrator OAuth connection is expected. It is
+not evidence of missing repository scopes. The admin GitHub tab reports OAuth and
+repository-read readiness separately and disables synchronization until both
+credentials match the active environment and configured repository.
 
 Administrative operations are:
 
-- `GET /admin/github/connection` to inspect safe status;
+- `GET /admin/github/connection` to inspect safe OAuth and repository-credential
+  readiness without returning either token;
 - `POST /admin/github/validate` to confirm the token and refresh identity/scopes;
 - `POST /admin/github/sync` to fetch the Project and repository issues;
 - `GET /admin/github/project` to read the latest local Project snapshot;
@@ -162,12 +178,14 @@ snapshot. Revalidate the credential before retrying repeated authentication erro
 
 ## Verification
 
-1. Configure separate OAuth app records for development and production.
-2. Link a user account and confirm the numeric GitHub ID is stored.
+1. Configure separate OAuth app records for development and production with Device
+   Flow disabled.
+2. Link a user account and confirm the numeric GitHub ID is stored without creating
+   Project or private-repository authority.
 3. Connect the development admin integration and confirm `read:project` appears in
    the safe scope list without broader repository scope.
-4. Configure the environment's repository-read token and verify its owner and
-   repository binding.
+4. Configure the environment's repository-read token with only Metadata and Issues
+   read access, then verify its owner and repository binding.
 5. Synchronize and compare issue count, Project columns, stable option IDs, and
    removal reconciliation.
 6. Confirm a linked issue author resolves by numeric ID even after a login rename.

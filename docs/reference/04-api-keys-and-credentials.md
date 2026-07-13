@@ -8,7 +8,7 @@ id: orbiters.reference.api-keys-and-credentials
 domain: website
 type: reference
 owner: orbiters-security
-lastVerified: 2026-07-12
+lastVerified: 2026-07-13
 ---
 
 # API Keys and Credentials
@@ -34,8 +34,8 @@ Runtime credentials are stored in the `APIKeys` table instead of hardcoded envir
 - `AGENT_ACCESS`: hashed Product Steward bearer token with fixed scopes, expiration,
   revocation, and rate metadata.
 - `GITHUB_REPOSITORY_READ`: encrypted, environment-bound fine-grained token used
-  only for private issue and fallback Project reads; bind it to the expected owner
-  and repository.
+  only for private issue reads; bind it to the expected owner and repository and
+  grant only Metadata and Issues read access.
 - `MCP_ACCESS`: hashed read-only Knowledge MCP bearer token with an audience ceiling.
 
 Raw agent and MCP tokens are revealed once and are not recoverable from stored

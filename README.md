@@ -1,7 +1,8 @@
 # Orbiters Documentation
 
-This repository is the canonical Markdown source for the Orbiters Knowledge Base.
-The website and permission-scoped MCP server consume the same reviewed pages.
+This repository is the canonical Markdown source for Orbiters Documentation. The
+human website reader and permission-scoped Knowledge MCP server consume the same
+reviewed pages while presenting them for different audiences.
 
 ## Validate changes
 
@@ -34,8 +35,9 @@ The Orbiters backend reads Markdown files from `docs/`, filters them by audience
 - `docs/architecture`: architecture views, runtime flows, and data model notes.
 - `docs/decisions`: architecture decision records.
 
-The website groups Knowledge Base pages by their `section` and `domain` metadata,
-not by folder name alone. Keep stable IDs unchanged when reorganizing navigation.
+The website groups Documentation pages by their `section` and `domain` metadata,
+not by folder name alone. The MCP surface retains structured metadata for agents.
+Keep stable IDs unchanged when reorganizing navigation.
 
 ## Frontmatter
 
