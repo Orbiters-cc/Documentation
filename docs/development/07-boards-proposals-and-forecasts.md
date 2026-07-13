@@ -114,6 +114,14 @@ state, opens the Board in Idea Box, and gives the owner a deliberate **Private**
 owner Boards receive a simplified, safe preview on the owner's public profile;
 private Boards do not appear there.
 
+The **Public** choice is an explicit publication action, not only a Board access
+toggle. Its profile preview can publish the title and state of a placed external
+issue even when the source issue credential and full issue record are staff-only.
+The serializer loads and returns no issue body, URL, repository, issue number, or
+provider metadata, and it excludes every private or pending Proposal. Owners should
+review placed issue titles before publishing a Board; changing it back to
+**Private** removes the whole Board from the public-profile response.
+
 ## Trello Boards
 
 A Creator can connect GitHub and Trello from **Creator > Integrations**; the same

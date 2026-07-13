@@ -36,8 +36,8 @@ Runtime credentials are stored in the `APIKeys` table instead of hardcoded envir
 - `GITHUB_REPOSITORY_READ`: encrypted, environment-bound fine-grained token used
   only for private issue reads; bind it to the expected owner and repository and
   grant only Metadata and Issues read access.
-- `TRELLO_APP`: environment-specific Trello Power-Up API key, secret, account return
-  URL, and public webhook API origin.
+- `TRELLO_APP`: environment-specific Trello Power-Up API key and secret, with
+  optional authorization-return and public-webhook URL overrides.
 - `TRELLO_ACCOUNT`: encrypted creator authorization created by the Trello account
   connection flow; it is not entered in the generic API Keys form.
 - `MCP_ACCESS`: hashed read-only Knowledge MCP bearer token with an audience ceiling.
@@ -86,12 +86,22 @@ The current guides cover every credential type that can be created from those ta
   repository names.
 - **Trello application:** create or select the Orbiters Power-Up and generate its
   API key, copy the environment-specific iframe URL from
-  `setupGuide.connectorUrl`, add the Orbiters website origin to allowed origins,
-  then save the key and secret with the account return URL and public API webhook
-  origin. The setup panel renders that URL as a selectable value with a copy action.
-  Its `setupGuide.connectorNote` explains that the hosted connector declares no
-  Power-Up capabilities, exposes no Board data, and leaves synchronization to the
-  Orbiters REST integration.
+  `setupGuide.connectorUrl`, add the origin of
+  `setupGuide.authorizationReturnUrl` to allowed origins, then save the key and
+  secret. The setup panel renders the connector, authorization return, and webhook
+  base URLs as selectable values with copy actions. Their adjacent
+  `setupGuide.connectorNote`, `setupGuide.authorizationReturnNote`, and
+  `setupGuide.webhookBaseNote` explain how each value is used.
+
+The Trello URL fields stored with `TRELLO_APP` are overrides, not normally required
+setup values. Runtime derives the authorization return URL from `FRONTEND_URL`, then
+falls back to `FRONT_URL`, and appends `/creator?tab=integrations`. It derives the
+webhook base from `PUBLIC_API_URL`. `TRELLO_RETURN_URL` and
+`TRELLO_WEBHOOK_BASE_URL` override those defaults only when an environment needs an
+explicit value. The setup guide resolves and displays the exact environment-derived
+defaults, including the hosted `/trello/power-up/connector`; it does not load or
+echo a stored override. A nonblank stored field replaces the derived default only at
+runtime.
 
 `GET /api-keys/options` returns the same `setupGuide` metadata used by both tabs.
 Keep the service registry and this page aligned when a credential type or provider

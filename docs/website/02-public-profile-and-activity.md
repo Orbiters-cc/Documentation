@@ -66,10 +66,13 @@ member-visible, unlisted, and every other non-public Board are excluded even whe
 the viewer could open them elsewhere.
 
 Each Board preview contains only safe public metadata, its columns and visible item
-counts, and at most eight public item summaries. Hidden Proposals, private GitHub
-issues, membership data, forecasts, and synchronization credentials are never added
-to the profile payload. The website presents a simplified preview with a link to the
-full Board rather than embedding another Kanban inside the profile.
+counts, and at most eight item summaries. Publishing a Board explicitly also
+publishes the title and state of its placed external issues in this preview, even
+when the credential used to read the full source issue is staff-only. The response
+never includes an issue body, URL, repository, issue number, provider metadata,
+membership data, forecasts, synchronization credentials, or private and pending
+Proposal content. The website presents a simplified preview with a link to the full
+Board rather than embedding another Kanban inside the profile.
 
 ## Profile Comments
 

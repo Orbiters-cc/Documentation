@@ -27,21 +27,27 @@ Keys** before creators connect:
 
 1. Open Trello Power-Up administration, create or select the Orbiters Power-Up, and
    generate its API key.
-2. Add the Orbiters website origin for this environment to the key's allowed
-   origins.
+2. Copy `setupGuide.authorizationReturnUrl` from the Orbiters setup guide and add
+   its origin to the Trello API key's allowed origins. The default path is
+   `/creator?tab=integrations` on the current Orbiters website.
 3. Copy the exact hosted iframe connector URL shown in the Orbiters setup guide as
    `setupGuide.connectorUrl`. It ends in `/trello/power-up/connector`. Register it
    as the Power-Up iframe connector in Trello; do not enable any Power-Up
    capabilities. The adjacent `setupGuide.connectorNote` confirms that the page
    exposes no Board data and is not the synchronization transport.
 4. Save `TRELLO_API_KEY` and `TRELLO_API_SECRET` in Orbiters.
-5. Set `TRELLO_RETURN_URL` to the account Connections page for the same website
-   environment. Its origin must match the current Orbiters site. Trello returns the
-   user token in the URL fragment, which the page immediately exchanges with the
-   backend.
-6. Set `TRELLO_WEBHOOK_BASE_URL` to the public API origin for that environment, such
-   as `https://dev.api.orbiters.cc` in development. Trello webhooks use
-   `/trello/webhooks/:publicId` below that origin.
+5. Verify the copyable default `setupGuide.authorizationReturnUrl` and
+   `setupGuide.webhookBaseUrl` values. Their
+   `setupGuide.authorizationReturnNote` and `setupGuide.webhookBaseNote` identify
+   the deployment settings from which they were derived.
+   Trello returns the user token in the authorization URL fragment, which the page
+   immediately exchanges with the backend. Webhooks use
+   `/trello/webhooks/:publicId` below the displayed public API origin.
+6. Normally leave `TRELLO_RETURN_URL` and `TRELLO_WEBHOOK_BASE_URL` empty. Orbiters
+   derives them from `FRONTEND_URL`, then `FRONT_URL`, and from `PUBLIC_API_URL`
+   respectively. Store either optional field only as an explicit override for the
+   same environment. The guide continues to show the derived default, so review a
+   nonblank override directly before saving it; runtime uses the stored value.
 
 The connector is intentionally a minimal hosted page with no capabilities. Orbiters
 uses its backend REST synchronization for Lists and Cards; the connector does not
@@ -49,7 +55,8 @@ run product logic inside Trello or ask for additional capability permissions.
 
 Do not share an application secret or user token between development and production
 records. The generic API Keys form includes the same provider link and numbered
-micro-guide next to these fields.
+micro-guide next to these fields. An override belongs to its environment-specific
+record and must not point development authorization or webhooks at production.
 
 ## Connect a Creator Account
 
@@ -80,7 +87,9 @@ return a safe warning that tells the creator to revoke the token manually in Tre
 1. Open **Creator > Boards** and choose **Import Trello board**. Trello import is
    intentionally kept out of Idea Box.
 2. Select one of the connected account's open Trello Boards.
-3. Choose whether the new Orbiters Board is private or public.
+3. Choose whether the new Orbiters Board is private or public. Public visibility
+   also publishes the safe profile preview described below; review placed Card and
+   issue titles before choosing it.
 4. Preview the source Board link, then choose **Import board**.
 5. Open the created Board and confirm its columns, Proposals, and Trello sync state.
 
@@ -92,6 +101,12 @@ the source provider, Trello Card ID, URL, and short link. The default visibility
 private. Closed Trello Boards and Boards with no open Lists are rejected. One import
 supports at most 30 open Lists and 500 open Cards, and the same Trello Board cannot
 be imported twice for one connection.
+
+A public imported Board can appear on its owner's public profile. That preview may
+show the title and state of a placed external issue even when the credential used to
+read the source issue is staff-only. It never includes the issue body, URL,
+repository, issue number, provider metadata, or any private or pending Proposal
+content. Choosing private removes the entire Board from the public profile surface.
 
 Orbiters registers a signed webhook after the local import transaction. If Trello
 rejects webhook creation, the imported Board remains usable with a warning and the

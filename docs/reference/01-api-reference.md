@@ -46,7 +46,10 @@ OAuth login issues a short-lived JWT and a refresh token stored in an HTTP-only 
 - `GET /users/:id/profile` for a public profile, created assets, authored activity,
   provider links, profile comments, and `user.publicBoards`. Public Board previews
   contain only owner-owned public Boards, safe visible counts, and at most eight
-  public item summaries per Board.
+  item summaries per Board. A placed external issue contributes only
+  `{ "title", "status" }`, with `status` derived from its issue state; issue body,
+  URL, repository, number, metadata, visibility, and non-public Proposal content are
+  omitted.
 - `POST /users/:id/profile/comments` for an authenticated public profile comment
 - `/assets`
 - `/files`
