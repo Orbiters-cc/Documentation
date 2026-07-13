@@ -8,7 +8,7 @@ id: orbiters.architecture.data-model
 domain: website
 type: reference
 owner: orbiters-engineering
-lastVerified: 2026-07-12
+lastVerified: 2026-07-13
 ---
 
 # Data Model Notes
@@ -37,6 +37,11 @@ This is a high-level map of the Orbiters data model. It is not a full schema dum
 - `AssetStoreLinks`: canonical asset-to-product mappings.
 - `StoreSales`: mirrored sales and license hashes.
 - `WebhookEvent`: deduplicated provider events.
+- `SupporterTier`: creator access tiers, including optional Patreon tier identity,
+  amount, and currency.
+- `SupporterStatus`: source-separated Discord, manual, or Patreon membership state.
+- `Notification` and `NotificationPreference`: per-user delivery records and
+  category controls used by the account menu and website toasts.
 
 ## Discord Integrations
 

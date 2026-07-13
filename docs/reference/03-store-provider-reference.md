@@ -8,7 +8,7 @@ id: orbiters.reference.store-providers
 domain: website
 type: reference
 owner: orbiters-engineering
-lastVerified: 2026-07-12
+lastVerified: 2026-07-13
 ---
 
 # Store Provider Reference
@@ -17,12 +17,20 @@ Store providers normalize external store behavior into one Orbiters integration 
 
 ## Providers
 
-| Provider | Main credential | Product sync | License check | Webhooks |
-|---|---|---:|---:|---:|
-| Gumroad | Access token | yes | yes | yes |
-| Jinxxy | Creator API key | yes | yes | account-dependent |
-| Payhip | Product secrets JSON | manual JSON | yes | limited |
-| Lemon Squeezy | API key | yes | yes | yes |
+| Provider | Connection | Product sync | License check | Historical revenue | Webhooks |
+|---|---|---:|---:|---:|---:|
+| Gumroad | OAuth or access token | yes | yes | yes | yes |
+| Jinxxy | Creator API key | yes | yes | partial amounts | account-dependent |
+| Payhip | Product secrets JSON | manual JSON | yes | no | limited |
+| Lemon Squeezy | API key | yes | yes | yes, from orders | yes |
+| Patreon | OAuth or access token | membership tiers | no | webhook history | yes |
+| Ko-fi | verification token | shop event metadata | no | webhook history | yes |
+
+Historical revenue stores normalized minor-unit amounts plus the original currency.
+Never sum unlike currencies. A mirrored sale without a provider-confirmed amount is
+an unknown amount, not zero revenue. Gumroad, Jinxxy, and Lemon Squeezy expose a
+manual backfill action; the Jinxxy API does not provide a dependable amount for all
+license records, so its coverage can remain partial.
 
 ## Product Links
 

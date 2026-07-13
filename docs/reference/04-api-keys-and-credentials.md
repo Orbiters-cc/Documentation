@@ -24,6 +24,8 @@ Runtime credentials are stored in the `APIKeys` table instead of hardcoded envir
 - `JINXXY`: Jinxxy API key and webhook secret.
 - `PAYHIP`: Payhip product JSON and account API key.
 - `LEMONSQUEEZY`: Lemon Squeezy API key, store ID, and webhook secret.
+- `PATREON`: creator access token, optional refresh token, and webhook secret.
+- `KOFI`: official webhook verification token and public Ko-fi page URL.
 - `VAPID`: Web push public/private keys and subject.
 
 <alpha>
@@ -43,6 +45,10 @@ Runtime credentials are stored in the `APIKeys` table instead of hardcoded envir
   optional authorization-return and public-webhook URL overrides.
 - `TRELLO_ACCOUNT`: encrypted creator authorization created by the Trello account
   connection flow; it is not entered in the generic API Keys form.
+- `GUMROAD_OAUTH_APP`: environment-specific Gumroad client ID, client secret, and
+  callback URL.
+- `PATREON_OAUTH_APP`: environment-specific Patreon client ID, client secret, and
+  callback URL.
 - `MCP_ACCESS`: hashed read-only Knowledge MCP bearer token with an audience ceiling.
 
 Raw agent and MCP tokens are revealed once and are not recoverable from stored
@@ -78,6 +84,16 @@ The current guides cover every credential type that can be created from those ta
   and secret as the documented JSON array, then add the optional account API key.
 - **Lemon Squeezy:** create an environment-matched API key, copy the store ID, then
   create the Orbiters webhook and save its signing secret.
+- **Patreon:** prefer the creator OAuth connection; for manual setup, create a
+  creator client, copy the creator access and refresh tokens, grant member-email
+  and campaign-webhook access, then save the webhook secret after registration.
+- **Ko-fi:** enable the official webhook, copy the displayed Orbiters callback URL,
+  save the verification token, then send Ko-fi's test event and confirm it appears
+  before relying on shop or supporter notifications.
+- **Gumroad OAuth application:** create an application for the current environment,
+  register the displayed Orbiters callback, and save its client ID and secret.
+- **Patreon OAuth application:** create a Patreon client for the current
+  environment, register the displayed callback, and save its client ID and secret.
 - **VAPID:** generate one web-push key pair in a trusted terminal, save both keys,
   then set a monitored `mailto:` or HTTPS subject.
 - **GitHub OAuth application:** create one OAuth App for the current environment,

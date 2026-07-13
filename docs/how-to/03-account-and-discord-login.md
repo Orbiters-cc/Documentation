@@ -8,7 +8,7 @@ id: orbiters.how-to.account-and-discord-login
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-07-12
+lastVerified: 2026-07-13
 ---
 
 # Account and Discord Login
@@ -22,6 +22,16 @@ Orbiters accounts are based on Discord login. Discord identity lets Orbiters con
 3. Return to Orbiters.
 
 After login, the frontend stores a short-lived JWT and uses a refresh cookie to rotate it.
+
+## Notifications And Account Actions
+
+The avatar at the right of the navigation bar opens the account menu. Its badge is
+the unread notification count. The same menu contains recent notifications, **Mark
+all read**, **My Account**, notification settings, and logout; there is no separate
+notification-bell destination.
+
+Use **Account > Notifications** or **Creator > Notifications** to enable or disable
+categories. New enabled notifications can also appear as temporary website toasts.
 
 ## What Login Controls
 

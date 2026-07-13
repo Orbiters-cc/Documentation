@@ -159,10 +159,12 @@ webhook security, and disconnect behavior.
 
 Opening a connected Board starts a bounded reconciliation when its last successful
 sync is stale, while the signed webhook and periodic scheduler cover changes made
-outside the website. Moving a mapped card in Orbiters immediately reconciles its
-Trello List; a remote failure keeps the local move, reports a safe warning, and
-leaves the normal background and manual retry paths active. **Add element** offers a
-default-on Trello toggle so the new Proposal is also created as a real Card.
+outside the website. Moving a mapped card in Orbiters updates the Kanban
+optimistically, writes the destination List to Trello, then commits the local
+placement. If Trello rejects the write, the card returns to its previous column and
+the website reports the failure; it does not leave a local position that the next
+sync will silently undo. **Add element** offers a default-on Trello toggle so the
+new Proposal is also created as a real Card.
 
 Board owners and administrators can also link a synchronized Trello Card to a
 separate Proposal as delivery context. `TrelloCardLink.linkedProposalId` is distinct
@@ -271,8 +273,17 @@ monthly, or yearly. A request can include Proposal descendants in one scenario.
 `POST /forecasts/preview` computes output without persistence. `/forecasts` lists and
 saves scenarios. Only the author or an administrator can delete a scenario.
 
+The Revenues tab calculates the active preview automatically as assumptions change.
+Its chart places the previous 12 months of mirrored provider sales before the
+scenario horizon. Historical amounts remain separated by currency; the current
+forecast model is USD, so a non-USD history view does not combine unlike currencies
+on one line. Creators can force a history refresh for providers with a sales-list
+API. Webhook-only providers show that limitation instead of a misleading sync
+button. Older mirrored rows that predate amount capture remain counted as sales and
+are reported as amount-unknown rather than treated as zero revenue.
+
 Forecast values are planning projections, not accounting records. Preserve inputs,
-curve, horizon, and inclusion choices whenever presenting totals.
+curve, horizon, currency, and inclusion choices whenever presenting totals.
 
 ## Ideas-Vault Migration
 

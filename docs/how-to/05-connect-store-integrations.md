@@ -8,7 +8,7 @@ id: orbiters.how-to.connect-store-integrations
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-07-12
+lastVerified: 2026-07-13
 ---
 
 # Connect Store Integrations
@@ -17,17 +17,25 @@ Store integrations let creators connect outside stores to Orbiters. Orbiters can
 
 ## Supported Providers
 
-- **Gumroad**: product sync, license verification, sale webhooks, and sales backfill.
-- **Jinxxy**: product sync, license lookup, license backfill, and webhook support when available.
+- **Gumroad**: OAuth or access-token connection, product sync, license verification,
+  sale webhooks, and sales backfill.
+- **Jinxxy**: Creator API key connection, product sync, license lookup, license
+  backfill, and webhook support when available.
 - **Payhip**: license verification through creator-provided product secret keys.
-- **Lemon Squeezy**: product sync, license validation, webhook signing, and license backfill.
+- **Lemon Squeezy**: product sync, license validation, webhook signing, and order
+  revenue backfill.
+- **Patreon**: OAuth or access-token connection, membership webhooks, and supporter
+  tier/member synchronization.
+- **Ko-fi**: official webhook ingestion for donations, memberships, commissions,
+  and shop orders, including shop-item direct-link codes.
 
 ## Connect A Store
 
 1. Open **Creator**.
 2. Open **Integrations**.
 3. Choose the store provider.
-4. Enter the provider credentials.
+4. Choose **Connect** when OAuth is available, or enter provider credentials when
+   you prefer a manual token or the provider has no account authorization flow.
 5. Save the integration.
 6. Run a sync if the first sync does not start automatically.
 7. Link imported products to Orbiters assets.
@@ -37,6 +45,8 @@ Store integrations let creators connect outside stores to Orbiters. Orbiters can
 ### Gumroad
 
 Use a Gumroad access token. Orbiters can import products and register sale webhooks.
+When the administrator has configured the Gumroad OAuth application, **Connect
+Gumroad** grants the same creator-owned access without manually copying the token.
 
 ### Jinxxy
 
@@ -60,6 +70,31 @@ Payhip license checks are product-secret based. Enter product data as JSON:
 ### Lemon Squeezy
 
 Use a Lemon Squeezy API key. Store ID and webhook signing secret are optional. If no store ID is entered, Orbiters uses the first store returned by Lemon Squeezy.
+
+### Patreon
+
+Use **Connect Patreon** when the administrator has configured the Patreon OAuth
+application. The authorization requests identity, campaign, member email, and
+campaign-webhook permissions. A creator access token remains available as a manual
+alternative. After connection, open **Creator > Supporters** and select **Sync
+Patreon** to reconcile published tiers and active members.
+
+### Ko-fi
+
+Copy the Orbiters webhook URL into Ko-fi's official webhook settings and save the
+Ko-fi verification token in the integration. Orbiters reads the official payload,
+including `shop_items[].direct_link_code`. Ko-fi does not provide an OAuth account
+connection or a supported historical-sales listing API, so revenue history begins
+with received webhooks. Orbiters does not send creator or customer data to
+third-party Ko-fi scraping or cache services.
+
+## Refresh Revenue History
+
+Open **Creator > Revenues**. Use the provider sync buttons to refresh historical
+sales for Gumroad, Jinxxy, and Lemon Squeezy. Patreon and Ko-fi rely on signed or
+verified webhooks, so they are labeled as webhook history instead of exposing a
+button that cannot retrieve older transactions. The graph keeps currencies
+separate and reports legacy sale rows whose amount is unknown.
 
 ## Integration Status
 
