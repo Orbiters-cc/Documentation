@@ -45,11 +45,11 @@ OAuth login issues a short-lived JWT and a refresh token stored in an HTTP-only 
 - `/users`
 - `GET /users/:id/profile` for a public profile, created assets, authored activity,
   provider links, profile comments, and `user.publicBoards`. Public Board previews
-  contain only owner-owned public Boards, safe visible counts, and at most eight
-  item summaries per Board. A placed external issue contributes only
-  `{ "title", "status" }`, with `status` derived from its issue state; issue body,
-  URL, repository, number, metadata, visibility, and non-public Proposal content are
-  omitted.
+  contain only owner-owned public Boards, safe counts, and at most three
+  `{ "title", "status" }` summaries inside each column. Publishing the Board makes
+  this bounded projection visible for every placed item, including a private local
+  Proposal or Trello mirror; body, URL, repository, number, metadata, visibility,
+  and comments are omitted.
 - `POST /users/:id/profile/comments` for an authenticated public profile comment
 - `/assets`
 - `/files`
@@ -100,11 +100,11 @@ Store webhook routes receive provider events. The `secret` segment identifies th
 - `/mcp` for stateless, scoped MCP requests
 - `/github` for user GitHub identity linking
 - `/admin/github` for environment-specific read-only GitHub synchronization
-- `/trello` for creator account authorization, Board import, manual bidirectional
-  synchronization, disconnect, and signed webhook callbacks
+- `/trello` for creator account authorization, Board import, automatic and manual
+  bidirectional synchronization, disconnect, and signed webhook callbacks
 - `/admin/knowledge-base` for source, index, and MCP-token administration
 - `/boards` and `/proposals` for planning and moderation
-- `/forecasts` for administrator-only private projections
+- `/forecasts` for Board-scoped private Creator and staff revenue projections
 - `/research-reports` for report review, comments, decisions, and promotion
 - `/admin/agents` for Product Steward profiles, tokens, briefs, and runs
 - `/agent/v1` for fixed scoped local-agent operations

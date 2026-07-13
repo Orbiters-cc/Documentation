@@ -19,8 +19,10 @@ A `Proposal` is durable Markdown product context. A `Board` is an independently
 permissioned planning view. A `BoardItem` places a Proposal or synchronized GitHub
 issue in a column without merging their source-of-truth rules.
 
-The user-facing action may still say **Submit an idea**. The underlying general
-product term is **Board**, and the canonical idea object is **Proposal**.
+The user-facing creation action is **Add element** because a Board can contain a
+native Proposal, a synchronized Trello Card, or a GitHub issue. The underlying
+general product term is **Board**, and the canonical Orbiters idea object remains
+**Proposal**.
 
 The website groups these concepts under `/idea-box`. Its default workspace uses the
 full available page width. The page title, active Board selector, and proposal search
@@ -36,10 +38,12 @@ first result. Product research remains available as a secondary Idea Box view, w
 Internal navigation uses React Router so switching between these surfaces does not
 reload the development bundle or repeat authentication refreshes.
 
-The top navigation presents **Board**, the administrator-only **Forecast**, and
-**Research** as one underlined Idea Box view set instead of unrelated page controls.
-Research lists and report details keep that navigation, and report or Proposal
-details provide clickable Idea Box breadcrumbs plus an explicit return to the Board.
+The Idea Box navigation presents **Board** and **Research** as one underlined view
+set instead of unrelated page controls. Research lists and report details keep that
+navigation, and report or Proposal details provide clickable Idea Box breadcrumbs
+plus an explicit return to the Board. Revenue projections live under
+**Creator > Revenues**, where they can be scoped to a Board the current creator or
+staff member manages.
 After a card is selected, its preview opens as a flush, square-edged right split pane
 separated from the Kanban by one divider. It is not rendered before selection and is
 not a floating island. Profile, Proposal, and research detail bodies use the same
@@ -55,8 +59,8 @@ scrolls its own cards with a visually hidden scrollbar. The Board header and oth
 columns remain in place while one long column scrolls. Smaller screens retain the
 page flow and horizontal Board scrolling needed to reach every column.
 
-Users with submission permission receive a visible **Add idea** or **Submit an
-idea** action in the workspace and at the bottom of appropriate columns. Board
+Users with submission permission receive a visible **Add element** action in the
+workspace and at the bottom of appropriate columns. Board
 settings, export, move, remove, and overflow controls appear only when they perform
 the labeled action and the current user has permission. Column menus and card
 overflow buttons are not decorative.
@@ -127,9 +131,11 @@ private Boards do not appear there.
 The **Public** choice is an explicit publication action, not only a Board access
 toggle. Its profile preview can publish the title and state of a placed external
 issue even when the source issue credential and full issue record are staff-only.
-The serializer loads and returns no issue body, URL, repository, issue number, or
-provider metadata, and it excludes every private or pending Proposal. Owners should
-review placed issue titles before publishing a Board; changing it back to
+The serializer loads and returns no body, URL, repository, issue number, provider
+metadata, or Proposal visibility. Publishing a Board also publishes the title and
+state of every placed item as a deliberately bounded roadmap projection, including
+private canonical Proposals and Trello mirrors, without publishing their content.
+Owners should review placed titles before publishing a Board; changing it back to
 **Private** removes the whole Board from the public-profile response.
 
 ## Trello Boards
@@ -148,6 +154,13 @@ content, placement, and order synchronize in both directions, while Orbiters-onl
 comments, decisions, visibility, membership, and forecasts remain local. See
 `orbiters.how-to.connect-and-sync-trello` for account setup, limits, conflict rules,
 webhook security, and disconnect behavior.
+
+Opening a connected Board starts a bounded reconciliation when its last successful
+sync is stale, while the signed webhook and periodic scheduler cover changes made
+outside the website. Moving a mapped card in Orbiters immediately reconciles its
+Trello List; a remote failure keeps the local move, reports a safe warning, and
+leaves the normal background and manual retry paths active. **Add element** offers a
+default-on Trello toggle so the new Proposal is also created as a real Card.
 
 Board owners and administrators can also link a synchronized Trello Card to a
 separate Proposal as delivery context. `TrelloCardLink.linkedProposalId` is distinct
@@ -176,7 +189,8 @@ becomes public.
 
 Board owners and `admin` members manage policy and membership. Editors can change
 Board layout and local item placement. Administrators and developers receive staff
-access, while the Idea Box Forecast view is limited to Orbiters administrators.
+access. A creator or staff member can use **Creator > Revenues** only for a Board
+they can manage.
 
 ## Proposal Content and Product Memory
 
@@ -206,11 +220,20 @@ The alpha REST surface includes:
 - `/proposals` for filtered listing, creation, and export;
 - `/proposals/:id` for content, updates, comments, and product decisions;
 - `/proposals/:id/github-link` for a staff-managed link to one synchronized issue.
+- `/github/issues/:id` and `/github/issues/:id/comments` for a complete visible
+  issue and paginated discussion;
+- `/github/boards/:boardId/issues` for permissioned issue creation with a separate
+  repository-write credential.
 
 Creator-facing Trello routes live under `/trello` for account connection, source
 Board listing, import, manual synchronization, disconnect, and signed webhook
 callbacks. They create ordinary local `proposal` Board items rather than a new
 Trello-only item type.
+
+Proposal and GitHub issue reads also return permission-filtered mention locations.
+The preview and dedicated pages expose **Copy link**. When that internal Proposal or
+issue URL appears in a Markdown surface, the renderer replaces the plain URL with a
+compact element card containing its title, short excerpt, and author avatar.
 
 The Kanban workspace uses only fields returned by these routes. Scores, comments,
 visibility, author, placement, GitHub state, dates, and forecast values must never be
@@ -218,8 +241,9 @@ filled with decorative sample data. The proposal detail page may rearrange those
 real fields into summary, activity, context, and related-information panels, but an
 unavailable metric is omitted rather than invented.
 
-GitHub-backed items are read-only. A request that changes their Project column is
-rejected until a separately reviewed write-sync phase exists. Linking a Proposal to
+GitHub Project placement remains read-only. A request that changes a synchronized
+issue's Project column is rejected until a separately reviewed write-sync phase
+exists. Linking a Proposal to
 an issue lets the issue card carry the Proposal context without deleting the local
 Proposal placement. The Board serializer deduplicates the visible cards while the
 link exists; unlinking or removing the Project item makes the local card visible
@@ -227,9 +251,10 @@ again.
 
 ## Forecasts
 
-Forecasts are private saved scenarios available only to Orbiters administrators.
-The **Forecast** tab is omitted for every other account rather than displaying
-private projection controls that will later fail authorization.
+Forecasts are private saved scenarios exposed as **Creator > Revenues**. A creator
+can forecast only a Board they manage; administrators, developers, and owners retain
+the same Board-scoped access for operational recovery. The tab is omitted for
+accounts that are neither creators nor product staff.
 Each `ForecastScenario` records its optional Board, author, title, duration, bucket,
 totals, and line items. A line item snapshots the selected Proposal title and revenue
 assumptions so a later Proposal edit does not silently rewrite historical output.
@@ -289,10 +314,14 @@ parents. Keep the source export and reported checksum as migration evidence.
 5. Drag a local Proposal between columns with both the card and drag handle, then
    reload the Board and confirm the persisted column.
 6. Confirm a GitHub issue item cannot be dragged or moved locally.
-7. Confirm the Forecast tab and forecast endpoints are available to administrators
-   and absent or forbidden for every other rank.
+7. Confirm Creator > Revenues and forecast endpoints are available for managed
+   Boards and absent or forbidden for unrelated accounts.
 8. Compare preview and saved forecast totals for every curve.
 9. Dry-run and import the same version-2 migration bundle twice; the second import
    must update existing legacy identities without duplicating them.
 10. Import a Trello Board, reconcile one change in each direction, and confirm the
     selected local visibility and Orbiters-only product history never leave Orbiters.
+11. Publish a Board containing a private Trello mirror, confirm its profile preview
+    shows only title and status, then make the Board private and confirm it vanishes.
+12. Open a GitHub issue, scroll through more than one comment page, copy its link,
+    render the link in Markdown, and confirm the element backlink is listed.

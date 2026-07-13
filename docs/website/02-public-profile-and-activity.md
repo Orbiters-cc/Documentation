@@ -69,11 +69,12 @@ Each Board preview contains only safe public metadata, its columns and visible i
 counts, and up to three safe item summaries inside every column. The website renders
 these as a horizontally scrollable mini-Kanban so the Board structure remains
 visible without exposing the full management UI. Publishing a Board explicitly also
-publishes the title and state of its placed external issues in this preview, even
-when the credential used to read the full source issue is staff-only. The response
-never includes an issue body, URL, repository, issue number, provider metadata,
-membership data, forecasts, synchronization credentials, or private and pending
-Proposal content. Every preview retains a link to the full Board.
+publishes the title and state of every placed item in this preview, including
+private canonical Proposals, Trello mirrors, and external issues. This is a bounded
+roadmap projection: the response never includes the item body, URL, repository,
+number, provider metadata, Proposal visibility, membership data, forecasts,
+synchronization credentials, or comments. Every preview retains a link to the full
+Board, where normal authorization still applies.
 
 ## Profile Comments
 

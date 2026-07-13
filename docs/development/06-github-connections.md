@@ -1,5 +1,5 @@
 ---
-title: GitHub Connections and Read-Only Sync
+title: GitHub Connections and Board Sync
 section: Development
 order: 65
 audience: dev
@@ -12,7 +12,7 @@ lastVerified: 2026-07-13
 relations: orbiters.decision.github-connection-separation, orbiters.development.boards-proposals-and-forecasts, orbiters.reference.api-keys-and-credentials
 ---
 
-# GitHub Connections and Read-Only Sync
+# GitHub Connections and Board Sync
 
 Orbiters has two independent GitHub OAuth connections. A user connection proves
 account identity. An administrator connection reads the delivery Project. The
@@ -101,6 +101,13 @@ OAuth credential reads the user-owned Project; the fine-grained token lists priv
 issues. Without the repository credential, private issue sync fails with an
 explicit configuration error instead of broadening OAuth silently.
 
+Creating issues uses a third, deliberately separate `GITHUB_REPOSITORY_WRITE`
+credential. Its fine-grained token is bound to the configured owner and repository
+and receives only **Metadata: Read-only** plus **Issues: Read and write**. It is not
+used for Project synchronization or normal issue reads. This split keeps the
+default synchronization path read-only and makes issue creation an explicit
+operator choice.
+
 Seeing only `read:project` on the administrator OAuth connection is expected. It is
 not evidence of missing repository scopes. The admin GitHub tab reports OAuth and
 repository-read readiness separately and disables synchronization until both
@@ -148,6 +155,12 @@ REST calls. A successful synchronization persists:
 - the matched Orbiters user ID when the GitHub numeric author ID is linked;
 - synchronization status and safe error text.
 
+The dedicated Orbiters issue page reads the synchronized body and metadata from the
+local issue record. Its Comments tab fetches complete GitHub comment bodies through
+the repository-read credential in bounded pages and continues loading as the reader
+scrolls. Failed pages stop until the reader explicitly retries; credentials and raw
+provider errors never enter the response.
+
 The default Orbiters Board copies its columns from the Project Status options. A
 linked issue becomes a `github-issue` Board item. Local status uses the stable option
 ID as `columnKey` and keeps the display name as delivery status. If GitHub replaces
@@ -183,10 +196,13 @@ In the alpha release:
 - GitHub Project owns the delivery status of linked issue items;
 - synchronization from GitHub to Orbiters is read-only.
 
-Attempting to move a GitHub-backed Board item to another column returns a conflict.
-Granting `project` scope or adding write mutations requires a separate review after
-read-only reconciliation is reliable. The current implementation does not create
-GitHub issues automatically.
+Attempting to move a GitHub-backed Board item to another Project column returns a
+conflict. Granting `project` scope or adding Project write mutations requires a
+separate review after read-only reconciliation is reliable. When a manager chooses
+**Add element** on a GitHub-backed Board, a default-off toggle can create a real
+repository issue with the dedicated write credential. Orbiters creates the local
+Proposal first, links the returned issue, and places an issue that is not yet in the
+Project under **Not on Project**; it does not silently add or move a Project item.
 
 ## Failure Handling
 
@@ -237,3 +253,8 @@ ID to an administrator without sharing the credential.
    confirm the cleanup loop removes the ciphertext after GitHub recovers.
 12. Probe a fine-grained token that cannot see the private repository and confirm
     the admin UI explains the `404` remediation while exposing no secret value.
+13. Configure the separate repository-write credential, create one issue through
+    **Add element**, and confirm the read credential and Project placement remain
+    unchanged.
+14. Open a synchronized issue with more than one page of comments and confirm full
+    comment bodies load once as the Comments tab scrolls.

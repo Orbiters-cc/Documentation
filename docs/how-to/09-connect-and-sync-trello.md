@@ -102,11 +102,12 @@ private. Closed Trello Boards and Boards with no open Lists are rejected. One im
 supports at most 30 open Lists and 500 open Cards, and the same Trello Board cannot
 be imported twice for one connection.
 
-A public imported Board can appear on its owner's public profile. That preview may
-show the title and state of a placed external issue even when the credential used to
-read the source issue is staff-only. It never includes the issue body, URL,
-repository, issue number, provider metadata, or any private or pending Proposal
-content. Choosing private removes the entire Board from the public profile surface.
+A public imported Board can appear on its owner's public profile. Publishing the
+Board makes the title and state of every placed Card visible as a bounded roadmap
+projection, even when its local mirror is private. It never includes the Card or
+Proposal body, URL, provider metadata, visibility, comments, or synchronization
+credential. Choosing private removes the entire Board from the public profile
+surface.
 
 Orbiters registers a signed webhook after the local import transaction. If Trello
 rejects webhook creation, the imported Board remains usable with a warning and the
@@ -117,10 +118,17 @@ creator can use **Sync Trello** manually.
 Use **Sync Trello** on a connected Board for an immediate reconciliation. A valid
 Trello webhook starts the same reconciliation in the background after external
 changes, and a scheduler reconciles connected Boards every five minutes by default.
+Opening a Board also requests synchronization when the prior successful run is more
+than one minute old. Repeated page loads inside that window reuse the current state
+instead of starting duplicate work.
 Only the connected account owner who can manage the Board, or Orbiters staff
 performing recovery, can start or disconnect a synchronization. Database-backed
 claims prevent duplicate workers and reclaim a run that remains stale after its
 claim timeout.
+
+**Add element** shows a default-on **Create a Trello card** toggle for a connected
+Board. Leaving it enabled creates the local Proposal and lets synchronization create
+the real Card; turning it off keeps the new element local to Orbiters.
 
 Synchronization compares both sides with the last stored snapshot:
 
@@ -130,6 +138,9 @@ Synchronization compares both sides with the last stored snapshot:
   Proposal card creates a Trello Card;
 - List names and order, Card title and description, Card column/List, and Card
   position synchronize in both directions;
+- dragging a mapped Card between Orbiters columns reconciles the real Trello List
+  immediately; if Trello is temporarily unavailable, the local move remains saved,
+  a warning is shown, and automatic or manual synchronization retries it;
 - archiving a Trello Card removes its Board placement but preserves the local
   Proposal and product history;
 - archiving a List, or removing an unchanged local List or Card placement,
@@ -168,6 +179,8 @@ Trello.
   iframe connector configured by the administrator.
 - `POST /trello/import` creates the local Board and initial mappings.
 - `POST /trello/boards/:boardId/sync` runs manual reconciliation.
+- `POST /trello/boards/:boardId/sync-on-load` starts a reconciliation only when the
+  manager opens a stale connected Board.
 - `DELETE /trello/boards/:boardId` removes synchronization without deleting the
   local Board.
 - `HEAD` and `POST /trello/webhooks/:publicId` are the Trello callback surface. The
@@ -202,19 +215,21 @@ application secret nor a user token is returned to clients or written to logs.
    order, placement, and selected visibility.
 3. Create and move one card on each side, then confirm manual sync updates the other
    side once without duplicates.
-4. Edit the same linked card on both sides and confirm Trello wins with one reported
+4. Use **Add element** with **Create a Trello card** enabled, then confirm the real
+   Card exists and moving it in Orbiters immediately changes its Trello List.
+5. Edit the same linked card on both sides and confirm Trello wins with one reported
    conflict.
-5. Archive a Trello Card and confirm the placement disappears while the Proposal
+6. Archive a Trello Card and confirm the placement disappears while the Proposal
    remains.
-6. Reject or disable the webhook, confirm the import warning is actionable, then
+7. Reject or disable the webhook, confirm the import warning is actionable, then
    confirm manual synchronization still works.
-7. Revoke the user token, confirm the account becomes `reconnect-required`, then
+8. Revoke the user token, confirm the account becomes `reconnect-required`, then
    reconnect without exposing either token.
-8. Disconnect Trello and confirm the local Board and Proposals remain. Simulate
+9. Disconnect Trello and confirm the local Board and Proposals remain. Simulate
    remote cleanup failure and confirm the local disconnect returns manual-revocation
    guidance rather than retaining the encrypted credential.
-9. Import and synchronize Cards whose sparse positions exceed `10^14`, then confirm
+10. Import and synchronize Cards whose sparse positions exceed `10^14`, then confirm
    their order persists without numeric overflow or accidental compaction.
-10. Force an unexpected database failure in a Trello route and confirm the client
+11. Force an unexpected database failure in a Trello route and confirm the client
     receives only the generic route error while the server log includes the safe
     error identity and database code without credentials.

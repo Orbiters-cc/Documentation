@@ -147,6 +147,12 @@ a new tab with `noopener` and `noreferrer`. Public HTTPS destinations receive a
 small favicon prefix from their own origin when available; localhost, IP, private,
 or otherwise unsafe favicon targets fall back to a neutral external-link mark.
 
+Links to same-site `/proposals/:id` and `/issues/:id` routes render as compact Board
+element cards instead of bare URLs. Each card loads only an authorized title, short
+excerpt, and author avatar. Proposal and issue detail responses also list the
+permission-filtered Documentation, report, comment, and Proposal locations that
+mention their canonical URL, providing backlinks without leaking hidden content.
+
 It also provides `orbiters://knowledge/{id}`, `orbiters://research-reports/{id}`,
 and `orbiters://proposals/{id}` resource templates. A missing or unauthorized object
 is returned as absent, not leaked through a more descriptive authorization error.

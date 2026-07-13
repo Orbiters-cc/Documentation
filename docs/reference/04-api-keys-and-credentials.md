@@ -36,6 +36,9 @@ Runtime credentials are stored in the `APIKeys` table instead of hardcoded envir
 - `GITHUB_REPOSITORY_READ`: encrypted, environment-bound fine-grained token used
   only for private issue reads; bind it to the expected owner and repository and
   grant only Metadata and Issues read access.
+- `GITHUB_REPOSITORY_WRITE`: encrypted, environment-bound fine-grained token used
+  only when a Board manager explicitly creates a repository issue; bind it to the
+  expected owner and repository and grant Metadata read plus Issues read and write.
 - `TRELLO_APP`: environment-specific Trello Power-Up API key and secret, with
   optional authorization-return and public-webhook URL overrides.
 - `TRELLO_ACCOUNT`: encrypted creator authorization created by the Trello account
@@ -84,6 +87,10 @@ The current guides cover every credential type that can be created from those ta
   account that can see the private repository, limit it to `Orbiters` with only
   Metadata and Issues read permission, then save the token with the exact owner and
   repository names.
+- **GitHub repository issue creation:** create a separate fine-grained token for the
+  same repository, grant Metadata read and Issues read/write, then save it with the
+  exact owner and repository names. Do not reuse the read-only synchronization
+  credential or grant Project write permission.
 - **Trello application:** create or select the Orbiters Power-Up and generate its
   API key, copy the environment-specific iframe URL from
   `setupGuide.connectorUrl`, add the origin of
