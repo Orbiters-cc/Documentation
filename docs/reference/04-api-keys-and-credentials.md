@@ -36,6 +36,10 @@ Runtime credentials are stored in the `APIKeys` table instead of hardcoded envir
 - `GITHUB_REPOSITORY_READ`: encrypted, environment-bound fine-grained token used
   only for private issue reads; bind it to the expected owner and repository and
   grant only Metadata and Issues read access.
+- `TRELLO_APP`: environment-specific Trello Power-Up API key, secret, account return
+  URL, and public webhook API origin.
+- `TRELLO_ACCOUNT`: encrypted creator authorization created by the Trello account
+  connection flow; it is not entered in the generic API Keys form.
 - `MCP_ACCESS`: hashed read-only Knowledge MCP bearer token with an audience ceiling.
 
 Raw agent and MCP tokens are revealed once and are not recoverable from stored
@@ -43,6 +47,57 @@ credentials. GitHub access tokens remain secret credential fields and never appe
 connection status responses.
 
 </alpha>
+
+## Setup Guides in the Website
+
+The **API Keys** tabs in Creator and Admin expose a short setup guide as soon as a
+provider is selected. Each guide appears before the credential fields and contains
+at least three numbered steps plus a link to the provider's official setup
+documentation.
+The creator view shows creator-owned credential types; the admin view also shows
+global and administrator-only types such as R2, the two configurable GitHub
+credentials, and the Trello application.
+
+The current guides cover every credential type that can be created from those tabs:
+
+- **Discord:** create or select the Discord application, collect the application
+  and bot credentials, then register both Orbiters callback URLs.
+- **Cloudflare R2:** create the public and private buckets, issue a bucket-scoped
+  Object Read & Write token, then copy the S3 URLs, access keys, and optional public
+  files domain.
+- **Gemini:** select the billing project in Google AI Studio, create the key, then
+  record its project name and number with the credential.
+- **Gumroad:** create the Orbiters application, generate the connected-account
+  access token, then save the application values and API URL.
+- **Jinxxy:** create a dedicated Creator API key, configure the Orbiters webhook,
+  then save the API key and webhook signing secret.
+- **Payhip:** enable software license keys for each product, enter their product key
+  and secret as the documented JSON array, then add the optional account API key.
+- **Lemon Squeezy:** create an environment-matched API key, copy the store ID, then
+  create the Orbiters webhook and save its signing secret.
+- **VAPID:** generate one web-push key pair in a trusted terminal, save both keys,
+  then set a monitored `mailto:` or HTTPS subject.
+- **GitHub OAuth application:** create one OAuth App for the current environment,
+  copy the displayed callback exactly with Device Flow disabled, then save the
+  client ID and newly generated client secret.
+- **GitHub private repository read access:** create a fine-grained token owned by an
+  account that can see the private repository, limit it to `Orbiters` with only
+  Metadata and Issues read permission, then save the token with the exact owner and
+  repository names.
+- **Trello application:** create or select the Orbiters Power-Up and generate its
+  API key, copy the environment-specific iframe URL from
+  `setupGuide.connectorUrl`, add the Orbiters website origin to allowed origins,
+  then save the key and secret with the account return URL and public API webhook
+  origin. The setup panel renders that URL as a selectable value with a copy action.
+  Its `setupGuide.connectorNote` explains that the hosted connector declares no
+  Power-Up capabilities, exposes no Board data, and leaves synchronization to the
+  Orbiters REST integration.
+
+`GET /api-keys/options` returns the same `setupGuide` metadata used by both tabs.
+Keep the service registry and this page aligned when a credential type or provider
+workflow changes. Internal `GITHUB_PROJECT`, `TRELLO_ACCOUNT`, `AGENT_ACCESS`, and
+`MCP_ACCESS` records are created by their dedicated authorization or token flows and
+are not manually created from the generic API Keys form.
 
 ## Environments
 

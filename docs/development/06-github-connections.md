@@ -20,8 +20,9 @@ private Orbiters repository uses a separate read credential because a classic OA
 app has no read-only private-repository scope. Sharing credentials between these
 purposes would grant unnecessary access and make environment revocation ambiguous.
 
-The alpha integration calls GitHub REST and GraphQL APIs directly from the backend.
-The `gh` command is not part of the production request path.
+The alpha integration calls GitHub's REST APIs directly from the backend. The
+Project reader opts into the GitHub Projects v2 REST API version `2026-03-10`; the
+`gh` command and GraphQL are not part of the production synchronization path.
 
 ## OAuth Application Configuration
 
@@ -62,6 +63,11 @@ It records the stable GitHub numeric ID and node ID plus login and avatar snapsh
 on the Orbiters user and `GitHubConnection`. The numeric ID, not the mutable login,
 matches imported issue authors to Orbiters accounts.
 
+Creators can manage this identity connection from **Creator > Integrations**. The
+same personal connection control is available from **Account > Connections** for
+eligible accounts; both surfaces use this one backend connection rather than storing
+separate tokens.
+
 `GET /github/account` returns safe connection status. `DELETE /github/account`
 removes the identity connection and clears the GitHub identity snapshots. Orbiters
 stores the temporary user credential only as an encrypted, inactive cleanup record
@@ -85,21 +91,26 @@ and optional refresh token as encrypted credentials on a secret `GITHUB_PROJECT`
 API key for the current `dev` or `prod` runtime. Tokens are separate by environment
 and are never returned by connection-status endpoints.
 
-The Orbiters repository is private. GitHub's classic `repo` OAuth scope includes
-write-capable access, so the Project link deliberately does not request it. Configure
-a `GITHUB_REPOSITORY_READ` API key for each environment with a fine-grained token
-limited to `blackorbit1/Orbiters`. Choose **Only select repositories**, select
-`Orbiters`, and grant only **Metadata: Read-only** and **Issues: Read-only** under
-Repository permissions. Its credentials are `GITHUB_REPOSITORY_READ_TOKEN`,
-`GITHUB_OWNER`, and `GITHUB_REPOSITORY`. The OAuth credential reads the Project; the
-fine-grained token lists private issues. Without the repository credential, private
-issue sync fails with an explicit configuration error instead of broadening OAuth
-silently.
+The Orbiters repository is private. The Project link deliberately does not request
+classic `repo` scope. Configure a `GITHUB_REPOSITORY_READ` API key for each
+environment with a fine-grained token limited to `blackorbit1/Orbiters`. Choose
+**Only select repositories**, select `Orbiters`, and grant only **Metadata:
+Read-only** and **Issues: Read-only** under Repository permissions. Its credentials
+are `GITHUB_REPOSITORY_READ_TOKEN`, `GITHUB_OWNER`, and `GITHUB_REPOSITORY`. The
+OAuth credential reads the user-owned Project; the fine-grained token lists private
+issues. Without the repository credential, private issue sync fails with an
+explicit configuration error instead of broadening OAuth silently.
 
 Seeing only `read:project` on the administrator OAuth connection is expected. It is
 not evidence of missing repository scopes. The admin GitHub tab reports OAuth and
 repository-read readiness separately and disables synchronization until both
 credentials match the active environment and configured repository.
+
+Repository readiness includes a direct one-item Issues API probe against the
+configured owner and repository. A saved fine-grained token is therefore not marked
+valid merely because all three fields are present. The safe status can include the
+GitHub HTTP status and request ID for diagnosis, but never includes the token or a
+raw authorization header.
 
 Administrative operations are:
 
@@ -127,8 +138,9 @@ the same cleanup loop instead of being lost outside Orbiters' lifecycle tracking
 
 ## Synchronization Contract
 
-ProjectV2 fields and items are fetched through GraphQL. Repository issues are fetched
-through paginated REST calls. A successful synchronization persists:
+The user-owned Project, its fields, and its items are fetched through the versioned
+Projects v2 REST endpoints. Repository issues are fetched through separate paginated
+REST calls. A successful synchronization persists:
 
 - the Project node ID, title, URL, fields, options, items, and sync time;
 - issue node ID, number, title, URL, state, labels, and author identity;
@@ -141,6 +153,13 @@ linked issue becomes a `github-issue` Board item. Local status uses the stable o
 ID as `columnKey` and keeps the display name as delivery status. If GitHub replaces
 or renames a column, local Proposal cards are remapped by key or normalized title,
 then fall back to the first current column instead of disappearing.
+
+Repository issues that are not items on the configured Project remain visible in an
+explicit **Not on Project** column rather than being dropped or assigned a made-up
+delivery status. An issue that is on the Project but has no Status value uses the
+**Untracked** fallback. At the 2026-07-13 verification snapshot, synchronization
+imported all 68 repository issues: 66 mapped to their Project status and two were
+reported in **Not on Project**.
 
 The scheduler runs once when external startup services begin and then every five
 minutes by default. `GITHUB_PROJECT_SYNC_INTERVAL_MS` accepts values from one minute
@@ -176,6 +195,24 @@ the bearer token. Rate-limit and request identifiers may be retained for diagnos
 A failed sync marks the connection as errored without replacing the last successful
 snapshot. Revalidate the credential before retrying repeated authentication errors.
 
+Treat credential probe failures according to the GitHub status:
+
+- `401` means that the fine-grained token is expired, revoked, or otherwise
+  rejected. Replace it in **Admin > API Keys**.
+- `403` means that the token or its resource-owner approval lacks the required
+  access. Grant **Metadata: Read-only** and **Issues: Read-only**, complete any
+  organization approval, then save the credential again.
+- `404` from the private repository Issues endpoint usually means that GitHub is
+  hiding a repository the token cannot see; it does not mean that the Orbiters sync
+  route is missing. Edit the fine-grained token, select the correct resource owner,
+  choose the `Orbiters` repository explicitly, grant the two read-only permissions,
+  and save the token again with the matching owner and repository fields.
+
+After correcting a token, reload the GitHub tab and confirm the repository-read
+validation is **valid** before pressing **Synchronize**. If a `404` persists, compare
+the displayed target owner and repository, then give the displayed GitHub request
+ID to an administrator without sharing the credential.
+
 ## Verification
 
 1. Configure separate OAuth app records for development and production with Device
@@ -185,13 +222,18 @@ snapshot. Revalidate the credential before retrying repeated authentication erro
 3. Connect the development admin integration and confirm `read:project` appears in
    the safe scope list without broader repository scope.
 4. Configure the environment's repository-read token with only Metadata and Issues
-   read access, then verify its owner and repository binding.
-5. Synchronize and compare issue count, Project columns, stable option IDs, and
-   removal reconciliation.
-6. Confirm a linked issue author resolves by numeric ID even after a login rename.
-7. Confirm a local request cannot move a GitHub-backed Board item.
-8. Revoke the integration and confirm validation and sync no longer work.
-9. Shorten the scheduler interval in a test environment and confirm stale state and
+   read access, then verify its owner and repository binding and the direct Issues
+   access probe.
+5. Synchronize and confirm 68 repository issues are imported, 66 map to Project
+   statuses, and the two unmatched issues appear in **Not on Project** with an
+   actionable warning.
+6. Compare Project columns, stable option IDs, and removal reconciliation.
+7. Confirm a linked issue author resolves by numeric ID even after a login rename.
+8. Confirm a local request cannot move a GitHub-backed Board item.
+9. Revoke the integration and confirm validation and sync no longer work.
+10. Shorten the scheduler interval in a test environment and confirm stale state and
    the single-run guard without calling production GitHub.
-10. Force GitHub revocation to fail, confirm local access stops immediately, then
+11. Force GitHub revocation to fail, confirm local access stops immediately, then
    confirm the cleanup loop removes the ciphertext after GitHub recovers.
+12. Probe a fine-grained token that cannot see the private repository and confirm
+    the admin UI explains the `404` remediation while exposing no secret value.

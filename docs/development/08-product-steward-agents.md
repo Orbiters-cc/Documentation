@@ -167,18 +167,20 @@ Read operations:
 Mutation operations:
 
 - start the run;
+- upload private visual evidence for the run;
 - create its one private Product Research Report;
 - add a comment to a visible report;
 - create up to three private candidate Proposals when that action is explicitly
   scoped;
 - comment on a visible Proposal.
 
-Every mutation requires an `Idempotency-Key` header of at most 180 characters. The
-server reserves the key inside the mutation transaction, then stores the operation,
-request hash, run, and response. Repeating the same key and body replays the result;
-reusing it for a different body or operation returns a conflict. A report is also
-unique per run. Both report recommendations and directly created Proposals are
-limited to three per run.
+Every mutation except the media upload requires an `Idempotency-Key` header of at
+most 180 characters. The server reserves the key inside the mutation transaction,
+then stores the operation, request hash, run, and response. Repeating the same key
+and body replays the result; reusing it for a different body or operation returns a
+conflict. Media upload returns a new private file object and is not replayed by an
+idempotency key. A report is also unique per run. Both report recommendations and
+directly created Proposals are limited to three per run.
 
 ## Required Research Process
 
@@ -228,6 +230,16 @@ The report records:
 - confidence and evidence coverage;
 - source and run provenance.
 
+The generated version-2 brief instructs the local agent to lead with no more than
+three recommendations and remove repeated summaries, long preambles, and generic
+AI process narration. The human report page uses the same hierarchy: recommendations
+first, then recommendation visuals, an optional executive brief, grouped supporting
+research, remaining visual evidence, and comments. Recommendation cards expose the
+title and summary immediately, label the rationale as **Why this matters**, and keep
+evidence and review controls collapsed until requested. Empty supporting sections
+are omitted; populated evidence, alternatives, risks, and open questions are grouped
+in accordions instead of one undifferentiated wall of text.
+
 `confidence` and `evidenceCoverage` are optional explanatory text, not fixed labels
 or short enums. A report may therefore state both the confidence level and why the
 available evidence supports it. Existing databases migrate the confidence column to
@@ -236,6 +248,46 @@ available evidence supports it. Existing databases migrate the confidence column
 Each recommendation needs a title and summary. It can retain rationale, evidence,
 similar prior objects, similarity class, material-change explanation, human outcome,
 decision rationale, and promoted Proposal ID.
+
+Report narrative, recommendation rationale, evidence, and comments use the shared
+GitHub-flavored Markdown renderer. It supports headings, tables, task lists, code,
+images, and links. External links are clickable in a new tab and receive the source
+site favicon when a safe public HTTPS favicon is available. Raw HTML inside Markdown
+is ignored; use report media for reviewed HTML or SVG visuals.
+
+### Report Media
+
+Upload a run-owned image before report creation with
+`POST /agent/v1/runs/:publicId/media`, the same bearer token, and a
+`multipart/form-data` body whose file field is named `file`. JPEG, PNG, WebP, and
+AVIF inputs are accepted up to 8 MB. Orbiters decodes the image, applies its
+orientation, rejects inputs above the 40-million-pixel decoder budget, limits the
+result to 2,400 by 2,400 pixels without enlargement, stores it as a private WebP,
+and returns a ready-to-use `media` object. Include that exact object in the report's
+`media` array.
+
+A report can contain at most 12 media items. Supported objects are:
+
+- `{ "type": "image", "fileId": 123 }` for an image uploaded by the same Agent
+  profile and run;
+- `{ "type": "image", "url": "https://example.com/diagram.png" }` for a public
+  HTTPS image;
+- `{ "type": "svg", "content": "<svg>...</svg>" }` for an inline SVG;
+- `{ "type": "html", "content": "<div>...</div>" }` for a compact visual,
+  comparison, or diagram.
+
+Each item can provide `title`, `caption`, and one of the placements
+`recommendations`, `overview`, `evidence`, or `appendix`. Images can also provide
+`alt`; HTML and SVG items can request a display `height` from 180 to 900 pixels.
+Inline visual markup is limited to 100,000 characters. Scripts, event handlers,
+embedded documents, forms, unsafe URL schemes, and SVG `foreignObject` elements are
+rejected. Accepted HTML and SVG render in a sandboxed frame with a restrictive
+Content Security Policy and no script permission.
+
+Stored media remains private.
+`GET /research-reports/:reportId/media/:fileId` returns an image only when the
+viewer can read the report, the report references that file, and the file belongs to
+the same run. A file ID from another run cannot be attached to the report.
 
 Reports start private. Staff or the sponsor can change visibility, decide a
 recommendation, or promote it to a private Proposal. Promotion is replay-safe and
@@ -248,14 +300,16 @@ returned to subsequent authorized runs.
    agent that cannot authenticate as a human.
 2. Create a run and inspect the brief for secrets; it must contain none.
 3. Configure a scoped token locally and retrieve complete prior context.
-4. Submit one private report with no more than three recommendations.
-5. Add human comments and record accepted, rejected, or deferred outcomes.
-6. Start a second run and confirm it retrieves the first report and every comment.
-7. Attempt to submit the same idea as `new`; the API must require explicit prior
+4. Upload an image and submit one private, recommendation-first report with that
+   image, one sandboxed SVG or HTML visual, and no more than three recommendations.
+5. Confirm unsafe visual markup and a file from another run are rejected.
+6. Add human comments and record accepted, rejected, or deferred outcomes.
+7. Start a second run and confirm it retrieves the first report and every comment.
+8. Attempt to submit the same idea as `new`; the API must require explicit prior
    classification or a material-change explanation.
-8. Remove one current action or Knowledge audience from the profile and confirm the
+9. Remove one current action or Knowledge audience from the profile and confirm the
    existing token loses it immediately.
-9. Revoke the token and confirm it can no longer read or write.
+10. Revoke the token and confirm it can no longer read or write.
 
 ## Non-Goals
 

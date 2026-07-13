@@ -63,7 +63,10 @@ backlinks to callers outside the new policy.
 `GET /knowledge` is the structured Knowledge search used by agents and internal
 clients. Supported query parameters are `q`,
 `category`, `stage`, `domain`, `type`, `limit`, and `offset`. Results include score,
-provenance, backlinks, pagination, and staleness state.
+provenance, backlinks, pagination, and staleness state. A text query also returns up
+to three short plain-text `matches` excerpts from the policy-visible indexed body.
+The service scores the same visible content it returns; it does not rank a
+content-less list projection.
 
 `GET /knowledge/:id` reads one visible document by stable ID or slug. `GET
 /knowledge/health` returns index build time and the valid-document count. Health
@@ -121,17 +124,28 @@ The landing and reader use the website's normal typography, page background, car
 and hover treatment. Search sits directly in the page header without a separate
 black backdrop or decorative hero artwork. The reader uses a documentation layout:
 a section sidebar, article content, and an in-page outline when headings are
-available.
+available. Tool marks remain transparent inside their rows; MCB, ReFit, UnitGit, and
+XRayGizmos icons do not receive an extra icon-tile background.
 
 Navigation is topic-scoped. Entering MCB, ReFit, UnitGit, XRayGizmos, Website, or
 General knowledge limits the sidebar to that topic. Selecting another page from the
 sidebar must preserve that scope; it must not repopulate unrelated topics. Returning
 to the landing or explicitly choosing another category changes the scope.
 
-Search results may cross visible topics. Opening a result carries the active query
-into the reader and highlights case-insensitive matches in visible article text.
-Highlights are presentation-only: they do not alter Markdown, code blocks, links,
-or indexed content, and clearing the query removes them.
+Search results may cross visible topics. While the visitor types, each result shows
+up to two matching body excerpts and highlights the case-insensitive query terms in
+the title and excerpts. Opening a result carries the active query into the reader
+and highlights the same terms in visible article text. Highlights are
+presentation-only: they do not alter Markdown, code blocks, links, or indexed
+content, and clearing the query removes them.
+
+Documentation, Proposals, Product Research Reports, report comments, and other
+Markdown surfaces share one safe renderer. It supports GitHub-flavored Markdown and
+syntax highlighting, skips arbitrary raw HTML, and accepts Markdown images only from
+site-relative paths or HTTPS sources. External HTTP or HTTPS links are clickable in
+a new tab with `noopener` and `noreferrer`. Public HTTPS destinations receive a
+small favicon prefix from their own origin when available; localhost, IP, private,
+or otherwise unsafe favicon targets fall back to a neutral external-link mark.
 
 It also provides `orbiters://knowledge/{id}`, `orbiters://research-reports/{id}`,
 and `orbiters://proposals/{id}` resource templates. A missing or unauthorized object

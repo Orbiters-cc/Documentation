@@ -8,7 +8,7 @@ id: orbiters.reference.api
 domain: website
 type: reference
 owner: orbiters-engineering
-lastVerified: 2026-07-12
+lastVerified: 2026-07-13
 ---
 
 # API Reference
@@ -43,6 +43,11 @@ OAuth login issues a short-lived JWT and a refresh token stored in an HTTP-only 
 ## User And Asset Access
 
 - `/users`
+- `GET /users/:id/profile` for a public profile, created assets, authored activity,
+  provider links, profile comments, and `user.publicBoards`. Public Board previews
+  contain only owner-owned public Boards, safe visible counts, and at most eight
+  public item summaries per Board.
+- `POST /users/:id/profile/comments` for an authenticated public profile comment
 - `/assets`
 - `/files`
 - `/keywords`
@@ -92,12 +97,30 @@ Store webhook routes receive provider events. The `secret` segment identifies th
 - `/mcp` for stateless, scoped MCP requests
 - `/github` for user GitHub identity linking
 - `/admin/github` for environment-specific read-only GitHub synchronization
+- `/trello` for creator account authorization, Board import, manual bidirectional
+  synchronization, disconnect, and signed webhook callbacks
 - `/admin/knowledge-base` for source, index, and MCP-token administration
 - `/boards` and `/proposals` for planning and moderation
-- `/forecasts` for private admin/developer projections
+- `/forecasts` for administrator-only private projections
 - `/research-reports` for report review, comments, decisions, and promotion
 - `/admin/agents` for Product Steward profiles, tokens, briefs, and runs
 - `/agent/v1` for fixed scoped local-agent operations
+
+`GET /boards?owned=true` requires authentication and returns only Boards owned by
+the current User. Creator > Boards uses `PATCH /boards/:id` with
+`{ "visibility": "private" }` or `{ "visibility": "public" }` for its visibility
+control. The normal Board edit authorization still applies.
+
+`GET` and `HEAD /trello/power-up/connector` are public hosted iframe responses for
+Trello Power-Up registration. They declare no Power-Up capabilities and expose no
+Board data; account authorization and synchronization remain on the protected
+`/trello` REST routes.
+
+An Agent token with `research-reports:write` can upload a private image through
+`POST /agent/v1/runs/:publicId/media`, then include the returned media object in the
+run's single report. Authorized report readers retrieve a referenced stored image
+through `GET /research-reports/:reportId/media/:fileId`; the general file route does
+not make report media public.
 
 These endpoints are alpha and must not be exposed without their documented JWT,
 feature, audience, or scoped-token controls.
