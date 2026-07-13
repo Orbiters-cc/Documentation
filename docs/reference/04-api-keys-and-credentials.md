@@ -89,7 +89,7 @@ The current guides cover every credential type that can be created from those ta
   `setupGuide.connectorUrl`, add the origin of
   `setupGuide.authorizationReturnUrl` to allowed origins, then save the key and
   secret. The setup panel renders the connector, authorization return, and webhook
-  base URLs as selectable values with copy actions. Their adjacent
+  base URLs as rounded read-only form fields with copy actions. Their adjacent
   `setupGuide.connectorNote`, `setupGuide.authorizationReturnNote`, and
   `setupGuide.webhookBaseNote` explain how each value is used.
 

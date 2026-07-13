@@ -44,6 +44,11 @@ After a card is selected, its preview opens as a flush, square-edged right split
 separated from the Kanban by one divider. It is not rendered before selection and is
 not a floating island. Profile, Proposal, and research detail bodies use the same
 site content rail so moving between them does not change the readable page width.
+The preview pane owns its vertical scroll and renders the complete Markdown body;
+long content must not be clipped inside a nested fixed-height excerpt. Proposal
+detail headers contain identity, workflow, and ownership metadata only. Markdown
+content belongs in the readable overview below the tabs, not in a duplicate header
+preview or a page-specific background layer.
 
 On desktop, each Kanban column stays within the available viewport height and
 scrolls its own cards with a visually hidden scrollbar. The Board header and other
@@ -143,6 +148,14 @@ content, placement, and order synchronize in both directions, while Orbiters-onl
 comments, decisions, visibility, membership, and forecasts remain local. See
 `orbiters.how-to.connect-and-sync-trello` for account setup, limits, conflict rules,
 webhook security, and disconnect behavior.
+
+Board owners and administrators can also link a synchronized Trello Card to a
+separate Proposal as delivery context. `TrelloCardLink.linkedProposalId` is distinct
+from `proposalId`: the latter remains the local mirror used by bidirectional Card
+synchronization, while the former is a contextual relationship. Linking therefore
+never lets a later Trello sync overwrite the target Proposal's title, Markdown,
+discussion, decisions, or forecast. A Card can have at most one contextual Proposal
+link and reassignment requires an explicit unlink first.
 
 ## Visibility
 
