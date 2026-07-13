@@ -86,6 +86,11 @@ One Proposal can appear on multiple Boards. Moving or removing its placement doe
 not rewrite its Markdown, comments, decisions, or forecast assumptions. A Proposal
 may also link to one synchronized GitHub issue without becoming a copy of that issue.
 
+`BoardItem.position` is `DECIMAL(30,8)`. External Boards can use sparse numeric
+ordering values above `10^14`; retaining that width prevents Trello import or sync
+from overflowing the database or collapsing distinct Card positions. Do not narrow
+the column or coerce remote ordering into a smaller integer representation.
+
 ## Default Boards
 
 The default public `Orbiters` Board is created for the first human owner account. It

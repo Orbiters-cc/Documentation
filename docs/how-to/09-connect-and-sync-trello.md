@@ -139,6 +139,10 @@ Synchronization compares both sides with the last stored snapshot:
   snapshot, the Trello value wins and the reconciliation counts a conflict instead
   of silently combining incompatible edits.
 
+Orbiters preserves Trello's sparse numeric Card positions, including values above
+`10^14`, so importing or synchronizing a widely spaced Board does not fail or
+silently resequence its Cards.
+
 The result reports `pulled`, `pushed`, `createdLocal`, `createdRemote`, `conflicts`,
 and `archived` counts. Board responses expose a safe `trelloSync` summary with its
 remote ID, name, URL, state, last sync time, last error, and whether its webhook is
@@ -175,6 +179,12 @@ Orbiters-originated Trello writes carry a client identifier so their echo webhoo
 do not start a loop. The callback acknowledges valid external events before running
 the bounded synchronization asynchronously.
 
+Unexpected Trello route failures keep the client response generic. The server logs
+the safe error name and message plus the database code from the wrapped database
+error when one exists. Shared safe serialization excludes request authorization
+headers and credentials; database diagnostics and other internal details are never
+copied into the JSON error response.
+
 The periodic scheduler uses `TRELLO_SYNC_INTERVAL_MS`, defaults to five minutes, and
 clamps the interval from one minute to 24 hours. `TRELLO_SYNC_BATCH_SIZE` defaults to
 20 and accepts from one to 50 Boards per pass. `TRELLO_SYNC_CLAIM_TIMEOUT_MS`
@@ -203,3 +213,8 @@ application secret nor a user token is returned to clients or written to logs.
 8. Disconnect Trello and confirm the local Board and Proposals remain. Simulate
    remote cleanup failure and confirm the local disconnect returns manual-revocation
    guidance rather than retaining the encrypted credential.
+9. Import and synchronize Cards whose sparse positions exceed `10^14`, then confirm
+   their order persists without numeric overflow or accidental compaction.
+10. Force an unexpected database failure in a Trello route and confirm the client
+    receives only the generic route error while the server log includes the safe
+    error identity and database code without credentials.
