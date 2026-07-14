@@ -8,7 +8,7 @@ id: orbiters.how-to.configure-creator-assets
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-07-12
+lastVerified: 2026-07-14
 ---
 
 # Creator Assets
@@ -38,6 +38,17 @@ Use scopes for test groups, early releases, creator QA, and staged updates. Do n
 ## Store Product Links
 
 Store links connect an Orbiters asset to a product ID in a store integration. Add a public URL when users should see a purchase button.
+
+## Creator Galleries
+
+Creators can open **Creator** > **Galleries** to create website galleries backed by
+Discord image rooms they own through a creator Discord integration. A gallery has a
+name, public or private visibility, a gallery layout, and one Discord room source.
+
+Use **Crawl Past Images** to import existing Discord images from that room. Interrupted
+crawls can be resumed from their saved cursor or restarted from the beginning. **Flush
+Images** removes the stored website placements and orphaned mirrored image records for
+that gallery; it does not delete Discord messages or attachments.
 
 ## Discord Asset Roles
 

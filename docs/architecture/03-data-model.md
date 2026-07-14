@@ -8,7 +8,7 @@ id: orbiters.architecture.data-model
 domain: website
 type: reference
 owner: orbiters-engineering
-lastVerified: 2026-07-13
+lastVerified: 2026-07-14
 ---
 
 # Data Model Notes
@@ -48,6 +48,11 @@ This is a high-level map of the Orbiters data model. It is not a full schema dum
 - `DiscordIntegration`: guild routing to shared or custom bot mode.
 - `DiscordVerificationRules`: guild-scoped verification rules.
 - `Appeals` and `AppealRules`: guild-scoped moderation flows.
+- `DiscordImage`: one mirrored Discord image attachment per message attachment.
+- `DiscordImagePlacement`: a context-specific website placement for a Discord image.
+- `AssetShowcaseChannel` and `GalleryChannel`: Discord room sources for asset
+  showcases and standalone galleries.
+- `Galleries`: creator-owned public or private Discord-backed image galleries.
 
 ## Runtime Work
 

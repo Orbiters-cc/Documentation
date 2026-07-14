@@ -8,7 +8,7 @@ id: orbiters.architecture.runtime-flows
 domain: website
 type: explanation
 owner: orbiters-engineering
-lastVerified: 2026-07-12
+lastVerified: 2026-07-14
 ---
 
 # Runtime Flows
@@ -60,6 +60,29 @@ sequenceDiagram
     Backend->>DB: Record sale or disable access
     Backend->>Outbox: Queue role revoke when needed
 ```
+
+## Discord Image Galleries
+
+```mermaid
+sequenceDiagram
+    participant Creator
+    participant Backend
+    participant Discord
+    participant DB
+    participant Outbox
+    Creator->>Backend: Create gallery from owned Discord room
+    Backend->>Discord: Validate room is available to the bot
+    Backend->>DB: Save Gallery and GalleryChannel
+    Creator->>Backend: Crawl past images
+    Backend->>Outbox: Queue gallery.crawl jobs
+    Outbox->>Discord: Fetch message batches
+    Outbox->>DB: Upsert DiscordImage records and gallery placements
+    Backend-->>Creator: Stream crawl status over WebSocket
+```
+
+Live Discord message events use the same ingestion path as historical crawls. One
+Discord message can produce multiple `DiscordImage` records, one per image attachment,
+and each destination uses a separate `DiscordImagePlacement`.
 
 ## Documentation Request
 
