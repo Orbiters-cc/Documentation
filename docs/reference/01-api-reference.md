@@ -71,6 +71,7 @@ Creator routes require authentication and creator ownership checks where relevan
 ## Admin
 
 - `/admin/users`
+- `/admin/creator-status`
 - `/admin/assets`
 - `/admin/avatar-bases`
 - `/admin/user-assets`
@@ -85,6 +86,14 @@ Creator routes require authentication and creator ownership checks where relevan
 - `/admin/developer` when developer redirections are enabled
 
 Admin routes use JWT auth and feature/rank gates depending on the area.
+
+Authenticated users submit creator access requests with
+`POST /users/me/creator-status-requests`. Their latest request is returned with
+`GET /users/me/account-overview`. Administrators list requests with
+`GET /admin/creator-status?status=PENDING`, then use
+`POST /admin/creator-status/:id/accept` or
+`POST /admin/creator-status/:id/dismiss`. The user moderation dialog persists rank and
+creator access together through `PATCH /admin/users/:id/moderation`.
 
 ## Webhooks
 

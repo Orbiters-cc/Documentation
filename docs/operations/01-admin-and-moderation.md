@@ -27,6 +27,26 @@ Use user tools when you need to answer:
 - whether Discord roles or verification state need attention,
 - whether tokens should be revoked.
 
+The **Moderate User** dialog can update the Orbiters rank and creator status together.
+Granting creator status directly also accepts that user's pending creator request.
+Leaving creator status disabled while saving dismisses a pending request. Orbiters
+notifies the affected user when creator status is granted, removed, or a pending request
+is dismissed.
+
+## Creator Requests
+
+Open **Admin > Creators** to review users who requested creator status. The tab provides
+Pending, Accepted, Dismissed, and All views. Each pending request shows the applicant's
+Orbiters identity, Discord identity, email when available, and submission time.
+
+- **Accept** grants `User.creator` access and records the administrator and review time.
+- **Dismiss** closes the request without granting creator access.
+
+The user receives an account notification for either decision. When a user submits a new
+request, the designated Orbiters administrator plus authenticated admin and owner accounts
+receive a moderation notification linking directly to **Admin > Creators**. A user can
+have only one pending creator request at a time.
+
 ## Assets And User Assets
 
 User assets represent a user's relationship to an asset. Important fields include:

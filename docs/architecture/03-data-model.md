@@ -22,6 +22,12 @@ This is a high-level map of the Orbiters data model. It is not a full schema dum
 - `Roles`: Orbiters role metadata mapped to Discord roles.
 - `UserDiscordServerPresence`: per-guild user state.
 - `UserDiscordServerRole`: tracked Discord role state.
+- `CreatorStatusRequest`: one user's creator-access review, with `PENDING`,
+  `ACCEPTED`, or `DISMISSED` state plus the resolving administrator and timestamp.
+
+Only one pending `CreatorStatusRequest` may exist per user. Accepting a request and
+setting `Users.creator` happen in the same database transaction. Direct moderation of
+creator status resolves any pending request in that transaction as well.
 
 ## Assets
 

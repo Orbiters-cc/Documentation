@@ -23,6 +23,22 @@ Orbiters accounts are based on Discord login. Discord identity lets Orbiters con
 
 After login, the frontend stores a short-lived JWT and uses a refresh cookie to rotate it.
 
+## Request Creator Status
+
+Creator status controls access to creator profiles and creator tools. To request it:
+
+1. Open **Account > Overview**.
+2. Find **Creator Status**.
+3. Select **Request creator status**.
+
+The request remains visible as **Review pending** until an administrator reviews it.
+Submitting again while the request is pending does not create a duplicate. After an
+administrator accepts or dismisses the request, Orbiters sends an account notification
+that links back to the Overview tab. A dismissed request can be submitted again later.
+
+When the request is accepted, the Creator Status card changes to **Creator** and creator
+tools become available to the account.
+
 ## Notifications And Account Actions
 
 The avatar at the right of the navigation bar opens the account menu. Its badge is
