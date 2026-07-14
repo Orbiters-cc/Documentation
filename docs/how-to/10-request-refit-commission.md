@@ -22,10 +22,10 @@ Use the manual commission flow when an automatic ReFit result needs artist work.
 2. Under **The ReFit doesn't look right?**, select one or more available creators.
 3. Select **Next**. Orbiters opens the commission draft in the browser.
 4. Put the creators in preference order.
-5. Keep the default 48-hour response time or set a different limit for each creator.
+5. Keep the default two-day response time or set a different limit for each creator.
 6. Optionally enable **Ask everyone at once and take the first creator who accepts**.
-7. Review the asset context, add a brief and preferred contact method, then continue
-   to Stripe.
+7. Review the receipt, then select **Next** to continue to Stripe. The asset,
+   source avatar, target avatar, and blendshape context comes directly from ReFit.
 8. Authorize the EUR 2 Orbiters request fee.
 
 The card authorization is captured only when a creator accepts. Cancelling the
@@ -44,9 +44,9 @@ mode, every selected creator receives the request at once and the first acceptan
 wins atomically.
 
 Before acceptance, creators see that a ReFit commission is available and its
-response deadline, but not the private brief or client identity. Acceptance captures
-the EUR 2 request fee, reveals the details to the accepting creator, and cancels the
-remaining offers.
+response deadline, but not the client identity or technical asset context. Acceptance
+captures the EUR 2 request fee, reveals the ReFit context and the client's existing
+Orbiters profile to the accepting creator, and cancels the remaining offers.
 
 The client receives an Orbiters notification, a push notification when enabled, and
 a Discord direct message when Orbiters can reach the linked Discord account. The
