@@ -8,7 +8,7 @@ id: orbiters.reference.api-keys-and-credentials
 domain: website
 type: reference
 owner: orbiters-security
-lastVerified: 2026-07-13
+lastVerified: 2026-07-14
 ---
 
 # API Keys and Credentials
@@ -26,6 +26,8 @@ Runtime credentials are stored in the `APIKeys` table instead of hardcoded envir
 - `LEMONSQUEEZY`: Lemon Squeezy API key, store ID, and webhook secret.
 - `PATREON`: creator access token, optional refresh token, and webhook secret.
 - `KOFI`: official webhook verification token and public Ko-fi page URL.
+- `PAYPAL`: creator REST application client ID, secret, live or sandbox environment,
+  and optional account label.
 - `VAPID`: Web push public/private keys and subject.
 
 <alpha>
@@ -90,6 +92,10 @@ The current guides cover every credential type that can be created from those ta
 - **Ko-fi:** enable the official webhook, copy the displayed Orbiters callback URL,
   save the verification token, then send Ko-fi's test event and confirm it appears
   before relying on shop or supporter notifications.
+- **PayPal:** create a live or sandbox REST application in PayPal Apps & Credentials,
+  copy its client ID and secret, choose the matching environment, then validate and
+  synchronize it from Creator > Integrations and Creator > Revenues. Live accounts
+  may need PayPal to enable Transaction Search.
 - **Gumroad OAuth application:** create an application for the current environment,
   register the displayed Orbiters callback, and save its client ID and secret.
 - **Patreon OAuth application:** create a Patreon client for the current

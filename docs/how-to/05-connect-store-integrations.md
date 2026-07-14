@@ -8,7 +8,7 @@ id: orbiters.how-to.connect-store-integrations
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-07-13
+lastVerified: 2026-07-14
 ---
 
 # Connect Store Integrations
@@ -28,6 +28,8 @@ Store integrations let creators connect outside stores to Orbiters. Orbiters can
   tier/member synchronization.
 - **Ko-fi**: official webhook ingestion for donations, memberships, commissions,
   and shop orders, including shop-item direct-link codes.
+- **PayPal**: REST application connection and positive balance-affecting transaction
+  history for the Revenues tab.
 
 ## Connect A Store
 
@@ -101,14 +103,43 @@ The current Ko-fi `Transaction_All.csv` export is recognized through its
 `DateTime (UTC)`, `Received`, `Currency`, `TransactionType`, `TransactionId`, and
 `BuyerEmail` headers.
 
+### PayPal
+
+1. Open [PayPal Apps & Credentials](https://developer.paypal.com/dashboard/applications/live)
+   and select **Live** for real revenue or **Sandbox** while testing.
+2. Create a REST application for Orbiters. PayPal may require the live account to
+   request or enable Transaction Search before live reporting is available.
+3. Copy the client ID and secret, then open **Creator > Integrations**, choose
+   **PayPal**, select the matching environment, and validate the connection.
+4. Open **Creator > Revenues** and choose **Sync PayPal**. Orbiters pages through
+   PayPal Transaction Search in windows accepted by the API and stores only
+   normalized incoming, balance-affecting transactions.
+
+The client secret belongs to the creator account and is encrypted through the same
+API-key storage used by other manual integrations. Orbiters does not present this as
+a generic OAuth button: PayPal's third-party seller onboarding is a separate partner
+capability and is not required for a creator to read their own REST application data.
+
 ## Refresh Revenue History
 
 Open **Creator > Revenues**. Use the provider sync buttons to refresh historical
-sales for Gumroad, Jinxxy, and Lemon Squeezy. A manual sync performs a full-history
+sales for Gumroad, Jinxxy, Lemon Squeezy, and PayPal. A manual sync performs a full-history
 reconciliation so older rows gain missing amount and date data; scheduled background
 sync remains incremental. Patreon relies on signed webhooks. Ko-fi combines verified
 webhooks with the optional historical CSV import described above. The graph keeps
-currencies separate and reports legacy sale rows whose amount is unknown.
+currencies separate, stacks revenue by original provider, and reports legacy sale
+rows whose amount is unknown.
+
+Use **Deduplicate PayPal transfers** when shop or Ko-fi payments also appear in
+PayPal. Orbiters matches one payment to at most one PayPal row using exact amount and
+currency, a 15-minute window, and matching buyer email when both providers supply
+one. It keeps the original shop or Ko-fi source for attribution and excludes the
+matching PayPal pass-through from totals. The toggle is reversible and the UI shows
+how many likely duplicates were found.
+
+Choose a 30-day, 90-day, one-year, or five-year preset, or enter exact start and end
+dates. The chart automatically uses daily, weekly, or monthly buckets appropriate
+for the selected range.
 
 ## Integration Status
 

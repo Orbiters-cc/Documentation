@@ -276,13 +276,13 @@ monthly, or yearly. A request can include Proposal descendants in one scenario.
 saves scenarios. Only the author or an administrator can delete a scenario.
 
 The Revenues tab calculates the active preview automatically as assumptions change.
-Its chart places the previous 12 months of mirrored provider sales before the
-scenario horizon. Historical amounts remain separated by currency; the current
-forecast model is USD, so a non-USD history view does not combine unlike currencies
-on one line. Creators can force a history refresh for providers with a sales-list
-API. Webhook-only providers show that limitation instead of a misleading sync
-button. Older mirrored rows that predate amount capture remain counted as sales and
-are reported as amount-unknown rather than treated as zero revenue.
+Its stacked area chart groups mirrored history by provider and keeps currencies
+separate. Creators can use fixed presets or exact start/end dates; the history API
+selects daily, weekly, or monthly buckets for the range. Creators can force a history
+refresh for providers with a sales-list API. Webhook-only providers show that
+limitation instead of a misleading sync button. Older mirrored rows that predate
+amount capture remain counted as sales and are reported as amount-unknown rather
+than treated as zero revenue.
 
 Manual provider sync is a full-history reconciliation, while background sync is
 incremental. Jinxxy history comes from paid Orders and uses `payout_total`; license
@@ -290,6 +290,25 @@ records are not revenue. Ko-fi history combines verified webhook records with an
 optional CSV import at
 `POST /creator/integrations/stores/:id/kofi-csv`. CSV transactions reconcile against
 nearby matching webhook rows, so historical import does not double count a payment.
+PayPal history comes from `GET /v1/reporting/transactions` with balance-affecting
+records and bounded query windows. Optional cross-provider deduplication finds exact
+amount/currency matches within 15 minutes, requires equal buyer email when both are
+available, assigns each PayPal row at most once, and excludes the PayPal copy while
+retaining the original provider for the source chart.
+
+**Gain continuity** adds a statistical projection derived from the creator's last
+180 days in the selected currency. It is stored alongside, not in place of, the
+Proposal scenario. Available fast models are:
+
+- weighted moving average over the latest 28 daily values;
+- ordinary least-squares linear trend over at most 90 daily values;
+- Holt level-and-trend smoothing over at most 90 daily values;
+- weekly seasonal naive repetition of the latest seven daily values.
+
+All algorithms clamp negative predictions to zero. If no revenue exists in the
+selected currency, the API marks continuity unavailable instead of presenting a
+fabricated zero-history forecast. Saved scenario totals preserve both the original
+Proposal calculation and the selected continuity projection.
 
 Forecast values are planning projections, not accounting records. Preserve inputs,
 curve, horizon, currency, and inclusion choices whenever presenting totals.
@@ -347,3 +366,9 @@ parents. Keep the source export and reported checksum as migration evidence.
     shows only title and status, then make the Board private and confirm it vanishes.
 12. Open a GitHub issue, scroll through more than one comment page, copy its link,
     render the link in Markdown, and confirm the element backlink is listed.
+13. Connect a sandbox PayPal REST application, sync two pages of transactions, and
+    confirm incoming rows are idempotent across a second sync.
+14. Create matching Ko-fi and PayPal rows, toggle PayPal deduplication, and confirm
+    the total changes once while the source area remains attributed to Ko-fi.
+15. Exercise every gain-continuity algorithm with and without history, then compare
+    preview totals with the values persisted on a saved scenario.

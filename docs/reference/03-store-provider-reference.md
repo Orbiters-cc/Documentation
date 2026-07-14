@@ -8,7 +8,7 @@ id: orbiters.reference.store-providers
 domain: website
 type: reference
 owner: orbiters-engineering
-lastVerified: 2026-07-13
+lastVerified: 2026-07-14
 ---
 
 # Store Provider Reference
@@ -25,12 +25,20 @@ Store providers normalize external store behavior into one Orbiters integration 
 | Lemon Squeezy | API key | yes | yes | yes, from orders | yes |
 | Patreon | OAuth or access token | membership tiers | no | webhook history | yes |
 | Ko-fi | verification token | shop event metadata | no | webhook history | yes |
+| PayPal | REST app client ID and secret | no | no | Transaction Search | no |
 
 Historical revenue stores normalized minor-unit amounts plus the original currency.
 Never sum unlike currencies. A mirrored sale without a provider-confirmed amount is
 an unknown amount, not zero revenue. Gumroad, Jinxxy, and Lemon Squeezy expose a
-manual backfill action; the Jinxxy API does not provide a dependable amount for all
-license records, so its coverage can remain partial.
+manual backfill action; PayPal uses the same action for positive balance-affecting
+transactions. The Jinxxy API does not provide a dependable amount for all license
+records, so its coverage can remain partial.
+
+PayPal can be the payment rail behind another provider. Optional revenue
+deduplication uses one-to-one matches on exact amount and currency within 15 minutes.
+When both rows contain buyer email, the emails must match. Orbiters retains the
+original provider row for source attribution and removes only the matched PayPal
+pass-through from calculated totals.
 
 ## Product Links
 
