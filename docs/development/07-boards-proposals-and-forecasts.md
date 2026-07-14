@@ -8,7 +8,7 @@ id: orbiters.development.boards-proposals-and-forecasts
 domain: website
 type: reference
 owner: orbiters-engineering
-lastVerified: 2026-07-13
+lastVerified: 2026-07-14
 relations: orbiters.decision.boards-and-proposals, orbiters.development.github-connections, orbiters.development.product-steward-agents, orbiters.how-to.connect-and-sync-trello
 ---
 
@@ -276,8 +276,11 @@ monthly, or yearly. A request can include Proposal descendants in one scenario.
 saves scenarios. Only the author or an administrator can delete a scenario.
 
 The Revenues tab calculates the active preview automatically as assumptions change.
-Its stacked area chart groups mirrored history by provider and keeps currencies
-separate. Creators can use fixed presets or exact start/end dates; the history API
+Its stacked area chart groups mirrored history by provider, cumulatively stacks the
+provider areas, and keeps currencies separate. The optional 3-, 7-, 14-, or
+30-bucket moving-window average smooths each provider series independently for
+display; it never changes stored transactions, summary totals, deduplication, or
+forecast inputs. Creators can use fixed presets or exact start/end dates; the history API
 selects daily, weekly, or monthly buckets for the range. Creators can force a history
 refresh for providers with a sales-list API. Webhook-only providers show that
 limitation instead of a misleading sync button. Older mirrored rows that predate
@@ -296,19 +299,23 @@ amount/currency matches within 15 minutes, requires equal buyer email when both 
 available, assigns each PayPal row at most once, and excludes the PayPal copy while
 retaining the original provider for the source chart.
 
-**Gain continuity** adds a statistical projection derived from the creator's last
-180 days in the selected currency. It is stored alongside, not in place of, the
-Proposal scenario. Available fast models are:
+**Gain continuity** adds a USD store-revenue projection derived from the creator's
+last 180 days of revenue to the selected Proposal scenario. It does not replace or
+hide the Proposal projection. The chart renders **Selected ideas** and **Store
+continuity** as separate cumulative areas in the same forecast stack, while the
+summary and projection rows use their combined total. The response retains
+Proposal-only, store-only, and combined buckets so callers do not have to infer one
+from another. Available fast models are:
 
 - weighted moving average over the latest 28 daily values;
 - ordinary least-squares linear trend over at most 90 daily values;
 - Holt level-and-trend smoothing over at most 90 daily values;
 - weekly seasonal naive repetition of the latest seven daily values.
 
-All algorithms clamp negative predictions to zero. If no revenue exists in the
-selected currency, the API marks continuity unavailable instead of presenting a
-fabricated zero-history forecast. Saved scenario totals preserve both the original
-Proposal calculation and the selected continuity projection.
+All algorithms clamp negative predictions to zero. If no USD revenue exists, the
+API marks continuity unavailable instead of presenting a fabricated zero-history
+forecast. Saved scenario totals preserve the original Proposal calculation, the
+selected continuity projection, and their combined result.
 
 Forecast values are planning projections, not accounting records. Preserve inputs,
 curve, horizon, currency, and inclusion choices whenever presenting totals.
@@ -372,3 +379,7 @@ parents. Keep the source export and reported checksum as migration evidence.
     the total changes once while the source area remains attributed to Ko-fi.
 15. Exercise every gain-continuity algorithm with and without history, then compare
     preview totals with the values persisted on a saved scenario.
+16. Enable curve smoothing for several window sizes and confirm only the chart shape
+    changes; provider and forecast totals must remain unchanged.
+17. Enable gain continuity and confirm both selected-idea and store-continuity areas
+    remain visible and add up to the combined total.

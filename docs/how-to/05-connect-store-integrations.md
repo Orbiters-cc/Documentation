@@ -139,7 +139,14 @@ how many likely duplicates were found.
 
 Choose a 30-day, 90-day, one-year, or five-year preset, or enter exact start and end
 dates. The chart automatically uses daily, weekly, or monthly buckets appropriate
-for the selected range.
+for the selected range. Provider areas are cumulative. Use **Curve smoothing** to
+apply a trailing 3-, 7-, 14-, or 30-bucket moving average when a noisy history is
+hard to read. Smoothing is visual only and does not change the revenue total.
+
+When forecasting a Board, **Gain continuity** projects USD store revenue from the
+last 180 days and adds it to the forecast for the selected ideas. The chart keeps
+the two forecast areas separate and stacked, and labels the summary as the combined
+forecast. Turning continuity on never removes the selected-idea projection.
 
 ## Integration Status
 
