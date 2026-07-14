@@ -8,7 +8,7 @@ id: orbiters.tools.refit-operating-contract
 domain: refit
 type: reference
 owner: orbiters-refit
-lastVerified: 2026-07-12
+lastVerified: 2026-07-14
 relations: orbiters.tools.mcb-operating-contract, orbiters.tools.unitgit-operating-contract, orbiters.tools.xray-gizmos-operating-contract
 ---
 
@@ -37,3 +37,19 @@ freeze the main thread. Batch validation uses
 When MCB invokes ReFit, the default base is model A, the applied custom base is
 model B, generated files are committed through Unit Git, and reset must restore the
 original meshes after a Unity restart.
+
+## Manual ReFit Commissions
+
+The result screen lists creators who currently accept manual ReFit commissions.
+The user can select several creators and continue to Orbiters through a short-lived,
+one-time browser handoff. When MCB authentication is available, that handoff also
+opens the matching Orbiters account in the browser. A standalone ReFit install can
+still continue, but the website asks the user to sign in.
+
+The handoff includes only the selected creator IDs and bounded ReFit context: asset
+name, source avatar, target avatar, mode, and blendshape. It does not upload the
+Unity asset, mesh, scene, local paths, or authentication token.
+
+On Orbiters, the user can reorder creators, override each response time, or ask all
+selected creators at once and take the first acceptance. See [Request a Manual
+ReFit Commission](../how-to/10-request-refit-commission.md).

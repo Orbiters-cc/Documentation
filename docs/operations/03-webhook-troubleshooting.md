@@ -8,7 +8,7 @@ id: orbiters.operations.webhook-troubleshooting
 domain: operations
 type: runbook
 owner: orbiters-operations
-lastVerified: 2026-07-12
+lastVerified: 2026-07-14
 ---
 
 # Webhook Troubleshooting
@@ -41,6 +41,28 @@ Duplicate processed webhook events are ignored. Failed events can be retried by 
 ## Provider-Specific Notes
 
 Gumroad and Lemon Squeezy use signed webhook flows. Jinxxy support depends on account features. Payhip license verification is supported through product secret keys; webhook behavior is limited by provider capabilities.
+
+## Stripe ReFit Commissions
+
+ReFit commission requests use Stripe Checkout with manual capture. The webhook URL
+is `https://api.orbiters.cc/stripe/webhook`. Configure these events:
+
+- `checkout.session.completed`
+- `payment_intent.amount_capturable_updated`
+- `payment_intent.canceled`
+- `payment_intent.payment_failed`
+- `account.updated`
+
+Set `STRIPE_SECRET_KEY` and `STRIPE_WEBHOOK_SECRET` in the backend environment. Set
+`FRONTEND_URL` to the website origin so Checkout and Stripe Connect return to the
+correct deployment.
+
+If a paid draft remains in **Waiting for payment authorization**, confirm the
+Checkout event arrived and the PaymentIntent reached `requires_capture`. If a
+request remains in **Creator acceptance is being finalized**, check Stripe capture
+status and the persisted Board destination. The commission scheduler retries stale
+acceptances idempotently; network failures do not cancel the request, while a card
+decline or non-capturable authorization does.
 
 <audience include="dev">
 
