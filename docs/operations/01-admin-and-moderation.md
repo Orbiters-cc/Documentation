@@ -8,7 +8,7 @@ id: orbiters.operations.admin-and-moderation
 domain: operations
 type: runbook
 owner: orbiters-operations
-lastVerified: 2026-07-12
+lastVerified: 2026-07-14
 ---
 
 # Admin and Moderation
@@ -62,6 +62,32 @@ owners can choose **All users** or **All creators** in **Notify on save**. Draft
 cannot generate an audience notification. Each eligible human account receives one
 system notification linking to `/blog/:id`; account notification preferences are
 honored. Saving a post without an audience selection does not send anything.
+
+## Notification Delivery Test
+
+Administrators, developers, and owners can use **Admin > Developer > Notification**
+to preview and deliver a real in-app notification. The tool supports:
+
+- one human account selected through username or user-ID autocomplete;
+- creators, moderators, developers, administrators, owners, or all staff;
+- every human account that can authenticate.
+
+Start with **Moderation action required**, **API quota reached**, **New creator**,
+or **New asset added**, or choose **Custom notification**. Presets fill the category,
+internal type, title, message, and destination link; every field remains editable
+before delivery. The preview is presentation-only and does not create a row.
+Selecting **Send notification** is the explicit delivery action.
+
+Delivery honors each recipient's category preferences. A result of zero recipients
+means the selected group is empty or a specific recipient disabled that category;
+it is not reported as a successful delivery to one person. Audience delivery is
+limited to human accounts that can authenticate, and the sender ID is retained in
+notification metadata for operational diagnosis.
+
+The four presets are safe test templates and event contracts. They do not by
+themselves subscribe to every vendor or moderation event; automatic producers must
+call the notification service at the point where the corresponding event is
+authoritatively detected.
 
 <audience include="dev">
 
