@@ -38,9 +38,19 @@ When MCB invokes ReFit, the default base is model A, the applied custom base is
 model B, generated files are committed through Unit Git, and reset must restore the
 original meshes after a Unity restart.
 
+## Environment
+
+ReFit Settings exposes the same **Dev Environment** switch as MCB. Production uses
+`https://api.orbiters.cc/refit`; development uses `http://localhost:4100/refit`.
+When MCB is installed, ReFit reads and writes MCB's persisted environment selection
+so both tools always address the same backend. A standalone ReFit install persists
+the selection independently and defaults to production.
+
 ## Manual ReFit Commissions
 
 The result screen lists creators who currently accept manual ReFit commissions.
+Creator profile pictures are center-cropped and circular; missing pictures use the
+same circular fallback frame.
 The user can select several creators and continue to Orbiters through a short-lived,
 one-time browser handoff. When MCB authentication is available, that handoff also
 opens the matching Orbiters account in the browser. A standalone ReFit install can
