@@ -120,6 +120,12 @@ the first document. It presents the three groups, recently updated pages,
 quick-access routes, and full-text search. `/documentation/:id` is the focused
 reader.
 
+List and document requests keep independent loading and error state. The reader
+assigns a generation to each document request and ignores any response from an older
+generation. A delayed signed-out `404`, topic change, or retry therefore cannot
+replace a later successful document with a stale **Knowledge document not found**
+banner.
+
 The landing and reader use the website's normal typography, page background, cards,
 and hover treatment. Search sits directly in the page header without a separate
 black backdrop or decorative hero artwork. The reader uses a documentation layout:
@@ -152,6 +158,8 @@ element cards instead of bare URLs. Each card loads only an authorized title, sh
 excerpt, and author avatar. Proposal and issue detail responses also list the
 permission-filtered Documentation, report, comment, and Proposal locations that
 mention their canonical URL, providing backlinks without leaking hidden content.
+Published Blog post title and content are included in that permission-filtered
+backlink search.
 
 It also provides `orbiters://knowledge/{id}`, `orbiters://research-reports/{id}`,
 and `orbiters://proposals/{id}` resource templates. A missing or unauthorized object

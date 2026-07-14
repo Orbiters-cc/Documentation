@@ -55,6 +55,14 @@ When a creator reports a store issue, check:
 
 The admin issue tools collect reports submitted from the frontend. Prioritize reports that block login, asset access, downloads, creator revenue, or moderation.
 
+## Blog Audience Notifications
+
+When saving a published Blog post, moderators, developers, administrators, and
+owners can choose **All users** or **All creators** in **Notify on save**. Drafts
+cannot generate an audience notification. Each eligible human account receives one
+system notification linking to `/blog/:id`; account notification preferences are
+honored. Saving a post without an audience selection does not send anything.
+
 <audience include="dev">
 
 `WebhookEvent` rows are deduplicated by store integration and external event ID. Already processed events are ignored on retry. Failed or incomplete events are reset to `RECEIVED` when the provider sends the same event again.

@@ -238,6 +238,8 @@ Proposal and GitHub issue reads also return permission-filtered mention location
 The preview and dedicated pages expose **Copy link**. When that internal Proposal or
 issue URL appears in a Markdown surface, the renderer replaces the plain URL with a
 compact element card containing its title, short excerpt, and author avatar.
+Published Blog posts are part of the same backlink index, so a Proposal or issue
+detail lists a Blog post that contains its canonical URL under **Mentioned in**.
 
 The Kanban workspace uses only fields returned by these routes. Scores, comments,
 visibility, author, placement, GitHub state, dates, and forecast values must never be
@@ -281,6 +283,13 @@ on one line. Creators can force a history refresh for providers with a sales-lis
 API. Webhook-only providers show that limitation instead of a misleading sync
 button. Older mirrored rows that predate amount capture remain counted as sales and
 are reported as amount-unknown rather than treated as zero revenue.
+
+Manual provider sync is a full-history reconciliation, while background sync is
+incremental. Jinxxy history comes from paid Orders and uses `payout_total`; license
+records are not revenue. Ko-fi history combines verified webhook records with an
+optional CSV import at
+`POST /creator/integrations/stores/:id/kofi-csv`. CSV transactions reconcile against
+nearby matching webhook rows, so historical import does not double count a payment.
 
 Forecast values are planning projections, not accounting records. Preserve inputs,
 curve, horizon, currency, and inclusion choices whenever presenting totals.

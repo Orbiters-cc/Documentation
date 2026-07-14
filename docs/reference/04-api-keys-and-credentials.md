@@ -94,6 +94,9 @@ The current guides cover every credential type that can be created from those ta
   register the displayed Orbiters callback, and save its client ID and secret.
 - **Patreon OAuth application:** create a Patreon client for the current
   environment, register the displayed callback, and save its client ID and secret.
+  The creator access and refresh tokens shown on the same Patreon page are optional
+  creator-account credentials; enter them through Creator > Integrations > Patreon
+  > Use API key instead, not in this global application record.
 - **VAPID:** generate one web-push key pair in a trusted terminal, save both keys,
   then set a monitored `mailto:` or HTTPS subject.
 - **GitHub OAuth application:** create one OAuth App for the current environment,
@@ -131,6 +134,13 @@ Keep the service registry and this page aligned when a credential type or provid
 workflow changes. Internal `GITHUB_PROJECT`, `TRELLO_ACCOUNT`, `AGENT_ACCESS`, and
 `MCP_ACCESS` records are created by their dedicated authorization or token flows and
 are not manually created from the generic API Keys form.
+
+OAuth application setup guides expose their environment-specific callback as a
+rounded, copyable read-only field before the secret fields. Patreon and Gumroad use
+`${PUBLIC_API_URL}/store-oauth/callback`; GitHub uses
+`${PUBLIC_API_URL}/github/oauth/callback`. Copy the rendered absolute URL rather than
+constructing it manually, because development and production have different API
+origins.
 
 ## Environments
 

@@ -50,7 +50,9 @@ Gumroad** grants the same creator-owned access without manually copying the toke
 
 ### Jinxxy
 
-Use a Jinxxy Creator API key. Enter a webhook signing secret if Jinxxy provides one for your account.
+Use a Jinxxy Creator API key with `orders_read`. Orbiters uses paid Orders and their
+`payout_total` values for revenue history. Enter a webhook signing secret if Jinxxy
+provides one for your account.
 
 ### Payhip
 
@@ -76,25 +78,37 @@ Use a Lemon Squeezy API key. Store ID and webhook signing secret are optional. I
 Use **Connect Patreon** when the administrator has configured the Patreon OAuth
 application. The authorization requests identity, campaign, member email, and
 campaign-webhook permissions. A creator access token remains available as a manual
-alternative. After connection, open **Creator > Supporters** and select **Sync
-Patreon** to reconcile published tiers and active members.
+alternative: choose **Use API key instead** and enter the creator access token plus
+the optional refresh token shown in Patreon Clients & API Keys. Those account tokens
+do not belong in the administrator's global Patreon OAuth application credential.
+After connection, open **Creator > Supporters** and select **Sync Patreon** to
+reconcile published tiers and active members. Orbiters resolves the singular
+`campaign` resource returned by Patreon API v2 and never substitutes the user ID for
+a missing campaign ID.
 
 ### Ko-fi
 
 Copy the Orbiters webhook URL into Ko-fi's official webhook settings and save the
 Ko-fi verification token in the integration. Orbiters reads the official payload,
 including `shop_items[].direct_link_code`. Ko-fi does not provide an OAuth account
-connection or a supported historical-sales listing API, so revenue history begins
-with received webhooks. Orbiters does not send creator or customer data to
-third-party Ko-fi scraping or cache services.
+connection or a supported historical-sales listing API. For older history, export
+the payment-history CSV from Ko-fi's **Payments & Orders** area, then open **Creator
+> Revenues** and choose **Import Ko-fi CSV**. Orbiters reconciles matching CSV and
+webhook transactions instead of counting both, skips failed or pending rows, and
+does not retain the uploaded CSV. Imports are limited to 5 MB. Orbiters does not
+send creator or customer data to third-party Ko-fi scraping or cache services.
+The current Ko-fi `Transaction_All.csv` export is recognized through its
+`DateTime (UTC)`, `Received`, `Currency`, `TransactionType`, `TransactionId`, and
+`BuyerEmail` headers.
 
 ## Refresh Revenue History
 
 Open **Creator > Revenues**. Use the provider sync buttons to refresh historical
-sales for Gumroad, Jinxxy, and Lemon Squeezy. Patreon and Ko-fi rely on signed or
-verified webhooks, so they are labeled as webhook history instead of exposing a
-button that cannot retrieve older transactions. The graph keeps currencies
-separate and reports legacy sale rows whose amount is unknown.
+sales for Gumroad, Jinxxy, and Lemon Squeezy. A manual sync performs a full-history
+reconciliation so older rows gain missing amount and date data; scheduled background
+sync remains incremental. Patreon relies on signed webhooks. Ko-fi combines verified
+webhooks with the optional historical CSV import described above. The graph keeps
+currencies separate and reports legacy sale rows whose amount is unknown.
 
 ## Integration Status
 

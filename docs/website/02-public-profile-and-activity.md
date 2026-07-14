@@ -65,16 +65,21 @@ that User. `GET /users/:id/profile` returns them as `user.publicBoards`; private
 member-visible, unlisted, and every other non-public Board are excluded even when
 the viewer could open them elsewhere.
 
-Each Board preview contains only safe public metadata, its columns and visible item
-counts, and up to three safe item summaries inside every column. The website renders
-these as a horizontally scrollable mini-Kanban so the Board structure remains
-visible without exposing the full management UI. Publishing a Board explicitly also
+Each Board preview contains only safe public metadata, its columns and safe item
+summaries inside every column. The website initially shows three items per column;
+**Show all** expands the column into a vertically scrollable list, and **Show less**
+returns to the compact projection. The mini-Kanban remains horizontally scrollable
+so every Board column is visible without exposing the full management UI. Publishing
+a Board explicitly also
 publishes the title and state of every placed item in this preview, including
 private canonical Proposals, Trello mirrors, and external issues. This is a bounded
 roadmap projection: the response never includes the item body, URL, repository,
 number, provider metadata, Proposal visibility, membership data, forecasts,
-synchronization credentials, or comments. Every preview retains a link to the full
-Board, where normal authorization still applies.
+synchronization credentials, or comments. Selecting an item opens a floating detail
+dialog that loads the canonical Proposal or issue route. Full Markdown is therefore
+shown only when the current visitor is authorized; the public preview payload does
+not contain it. Every preview retains a link to the full Board, where normal
+authorization still applies.
 
 ## Profile Comments
 
