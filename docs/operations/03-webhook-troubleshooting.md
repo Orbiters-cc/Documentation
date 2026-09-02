@@ -83,7 +83,9 @@ On a `dev` deployment, a creator can use **Create a ReFit request** in the
 Commissions tab to create a self-addressed dummy request and continue through the
 real platform Checkout. This development shortcut requires the platform secret key
 but not the webhook because the Checkout return page refreshes the PaymentIntent
-directly. The backend returns `404` for this endpoint outside `dev`; it is never a
+directly. The frontend uses the same development API URL signal as the home-page
+warning, while the backend accepts only an explicitly development-configured or
+local/development API host. The backend returns `404` elsewhere; this is never a
 production fallback for webhook delivery.
 
 If a paid draft remains in **Waiting for payment authorization**, confirm the
