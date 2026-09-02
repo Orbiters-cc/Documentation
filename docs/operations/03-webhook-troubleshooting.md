@@ -50,10 +50,12 @@ creator does not connect a Stripe account and Orbiters does not collect the
 creator's separate commission price.
 
 Configure Stripe from **Admin > API Keys** by adding a global **Stripe platform**
-credential for the current environment. Enter the publishable key, secret key, and
-the Account webhook signing secret. The setup panel displays the exact webhook URL;
-for production it is `https://api.orbiters.cc/stripe/webhook`. Configure these
-Account events:
+credential for the Orbiters deployment that processes the request (`dev` for
+local/development or `prod` for the deployed site). Stripe sandbox keys can be used
+in either deployment while testing, but the publishable and secret keys must both
+be test keys or both be live keys. Enter those keys and the Account webhook signing
+secret. The setup panel displays the exact webhook URL; for production it is
+`https://api.orbiters.cc/stripe/webhook`. Configure these Account events:
 
 - `checkout.session.completed`
 - `payment_intent.amount_capturable_updated`

@@ -99,10 +99,11 @@ The current guides cover every credential type that can be created from those ta
   synchronize it from Creator > Integrations and Creator > Revenues. Live accounts
   may need PayPal to enable Transaction Search.
 - **Stripe platform:** choose a sandbox or live Stripe environment, copy the
-  matching publishable and secret keys, create an Account webhook at the exact URL
-  shown by Orbiters, subscribe to the Checkout and PaymentIntent events listed in
-  the guide, then save its `whsec_` signing secret. Creators never see or manage
-  this global credential.
+  matching publishable and secret keys, then save them for the Orbiters deployment
+  that will process the request (`dev` for local/development or `prod` for the
+  deployed site). Create an Account webhook at the exact URL shown by Orbiters,
+  subscribe to the Checkout and PaymentIntent events listed in the guide, then save
+  its `whsec_` signing secret. Creators never see or manage this global credential.
 - **Gumroad OAuth application:** create an application for the current environment,
   register the displayed Orbiters callback, and save its client ID and secret.
 - **Patreon OAuth application:** create a Patreon client for the current
