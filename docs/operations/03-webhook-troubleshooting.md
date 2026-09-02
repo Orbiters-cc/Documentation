@@ -62,6 +62,14 @@ secret. The setup panel displays the exact webhook URL; for production it is
 - `payment_intent.canceled`
 - `payment_intent.payment_failed`
 
+In the selected Stripe sandbox, open **Workbench > Webhooks**, select **Create an
+event destination**, and choose **Events on your account**. Select the four events
+above, continue with **Webhook endpoint**, and paste the URL displayed by Orbiters.
+After creating the destination, open its details and select **Click to reveal**
+under **Signing secret**. Copy the resulting `whsec_...` value into the existing
+Stripe platform credential in **Admin > API Keys**. The API-key edit dialog repeats
+these steps and displays a copyable endpoint URL.
+
 `STRIPE_PUBLISHABLE_KEY`, `STRIPE_SECRET_KEY`, and `STRIPE_WEBHOOK_SECRET`
 environment variables remain deployment overrides. Database credentials are
 encrypted and selected by Orbiters environment. `FRONTEND_URL` controls where
@@ -70,6 +78,13 @@ Checkout returns after authorization.
 The secret key alone enables Stripe API calls, but commission listings and new
 requests stay disabled until the webhook signing secret is also present. This keeps
 the request queue from accepting payments that it cannot reconcile.
+
+On a `dev` deployment, a creator can use **Create a ReFit request** in the
+Commissions tab to create a self-addressed dummy request and continue through the
+real platform Checkout. This development shortcut requires the platform secret key
+but not the webhook because the Checkout return page refreshes the PaymentIntent
+directly. The backend returns `404` for this endpoint outside `dev`; it is never a
+production fallback for webhook delivery.
 
 If a paid draft remains in **Waiting for payment authorization**, confirm the
 Checkout event arrived and the PaymentIntent reached `requires_capture`. If a

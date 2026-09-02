@@ -36,6 +36,16 @@ exceed six days and may be shortened to the card network's actual capture deadli
 The creator's own commission price is not charged by this request. Arrange that
 price and payment directly with the creator after acceptance.
 
+<audience include="creator, admin, dev">
+
+On development deployments only, the Creator **Commissions** tab includes **Create
+a ReFit request**. It creates a dummy request addressed to the signed-in creator,
+opens the real payment checkout, and returns to the normal request status page. Use
+it to test the website workflow before a Unity handoff is available. The button and
+its backend endpoint are unavailable on production deployments.
+
+</audience>
+
 ## What Happens Next
 
 In preference-order mode, Orbiters asks one creator at a time. Declining or reaching
