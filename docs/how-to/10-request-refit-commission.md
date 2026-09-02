@@ -8,7 +8,7 @@ id: orbiters.how-to.request-refit-commission
 domain: refit
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-07-14
+lastVerified: 2026-09-02
 relations: orbiters.tools.refit-operating-contract, orbiters.how-to.connect-store-integrations
 ---
 
@@ -66,9 +66,11 @@ accepting. Orbiters creates a private proposal there after the payment capture. 
 payment capture fails, the details remain private and the request is closed as a
 payment failure.
 
-Stripe Express is available under **Creator > Integrations**. It is separate from
-the EUR 2 Orbiters request fee and does not automatically collect the creator's own
-commission price in this workflow.
+Creators do not connect a payment account for this workflow. Orbiters processes the
+EUR 2 website request fee through the administrator's platform payment account.
+The creator's own commission price and payment remain a direct arrangement with the
+client. If platform payments are unavailable, the Commissions tab disables new
+listings and shows a generic payment-setup notice.
 
 <audience include="dev">
 

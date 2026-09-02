@@ -8,7 +8,7 @@ id: orbiters.how-to.mcb-and-unity-tools
 domain: mcb
 type: how-to
 owner: mcb-maintainers
-lastVerified: 2026-07-13
+lastVerified: 2026-09-02
 ---
 
 # MCB and Unity Tools
@@ -81,7 +81,11 @@ If the tool cannot connect:
 
 <audience include="dev">
 
-The legacy `unity-wizard` routes and newer `mcb` routes overlap. Avoid adding new behavior to the legacy path unless the caller still depends on it.
+The legacy `unity-wizard` routes and newer `mcb` routes expose the same token
+response contracts through one shared WizardToken lifecycle service. Recent
+IP-based discovery remains limited to one minute, while direct token reuse records
+each IP address and user agent in `WizardTokenUses`. Change lifecycle behavior in
+the shared service so the two route families cannot drift.
 
 MCB UI Toolkit builds must not be re-entered by cache or network callbacks. User-info cache hits defer completion until after the current editor callback returns. Version rows request user metadata only when it is absent and subscribe separately to avatar-image completion. Asset thumbnails, banners, and author images update existing image controls through the bounded dynamic-content refresh instead of recursively rebuilding the complete inspector. Preserve this separation when adding asynchronous UI data.
 

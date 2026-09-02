@@ -8,7 +8,7 @@ id: orbiters.reference.api-keys-and-credentials
 domain: website
 type: reference
 owner: orbiters-security
-lastVerified: 2026-07-14
+lastVerified: 2026-09-02
 ---
 
 # API Keys and Credentials
@@ -28,6 +28,8 @@ Runtime credentials are stored in the `APIKeys` table instead of hardcoded envir
 - `KOFI`: official webhook verification token and public Ko-fi page URL.
 - `PAYPAL`: creator REST application client ID, secret, live or sandbox environment,
   and optional account label.
+- `STRIPE`: global administrator-owned platform publishable key, secret key, and
+  Account webhook signing secret for ReFit request fees.
 - `VAPID`: Web push public/private keys and subject.
 
 <alpha>
@@ -67,7 +69,7 @@ at least three numbered steps plus a link to the provider's official setup
 documentation.
 The creator view shows creator-owned credential types; the admin view also shows
 global and administrator-only types such as R2, the two configurable GitHub
-credentials, and the Trello application.
+credentials, the Trello application, and Stripe platform payments.
 
 The current guides cover every credential type that can be created from those tabs:
 
@@ -96,6 +98,11 @@ The current guides cover every credential type that can be created from those ta
   copy its client ID and secret, choose the matching environment, then validate and
   synchronize it from Creator > Integrations and Creator > Revenues. Live accounts
   may need PayPal to enable Transaction Search.
+- **Stripe platform:** choose a sandbox or live Stripe environment, copy the
+  matching publishable and secret keys, create an Account webhook at the exact URL
+  shown by Orbiters, subscribe to the Checkout and PaymentIntent events listed in
+  the guide, then save its `whsec_` signing secret. Creators never see or manage
+  this global credential.
 - **Gumroad OAuth application:** create an application for the current environment,
   register the displayed Orbiters callback, and save its client ID and secret.
 - **Patreon OAuth application:** create a Patreon client for the current

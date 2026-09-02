@@ -8,7 +8,7 @@ id: orbiters.how-to.assets-and-downloads
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-07-14
+lastVerified: 2026-09-02
 ---
 
 # Assets and Downloads
@@ -55,3 +55,7 @@ Images use the same infinite gallery controls as asset showcases: relevant, date
 reactions sorting; the configured grid layout for a selected gallery; and a full-screen
 image viewer with author, date, and reaction information. Gallery owners can hide an
 image from the website without changing the original Discord message.
+
+If Discord returns only part of a message's reaction list during synchronization,
+Orbiters keeps the last complete reaction counts and retries on a later sync. A
+temporary Discord fetch failure therefore does not remove reactions from the gallery.

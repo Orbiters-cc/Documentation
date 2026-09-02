@@ -8,7 +8,7 @@ id: orbiters.operations.webhook-troubleshooting
 domain: operations
 type: runbook
 owner: orbiters-operations
-lastVerified: 2026-07-14
+lastVerified: 2026-09-02
 ---
 
 # Webhook Troubleshooting
@@ -44,18 +44,30 @@ Gumroad and Lemon Squeezy use signed webhook flows. Jinxxy support depends on ac
 
 ## Stripe ReFit Commissions
 
-ReFit commission requests use Stripe Checkout with manual capture. The webhook URL
-is `https://api.orbiters.cc/stripe/webhook`. Configure these events:
+ReFit commission requests use Stripe Checkout on the Orbiters platform account with
+manual capture. The EUR 2 request fee is received by the website administrator; a
+creator does not connect a Stripe account and Orbiters does not collect the
+creator's separate commission price.
+
+Configure Stripe from **Admin > API Keys** by adding a global **Stripe platform**
+credential for the current environment. Enter the publishable key, secret key, and
+the Account webhook signing secret. The setup panel displays the exact webhook URL;
+for production it is `https://api.orbiters.cc/stripe/webhook`. Configure these
+Account events:
 
 - `checkout.session.completed`
 - `payment_intent.amount_capturable_updated`
 - `payment_intent.canceled`
 - `payment_intent.payment_failed`
-- `account.updated`
 
-Set `STRIPE_SECRET_KEY` and `STRIPE_WEBHOOK_SECRET` in the backend environment. Set
-`FRONTEND_URL` to the website origin so Checkout and Stripe Connect return to the
-correct deployment.
+`STRIPE_PUBLISHABLE_KEY`, `STRIPE_SECRET_KEY`, and `STRIPE_WEBHOOK_SECRET`
+environment variables remain deployment overrides. Database credentials are
+encrypted and selected by Orbiters environment. `FRONTEND_URL` controls where
+Checkout returns after authorization.
+
+The secret key alone enables Stripe API calls, but commission listings and new
+requests stay disabled until the webhook signing secret is also present. This keeps
+the request queue from accepting payments that it cannot reconcile.
 
 If a paid draft remains in **Waiting for payment authorization**, confirm the
 Checkout event arrived and the PaymentIntent reached `requires_capture`. If a

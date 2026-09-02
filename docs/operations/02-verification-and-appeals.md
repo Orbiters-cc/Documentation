@@ -8,7 +8,7 @@ id: orbiters.operations.verification-and-appeals
 domain: operations
 type: runbook
 owner: orbiters-operations
-lastVerified: 2026-07-12
+lastVerified: 2026-09-02
 ---
 
 # Verification and Appeals
@@ -18,6 +18,11 @@ Verification and appeals are scoped to Discord servers. This lets creators manag
 ## Verification
 
 A verification rule belongs to a guild. A user passes or fails verification for that guild only.
+
+On rejoin, Orbiters inherits verification only from the latest presence state for
+that guild. A latest revoked state remains revoked even when an older presence was
+verified. Join synchronization and verification decisions use the same per-user
+database lock so concurrent events cannot restore a revoked timestamp.
 
 Successful verification can:
 
@@ -29,6 +34,10 @@ Successful verification can:
 ## Appeals
 
 Appeals are also guild-scoped. A rejected appeal can unverify or remove a user from that guild without changing the user's state in another connected server.
+
+Discord delivery is queued after the appeal is durably saved. If moderators resolve
+the appeal before a delayed delivery job runs, the job completes without posting a
+stale actionable message.
 
 ## Creator-Managed Queues
 
