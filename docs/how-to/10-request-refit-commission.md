@@ -8,7 +8,7 @@ id: orbiters.how-to.request-refit-commission
 domain: refit
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-02
+lastVerified: 2026-09-04
 relations: orbiters.tools.refit-operating-contract, orbiters.how-to.connect-store-integrations
 ---
 
@@ -61,6 +61,51 @@ Orbiters profile to the accepting creator, and cancels the remaining offers.
 The client receives an Orbiters notification, a push notification when enabled, and
 a Discord direct message when Orbiters can reach the linked Discord account. The
 acceptance page links to the creator's public profile and contact links.
+
+## Track Your Commissions
+
+Open **My Account > My commissions** to see every active request and accepted job.
+Completed, cancelled, expired, and failed requests remain in **Past commissions**.
+The avatar account menu also lists all active commissions above notifications, with
+the asset name, creator avatar/name, and a progress bar. Select an entry to open its
+status page. **My Account** and **Log out** stay above the scrollable lists; the
+notification preview retains its own link to the full inbox.
+
+Progress represents workflow milestones, not elapsed time or a delivery estimate:
+payment authorization, waiting for a creator, acceptance, work in progress, review,
+and completion. After acceptance, the original commission Board column or delivery
+status determines progress, with the proposal status used when there is no recognized
+Board stage. **Active / In progress**, **Review / In review**, and
+**Done / Completed / Delivered** advance the bar. Paused or deferred work stays in
+the active list; rejected or cancelled work moves to history. Unrecognized custom
+stages stay at the accepted milestone instead of guessing completion.
+
+Lists refresh every 30 seconds while displayed and when the browser regains focus.
+The account tab also has a **Refresh** button. The payment panel distinguishes an
+authorization hold from **Paid** after the creator accepts and the fee is captured.
+
+<audience include="admin, dev">
+
+## Platform Payment Revenue
+
+The designated website administrator and users with admin or owner rank see Stripe
+platform payments in **Creator > Revenues**. Ordinary creators only see their own
+store revenue; the platform's Stripe income is not included for them.
+
+The chart and totals include all captured charges from the configured global Stripe
+account in the selected date range, including existing ReFit EUR 2 fees and other
+Stripe payments. Revenue is captured gross less refunds, before processing fees, and
+is grouped by the original charge date. Refunds adjust that original payment rather
+than creating a new entry on the refund date. Authorization holds and failed charges
+are excluded. Currencies are kept separate; choose EUR to inspect ReFit fees.
+
+Sandbox credentials display **Sandbox (test money)**. Only the account and test/live
+mode selected by the deployment's global credential are included. Data is fetched
+from Stripe when loading or refreshing Revenues, without requiring a webhook replay
+or adding duplicate local fee records. If Stripe is unavailable, an explicit warning
+says that totals currently exclude Stripe while store history remains available.
+
+</audience>
 
 ## Creator Setup
 
