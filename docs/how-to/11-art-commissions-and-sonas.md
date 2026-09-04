@@ -138,6 +138,8 @@ initialization paths are covered by disposable PostgreSQL preflights.
 Private browser images use authenticated blob requests through the API with
 `Cache-Control: private, no-store`; they do not require public R2 bucket CORS or
 tokens in URLs. Request creation and status changes use database row locks.
+Uploads reserve quota with a short database lock and become active only after
+storage completes; remote storage operations do not hold database locks.
 Art requests never enter ReFit's Stripe or expiry scheduler.
 
 </audience>
