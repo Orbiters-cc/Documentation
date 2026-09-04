@@ -50,8 +50,8 @@ machine: the browser must resolve it correctly and trust its TLS certificate.
 The backend still needs outbound access to Telegram for the token exchange.
 
 For example, with the frontend at `https://dev.example.invalid` and the backend
-at `https://dev.api.example.invalid`, register the frontend origin and
-`https://dev.api.example.invalid/auth/telegram/callback` in BotFather. Set the
+at `https://dev-api.example.invalid`, register the frontend origin and
+`https://dev-api.example.invalid/auth/telegram/callback` in BotFather. Set the
 same callback in the **dev** Telegram Login key. Use the HTTPS frontend address
 throughout the flow rather than switching between that hostname and localhost;
 the login state cookie must return to the backend hostname that issued it.
@@ -65,6 +65,13 @@ A public tunnel is not inherently required for this browser redirect. If
 BotFather rejects the registered development URL, or the browser completing the
 login is on a device that cannot reach the local machine, use a reachable HTTPS
 development deployment or tunnel instead.
+
+The Orbiters public development deployment now uses **dev.orbiters.cc** for the
+frontend and **dev-api.orbiters.cc** for the API, routed to the Windows workstation
+over Tailscale. Register the frontend origin and the API's
+`/auth/telegram/callback` URL in BotFather, and use that callback in the dev key.
+See [Public Access to Local Development](../operations/06-public-local-development.md)
+for availability requirements and the other provider callbacks.
 
 ### Environment configuration
 
