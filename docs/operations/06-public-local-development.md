@@ -59,6 +59,10 @@ credentials and the callback above.
 Telegram documents registration of Allowed URLs but does not specify a public
 HTTP reachability check during that registration. BotFather has rejected the
 development URL during setup; the exact validation requirement is unconfirmed.
+The later `/setdomain` command succeeded, but that command configures the legacy
+widget. Complete **Login Widget > Allowed URLs** in the BotFather mini app for
+the OpenID Connect flow used by Orbiters; see the credential mapping in
+[Telegram Login Setup](../reference/telegram-login.md).
 
 ### Public Telegram Registration Endpoint
 

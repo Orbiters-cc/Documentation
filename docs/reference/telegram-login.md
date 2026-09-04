@@ -15,8 +15,9 @@ lastVerified: 2026-09-04
 
 ## Configure the Application
 
-1. Create or choose the bot representing your website in BotFather. Open its
-   **Login Widget** settings.
+1. Open the [BotFather mini app](https://t.me/botfather?startapp=), select the bot
+   representing your website, and open **Login Widget**. The bot overview shows
+   its Bot API access token; continue to **Login Widget** for login credentials.
 2. Register your website origin and the exact backend callback URL in **Allowed
    URLs**. The callback path is `/auth/telegram/callback`, without an `/api` prefix.
 3. Copy the **Client ID** and **Client Secret** from those settings. Keep the default
@@ -27,14 +28,26 @@ lastVerified: 2026-09-04
 
 | Field | Value |
 | --- | --- |
-| `TELEGRAM_CLIENT_ID` | Client ID from BotFather |
-| `TELEGRAM_CLIENT_SECRET` | Client Secret from BotFather |
+| `TELEGRAM_CLIENT_ID` (Login Client ID) | **Client ID** in the mini app's **your bot > Login Widget** section |
+| `TELEGRAM_CLIENT_SECRET` (Login Client Secret) | **Client Secret** in that same **Login Widget** section; not the Bot API access token |
 | `TELEGRAM_CALLBACK_URL` | Exact registered backend callback, such as `https://api.example.invalid/auth/telegram/callback` |
 
 The API Keys system encrypts stored credentials and masks the secret. The active
 global key is selected for the runtime environment, using the existing common-key
 selection rules. Credentials are read on each login attempt; changing this key
 does not require restarting the backend.
+
+The `/setdomain` chat command configures Telegram's legacy widget. Its success
+message confirms that domain setting only; it does not confirm registration of
+the new OpenID Connect Allowed URLs or provide the login client credentials.
+The Bot API access token displayed beside **Copy** and **Revoke** on the bot
+overview is not a substitute for the Login Client Secret.
+
+If **Login Widget** or the client credentials are unavailable, try the mini-app
+link in an up-to-date Telegram client. If still missing, contact **@BotSupport**
+with **#oidc**, following [Telegram's setup support guidance](https://core.telegram.org/bots/telegram-login).
+Keep the default signing algorithm; its optional setting is under
+**Login Widget > Advanced**.
 
 The backend accepts HTTPS callbacks and HTTP loopback callbacks for local
 development. Telegram must also accept and register the exact callback. An HTTPS
