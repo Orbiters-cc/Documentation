@@ -56,6 +56,11 @@ same callback in the **dev** Telegram Login key. Use the HTTPS frontend address
 throughout the flow rather than switching between that hostname and localhost;
 the login state cookie must return to the backend hostname that issued it.
 
+Before starting, open the frontend and backend HTTPS addresses in the same
+desktop browser and check that neither shows a certificate warning. A Windows
+hosts-file entry applies only to that computer; another device needs its own
+working name resolution and network access to the development server.
+
 A public tunnel is not inherently required for this browser redirect. If
 BotFather rejects the registered development URL, or the browser completing the
 login is on a device that cannot reach the local machine, use a reachable HTTPS
