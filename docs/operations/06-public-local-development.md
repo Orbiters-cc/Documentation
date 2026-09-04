@@ -57,9 +57,32 @@ local API hostname. Telegram requires a Telegram Login dev key with its client
 credentials and the callback above.
 
 Telegram documents registration of Allowed URLs but does not specify a public
-HTTP reachability check during that registration. Do not introduce a public
-tunnel solely because OAuth uses a callback. If BotFather rejects a URL, inspect
-its actual error before changing DNS or routing.
+HTTP reachability check during that registration. BotFather has rejected the
+development URL during setup; the exact validation requirement is unconfirmed.
+
+### Public Telegram Registration Endpoint
+
+The production Caddy configuration serves a static `200` response for `GET` and
+`HEAD /auth/telegram/callback` on `dev.api.orbiters.cc`. This provides a public
+registration probe without forwarding traffic to the workstation. It does not
+exchange authorization codes, create sessions, or authenticate users. It ignores
+query parameters, disables caching, and skips Caddy access logging for this path.
+
+Real development logins still reach the backend through the workstation's hosts
+file. Keep the existing callback URL and local Caddy configuration. The static
+response is configured in `Caddyfile.prod` and the production server's active
+`Caddyfile`; other API paths retain their existing routing.
+
+On 2026-09-04, public HTTP GET and HEAD returned `200`, but public HTTPS failed
+during the Cloudflare TLS handshake before reaching Caddy. BotFather verification
+is therefore not confirmed. Cloudflare Universal SSL does not cover the nested
+hostname `dev.api.orbiters.cc`; an edge certificate covering that hostname is
+still required. Installing a certificate only on the origin would not fix this
+edge failure. See [Cloudflare hostname coverage](https://developers.cloudflare.com/ssl/edge-certificates/universal-ssl/limitations/).
+
+After configuring certificate coverage, verify the exact HTTPS callback from a
+machine without the local hosts overrides, then retry registration in BotFather.
+The static response verifies reachability only; test a real local login separately.
 
 Server-to-server webhooks are separate from browser OAuth redirects. A provider
 sending a webhook cannot use the workstation's hosts file and needs a reachable

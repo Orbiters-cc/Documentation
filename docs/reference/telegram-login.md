@@ -62,9 +62,10 @@ hosts-file entry applies only to that computer; another device needs its own
 working name resolution and network access to the development server.
 
 A public tunnel is not inherently required for this browser redirect. If
-BotFather rejects the registered development URL, or the browser completing the
-login is on a device that cannot reach the local machine, use a reachable HTTPS
-development deployment or tunnel instead.
+BotFather rejects the registered development URL, check the exact error and
+public HTTPS availability. A public registration probe can respond independently
+of the local backend. If the browser completing login cannot reach the local
+machine, it needs a reachable development deployment or tunnel for the real flow.
 
 Orbiters development uses **dev.orbiters.cc** for the frontend and
 **dev.api.orbiters.cc** for the API, resolved locally through the Windows hosts
@@ -73,6 +74,13 @@ Register `https://dev.orbiters.cc` and
 `https://dev.api.orbiters.cc/auth/telegram/callback` in BotFather, and use the
 callback in the dev key. See [Local Development and OAuth](../operations/06-public-local-development.md)
 for the local routing and provider callback settings.
+
+The production proxy also serves a static response at that development callback
+path for public GET/HEAD registration checks. It performs no authentication and
+does not forward to the workstation. Public HTTP was verified on 2026-09-04;
+HTTPS remains blocked by missing Cloudflare edge certificate coverage for the
+nested hostname. BotFather acceptance has not been verified. Resolve that TLS
+failure before relying on the public probe.
 
 ### Environment configuration
 
