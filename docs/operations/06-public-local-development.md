@@ -1,5 +1,5 @@
 ---
-title: Public Access to Local Development
+title: Local Development and OAuth
 section: Operations
 order: 106
 audience: admin, dev
@@ -11,115 +11,77 @@ owner: orbiters-platform
 lastVerified: 2026-09-04
 ---
 
-# Public Access to Local Development
+# Local Development and OAuth
 
-## Current Routing
+## Local Routing
 
-The public server accepts development requests through its existing Cloudflare
-tunnel and forwards them to the Windows development workstation over Tailscale.
-The frontend and backend still run on Windows; the production application stays
-on the public server.
+Development runs on the Windows workstation. Its hosts file resolves
+`dev.orbiters.cc` and `dev.api.orbiters.cc` to `127.0.0.1`. Local Caddy serves
+HTTPS using the trusted development certificate and forwards requests to:
 
-| Public hostname | Destination |
+| Local hostname | Destination |
 | --- | --- |
-| `dev.orbiters.cc` | Windows development frontend, port 3100 |
-| `dev-api.orbiters.cc` | Windows development backend, port 4100 |
-| `orbiters.cc` | Production frontend container |
-| `api.orbiters.cc` | Production backend container |
+| `dev.orbiters.cc` | Development frontend, port 3100 |
+| `dev.api.orbiters.cc` | Development backend, port 4100 |
 
-The development upstreams are configured in `Caddyfile.prod` using the Windows
-workstation's Tailscale IPv4 address. The public server runs this configuration
-as `Caddyfile`. Both development routes forward the original host and set
-`X-Forwarded-Proto` to HTTPS. Caddy also proxies the frontend hot-reload WebSocket.
+The frontend uses `https://dev.api.orbiters.cc` for API requests. Frontend origin
+and credentialed CORS use `https://dev.orbiters.cc`. The root and frontend
+`.env.dev` files contain the local API address; the backend `.env.dev` sets
+`PUBLIC_API_URL` to the same address.
 
-`cloudflared/config.yml` routes both public development hostnames to Caddy on
-port 80. Cloudflare terminates public TLS. The API uses the first-level hostname
-`dev-api.orbiters.cc`: Cloudflare's standard Universal SSL certificate does not
-cover the previous nested hostname `dev.api.orbiters.cc`.
+The temporary public forwarding to the workstation has been removed, including
+its `dev-api.orbiters.cc` DNS alias. Development does not require Tailscale or the
+production server. Existing public DNS for the original development hostnames
+may reach a different server; the Windows hosts entries determine local access.
 
-## Availability
+## OAuth Callbacks
 
-Keep the Windows machine awake, Tailscale connected on both machines, and the
-local frontend and backend running. The public server's Caddy container must be
-able to reach the workstation's Tailscale address on ports 3100 and 4100.
+Discord and Telegram authorization return the browser to the configured callback
+URL. The browser resolves that URL using its own DNS configuration, including the
+Windows hosts file. The backend then makes an outbound request to the provider
+to exchange the authorization code.
 
-Requests reach the actual development services and database. Local code changes
-and backend restarts are therefore visible through the public development URLs.
-If the workstation or a service is unavailable, its development route fails;
-requests are never sent to production as a fallback.
-
-A Windows hosts-file entry for `dev.orbiters.cc` can remain for direct local
-frontend access. The frontend uses `https://dev-api.orbiters.cc` for API requests.
-The old local `dev.api.orbiters.cc` entry is not the public API address. No new
-hosts-file entry is required for the public API.
-
-## Application and Provider Settings
-
-The local root and frontend `.env.dev` files use the new API hostname for
-`BACKEND_URL`, `REACT_APP_BACKEND_URL`, and provider URLs. The backend `.env.dev`
-sets `PUBLIC_API_URL` to the same address. Frontend origin and credentialed CORS
-remain `https://dev.orbiters.cc`.
-
-Changing Docker-injected frontend environment variables requires recreating the
-frontend container; a browser refresh alone does not update its configuration.
-The running backend must also reload environment changes and cached Discord
-strategy configuration.
-
-Register these URLs with their respective providers:
+Use the same desktop browser and development hostnames throughout the flow so
+the callback receives the session cookie issued at login. The local certificate
+must be trusted. Provider callback registrations must exactly match these URLs:
 
 | Provider | Registration |
 | --- | --- |
 | Telegram Allowed URLs | `https://dev.orbiters.cc` |
-| Telegram callback | `https://dev-api.orbiters.cc/auth/telegram/callback` |
-| Discord login redirect | `https://dev-api.orbiters.cc/auth/discord/callback` |
-| Discord verification redirect | `https://dev-api.orbiters.cc/verify/callback-discord` |
+| Telegram callback | `https://dev.api.orbiters.cc/auth/telegram/callback` |
+| Discord login redirect | `https://dev.api.orbiters.cc/auth/discord/callback` |
+| Discord verification redirect | `https://dev.api.orbiters.cc/verify/callback-discord` |
 
-The two Discord callback fields on the **dev** API key use the new hostname.
-The provider's own application registration must match them. Telegram additionally
-requires a configured **Telegram Login** dev key; public routing alone does not
-supply its client credentials. Keep production provider settings unchanged.
+The two callback fields on the development Discord API key use the original
+local API hostname. Telegram requires a Telegram Login dev key with its client
+credentials and the callback above.
 
-## Validate Routing
+Telegram documents registration of Allowed URLs but does not specify a public
+HTTP reachability check during that registration. Do not introduce a public
+tunnel solely because OAuth uses a callback. If BotFather rejects a URL, inspect
+its actual error before changing DNS or routing.
 
-Check the following from the public server or another machine without the local
-hosts-file override:
+Server-to-server webhooks are separate from browser OAuth redirects. A provider
+sending a webhook cannot use the workstation's hosts file and needs a reachable
+endpoint or an appropriate forwarding tool.
 
-1. The development homepage returns 200 and serves the development frontend.
-2. The development API `/healthz` returns 200 over validated HTTPS.
-3. `/auth/discord` redirects with the new development callback URL.
-4. `/auth/telegram/callback` without a login state returns a controlled
-   `invalid_state` redirect to the development frontend.
-5. The frontend `/ws` WebSocket upgrades with HTTP 101.
-6. Production homepage and API `/healthz` continue to return 200.
+## Apply and Check Configuration
 
-Requests are still subject to existing Cloudflare security policies. A 403 from
-Cloudflare can be a request-policy issue rather than a tunnel or Caddy failure.
-Inspect response headers and Cloudflare events before changing origin routing.
+After changing Docker-injected frontend environment variables, recreate only
+the development frontend container. Reload the existing development backend to
+pick up environment values and cached Discord strategy configuration.
 
-## Configuration Changes and Rollback
+From Windows, check that:
 
-Back up the public server's active `Caddyfile`, `Caddyfile.prod`, and
-`cloudflared/config.yml` before editing them. Validate a candidate with
-`caddy validate` and compare its adapted JSON to the live configuration so only
-the intended hostname routes change. Write the active Caddyfile in place to
-preserve its Docker bind mount, then use `caddy reload`.
+1. Both local HTTPS hostnames resolve to the workstation without certificate warnings.
+2. The frontend homepage and API `/healthz` return 200.
+3. `/auth/discord` redirects with the exact local API callback above.
+4. A fresh login starts and completes in the same browser. Restart any flow begun
+   before changing hostnames; its state cookie belongs to the previous hostname.
 
-Cloudflared must restart to pick up changes to this locally managed ingress
-configuration. During a rollout, start a temporary connector on the same tunnel
-with the updated configuration, wait for registered tunnel connections, restart
-the normal connector, verify its connections, and remove the temporary connector.
-This maintains an active connector for production throughout the change.
-
-The initial rollout's server backups are under
-`~/.local/state/orbiters-dev-routing/20260904T144749Z/`. Local environment and
-Discord callback backups are under
-`%LOCALAPPDATA%\Orbiters\dev-routing\20260904T144749Z\`.
-
-To undo the rollout, restore the backed-up Caddy and tunnel configuration, reload
-Caddy, and reload the tunnel configuration. Restore local environment values and
-the dev Discord callback fields, then reload the development services. Restore
-provider-side callback registrations if they were changed. The separately created
-`dev-api.orbiters.cc` DNS record can be removed after confirming it is unused.
+A health check confirms routing, not provider authorization. Complete a real
+provider login separately after configuring its application and credentials.
+Production configuration and provider credentials remain independent.
 
 See [Telegram Login Setup](../reference/telegram-login.md) and
-[Cloudflare Universal SSL limitations](https://developers.cloudflare.com/ssl/edge-certificates/universal-ssl/limitations/).
+[Telegram's official login documentation](https://core.telegram.org/bots/telegram-login).
