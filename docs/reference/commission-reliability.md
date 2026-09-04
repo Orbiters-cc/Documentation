@@ -83,7 +83,11 @@ when necessary, rather than assuming every provider uses cents.
 Use explicit server `ORBITERS_ENV=dev` or `prod`. Browser hostnames cannot enable
 development tools, and the dummy ReFit request requires Stripe test-mode keys.
 
-Startup sync adds the new string-based state fields and tables. The one-time
+Before startup sync, a transactional schema migration adds `nextPaymentCheckAt`
+to existing commission tables, fills only missing timestamps with the current time,
+and enforces its required value and database default. Existing scheduled timestamps
+and commission rows are preserved, including when retrying a partially applied upgrade.
+Startup sync adds the other new string-based state fields and tables. The one-time
 `2026-09-05-commission-reliability` migration preserves existing payment/delivery
 states, indexes existing image references and retains current art notes as activity.
 `ApplicationMigrations` records completion; normal runtime does not maintain an old
@@ -92,7 +96,13 @@ authentication version and must be replaced with new links.
 
 Before deploying, run unit tests and boot the backend twice with
 `EXIT_AFTER_DATABASE_INIT=true`, `FAIL_FAST=true` and `PORT=4200` against a disposable
-database. The opt-in `commissionReliabilityDatabase.test.js` checks real PostgreSQL
+database. Also test upgrading a populated previous schema and a partially applied
+nullable timestamp column; two empty-database boots do not validate existing data.
+`commissionPaymentCheckSchemaDatabase.test.js` performs these startup regressions
+when `COMMISSION_SCHEMA_TEST_DATABASE=true`. It requires `ENV_COMMON=true`, a loopback
+PostgreSQL connection, and an empty disposable database named `commission_schema_fixture`.
+It never resets an existing deployment database.
+The opt-in `commissionReliabilityDatabase.test.js` checks real PostgreSQL
 locking, handoff revocation/replay, delivery history, media retention and ledger
 deduplication. It refuses to run unless explicitly pointed at the fixture database.
 No verification requires a live charge or access to a creator's Stripe account.
