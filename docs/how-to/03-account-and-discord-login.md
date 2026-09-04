@@ -29,6 +29,7 @@ configured for this deployment, the sign-in page explains that it is unavailable
 
 Keyboard users can select either provider after expanding the button. Escape
 closes the chooser. The animation respects reduced-motion preferences.
+In dark mode, the provider labels and icons use a brighter blue for readability.
 
 After login, the frontend stores a short-lived JWT and uses a refresh cookie to rotate it.
 

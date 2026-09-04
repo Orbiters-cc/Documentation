@@ -42,6 +42,27 @@ development domain can be used when loopback registration is unavailable.
 
 ## Deployment URLs
 
+### Local development with an HTTPS hostname
+
+Telegram's callback is a redirect in the browser performing the login, not a
+server-to-server webhook. A development HTTPS hostname can resolve to your local
+machine: the browser must resolve it correctly and trust its TLS certificate.
+The backend still needs outbound access to Telegram for the token exchange.
+
+For example, with the frontend at `https://dev.example.invalid` and the backend
+at `https://dev.api.example.invalid`, register the frontend origin and
+`https://dev.api.example.invalid/auth/telegram/callback` in BotFather. Set the
+same callback in the **dev** Telegram Login key. Use the HTTPS frontend address
+throughout the flow rather than switching between that hostname and localhost;
+the login state cookie must return to the backend hostname that issued it.
+
+A public tunnel is not inherently required for this browser redirect. If
+BotFather rejects the registered development URL, or the browser completing the
+login is on a device that cannot reach the local machine, use a reachable HTTPS
+development deployment or tunnel instead.
+
+### Environment configuration
+
 The frontend uses `REACT_APP_BACKEND_URL` for both providers. The backend uses
 `FRONTEND_URL` to return users to the website and `FRONT_URL` for credentialed CORS.
 Set these for the intended website in each deployment, whether running locally
