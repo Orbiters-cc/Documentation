@@ -1,5 +1,5 @@
 ---
-title: Account and Discord Login
+title: Account Login and Connections
 section: How To
 order: 32
 audience: public, user
@@ -8,20 +8,49 @@ id: orbiters.how-to.account-and-discord-login
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-07-14
+lastVerified: 2026-09-04
 ---
 
-# Account and Discord Login
+# Account Login and Connections
 
-Orbiters accounts are based on Discord login. Discord identity lets Orbiters connect website access, creator permissions, server verification, and Discord role automation.
+Sign in to Orbiters with Discord or Telegram. Connecting both providers lets you
+use either one to reach the same account, purchases, and creator permissions.
+Discord server verification and role automation require a Discord connection.
 
 ## Sign In
 
 1. Select **Login / Sign Up**.
-2. Authorize the Orbiters Discord application.
-3. Return to Orbiters.
+2. The button expands into **Discord** and **Telegram**. Choose a provider.
+3. Authorize Orbiters with that provider and return to the website.
+
+Your first sign-in creates an account. Later sign-ins with the same provider open
+that account. Telegram can be used without a Discord account. If Telegram is not
+configured for this deployment, the sign-in page explains that it is unavailable.
+
+Keyboard users can select either provider after expanding the button. Escape
+closes the chooser. The animation respects reduced-motion preferences.
 
 After login, the frontend stores a short-lived JWT and uses a refresh cookie to rotate it.
+
+## Connect Another Login Provider
+
+1. Sign in to the Orbiters account you want to keep using.
+2. Open **Account > Overview > Connections**.
+3. Select **Connect Discord** or **Connect Telegram** for an unconnected provider.
+4. Authorize the connection. Orbiters returns you to Overview and shows **Connected**.
+
+Connect the second provider here before using it to sign in separately. A separate
+first sign-in creates a separate account. Orbiters does not merge accounts based
+on matching names or email addresses, and rejects a connection already owned by
+another account. Existing connections cannot be replaced or disconnected here.
+
+Connecting Telegram preserves an existing Orbiters profile. Connecting Discord
+uses your Discord profile and enables Discord synchronization. **Sync with Discord**
+is disabled until Discord is connected. Telegram login alone does not grant any
+Discord roles or creator privileges.
+
+If authorization is cancelled or the login attempt expires, restart it from the
+chooser or the Connections section.
 
 ## Request Creator Status
 
@@ -81,5 +110,7 @@ Discord server verification is not a single global flag. A user can be verified 
 <audience include="dev">
 
 OAuth login uses one Orbiters Discord application. Creator custom bots are gateway and REST clients only; they are not used for user OAuth.
+
+For Telegram deployment configuration, see [Telegram Login Setup](../reference/telegram-login.md).
 
 </audience>
