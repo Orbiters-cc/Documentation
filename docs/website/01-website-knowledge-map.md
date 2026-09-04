@@ -8,7 +8,7 @@ id: orbiters.website.knowledge-map
 domain: website
 type: reference
 owner: orbiters-docs
-lastVerified: 2026-07-13
+lastVerified: 2026-09-04
 relations: orbiters.start.overview, orbiters.reference.access-model, orbiters.reference.api, orbiters.website.public-profile
 ---
 
@@ -28,6 +28,8 @@ belong in General knowledge.
   tier, role, or feature scope.
 - Use `orbiters.website.public-profile` for public identity, external account links,
   created assets, and comment activity.
+- Use [Art Commissions and Sonas](../how-to/11-art-commissions-and-sonas.md) for
+  saved character references, configurable YCH listings, and art requests (beta).
 
 ## Creator Workflows
 
