@@ -29,7 +29,11 @@ Use the manual commission flow when an automatic ReFit result needs artist work.
 8. Authorize the EUR 2 Orbiters request fee.
 
 The card authorization is captured only when a creator accepts. Cancelling the
-request or reaching the deadline without an acceptance releases the authorization.
+request or reaching the deadline without an acceptance queues an authorization release.
+The payment panel shows **Release pending** until the payment provider confirms it.
+If checkout preparation is interrupted, the request stays saved: open its status page
+and use **Continue to payment** when checkout is ready. Retrying the same submission
+does not create another commission.
 Card authorization windows are temporary, so the complete request window cannot
 exceed six days and may be shortened to the card network's actual capture deadline.
 
@@ -40,9 +44,11 @@ price and payment directly with the creator after acceptance.
 
 On development deployments only, the Creator **Commissions** tab includes **Create
 a ReFit request**. It creates a dummy request addressed to the signed-in creator,
-opens the real payment checkout, and returns to the normal request status page. Use
+opens a Stripe **test-mode** checkout, and returns to the normal request status page. Use
 it to test the website workflow before a Unity handoff is available. The button and
-its backend endpoint are unavailable on production deployments.
+its backend endpoint are unavailable on production deployments. Live payment keys
+cannot be used for this development shortcut. The server's deployment configuration,
+not the browser hostname, controls availability.
 
 </audience>
 
@@ -66,22 +72,24 @@ acceptance page links to the creator's public profile and contact links.
 
 Open **My Account > My commissions** to see every active request and accepted job.
 Completed, cancelled, expired, and failed requests remain in **Past commissions**.
-The avatar account menu also lists all active commissions above notifications, with
+The avatar account menu previews active commissions above notifications, with
 the asset name, creator avatar/name, and a progress bar. Select an entry to open its
 status page. **My Account** and **Log out** stay above the scrollable lists; the
 notification preview retains its own link to the full inbox.
 
 Progress represents workflow milestones, not elapsed time or a delivery estimate:
 payment authorization, waiting for a creator, acceptance, work in progress, review,
-and completion. After acceptance, the original commission Board column or delivery
-status determines progress, with the proposal status used when there is no recognized
-Board stage. **Active / In progress**, **Review / In review**, and
-**Done / Completed / Delivered** advance the bar. Paused or deferred work stays in
-the active list; rejected or cancelled work moves to history. Unrecognized custom
-stages stay at the accepted milestone instead of guessing completion.
+and completion. After acceptance, the creator updates the delivery stage on the
+commission page: **Start / resume work**, **Ready for review**, and **Mark completed**.
+Board column names no longer change the customer's progress. Creators can post
+notes without changing stage; the latest 50 updates, including earlier review and
+delivery links, remain visible to the participants.
 
-Lists refresh every 30 seconds while displayed and when the browser regains focus.
-The account tab also has a **Refresh** button. Commission names use the ReFit icon.
+The account and menu share one active-list query. Lists load 20 entries at a time;
+use **Load more** in the account tab to see additional work or history. The first
+page refreshes every 30 seconds while visible and when the browser regains focus.
+After loading additional pages, use **Refresh** to return to a fresh first page.
+Commission names use the ReFit icon.
 The detail page shows a non-clickable progress bar with the current workflow state;
 the linked commission cards are used only in lists and the account menu. The payment panel distinguishes an
 authorization hold from **Paid** after the creator accepts and the fee is captured.
@@ -94,18 +102,18 @@ The designated website administrator and users with admin or owner rank see Stri
 platform payments in **Creator > Revenues**. Ordinary creators only see their own
 store revenue; the platform's Stripe income is not included for them.
 
-The chart and totals include all captured charges from the configured global Stripe
-account in the selected date range, including existing ReFit EUR 2 fees and other
-Stripe payments. Revenue is captured gross less refunds, before processing fees, and
-is grouped by the original charge date. Refunds adjust that original payment rather
-than creating a new entry on the refund date. Authorization holds and failed charges
-are excluded. Currencies are kept separate; choose EUR to inspect ReFit fees.
+The chart uses a synchronized platform payment ledger, including ReFit EUR 2 fees
+and other Stripe payments. It includes payment, refund and dispute-adjustment
+transactions before processing fees, grouped by each balance transaction's date
+and settlement currency. Refunds and reversals have their own dates and signs;
+payouts and account transfers are excluded. This is not a bank-payout statement.
 
 Sandbox credentials display **Sandbox (test money)**. Only the account and test/live
-mode selected by the deployment's global credential are included. Data is fetched
-from Stripe when loading or refreshing Revenues, without requiring a webhook replay
-or adding duplicate local fee records. If Stripe is unavailable, an explicit warning
-says that totals currently exclude Stripe while store history remains available.
+mode selected by the deployment's global credential are included. History fills in
+incrementally; a warning labels totals as partial until backfill finishes. Refresh
+to see new entries and the last synchronization time. If synchronization fails,
+previously synchronized entries remain visible with a warning. Amounts are normalized
+for each currency, including zero-decimal currencies, before conversion.
 
 ### All Currencies Estimate
 
@@ -138,9 +146,11 @@ views remain available.
 6. Open **Creator > Requests** to accept or decline active offers.
 
 If no default Board destination is configured, choose a Board and column while
-accepting. Orbiters creates a private proposal there after the payment capture. If
-payment capture fails, the details remain private and the request is closed as a
-payment failure.
+accepting. Orbiters creates a private proposal there after payment capture. Customers
+use the participant-facing commission page, not the creator's private Board. Board
+placement retries independently of payment capture. If a destination was removed,
+the accepting creator can enter a replacement Board ID and column key on the request
+page and select **Retry Board placement**. No second capture is made.
 
 Creators do not connect a payment account for this workflow. Orbiters processes the
 EUR 2 website request fee through the administrator's platform payment account.
@@ -151,8 +161,13 @@ listings and shows a generic payment-setup notice.
 <audience include="dev">
 
 The Unity handoff expires after ten minutes and stores only a SHA-256 token hash.
-Creator offers and request acceptance use row locks. The selected Board placement is
-persisted before Stripe capture so a retry or scheduler recovery can finish proposal
-creation without charging twice.
+Authenticated handoffs are bound to the issuing session's token version, so revocation
+invalidates unused links. An account mismatch is rejected without switching the
+browser's signed-in account. Unauthenticated handoffs transfer only a draft and
+require the browser user to sign in.
+
+Payment work is durably queued with the same transaction as the commission state
+change. See [Commission Reliability](../reference/commission-reliability.md) for
+states, recovery jobs, schema migration and deployment checks.
 
 </audience>

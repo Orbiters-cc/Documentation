@@ -38,9 +38,12 @@ with that request's artist. Review the preview and confirm sharing before sendin
 
 You can edit a Sona or remove it from the library. Requests keep the text and image
 references submitted at the time: later edits or removal do not rewrite existing
-briefs. Removed uploads remain in private storage; removing an image from a Sona
-does not erase copies already shared in a request. Accounts can save up to 50
-Sonas and upload up to 500 commission/reference images in total.
+briefs. Images remain retained while attached to a saved Sona, listing or submitted
+request. Unreferenced uploads, including cancelled drafts, become eligible for
+cleanup after 24 hours; failed storage cleanup is retried. Removing an image from
+a Sona does not erase references already shared in a request. Accounts can save up
+to 50 Sonas and retain up to 500 commission/reference images; reclaimed uploads free
+quota instead of consuming a lifetime upload allowance.
 
 ## Request Artwork
 
@@ -59,7 +62,9 @@ not from a customer-supplied total.
 
 Requests appear in **My Account → My commissions** and in the account menu's
 active commission list. Open a request to see its original configuration,
-references, artist update, and progress. Customers can cancel before acceptance.
+references, artist updates, and progress. Earlier notes and delivery links remain
+in the request's activity history, even when the artist starts another revision.
+Artists can post updates without changing the stage. Customers can cancel before acceptance.
 After acceptance, coordinate changes with the artist using the contact details in
 the request or their profile.
 
