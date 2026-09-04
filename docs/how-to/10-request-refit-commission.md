@@ -81,7 +81,9 @@ the active list; rejected or cancelled work moves to history. Unrecognized custo
 stages stay at the accepted milestone instead of guessing completion.
 
 Lists refresh every 30 seconds while displayed and when the browser regains focus.
-The account tab also has a **Refresh** button. The payment panel distinguishes an
+The account tab also has a **Refresh** button. Commission names use the ReFit icon.
+The detail page shows a non-clickable progress bar with the current workflow state;
+the linked commission cards are used only in lists and the account menu. The payment panel distinguishes an
 authorization hold from **Paid** after the creator accepts and the fee is captured.
 
 <audience include="admin, dev">
@@ -104,6 +106,25 @@ mode selected by the deployment's global credential are included. Data is fetche
 from Stripe when loading or refreshing Revenues, without requiring a webhook replay
 or adding duplicate local fee records. If Stripe is unavailable, an explicit warning
 says that totals currently exclude Stripe while store history remains available.
+
+### All Currencies Estimate
+
+The revenue currency selector starts on **All (estimate)**, using your saved default
+currency from **Account > Overview > Account Information** (EUR initially). It
+converts each historical bucket and provider series using the latest available
+reference rates, not historical payment-date rates. The USD-based forecast is also
+converted to the same display currency. Individual currency options still show the
+original amounts without conversion.
+
+Rates come from [Frankfurter](https://frankfurter.dev/), which publishes daily
+central-bank reference rates. The chart shows the publication date; this is an
+estimate before conversion fees, not a live bank quote or accounting exchange rate.
+The backend fetches a public EUR-based rate table without sending account details
+or revenue amounts. It caches successful fetches for one hour and, on a provider
+outage, may use a clearly labelled cached snapshot for at most seven days. If a
+needed rate is missing or no usable snapshot exists, the combined estimate is
+unavailable instead of showing a misleading partial total. Exact individual-currency
+views remain available.
 
 </audience>
 

@@ -39,6 +39,14 @@ that links back to the Overview tab. A dismissed request can be submitted again 
 When the request is accepted, the Creator Status card changes to **Creator** and creator
 tools become available to the account.
 
+## Default Currency
+
+In **Account > Overview > Account Information**, choose **Default currency** and
+select **Save currency**. New and existing accounts start with EUR. This preference
+is saved to your account across devices and is used by **All (estimate)** in the
+Creator Revenues tab. It does not change checkout prices, payment currencies, or
+the original amounts recorded in revenue history.
+
 ## Notifications And Account Actions
 
 The avatar at the right of the navigation bar opens the account menu. Its badge is
