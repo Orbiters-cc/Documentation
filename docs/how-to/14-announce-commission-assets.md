@@ -49,16 +49,23 @@ flowchart LR
 3. Link a discussion group to the channel and add the bot as administrator there
    too. Comments live in that group, not in the channel itself.
 4. Return to Orbiters and select **Refresh setup**.
-5. Enter the announcement channel's `@username`, or paste a link copied from one
-   of its posts. For private channels, use **Copy Post Link** on a channel post
-   (not a discussion reply or invite link). Select **Verify & connect**. No
-   numeric ID is needed.
+5. Search **Telegram channel** and select your channel, then **Verify & connect**.
+   The picker includes private channels. **Refresh channels** checks again.
+
+**Channel missing?** If the bot was added before discovery was enabled, ask the
+administrator to rerun the current webhook command in API Keys. Publish a new
+post in the channel, then refresh the picker. Telegram does not replay old bot
+membership events. You can also expand **Channel missing?** and paste the
+channel's `@username` or a link copied from one of its posts once. No numeric ID
+is needed. Newly added channels are discovered from the bot's membership update.
 
 Your linked Telegram identity must administer the channel. A channel already
 connected to another creator cannot be claimed by entering its username.
-Telegram does not expose a list of your channels through the bot API; the invite
-button opens Telegram's own channel picker. Orbiters reads the channel reference
-from the pasted post link locally, then verifies your administration rights.
+Telegram does not expose a list of all channels through the bot API. Orbiters
+remembers channels from authenticated bot-membership and channel-post updates,
+and checks your current administration rights and the bot's membership before
+showing them. Discovery records are scoped to the environment's bot, and contain
+channel metadata and administrator IDs, not post text or character references.
 
 ## Connect Discord
 
@@ -144,7 +151,7 @@ Registering the update webhook does not replace the Login callback.
 
 Register Telegram's `setWebhook` with the public API URL shown in the setup guide,
 ending in `/commission-channels/telegram/webhook`. Set `secret_token` to the same
-secret and `allowed_updates` to `["message", "edited_message"]`. Keep secrets out
+secret and `allowed_updates` to `["message", "edited_message", "my_chat_member", "channel_post", "edited_channel_post"]`. Keep secrets out
 of browser URLs, screenshots and logs. Check `getWebhookInfo` for delivery errors.
 
 There is **no BotFather field for this webhook secret**. In the API key create or

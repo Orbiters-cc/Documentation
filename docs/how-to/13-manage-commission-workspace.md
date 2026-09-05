@@ -50,8 +50,13 @@ flowchart LR
   immediately in the preview. Use each image's corner **Download** button to save
   it, or click the image to open a larger view. Access checks still apply.
 - Scroll the modal with the mouse wheel or touch. It uses one scroll area and a
-  spring entry/exit animation. Large dialogs use a smaller opening tilt to avoid
-  sweeping across the screen; reduced-motion preferences disable movement.
+  160 ms opening and 100 ms closing animation. Large dialogs use a smaller tilt;
+  reduced-motion preferences disable movement. Closing stops intercepting clicks
+  immediately, so you can select another card while it fades out.
+  HeroUI skeletons reserve reference space during loading. Recent proposal details
+  and image blobs are kept in memory for up to 30 seconds (32 entries / 32 MiB),
+  isolated by login token. Reopened details refresh in the background; nothing is
+  written to persistent browser storage.
 
 Accepting an art request creates one private task in your configured commission
 Board. Without a configured Board, it uses your Creations Board. ReFit keeps its
