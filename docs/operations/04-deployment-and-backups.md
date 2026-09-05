@@ -13,6 +13,15 @@ lastVerified: 2026-07-12
 
 # Deployment and Backups
 
+<alpha>
+
+The privacy release requires a dedicated production credential key before preflight.
+Preserve the newest privacy deletion ledger independently when restoring older data.
+See [Privacy and Credential Security Architecture](../reference/privacy-security-architecture.md)
+for the environment secret, migration and restore procedure.
+
+</alpha>
+
 Orbiters runs through Docker Compose, with Caddy routing traffic to frontend and backend services. Production deploys and backups are coordinated by GitHub Actions and scripts in the main repository.
 
 <alpha>

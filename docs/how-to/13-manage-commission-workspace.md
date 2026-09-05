@@ -13,6 +13,14 @@ lastVerified: 2026-09-05
 
 # Your Commission Workspace
 
+<beta>
+
+Commission creators control public hiding while both participants retain their
+private record. Account closure preserves shared commission history. See
+[Manage Privacy and Shared Content](15-manage-privacy-and-shared-content.md).
+
+</beta>
+
 Use **Home → Your workspace** for quick task moves. Open **Full Board** when you
 need its settings or more room.
 
