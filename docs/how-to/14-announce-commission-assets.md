@@ -17,6 +17,11 @@ Connect a channel once, then select **Post on [channel]** when saving a public
 commission asset. Posting is optional and starts unchecked. Each listing gets
 one announcement per channel; editing it does not create repeated posts.
 
+Start in **Creator → Commissions → Automate your commission announcements**.
+The setup guide checks bot readiness and your linked identity before you connect.
+If something is missing, it explains whether you or the website administrator
+needs to act. You can also open the same guide from the commission asset editor.
+
 Announcements include the public listing preview, name, short description,
 starting price and link. **Private customer requests, Sonas and their references
 are never used as announcement content.**
@@ -34,27 +39,45 @@ flowchart LR
 
 ## Connect Telegram
 
-1. Link your Telegram identity in your Orbiters account.
-2. Add the deployment's Orbiters bot as administrator to your announcement
-   channel, with permission to post messages.
+1. Select **Telegram** in the setup guide. Link your Telegram identity in
+   **Account → Overview** if prompted.
+2. Select **Add bot to Telegram channel**. The guide shows the actual bot
+   username. Add it as administrator with **Post Messages** enabled.
 3. Link a discussion group to the channel and add the bot as administrator there
    too. Comments live in that group, not in the channel itself.
-4. In the commission asset editor, open **Announce your commission → Connect a
-   channel → Telegram**.
-5. Enter its `@channel` name or numeric channel ID and select **Verify & connect**.
+4. Return to Orbiters and select **Refresh setup**.
+5. Enter the announcement channel's `@username`, or paste a link copied from one
+   of its posts. For private channels, use **Copy Post Link** on a channel post
+   (not a discussion reply or invite link). Select **Verify & connect**. No
+   numeric ID is needed.
 
 Your linked Telegram identity must administer the channel. A channel already
-connected to another creator cannot be claimed by entering its ID.
+connected to another creator cannot be claimed by entering its username.
+Telegram does not expose a list of your channels through the bot API; the invite
+button opens Telegram's own channel picker. Orbiters reads the channel reference
+from the pasted post link locally, then verifies your administration rights.
 
 ## Connect Discord
 
-1. Link your Discord identity and invite the Orbiters bot to the server.
-2. Choose a text or announcement channel. Your identity needs **Manage Channels**.
-3. Grant the bot **View Channel**, **Send Messages**, **Read Message History**,
+1. Select **Discord**. Link or reconnect it in **Account → Overview** if prompted.
+2. Search and select your **Discord server** by name. Use **Invite bot to Discord**
+   if needed; the selected server is prefilled. Inviting needs **Manage Server**,
+   so ask a server administrator if you cannot invite applications yourself.
+3. Return and select **Refresh setup**, then search **Announcement channel**.
+   Only text/announcement channels your linked account can view and manage are
+   offered. No Developer Mode or copied IDs are needed.
+4. If a channel says **Bot permissions needed**, grant **View Channel**,
+   **Send Messages**, **Read Message History**,
    **Create Public Threads**, and **Send Messages in Threads**. Image attachments
-   also require **Attach Files**.
-4. In **Connect a channel → Discord**, enter the server ID and channel ID, then
-   verify. Discord's Developer Mode exposes **Copy ID** in context menus.
+   also require **Attach Files**. Refresh after changing permissions.
+5. Select **Verify & connect**. Orbiters rechecks your permission and the bot's
+   permission before connecting.
+
+You do not need to create a Discord application or enter an API key. When the
+deployment's shared bot is unconfigured or offline, the guide asks the website
+administrator to finish its setup. Invite links use the standard
+[Discord bot authorization flow](https://docs.discord.com/developers/topics/oauth2)
+and [Telegram bot channel links](https://core.telegram.org/api/links#bot-links).
 
 Orbiters creates a discussion thread on the announcement. Replies there, or direct
 replies to the announcement in its channel, are mirrored. The deployment must have

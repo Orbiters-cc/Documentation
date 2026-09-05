@@ -16,6 +16,15 @@ lastVerified: 2026-09-05
 Use **Home → Your workspace** for quick task moves. Open **Full Board** when you
 need its settings or more room.
 
+For creators, Home opens directly on the workspace without the Orbiters hero or
+development warning. In **Creator → Commissions → Your commission workspace**,
+choose your **Default Board** and starting column, then save. This shared setting
+applies to art and ReFit work and selects that Board automatically on Home. You
+can temporarily browse another Board using Home's selector without changing the
+saved default.
+On small screens, the Creator page uses a **Creator section** selector instead
+of a wide sidebar. The top shortcuts jump to Board and announcement settings.
+
 ```mermaid
 flowchart LR
   accTitle: A commission from acceptance to recorded income
@@ -34,7 +43,12 @@ flowchart LR
 - Drag a task between columns, or use its **Move to** menu on touch or keyboard.
 - Select **New commission** in a column to enter a name and brief. This creates a
   private task, not a customer request, payment or asset listing.
-- Open a task to read its brief, attachments and linked commission details.
+- Click a task to open a quick-view modal. Read the brief, requester, commission
+  state and recorded payment without leaving the Board. Use the small **Open full
+  element** button in its header for the full page.
+- Character references, request attachments and supported Trello images appear
+  immediately in the preview. Use each image's corner **Download** button to save
+  it, or click the image to open a larger view. Access checks still apply.
 
 Accepting an art request creates one private task in your configured commission
 Board. Without a configured Board, it uses your Creations Board. ReFit keeps its
@@ -64,6 +78,8 @@ someone saved a newer version; reload before saving your correction.
 
 The yellow **Orbiters · ReFit request fee** receipt is separate from your price.
 It describes the platform request fee, not an artist payment or tax invoice.
+In the ReFit request view, the compact creator identity sits above this receipt
+in the right-hand column; cutout edges distinguish the receipt from other cards.
 
 ## Trello References
 
@@ -85,4 +101,5 @@ Files above the 10 MB preview/download limit must be opened on Trello.
 
 Customers use **My Account → My commissions** or the account menu. More than two
 items switch to compact rows while retaining the title, artist and progress bar.
+The artist sits beside the title, rather than taking another row in each card.
 Commission task discussions omit proposal sentiment and product-decision controls.
