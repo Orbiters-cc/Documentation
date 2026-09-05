@@ -24,6 +24,8 @@ coroutine runner. Staging and baking use Unity objects on the main thread;
 geometry uses captured arrays on a worker. The existing three-argument entry point
 remains the MCB integration contract. A fourth `CancellationToken` argument is
 available; synchronous service/engine calls also accept a token after progress.
+The service still applies and saves successful output when `onComplete` is null;
+the callback is a notification, not permission to perform application.
 
 Settings and requested shape names are copied at invocation. Keep input Unity
 objects alive. The service checks input transforms, renderer state, metadata and
@@ -95,6 +97,12 @@ integration entries. The public MCB coroutine contract is tested separately usin
 multiple shapes, without driving the MCB UI or a complete version-application flow.
 Standalone compilation writes `Temp/ReFitTests/standalone/result.txt`; this does not
 replace a fresh-project package-resolution test.
+
+The 2026-09-05 local run reported 62 passed, 2 explicitly skipped, and no failures.
+It included both authored FBXs, private clothing regressions, lifecycle/rollback
+checks and the multi-shape public service contract. This result does not establish
+universal fitting accuracy; visual clipping and authored-reference outliers are
+separate from regression parity.
 
 Private audit/benchmark artifacts stay under `Temp/ReFitBenchmarks`. Capture needs
 graphics support. Engine timings exclude scene saving and debug snapshot overhead;
