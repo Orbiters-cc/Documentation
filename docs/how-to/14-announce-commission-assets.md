@@ -33,7 +33,7 @@ flowchart LR
   A[Public commission asset] --> B[Select verified channel]
   B --> C[Announcement queued]
   C --> D[Channel post]
-  D --> E[Discussion replies]
+  D -->|If a discussion is connected| E[Discussion replies]
   E --> F[Asset comments with source label]
 ```
 
@@ -49,8 +49,9 @@ flowchart LR
    **Add Administrators** screen, not “Orbiters”. The identity remains visible
    before webhook registration is complete, provided the Bot API token is valid.
    Alternatively select **Add bot to Telegram channel**. Give it **Post Messages**.
-3. Link a discussion group to the channel and add the bot as administrator there
-   too. Comments live in that group, not in the channel itself.
+3. **Optional: sync Telegram comments.** Link a discussion group to the channel
+   and add the bot as administrator there too. Without a discussion group,
+   announcements still work; customers can comment directly on the Orbiters listing.
 4. Return to Orbiters and select **Refresh setup**.
 5. Search **Telegram channel** and select your channel, then **Verify & connect**.
    The picker includes private channels. **Refresh channels** checks again.
