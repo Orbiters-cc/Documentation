@@ -58,7 +58,8 @@ the selection independently and defaults to production.
 ### Navigation and Active Requests
 
 Right-click a skinned accessory in Unity's Hierarchy and choose **ReFit**, or use the
-renderer's Inspector context menu. ReFit preselects that accessory and its containing
+renderer's Inspector context menu. The Hierarchy entry is ordered in the leading
+custom-command group. ReFit preselects that accessory and its containing
 avatar when identifiable. Multiple candidate meshes or an unidentified avatar keep
 the corresponding selection step; opening the wizard does not modify the scene.
 
@@ -68,8 +69,10 @@ Successful wizard and MCB transfers update this local history; failed runs do no
 **Back** and **Settings** are now in the top banner.
 
 The main page shows active ReFit commissions below refitted assets. Each compact row
-shows its title, creator, status and website-provided progress, without a repeated
-ReFit logo. Click a row to open the request on Orbiters. Sign in through MCB to load
+shows its title, status and creator on one line, with website-provided progress below,
+without a repeated ReFit logo. The list is capped at 560 pixels wide. Search, suggestion
+and refresh controls use ReFit styling; banner buttons use a lighter charcoal background.
+Click a row to open the request on Orbiters. Sign in through MCB to load
 the list. Account or environment changes discard cached requests.
 
 The first page refreshes every 30 seconds while the main page is visible. **Load
