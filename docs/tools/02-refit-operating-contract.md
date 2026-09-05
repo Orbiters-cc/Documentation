@@ -53,6 +53,46 @@ the selection independently and defaults to production.
 
 ## Manual ReFit Commissions
 
+<alpha>
+
+### Navigation and Active Requests
+
+Right-click a skinned accessory in Unity's Hierarchy and choose **ReFit**, or use the
+renderer's Inspector context menu. ReFit preselects that accessory and its containing
+avatar when identifiable. Multiple candidate meshes or an unidentified avatar keep
+the corresponding selection step; opening the wizard does not modify the scene.
+
+The blendshape picker uses a search field and wrapping name suggestions. An empty
+search shows up to three recently refitted shapes that exist on the selected body.
+Successful wizard and MCB transfers update this local history; failed runs do not.
+**Back** and **Settings** are now in the top banner.
+
+The main page shows active ReFit commissions below refitted assets. Each compact row
+shows its title, creator, status and website-provided progress, without a repeated
+ReFit logo. Click a row to open the request on Orbiters. Sign in through MCB to load
+the list. Account or environment changes discard cached requests.
+
+The first page refreshes every 30 seconds while the main page is visible. **Load
+more** adds older active requests; the refresh icon returns to the latest first page.
+After loading additional pages, refresh is manual so the accumulated list stays in
+place. Errors retain already loaded rows and offer refresh to retry.
+
+<audience include="dev">
+The list reuses authenticated `GET /commissions/mine?scope=active` and cursor
+pagination. Progress labels and percentages come from the existing commission
+summary service. Only active `REFIT` items are displayed. Authentication tokens
+remain request headers and are not written to logs or links.
+
+`Orbiters.ReFit.Editor.Tests.ReFitNavigationTests.RunOrThrow()` checks search,
+available recent names, failed-run history isolation, commission DTO/row behavior,
+header placement and shortcut ambiguity. The deterministic runner includes it and
+restores local history after testing. The optional read-only
+`ReFitNavigationTests.ProbeCommissionEndpoint()` writes request counts to
+`Temp/ReFitTests/commission-endpoint.txt`, without customer details.
+</audience>
+
+</alpha>
+
 The result screen lists creators who currently accept manual ReFit commissions.
 Creator profile pictures are center-cropped and circular; missing pictures use the
 same circular fallback frame.
