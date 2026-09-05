@@ -32,8 +32,11 @@ Offer manual fitting work and keep accepted requests on your private Board.
 Open **Creator → Requests** to accept or decline an active offer.
 If no Board destination is configured, choose one while accepting.
 
-Before acceptance you see the offer and response deadline. After acceptance,
-the client's profile and ReFit details become available, and other offers close.
+Before acceptance you see the offer, response deadline, avatar previews and any
+other shared attachments. Review these under **Attachments** to assess the work.
+After acceptance, the previews remain available, the client's profile and ReFit
+details become available, and other offers close. Downloaded files are user-provided;
+check them before opening them.
 
 ## Keep the client updated
 

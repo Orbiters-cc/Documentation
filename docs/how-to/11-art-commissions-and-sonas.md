@@ -8,7 +8,7 @@ id: orbiters.website.art-commissions-and-sonas
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-04
+lastVerified: 2026-09-05
 relations: orbiters.website.knowledge-map, orbiters.website.public-profile
 ---
 
@@ -54,7 +54,10 @@ quota instead of consuming a lifetime upload allowance.
    additional price and all selected extras, in the listing's currency.
 5. Choose a Sona. Add your request details and contact information for arranging
    payment and delivery.
-6. Confirm reference sharing and select **Send commission request**.
+6. Optionally add files or images under **Attachments** (eight files maximum,
+   10 MB each). These are shared with the artist before acceptance and retained
+   with the submitted request. Only upload files you have permission to share.
+7. Confirm reference sharing and select **Send commission request**.
 
 If the listing changes while you are configuring a request, submission is refused:
 reload and review the new price. The server computes the price from the listing,
@@ -146,5 +149,14 @@ tokens in URLs. Request creation and status changes use database row locks.
 Uploads reserve quota with a short database lock and become active only after
 storage completes; remote storage operations do not hold database locks.
 Art requests never enter ReFit's Stripe or expiry scheduler.
+
+Both art and ReFit request forms use `/commission-attachments` for authenticated
+multipart uploads (`file`). GET `/:id` returns metadata; GET `/:id/content` delivers
+private bytes to eligible participants; DELETE `/:id` removes only an owner's
+unreferenced upload. Submitted requests store validated `attachmentFileIds`.
+Generic files download as binary attachments; JPEG/PNG/WebP images are decoded,
+metadata-stripped and resized to at most 1600 pixels per side. SVG and animated
+image previews are rejected. Attachment storage is limited to 500 files per account;
+unused uploads become eligible for cleanup after 24 hours.
 
 </audience>

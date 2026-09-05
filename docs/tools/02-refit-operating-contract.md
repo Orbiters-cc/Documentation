@@ -8,7 +8,7 @@ id: orbiters.tools.refit-operating-contract
 domain: refit
 type: reference
 owner: orbiters-refit
-lastVerified: 2026-07-14
+lastVerified: 2026-09-05
 relations: orbiters.tools.mcb-operating-contract, orbiters.tools.unitgit-operating-contract, orbiters.tools.xray-gizmos-operating-contract
 ---
 
@@ -57,9 +57,25 @@ separate Next button in Unity. When MCB authentication is available, that handof
 opens the matching Orbiters account in the browser. A standalone ReFit install can
 still continue, but the website asks the user to sign in.
 
-The handoff includes only the selected creator IDs and bounded ReFit context: asset
-name, source avatar, target avatar, mode, and blendshape. It does not upload the
-Unity asset, mesh, scene, local paths, or authentication token.
+The handoff includes selected creator IDs, bounded ReFit context (asset name,
+source avatar, target avatar, mode, blendshape), and four rendered preview images.
+Clicking the card captures front, three-quarter, side and elevated views in an
+offscreen renderer. The primary refit shape is forced to 100% on the temporary
+renderer; the current pose and other shape values are preserved. Live scene values
+are unchanged. Debug snapshots are excluded. It does not upload the Unity asset,
+mesh, scene file, local paths, or authentication token as commission content.
+
+Preview images travel as multipart `previews` with a JSON `payload` field to the
+handoff endpoint. The ten-minute handoff temporarily holds sanitized images,
+which are removed from its stored payload on exchange. After sign-in the browser
+imports them into private owned attachments. The user can inspect/remove them or
+add other files before submission. Active requested creators see the attachments
+before acceptance; only the accepted creator retains access after offers close.
+
+Capture regression checks are available as
+`Orbiters.ReFit.Editor.Tests.ReFitCommissionCaptureTests.RunOrThrow()` and the
+**Tools > Orbiters > ReFit > Run Commission Capture Tests** menu. They require
+graphics support and do not run the deformation pipeline.
 
 On Orbiters, the user can reorder creators, override each response time, or ask all
 selected creators at once and take the first acceptance. See [Request a Manual

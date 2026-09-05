@@ -22,12 +22,35 @@ Automatic ReFit not quite right? Ask a creator to finish the fit by hand.
 ## Send your request
 
 1. **Start in Unity.** After your ReFit, open **The ReFit doesn't look right?**,
-   check the price ranges and click an artist card. The website opens with that artist selected.
+   check the price ranges and click an artist card. ReFit captures and uploads four
+   private views of your avatar wearing the refitted accessory, then opens the
+   website with that artist selected. No mesh or scene file is uploaded automatically.
 2. **Choose who to ask.** In the browser, arrange creators in preference order
    and choose their response limits (two days each by default).
 3. **Review your request.** The asset, avatars and blendshape are already filled in.
-   Review the receipt and choose **Next**.
+   Review the captured images under **Attachments**, remove any you do not want to
+   share, and optionally add reference files or images. Review the receipt and choose **Next**.
 4. **Authorize €2 in Stripe.** Return to Orbiters to follow the request.
+
+## Preview images and attachments
+
+ReFit captures front, three-quarter, side and elevated views without changing the
+scene. Its captured copy has the primary refit blendshape at 100%; other blendshapes
+and the pose use their current scene values. Set the body and matching clothing
+blendshapes to the state you want the artist to inspect before clicking a card.
+
+Requests support **eight attachments total, up to 10 MB each**, including the four
+automatic images. JPEG, PNG and WebP images are optimized to WebP at up to 1600 pixels
+per side; animated images and SVG previews are not supported. Other files are
+downloadable attachments. Only share files you have permission to send. Do not open
+untrusted downloaded files without checking them.
+
+The client and creators with an active offer can view the private attachments.
+The accepting creator keeps access. Waiting candidates do not get access until
+their offer becomes active; closed, unaccepted offers lose access. Submitted
+attachments are retained with the request. Unsubmitted uploads become eligible
+for cleanup after 24 hours. If preview import fails, reload the request page to
+retry before proceeding to checkout.
 
 ## What happens to the request fee?
 
@@ -84,8 +107,10 @@ and can add notes or delivery links. Completed or closed requests move to
 | No creator accepted | Check whether the next creator is being asked or the request has expired. |
 | The payment panel says **Paid** | The creator accepted and Orbiters collected the request fee. |
 
-Before acceptance, creators see an offer and its deadline—not your identity or
-technical asset details. Acceptance reveals that context to the accepting creator.
+Before acceptance, creators see the offer, deadline and shared attachments, not
+your account identity or technical asset fields. Images and files can themselves
+contain identifying information: review them before submitting. Acceptance reveals
+the remaining context to the accepting creator.
 
 <audience include="creator, admin, dev">
 
