@@ -23,7 +23,8 @@ access to meetup instances.
 
 ## Link VRChat with a friend request
 
-1. Select **Link VRChat** to start a 15-minute linking session.
+1. In **Account → Overview → Connections**, select **Connect VRChat**, then
+   **Start linking** to start a 15-minute linking session.
 2. Open the service account profile linked on the page. Send it a friend request
    from your VRChat account.
 3. Select **Check incoming requests**. Recent requests may also appear to other
@@ -50,7 +51,8 @@ or login codes.
 
 VRChat must expose its explicit **18+** result. A hidden badge or general age
 verification does not establish adulthood for Orbiters. You can refresh the
-linked account from this panel.
+linked account from **Connections → VRChat → Manage → Refresh profile**.
+The connection represents your VRChat identity even without a visible age badge.
 
 Other sources include manual staff verification, qualifying Furality convention
 evidence reviewed by staff, and a configured adult-verification role in a trusted
@@ -59,7 +61,7 @@ independent valid source.
 
 ## Remove a connection
 
-Select **Unlink VRChat**, then confirm. This withdraws evidence from that VRChat
+In **Connections → VRChat → Manage**, select **Disconnect**, then confirm. This withdraws evidence from that VRChat
 account while retaining other sources and any review hold. It does not remove a
 VRChat friendship.
 

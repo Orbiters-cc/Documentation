@@ -15,7 +15,8 @@ lastVerified: 2026-09-05
 
 Moderators, administrators and owners can manage verification from
 **Admin → Users**. Moderators receive a limited member directory. In the full
-administrator table, select **18+ status** for a human account.
+administrator table, select **More** for a human account. This modal groups the
+Orbiters ID, Jinxxy ID, creation date and age-verification controls.
 
 ## Record or withdraw staff verification
 
@@ -51,14 +52,25 @@ the review-hold workflow.
 
 ## Trust a Discord server
 
-Open **Admin → Discord Servers**, select a recorded server, and choose the role
-that establishes adult verification. Record how the partner verifies adulthood.
+Open **Admin → Discord Servers** and search the server cards. Icons and counts
+identify recorded communities. Open a server and select **Sync server** to refresh
+its role catalog and your own membership. Choose the role that establishes adult
+verification, enable **Trusted**, and record how the partner verifies adulthood.
 Do not trust self-assigned roles or roles that merely mirror Orbiters approval.
 
-Select **Preview affected members**, review the proposed changes, then save.
+Select **Review changes**, review the proposed changes, then save.
 The preview uses fresh observations and may change as Discord updates. Old role
 records alone never grant approval. Background synchronization checks known active
-members after the policy is configured; individual refresh is also available.
+members after the policy is configured. Expand **Details & sync** on a member
+row to refresh that membership and its roles, even before configuring trust.
+Search by username or Discord ID and filter current or former periods.
+
+Role names require a connected Orbiters bot that can access the server. Without
+one, authorized member connections can supply their role IDs, which remain
+selectable. The refresh result explains unavailable catalog or membership data.
+**Sync with Discord** in Account Overview refreshes the profile, complete server
+membership list and available role assignments. Partial results are reported;
+renew Discord sign-in if the membership authorization is unavailable.
 
 The directory shows recorded membership periods, including rejoins. Departure
 dates are when Orbiters recorded the departure and may differ from the actual
@@ -72,7 +84,7 @@ successful observation expires normally, and the panel shows refresh failures.
 
 ## Connect the dedicated VRChat service account
 
-In **Admin → API Keys → VRChat service account**, enter the dedicated website
+In **Admin → VRChat**, enter the dedicated website
 account's username and password. Complete the email, authenticator or recovery
 code step if requested. Challenges last ten minutes and permit five attempts.
 
@@ -81,7 +93,12 @@ configured. Only the encrypted authenticated session is saved; the password is
 not retained. This connection has a dedicated card rather than editable raw
 cookie fields. It is shared by this backend/database deployment.
 
-Use **Check connection** to validate a session. Replacement login preserves the
+The connected account card shows its profile picture, name, profile link and
+connection health. Browse the paginated **Online** and **Offline** friend lists
+and use **Refresh friends** to reload them. The list does not show instance locations.
+
+Use **Check connection** to validate a session and refresh the account profile.
+Select **Change account** to reveal the replacement login form. Replacement login preserves the
 working connection until the new login succeeds. **Disconnect** removes local
 session material and attempts remote logout. If remote logout cannot be
 confirmed, revoke the session through VRChat's account settings.

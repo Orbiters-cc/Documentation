@@ -77,12 +77,34 @@ no-store`.
 | `/age-verification/me` | Status, linking session, candidates, claim, refresh, unlink | Current human member |
 | `/age-verification/admin/users` | Search, status/history, manual evidence and review hold | Moderator, admin or owner |
 | `/age-verification/admin/users/:id/connection` | Associate, reassign or unlink a VRChat account | Admin or owner |
-| `/age-verification/admin/servers` | Directory, history, policy preview/save and member refresh | Admin or owner |
-| `/age-verification/vrchat-service` | Login, challenge verification, health and disconnect | Admin or owner |
+| `/age-verification/admin/servers` | Directory, searchable history, policy preview/save, server and member refresh | Admin or owner |
+| `/age-verification/vrchat-service` | Login, challenge verification, health, paginated friends and disconnect | Admin or owner |
 
 The configured primary administrator retains access. Developer rank alone does
 not confer age-management or service-account permissions. Staff reasons are
 limited to 500 characters. History responses contain the latest 100 actions.
+
+## Discord synchronization and display
+
+`POST /users/me/sync-discord-info` and the staff equivalent refresh profile,
+memberships and role assignments. Responses include `discordSync` with server
+and role-refresh counts, a partial-result flag and a display message. A profile
+refresh can succeed while membership access is unavailable.
+
+The complete OAuth guild list is paginated before reconciling departures. Login
+profile snapshots are non-authoritative for departures. Role synchronization
+repairs missing guild IDs and reuses existing user associations.
+
+`POST /age-verification/admin/servers/:guildId/sync` refreshes the bot-accessible
+role catalog and the requesting administrator's membership. The per-member
+refresh updates general membership and role records as well as age observations.
+Bot access is preferred; authorized OAuth membership data provides role IDs when
+bot access is unavailable. Membership history responses include avatar metadata.
+
+`GET /age-verification/vrchat-service/friends?page=0&offline=false` returns up to
+24 sanitized profiles and a `hasMore` flag. It shares service-account pacing and
+backoff. It exposes no locations, credentials or friendship mutation operations.
+The logo asset is from [Simple Icons](https://simpleicons.org/?q=vrchat).
 
 ## Validation
 
