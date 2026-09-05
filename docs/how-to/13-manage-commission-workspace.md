@@ -49,6 +49,8 @@ flowchart LR
 - Character references, request attachments and supported Trello images appear
   immediately in the preview. Use each image's corner **Download** button to save
   it, or click the image to open a larger view. Access checks still apply.
+- Scroll the modal with the mouse wheel or touch. It uses one scroll area and a
+  spring entry/exit animation; reduced-motion preferences disable movement.
 
 Accepting an art request creates one private task in your configured commission
 Board. Without a configured Board, it uses your Creations Board. ReFit keeps its
@@ -76,8 +78,12 @@ but cannot edit it. To correct a received amount or currency, uncheck received,
 save, make the correction, and mark it received again. A stale-edit warning means
 someone saved a newer version; reload before saving your correction.
 
-The yellow **Orbiters · ReFit request fee** receipt is separate from your price.
-It describes the platform request fee, not an artist payment or tax invoice.
+The yellow receipt itemizes the **Orbiters request fee** and, once recorded, the
+**Artist commission** price. Saving the artist record updates the receipt and
+total immediately. Prices in the same currency are added; different currencies
+keep separate totals, without an invented conversion. Each line retains its own
+payment state: an agreed artist price is not proof of payment or a Stripe charge.
+This summary is not a tax invoice.
 In the ReFit request view, the compact creator identity sits above this receipt
 in the right-hand column; cutout edges distinguish the receipt from other cards.
 
@@ -96,6 +102,19 @@ to preview supported image attachments, download uploaded files, or open externa
 attachment links. Private uploaded files require Orbiters Board membership and
 task access; they are not made public to work around Trello authentication.
 Files above the 10 MB preview/download limit must be opened on Trello.
+
+Board covers use small, lazily loaded previews rather than downloading the full
+image to the browser. Orbiters generates a PNG of at most 480 × 320 pixels on
+first use and caches it privately. The first uncached image still requires a
+Trello download; subsequent views reuse the stored preview. Opening/downloading
+references uses the original. Authorization is checked even for cached previews.
+
+<audience include="dev">
+Thumbnail files live in `backend/.cache/trello-thumbnails`, outside public file
+serving. They are disposable, expire after seven days, and are pruned to 2,000
+files on generation. Generation is deduplicated with four concurrent workers;
+inputs retain the 10 MB download limit and a 40-million-pixel decoder limit.
+</audience>
 
 ## Find Your Own Requests
 

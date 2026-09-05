@@ -41,8 +41,11 @@ flowchart LR
 
 1. Select **Telegram** in the setup guide. Link your Telegram identity in
    **Account → Overview** if prompted.
-2. Select **Add bot to Telegram channel**. The guide shows the actual bot
-   username. Add it as administrator with **Post Messages** enabled.
+2. In **This deployment’s announcement bot**, use **Copy bot username** or
+   **Open this bot in Telegram**. Search the exact `@username` in Telegram’s
+   **Add Administrators** screen, not “Orbiters”. The identity remains visible
+   before webhook registration is complete, provided the Bot API token is valid.
+   Alternatively select **Add bot to Telegram channel**. Give it **Post Messages**.
 3. Link a discussion group to the channel and add the bot as administrator there
    too. Comments live in that group, not in the channel itself.
 4. Return to Orbiters and select **Refresh setup**.
@@ -133,6 +136,19 @@ Register Telegram's `setWebhook` with the public API URL shown in the setup guid
 ending in `/commission-channels/telegram/webhook`. Set `secret_token` to the same
 secret and `allowed_updates` to `["message", "edited_message"]`. Keep secrets out
 of browser URLs, screenshots and logs. Check `getWebhookInfo` for delivery errors.
+
+There is **no BotFather field for this webhook secret**. In the API key create or
+edit form, choose **Generate new secret**, **Copy secret**, then save. Use
+**Copy PowerShell command** in the setup guide and run it in PowerShell. It asks
+privately for the Bot API token and the same saved secret, then sends a
+`setWebhook` request to Telegram. The secret maps to **`secret_token`** and the
+**Telegram webhook URL** maps to **`url`**. Expand **Preview the command** to
+inspect it first. The script reports registration success or failure without
+printing your credentials.
+
+Generating does not change Telegram or the saved API key by itself. Replacing a
+saved secret requires running registration again. Registration replaces that
+bot’s previous webhook, so do not reuse your production bot for development.
 
 A hosts-file-only development name is not reachable by Telegram. Use a public
 HTTPS tunnel that forwards this endpoint to development, and a **separate bot**
