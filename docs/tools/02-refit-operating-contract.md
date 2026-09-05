@@ -70,7 +70,8 @@ Successful wizard and MCB transfers update this local history; failed runs do no
 
 The main page shows active ReFit commissions below refitted assets. Each compact row
 shows its title, status and creator on one line, with website-provided progress below,
-without a repeated ReFit logo. The list is capped at 560 pixels wide. Search, suggestion
+without a repeated ReFit logo. The section is centered and capped at 460 pixels wide,
+with refresh on the right of its heading. Search, suggestion
 and refresh controls use ReFit styling; banner buttons use a lighter charcoal background.
 Click a row to open the request on Orbiters. Sign in through MCB to load
 the list. Account or environment changes discard cached requests.
