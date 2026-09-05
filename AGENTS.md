@@ -69,6 +69,15 @@ If a feature is not implemented, do not document it as available. Put design not
 - Avoid repeating the same concept across pages. Link by title when another page owns the detail.
 - Keep terms consistent: creator, asset, version, scope, supporter tier, store integration, Discord integration, outbox job.
 
+## Diagrams and readable guides
+
+Use fenced `mermaid` blocks for short workflows; the backend generates and caches
+transparent PNGs automatically. Include `accTitle` and a single-line `accDescr`.
+Do not commit generated images or put Mermaid configuration directives in pages.
+Keep the core customer task short and move creator, admin and developer details to
+linked, audience-specific guides. See `docs/reference/documentation-diagrams.md`
+for rendering limits, runtime prerequisites and validation.
+
 ## Required Frontmatter
 
 Each website-visible Markdown page under `docs/` needs:

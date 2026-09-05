@@ -8,166 +8,87 @@ id: orbiters.how-to.request-refit-commission
 domain: refit
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-04
-relations: orbiters.tools.refit-operating-contract, orbiters.how-to.connect-store-integrations
+lastVerified: 2026-09-05
 ---
 
 # Request a Manual ReFit Commission
 
-Use the manual commission flow when an automatic ReFit result needs artist work.
+Automatic ReFit not quite right? Ask a creator to finish the fit by hand.
 
-## Send a Request
+> **Two separate prices:** Orbiters authorizes a **€2 request fee** and collects it
+> only when a creator accepts. Agree on the **artist's price and payment directly
+> with the artist**—the €2 does not pay for their work.
 
-1. Finish a ReFit in Unity.
-2. Under **The ReFit doesn't look right?**, select one or more available creators.
-3. Select **Next**. Orbiters opens the commission draft in the browser.
-4. Put the creators in preference order.
-5. Keep the default two-day response time or set a different limit for each creator.
-6. Optionally enable **Ask everyone at once and take the first creator who accepts**.
-7. Review the receipt, then select **Next** to continue to Stripe. The asset,
-   source avatar, target avatar, and blendshape context comes directly from ReFit.
-8. Authorize the EUR 2 Orbiters request fee.
+## Send your request
 
-The card authorization is captured only when a creator accepts. Cancelling the
-request or reaching the deadline without an acceptance queues an authorization release.
-The payment panel shows **Release pending** until the payment provider confirms it.
-If checkout preparation is interrupted, the request stays saved: open its status page
-and use **Continue to payment** when checkout is ready. Retrying the same submission
-does not create another commission.
-Card authorization windows are temporary, so the complete request window cannot
-exceed six days and may be shortened to the card network's actual capture deadline.
+1. **Start in Unity.** After your ReFit, open **The ReFit doesn't look right?**,
+   select available creators, then choose **Next**.
+2. **Choose who to ask.** In the browser, arrange creators in preference order
+   and choose their response limits (two days each by default).
+3. **Review your request.** The asset, avatars and blendshape are already filled in.
+   Review the receipt and choose **Next**.
+4. **Authorize €2 in Stripe.** Return to Orbiters to follow the request.
 
-The creator's own commission price is not charged by this request. Arrange that
-price and payment directly with the creator after acceptance.
+## What happens to the request fee?
+
+```mermaid
+flowchart TD
+    accTitle: Your request, from authorization to acceptance
+    accDescr: Authorize the request fee. Acceptance captures it; cancellation or expiry releases the hold once the provider confirms.
+    A["Authorize €2"] --> B["Waiting for a creator"]
+    B --> C{"Creator accepts?"}
+    C -->|Yes| D["€2 fee collected"]
+    D --> E["Contact creator and agree on their price"]
+    C -->|"No: expired or cancelled"| F["Release pending"]
+    F --> G["Card hold released"]
+```
+
+A card hold is temporary. The total request window is at most **six days**,
+and may be shorter depending on the card's authorization deadline.
+
+### Choose how creators receive the request
+
+| Ask in preference order | Ask everyone at once |
+| --- | --- |
+| One creator receives the offer at a time. | All selected creators receive it together. |
+| A decline or timeout moves to the next creator. | The first creator to accept gets the job. |
+
+When someone accepts, other offers close. You receive an Orbiters notification,
+plus push or Discord notifications when available. Open the request to find the
+creator's profile and contact links.
+
+## Follow the work
+
+Open **My Account → My commissions**, or select a commission in your avatar menu.
+
+```mermaid
+flowchart TD
+    accTitle: Follow the creator's progress
+    accDescr: Accepted work moves through work in progress, review and completion. Review can return to work for revisions.
+    A["Accepted"] --> B["Work in progress"]
+    B --> C["Ready for review"]
+    C -->|Revisions| B
+    C --> D["Completed"]
+```
+
+These are milestones, **not a delivery countdown**. The creator updates the stage
+and can add notes or delivery links. Completed or closed requests move to
+**Past commissions**.
+
+## Need help?
+
+| What you see | What to do |
+| --- | --- |
+| Checkout was interrupted | Open the saved request and choose **Continue to payment** when ready. |
+| **Release pending** | The provider has not confirmed release of the hold yet. |
+| No creator accepted | Check whether the next creator is being asked or the request has expired. |
+| The payment panel says **Paid** | The creator accepted and Orbiters collected the request fee. |
+
+Before acceptance, creators see an offer and its deadline—not your identity or
+technical asset details. Acceptance reveals that context to the accepting creator.
 
 <audience include="creator, admin, dev">
 
-On development deployments only, the Creator **Commissions** tab includes **Create
-a ReFit request**. It creates a dummy request addressed to the signed-in creator,
-opens a Stripe **test-mode** checkout, and returns to the normal request status page. Use
-it to test the website workflow before a Unity handoff is available. The button and
-its backend endpoint are unavailable on production deployments. Live payment keys
-cannot be used for this development shortcut. The server's deployment configuration,
-not the browser hostname, controls availability.
-
-</audience>
-
-## What Happens Next
-
-In preference-order mode, Orbiters asks one creator at a time. Declining or reaching
-that creator's response deadline activates the next creator. In first-acceptance
-mode, every selected creator receives the request at once and the first acceptance
-wins atomically.
-
-Before acceptance, creators see that a ReFit commission is available and its
-response deadline, but not the client identity or technical asset context. Acceptance
-captures the EUR 2 request fee, reveals the ReFit context and the client's existing
-Orbiters profile to the accepting creator, and cancels the remaining offers.
-
-The client receives an Orbiters notification, a push notification when enabled, and
-a Discord direct message when Orbiters can reach the linked Discord account. The
-acceptance page links to the creator's public profile and contact links.
-
-## Track Your Commissions
-
-Open **My Account > My commissions** to see every active request and accepted job.
-Completed, cancelled, expired, and failed requests remain in **Past commissions**.
-The avatar account menu previews active commissions above notifications, with
-the asset name, creator avatar/name, and a progress bar. Select an entry to open its
-status page. **My Account** and **Log out** stay above the scrollable lists; the
-notification preview retains its own link to the full inbox.
-
-Progress represents workflow milestones, not elapsed time or a delivery estimate:
-payment authorization, waiting for a creator, acceptance, work in progress, review,
-and completion. After acceptance, the creator updates the delivery stage on the
-commission page: **Start / resume work**, **Ready for review**, and **Mark completed**.
-Board column names no longer change the customer's progress. Creators can post
-notes without changing stage; the latest 50 updates, including earlier review and
-delivery links, remain visible to the participants.
-
-The account and menu share one active-list query. Lists load 20 entries at a time;
-use **Load more** in the account tab to see additional work or history. The first
-page refreshes every 30 seconds while visible and when the browser regains focus.
-After loading additional pages, use **Refresh** to return to a fresh first page.
-Commission names use the ReFit icon.
-The detail page shows a non-clickable progress bar with the current workflow state;
-the linked commission cards are used only in lists and the account menu. The payment panel distinguishes an
-authorization hold from **Paid** after the creator accepts and the fee is captured.
-
-<audience include="admin, dev">
-
-## Platform Payment Revenue
-
-The designated website administrator and users with admin or owner rank see Stripe
-platform payments in **Creator > Revenues**. Ordinary creators only see their own
-store revenue; the platform's Stripe income is not included for them.
-
-The chart uses a synchronized platform payment ledger, including ReFit EUR 2 fees
-and other Stripe payments. It includes payment, refund and dispute-adjustment
-transactions before processing fees, grouped by each balance transaction's date
-and settlement currency. Refunds and reversals have their own dates and signs;
-payouts and account transfers are excluded. This is not a bank-payout statement.
-
-Sandbox credentials display **Sandbox (test money)**. Only the account and test/live
-mode selected by the deployment's global credential are included. History fills in
-incrementally; a warning labels totals as partial until backfill finishes. Refresh
-to see new entries and the last synchronization time. If synchronization fails,
-previously synchronized entries remain visible with a warning. Amounts are normalized
-for each currency, including zero-decimal currencies, before conversion.
-
-### All Currencies Estimate
-
-The revenue currency selector starts on **All (estimate)**, using your saved default
-currency from **Account > Overview > Account Information** (EUR initially). It
-converts each historical bucket and provider series using the latest available
-reference rates, not historical payment-date rates. The USD-based forecast is also
-converted to the same display currency. Individual currency options still show the
-original amounts without conversion.
-
-Rates come from [Frankfurter](https://frankfurter.dev/), which publishes daily
-central-bank reference rates. The chart shows the publication date; this is an
-estimate before conversion fees, not a live bank quote or accounting exchange rate.
-The backend fetches a public EUR-based rate table without sending account details
-or revenue amounts. It caches successful fetches for one hour and, on a provider
-outage, may use a clearly labelled cached snapshot for at most seven days. If a
-needed rate is missing or no usable snapshot exists, the combined estimate is
-unavailable instead of showing a misleading partial total. Exact individual-currency
-views remain available.
-
-</audience>
-
-## Creator Setup
-
-1. Open **Creator > Commissions**.
-2. Enable **Accept ReFit commissions**.
-3. Enter a typical minimum and maximum price shown to users.
-4. Optionally choose the Board and column where accepted work should appear.
-5. Save the settings.
-6. Open **Creator > Requests** to accept or decline active offers.
-
-If no default Board destination is configured, choose a Board and column while
-accepting. Orbiters creates a private proposal there after payment capture. Customers
-use the participant-facing commission page, not the creator's private Board. Board
-placement retries independently of payment capture. If a destination was removed,
-the accepting creator can enter a replacement Board ID and column key on the request
-page and select **Retry Board placement**. No second capture is made.
-
-Creators do not connect a payment account for this workflow. Orbiters processes the
-EUR 2 website request fee through the administrator's platform payment account.
-The creator's own commission price and payment remain a direct arrangement with the
-client. If platform payments are unavailable, the Commissions tab disables new
-listings and shows a generic payment-setup notice.
-
-<audience include="dev">
-
-The Unity handoff expires after ten minutes and stores only a SHA-256 token hash.
-Authenticated handoffs are bound to the issuing session's token version, so revocation
-invalidates unused links. An account mismatch is rejected without switching the
-browser's signed-in account. Unauthenticated handoffs transfer only a draft and
-require the browser user to sign in.
-
-Payment work is durably queued with the same transaction as the commission state
-change. See [Commission Reliability](../reference/commission-reliability.md) for
-states, recovery jobs, schema migration and deployment checks.
+**Are you a creator?** Read [Accept ReFit commissions](/documentation/orbiters.how-to.accept-refit-commissions).
 
 </audience>
