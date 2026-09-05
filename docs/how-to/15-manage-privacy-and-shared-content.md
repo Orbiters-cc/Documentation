@@ -16,6 +16,7 @@ lastVerified: 2026-09-05
 Open **Account → Privacy & data** to download your information, make a privacy
 request, review reports or close your account. Each control expands inside the
 page. Downloads are prepared in the background, so you can continue using Orbiters.
+On a phone, choose **Privacy & data** from the compact **Account section** selector.
 
 ## Download Your Information
 
