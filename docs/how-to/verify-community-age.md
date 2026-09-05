@@ -27,15 +27,24 @@ access to meetup instances.
    **Start linking** to start a 15-minute linking session.
 2. Open the service account profile linked on the page. Send it a friend request
    from your VRChat account.
-3. Select **Check incoming requests**. Recent requests may also appear to other
-   members who are linking at the same time.
-4. Find your profile and select **It’s me**. Check the profile again, then select
-   **Confirm my account**.
+3. Keep the linking window open. Your profile appears automatically with an
+   animated reveal when the request arrives. Recent requests may also appear to
+   other members linking at the same time.
+4. Find your profile and select **It’s me**. This immediately links the account;
+   there is no second confirmation.
 
 You never enter your VRChat password or login code on the member linking page.
 Only one Orbiters account can be associated with a given VRChat account. A claimed
-request cannot be reused after unlinking. Linking does not automatically accept
-or clear the friend request.
+request cannot be reused after unlinking. Orbiters accepts your claimed friend
+request automatically. Acceptance is queued and retried if VRChat is temporarily
+unavailable; your account connection remains saved.
+
+**Listening live** means incoming requests are monitored in real time. During a
+connection interruption, the window reconnects and checks automatically every
+30 seconds. Start a new session if the 15-minute session expires.
+
+Connected Discord, Telegram and VRChat rows show profile pictures when their
+provider supplies one. The VRChat **Manage** button opens connection details.
 
 If you are already friends with the service account, cannot find your request,
 or selected the wrong profile, contact an Orbiters administrator through Discord.

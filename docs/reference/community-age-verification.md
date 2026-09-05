@@ -20,7 +20,8 @@ restrict instances, issue bans or change SFW content rules.
 
 Separate Sequelize tables hold `AgeStatus`, `AgeEvidence`, `AgeAudit`,
 `VrchatConnection`, `VrchatLinkSession`, `VrchatFriendClaim`, `AgeDiscordPolicy`,
-`AgeDiscordObservation` and `VrchatServiceState` records. Startup creates missing
+`AgeDiscordObservation`, `VrchatServiceState`, `CommunityLeadership`,
+`VrchatFriendAcceptance` and `VrchatAnnouncement` records. Startup creates missing
 tables without altering existing user columns or inferring age from old roles.
 Subsequent schema changes to these tables require explicit migrations.
 
@@ -78,7 +79,10 @@ no-store`.
 | `/age-verification/admin/users` | Search, status/history, manual evidence and review hold | Moderator, admin or owner |
 | `/age-verification/admin/users/:id/connection` | Associate, reassign or unlink a VRChat account | Admin or owner |
 | `/age-verification/admin/servers` | Directory, searchable history, policy preview/save, server and member refresh | Admin or owner |
-| `/age-verification/vrchat-service` | Login, challenge verification, health, paginated friends and disconnect | Admin or owner |
+| `/age-verification/vrchat-service` | Shared account login, health, friends, groups and announcements | Admin or owner |
+| `/vrchat-community/capabilities` | Current user's Community Leader status | Current member |
+| `/vrchat-community/leaders/:id` | Read or change Community Leader access | Admin or owner |
+| `/vrchat-community/account` | Own community login, health, friends, groups and announcements | Community Leader |
 
 The configured primary administrator retains access. Developer rank alone does
 not confer age-management or service-account permissions. Staff reasons are
@@ -106,6 +110,36 @@ bot access is unavailable. Membership history responses include avatar metadata.
 backoff. It exposes no locations, credentials or friendship mutation operations.
 The logo asset is from [Simple Icons](https://simpleicons.org/?q=vrchat).
 
+## Live linking and community accounts
+
+`GET /age-verification/me/link-events?token=...` is an authenticated SSE stream
+bound to the member's unexpired linking session and the Orbiters service account.
+The backend subscribes to VRChat's notification WebSocket only while linking
+windows are open. Only invalidation signals reach the browser; cookies and raw
+notifications do not. A live signal automatically reloads eligible candidates.
+Streams close on expiry or disconnect, with a two-stream limit per user. The
+browser reconnects automatically and falls back to a 30-second refresh while
+the upstream connection is unavailable.
+
+A successful claim atomically creates a durable friend-acceptance job. The worker
+checks that the association and service account still match, then accepts the
+request. Existing friendship counts as success. Unlinked claims are cancelled;
+temporary failures retry with backoff up to one hour. The minute scheduler takes
+up to five pending jobs per batch. No member credentials are involved.
+
+Community account keys are assigned by the server as `user:<Orbiters ID>`.
+The global Orbiters account uses `service`. Leadership is checked on every
+community request and again inside the account transaction. Each scope has its
+own encrypted state, transaction lock and request pacing. The User deletion hook
+removes the owner's community session. Leadership changes are audited.
+
+Both management prefixes expose `/groups`, `/group`, `/group/members` and
+`/group/posts`. Members and posts use zero-based pages of 24. Selecting a group
+requires current membership; posting rechecks membership and announcement
+permissions. Announcements use VRChat's posts endpoint, preserving history.
+Submissions include the selected group ID and a UUID request ID. A durable receipt
+prevents retries after an uncertain provider result from duplicating a post.
+
 ## Validation
 
 The normal backend suite includes policy, transport and HTTP permission tests;
@@ -117,7 +151,8 @@ PostgreSQL instance on localhost. Set `ENV_COMMON=true`, use database
 developer or production database.
 
 - `AGE_VERIFICATION_TEST_DATABASE=true`: run
-  `node --test test/ageVerificationDatabase.test.js` after a fixture backend boot.
+  `node --test --test-concurrency=1 test/ageVerificationDatabase.test.js test/vrchatCommunityDatabase.test.js`
+  after a fixture backend boot.
 - `AGE_VERIFICATION_UPGRADE_TEST_DATABASE=true`: run
   `node --test test/ageVerificationUpgrade.test.js`. This creates and removes
   uniquely named fixture databases, testing fresh and populated installations
