@@ -14,6 +14,11 @@ relations: orbiters.tools.mcb-operating-contract, orbiters.tools.unitgit-operati
 
 # ReFit Operating Contract
 
+<alpha>
+Development API, cancellation, cache and regression details are in
+[ReFit Validation and Performance](../reference/refit-validation-and-performance.md).
+</alpha>
+
 ReFit transfers clothing or accessory deformation from model A to model B and
 writes the result as non-destructive blendshapes on duplicated mesh assets. Source
 mesh assets are never modified.
