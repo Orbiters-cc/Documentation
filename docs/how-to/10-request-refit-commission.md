@@ -40,8 +40,9 @@ and the pose use their current scene values. Set the body and matching clothing
 blendshapes to the state you want the artist to inspect before clicking a card.
 
 Requests support **eight attachments total, up to 10 MB each**, including the four
-automatic images. JPEG, PNG and WebP images are optimized to WebP at up to 1600 pixels
-per side; animated images and SVG previews are not supported. Other files are
+automatic images. Uploaded JPEG, PNG and WebP images are saved as JPEG for opaque
+images or PNG when transparency is present, at up to 1600 pixels per side.
+Automatic avatar photos download as JPEG. Animated images and SVG previews are not supported. Other files are
 downloadable attachments. Only share files you have permission to send. Do not open
 untrusted downloaded files without checking them.
 

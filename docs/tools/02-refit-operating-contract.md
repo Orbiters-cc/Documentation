@@ -72,6 +72,12 @@ imports them into private owned attachments. The user can inspect/remove them or
 add other files before submission. Active requested creators see the attachments
 before acceptance; only the accepted creator retains access after offers close.
 
+Automatic previews are JPEG. Additional request images use JPEG for opaque images
+and PNG for transparency. The website includes HeroUI's animation dependencies in
+its initial bundle so opening interactive controls does not require a separate
+animation chunk download. Frontend build-configuration changes require restarting
+the development frontend server and reloading open browser tabs.
+
 Capture regression checks are available as
 `Orbiters.ReFit.Editor.Tests.ReFitCommissionCaptureTests.RunOrThrow()` and the
 **Tools > Orbiters > ReFit > Run Commission Capture Tests** menu. They require

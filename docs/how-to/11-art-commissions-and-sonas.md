@@ -155,7 +155,9 @@ multipart uploads (`file`). GET `/:id` returns metadata; GET `/:id/content` deli
 private bytes to eligible participants; DELETE `/:id` removes only an owner's
 unreferenced upload. Submitted requests store validated `attachmentFileIds`.
 Generic files download as binary attachments; JPEG/PNG/WebP images are decoded,
-metadata-stripped and resized to at most 1600 pixels per side. SVG and animated
+metadata-stripped and resized to at most 1600 pixels per side, then saved as JPEG
+(opaque) or PNG (with transparency) for desktop editing compatibility. This applies
+to request attachments, not the separate Sona/library image pipeline. SVG and animated
 image previews are rejected. Attachment storage is limited to 500 files per account;
 unused uploads become eligible for cleanup after 24 hours.
 
