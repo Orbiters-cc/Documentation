@@ -50,7 +50,8 @@ flowchart LR
   immediately in the preview. Use each image's corner **Download** button to save
   it, or click the image to open a larger view. Access checks still apply.
 - Scroll the modal with the mouse wheel or touch. It uses one scroll area and a
-  spring entry/exit animation; reduced-motion preferences disable movement.
+  spring entry/exit animation. Large dialogs use a smaller opening tilt to avoid
+  sweeping across the screen; reduced-motion preferences disable movement.
 
 Accepting an art request creates one private task in your configured commission
 Board. Without a configured Board, it uses your Creations Board. ReFit keeps its

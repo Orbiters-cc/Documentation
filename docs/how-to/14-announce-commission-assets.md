@@ -76,6 +76,10 @@ from the pasted post link locally, then verifies your administration rights.
 5. Select **Verify & connect**. Orbiters rechecks your permission and the bot's
    permission before connecting.
 
+Server and channel choices filter as you type. Discord setup does not wait for
+Telegram checks; switching back reuses the loaded server list until you select
+**Refresh setup** or leave the form. Channel permissions are still checked live.
+
 You do not need to create a Discord application or enter an API key. When the
 deployment's shared bot is unconfigured or offline, the guide asks the website
 administrator to finish its setup. Invite links use the standard
@@ -127,6 +131,12 @@ Orbiters. Keep personal details and character references in private requests.
 In **Admin → API Keys**, add **Telegram announcement bot** as a global,
 environment-specific record:
 
+**Use the same bot for Telegram Login and announcements.** Select that bot in
+BotFather for both API-key records. Login uses its Login Client ID/Secret and
+OAuth callback; announcements use its Bot API token and update webhook. These
+are different credentials for one bot, not a reason to create another bot.
+Registering the update webhook does not replace the Login callback.
+
 | Field | Value |
 | --- | --- |
 | Bot API token | The bot access token from BotFather, not a Login Widget secret |
@@ -138,17 +148,19 @@ secret and `allowed_updates` to `["message", "edited_message"]`. Keep secrets ou
 of browser URLs, screenshots and logs. Check `getWebhookInfo` for delivery errors.
 
 There is **no BotFather field for this webhook secret**. In the API key create or
-edit form, choose **Generate new secret**, **Copy secret**, then save. Use
-**Copy PowerShell command** in the setup guide and run it in PowerShell. It asks
-privately for the Bot API token and the same saved secret, then sends a
-`setWebhook` request to Telegram. The secret maps to **`secret_token`** and the
-**Telegram webhook URL** maps to **`url`**. Expand **Preview the command** to
-inspect it first. The script reports registration success or failure without
-printing your credentials.
+edit form, paste the Bot API token and choose **Generate new secret**. Select
+**Copy PowerShell command**, save the key, then run the copied command in
+PowerShell. The command updates automatically from the current fields; the
+preview masks secrets. Blank fields representing hidden saved values are
+prompted privately instead. Stored secrets are never fetched back for display.
+The secret maps to **`secret_token`** and the URL to **`url`**.
+The copied command contains entered credentials: keep it private, including
+clipboard contents and terminal history. Execution does not print credentials.
 
 Generating does not change Telegram or the saved API key by itself. Replacing a
 saved secret requires running registration again. Registration replaces that
 bot’s previous webhook, so do not reuse your production bot for development.
+You do not need separate development bots for login and announcements.
 
 A hosts-file-only development name is not reachable by Telegram. Use a public
 HTTPS tunnel that forwards this endpoint to development, and a **separate bot**
