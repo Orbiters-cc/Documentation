@@ -111,6 +111,11 @@ review/delivery link when changing status.
 Progress indicates workflow stages, not time remaining or payment settlement.
 Commission notifications follow the account's Payments and commissions preference.
 
+Acceptance also creates a private Board task. Use the
+[commission workspace](13-manage-commission-workspace.md) on Home to move tasks
+and record agreed prices or payments received directly. To publish to your
+channels, follow [commission announcements](14-announce-commission-assets.md).
+
 ## Ko-fi Listings
 
 Ko-fi catalogue import is not available. Its [documented API](https://help.ko-fi.com/hc/en-us/articles/360004162298-Does-Ko-fi-have-an-API-or-webhook)

@@ -15,7 +15,9 @@ lastVerified: 2026-09-05
 
 The designated website administrator and users with admin or owner rank see Stripe
 platform payments in **Creator > Revenues**. Ordinary creators only see their own
-store revenue; the platform's Stripe income is not included for them.
+store revenue and their own recorded external commission payments; the platform's
+Stripe income is not included for them. See
+[recording commission payments](13-manage-commission-workspace.md#record-your-price-and-payment).
 
 The chart uses a synchronized platform payment ledger, including ReFit EUR 2 fees
 and other Stripe payments. It includes payment, refund and dispute-adjustment

@@ -8,7 +8,7 @@ id: orbiters.how-to.connect-and-sync-trello
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-07-13
+lastVerified: 2026-09-05
 relations: orbiters.development.boards-proposals-and-forecasts, orbiters.reference.api-keys-and-credentials
 ---
 
@@ -19,6 +19,10 @@ result in Idea Box, and keep its Lists and Cards synchronized in both directions
 Trello Lists become Orbiters Board columns; open Trello Cards become local Proposals
 placed in those columns. The imported Orbiters Board remains a normal permissioned
 Board and keeps its selected Orbiters visibility.
+
+Commission tasks also synchronize their shared references. Review the
+[Trello reference privacy rules](13-manage-commission-workspace.md#trello-references)
+before placing customer work on a connected Board.
 
 ## Administrator Setup
 

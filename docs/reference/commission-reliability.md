@@ -8,7 +8,7 @@ id: orbiters.reference.commission-reliability
 domain: website
 type: reference
 owner: orbiters-product
-lastVerified: 2026-09-04
+lastVerified: 2026-09-05
 ---
 
 # Commission Reliability
@@ -58,8 +58,38 @@ cleanup leaves its database record for retry. Cleanup only removes local paths
 inside the commission-upload directory and the remote objects recorded on the file.
 
 `CommissionActivity` preserves stage changes and participant updates. The request
-detail displays the latest 50 entries. Customers do not receive internal proposal
-links or the creator's Board permissions.
+detail displays the latest 50 entries. A customer may view a task linked to their
+own commission, but this does not grant editing or the creator's Board permissions.
+
+## Workspace Payment Records and Announcements
+
+`CommissionPaymentRecord` has one named unique target key. Linked proposals
+resolve to the art/ReFit request before reading or writing: the two pages cannot
+create independent payment records. Writes lock the canonical target and check a
+version. Only the artist writes; participants may read. Only records with a receipt
+date enter the artist's revenue history. No Stripe mutation is performed.
+
+Listing save and selected channel jobs share a transaction. Announcement uniqueness
+is `(assetId, channelId)`. The worker rechecks publication, ownership and provider
+permissions. It records a dispatch claim before sending and persists the external
+message ID afterward. An uncertain result requires human confirmation before
+retrying; a Discord discussion retry uses the saved message instead of reposting.
+
+External asset discussion uses a separate provenance-aware table rather than
+inventing local accounts or assigning unmatched comments to the creator. A named
+`(provider, externalKey)` index deduplicates webhook delivery; timestamp guards
+reject old edits and deletion tombstones prevent resurrection. Filters apply
+before pagination. Telegram webhook authentication uses a constant-time secret
+comparison. Discord events use the existing designated-client routing.
+
+Trello upload retries first list existing attachments and reuse stable file-ID
+markers. Downloads require Board membership plus proposal visibility, keep tokens
+out of URLs, bound redirects and bytes, and send private/no-store responses.
+
+New tables and the Telegram Bot API-key enum value are covered by opt-in
+`commissionManagementUpgrade.test.js` disposable PostgreSQL tests: fresh and
+populated/partially applied schemas, each booted twice. Never run upgrade fixtures
+against a development or production database.
 
 ## List and Revenue Queries
 
