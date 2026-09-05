@@ -41,6 +41,9 @@ flowchart LR
 
 1. Select **Telegram** in the setup guide. Link your Telegram identity in
    **Account → Overview** if prompted.
+   If Account → Connections offers **Reconnect Telegram**, use it once. This
+   repairs an earlier login-ID mapping issue using a verified Telegram login;
+   it keeps your existing Orbiters account and does not require unlinking it.
 2. In **This deployment’s announcement bot**, use **Copy bot username** or
    **Open this bot in Telegram**. Search the exact `@username` in Telegram’s
    **Add Administrators** screen, not “Orbiters”. The identity remains visible
@@ -148,6 +151,7 @@ Registering the update webhook does not replace the Login callback.
 | --- | --- |
 | Bot API token | The bot access token from BotFather, not a Login Widget secret |
 | Webhook secret | A random 32–256-character secret using letters, digits, `_`, `-` |
+| Public webhook URL (optional) | Filled automatically by the local development bridge; leave blank for the deployment URL |
 
 Register Telegram's `setWebhook` with the public API URL shown in the setup guide,
 ending in `/commission-channels/telegram/webhook`. Set `secret_token` to the same
@@ -173,6 +177,39 @@ A hosts-file-only development name is not reachable by Telegram. Use a public
 HTTPS tunnel that forwards this endpoint to development, and a **separate bot**
 from production: one Telegram bot has one webhook. Saving the API key alone does
 not register or replace the provider webhook.
+
+### Local development: start the restricted bridge
+
+Run the backend normally, with its active **dev** Telegram bot key saved. Install
+[cloudflared](https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/downloads/)
+on PATH (or set `CLOUDFLARED_BIN` to the executable). From `backend`, run:
+
+```sh
+npm run telegram:bridge
+```
+
+The helper creates a temporary public HTTPS tunnel, waits for it to work, registers
+the existing bot webhook without discarding queued updates, and saves its public
+URL on the dev API key. It does **not** change Telegram Login or its callback.
+Keep it running while testing. Restart it after reboot or tunnel shutdown; the
+temporary URL changes and is registered again automatically. This is a development
+helper, not a production tunnel or an automatically installed startup service.
+
+Only authenticated POST requests to `/commission-channels/telegram/webhook` pass
+through. Other paths/methods return 404; missing or incorrect webhook secrets
+return 403. Bodies are limited to 256 KiB. The gateway listens only on localhost
+port 4215 and forwards to local port 4100. Set `TELEGRAM_BRIDGE_BACKEND_URL` if the
+local backend uses another port; remote targets are rejected. No login, admin,
+API-key or other backend routes are exposed through this bridge.
+
+For the Windows workspace helper, a verified executable at
+`backend/.cache/tools/cloudflared.exe` is also detected. Tunnel diagnostics are in
+`backend/.cache/telegram-tunnel.log`; these files are not committed.
+
+If Telegram reports an SSL handshake error or pending updates keep increasing,
+the public webhook is not delivering to your backend. Re-adding the bot does not
+repair HTTPS. Start the bridge and verify `getWebhookInfo` shows the bridge URL
+and a draining queue. Channel discovery then uses delivered updates.
 
 Discord uses the existing shared/custom-bot client manager and guild routing;
 no second client is created. Enable the Message Content intent in the Developer
