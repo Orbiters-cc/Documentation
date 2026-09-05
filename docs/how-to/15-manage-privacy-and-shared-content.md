@@ -73,6 +73,7 @@ same section to confirm closure.
 Closure removes website membership, sign-in credentials, account connections,
 profile information, private settings and private library records. It disables
 future account sync and invalidates account access and export downloads.
+The browser returns to the homepage with website login, draft and preference storage cleared.
 
 Shared native discussions remain with a **Deleted account** attribution. Imported
 messages keep their external source attribution. Commissions, deliveries and
