@@ -51,8 +51,9 @@ the selection independently and defaults to production.
 The result screen lists creators who currently accept manual ReFit commissions.
 Creator profile pictures are center-cropped and circular; missing pictures use the
 same circular fallback frame.
-The user can select several creators and continue to Orbiters through a short-lived,
-one-time browser handoff. When MCB authentication is available, that handoff also
+Each card shows the artist's price range beside their name. Clicking a card immediately
+starts a short-lived, one-time browser handoff with that artist selected; there is no
+separate Next button in Unity. When MCB authentication is available, that handoff also
 opens the matching Orbiters account in the browser. A standalone ReFit install can
 still continue, but the website asks the user to sign in.
 

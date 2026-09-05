@@ -22,7 +22,7 @@ Automatic ReFit not quite right? Ask a creator to finish the fit by hand.
 ## Send your request
 
 1. **Start in Unity.** After your ReFit, open **The ReFit doesn't look right?**,
-   select available creators, then choose **Next**.
+   check the price ranges and click an artist card. The website opens with that artist selected.
 2. **Choose who to ask.** In the browser, arrange creators in preference order
    and choose their response limits (two days each by default).
 3. **Review your request.** The asset, avatars and blendshape are already filled in.
