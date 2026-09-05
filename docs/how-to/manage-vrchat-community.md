@@ -50,7 +50,7 @@ Community Leader access or connect a community-management session.
 
 ## Choose a group
 
-Choose a card in **Choose your community group**. The picker lists groups joined
+Select **Load groups** the first time, then choose a card in **Choose your community group**. The picker lists groups joined
 by the connected VRChat account and supports search and refresh. If the desired
 group is missing, join it in VRChat and refresh the picker.
 
@@ -58,6 +58,24 @@ The selected group's banner, icon, name and member count identify it above the
 **Members** and **Announcements** tabs. Members include profile pictures and
 profile links. Both lists support pagination and refresh. **Change group** opens
 the picker again; leaving a group in VRChat removes access to its management tools.
+
+## Browse saved information
+
+Opening the VRChat tab, changing tabs and browsing pages use saved information.
+They do not refresh data from VRChat automatically. Use **Load friends**, **Load
+this page**, or the corresponding **Refresh** button when you need a fresh snapshot.
+The page shows when information was last loaded and whether it may be incomplete.
+Previously loaded data survives reopening the page and backend restarts.
+
+**Live updates** keeps supported account and friend changes in step with VRChat.
+Group events can indicate that something changed without including a complete
+member list or announcement. In that case the saved snapshot is marked stale;
+refresh the relevant section when needed. After a connection interruption, saved
+information remains available and may need refreshing. Repeated refresh clicks
+within ten seconds reuse the same result.
+
+Use **Refresh group details** after a group role change to recheck announcement
+access. A live connection alone does not guarantee a complete, current roster.
 
 ## Publish an announcement
 
@@ -69,7 +87,7 @@ the picker again; leaving a group in VRChat removes access to its management too
 
 The account must own the group or have its announcement-management permission.
 New posts preserve earlier announcement history. If sending returns an uncertain
-result, check that history before composing a new submission; repeating the same
+result, refresh that history before composing a new submission; repeating the same
 submission cannot automatically create another post.
 
 These tools do not yet create event instances, assign meetup roles or invite members.

@@ -95,7 +95,9 @@ cookie fields. It is shared by this backend/database deployment.
 
 The connected account card shows its profile picture, name, profile link and
 connection health. Browse the paginated **Online** and **Offline** friend lists
-and use **Refresh friends** to reload them. The list does not show instance locations.
+and use **Load friends** or **Refresh friends** to retrieve the selected page.
+Opening the tab and browsing saved pages do not call the VRChat data API.
+The list does not show instance locations.
 Claimed member requests are accepted automatically, with retries during temporary
 failures. Unclaimed requests remain available for the member-linking flow.
 

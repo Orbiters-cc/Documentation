@@ -40,8 +40,9 @@ request automatically. Acceptance is queued and retried if VRChat is temporarily
 unavailable; your account connection remains saved.
 
 **Listening live** means incoming requests are monitored in real time. During a
-connection interruption, the window reconnects and checks automatically every
-30 seconds. Start a new session if the 15-minute session expires.
+connection interruption, the window reconnects and reads saved requests every
+30 seconds. This does not poll VRChat. Use **Refresh requests from VRChat** if an
+incoming request may have been missed. Start a new session if the 15-minute session expires.
 
 Connected Discord, Telegram and VRChat rows show profile pictures when their
 provider supplies one. The VRChat **Manage** button opens connection details.
@@ -62,6 +63,8 @@ VRChat must expose its explicit **18+** result. A hidden badge or general age
 verification does not establish adulthood for Orbiters. You can refresh the
 linked account from **Connections → VRChat → Manage → Refresh profile**.
 The connection represents your VRChat identity even without a visible age badge.
+VRChat evidence expires after thirty days unless refreshed through an explicit
+action; Orbiters does not run scheduled profile polling.
 
 Other sources include manual staff verification, qualifying Furality convention
 evidence reviewed by staff, and a configured adult-verification role in a trusted
