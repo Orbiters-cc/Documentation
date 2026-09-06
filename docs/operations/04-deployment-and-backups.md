@@ -58,18 +58,41 @@ On Windows dev:
 
 ## Production Deploy Flow
 
+The manual production workflow holds a deployment lock before changing the server
+checkout. Because the backend source is bind-mounted, maintenance begins before
+checkout; allow time for image builds and the database rehearsal within the window.
+
 The manual production workflow:
 
 1. Connects the GitHub runner to the Tailnet.
 2. SSHes to the production host.
-3. Checks out the selected ref on the production machine.
-4. Creates and uploads a pre-deploy backup.
-5. Runs a production-shaped backend preflight.
-6. Switches Caddy to maintenance mode.
+3. Creates and uploads an encrypted backup of the running release.
+4. Switches Caddy to maintenance mode and stops the old backend workers.
+5. Checks out the selected ref and installs the production credential key.
+6. Runs two database initialization passes against a clone using the running PostgreSQL image.
 7. Rebuilds and recreates frontend and backend containers.
 8. Waits for `/healthz`.
 9. Writes deployment status metadata.
 10. Restores the production Caddy config.
+
+If public health checks fail, maintenance is restored. A failure after checkout
+leaves maintenance active for investigation; never restart old code against a
+migrated database without checking the recovery procedure.
+
+## Before approving a release
+
+Verify a fresh backup can be decrypted and its database dump restored in an isolated
+database. Keep the age private key outside the server as well as in protected recovery
+storage. The backup key is separate from `API_CREDENTIAL_ENCRYPTION_KEY`.
+
+The deployment host needs Node.js on its non-interactive SSH path. The scripts also
+look in `~/.local/bin`. CI uses a disposable encryption key with its isolated database;
+production credentials must never be supplied to pull-request tests.
+
+Check the **Backup production** workflow's last successful run, not just whether
+the schedule exists. A rejected Tailscale login prevents the runner from reaching
+the backup command. Review credential validity and authentication type, repair the
+connection, then run and verify a manual backup before relying on the schedule again.
 
 ## Local Backup
 
