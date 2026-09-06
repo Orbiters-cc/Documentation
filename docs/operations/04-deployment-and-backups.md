@@ -69,6 +69,11 @@ The manual production workflow holds a deployment lock before changing the serve
 checkout. Because the backend source is bind-mounted, maintenance begins before
 checkout; allow time for image builds and the database rehearsal within the window.
 
+The documentation impact reason can contain normal prose, quotes and line breaks.
+The workflow preserves it as one SSH argument and checks the transferred files
+before entering maintenance. A missing-file or argument-count failure at this
+stage leaves the running release online.
+
 The manual production workflow:
 
 1. Connects the GitHub runner to the Tailnet.
