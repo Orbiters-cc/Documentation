@@ -31,6 +31,12 @@ npm test
 
 Frontend behavior tests and a production build check JSX, imports and integration with existing components. A successful build or mocked test does not prove a live vendor integration.
 
+## The empty database that gave false confidence
+
+Imagine adding a required date column. A fresh database starts perfectly because new rows receive an application default. The upgrade fails because existing rows have no value, and the database tries to enforce NOT NULL before they are filled.
+
+The revealing fixture is an older, populated table. Preserve a known existing value, leave another row needing a backfill, run the migration, then run it again. The second pass should have nothing left to reinterpret.
+
 ## Treat upgrades as a separate product path
 
 

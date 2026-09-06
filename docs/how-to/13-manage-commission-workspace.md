@@ -33,16 +33,13 @@ saved default.
 On small screens, the Creator page uses a **Creator section** selector instead
 of a wide sidebar. The top shortcuts jump to Board and announcement settings.
 
-```mermaid
-flowchart LR
-  accTitle: A commission from acceptance to recorded income
-  accDescr: Accept a request, manage its private Board task, deliver the work and record payment received directly from the customer.
-  A[Accept request] --> B[Private Board task]
-  B --> C[Work and review]
-  C --> D[Deliver commission]
-  B --> E[Record agreed price]
-  E --> F[Mark external payment received]
-  F --> G[Revenues]
+
+## Try the distinction before using your own Board
+
+Imagine moving Mika's jacket task into your review pile at the end of the day. That organizes your desk. It does not tell Mika the work is ready. Use both controls below and watch the client’s status.
+
+```orbiters
+{"kind":"workspace-states"}
 ```
 
 ## Move or Add Work
@@ -79,6 +76,10 @@ existing acceptance and placement workflow.
 **Board columns and customer-facing delivery stages are separate.** Use the
 commission's **Start work**, **Ready for review**, and completion controls to
 update the customer. Moving a Board task does not claim a payment or delivery.
+
+## Leave tomorrow-you a useful note
+
+A Board card is also a memory aid. “Sleeve clips at shoulder; cuff approved; waiting for a raised-arm reference” is easier to resume than “continue jacket.” Keep the next concrete decision in the brief or discussion, and update the delivery stage when the client-facing milestone actually changes.
 
 ## Record Your Price and Payment
 

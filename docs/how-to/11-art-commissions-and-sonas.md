@@ -14,24 +14,8 @@ relations: orbiters.website.knowledge-map, orbiters.website.public-profile
 
 # Art Commissions and Sonas
 
-Choose the listing and options, add a Sona, then follow the artist response.
+Your character has one cream ear, an asymmetric sleeve and a tiny crescent on the collar. Those are easy details to lose in a scattered message thread. A Sona gives the artist a deliberate reference set to work from.
 
-```mermaid
-flowchart TD
-  accTitle: Request art with a saved reference
-  accDescr: Choose the listing and options, add a Sona, then follow the artist response.
-  N0["Published listing"]
-  N1["Variant and options"]
-  N2["Sona and brief"]
-  N3["Saved request"]
-  N4["Artist response"]
-  N5["Work and review"]
-  N0 --> N1 --> N2 --> N3 --> N4 --> N5
-```
-
-## In this guide
-
-Save a Character · Request Artwork · Publish a Commission Asset · Manage Requests · Ko-fi Listings · Runtime and API
 
 Art commission assets let artists publish YCH (your character here) illustrations,
 sticker packs, and other made-to-order artwork on the Assets page. Customers choose
@@ -41,6 +25,14 @@ Art payments are arranged directly between customer and artist. Creating or
 accepting an art request does **not** charge a card through Orbiters, create a
 Stripe sale, or grant a downloadable asset license. This is separate from the
 [manual ReFit request fee](/documentation/orbiters.how-to.request-refit-commission).
+
+## Make the reference useful before making it pretty
+
+> **Example character note**
+>
+> “Cream patch on the left ear; the right ear is dark. Keep the crescent collar. The older red-jacket image is for face shape only.”
+
+That last sentence matters. When references disagree, tell the artist which part of each one to trust. A saved library can be beautiful and still be ambiguous.
 
 ## Save a Character
 
@@ -186,3 +178,7 @@ image previews are rejected. Attachment storage is limited to 500 files per acco
 unused uploads become eligible for cleanup after 24 hours.
 
 </audience>
+
+```orbiters
+{"kind": "challenge", "title": "You changed the collar after sending the request.", "question": "Does editing the Sona in your library rewrite the brief the artist already received?", "options": [{"label": "Yes, the artist always sees the latest library version", "correct": false, "explanation": "A submitted request keeps the references selected at submission. Otherwise a brief could change underneath work already in progress."}, {"label": "No, discuss the change on the existing request", "correct": true, "explanation": "The submitted brief is a snapshot. Tell the artist about the change and agree its impact; editing your library does not rewrite their existing request."}]}
+```

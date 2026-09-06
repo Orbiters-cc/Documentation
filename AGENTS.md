@@ -71,12 +71,29 @@ If a feature is not implemented, do not document it as available. Put design not
 
 ## Diagrams and readable guides
 
-Use fenced `mermaid` blocks for short workflows; the backend generates and caches
-transparent PNGs automatically. Include `accTitle` and a single-line `accDescr`.
+Choose a visual because it explains a relationship, a decision or a consequence.
+Do not turn an ordinary ordered list into a tall flowchart, repeat the introduction
+in a diagram, or put the same generic visual on every page. Prefer an example the
+reader can reason about over a decorative diagram quota.
+
+Use fenced `mermaid` blocks for meaningful branching, state or system relationships;
+the backend generates and caches transparent PNGs automatically. Include `accTitle`
+and a single-line `accDescr`.
 Do not commit generated images or put Mermaid configuration directives in pages.
 Keep the core customer task short and move creator, admin and developer details to
 linked, audience-specific guides. See `docs/reference/documentation-diagrams.md`
 for rendering limits, runtime prerequisites and validation.
+
+Use short, explicitly fictional scenarios where they clarify a real product rule.
+Name the surprising distinction, show a concrete example, and give the reader a
+useful next action. Match the tone to the subject: privacy and payment problems
+need calm precision. Link to verified primary provider guides at the point where
+they help. Do not invent customer testimonials, product capabilities or prices.
+
+The website supports bounded `orbiters` example fences, captions and annotated
+product artwork. See `docs/development/09-editorial-experiences.md` for the format,
+available examples, fallback requirements and visual review checklist. Essential
+instructions must remain readable without interacting with an example.
 
 ## Required Frontmatter
 

@@ -14,22 +14,8 @@ relations: orbiters.development.boards-proposals-and-forecasts, orbiters.referen
 
 # Connect and Sync Trello
 
-References copied to a Trello card are visible to members of that Trello Board.
+A Trello card can be a useful second desk for a commission. The important detail is what crosses the boundary: an uploaded reference becomes a copy governed by that Trello Board’s visibility.
 
-```mermaid
-flowchart TD
-  accTitle: Understand the sharing boundary
-  accDescr: References copied to a Trello card are visible to members of that Trello Board.
-  N0["Orbiters commission references"]
-  N1["Connected Trello Board"]
-  N2["Copies uploaded to its card"]
-  N3["Trello Board members"]
-  N0 --> N1 --> N2 --> N3
-```
-
-## In this guide
-
-Administrator Setup · Connect a Creator Account · Import a Board · Bidirectional Synchronization · API and Webhook Contract · Verification
 
 A creator can import an existing Trello Board from **Creator > Boards**, manage the
 result in Idea Box, and keep its Lists and Cards synchronized in both directions.
@@ -254,3 +240,13 @@ application secret nor a user token is returned to clients or written to logs.
 11. Force an unexpected database failure in a Trello route and confirm the client
     receives only the generic route error while the server log includes the safe
     error identity and database code without credentials.
+## The reference that travelled further than expected
+
+Imagine a private character sheet attached to a commission. Synchronization uploads a copy to Trello. Making the Orbiters task private does not make a public Trello Board private too.
+
+Before assigning private work to an external Board, inspect its members and visibility in Trello. [Atlassian's Board visibility guide](https://support.atlassian.com/trello/docs/changing-the-visibility-of-a-board/) explains who can read each kind of Board.
+
+
+```orbiters
+{"kind": "challenge", "title": "Does disconnecting bring the file back?", "question": "You disconnect Trello after a reference was uploaded. What should you assume about the uploaded copy?", "options": [{"label": "The copy may still exist on Trello", "correct": true, "explanation": "Disconnecting stops the connection; it does not recall files already uploaded. Review the destination and remove the copy there when appropriate."}, {"label": "Only the Orbiters original remains", "correct": false, "explanation": "A connection is not a remote eraser. Treat the uploaded Trello reference as a separate copy with its own visibility."}]}
+```

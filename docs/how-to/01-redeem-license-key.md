@@ -23,18 +23,6 @@ Have the license key from your store receipt ready. Redeeming it attaches the su
 4. If Orbiters asks for the creator, choose the seller and retry.
 
 
-```mermaid
-flowchart TD
-  accTitle: Redeem a purchase
-  accDescr: Enter a key, narrow the creator if asked, then open the asset after access is confirmed.
-  A[Sign in] --> B[Enter your license key]
-  B --> C{Result}
-  C -->|Access confirmed| D[Open the asset]
-  C -->|Creator needed| E[Choose the seller]
-  E --> B
-  C -->|Not resolved| F[Check receipt and account]
-```
-
 ## Know what success gives you
 
 The asset appears as owned. Public versions become available; beta and alpha versions still need the corresponding access scope. A configured Discord role is delivered separately, so website access can succeed before the role appears.
@@ -57,3 +45,11 @@ Matched refunds, chargebacks or disabled-license events can withdraw access late
 Access decisions belong in `accessPolicyService.canUserAccessAsset`. Keep enabled-state, scope and supporter-tier rules centralized when adding a route. See [license resolution](/documentation/orbiters.explanation.license-resolution) for the provider lookup boundary.
 
 </audience>
+
+## Make an ambiguous result easier to solve
+
+A buyer pastes a valid key while looking at the wrong creator's asset. Repeating the same paste supplies no new information. Matching the receipt's seller and product does.
+
+When requesting help, describe the boundary: “The key was accepted, but the public download remains unavailable” is different from “The provider could not validate the key.” Keep the original wording of the result and the relevant asset link. A full key belongs in a private support exchange, not a public screenshot.
+
+For Gumroad purchases, the provider's [license-key help](https://gumroad.com/help/article/76-license-keys) explains its own key feature. Other stores have different purchase and key formats; an order ID is not a universal substitute.

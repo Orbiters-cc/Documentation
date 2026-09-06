@@ -16,16 +16,22 @@ lastVerified: 2026-09-06
 Start at the user action, trace its route into the service that owns the decision, and test that boundary. ORBITERS has a React/HeroUI frontend, an Express backend and PostgreSQL.
 
 
-```mermaid
-flowchart TD
-  accTitle: A focused implementation
-  accDescr: Trace the interaction, change the owning service, verify behavior, then update the documentation.
-  A[User action] --> B[Frontend call and Express route]
-  B --> C[Domain service and access check]
-  C --> D[State change and external work]
-  D --> E[Regression coverage]
-  E --> F[Audience-scoped documentation]
+## A small bug with two different identities
+
+The checkout path needs a Stripe account and the locked Orbiters user. Both are “accounts” in conversation, but they are not interchangeable in code. An inner `account` variable previously hid the outer provider account and persisted the user's ID where the Stripe account ID belonged.
+
+The useful fix is the distinction:
+
+```js
+const stripeAccount = await stripe.accountIdentity();
+// Inside the database transaction:
+const clientAccount = await User.findByPk(client.id, { transaction });
+// Persist provider identity from stripeAccount, never clientAccount.
 ```
+
+This is an abbreviated illustration, not a complete checkout implementation. The actual service keeps its transaction lock and authentication checks. A regression uses obviously different identities—such as a numeric user ID and an `acct_...` provider ID—so accidentally swapping them cannot pass unnoticed.
+
+A good test tells that story. “The method was called” would not catch the wrong value being stored.
 
 ## Find the right home
 

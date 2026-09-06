@@ -1,5 +1,5 @@
 ---
-title: Assets and Downloads
+title: Find the version that belongs in your project
 section: How To
 order: 31
 audience: public, user
@@ -11,68 +11,48 @@ owner: orbiters-product
 lastVerified: 2026-09-02
 ---
 
-# Assets and Downloads
+# Find the version that belongs in your project
 
-Check the asset and its available releases against your enabled access.
+You have the receipt. The asset is in your account. Then a tempting new version appears with a beta label—and its download is locked.
 
-```mermaid
-flowchart TD
-  accTitle: Choose a version you can use
-  accDescr: Check the asset and its available releases against your enabled access.
-  N0["Asset page"]
-  N1["Enabled access"]
-  N2["Release scope"]
-  N3["Download or install"]
-  N0 --> N1 --> N2 --> N3
+That can be a perfectly healthy account. **Access to the asset and access to a release channel are separate.** Start with the public version unless the creator has invited you to test another one.
+
+## Read the page like a receipt
+
+Match the **asset name and creator** to what you bought. Then look for the access state and the version you want. The page may also offer purchase links, license redemption, supporter access, creator media and MCB or Unity installation.
+
+A visible product page tells you what the item is. An available download or install action tells you what your current account can use.
+
+```orbiters
+{"kind":"release-access"}
 ```
 
-## In this guide
+The people and releases above are fictional. The scope relationship is real: public → public; beta → beta and public; alpha → all three. Supporter access to a linked asset is public-only and does not automatically unlock downloads that require owned access.
 
-Asset Page Signals · Download Access · Version Scopes · Gallery Page
+## A locked download is a clue
 
-Asset pages show what an asset is, how to buy or redeem it, and what versions are available to your account.
+| What you notice | The next useful check |
+| --- | --- |
+| Your account looks empty after signing in | Confirm you used the provider connected to the account that redeemed the purchase. |
+| You have a key but no asset access | Follow [license redemption](/documentation/orbiters.how-to.redeem-license-key). |
+| Public works; beta or alpha does not | Check whether the creator granted that scope. |
+| Access used to work | Check for a disabled access record or a change in supporter eligibility. |
+| Supporter access works on the page, but a file is unavailable | That download may require owned access. |
 
-## Asset Page Signals
+> **A useful support message**
+>
+> “I can use the public release of Moon Jacket, but version 1.1 beta is locked. I am signed in with the account that redeemed it.”
+>
+> That gives the creator a concrete boundary to check. “Downloads are broken” does not. Include the real asset and version names; keep the full license key out of public comments.
 
-An asset page can show:
+## Take the release into Unity
 
-- ownership or access state,
-- connected store purchase links,
-- a license redemption form,
-- supporter-tier access,
-- version downloads,
-- MCB or Unity install options,
-- creator metadata and related media.
+For compatible assets, follow the [MCB and Unity guide](/documentation/orbiters.how-to.mcb-and-unity-tools). The tool uses the same account access, so reinstalling Unity is rarely the first useful response to a scope restriction.
 
-## Download Access
+For VRChat project setup, keep the [official SDK setup guide](https://creators.vrchat.com/sdk/) nearby. It explains how Creator Companion prepares Unity and the SDK; Orbiters supplies compatible asset access and versions.
 
-Download access depends on the asset, your user asset record, the requested release scope, and any active supporter-tier status.
+## Stay for the gallery
 
-If you can see the asset but cannot download a version, it usually means one of these is true:
+The Gallery starts with **All**, followed by your private galleries and the public galleries available to you. Open an image to inspect its author, date and reactions, or change the sorting to find recent work and community favorites.
 
-- you are not signed in,
-- the license has not been redeemed,
-- your access was disabled by a refund or staff action,
-- the version is beta or alpha and you only have public access,
-- the asset is available through a supporter tier but the requested file requires owned access.
-
-## Version Scopes
-
-Creators can stage versions by scope. Public versions are for normal users. Beta versions are for users granted beta or alpha scope. Alpha versions are for users granted alpha scope.
-
-Supporter-tier access grants public access only.
-
-## Gallery Page
-
-The Gallery page shows Discord images collected from creator-managed gallery rooms. The
-left navigation starts with **All**, then private galleries owned by the signed-in user,
-then public galleries available to the user.
-
-Images use the same infinite gallery controls as asset showcases: relevant, date, and
-reactions sorting; the configured grid layout for a selected gallery; and a full-screen
-image viewer with author, date, and reaction information. Gallery owners can hide an
-image from the website without changing the original Discord message.
-
-If Discord returns only part of a message's reaction list during synchronization,
-Orbiters keeps the last complete reaction counts and retries on a later sync. A
-temporary Discord fetch failure therefore does not remove reactions from the gallery.
+A gallery owner can hide an image on the website without changing its Discord original. Temporary partial reaction fetches preserve the last complete counts and retry later, so a momentary Discord problem need not empty the gallery's reaction history.

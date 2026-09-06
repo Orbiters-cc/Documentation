@@ -13,27 +13,22 @@ lastVerified: 2026-09-05
 
 # Manage Privacy and Shared Content
 
-Exporting, disconnecting, hiding and closure have different effects.
+You want one old image out of view. That is a different goal from leaving Orbiters, getting a copy of your data, or disconnecting an external account. Choose the smallest action that actually matches your goal.
 
-```mermaid
-flowchart TD
-  accTitle: Choose the action matching your goal
-  accDescr: Exporting, disconnecting, hiding and closure have different effects.
-  A[Your goal] --> B[Get a copy of your data]
-  A --> C[Disconnect a provider]
-  A --> D[Change content visibility]
-  A --> E[Close your account]
-  E --> F[Shared records retain their own rules]
-```
-
-## In this guide
-
-Download Your Information · Correct Information or Ask for Removal · Connect, Disconnect or Hide Content · Preserve Commission History · Close Your Account · Report or Contest a Decision
 
 Open **Account → Privacy & data** to download your information, make a privacy
 request, review reports or close your account. Each control expands inside the
 page. Downloads are prepared in the background, so you can continue using Orbiters.
 On a phone, choose **Privacy & data** from the compact **Account section** selector.
+
+## Choose by the result you want
+
+| You want… | Start here | What to remember |
+| --- | --- | --- |
+| A copy to keep | Download your data | Preparation happens in the background. |
+| An imported image hidden on Orbiters | Its hiding control | The original on Discord or Telegram remains. |
+| Another service disconnected | That connection’s controls | Copies already shared elsewhere are not recalled. |
+| Your membership closed | Close your account | Shared records have their own retention rules. |
 
 ## Download Your Information
 

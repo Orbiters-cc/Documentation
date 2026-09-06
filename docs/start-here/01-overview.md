@@ -1,5 +1,5 @@
 ---
-title: Make something. Find what you need.
+title: A field guide to making things with Orbiters
 section: Start Here
 order: 10
 audience: public
@@ -11,48 +11,49 @@ owner: orbiters-product
 lastVerified: 2026-09-06
 ---
 
-# Make something. Find what you need.
+# A field guide to making things with Orbiters
 
-Orbiters brings creator assets, community access and commissioned work together. Start with the outcome you want; you do not need to understand the whole platform first.
+A new jacket. An avatar that finally feels like you. A commission moving from “could you?” to “look at this.” Orbiters connects the practical pieces around those moments: assets, creators, access and the work in between.
 
-| I want to… | Start here | What I will leave with |
+Start with something you want to do. You can learn the machinery when it becomes useful.
+
+![An avatar from the existing MCB product artwork, showing the kind of character creators customize](/assets/mcb/ultipaw-banner.png "From the MCB product artwork. Your own base, version and customization will determine the result.")
+
+## Pick a small adventure
+
+| Today I want to… | Start with this | The useful surprise inside |
 | --- | --- | --- |
-| Use something I bought | [Redeem a license](/documentation/orbiters.how-to.redeem-license-key) | Access attached to my account |
-| Explore my assets | [Assets and downloads](/documentation/orbiters.how-to.assets-and-downloads) | A version I can download or install |
-| Ask for a better fit | [Request a ReFit commission](/documentation/orbiters.how-to.request-refit-commission) | A saved request and a place to follow it |
-| Understand my community status | [Community age verification](/documentation/orbiters.account.age-verification) | The evidence behind my current status |
+| Use my purchase | [From receipt to download](/documentation/orbiters.tutorial.redeem-first-license) | Why a working download and a missing Discord role can coexist |
+| Understand a locked release | [Explore release access](/documentation/orbiters.how-to.assets-and-downloads) | Borrow four accounts and watch the available versions change |
+| Improve an awkward fit | [Ask a ReFit creator](/documentation/orbiters.how-to.request-refit-commission) | Follow the request fee separately from the artist's price |
+| Customize in Unity | [Read your MCB version](/documentation/orbiters.how-to.mcb-and-unity-tools) | Which local facts remain useful when the network is unavailable |
 
+> **Keep this distinction in your pocket**
+>
+> Signing in identifies you. Access decides what you can use. A connection links another service. None of those alone promises that every other step is complete.
 
-```mermaid
-flowchart TD
-  accTitle: Choose your Orbiters journey
-  accDescr: Purchases lead to asset access. Commission requests lead to creator work and review.
-  A[Your Orbiters account] --> B[Use a purchased asset]
-  A --> C[Commission a creator]
-  A --> D[Connect your community]
-  B --> E[Redeem and install]
-  C --> F[Request and follow work]
-  D --> G[Check connection and verification]
-```
+## Learn by trying a safe example
 
-## Four ideas worth knowing
+Some guides contain small interactive illustrations: switch an account, move a fictional task, inspect a receipt. They explain a feature using sample data. They never change your account, move real work or create a payment.
 
-**An asset** is a creator's published item. **A version** is a release of that item. **Access** determines which releases your account can use. **A commission** is work requested from a creator, with its own participants, progress and payment records.
-
-A successful website sign-in does not by itself grant an asset, a Discord role or community verification. Each workflow checks its own evidence.
-
-## Find your place
-
-Documentation is tailored to your account. Public guides are available to everyone; signed-in users, creators and staff receive the material their account can read. The stable, beta and alpha selector is a separate release filter.
+If you prefer to read straight through, the surrounding text explains the same lesson. Motion follows your reduced-motion preference.
 
 <audience include="creator, admin, dev">
 
-**Building your creator workspace?** Continue with [the documentation map](/documentation/orbiters.start.documentation-map), then connect your store, publish assets and configure commissioned work.
+## Behind the creator's desk
+
+Start with [an asset people can actually use](/documentation/orbiters.how-to.configure-creator-assets). Then connect the shop, prepare the release and check how it looks from the buyer's side. For commissioned work, the [workspace guide](/documentation/orbiters.how-to.manage-commission-workspace) explains the difference between organizing your desk and updating your client.
 
 </audience>
 
 <audience include="admin, dev">
 
-**Supporting or developing Orbiters?** Open [Who sees what](/documentation/orbiters.reference.visibility-atlas). The reader's visibility panel shows page audiences; its inspection switch marks restricted sections without expanding your access.
+## See the system from another seat
+
+The [visibility atlas](/documentation/orbiters.reference.visibility-atlas) makes account categories and resource relationships concrete. The [audience catalog](/documentation/orbiters.reference.documentation-audience-catalog) lets you audit the whole library. The reader's inspection control labels allowed restricted sections without expanding your permissions.
 
 </audience>
+
+## A good route out of a dead end
+
+When something is confusing, keep three details: **what you expected, what you saw, and where it happened**. “Moon Jacket's public release works; the beta does not” is a much better starting point than “my account is broken.” The guides help you find that distinction.

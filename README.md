@@ -20,8 +20,12 @@ node scripts/validate-docs.js
 ```
 
 Write the reader's outcome first, then prerequisites and steps. Put exact payloads
-and long contracts in a linked reference. Use short Mermaid diagrams for decisions,
-handoffs and ownership boundaries, with a caption and prose explaining the result.
+and long contracts in a linked reference. Use visuals to teach a relationship or a
+consequence, not to decorate a list. The reader supports interactive examples,
+explained choices, captioned artwork and numbered image tours. See
+[Write a guide worth exploring](docs/development/09-editorial-experiences.md).
+Keep Mermaid for decisions, handoffs and ownership boundaries that benefit from it,
+with a caption and prose explaining the result.
 Website links should use stable `/documentation/<id>` routes. Keep page IDs stable
 when editing titles or splitting a long reference.
 
@@ -32,8 +36,8 @@ node scripts/validate-docs.js
 ```
 
 The command validates every Markdown page under `docs/`, including its stable ID,
-domain, document type, owner, verification date, visibility metadata, and relative
-links. It reports stale verification dates as warnings and exits non-zero for
+domain, document type, owner, verification date, visibility metadata, internal
+links and interactive-example definitions. It reports stale verification dates as warnings and exits non-zero for
 contract violations.
 
 This repository is the source of truth for the Orbiters documentation shown on the website and for contributor-facing ecosystem notes.

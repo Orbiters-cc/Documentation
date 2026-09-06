@@ -16,21 +16,6 @@ relations: orbiters.decision.knowledge-base-and-mcp, orbiters.development.docume
 
 Filter the indexed Markdown for the caller before website or MCP delivery.
 
-```mermaid
-flowchart TD
-  accTitle: One corpus, scoped readers
-  accDescr: Filter the indexed Markdown for the caller before website or MCP delivery.
-  N0["Reviewed Markdown"]
-  N1["Knowledge source policy"]
-  N2["Caller audience and stage"]
-  N3["Filtered document"]
-  N4["Website reader or MCP tool"]
-  N0 --> N1 --> N2 --> N3 --> N4
-```
-
-## In this guide
-
-Canonical Content Contract · Source Configuration · REST Read Surface · MCP Connection · MCP Tools · Human Documentation Experience · Administrator MCP Setup · Duplicate-Idea Guard · Security Boundaries
 
 The alpha documentation service indexes reviewed Markdown from this repository. The
 website presents it as **Documentation** for people, while REST and a stateless MCP

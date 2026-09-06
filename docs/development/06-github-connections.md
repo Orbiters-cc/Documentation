@@ -25,10 +25,6 @@ flowchart TD
   D --> E[Board and issue evidence]
 ```
 
-## In this guide
-
-OAuth Application Configuration · User Identity Connection · Administrator Project Connection · Synchronization Contract · Source of Truth and Write Boundary · Failure Handling · Verification
-
 Orbiters has two independent GitHub OAuth connections. A user connection proves
 account identity. An administrator connection reads the delivery Project. The
 private Orbiters repository uses a separate read credential because a classic OAuth

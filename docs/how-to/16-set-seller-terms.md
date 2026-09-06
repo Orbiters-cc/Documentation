@@ -15,20 +15,6 @@ lastVerified: 2026-09-05
 
 Configure seller details and terms before a customer submits a versioned agreement.
 
-```mermaid
-flowchart TD
-  accTitle: Publish terms before taking work
-  accDescr: Configure seller details and terms before a customer submits a versioned agreement.
-  N0["Seller details"]
-  N1["Terms and availability"]
-  N2["Customer reviews terms"]
-  N3["Request stores the agreement"]
-  N0 --> N1 --> N2 --> N3
-```
-
-## In this guide
-
-What Customers See · Cancellation, Early Work and Disputes · Conditional Tax and Age Requirements
 
 Open your commission tools and expand **Seller information** before publishing
 an art listing or enabling ReFit requests. Complete the inline setup once; later

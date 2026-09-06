@@ -13,24 +13,25 @@ lastVerified: 2026-07-12
 
 # Configure Discord Integrations
 
-Choose a server and bot, verify permissions, then configure roles and channels.
+A customer can download their asset, but the owner role never arrives in Discord. Before changing their purchase, check the bot’s position: a connected bot can still be unable to assign the role.
 
-```mermaid
-flowchart TD
-  accTitle: Connect a community
-  accDescr: Choose a server and bot, verify permissions, then configure roles and channels.
-  N0["Server and bot"]
-  N1["Connection permissions"]
-  N2["Roles and channels"]
-  N3["Check the intended workflow"]
-  N0 --> N1 --> N2 --> N3
-```
-
-## In this guide
-
-Shared Bot Mode · Custom Bot Mode · Role Requirements · Verification And Appeals
 
 Discord integrations connect creator servers to Orbiters workflows such as asset roles, verification, and appeals.
+
+## Make the permission problem visible
+
+This miniature role list starts in a broken state. Move the bot, then try disabling **Manage Roles**. Each control changes a different requirement.
+
+```orbiters
+{"kind":"discord-roles"}
+```
+
+The bot must have permission to manage roles and sit above the role it is assigning. Discord's [roles and permissions guide](https://support.discord.com/hc/en-us/articles/214836687-Discord-Roles-and-Permissions) explains the underlying hierarchy. Orbiters still needs the correct server, member and configured target role.
+
+> **A better first test**
+>
+> If website access works but the role does not, inspect delivery. If the website access is missing too, investigate the purchase or access grant. These two reports lead to different fixes.
+
 
 ## Shared Bot Mode
 

@@ -13,22 +13,8 @@ lastVerified: 2026-09-05
 
 # Announce a Commission Asset
 
-Inspect the destination before retrying an uncertain announcement.
+You publish a new commission listing. The channel post appears, but your browser times out before the confirmation arrives. Pressing publish again feels natural—and could give your audience two announcements.
 
-```mermaid
-flowchart TD
-  accTitle: Check delivery before repeating it
-  accDescr: Inspect the destination before retrying an uncertain announcement.
-  A[Choose connected channel] --> B[Publish announcement]
-  B --> C{Delivery result}
-  C -->|Posted| D[Open destination]
-  C -->|Failed| E[Fix setup]
-  C -->|Uncertain| F[Inspect channel before retry]
-```
-
-## In this guide
-
-Connect Telegram · Connect Discord · Publish and Check Delivery · Public Comment Rules · Administrator Prerequisites
 
 Connect a channel once, then select **Post on [channel]** when saving a public
 commission asset. Posting is optional and starts unchecked. Each listing gets
@@ -43,16 +29,16 @@ Announcements include the public listing preview, name, short description,
 starting price and link. **Private customer requests, Sonas and their references
 are never used as announcement content.**
 
-```mermaid
-flowchart LR
-  accTitle: Optional channel announcement and public comments
-  accDescr: A creator selects a verified channel, Orbiters posts the listing, and channel discussion replies appear in the asset comments with their platform label.
-  A[Public commission asset] --> B[Select verified channel]
-  B --> C[Announcement queued]
-  C --> D[Channel post]
-  D -->|If a discussion is connected| E[Discussion replies]
-  E --> F[Asset comments with source label]
-```
+
+## A listing travels; a private brief stays private
+
+| This can appear in the announcement | This stays out of it |
+| --- | --- |
+| Public preview and listing name | A customer's private request |
+| Short description and starting price | Their Sona and reference images |
+| Link back to the public listing | Private delivery details |
+
+A useful announcement gives someone enough to decide whether to open the listing. Keep detailed character references in the private request, not in the public promotion.
 
 ## Connect Telegram
 

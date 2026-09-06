@@ -17,6 +17,12 @@ Open **Admin → Background jobs** when repeated failures or worker interruption
 
 The list shows job IDs, operation types, state, failed attempts, interrupted attempts and the next scheduled attempt. It omits payloads and raw error text, which can contain private provider or customer details.
 
+## A worker vanishes halfway through a payment
+
+Picture the uncomfortable case: a provider received the request, but the worker stopped before saving the response. “Try again from scratch” might repeat something that already happened. “Mark it successful” would invent an outcome.
+
+The job keeps its identity while recovery asks what actually happened. That is why an attention flag can coexist with continuing payment recovery.
+
 ## Decide what needs fixing
 
 | State in the view | Meaning | Your next step |
@@ -77,3 +83,8 @@ Jobs are claimed immediately before execution, one at a time. Each run handles u
 Routes: `GET /admin/outbox` and `POST /admin/outbox/:id/retry`. Both require authenticated administrative authorization and return private, non-cacheable responses.
 
 </audience>
+
+
+```orbiters
+{"kind": "challenge", "title": "A warning is still visible. Should you replace the charge?", "question": "The queue says Recovery continuing after an uncertain commission payment response.", "options": [{"label": "Create a new charge to finish faster", "correct": false, "explanation": "The original operation may already have reached the provider. A replacement could repeat it. Investigate configuration and let reconciliation determine the original outcome."}, {"label": "Repair the cause and follow the existing job", "correct": true, "explanation": "The durable job keeps the operation discoverable. Its attention flag clears after successful processing; a warning alone is not evidence that the provider rejected the payment."}]}
+```

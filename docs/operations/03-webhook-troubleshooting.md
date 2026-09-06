@@ -13,26 +13,21 @@ lastVerified: 2026-09-02
 
 # Webhook Troubleshooting
 
-Check validation, persistence, domain changes and background delivery in order.
+“The refund happened in the shop, but access still works.” Treat this as a trail to follow: delivery, validation, matching, state change. Jumping straight to a manual access edit can hide the broken link.
 
-```mermaid
-flowchart TD
-  accTitle: Trace a webhook to its effect
-  accDescr: Check validation, persistence, domain changes and background delivery in order.
-  N0["Provider event"]
-  N1["Signature and route"]
-  N2["Stored event"]
-  N3["Matched domain change"]
-  N4["Background delivery"]
-  N5["Visible result"]
-  N0 --> N1 --> N2 --> N3 --> N4 --> N5
-```
-
-## In this guide
-
-First Checks · Matching Revocations · Duplicate Events · Provider-Specific Notes · Stripe ReFit Commissions
 
 Store webhooks keep Orbiters close to the provider's sale and license state. They are especially important for refunds, revocations, chargebacks, and sale mirrors.
+
+## Keep one event in view
+
+| Your evidence | What you can conclude | Where to look next |
+| --- | --- | --- |
+| Provider has a delivery attempt | It tried to send an event | Destination and response |
+| Orbiters recorded a valid event | The event entered the system | Product, sale and license matching |
+| Matching found the intended access | The event has enough identity | The resulting access state |
+| Access changed; Discord did not | Domain change and role delivery diverged | The background queue and bot permissions |
+
+Keep the same provider event or sale identity through these checks. Switching between unrelated examples makes a broken path look healthy.
 
 ## First Checks
 
@@ -119,3 +114,6 @@ decline or non-capturable authorization does.
 Webhook routes preserve the raw request body for signature validation. Provider modules own signature validation and webhook parsing. Do not validate signatures in route code unless the provider module delegates that exact concern.
 
 </audience>
+## Learn the provider's delivery tools
+
+Provider dashboards differ. [GitHub's redelivery guide](https://docs.github.com/en/webhooks/testing-and-troubleshooting-webhooks/redelivering-webhooks) is useful when investigating GitHub events: use the recorded delivery, not a newly invented payload. Store and Stripe events need their own provider's delivery controls and signature configuration.

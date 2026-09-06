@@ -13,7 +13,9 @@ lastVerified: 2026-09-05
 
 # Request a Manual ReFit Commission
 
-Automatic ReFit not quite right? Ask a creator to finish the fit by hand.
+The jacket looks good standing still. Raise the avatar’s arm, though, and the sleeve cuts into the shoulder. That is the kind of concrete problem a manual ReFit request can help you explain to a creator.
+
+Show where the fit fails, the pose that reveals it, and what you want to keep. A clear brief is more useful than asking the artist to guess what “not quite right” means.
 
 > **Two separate prices:** Orbiters authorizes a **€2 request fee** and collects it
 > only when a creator accepts. Agree on the **artist's price and payment directly
@@ -55,17 +57,14 @@ retry before proceeding to checkout.
 
 ## What happens to the request fee?
 
-```mermaid
-flowchart TD
-    accTitle: Your request, from authorization to acceptance
-    accDescr: Authorize the request fee. Acceptance captures it; cancellation or expiry releases the hold once the provider confirms.
-    A["Authorize €2"] --> B["Waiting for a creator"]
-    B --> C{"Creator accepts?"}
-    C -->|Yes| D["€2 fee collected"]
-    D --> E["Contact creator and agree on their price"]
-    C -->|"No: expired or cancelled"| F["Release pending"]
-    F --> G["Card hold released"]
+The two amounts on a commission do different jobs. Try the moments below; the artist's €40 price is fictional, while the Orbiters request fee is €2.
+
+```orbiters
+{"kind":"commission-receipt"}
 ```
+
+Stripe calls this separation [authorization and capture](https://docs.stripe.com/payments/place-a-hold-on-a-payment-method): reserving funds and collecting them are different events. Your bank's display can make the distinction less obvious.
+
 
 A card hold is temporary. The total request window is at most **six days**,
 and may be shorter depending on the card's authorization deadline.
@@ -81,19 +80,18 @@ When someone accepts, other offers close. You receive an Orbiters notification,
 plus push or Discord notifications when available. Open the request to find the
 creator's profile and contact links.
 
+## Give the artist something they can act on
+
+> **Example brief · A sleeve that pinches**
+>
+> “The shoulder clips when the arm lifts sideways. I attached a front and side view in that pose. Please keep the loose cuff and the current chest fit; the shoulder is the part I want corrected.”
+
+This names a visible defect, a way to reproduce it and two things to preserve. Review your captures before paying: a beautifully framed neutral pose may conceal the problem you are asking someone to fix.
+
 ## Follow the work
 
 Open **My Account → My commissions**, or select a commission in your avatar menu.
 
-```mermaid
-flowchart TD
-    accTitle: Follow the creator's progress
-    accDescr: Accepted work moves through work in progress, review and completion. Review can return to work for revisions.
-    A["Accepted"] --> B["Work in progress"]
-    B --> C["Ready for review"]
-    C -->|Revisions| B
-    C --> D["Completed"]
-```
 
 These are milestones, **not a delivery countdown**. The creator updates the stage
 and can add notes or delivery links. Completed or closed requests move to

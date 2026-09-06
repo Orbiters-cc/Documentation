@@ -16,21 +16,6 @@ relations: orbiters.decision.product-steward-security, orbiters.development.know
 
 A configured identity uses scoped tools to research and propose work under review boundaries.
 
-```mermaid
-flowchart TD
-  accTitle: Keep steward authority explicit
-  accDescr: A configured identity uses scoped tools to research and propose work under review boundaries.
-  N0["Steward identity"]
-  N1["Scoped token and tools"]
-  N2["Evidence gathering"]
-  N3["Research or proposal"]
-  N4["Authorized review and action"]
-  N0 --> N1 --> N2 --> N3 --> N4
-```
-
-## In this guide
-
-Identity Model · Administrator Workflow · Token Contract · Local Agent API · Required Research Process · Product Research Report Contract · Product Steward Acceptance Test · Non-Goals
 
 A Product Steward is a high-level product-research actor. It studies a feature or
 tool over time, compares new evidence with product memory, and submits a private

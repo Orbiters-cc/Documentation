@@ -15,21 +15,6 @@ lastVerified: 2026-07-12
 
 Validate configuration and revision, preserve backups, then inspect startup.
 
-```mermaid
-flowchart TD
-  accTitle: Release with recovery evidence
-  accDescr: Validate configuration and revision, preserve backups, then inspect startup.
-  N0["Revision and configuration"]
-  N1["Preflight evidence"]
-  N2["Backup evidence"]
-  N3["Deploy"]
-  N4["Startup and release checks"]
-  N0 --> N1 --> N2 --> N3 --> N4
-```
-
-## In this guide
-
-Caddy Config · Production Deploy Flow · Local Backup · Production Backup Encryption
 
 <alpha>
 

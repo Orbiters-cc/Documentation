@@ -27,10 +27,6 @@ flowchart TD
   C --> F[Discussion and decisions]
 ```
 
-## In this guide
-
-Data Model · Default Boards · Trello Boards · Visibility · Proposal Content and Product Memory · Board and Proposal Routes · Forecasts · Ideas-Vault Migration · Verification
-
 The alpha product-planning model separates the idea itself from where it is shown.
 A `Proposal` is durable Markdown product context. A `Board` is an independently
 permissioned planning view. A `BoardItem` places a Proposal or synchronized GitHub

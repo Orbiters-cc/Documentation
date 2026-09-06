@@ -15,21 +15,6 @@ lastVerified: 2026-07-14
 
 Identify the resource and authorized tool before changing state and checking the result.
 
-```mermaid
-flowchart TD
-  accTitle: Investigate from the affected resource
-  accDescr: Identify the resource and authorized tool before changing state and checking the result.
-  N0["Report or symptom"]
-  N1["Affected account and resource"]
-  N2["Authorized management view"]
-  N3["Review current evidence"]
-  N4["Apply and verify the decision"]
-  N0 --> N1 --> N2 --> N3 --> N4
-```
-
-## In this guide
-
-Users · Creator Requests · Assets And User Assets · Store And Webhook Issues · Bug And Issue Handling · Blog Audience Notifications · Notification Delivery Test
 
 Administrative access depends on rank and feature access. Moderators may see a smaller operational surface than admins or developers.
 

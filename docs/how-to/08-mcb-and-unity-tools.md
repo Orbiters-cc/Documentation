@@ -13,22 +13,8 @@ lastVerified: 2026-09-02
 
 # MCB and Unity Tools
 
-Sign in, prepare the installer and link Unity before using permitted versions.
+You open MCB and see a version number, a beta chip and an Installed label. Each tells you something different. Learn to read those signals before changing a project you care about.
 
-```mermaid
-flowchart TD
-  accTitle: Move from the website into Unity
-  accDescr: Sign in, prepare the installer and link Unity before using permitted versions.
-  N0["Website account"]
-  N1["Install wizard"]
-  N2["Magic Sync"]
-  N3["Unity project and asset versions"]
-  N0 --> N1 --> N2 --> N3
-```
-
-## In this guide
-
-What The Tools Use Orbiters For · User Flow · Inspect Version Capabilities · Switch Or Reset Mesh Versions · ReFit Assets · Creator Flow · Connection Problems
 
 MCB and Unity-facing tools use Orbiters as the account, access, and package source for compatible avatar assets.
 
@@ -51,6 +37,16 @@ The tools can call Orbiters to:
 3. Connect the tool when prompted.
 4. Choose an asset and version that your account can access.
 5. Install or update through the tool.
+
+## Read the interface before changing the avatar
+
+```orbiters
+{"kind":"mcb-version-tour"}
+```
+
+The illustration comes from the existing MCB product artwork. Its sample version numbers are not a recommendation to install a particular release.
+
+For a new VRChat project, use the [official SDK setup guide](https://creators.vrchat.com/sdk/) and let Creator Companion guide the supported Unity setup. Keep a recoverable project copy before experimenting with packages or model versions.
 
 ## Inspect Version Capabilities
 

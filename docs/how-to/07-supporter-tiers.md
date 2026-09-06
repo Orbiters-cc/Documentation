@@ -13,22 +13,8 @@ lastVerified: 2026-07-13
 
 # Supporter Tiers
 
-Supporter evidence resolves a tier which can grant public asset access.
+A supporter joins your community for a month. You want them to try selected public releases while their membership is active. That is a different promise from selling them a permanent copy.
 
-```mermaid
-flowchart TD
-  accTitle: Supporter access stays scoped
-  accDescr: Supporter evidence resolves a tier which can grant public asset access.
-  N0["Supporter evidence"]
-  N1["Matching tier"]
-  N2["Linked assets"]
-  N3["Public release access"]
-  N0 --> N1 --> N2 --> N3
-```
-
-## In this guide
-
-When To Use Supporter Tiers · Configure Tier Access · Synchronize Patreon · Scope Limits
 
 Supporter tiers let creators grant public asset access while a user's tier status is active.
 
@@ -73,6 +59,12 @@ Members match an Orbiters account by normalized account email or a previously
 known store email. Orbiters skips missing and ambiguous matches instead of granting
 access to the wrong account. Patreon member webhooks schedule the same
 reconciliation, while the manual button remains available for recovery and audit.
+
+## The reward you meant to offer
+
+Imagine your “Studio visitors” tier includes Moon Jacket. Linking the asset gives active, matched supporters public access. It does not silently add them to your beta test group. Name the benefit accordingly: “public releases while your membership is active” is clearer than “full access.”
+
+Keep permanent purchases separate. A supporter who also owns the item can have another valid access source; membership ending is not proof that every kind of access should disappear.
 
 ## Scope Limits
 

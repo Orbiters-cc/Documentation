@@ -24,10 +24,6 @@ flowchart TD
   D --> E[Announcements and discussion]
 ```
 
-## In this guide
-
-Configure the Application · Deployment URLs · Endpoints · Identity and Verification · Troubleshooting
-
 ## Configure the Application
 
 1. Open the [BotFather mini app](https://t.me/botfather?startapp=), select the bot

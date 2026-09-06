@@ -15,21 +15,6 @@ lastVerified: 2026-09-05
 
 Receive the request, establish scope, perform the authorized action and record the result.
 
-```mermaid
-flowchart TD
-  accTitle: Work a recorded privacy case
-  accDescr: Receive the request, establish scope, perform the authorized action and record the result.
-  N0["Request received"]
-  N1["Identity and scope"]
-  N2["Authorized operation"]
-  N3["Recorded response"]
-  N4["Retention and follow-up review"]
-  N0 --> N1 --> N2 --> N3 --> N4
-```
-
-## In this guide
-
-Handle a Privacy Request · Decide Content Reports and Appeals · Maintain the Compliance Register · Seller Tax Reporting · Retention and Release Review
 
 Use **Admin → Privacy and reports** for the queues. Moderators handle content cases;
 admins and owners can also manage privacy requests, the compliance register and

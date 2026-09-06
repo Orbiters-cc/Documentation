@@ -17,18 +17,12 @@ Use this map when reviewing a screen, writing a guide or investigating an access
 
 ## Documentation: two independent gates
 
-```mermaid
-flowchart TD
-  accTitle: Documentation visibility gates
-  accDescr: A page needs both an audience match and a permitted release stage. Inline sections are filtered again before delivery.
-  A[Page requested] --> B{Audience matches?}
-  B -->|No| X[Page omitted or not found]
-  B -->|Yes| C{Stage fits selected mode?}
-  C -->|No| X
-  C -->|Yes| D[Filter inline audience and stage blocks]
-  D --> E[Return allowed Markdown and diagrams]
-  E --> F[Admin or dev inspection labels visible boundaries]
+Try **Admin → Alpha** in the example. The experimental developer guide stays unavailable. Then try **Developer → Stable**: the same guide is still hidden, for a different reason. This is the difference between an audience and a release mode.
+
+```orbiters
+{"kind":"audience-lens"}
 ```
+
 
 | Base profile | Documentation audience set |
 | --- | --- |

@@ -25,10 +25,6 @@ flowchart TD
   A --> E[Shared commission and discussion records]
 ```
 
-## In this guide
-
-Service Boundaries · Credentials and Local Setup · Production Deployment · Closure, Shared Data and Restore · Session and User Experience Invariants · Validation
-
 The implementation is local development work awaiting application release. Public
 privacy and seller controls use existing account and commission surfaces with
 HeroUI disclosures, status messages and reduced-motion support.

@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { validateExperiences } = require('./validate-experiences');
 
 const REPOSITORY_ROOT = path.resolve(__dirname, '..');
 const DOCS_ROOT = path.join(REPOSITORY_ROOT, 'docs');
@@ -122,6 +123,7 @@ const validatePage = (page) => {
         if (opens !== closes) page.errors.push(`Malformed ${stage} block`);
     }
     page.errors.push(...validateRelativeLinks(page));
+    page.errors.push(...validateExperiences(content));
 };
 
 const pages = walkMarkdown(DOCS_ROOT).map(parsePage);

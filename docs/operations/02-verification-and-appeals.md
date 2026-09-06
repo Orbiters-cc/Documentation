@@ -15,21 +15,6 @@ lastVerified: 2026-09-02
 
 Saved presence and appeal decisions affect their own Discord server.
 
-```mermaid
-flowchart TD
-  accTitle: Keep verification scoped to its server
-  accDescr: Saved presence and appeal decisions affect their own Discord server.
-  N0["Account and Discord server"]
-  N1["Latest presence state"]
-  N2["Verification or appeal"]
-  N3["Decision saved for this server"]
-  N4["Discord delivery and role work"]
-  N0 --> N1 --> N2 --> N3 --> N4
-```
-
-## In this guide
-
-Verification · Appeals · Creator-Managed Queues · Troubleshooting
 
 Verification and appeals are scoped to Discord servers. This lets creators manage their own communities without forcing one global verification state.
 

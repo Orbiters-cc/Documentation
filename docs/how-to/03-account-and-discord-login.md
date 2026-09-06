@@ -13,23 +13,8 @@ lastVerified: 2026-09-04
 
 # Account Login and Connections
 
-Review your current account before adding another sign-in provider.
+Your purchases live with your Orbiters account. Discord and Telegram are ways to reach it. Adding a second way in is useful; accidentally starting a second account is much less useful.
 
-```mermaid
-flowchart TD
-  accTitle: Connect identities deliberately
-  accDescr: Review your current account before adding another sign-in provider.
-  N0["Sign in"]
-  N1["My Account"]
-  N2["Review connections"]
-  N3["Connect another provider"]
-  N4["Confirm the same Orbiters account"]
-  N0 --> N1 --> N2 --> N3 --> N4
-```
-
-## In this guide
-
-Sign In · Connect Another Login Provider · Request Creator Status · Default Currency · Notifications And Account Actions · What Login Controls · Verification Is Server-Scoped
 
 Sign in to Orbiters with Discord or Telegram. Connecting both providers lets you
 use either one to reach the same account, purchases, and creator permissions.
@@ -49,7 +34,9 @@ Keyboard users can select either provider after expanding the button. Escape
 closes the chooser. The animation respects reduced-motion preferences.
 In dark mode, the provider labels and icons use a brighter blue for readability.
 
+<audience include="dev">
 After login, the frontend stores a short-lived JWT and uses a refresh cookie to rotate it.
+</audience>
 
 ## Connect Another Login Provider
 
@@ -70,6 +57,11 @@ Discord roles or creator privileges.
 
 If authorization is cancelled or the login attempt expires, restart it from the
 chooser or the Connections section.
+
+
+```orbiters
+{"kind": "challenge", "title": "Two names, one account?", "question": "You already use Discord for Orbiters and want to sign in with Telegram too. Where should you start?", "options": [{"label": "Your existing account’s Connections section", "correct": true, "explanation": "Connect Telegram while signed in to the account you already use. That links the provider to the same purchases and permissions."}, {"label": "A fresh Telegram signup while logged out", "correct": false, "explanation": "A first sign-in with an unconnected provider can create another account. Matching names do not merge them. Start from the existing account’s Connections section."}]}
+```
 
 ## Request Creator Status
 

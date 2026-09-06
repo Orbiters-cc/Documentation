@@ -49,3 +49,13 @@ Staff interfaces may require feature access as well as rank. A documentation lab
 Use [Who sees what](/documentation/orbiters.reference.visibility-atlas) for the visual map and [the audience catalog](/documentation/orbiters.reference.documentation-audience-catalog) for every page's declared audience and stage.
 
 </audience>
+
+## A promotion that does not unlock everything
+
+An administrator can read staff operations but may not have the creator flag. A developer can read developer material but still needs the selected release mode to include alpha pages. These are independent inputs; the title of the account rank is not a shortcut through them.
+
+```orbiters
+{"kind":"audience-lens"}
+```
+
+The example describes documentation only. A private commission still checks participation, and a private Board still checks its own access rules.

@@ -13,25 +13,23 @@ lastVerified: 2026-07-14
 
 # Connect Store Integrations
 
-Connect a provider, synchronize products, link assets and inspect delivery health.
+Your shop says a sale happened. Orbiters needs one more piece of context: which asset that product should unlock. Connecting the shop and mapping its products solve different parts of the problem.
 
-```mermaid
-flowchart TD
-  accTitle: From store to asset access
-  accDescr: Connect a provider, synchronize products, link assets and inspect delivery health.
-  N0["Provider credentials"]
-  N1["Store integration"]
-  N2["Product synchronization"]
-  N3["Asset product links"]
-  N4["Purchase access"]
-  N0 --> N1 --> N2 --> N3 --> N4
-```
-
-## In this guide
-
-Supported Providers · Connect A Store · Provider Credentials · Refresh Revenue History · Integration Status
 
 Store integrations let creators connect outside stores to Orbiters. Orbiters can import products, verify license keys, mirror sales, and receive sale or license events where the provider supports it.
+
+## Follow one fictional jacket purchase
+
+**Moon Jacket in your shop** is a provider product. **Moon Jacket in Orbiters** is an asset. The product link connects those two identities. A sync can successfully import the shop product while the asset is still waiting for its mapping.
+
+| Checkpoint | Useful evidence | What it does not prove yet |
+| --- | --- | --- |
+| Integration connected | Provider credentials or authorization were accepted | Every product is mapped |
+| Products synchronized | The jacket appears in imported products | A buyer has redeemed or received access |
+| Product linked to asset | The intended provider identity is attached | Every release scope is available |
+| Buyer can use public release | The access path worked for that account | The Discord role already arrived |
+
+Use one identifiable product and a permitted test purchase when validating setup. Four green-looking screens are less useful than following one purchase all the way to its intended release.
 
 ## Supported Providers
 

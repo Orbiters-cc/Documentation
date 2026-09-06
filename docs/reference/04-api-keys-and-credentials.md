@@ -15,21 +15,6 @@ lastVerified: 2026-09-02
 
 Store the provider configuration and check the capabilities needed by its consumer.
 
-```mermaid
-flowchart TD
-  accTitle: From credentials to a feature
-  accDescr: Store the provider configuration and check the capabilities needed by its consumer.
-  N0["Provider credential"]
-  N1["Encrypted configuration"]
-  N2["Consuming service"]
-  N3["Configuration readiness"]
-  N4["Feature operation"]
-  N0 --> N1 --> N2 --> N3 --> N4
-```
-
-## In this guide
-
-Credential Types · Setup Guides in the Website · Environments · Bootstrap · Safety
 
 Runtime credentials are stored in the `APIKeys` table instead of hardcoded environment variables where possible.
 

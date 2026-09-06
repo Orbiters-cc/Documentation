@@ -54,7 +54,7 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 
 | Page | Audience tags | Stage | Visitor | Member | Creator | Mod | Admin | Dev / owner |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Creator Assets | creator, admin, dev | stable | — | — | ✓ | — | ✓ | ✓ |
+| Build an asset people can actually use | creator, admin, dev | stable | — | — | ✓ | — | ✓ | ✓ |
 | Connect Store Integrations | creator, admin, dev | stable | — | — | ✓ | — | ✓ | ✓ |
 | Configure Discord Integrations | creator, admin, dev | stable | — | — | ✓ | — | ✓ | ✓ |
 | Supporter Tiers | creator, admin, dev | stable | — | — | ✓ | — | ✓ | ✓ |
@@ -99,6 +99,7 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | GitHub Connections and Board Sync | dev | alpha | — | — | — | — | — | ✓ |
 | Boards, Proposals, and Forecasts | dev | alpha | — | — | — | — | — | ✓ |
 | Product Steward Agents | dev | alpha | — | — | — | — | — | ✓ |
+| Write a guide worth exploring | dev | stable | — | — | — | — | — | ✓ |
 | Community age verification reference | dev, admin | beta | — | — | — | — | ✓ | ✓ |
 | Mermaid Documentation Diagrams | dev | stable | — | — | — | — | — | ✓ |
 | Orbiters Foundations Initialization | dev | stable | — | — | — | — | — | ✓ |
@@ -126,7 +127,7 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Page | Audience tags | Stage | Visitor | Member | Creator | Mod | Admin | Dev / owner |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Turn a purchase into Orbiters access | public, user | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Assets and Downloads | public, user | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Find the version that belongs in your project | public, user | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Account Login and Connections | public, user | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 ## Moderation
@@ -168,7 +169,7 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 
 | Page | Audience tags | Stage | Visitor | Member | Creator | Mod | Admin | Dev / owner |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Make something. Find what you need. | public | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| A field guide to making things with Orbiters | public | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Pick a path through the documentation | public | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 ## Tools
