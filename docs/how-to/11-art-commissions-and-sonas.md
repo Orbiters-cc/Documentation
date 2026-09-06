@@ -14,6 +14,25 @@ relations: orbiters.website.knowledge-map, orbiters.website.public-profile
 
 # Art Commissions and Sonas
 
+Choose the listing and options, add a Sona, then follow the artist response.
+
+```mermaid
+flowchart TD
+  accTitle: Request art with a saved reference
+  accDescr: Choose the listing and options, add a Sona, then follow the artist response.
+  N0["Published listing"]
+  N1["Variant and options"]
+  N2["Sona and brief"]
+  N3["Saved request"]
+  N4["Artist response"]
+  N5["Work and review"]
+  N0 --> N1 --> N2 --> N3 --> N4 --> N5
+```
+
+## In this guide
+
+Save a Character · Request Artwork · Publish a Commission Asset · Manage Requests · Ko-fi Listings · Runtime and API
+
 Art commission assets let artists publish YCH (your character here) illustrations,
 sticker packs, and other made-to-order artwork on the Assets page. Customers choose
 priced options and share a saved character with the artist.
@@ -21,7 +40,7 @@ priced options and share a saved character with the artist.
 Art payments are arranged directly between customer and artist. Creating or
 accepting an art request does **not** charge a card through Orbiters, create a
 Stripe sale, or grant a downloadable asset license. This is separate from the
-[manual ReFit request fee](10-request-refit-commission.md).
+[manual ReFit request fee](/documentation/orbiters.how-to.request-refit-commission).
 
 ## Save a Character
 
@@ -112,9 +131,9 @@ Progress indicates workflow stages, not time remaining or payment settlement.
 Commission notifications follow the account's Payments and commissions preference.
 
 Acceptance also creates a private Board task. Use the
-[commission workspace](13-manage-commission-workspace.md) on Home to move tasks
+[commission workspace](/documentation/orbiters.how-to.manage-commission-workspace) on Home to move tasks
 and record agreed prices or payments received directly. To publish to your
-channels, follow [commission announcements](14-announce-commission-assets.md).
+channels, follow [commission announcements](/documentation/orbiters.how-to.announce-commission-assets).
 
 ## Ko-fi Listings
 

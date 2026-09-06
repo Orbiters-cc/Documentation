@@ -13,6 +13,23 @@ lastVerified: 2026-07-13
 
 # Supporter Tiers
 
+Supporter evidence resolves a tier which can grant public asset access.
+
+```mermaid
+flowchart TD
+  accTitle: Supporter access stays scoped
+  accDescr: Supporter evidence resolves a tier which can grant public asset access.
+  N0["Supporter evidence"]
+  N1["Matching tier"]
+  N2["Linked assets"]
+  N3["Public release access"]
+  N0 --> N1 --> N2 --> N3
+```
+
+## In this guide
+
+When To Use Supporter Tiers · Configure Tier Access · Synchronize Patreon · Scope Limits
+
 Supporter tiers let creators grant public asset access while a user's tier status is active.
 
 ## When To Use Supporter Tiers

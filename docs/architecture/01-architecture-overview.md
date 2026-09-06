@@ -1,48 +1,51 @@
 ---
-title: Architecture Overview
+title: The platform at a glance
 section: Architecture
 order: 90
-audience: dev
+audience: admin, dev
 stage: stable
 id: orbiters.architecture.overview
 domain: website
 type: explanation
 owner: orbiters-engineering
-lastVerified: 2026-07-12
+lastVerified: 2026-09-06
 ---
 
-# Architecture Overview
+# The platform at a glance
 
-Orbiters is a React frontend, an Express backend, PostgreSQL, Caddy, and a small deployment webhook service.
+Read the diagram from the outside in: people and Unity tools reach the application, domain services decide what may happen, and persistence or provider adapters carry out the result.
 
-## Context View
 
 ```mermaid
-flowchart LR
-    User["User or creator"] --> Frontend["React frontend"]
-    Frontend --> Backend["Express backend"]
-    Backend --> Postgres["PostgreSQL"]
-    Backend --> Discord["Discord"]
-    Backend --> Stores["Store providers"]
-    Backend --> R2["Cloudflare R2"]
-    Unity["Unity and MCB tools"] --> Backend
-    Caddy["Caddy"] --> Frontend
-    Caddy --> Backend
+flowchart TD
+  accTitle: Orbiters system map
+  accDescr: Caddy routes browsers and tools to the application. Services use PostgreSQL, storage, documentation and providers.
+  Browser[Browser] --> Caddy[Caddy routing]
+  Unity[Unity tools] --> Caddy
+  Caddy --> Web[React and HeroUI]
+  Caddy --> API[Express API]
+  Web --> API
+  API --> DB[(PostgreSQL)]
+  API --> Jobs[Background workers]
+  Jobs --> Vendors[Discord, stores and Stripe]
+  API --> Files[Local storage and R2]
+  API --> Docs[Documentation repository]
 ```
 
-## Container View
+## Boundaries to preserve
 
-- Frontend: React, HeroUI, Redux Toolkit, and route-level pages.
-- Backend: Express routes, Sequelize models, services, workers, and provider clients.
-- Database: PostgreSQL with Sequelize sync and explicit migration blocks where needed.
-- Caddy: TLS and host routing.
-- Webhook service: deployment trigger helper.
-- Documentation repo: Markdown content read by backend.
+| Boundary | Responsibility |
+| --- | --- |
+| Browser → API | Authentication, input validation and permission checks |
+| API → database | Durable domain state and transactions |
+| Worker → provider | Bounded calls, retries and idempotency |
+| File request → storage | Authorization before private content delivery |
+| Markdown → reader | Audience and release filtering before rendering |
 
-## Constraints
+The deployment webhook is a separate helper. The Documentation checkout is a separate repository mounted read-only by the backend container.
 
-- API routes do not use an extra `/api` prefix.
-- Backend and frontend can run locally or in Docker.
-- Backend testing must use alternate ports such as `4200`.
-- External vendors must be mocked in automated tests.
-- Documentation visibility is enforced server-side.
+## Local and container runs
+
+Services can run locally or under Docker. Keep API paths directly under the configured backend origin. Tests use separate ports and disposable databases.
+
+Continue with [runtime flows](/documentation/orbiters.architecture.runtime-flows), [the data model](/documentation/orbiters.architecture.data-model), or [Who sees what](/documentation/orbiters.reference.visibility-atlas).

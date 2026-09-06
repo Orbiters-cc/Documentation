@@ -1,5 +1,5 @@
 ---
-title: Documentation Map
+title: Pick a path through the documentation
 section: Start Here
 order: 11
 audience: public
@@ -8,59 +8,64 @@ id: orbiters.start.documentation-map
 domain: general
 type: reference
 owner: orbiters-docs
-lastVerified: 2026-07-12
+lastVerified: 2026-09-06
 ---
 
-# Documentation Map
+# Pick a path through the documentation
 
-Use this page to choose the right docs path.
+Use this page as a route planner. Read a task guide when you want to do something; open a reference when you need exact rules.
 
-## Users
+## Use Orbiters
 
-Start with:
+1. [Sign in and connect your accounts](/documentation/orbiters.how-to.account-and-discord-login).
+2. [Redeem your first license](/documentation/orbiters.tutorial.redeem-first-license).
+3. [Find assets and versions](/documentation/orbiters.how-to.assets-and-downloads).
+4. [Request manual ReFit work](/documentation/orbiters.how-to.request-refit-commission) when you need a creator's help.
 
-- **Redeem a License Key** if you bought an asset and need to attach it to your Orbiters account.
-- **Assets and Downloads** if you need to understand asset pages, versions, and access messages.
-- **Account and Discord Login** if login or Discord identity is unclear.
+<audience include="creator, admin, dev">
 
-## Creators
+## Build your creator workspace
 
-Start with:
+| First | Then | Keep it healthy |
+| --- | --- | --- |
+| Connect a store | Link products to assets | Check sync and webhook results |
+| Connect Discord | Choose asset roles and channels | Check bot permissions |
+| Set commission terms and availability | Accept and organize work | Update progress and payment records |
 
-- **Creator Assets** to understand asset setup and access scopes.
-- **Connect Store Integrations** to connect Gumroad, Jinxxy, Payhip, or Lemon Squeezy.
-- **Configure Discord Integrations** if your assets or server workflows grant Discord roles.
-- **Supporter Tiers** if you want tier-based public access.
+Read [store connections](/documentation/orbiters.how-to.connect-store-integrations), [Discord setup](/documentation/orbiters.how-to.configure-discord-integrations) and [commission workspaces](/documentation/orbiters.how-to.manage-commission-workspace).
 
-## Moderators and Admins
+</audience>
 
-Start with:
+<audience include="mod, admin, dev">
 
-- **Admin and Moderation** for the operational surface.
-- **Verification and Appeals** for server-scoped verification, appeal decisions, and creator-managed queues.
-- **Webhook Troubleshooting** when store events, refunds, or license updates do not behave as expected.
+## Support the community
 
-## Developers
+Start with [verification and appeals](/documentation/orbiters.operations.verification-and-appeals). Identify the affected account, server and workflow before changing anything. A community verification decision is not an asset purchase decision.
 
-Start with:
+</audience>
 
-- **Developer Guide** for the repo layout, backend startup, and local rules.
-- **API Reference** for mounted routes and auth expectations.
-- **Architecture Overview** and **Runtime Flows** for system behavior.
-- **Documentation System** when changing this documentation feature.
+<audience include="admin, dev">
 
-## Release Stages
+## Operate and improve the platform
 
-Keep the documentation switch on **Stable** for current production behavior. Use **Beta** or **Alpha** only when you need preview or implementation notes.
+Start with [Who sees what](/documentation/orbiters.reference.visibility-atlas), [background job recovery](/documentation/orbiters.operations.background-jobs), and [the architecture overview](/documentation/orbiters.architecture.overview).
 
-<beta>
+</audience>
 
-Beta docs include upcoming workflows that are close enough to validate with creators or staff.
+<audience include="dev">
 
-</beta>
+For implementation, follow [local setup](/documentation/orbiters.development.local-setup), [testing](/documentation/orbiters.development.testing-strategy), then the relevant domain reference. Architecture decisions explain choices; they are not substitutes for current operating instructions.
 
-<alpha>
+</audience>
 
-Alpha docs include implementation notes and designs that can change quickly.
+## Choose the right kind of page
 
-</alpha>
+| Kind | Use it when |
+| --- | --- |
+| Tutorial | You want a complete first experience |
+| How-to | You know the goal and need the steps |
+| Reference | You need exact states, fields or boundaries |
+| Explanation | You want to understand why the system behaves this way |
+| Runbook | You are investigating or recovering a failure |
+
+Beta and alpha pages appear only in the selected release mode. A missing page can also mean your account cannot read its audience.

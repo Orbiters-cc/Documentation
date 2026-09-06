@@ -1,5 +1,5 @@
 ---
-title: Access Model Reference
+title: Access is several decisions, not one rank
 section: Reference
 order: 71
 audience: creator, admin, dev
@@ -8,51 +8,44 @@ id: orbiters.reference.access-model
 domain: website
 type: reference
 owner: orbiters-engineering
-lastVerified: 2026-07-12
+lastVerified: 2026-09-06
 ---
 
-# Access Model Reference
+# Access is several decisions, not one rank
 
-Orbiters access combines user identity, user assets, scopes, supporter tiers, roles, and feature flags.
+Use the table matching the resource you are diagnosing. Documentation audiences, asset release scopes and commission participation solve different problems.
 
-## Documentation Audiences
+## Documentation audiences
 
-- `public`: everyone.
-- `user`: logged-in users.
-- `creator`: creators and higher staff contexts.
-- `mod`: moderators, admins, developers, and owners.
-- `admin`: admins, developers, and owners.
-- `dev`: developers and owners.
+| Base profile | Public | User | Creator | Mod | Admin | Dev |
+| --- | --- | --- | --- | --- | --- | --- |
+| Visitor | Yes | — | — | — | — | — |
+| Signed-in member | Yes | Yes | — | — | — | — |
+| Creator member | Yes | Yes | Yes | — | — | — |
+| Moderator | Yes | Yes | With creator flag | Yes | — | — |
+| Admin | Yes | Yes | With creator flag | Yes | Yes | — |
+| Developer or owner | Yes | Yes | Yes | Yes | Yes | Yes |
 
-## Asset Scopes
+A page listing several audience tags accepts **any** matching audience. Its release stage must also fit the selected mode. Source or token audience ceilings can reduce these rights.
 
-| Granted scope | Public | Beta | Alpha |
-|---|---:|---:|---:|
-| `public` | yes | no | no |
-| `beta` | yes | yes | no |
-| `alpha` | yes | yes | yes |
+## Asset release scopes
 
-## User Asset States
+| Granted scope | Public version | Beta version | Alpha version |
+| --- | --- | --- | --- |
+| Public | Yes | No | No |
+| Beta | Yes | Yes | No |
+| Alpha | Yes | Yes | Yes |
 
-A user asset grants access only when it is enabled and its scope allows the requested version.
+The access record must remain enabled. Supporter-tier access grants public scope only. Refunds or revocations can disable matched records; role removal separately checks for other enabled assets granting the same role.
 
-Common disabled reasons:
+## Commission and Board boundaries
 
-- refund or revocation,
-- manual admin action,
-- stale or invalid access record,
-- migration cleanup.
+A customer sees their request. A ReFit candidate sees limited offer information and permitted attachments while its offer is active. The accepted creator receives full request context. Private Board access is checked separately; being an editor does not make someone a commission participant.
 
-## Supporter Tier Access
+Staff interfaces may require feature access as well as rank. A documentation label never authorizes an application endpoint.
 
-Supporter tiers grant public access only. They do not grant beta or alpha access.
+<audience include="admin, dev">
 
-## Feature Access
-
-Admin and moderation UI visibility can depend on feature access flags in addition to rank. A rank alone should not be treated as proof that every admin tool is visible.
-
-<audience include="dev">
-
-Developer and owner ranks expand to creator, mod, admin, and dev audiences in documentation. Admin expands to mod and admin. Moderator expands to mod.
+Use [Who sees what](/documentation/orbiters.reference.visibility-atlas) for the visual map and [the audience catalog](/documentation/orbiters.reference.documentation-audience-catalog) for every page's declared audience and stage.
 
 </audience>

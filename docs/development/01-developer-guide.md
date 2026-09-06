@@ -1,5 +1,5 @@
 ---
-title: Developer Guide
+title: Make a change you can explain and verify
 section: Development
 order: 60
 audience: dev
@@ -8,54 +8,44 @@ id: orbiters.development.developer-guide
 domain: website
 type: how-to
 owner: orbiters-engineering
-lastVerified: 2026-07-12
+lastVerified: 2026-09-06
 ---
 
-# Developer Guide
+# Make a change you can explain and verify
 
-## Repository Layout
+Start at the user action, trace its route into the service that owns the decision, and test that boundary. ORBITERS has a React/HeroUI frontend, an Express backend and PostgreSQL.
 
-- `backend`: Node.js and Express API.
-- `frontend`: React app using HeroUI and Redux Toolkit.
-- `Documentation`: Markdown source for website and ecosystem documentation.
-- `webhook`: deployment helper service.
-- `scripts`: deployment, backup, Caddy, and local utility scripts.
-- `Caddyfile.*`: reverse proxy templates.
 
-Backend endpoints are mounted directly under `https://api.orbiters.cc/<endpoint>` without an extra `/api` prefix.
-
-## Backend Startup
-
-The backend initializes Sequelize models at startup. Model changes must follow the Postgres alter rules in the main repo `AGENTS.md`.
-
-Run schema preflight twice when models change:
-
-```bash
-cd backend
-FAIL_FAST=true PORT=4200 EXIT_AFTER_DATABASE_INIT=true npm run dev:failfast
-FAIL_FAST=true PORT=4200 EXIT_AFTER_DATABASE_INIT=true npm run dev:failfast
+```mermaid
+flowchart TD
+  accTitle: A focused implementation
+  accDescr: Trace the interaction, change the owning service, verify behavior, then update the documentation.
+  A[User action] --> B[Frontend call and Express route]
+  B --> C[Domain service and access check]
+  C --> D[State change and external work]
+  D --> E[Regression coverage]
+  E --> F[Audience-scoped documentation]
 ```
 
-Windows PowerShell:
+## Find the right home
 
-```powershell
-$env:FAIL_FAST='true'; $env:PORT='4200'; $env:EXIT_AFTER_DATABASE_INIT='true'; npm run dev:failfast
-```
+| Location | Responsibility |
+| --- | --- |
+| `frontend/src/components/pages` | Route-level experience |
+| `frontend/src/components/elements` | Feature controls |
+| `backend/src/routes` | Authentication, input and response wiring |
+| `backend/src/services` | Domain decisions and provider coordination |
+| `backend/src/models` | Persistence and startup migrations |
+| `Documentation/docs` | Canonical user and contributor knowledge |
 
-Never use ports `4000`, `4100`, `3000`, or `3100` for backend testing. Those may already belong to a developer environment.
+Prefer the codebase graph for symbols and call tracing. Read current source before editing; the index can lag behind recent work.
 
-## API Base Paths
+## Keep contracts aligned
 
-The frontend uses `REACT_APP_BACKEND_URL` and calls direct paths such as `/documentation`, `/assets`, and `/creator`. Do not add an extra `/api` prefix.
+API paths sit directly under the backend origin, with no extra `/api` prefix. Frontend calls use the shared backend client and `REACT_APP_BACKEND_URL`. Local and Docker runs are both supported.
 
-## Service Boundaries
+External work must preserve durable state and use idempotency where an operation may be retried. A lease protects queue-row ownership; it does not make an external provider side effect exactly-once.
 
-- Store provider logic belongs under `backend/src/services/store/providers`.
-- Asset access decisions belong in `accessPolicyService`.
-- Discord role writes belong in `outboxService`.
-- API credentials are resolved through `apiCredentialService`.
-- Documentation reading and filtering belongs in `documentationService`.
+## Finish the change
 
-## Documentation
-
-Docs live in the root `Documentation` repository under `docs/`. The backend accepts `DOCUMENTATION_ROOT` for container and special local paths, but the default local path expects `Documentation/docs` beside `backend`.
+Use [local setup](/documentation/orbiters.development.local-setup) and [testing](/documentation/orbiters.development.testing-strategy). Update the affected task guide and visibility reference. Documentation is a separate repository; follow the repository's commit and push instructions.

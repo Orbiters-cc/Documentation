@@ -6,6 +6,25 @@ reviewed pages while presenting them for different audiences.
 
 ## Validate changes
 
+Start with [the audience atlas](docs/reference/visibility-atlas.md) when reviewing
+who can read a page or a section. The website gives admins and developers a
+visibility panel and optional inline boundary labels; it still enforces the
+caller's actual permissions.
+
+After adding a page or changing its audience, stage or title, regenerate the
+page-by-page catalog before validation:
+
+```bash
+node scripts/generate-audience-catalog.js
+node scripts/validate-docs.js
+```
+
+Write the reader's outcome first, then prerequisites and steps. Put exact payloads
+and long contracts in a linked reference. Use short Mermaid diagrams for decisions,
+handoffs and ownership boundaries, with a caption and prose explaining the result.
+Website links should use stable `/documentation/<id>` routes. Keep page IDs stable
+when editing titles or splitting a long reference.
+
 Run the documentation contract check before review:
 
 ```bash

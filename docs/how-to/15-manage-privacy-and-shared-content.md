@@ -13,6 +13,23 @@ lastVerified: 2026-09-05
 
 # Manage Privacy and Shared Content
 
+Exporting, disconnecting, hiding and closure have different effects.
+
+```mermaid
+flowchart TD
+  accTitle: Choose the action matching your goal
+  accDescr: Exporting, disconnecting, hiding and closure have different effects.
+  A[Your goal] --> B[Get a copy of your data]
+  A --> C[Disconnect a provider]
+  A --> D[Change content visibility]
+  A --> E[Close your account]
+  E --> F[Shared records retain their own rules]
+```
+
+## In this guide
+
+Download Your Information · Correct Information or Ask for Removal · Connect, Disconnect or Hide Content · Preserve Commission History · Close Your Account · Report or Contest a Decision
+
 Open **Account → Privacy & data** to download your information, make a privacy
 request, review reports or close your account. Each control expands inside the
 page. Downloads are prepared in the background, so you can continue using Orbiters.

@@ -17,7 +17,7 @@ lastVerified: 2026-09-05
 
 Commission creators control public hiding while both participants retain their
 private record. Account closure preserves shared commission history. See
-[Manage Privacy and Shared Content](15-manage-privacy-and-shared-content.md).
+[Manage Privacy and Shared Content](/documentation/orbiters.how-to.privacy-and-shared-content).
 
 </beta>
 
@@ -57,6 +57,10 @@ flowchart LR
 - Character references, request attachments and supported Trello images appear
   immediately in the preview. Use each image's corner **Download** button to save
   it, or click the image to open a larger view. Access checks still apply.
+- Scroll the quick view with the mouse wheel or touch. Reopen a task to refresh its details.
+
+<audience include="dev">
+
 - Scroll the modal with the mouse wheel or touch. It uses one scroll area and a
   160 ms opening and 100 ms closing animation. Large dialogs use a smaller tilt;
   reduced-motion preferences disable movement. Closing stops intercepting clicks
@@ -65,6 +69,8 @@ flowchart LR
   and image blobs are kept in memory for up to 30 seconds (32 entries / 32 MiB),
   isolated by login token. Reopened details refresh in the background; nothing is
   written to persistent browser storage.
+
+</audience>
 
 Accepting an art request creates one private task in your configured commission
 Board. Without a configured Board, it uses your Creations Board. ReFit keeps its
@@ -103,7 +109,7 @@ in the right-hand column; cutout edges distinguish the receipt from other cards.
 
 ## Trello References
 
-For a [connected Trello Board](09-connect-and-sync-trello.md), synchronization
+For a [connected Trello Board](/documentation/orbiters.how-to.connect-and-sync-trello), synchronization
 uploads the commission's shared Sona images and request attachments to its Trello
 card. References come from the submitted request, not later changes to a Sona.
 
@@ -136,3 +142,18 @@ Customers use **My Account → My commissions** or the account menu. More than t
 items switch to compact rows while retaining the title, artist and progress bar.
 The artist sits beside the title, rather than taking another row in each card.
 Commission task discussions omit proposal sentiment and product-decision controls.
+
+## Know your next action
+
+Cards show a next action derived from current request state. Use **My Account → My commissions → Needs my action** to find payment authorization and work ready for review across the active list. Creator request lists can filter their loaded requests; load more to include older entries.
+
+The same participant-aware cue appears on linked Board cards. A Board editor who is not a request participant does not receive that cue. Use request controls to update progress; dragging a Board card does not advance delivery.
+
+| Message | Next step |
+| --- | --- |
+| Continue payment authorization | Open the saved request and existing checkout |
+| Accept or decline | Review the active request or offer |
+| Start work when ready | Open the delivery controls |
+| Review the work | Read the work and discuss feedback with the creator |
+| Choose a working Board destination | Repair the destination on the request |
+| Payment confirmation is in progress | Let recovery finish; do not submit a duplicate |

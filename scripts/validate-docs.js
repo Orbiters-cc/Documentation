@@ -144,6 +144,13 @@ duplicateErrors('slug', (page) => page.metadata.slug || defaultSlug(page.filePat
 
 const knownIds = new Set(pages.map((page) => page.metadata.id).filter(Boolean));
 for (const page of pages) {
+    const content = page.content.replace(/^(`{3,}|~{3,})[^\n]*\n[\s\S]*?^\1\s*$/gm, '');
+    for (const match of content.matchAll(/\]\(\/documentation\/([^\s)#?]+)(?:[?#][^)]*)?\)/g)) {
+        const target = decodeURIComponent(match[1]);
+        if (!knownIds.has(target) && !pages.some(entry => (entry.metadata.slug || defaultSlug(entry.filePath)) === target)) {
+            page.errors.push(`Unknown documentation link: ${target}`);
+        }
+    }
     for (const relation of scalarList(page.metadata.relations || page.metadata.related)) {
         if (!knownIds.has(relation)) page.errors.push(`Unknown relation ID: ${relation}`);
     }

@@ -1,5 +1,5 @@
 ---
-title: Orbiters Overview
+title: Make something. Find what you need.
 section: Start Here
 order: 10
 audience: public
@@ -8,55 +8,51 @@ id: orbiters.start.overview
 domain: general
 type: explanation
 owner: orbiters-product
-lastVerified: 2026-07-12
+lastVerified: 2026-09-06
 ---
 
-# Orbiters Overview
+# Make something. Find what you need.
 
-Orbiters is the service layer around creator assets. It connects Discord accounts, creator stores, asset access, Discord roles, and Unity-facing install tools into one website.
+Orbiters brings creator assets, community access and commissioned work together. Start with the outcome you want; you do not need to understand the whole platform first.
 
-The main jobs are:
+| I want to… | Start here | What I will leave with |
+| --- | --- | --- |
+| Use something I bought | [Redeem a license](/documentation/orbiters.how-to.redeem-license-key) | Access attached to my account |
+| Explore my assets | [Assets and downloads](/documentation/orbiters.how-to.assets-and-downloads) | A version I can download or install |
+| Ask for a better fit | [Request a ReFit commission](/documentation/orbiters.how-to.request-refit-commission) | A saved request and a place to follow it |
+| Understand my community status | [Community age verification](/documentation/orbiters.account.age-verification) | The evidence behind my current status |
 
-- Help users find assets, redeem licenses, and download or install versions they can access.
-- Help creators publish assets, connect stores, link products, and manage Discord communities.
-- Help moderators and admins handle verification, appeals, assets, users, and operational issues.
-- Help developers run the backend, maintain integrations, and understand the ecosystem without reverse-engineering service code.
 
-## Core Concepts
+```mermaid
+flowchart TD
+  accTitle: Choose your Orbiters journey
+  accDescr: Purchases lead to asset access. Commission requests lead to creator work and review.
+  A[Your Orbiters account] --> B[Use a purchased asset]
+  A --> C[Commission a creator]
+  A --> D[Connect your community]
+  B --> E[Redeem and install]
+  C --> F[Request and follow work]
+  D --> G[Check connection and verification]
+```
 
-An **asset** is the thing a creator distributes. It can have metadata, store links, Discord role grants, supporter-tier access, and one or more downloadable or Unity-installable versions.
+## Four ideas worth knowing
 
-A **user asset** is a user's access record for an asset. It can come from a redeemed license, manual access, a creator-managed scope, or a related workflow.
+**An asset** is a creator's published item. **A version** is a release of that item. **Access** determines which releases your account can use. **A commission** is work requested from a creator, with its own participants, progress and payment records.
 
-A **store integration** connects one creator to one provider such as Gumroad, Jinxxy, Payhip, or Lemon Squeezy. Integrations let Orbiters import products, verify license keys, mirror sales, and receive webhooks when a provider supports them.
+A successful website sign-in does not by itself grant an asset, a Discord role or community verification. Each workflow checks its own evidence.
 
-A **Discord integration** connects one creator to one Discord server. Orbiters can use the shared Orbiters bot or a creator's custom bot, depending on how the server is configured.
+## Find your place
 
-A **scope** controls release access:
+Documentation is tailored to your account. Public guides are available to everyone; signed-in users, creators and staff receive the material their account can read. The stable, beta and alpha selector is a separate release filter.
 
-- `public`: stable user-facing access.
-- `beta`: beta plus public access.
-- `alpha`: alpha plus beta plus public access.
+<audience include="creator, admin, dev">
 
-## Documentation Visibility
+**Building your creator workspace?** Continue with [the documentation map](/documentation/orbiters.start.documentation-map), then connect your store, publish assets and configure commissioned work.
 
-Documentation is filtered by your account. If a page is missing from the navigation, your current account does not have access to it.
+</audience>
 
-- **Public**: visible to everyone.
-- **User**: visible to logged-in users.
-- **Creator**: visible to creators and staff who support creators.
-- **Mod**: visible to moderation staff.
-- **Admin**: visible to administrators.
-- **Dev**: visible to developers and owners.
+<audience include="admin, dev">
 
-The documentation switch can show stable, beta, or alpha docs. Stable mode shows current production behavior. Beta mode adds beta docs. Alpha mode adds alpha docs.
-
-<audience include="dev">
-
-## Documentation Implementation
-
-The website loads documentation from the root `Documentation` repository, not from `backend/docs`. The backend recursively reads Markdown from `Documentation/docs`, parses frontmatter, filters page-level audiences and release stages, strips inline restricted blocks, and only then returns Markdown to React.
-
-This means restricted text is not merely hidden in the browser. Unauthorized users do not receive that Markdown from `/documentation`.
+**Supporting or developing Orbiters?** Open [Who sees what](/documentation/orbiters.reference.visibility-atlas). The reader's visibility panel shows page audiences; its inspection switch marks restricted sections without expanding your access.
 
 </audience>

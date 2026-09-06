@@ -1,5 +1,5 @@
 ---
-title: Website Knowledge Map
+title: Find the right part of Orbiters
 section: Website
 order: 100
 audience: public, user, creator, mod, admin, dev
@@ -8,42 +8,42 @@ id: orbiters.website.knowledge-map
 domain: website
 type: reference
 owner: orbiters-docs
-lastVerified: 2026-09-04
+lastVerified: 2026-09-06
 relations: orbiters.start.overview, orbiters.reference.access-model, orbiters.reference.api, orbiters.website.public-profile
 ---
 
-# Website Knowledge Map
+# Find the right part of Orbiters
 
-Use the Website category for Orbiters account, access, creator, store, Discord, and
-staff workflows. Tool implementation details belong in Tools; VRChat platform rules
-belong in General knowledge.
+Choose the surface that owns your task. Settings, customer records and public content have different homes.
 
-## User Workflows
+| Goal | Website surface | What belongs there |
+| --- | --- | --- |
+| Manage identity | My Account | Connections, preferences and your requests |
+| Use a purchase | Asset page | License access, versions and downloads |
+| Follow commissioned work | My commissions | Progress, payment summary and next action |
+| Discover a creator | Public profile | Published work and visible activity |
+| Learn a workflow | Documentation | Guides filtered by audience and release mode |
 
-- Start with `orbiters.start.overview` for the website's role in the ecosystem.
-- Use `orbiters.how-to.account-and-discord-login` for account and Discord linking.
-- Use `orbiters.how-to.redeem-license-key` and
-  `orbiters.how-to.assets-and-downloads` for access and downloads.
-- Use `orbiters.reference.access-model` when access differs by ownership, supporter
-  tier, role, or feature scope.
-- Use `orbiters.website.public-profile` for public identity, external account links,
-  created assets, and comment activity.
-- Use [Art Commissions and Sonas](../how-to/11-art-commissions-and-sonas.md) for
-  saved character references, configurable YCH listings, and art requests (beta).
+<audience include="creator, admin, dev">
 
-## Creator Workflows
+## Creator work
 
-- Use `orbiters.how-to.configure-creator-assets` for asset configuration.
-- Use `orbiters.how-to.connect-store-integrations` and
-  `orbiters.reference.store-providers` for provider-specific behavior.
-- Use `orbiters.how-to.configure-discord-integrations` for role automation.
+Use the Creator page for integrations, assets, commission settings and income views. Home's workspace opens the selected Board. Request progress and Board columns remain separate: organizing a card does not tell a customer that delivery is complete.
 
-## Staff and Developer Workflows
+</audience>
 
-- Use `orbiters.operations.admin-and-moderation` for staff operations.
-- Use `orbiters.operations.deployment-and-backups` for production operations.
-- Use `orbiters.reference.api` and
-  `orbiters.reference.api-keys-and-credentials` for backend contracts.
+<audience include="mod, admin, dev">
 
-Search by stable ID when exact context matters. Titles and folders may change;
-stable IDs must not.
+## Community support
+
+Use the authorized verification and appeals tools for the affected Discord server. Keep membership, age evidence and purchased asset access distinct when investigating a report.
+
+</audience>
+
+<audience include="admin, dev">
+
+## Platform operations
+
+Start at [Who sees what](/documentation/orbiters.reference.visibility-atlas), then open the relevant administration view. Background jobs, credentials and documentation sources each have their own operating boundary.
+
+</audience>

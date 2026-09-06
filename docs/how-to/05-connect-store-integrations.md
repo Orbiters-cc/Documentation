@@ -13,6 +13,24 @@ lastVerified: 2026-07-14
 
 # Connect Store Integrations
 
+Connect a provider, synchronize products, link assets and inspect delivery health.
+
+```mermaid
+flowchart TD
+  accTitle: From store to asset access
+  accDescr: Connect a provider, synchronize products, link assets and inspect delivery health.
+  N0["Provider credentials"]
+  N1["Store integration"]
+  N2["Product synchronization"]
+  N3["Asset product links"]
+  N4["Purchase access"]
+  N0 --> N1 --> N2 --> N3 --> N4
+```
+
+## In this guide
+
+Supported Providers · Connect A Store · Provider Credentials · Refresh Revenue History · Integration Status
+
 Store integrations let creators connect outside stores to Orbiters. Orbiters can import products, verify license keys, mirror sales, and receive sale or license events where the provider supports it.
 
 ## Supported Providers

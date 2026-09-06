@@ -17,7 +17,7 @@ Orbiters can run locally or through Docker. Do not assume another developer has 
 
 ## Install
 
-Use Node.js 22 or newer.
+Use Node.js 22.12.0 or newer. Mermaid rendering also requires the Puppeteer browser described in [Documentation diagrams](/documentation/orbiters.reference.documentation-diagrams).
 
 ```bash
 npm install

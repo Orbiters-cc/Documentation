@@ -1,5 +1,5 @@
 ---
-title: Redeem Your First License
+title: Your first asset, from receipt to download
 section: Tutorials
 order: 20
 audience: public, user
@@ -8,42 +8,45 @@ id: orbiters.tutorial.redeem-first-license
 domain: website
 type: tutorial
 owner: orbiters-product
-lastVerified: 2026-07-12
+lastVerified: 2026-09-06
 ---
 
-# Redeem Your First License
+# Your first asset, from receipt to download
 
-Use this tutorial when you bought an asset from a creator store and want to unlock it on Orbiters.
+By the end of this tutorial, you will know which account owns your access and where to find an available version.
 
-## Prerequisites
+## Before you begin
 
-- A Discord account.
-- The license key from the store where you bought the asset.
-- Access to the Orbiters website.
+Use a license from a supported connected store. Keep the creator name and purchase receipt nearby. Sign in to the Orbiters account you intend to keep using.
 
-## Steps
+## 1. Find the asset
 
-1. Sign in to Orbiters with Discord.
-2. Open the asset page for the item you bought.
-3. Paste your license key into the redemption field.
-4. Submit the key.
-5. If Orbiters asks which creator sold the product, choose the creator and submit again.
-6. Wait for the confirmation message.
-7. Refresh the asset page if the download or install option does not appear immediately.
+Open its page and check the creator and product name against your receipt. This avoids redeeming a key while looking at a different item.
 
-## What Happens Next
+## 2. Redeem your purchase
 
-When a license is accepted, Orbiters adds the asset to your account. If the asset grants a Discord role and the creator configured the role correctly, Orbiters queues the role grant.
+Paste the key into the license field and submit. If the website asks who sold it, select that creator and continue. Wait for the access result before attempting another submission.
 
-Role changes are not instant in every case. Orbiters uses a retry queue so a temporary Discord outage does not break the redemption.
+## 3. Open an available version
 
-## If The Key Fails
+Return to the asset's versions. Choose a release your account can access. Public access does not automatically include beta or alpha releases.
 
-Check that you copied the full key and that you are redeeming the right asset. If the key came from a supported store and still fails, contact the creator with:
+## 4. Check the result
 
-- the store name,
-- the asset name,
-- the email used on the purchase,
-- the visible error message.
+You are finished when the asset is associated with your account and its permitted download or install action is available. A Discord role may arrive afterward through the background queue.
 
-Do not post your full license key in a public channel.
+
+```mermaid
+flowchart TD
+  accTitle: First asset checklist
+  accDescr: Confirm the account and asset, redeem the license, and use an available release.
+  A[Correct account] --> B[Correct asset and creator]
+  B --> C[License accepted]
+  C --> D[Permitted version available]
+```
+
+## If you get stuck
+
+Use [Redeem a license key](/documentation/orbiters.how-to.redeem-license-key) to interpret the result. Keep the seller, asset and error message when asking for help. Do not post the complete license key in public comments.
+
+Next, explore [assets and downloads](/documentation/orbiters.how-to.assets-and-downloads).

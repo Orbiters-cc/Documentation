@@ -98,3 +98,34 @@ DOCUMENTATION_ROOT=/usr/src/documentation/docs
 ```
 
 Without that mount, the backend would start but return an empty docs list.
+
+## Inspect audiences without changing access
+
+Admins, developers and owners see a page visibility panel in the website reader. Base-profile badges answer who can read the page; a switch marks the beginning and end of allowed audience and release blocks.
+
+```mermaid
+sequenceDiagram
+  accTitle: Permission-preserving documentation inspection
+  accDescr: The server validates the caller, filters content, then labels only visible boundaries.
+  participant Reader
+  participant API
+  participant Policy
+  Reader->>API: Read document with inspection requested
+  API->>Policy: Resolve caller and source audience ceiling
+  Policy-->>API: Allowed audience set
+  API->>API: Filter page and inline blocks
+  API->>API: Annotate visible blocks for admin or dev
+  API-->>Reader: Filtered Markdown and visibility metadata
+```
+
+`inspectVisibility=true` on document reads requests annotations. The service independently checks the caller rank; a query parameter cannot enable inspection for a regular user. Source ceilings still apply. A developer-only section remains absent from an admin response. Diagram requests check the current filtered page again.
+
+The [visibility atlas](/documentation/orbiters.reference.visibility-atlas) explains account expansion. The [catalog](/documentation/orbiters.reference.documentation-audience-catalog) is generated from page metadata. Neither surface changes an application's resource authorization.
+
+## Keep links and diagrams usable
+
+The reader builds its section navigation from Markdown headings and accepts both LF and Windows CRLF line endings.
+
+Use stable document IDs for website links: `/documentation/<document-id>`. IDs survive changes to titles and file names. The diagram's accompanying prose must explain its result and the meaning of branches; do not make readers depend on color alone.
+
+Every Mermaid fence needs an accessible title and description. Render diagrams through the same backend engine before publishing, especially after changing node labels or adding sequence/state diagrams.

@@ -14,6 +14,23 @@ relations: orbiters.development.boards-proposals-and-forecasts, orbiters.referen
 
 # Connect and Sync Trello
 
+References copied to a Trello card are visible to members of that Trello Board.
+
+```mermaid
+flowchart TD
+  accTitle: Understand the sharing boundary
+  accDescr: References copied to a Trello card are visible to members of that Trello Board.
+  N0["Orbiters commission references"]
+  N1["Connected Trello Board"]
+  N2["Copies uploaded to its card"]
+  N3["Trello Board members"]
+  N0 --> N1 --> N2 --> N3
+```
+
+## In this guide
+
+Administrator Setup · Connect a Creator Account · Import a Board · Bidirectional Synchronization · API and Webhook Contract · Verification
+
 A creator can import an existing Trello Board from **Creator > Boards**, manage the
 result in Idea Box, and keep its Lists and Cards synchronized in both directions.
 Trello Lists become Orbiters Board columns; open Trello Cards become local Proposals
@@ -21,7 +38,7 @@ placed in those columns. The imported Orbiters Board remains a normal permission
 Board and keeps its selected Orbiters visibility.
 
 Commission tasks also synchronize their shared references. Review the
-[Trello reference privacy rules](13-manage-commission-workspace.md#trello-references)
+[Trello reference privacy rules](/documentation/orbiters.how-to.manage-commission-workspace#trello-references)
 before placing customer work on a connected Board.
 
 ## Administrator Setup

@@ -13,6 +13,23 @@ lastVerified: 2026-07-12
 
 # Configure Discord Integrations
 
+Choose a server and bot, verify permissions, then configure roles and channels.
+
+```mermaid
+flowchart TD
+  accTitle: Connect a community
+  accDescr: Choose a server and bot, verify permissions, then configure roles and channels.
+  N0["Server and bot"]
+  N1["Connection permissions"]
+  N2["Roles and channels"]
+  N3["Check the intended workflow"]
+  N0 --> N1 --> N2 --> N3
+```
+
+## In this guide
+
+Shared Bot Mode · Custom Bot Mode · Role Requirements · Verification And Appeals
+
 Discord integrations connect creator servers to Orbiters workflows such as asset roles, verification, and appeals.
 
 ## Shared Bot Mode

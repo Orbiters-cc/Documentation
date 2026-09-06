@@ -16,7 +16,7 @@ relations: orbiters.tools.mcb-operating-contract, orbiters.tools.unitgit-operati
 
 <alpha>
 Development API, cancellation, cache and regression details are in
-[ReFit Validation and Performance](../reference/refit-validation-and-performance.md).
+[ReFit Validation and Performance](/documentation/orbiters.refit.validation-performance).
 </alpha>
 
 ReFit transfers clothing or accessory deformation from model A to model B and
@@ -134,4 +134,4 @@ graphics support and do not run the deformation pipeline.
 
 On Orbiters, the user can reorder creators, override each response time, or ask all
 selected creators at once and take the first acceptance. See [Request a Manual
-ReFit Commission](../how-to/10-request-refit-commission.md).
+ReFit Commission](/documentation/orbiters.how-to.request-refit-commission).

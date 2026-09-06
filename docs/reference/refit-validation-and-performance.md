@@ -15,7 +15,7 @@ relations: orbiters.tools.refit-operating-contract
 # ReFit Validation and Performance
 
 This describes the local development implementation. See the [ReFit Operating
-Contract](../tools/02-refit-operating-contract.md) for the creator-facing workflow.
+Contract](/documentation/orbiters.tools.refit-operating-contract) for the creator-facing workflow.
 
 ## Execution Contract
 

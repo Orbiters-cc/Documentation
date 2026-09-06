@@ -13,6 +13,21 @@ lastVerified: 2026-09-04
 
 # Telegram Login Setup
 
+Account sign-in and bot channel permissions have different responsibilities.
+
+```mermaid
+flowchart TD
+  accTitle: Separate identity from publishing
+  accDescr: Account sign-in and bot channel permissions have different responsibilities.
+  A[Telegram sign-in] --> B[Orbiters identity]
+  C[Telegram bot configuration] --> D[Channel permissions]
+  D --> E[Announcements and discussion]
+```
+
+## In this guide
+
+Configure the Application · Deployment URLs · Endpoints · Identity and Verification · Troubleshooting
+
 ## Configure the Application
 
 1. Open the [BotFather mini app](https://t.me/botfather?startapp=), select the bot
@@ -85,7 +100,7 @@ Orbiters development uses **dev.orbiters.cc** for the frontend and
 file. The public server does not forward these requests to the workstation.
 Register `https://dev.orbiters.cc` and
 `https://dev.api.orbiters.cc/auth/telegram/callback` in BotFather, and use the
-callback in the dev key. See [Local Development and OAuth](../operations/06-public-local-development.md)
+callback in the dev key. See [Local Development and OAuth](/documentation/orbiters.operations.public-local-development)
 for the local routing and provider callback settings.
 
 The production proxy also serves a static response at that development callback
@@ -155,4 +170,4 @@ database to exercise both initial creation and subsequent alteration.
   a different identity. Accounts are not automatically merged.
 
 See [Telegram's official login documentation](https://core.telegram.org/bots/telegram-login)
-and [Account Login and Connections](../how-to/03-account-and-discord-login.md).
+and [Account Login and Connections](/documentation/orbiters.how-to.account-and-discord-login).

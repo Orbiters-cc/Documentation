@@ -1,5 +1,5 @@
 ---
-title: Redeem a License Key
+title: Turn a purchase into Orbiters access
 section: How To
 order: 30
 audience: public, user
@@ -8,41 +8,52 @@ id: orbiters.how-to.redeem-license-key
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-07-12
+lastVerified: 2026-09-06
 ---
 
-# Redeem a License Key
+# Turn a purchase into Orbiters access
 
-License redemption links an outside store purchase to your Orbiters account.
+Have the license key from your store receipt ready. Redeeming it attaches the supported purchase to the Orbiters account you are currently using.
 
-## Redeem
+## Redeem the key
 
-1. Log in with Discord.
-2. Open the asset page.
-3. Enter the license key exactly as provided by the store.
-4. Submit the form.
-5. If prompted, pick the creator who sold the asset.
+1. Sign in to the account that should receive access.
+2. Open the asset page and enter the key exactly as the store supplied it.
+3. Submit once and read the result.
+4. If Orbiters asks for the creator, choose the seller and retry.
 
-## Why Orbiters Might Ask For The Creator
 
-Orbiters keeps one license input field, even though creators can connect their own stores. To avoid sending too many requests to outside providers, Orbiters searches under a fixed request budget. When too many creator stores remain untried, the website asks for a creator hint and retries the search in that creator's integrations.
+```mermaid
+flowchart TD
+  accTitle: Redeem a purchase
+  accDescr: Enter a key, narrow the creator if asked, then open the asset after access is confirmed.
+  A[Sign in] --> B[Enter your license key]
+  B --> C{Result}
+  C -->|Access confirmed| D[Open the asset]
+  C -->|Creator needed| E[Choose the seller]
+  E --> B
+  C -->|Not resolved| F[Check receipt and account]
+```
 
-## Access After Redemption
+## Know what success gives you
 
-After a successful redemption:
+The asset appears as owned. Public versions become available; beta and alpha versions still need the corresponding access scope. A configured Discord role is delivered separately, so website access can succeed before the role appears.
 
-- the asset appears as owned by your account,
-- the provider and store integration are recorded,
-- public downloads or install tools become available,
-- alpha or beta access appears only if the owner granted that scope,
-- related Discord role changes are queued when configured.
+| What you see | Next step |
+| --- | --- |
+| Creator selection requested | Choose the creator who sold the item |
+| Key not resolved | Check the copied key, seller and supported store |
+| Asset unlocked, Discord role missing | Check your Discord connection and server membership |
+| A beta version remains locked | Check your granted scope |
 
-## Refunds And Revocations
+## Why the creator question exists
 
-If a connected store sends a refund, chargeback, or license-disabled event that Orbiters can match to your redeemed license, the user asset is disabled. If the asset granted a Discord role, Orbiters queues a role removal.
+Orbiters searches connected stores under a limited request budget. A creator hint directs that search to the right integrations. It is not a second purchase or a request for your store password.
+
+Matched refunds, chargebacks or disabled-license events can withdraw access later. Role removal also checks whether another enabled asset still grants that role.
 
 <audience include="dev">
 
-The access decision is centralized in `accessPolicyService.canUserAccessAsset`. Do not duplicate redemption, enabled-state, scope, and supporter-tier checks inside individual routes.
+Access decisions belong in `accessPolicyService.canUserAccessAsset`. Keep enabled-state, scope and supporter-tier rules centralized when adding a route. See [license resolution](/documentation/orbiters.explanation.license-resolution) for the provider lookup boundary.
 
 </audience>

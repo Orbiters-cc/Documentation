@@ -13,6 +13,24 @@ lastVerified: 2026-09-04
 
 # Account Login and Connections
 
+Review your current account before adding another sign-in provider.
+
+```mermaid
+flowchart TD
+  accTitle: Connect identities deliberately
+  accDescr: Review your current account before adding another sign-in provider.
+  N0["Sign in"]
+  N1["My Account"]
+  N2["Review connections"]
+  N3["Connect another provider"]
+  N4["Confirm the same Orbiters account"]
+  N0 --> N1 --> N2 --> N3 --> N4
+```
+
+## In this guide
+
+Sign In · Connect Another Login Provider · Request Creator Status · Default Currency · Notifications And Account Actions · What Login Controls · Verification Is Server-Scoped
+
 Sign in to Orbiters with Discord or Telegram. Connecting both providers lets you
 use either one to reach the same account, purchases, and creator permissions.
 Discord server verification and role automation require a Discord connection.
@@ -112,6 +130,6 @@ Discord server verification is not a single global flag. A user can be verified 
 
 OAuth login uses one Orbiters Discord application. Creator custom bots are gateway and REST clients only; they are not used for user OAuth.
 
-For Telegram deployment configuration, see [Telegram Login Setup](../reference/telegram-login.md).
+For Telegram deployment configuration, see [Telegram Login Setup](/documentation/orbiters.reference.telegram-login).
 
 </audience>

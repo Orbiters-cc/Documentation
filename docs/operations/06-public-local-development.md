@@ -62,7 +62,7 @@ development URL during setup; the exact validation requirement is unconfirmed.
 The later `/setdomain` command succeeded, but that command configures the legacy
 widget. Complete **Login Widget > Allowed URLs** in the BotFather mini app for
 the OpenID Connect flow used by Orbiters; see the credential mapping in
-[Telegram Login Setup](../reference/telegram-login.md).
+[Telegram Login Setup](/documentation/orbiters.reference.telegram-login).
 
 ### Public Telegram Registration Endpoint
 
@@ -110,5 +110,5 @@ A health check confirms routing, not provider authorization. Complete a real
 provider login separately after configuring its application and credentials.
 Production configuration and provider credentials remain independent.
 
-See [Telegram Login Setup](../reference/telegram-login.md) and
+See [Telegram Login Setup](/documentation/orbiters.reference.telegram-login) and
 [Telegram's official login documentation](https://core.telegram.org/bots/telegram-login).

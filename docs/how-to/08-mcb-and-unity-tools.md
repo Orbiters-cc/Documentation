@@ -13,6 +13,23 @@ lastVerified: 2026-09-02
 
 # MCB and Unity Tools
 
+Sign in, prepare the installer and link Unity before using permitted versions.
+
+```mermaid
+flowchart TD
+  accTitle: Move from the website into Unity
+  accDescr: Sign in, prepare the installer and link Unity before using permitted versions.
+  N0["Website account"]
+  N1["Install wizard"]
+  N2["Magic Sync"]
+  N3["Unity project and asset versions"]
+  N0 --> N1 --> N2 --> N3
+```
+
+## In this guide
+
+What The Tools Use Orbiters For · User Flow · Inspect Version Capabilities · Switch Or Reset Mesh Versions · ReFit Assets · Creator Flow · Connection Problems
+
 MCB and Unity-facing tools use Orbiters as the account, access, and package source for compatible avatar assets.
 
 ## What The Tools Use Orbiters For

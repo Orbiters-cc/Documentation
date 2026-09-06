@@ -14,6 +14,24 @@ relations: orbiters.decision.structured-deployment-evidence, orbiters.operations
 
 # Structured Deployment Reports
 
+Follow revision identity through preflight and backup evidence to the runtime result.
+
+```mermaid
+flowchart TD
+  accTitle: Read a release report
+  accDescr: Follow revision identity through preflight and backup evidence to the runtime result.
+  N0["Commit identity"]
+  N1["Preflight events"]
+  N2["Backup events"]
+  N3["Deployment stages"]
+  N4["Final result and artifacts"]
+  N0 --> N1 --> N2 --> N3 --> N4
+```
+
+## In this guide
+
+Artifacts · Event Schema · Documentation Impact Declaration · Preflight and Backup Evidence · Reading Reports · Incident Use · Verification
+
 Production deployment reports are deterministic evidence written by the deployment
 script. They let an operator, administrator, or authorized local agent inspect what
 ran without granting production shell access. An AI may summarize a report, but it

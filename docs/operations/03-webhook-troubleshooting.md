@@ -13,6 +13,25 @@ lastVerified: 2026-09-02
 
 # Webhook Troubleshooting
 
+Check validation, persistence, domain changes and background delivery in order.
+
+```mermaid
+flowchart TD
+  accTitle: Trace a webhook to its effect
+  accDescr: Check validation, persistence, domain changes and background delivery in order.
+  N0["Provider event"]
+  N1["Signature and route"]
+  N2["Stored event"]
+  N3["Matched domain change"]
+  N4["Background delivery"]
+  N5["Visible result"]
+  N0 --> N1 --> N2 --> N3 --> N4 --> N5
+```
+
+## In this guide
+
+First Checks · Matching Revocations · Duplicate Events · Provider-Specific Notes · Stripe ReFit Commissions
+
 Store webhooks keep Orbiters close to the provider's sale and license state. They are especially important for refunds, revocations, chargebacks, and sale mirrors.
 
 ## First Checks

@@ -136,3 +136,19 @@ The opt-in `commissionReliabilityDatabase.test.js` checks real PostgreSQL
 locking, handoff revocation/replay, delivery history, media retention and ledger
 deduplication. It refuses to run unless explicitly pointed at the fixture database.
 No verification requires a live charge or access to a creator's Stripe account.
+
+## Worker ownership and operator attention
+
+Each outbox claim now has a UUID owner token and a renewable five-minute expiry. Success and failure require the same unexpired claim. Stale recovery increments an interrupted-attempt counter; repeated interruption becomes actionable instead of silently starting over forever.
+
+Commission operations and fee refunds retain reconciliation after the normal retry budget. They set an attention flag while continuing. Admins see IDs, types, attempt counts and schedules in **Admin → Background jobs**, without raw payloads or provider errors. Successful completion clears the flag. See [Recover background jobs](/documentation/orbiters.operations.background-jobs).
+
+## Identity at Checkout creation
+
+The locked client account determines whether the user may submit. The Stripe account determines the payment account ID and mode recorded on the request. These are distinct objects. A regression fixture deliberately uses a numeric client ID and `acct_fixture` to prevent variable shadowing from saving the wrong identity.
+
+## Derived next actions
+
+`commissionNextAction` computes a viewer-specific cue from existing request, offer and delivery states. It does not persist another status or infer that an external artist payment occurred. Only active unexpired candidates may receive an offer-response cue; private delivery cues belong to participants.
+
+The client list's `attention` scope filters in SQL before cursor pagination. Creator lists label their filters as applying to loaded requests or the current page. Board cards receive participant cues after item-visibility filtering. A review cue for the client links to the existing request and does not grant a new state transition.

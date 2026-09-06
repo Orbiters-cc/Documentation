@@ -13,6 +13,23 @@ lastVerified: 2026-09-02
 
 # Assets and Downloads
 
+Check the asset and its available releases against your enabled access.
+
+```mermaid
+flowchart TD
+  accTitle: Choose a version you can use
+  accDescr: Check the asset and its available releases against your enabled access.
+  N0["Asset page"]
+  N1["Enabled access"]
+  N2["Release scope"]
+  N3["Download or install"]
+  N0 --> N1 --> N2 --> N3
+```
+
+## In this guide
+
+Asset Page Signals · Download Access · Version Scopes · Gallery Page
+
 Asset pages show what an asset is, how to buy or redeem it, and what versions are available to your account.
 
 ## Asset Page Signals

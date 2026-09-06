@@ -13,6 +13,25 @@ lastVerified: 2026-09-05
 
 # Accept ReFit Commissions
 
+Acceptance leads to payment confirmation, Board placement and creator updates.
+
+```mermaid
+flowchart TD
+  accTitle: Accept, organize and deliver
+  accDescr: Acceptance leads to payment confirmation, Board placement and creator updates.
+  N0["Active offer"]
+  N1["Accept and select destination"]
+  N2["Platform payment confirmation"]
+  N3["Board placement"]
+  N4["Work and review"]
+  N5["Completion"]
+  N0 --> N1 --> N2 --> N3 --> N4 --> N5
+```
+
+## In this guide
+
+Set up once · Accept an offer · Keep the client updated · Test on a development deployment
+
 Offer manual fitting work and keep accepted requests on your private Board.
 
 ## Set up once

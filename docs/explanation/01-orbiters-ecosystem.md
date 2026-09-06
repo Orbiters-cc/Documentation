@@ -1,5 +1,5 @@
 ---
-title: Orbiters Ecosystem
+title: How the pieces fit together
 section: Explanation
 order: 80
 audience: public
@@ -8,33 +8,43 @@ id: orbiters.explanation.ecosystem
 domain: general
 type: explanation
 owner: orbiters-product
-lastVerified: 2026-07-12
+lastVerified: 2026-09-06
 ---
 
-# Orbiters Ecosystem
+# How the pieces fit together
 
-Orbiters sits between creators, users, stores, Discord, and Unity tools.
+Orbiters connects records that otherwise live in separate places: a store purchase, a website account, a community role and a Unity project.
 
-## Users
 
-Users log in with Discord, redeem purchases, download assets, and use installation tools when assets support them.
+```mermaid
+flowchart TD
+  accTitle: Orbiters responsibilities
+  accDescr: Stores supply purchase evidence, Orbiters resolves access, and connected tools consume the allowed result.
+  Store[Store purchase] --> Access[Orbiters access decision]
+  Identity[Connected account] --> Access
+  Access --> Versions[Allowed asset versions]
+  Access --> Roles[Configured Discord roles]
+  Versions --> Unity[Unity install tools]
+  Client[Commission client] --> Request[Shared request history]
+  Creator[Creator] --> Request
+  Request --> Board[Private work organization]
+```
 
-## Creators
+## One connection is not every permission
 
-Creators publish assets, connect stores, manage Discord integrations, configure asset roles, and use supporter tiers or scopes to control access.
+A login establishes identity. Store evidence establishes supported purchase access. A Discord integration determines which community the bot serves. Commission participation controls a private request. These relationships overlap, but each owns a different decision.
 
-## Stores
+| Question | Start with |
+| --- | --- |
+| Can I download this version? | Asset access and release scope |
+| Why is my role missing? | Asset-role mapping, membership and delivery result |
+| Who can read my commission? | Request participants and attachment-sharing stage |
+| Why is documentation absent? | Audience and selected release stage |
 
-Stores remain the system of record for purchases. Orbiters uses integrations to verify licenses and mirror sale or revocation events where possible.
+Creators connect their own stores and communities. Staff support those workflows through authorized tools. Unity tools use backend contracts; the local project remains where scene and mesh work happens.
 
-## Discord
+<audience include="creator, admin, dev">
 
-Discord is both the login identity provider and a runtime target for server workflows. Orbiters can manage verification state, appeals, and asset roles per connected server.
+Read [the access model](/documentation/orbiters.reference.access-model) for the exact distinctions.
 
-## Unity And MCB Tools
-
-Unity-facing tools call Orbiters to check account identity, discover assets, fetch versions, and download package data that matches the user's access.
-
-## Staff And Developers
-
-Staff use admin and moderation tools to operate the system. Developers maintain backend services, frontend flows, provider integrations, deployment scripts, and documentation.
+</audience>

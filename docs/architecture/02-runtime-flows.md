@@ -19,13 +19,16 @@ This page summarizes the highest-risk runtime flows.
 
 ```mermaid
 flowchart TD
+  accTitle: Runtime Flows
+  accDescr: Visual overview of runtime flows. The surrounding sections explain the steps and boundaries.
     Start["server.js starts"] --> DB["initializeDatabase"]
-    DB --> AI["ensure default AI config"]
+    DB --> Preflight{"EXIT_AFTER_DATABASE_INIT?"}
+    Preflight -->|no| AI["ensure default AI config"]
     AI --> Bootstrap["bootstrap integrations"]
     Bootstrap --> DiscordStrategies["initialize Discord OAuth strategies"]
-    DiscordStrategies --> Preflight{"EXIT_AFTER_DATABASE_INIT?"}
+    DiscordStrategies --> Runtime["start runtime workers and listeners"]
     Preflight -->|yes| Exit["close database and exit"]
-    Preflight -->|no| Runtime["start runtime workers and listeners"]
+
     Runtime --> Listen["listen on configured port"]
 ```
 
@@ -33,6 +36,8 @@ flowchart TD
 
 ```mermaid
 sequenceDiagram
+  accTitle: Runtime Flows
+  accDescr: Visual overview of runtime flows. The surrounding sections explain the steps and boundaries.
     participant User
     participant Frontend
     participant Backend
@@ -50,6 +55,8 @@ sequenceDiagram
 
 ```mermaid
 sequenceDiagram
+  accTitle: Runtime Flows
+  accDescr: Visual overview of runtime flows. The surrounding sections explain the steps and boundaries.
     participant Store
     participant Backend
     participant DB
@@ -65,6 +72,8 @@ sequenceDiagram
 
 ```mermaid
 sequenceDiagram
+  accTitle: Runtime Flows
+  accDescr: Visual overview of runtime flows. The surrounding sections explain the steps and boundaries.
     participant Creator
     participant Backend
     participant Discord
@@ -88,6 +97,8 @@ and each destination uses a separate `DiscordImagePlacement`.
 
 ```mermaid
 sequenceDiagram
+  accTitle: Runtime Flows
+  accDescr: Visual overview of runtime flows. The surrounding sections explain the steps and boundaries.
     participant Browser
     participant Backend
     participant DocsRepo

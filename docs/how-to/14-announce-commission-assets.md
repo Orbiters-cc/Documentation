@@ -13,6 +13,23 @@ lastVerified: 2026-09-05
 
 # Announce a Commission Asset
 
+Inspect the destination before retrying an uncertain announcement.
+
+```mermaid
+flowchart TD
+  accTitle: Check delivery before repeating it
+  accDescr: Inspect the destination before retrying an uncertain announcement.
+  A[Choose connected channel] --> B[Publish announcement]
+  B --> C{Delivery result}
+  C -->|Posted| D[Open destination]
+  C -->|Failed| E[Fix setup]
+  C -->|Uncertain| F[Inspect channel before retry]
+```
+
+## In this guide
+
+Connect Telegram · Connect Discord · Publish and Check Delivery · Public Comment Rules · Administrator Prerequisites
+
 Connect a channel once, then select **Post on [channel]** when saving a public
 commission asset. Posting is optional and starts unchecked. Each listing gets
 one announcement per channel; editing it does not create repeated posts.

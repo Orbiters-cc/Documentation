@@ -13,6 +13,23 @@ lastVerified: 2026-07-14
 
 # Creator Assets
 
+Configure the item, map store products and release versions, then check customer access.
+
+```mermaid
+flowchart TD
+  accTitle: Publish a usable asset
+  accDescr: Configure the item, map store products and release versions, then check customer access.
+  N0["Asset details"]
+  N1["Store product links"]
+  N2["Version and scope"]
+  N3["Publish and inspect access"]
+  N0 --> N1 --> N2 --> N3
+```
+
+## In this guide
+
+Configure An Asset · Access Scopes · Store Product Links · Creator Galleries · Discord Asset Roles
+
 Creators manage assets from the Creator area. The asset configuration screen is the source of truth for store links, access scopes, avatar base data, media, and version behavior.
 
 ## Configure An Asset

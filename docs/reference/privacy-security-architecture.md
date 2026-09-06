@@ -13,6 +13,22 @@ lastVerified: 2026-09-05
 
 # Privacy and Credential Security Architecture
 
+Closure changes authentication and credentials while shared records follow preservation rules.
+
+```mermaid
+flowchart TD
+  accTitle: Separate identity from shared history
+  accDescr: Closure changes authentication and credentials while shared records follow preservation rules.
+  A[Account lifecycle] --> B[Authentication state]
+  A --> C[External credentials]
+  A --> D[Private files]
+  A --> E[Shared commission and discussion records]
+```
+
+## In this guide
+
+Service Boundaries · Credentials and Local Setup · Production Deployment · Closure, Shared Data and Restore · Session and User Experience Invariants · Validation
+
 The implementation is local development work awaiting application release. Public
 privacy and seller controls use existing account and commission surfaces with
 HeroUI disclosures, status messages and reduced-motion support.
