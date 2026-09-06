@@ -66,3 +66,7 @@ Verification rules and appeals are scoped per guild. A user can be verified in o
 `discordClientManager` is the only module that creates discord.js clients or calls `login()`. Other services resolve a guild-specific client through the manager.
 
 </audience>
+
+## Display pictures from a Discord room
+
+To put a room on the Gallery page, follow [Gallery: connect a Discord room and import pictures](17-set-up-gallery.md). Connecting the Discord integration is the prerequisite; create the gallery and crawl its history separately.

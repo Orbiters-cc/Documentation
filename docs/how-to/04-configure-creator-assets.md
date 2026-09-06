@@ -70,3 +70,5 @@ An asset's Discord role can follow supported access grants and revocations throu
 **Implementation boundary.** Discord writes belong in `OutboxJob`/`outboxService`. Purchase, redemption, webhook and synchronization paths enqueue role operations; they should not introduce inline Discord mutations. `accessPolicyService` owns release-scope expansion and the linked supporter-tier check.
 
 </audience>
+
+For room selection, public/private visibility, history imports and troubleshooting, see [Gallery: connect a Discord room and import pictures](17-set-up-gallery.md). The guide also distinguishes Gallery rooms from an asset showcase.
