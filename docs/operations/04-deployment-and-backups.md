@@ -41,6 +41,10 @@ documentation impact, backup checksum/upload, both schema preflight boots, image
 synthetic checks, queue state, artifacts, and terminal outcome. See **Structured
 Deployment Reports** for interpretation and incident use.
 
+Image IDs in a completed deployment report come from the replacement containers,
+after recreation. Match those immutable IDs with `docker inspect` when checking
+which build is actually serving traffic; a mutable image tag alone is insufficient.
+
 </alpha>
 
 ## Caddy Config
