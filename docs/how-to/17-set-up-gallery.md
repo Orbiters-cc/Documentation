@@ -86,7 +86,26 @@ Open the asset's **Showcase** settings in Creator, select its **Showcase Rooms**
 
 The September 6 optimization separates image-list delivery from Discord URL refreshes. Lists return stored dimensions and source endpoints without contacting Discord; visible tiles refresh expired links independently and offer retry on failure. Previews request a bounded image from Discord's media proxy, with original-image fallback; opening a picture loads the original. Discord attachment URLs expire, so a cold image still depends on Discord availability and cannot be promised instantaneous delivery. See [Discord's signed attachment URL reference](https://docs.discord.com/developers/reference#signed-attachment-cdn-urls).
 
-Relevant ranking keeps reaction/recency weighting and author diversity, but ranks candidates in one query instead of repeatedly scanning 500-row batches. The per-author candidate limit preserves the requested result prefix. Masonry uses flexible columns capped at 240 pixels, fitting four columns at the desktop width shown in the report, with fewer columns on smaller screens.
+### Scrolling, duplicates and failed images
+
+- **All** returns one card per imported Discord image, even when several accessible galleries share that image. Separate uploads of similar-looking pictures are still separate sources; this is not visual similarity detection.
+- Supported image MIME types or image filename extensions determine eligibility. Video dimensions no longer qualify an attachment as a picture. The same rule filters existing imported records at read time, so no destructive flush or recrawl is required to remove video slots.
+- A failed source refresh or failed image decode removes the card from the current view and closes its space. **Retry skipped images** tries those sources again. This does not delete or globally hide the pictures. Network failures are bounded rather than leaving indefinite loading tiles.
+- Masonry positions come from stored dimensions and available width. Loading another page does not recompute earlier positions from recycled DOM measurements. Tilts fit within each card's allocated space, including very tall images. Four columns fit the reported desktop width, with fewer columns on phones.
+
+### Stable relevance while browsing
+
+The first page ranks eligible, deduplicated image IDs once. Relevant still combines reactions (75% weight, capped logarithmic score) and recency (25% weight), with an author diversity window of ten slots where alternatives exist. A source author's Discord identity supplies diversity even when there is no linked Orbiters profile.
+
+Later pages use the same ordered snapshot, so new pictures, reaction changes or the passage of time do not move page boundaries underneath a reader. Date and Reactions use snapshots too. Reloading or changing the sort creates a fresh order. Current gallery access, active placements and source visibility are checked again for each page; hidden or removed records can reduce a page's visible count without stopping pagination.
+
+Cursors are opaque, bound to the user, accessible gallery set and sort. Clients send `0` for the first page and return `nextCursor` unchanged afterwards. The frontend also suppresses repeated source IDs and ignores responses belonging to an earlier sort or gallery. A `410` response offers **Reload gallery** while retaining the current view; it never silently inserts a fresh first page into the existing list.
+
+### Deployment and verification
+
+Snapshots are held in backend memory for 30 minutes of inactivity, with a shared budget of 500,000 image IDs and at most 128 sessions. Eviction or a backend restart can require Reload gallery. A collection over 500,000 eligible images must be narrowed before browsing. The current Compose deployment has one backend per environment; multiple backend workers would need session affinity or a shared snapshot store before scaling this feature.
+
+Run `node --test test/galleryDelivery.test.js test/galleryFeed.test.js` from the backend for delivery and ordering checks. `src/scripts/galleryBrowserQa.cjs` exercises a production frontend build against local mocked APIs on port 4296: four pages, duplicates, a broken image, scroll-back, image bounds and mobile width. It never calls the live gallery or Discord. The optional `galleryRankingDatabase.test.js` requires an explicitly isolated local PostgreSQL fixture and checks populated ranking, video exclusion, shared placements and reaction changes between pages.
 
 These changes need the matching frontend and backend deployment; publishing this documentation alone does not deploy the optimization.
 
