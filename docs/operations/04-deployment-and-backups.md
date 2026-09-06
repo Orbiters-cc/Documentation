@@ -27,6 +27,13 @@ for the environment secret, migration and restore procedure.
 
 Orbiters runs through Docker Compose, with Caddy routing traffic to frontend and backend services. Production deploys and backups are coordinated by GitHub Actions and scripts in the main repository.
 
+The former Gitea experiment and its Docker-socket webhook deployers are retired.
+They are absent from Compose; `git.orbiters.cc` returns HTTP 410. Preserved legacy
+repository data is not a service dependency and must not be reactivated by deployment.
+Production Caddy administration listens only inside the Caddy container; use the
+documented `docker exec` reload path. The development administration port is published
+only on the host loopback interface.
+
 <alpha>
 
 The deploy script also appends versioned deterministic evidence for changed paths,
@@ -79,6 +86,11 @@ If public health checks fail, maintenance is restored. A failure after checkout
 leaves maintenance active for investigation; never restart old code against a
 migrated database without checking the recovery procedure.
 
+Application deployment recreates only the frontend and backend, without restarting
+PostgreSQL or unrelated services. PostgreSQL and production application containers
+have restart policies; normal Compose startup waits for PostgreSQL's health check,
+which uses the configured database name as well as its user.
+
 ## Before approving a release
 
 Verify a fresh backup can be decrypted and its database dump restored in an isolated
@@ -109,6 +121,9 @@ node scripts/orbiters-data.js backup --env prod --output backups/pre-deploy
 ```
 
 Backups include code, database dumps, config, and uploaded files. They contain secrets when env files are included.
+Existing backend credential-key files are included in the configuration snapshot.
+Keep an independent protected copy of the production encryption key as well; never
+replace a newer privacy deletion ledger with an older backup during recovery.
 
 ## Production Backup Encryption
 
