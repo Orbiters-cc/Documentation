@@ -45,6 +45,15 @@ Image IDs in a completed deployment report come from the replacement containers,
 after recreation. Match those immutable IDs with `docker inspect` when checking
 which build is actually serving traffic; a mutable image tag alone is insufficient.
 
+Backups exclude regenerable `.cache` directories, including rendered documentation
+diagrams. Those files may belong to the container user and are recreated on demand.
+Uploads, the privacy deletion ledger and credential key files remain recovery data;
+permission failures on those files must still stop the backup.
+Deployment creates the privacy ledger as a private file owned by the host backup
+user before the container starts writing to it. Repeated preparation keeps existing
+records intact. If an older ledger belongs to another user, preserve it and repair
+ownership; never delete it to make a backup succeed.
+
 </alpha>
 
 ## Caddy Config
