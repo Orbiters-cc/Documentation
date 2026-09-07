@@ -44,6 +44,14 @@ Use `node scripts/validate-docs.js` in the Documentation repository before revie
 CI performs the same contract check. A documentation change is not valid merely
 because the Markdown renderer accepts it.
 
+The knowledge search index expires after 30 seconds and rebuilds on the next
+request, including repository provenance. Added, edited, and removed Markdown
+pages therefore reach search and tool-category lists without restarting the
+backend. The administrator's forced rebuild remains available for immediate
+refresh. Publishing files alone does not update an already cached index until
+that refresh occurs. Regression coverage uses temporary Markdown files in
+`backend/test/knowledgeIndexRefresh.test.js`.
+
 ## Source Configuration
 
 `KnowledgeSource` stores the enabled state, stage allowlist, audience allowlist,
