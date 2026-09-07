@@ -25,6 +25,10 @@ separate colored lanes; **Tip** marks a version with no children. Independent ro
 stay disconnected. Channel names describe access, so Alpha, Beta and Public are
 not branch names.
 
+History uses compact rows without a card background. Selecting a release highlights
+the whole row, including its graph lane and dot. The save bar gains a soft shadow
+as it sticks above the editor while scrolling; the shadow fades away on return.
+
 Select a version to open its editor. Search highlights matching numbers, titles
 and channels while retaining the connections for context. On narrower screens,
 the scrollable graph sits above the editor.
