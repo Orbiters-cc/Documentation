@@ -57,6 +57,7 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Build an asset people can actually use | creator, admin, dev | stable | — | — | ✓ | — | ✓ | ✓ |
 | Connect Store Integrations | creator, admin, dev | stable | — | — | ✓ | — | ✓ | ✓ |
 | Configure Discord Integrations | creator, admin, dev | stable | — | — | ✓ | — | ✓ | ✓ |
+| Gallery — connect a Discord room and import pictures | creator, admin, dev | stable | — | — | ✓ | — | ✓ | ✓ |
 | Supporter Tiers | creator, admin, dev | stable | — | — | ✓ | — | ✓ | ✓ |
 | Connect and Sync Trello | creator, admin, dev | alpha | — | — | ✓ | — | ✓ | ✓ |
 | Request a Manual ReFit Commission | user, creator, admin, dev | stable | — | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -65,6 +66,7 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Manage Your Commission Workspace | creator, admin, dev | beta | — | — | ✓ | — | ✓ | ✓ |
 | Announce Commission Assets in Your Channels | creator, admin, dev | beta | — | — | ✓ | — | ✓ | ✓ |
 | Set Your Seller Information and Commission Terms | creator, admin, dev | beta | — | — | ✓ | — | ✓ | ✓ |
+| Edit releases in the version workspace | creator, admin, dev | beta | — | — | ✓ | — | ✓ | ✓ |
 
 ## Decisions
 
@@ -164,6 +166,8 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Steward API and Token Reference | dev | alpha | — | — | — | — | — | ✓ |
 | ReFit Validation and Performance | dev | alpha | — | — | — | — | — | ✓ |
 | Telegram Login Setup | admin, dev | beta | — | — | — | — | ✓ | ✓ |
+| MCB Version Pipeline Benchmarks | dev | alpha | — | — | — | — | — | ✓ |
+| MCB Adaptive Version Delivery | admin, dev | alpha | — | — | — | — | ✓ | ✓ |
 
 ## Start Here
 
@@ -181,6 +185,10 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | ReFit Operating Contract | creator, dev | stable | — | — | ✓ | — | — | ✓ |
 | Unit Git Operating Contract | creator, dev | stable | — | — | ✓ | — | — | ✓ |
 | XRay Gizmos Operating Contract | creator, dev | stable | — | — | ✓ | — | — | ✓ |
+| Inspect an avatar with XRayGizmos | public | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| XRayGizmos controls and troubleshooting | public | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Make your first project checkpoint with UnitGit | public | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Work with UnitGit branches, shelves, and history | public | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 ## Tutorials
 

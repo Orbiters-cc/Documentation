@@ -19,8 +19,11 @@ storage. The largest remaining first-use cost was Unity's blendshape constructio
 Binary cache serialization, buffered writes and Windows-native SHA-256 all improved
 measured stages while preserving the representation checked by the experiment.
 
-These are experimental results, not shipped behavior. Production packaging,
-downloads, Apply, cache identity and UI timing were not changed. Creator-built
+These results describe the initial experimental baseline. A subsequent local
+implementation is documented in [MCB Adaptive Version Delivery](mcb-adaptive-delivery.md),
+including the new block-codec results and completed health checks. It has not been
+released. In the initial experiment, production packaging, downloads, Apply,
+cache identity and UI timing were not changed. Creator-built
 AssetBundles were excluded: previous product experiments had made network traffic
 and server storage too expensive.
 
@@ -248,5 +251,6 @@ The native-mesh check returned successfully but also emitted “Bones do not mat
 bindpose” while its fixture restored renderer bounds through `SmrPathService`.
 That console diagnostic also needs review before calling the health suite clean.
 
-No source optimization was committed, pushed or enabled. This page records the
-experimental evidence and the proposed sequence only.
+No source optimization was committed, pushed or enabled during that initial
+experiment. The later implementation and validation status are recorded separately
+in [MCB Adaptive Version Delivery](mcb-adaptive-delivery.md).
