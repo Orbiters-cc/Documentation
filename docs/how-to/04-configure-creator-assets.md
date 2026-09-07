@@ -51,6 +51,12 @@ Public scope includes public releases. Beta adds beta releases. Alpha includes a
 
 If a purchase is recognized but access still looks wrong, investigate the product mapping and scope before asking the buyer to purchase again. [Connect store integrations](/documentation/orbiters.how-to.connect-store-integrations) explains where those links come from.
 
+<beta>
+The next release adds a graph and guided editor for uploaded avatar versions.
+See [Edit releases in the version workspace](22-edit-asset-versions.md) for parent
+links, per-version drafts, customization, dependencies and file actions.
+</beta>
+
 ```orbiters
 {"kind":"challenge","title":"Mika owns the jacket. The beta is locked.","question":"Mika has public access. You published version 1.1 as beta. What explains the locked release?","options":[{"label":"The key needs to be redeemed again","correct":false,"explanation":"Redemption already established public access. Repeating it does not turn a public grant into beta access. Check the intended release scope."},{"label":"The release needs a different scope","correct":true,"explanation":"Exactly: public ownership and beta access are separate. Invite Mika to beta only if that is your intention, or direct them to the public release."}]}
 ```
