@@ -61,6 +61,25 @@ allowlist, and page audience are intersected. A source configuration can remove 
 audience from already indexed content without leaking inline blocks, relations, or
 backlinks to callers outside the new policy.
 
+## Website navigation state
+
+The frontend keeps the selected guide in `/documentation/:id` and browsing context
+in the `q`, `category`, `domain`, `type`, and `stage` query parameters. The default
+stable stage can be omitted. Selecting a category, submitting a search, changing a
+filter, or opening a different guide pushes a history entry. Browser Back and
+Forward restore those views; opening the current guide does not add a duplicate.
+
+Links to `/documentation/...` inside Markdown use client-side routing and retain
+the current browsing parameters unless the link supplies its own query. The
+reader's Documentation button returns to that browsing context. Live search
+debounces user input only: restoring a URL or rerendering a callback must not
+resubmit a search or clear the selected tool category.
+
+Regression coverage lives in `KnowledgeBasePage.test.jsx`,
+`DocumentationSearch.test.jsx`, and `DocumentationLink.test.jsx` in the frontend.
+These implementation notes describe the navigation fix; production availability
+depends on deploying the frontend change.
+
 ## REST Read Surface
 
 `GET /knowledge` is the structured Knowledge search used by agents and internal

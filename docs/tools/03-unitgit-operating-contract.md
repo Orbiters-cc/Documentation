@@ -14,6 +14,8 @@ relations: orbiters.general.vpm-package-contract, orbiters.tools.refit-operating
 
 # Unit Git Operating Contract
 
+For the public workflow, start with [your first project checkpoint](/documentation/orbiters.tools.unitgit-get-started) and [branches, shelves, and history](/documentation/orbiters.tools.unitgit-history-and-shelves).
+
 Unit Git operates on the Git repository at the Unity project root. Open it from
 `Tools > Orbiters > Unit Git`.
 

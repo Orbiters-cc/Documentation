@@ -8,7 +8,7 @@ id: orbiters.start.documentation-map
 domain: general
 type: reference
 owner: orbiters-docs
-lastVerified: 2026-09-06
+lastVerified: 2026-09-07
 ---
 
 # Pick a path through the documentation
@@ -21,6 +21,15 @@ Use this page as a route planner. Read a task guide when you want to do somethin
 2. [Redeem your first license](/documentation/orbiters.tutorial.redeem-first-license).
 3. [Find assets and versions](/documentation/orbiters.how-to.assets-and-downloads).
 4. [Request manual ReFit work](/documentation/orbiters.how-to.request-refit-commission) when you need a creator's help.
+
+## Work in Unity
+
+These tool guides are public and do not require a creator account.
+
+| Tool | Start here | Keep nearby |
+| --- | --- | --- |
+| XRayGizmos | [Inspect an avatar](/documentation/orbiters.tools.xraygizmos-get-started) | [Controls and troubleshooting](/documentation/orbiters.tools.xraygizmos-controls) |
+| UnitGit | [Make your first checkpoint](/documentation/orbiters.tools.unitgit-get-started) | [Branches, shelves, and history](/documentation/orbiters.tools.unitgit-history-and-shelves) |
 
 <audience include="creator, admin, dev">
 

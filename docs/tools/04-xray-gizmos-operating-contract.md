@@ -14,6 +14,8 @@ relations: orbiters.tools.refit-operating-contract
 
 # XRay Gizmos Operating Contract
 
+For the public workflow, start with [Inspect an avatar with XRayGizmos](/documentation/orbiters.tools.xraygizmos-get-started) and [controls and troubleshooting](/documentation/orbiters.tools.xraygizmos-controls).
+
 XRay Gizmos renders editor-only armature, bone-weight, and mesh-edge overlays in the
 Unity Scene view. Open it from `Tools > Orbiters > XRay Gizmos`.
 
