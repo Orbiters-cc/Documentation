@@ -33,6 +33,9 @@ Select a version to open its editor. Search highlights matching numbers, titles
 and channels while retaining the connections for context. On narrower screens,
 the scrollable graph sits above the editor.
 
+The asset name, back button and availability count share a compact row above the
+editor, beside the history list, to keep the release controls near the top.
+
 ## Edit and save a release
 
 1. Enter a recognizable **Version title** and write **Release notes** describing
@@ -72,6 +75,10 @@ Save or discard edits before generating it.
 **Custom vein texture** previews and downloads the stored PNG. Upload or replace a
 PNG up to 20 MB to rebuild the archive. This file operation saves immediately;
 save or discard metadata edits before replacing the texture.
+
+The texture preview loads automatically when its card scrolls into view. Loading
+does not block editing; if it fails, use **Retry preview**. Versions without a
+stored texture do not request a preview.
 
 Version numbers identify uploaded builds. Source model metadata, upload details
 and fingerprints are inspectable under **Build information**. Rebuild in MCB to
