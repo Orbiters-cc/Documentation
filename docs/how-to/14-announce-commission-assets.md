@@ -155,7 +155,7 @@ Registering the update webhook does not replace the Login callback.
 | --- | --- |
 | Bot API token | The bot access token from BotFather, not a Login Widget secret |
 | Webhook secret | A random 32–256-character secret using letters, digits, `_`, `-` |
-| Public webhook URL (optional) | Filled automatically by the local development bridge; leave blank for the deployment URL |
+| Public webhook URL (optional) | Production: `https://api.orbiters.cc/commission-channels/telegram/webhook`. Development: the public HTTPS tunnel URL written by the bridge |
 
 Register Telegram's `setWebhook` with the public API URL shown in the setup guide,
 ending in `/commission-channels/telegram/webhook`. Set `secret_token` to the same
@@ -171,6 +171,29 @@ prompted privately instead. Stored secrets are never fetched back for display.
 The secret maps to **`secret_token`** and the URL to **`url`**.
 The copied command contains entered credentials: keep it private, including
 clipboard contents and terminal history. Execution does not print credentials.
+
+### Production registration troubleshooting
+
+The production backend must run with `PUBLIC_API_URL=https://api.orbiters.cc`.
+Both Telegram setup guides use that public address. If the guide shows HTTP,
+set this variable in `backend/.env.prod` and recreate the backend container so it
+loads the new environment. An internal HTTP proxy connection does not make HTTP
+a valid public Telegram webhook.
+
+If PowerShell reports **Registration failed**, first check that the command's
+URL begins with `https://`, uses the announcement path above, and contains the
+Bot API token rather than the Login Client Secret. Keep the same webhook secret
+in Orbiters and Telegram. The updated command reports Telegram's failure reason,
+verifies the registered URL using `getWebhookInfo`, and shows pending updates and
+the last delivery error. Registration success does not by itself prove delivery:
+a 403 delivery error points to a missing or mismatched secret; connection or TLS
+errors point to public reachability. Do not rotate credentials to fix an HTTP URL.
+
+The API-key form defaults new records to the running environment and fills the
+Telegram URL from that deployment. Use the matching deployment when configuring
+dev or prod; a dev webhook needs a publicly reachable tunnel, while production
+uses its normal HTTPS API address. Invalid public HTTP callbacks and webhook
+URLs are rejected before saving or copying setup commands.
 
 Generating does not change Telegram or the saved API key by itself. Replacing a
 saved secret requires running registration again. Registration replaces that

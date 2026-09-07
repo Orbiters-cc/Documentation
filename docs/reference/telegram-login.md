@@ -8,7 +8,7 @@ id: orbiters.reference.telegram-login
 domain: website
 type: reference
 owner: orbiters-platform
-lastVerified: 2026-09-04
+lastVerified: 2026-09-07
 ---
 
 # Telegram Login Setup
@@ -29,8 +29,9 @@ flowchart TD
 1. Open the [BotFather mini app](https://t.me/botfather?startapp=), select the bot
    representing your website, and open **Login Widget**. The bot overview shows
    its Bot API access token; continue to **Login Widget** for login credentials.
-2. Register your website origin and the exact backend callback URL in **Allowed
-   URLs**. The callback path is `/auth/telegram/callback`, without an `/api` prefix.
+2. Register the exact HTTPS backend callback in **Redirect URIs** under **Login
+   Widget**. The callback path is `/auth/telegram/callback`, without an `/api` prefix.
+   **Trusted Origins** is a separate setting for cross-origin token requests.
 3. Copy the **Client ID** and **Client Secret** from those settings. Keep the default
    RS256 signing algorithm, or choose ES256. Other signing algorithms are not supported.
 4. In Orbiters API Keys, create a global **Telegram Login** key for the deployment's
@@ -50,7 +51,7 @@ does not require restarting the backend.
 
 The `/setdomain` chat command configures Telegram's legacy widget. Its success
 message confirms that domain setting only; it does not confirm registration of
-the new OpenID Connect Allowed URLs or provide the login client credentials.
+the new OpenID Connect Redirect URIs or provide the login client credentials.
 The Bot API access token displayed beside **Copy** and **Revoke** on the bot
 overview is not a substitute for the Login Client Secret.
 
@@ -108,6 +109,14 @@ failure before relying on the public probe.
 
 ### Environment configuration
 
+Set the running backend's `PUBLIC_API_URL` to its external HTTPS address. For
+production Orbiters this is `https://api.orbiters.cc`, and the Telegram callback
+is `https://api.orbiters.cc/auth/telegram/callback` in both Orbiters and BotFather.
+A proxy can receive HTTPS externally and forward HTTP internally; that internal
+protocol must not become the callback shown by the setup guide. Changing an
+environment variable requires restarting or recreating the backend process.
+Changing the saved Telegram Login key takes effect on the next attempt.
+
 The frontend uses `REACT_APP_BACKEND_URL` for both providers. The backend uses
 `FRONTEND_URL` to return users to the website and `FRONT_URL` for credentialed CORS.
 Set these for the intended website in each deployment, whether running locally
@@ -157,6 +166,12 @@ database to exercise both initial creation and subsequent alteration.
 
 - **Provider unavailable:** check that an active global Telegram Login key exists
   in the correct environment and contains all three fields.
+- **"Telegram login is not configured or is temporarily unavailable" before
+  Telegram opens:** check the saved callback's scheme. A public `http://` callback
+  is rejected even if Client ID and Client Secret are present. Correct it to HTTPS
+  in Orbiters and in BotFather **Redirect URIs**, then start a new attempt. If the
+  setup guide itself shows HTTP, correct the backend's `PUBLIC_API_URL`; do not
+  copy the insecure URL. Recreating the bot or rotating its secret is unnecessary.
 - **Login expired:** begin again in the same browser with cookies enabled. Backend
   restarts clear pending login state in the existing in-memory session store.
 - **Login failed:** check the registered callback and signing algorithm. Restart
