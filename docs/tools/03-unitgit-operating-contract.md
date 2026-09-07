@@ -8,7 +8,7 @@ id: orbiters.tools.unitgit-operating-contract
 domain: unitgit
 type: reference
 owner: orbiters-unitgit
-lastVerified: 2026-09-05
+lastVerified: 2026-09-07
 relations: orbiters.general.vpm-package-contract, orbiters.tools.refit-operating-contract
 ---
 
@@ -25,6 +25,27 @@ Unity ignore file.
 
 Unit Git deliberately has no push action. Publishing remains an explicit external
 workflow so a Unity UI action cannot silently update a remote repository.
+
+<alpha>
+
+## Scoped release checkpoints
+
+The local checkpoint fix skips ignored, untracked package outputs such as generated
+`.unitypackage` files and their metadata. Tracked files remain eligible even when
+an ignore rule matches their name. It does not force generated archives into Git.
+
+Staging and the scoped commit use a private copy of the index while reserving the
+real index lock. Unrelated staged and unstaged changes retain their state. A failed
+stage or commit leaves the original index unchanged and restores the release
+metadata file. After a successful commit, the completed index replaces the original.
+If that final replacement fails, the checkpoint is still reported as committed and
+the completed index is retained for recovery; the Console gives its location.
+
+The regression tests exercise ignored package outputs, mixed staged/unstaged
+unrelated changes, and failed checkpoint rollback in temporary repositories.
+This implementation is validated locally and has not been released.
+
+</alpha>
 
 ## Large change sets
 

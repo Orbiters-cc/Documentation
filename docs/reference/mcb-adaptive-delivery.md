@@ -96,8 +96,11 @@ four-worker word XOR reduce preparation work. These changes do not introduce a n
 mesh transport representation, quantization, GPU requirement or AssetBundle build.
 
 Two stored archives increase storage relative to storing Zstd alone. Common package
-files occur in each archive. For the measured mesh fixture, the compressed payloads
-sum to about 82.45 MB before common files and ZIP overhead. A user downloads one
+files occur in each archive. The initial benchmark fixture totaled 82.45 MB across both payloads. The later
+creator regression build preserves every serialized position delta and totals
+106.65 MB (35.19 MB Zstd, 71.46 MB LZ4), before common files and ZIP overhead.
+See the [creator regression measurements](mcb-version-pipeline-benchmarks.md#creator-build-and-apply-regression)
+for the distinction. A user downloads one
 of them. Existing versions are not rebuilt automatically.
 
 ## Measurements available to staff

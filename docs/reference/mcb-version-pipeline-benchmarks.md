@@ -27,6 +27,91 @@ cache identity and UI timing were not changed. Creator-built
 AssetBundles were excluded: previous product experiments had made network traffic
 and server storage too expensive.
 
+## Creator build and Apply regression
+
+A later end-to-end regression used the actual Ultipaw creator inputs, with dynamic
+normals enabled, then applied a local unsubmitted version and reset the active
+avatar. It was not uploaded. The scene remained unsaved, with a separate recovery
+checkpoint captured before testing. These are complete workflow observations on
+one computer, not medians from the earlier microbenchmark suite.
+
+| Operation | Measured result | Boundary |
+| --- | ---: | --- |
+| Complete creator packaging before the fix | 207.39 s | Includes dynamic normals, both payload variants, logic, metadata and manifest |
+| Complete packaging with direct normal capture | 15.92 s | Same compressed payload bytes as the slow build |
+| Final packaging preserving every encoded position delta | 10.42 s | Later observation; payload size differs from the preceding pair |
+| Dynamic normal generation before the fix | 198.75 s | Most time was rebuilding 497 frames in a temporary Unity mesh |
+| Direct capture of the selected normal frames | 1.39 s | 18 selected shapes; no temporary blendshape mesh |
+| First Apply with frame-budgeted construction | 22.08 s | Scene work; 23.45 s observed wall time including presentation/scheduling |
+| Apply after returning to Base Default, using the cache | 0.47 s | Scene work; 1.47 s wall time |
+| Reset to Base Default | 0.29–0.33 s | Scene work; the first observed wall time was 3.98 s |
+
+The expensive build stage was `Mesh.AddBlendShapeFrame`, taking 189.31 seconds
+inside the temporary dynamic-normal mesh build. Calculating normals took about
+1.57 seconds in that instrumented baseline. Capturing the calculated normal arrays
+directly removes the temporary rebuild. A controlled slow/fast build pair produced
+identical Zstd and LZ4 bytes before the separate position-encoding correction.
+
+The first Apply still constructs the Unity mesh. It now yields between blendshape
+submissions after an 8 ms work budget. A single native call reached 82.6 ms, so this
+is not an 8 ms frame-time guarantee. The observed long uninterrupted construction
+pause was removed; elapsed first-use time remains substantial. Cached Apply skips
+that construction. The 80 ms intro and 600 ms completion animation remain intact.
+
+### Fidelity and source preservation
+
+The broken build omitted Body because it selected only renderers still backed by
+the canonical FBX. A generated Body mesh was skipped while Hair remained selected.
+Renderer collection now uses canonical model bindings and refuses incomplete or
+ambiguous mappings.
+
+The rebuilt version contains Body's 497 blendshapes and the other renderers' 8, 7,
+11 and 7 blendshapes: 530 frames across five renderers. Every name, order, frame
+weight and count matches the modified reference. Base vertices, normals, tangents,
+UV channels, submesh indices, bind poses, skin weights and all 95 bone paths per
+renderer compare exactly. The unrelated clothing mesh retained its source asset.
+
+Position deltas are serialized without the old per-component `0.00001` cutoff.
+Unity's public mesh construction still removes some near-zero position deltas when
+normal/tangent deltas do not retain that vertex. The verifier reports exactness
+separately: the largest observed source-frame position difference is below
+`0.00001` mesh units. A skinned deformation comparison at the applied weights and
+pose has a maximum Body position difference of `0.00000898` mesh units and RMS
+`0.000000339`. This is not bit-identical preservation of every source FBX field;
+blendshape normal/tangent delivery retains the existing selective dynamic-normal
+policy.
+
+Keeping every encoded position delta raises the final payloads to **35.19 MB Zstd**
+and **71.46 MB LZ4**, versus 29.19 MB and 53.26 MB in the earlier fixture. A user
+still downloads one variant. These are payload sizes, excluding common files and
+ZIP overhead.
+
+No FBX import occurred during the tested advanced Apply/reset transitions. The
+canonical FBX, its `.meta`, and preserved original hashes remained unchanged.
+The redundant importer work was replaced with direct root Animator-avatar
+assignment when the canonical FBX already contains the original data. An actual
+FBX replacement still requires restoration when switching back.
+
+The gallery test found published 0.5.1 missing from the old cached list. A fresh
+fetch populated both the visible list and shared cache. Deleting its local copy
+kept the server entry available. Published metadata now takes precedence over a
+downloaded copy, retaining its PUBLIC scope and server editing identity instead
+of showing the Imported badge. Testing redownload also exposed an initialization
+race: the UI could retain a garment hash after source mapping switched to the
+avatar FBX. Source changes now refresh hash state, stale asynchronous results are
+rejected, and downloads resolve the current source hash before requesting files.
+A redownload with an intentionally stale garment hash then succeeded. Downloaded
+metadata is now persisted locally as well, so repository scans after reload or
+while offline recognize the downloaded version.
+
+All 52 MCB and 29 Unit Git EditMode tests passed, along with both packages'
+deterministic health checks. Unit Git tests verify ignored archive handling and
+preservation of unrelated staged/unstaged changes. Aggregate local evidence is
+`Editor/Benchmarks/results/2026-09-07-creator-regression.json`; the reusable reference
+comparison is `MCBMeshRoundTripVerifier.Compare`. Existing uploaded incomplete
+versions are not repaired automatically; publish a corrected build to replace
+their behavior. Source fixes remain local and unreleased.
+
 ## Measurement conditions
 
 - Date: 2026-09-07; package source commit `b4224c9d87fa5d4d043dd65d81d904b955c0752d`.
