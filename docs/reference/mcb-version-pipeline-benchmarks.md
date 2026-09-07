@@ -14,6 +14,10 @@ relations: orbiters.tools.mcb-operating-contract
 
 # MCB Version Pipeline Benchmarks
 
+For the remaining Body construction bottleneck and the next proposed experiments,
+see [First Apply Optimization Research](mcb-first-apply-research.md). Those proposals
+are research only; no additional mesh-construction implementation was made.
+
 Local experiments found substantial gains in advanced-mesh packaging and cache
 storage. The largest remaining first-use cost was Unity's blendshape construction.
 Binary cache serialization, buffered writes and Windows-native SHA-256 all improved

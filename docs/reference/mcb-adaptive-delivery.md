@@ -105,12 +105,26 @@ of them. Existing versions are not rebuilt automatically.
 
 ## Measurements available to staff
 
-**Administration > MCB Performance** is available to admins, owners and developers.
+**Administration > My Custom Base > Delivery performance** is available to admins, owners and developers.
 It shows reporting installations, download decisions, codec shares, failures,
 median decode time per MB, and the mean estimated saving against the alternative.
 The 99% notice uses only choices where both codecs were available and calibration
 was complete. Uncalibrated choices and single-codec availability cannot inflate
 that comparison. Estimates are labelled separately from measured download times.
+
+Calibration plots show every reported compression/decompression point with median
+fitted coefficients for each codec. These are population summaries, not one universal
+computer model. The decision plot places predicted LZ4 time on the horizontal axis
+and predicted Zstd time on the vertical axis: LZ4 wins above the equal-time diagonal,
+Zstd below. Dot color records the actual selection; failed transfers remain visible
+in tooltips. Only calibrated decisions with both candidates belong in that plot.
+
+Select a real download to explore its two transfer-plus-decode curves against network
+speed. Its archive sizes and latest preceding calibration determine the crossover.
+The shaded areas show which codec is predicted to win. Missing preceding calibration
+is shown explicitly. The plots omit mesh construction and are not measured end-to-end
+speedups. Reports load in pages of 500 under one time window, without random sampling;
+loading and partial-fetch failures remain visible.
 
 Reports contain timing/byte samples, the chosen codec and candidates, Unity version,
 Editor platform, logical core count, memory size and a random installation ID.
@@ -122,7 +136,8 @@ from the measurement body. Requests still use normal authenticated transport.
 
 The summary covers the last 30 days. An hourly maintenance job removes older raw
 reports. Requests are schema-validated, size-limited and rate-limited by authenticated
-account. The dashboard returns aggregate data. Client reports are observations,
+account. The dashboard returns aggregates and staff-only timing points without the
+stored installation hash. Client reports are observations,
 not trusted billing or security signals.
 
 | Endpoint | Access and purpose |
@@ -131,6 +146,10 @@ not trusted billing or security signals.
 | `GET /mcb/performance/probe/25` or `/100` | Authenticated; fixed-size probe through existing private R2/local file delivery; eight requests per day |
 | `POST /mcb/performance/reports` | Authenticated; bounded schema 1 reports; 120 requests per hour |
 | `GET /mcb/performance/summary` | Admin/owner/dev aggregate view |
+| `GET /mcb/performance/points` | Admin/owner/dev; paginated 30-day points and preceding calibration; `until`, `afterTime`, `afterId` cursor |
+| `GET /mcb/package-versions` | Admin/owner/dev; public MCB package catalog with saved support status |
+| `PUT /mcb/package-versions` | Admin/owner/dev; atomically save selected public versions, status and message |
+| `GET /mcb/check-connection?packageVersion=1.5.2` | Existing authentication; explicit package support policy and custom update message |
 | `GET /mcb/:assetId/model?...&codec=LZ4` or `ZSTD` | Existing version authorization and source checks, followed by selection of a stored variant |
 
 Probe files are generated once and reused. The configured administrative account
@@ -138,6 +157,47 @@ must exist as their storage owner. Bootstrap failure is optional for the client;
 it does not disable version downloads. Network probes use the same configured
 private file-delivery service as versions, with cache avoidance and exact byte-count
 validation. The large probe is conditional on the client's small-probe result.
+
+## Public package support
+
+Open **My Custom Base > Package versions**, select one or several releases, choose
+a status, enter the message and save. Deprecated and unsupported statuses require
+a nonblank message, up to 2,000 characters. The interface previews the changed state
+immediately and restores the prior state on failure.
+
+- **Supported:** clear the warning and connected-feature restriction.
+- **Deprecated:** display the custom warning while allowing connected features.
+- **Unsupported:** require an update before connected features; locally saved versions
+  remain available.
+
+The catalog reads only `orbiters.mcb` from the
+[public VPM feed](https://blackorbit1.github.io/orbiters-vpm/index.json), with a five-minute
+cache. On 7 September 2026 the feed contained MCB 1.5.2; its separate `ultipaw` entries
+are not MCB package releases. Catalog failures do not erase existing policy. Startup
+reads the stored exact-version policy without waiting for GitHub. A newer major
+version alone does not make a supported version unsupported.
+
+Clients check on startup and reconnection. Existing published clients need the new
+policy-aware package code before they can honor these individual support settings;
+this is not a server-side ban on requests from old clients. Policies are stored in
+`mcb_package_policies`, with the last editing staff ID and timestamp.
+
+## Connection recovery and installation dependencies
+
+A transient backend transport failure retains the offline report and saved versions.
+The Editor quietly probes again after 2 seconds, backing off to at most one probe
+per minute; a response restores connectivity, rechecks package support and refreshes
+the gallery. Recovery does not replay uploads. The local development watcher is
+restricted to source/configuration and excludes `uploads` and `.cache`: generated
+delivery JSON must not restart the API. Restart the development watcher once after
+adopting its configuration.
+
+Python is not required by MCB users, and Unity installation is not treated as proof
+of a Python installation. C# calls the bundled native codecs directly. Python scripts
+are optional developer benchmarks or CI/package preparation tools; release archives
+exclude `.py` files and require all distributed codec binaries. Windows codec
+roundtrips passed with an empty executable search path. The separate Blender-sync
+feature uses Blender's embedded interpreter, not system Python.
 
 ## Local evidence and release checks
 
@@ -170,6 +230,15 @@ authorization, input limits, retention and aggregate queries. Disposable Postgre
 rehearsals boot both fresh and populated prior schemas twice and verify existing
 records and source/renderer associations remain unchanged. The frontend has targeted
 dashboard tests and a passing production build.
+
+The admin/recovery follow-up passed 58 Unity EditMode tests (including native
+roundtrips with no executable search path), six focused backend tests, seven frontend
+tests, and a production build. A fixture-only headless browser rendered all three
+plots and saved an unsupported package status plus message with no browser errors.
+Fresh and populated-schema rehearsals each booted twice, preserving existing rows
+and the new support policy; points and their preceding calibration were verified.
+A simulated offline incident in the live Editor recovered without reloading it.
+The locally constructed release archive validated 224 files with zero Python files.
 
 Final local totals: 49 Unity EditMode tests passed; 527 backend tests passed with
 14 existing skips; two dashboard tests passed. The backend and frontend were
