@@ -52,6 +52,11 @@ Public scope includes public releases. Beta adds beta releases. Alpha includes a
 If a purchase is recognized but access still looks wrong, investigate the product mapping and scope before asking the buyer to purchase again. [Connect store integrations](/documentation/orbiters.how-to.connect-store-integrations) explains where those links come from.
 
 <beta>
+In an avatar asset's **General** tab, **Change thumbnail** uploads the square image
+used in asset lists and MCB. Choose PNG, JPEG or WebP up to 10 MB; it is saved as a
+centered 512 × 512 crop. The preview updates after saving. The MCB banner is edited
+separately and is not changed by a thumbnail upload.
+
 The next release adds a graph and guided editor for uploaded avatar versions.
 See [Edit releases in the version workspace](22-edit-asset-versions.md) for parent
 links, per-version drafts, customization, dependencies and file actions.
