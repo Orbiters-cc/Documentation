@@ -37,7 +37,9 @@ calendar event. Group ownership supplies these permissions. A moderator can use
 an already connected group through their linked personal VRChat identity or a
 website team assignment.
 
-Opening pages reads saved information. **Refresh groups from VRChat**, adding a
+Browsing communities and events reads saved information. Opening **Manage team**
+or searching its members checks your current authority with the provider.
+**Refresh groups from VRChat**, adding a
 community, changing team access and publishing an event make the necessary
 provider requests. Future instance creation is part of the publication you authorize.
 
@@ -56,6 +58,8 @@ can establish team access. Website admins can delegate further under that native
 authority. Removing a website role does not revoke permissions the person already
 has on Discord or VRChat. Website assignments do not change native platform roles.
 If the original grantor loses native authority, their delegated access stops working.
+That includes viewing the team and searching for members: an old website assignment
+does not keep those lists accessible after its authority is revoked.
 
 Global Orbiters staff rank alone does not authorize another person's community.
 Community Leader status controls who can connect a personal community-management
@@ -69,6 +73,12 @@ the image to 16:9; review the preview before publishing. Replace or Remove chang
 the draft, and saving a published event updates its Discord cover and VRChat
 calendar/announcement image. Changing the VRChat community clears the banner so
 you can choose one for the new destination. Draft uploads stay private on Orbiters.
+
+**Trying a few covers? Save a draft when you find the right one.** Uploads that
+are at least 24 hours old and are not used by any saved event are cleaned up
+automatically. Saved drafts keep their banners, as do published and cancelled
+events. Replaced or removed covers become eligible once no saved event uses them.
+An abandoned editor cannot keep an upload indefinitely; upload it again if needed.
 
 In **The VRChat instance**, enter a world name and press **Search** or Enter.
 Results show thumbnails and authors; select a card to fill the world ID. Use

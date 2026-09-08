@@ -8,14 +8,14 @@ id: orbiters.how-to.edit-asset-versions
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-07
+lastVerified: 2026-09-08
 ---
 
 # Edit releases in the version workspace
 
 Open an avatar asset's configuration and select **Versions**. Publish versions from
 MCB Creator mode first; the website manages the uploaded releases. This workspace
-is implemented for the next application release and is not yet deployed.
+is included in the September 8 application release.
 
 ## Follow the history
 
@@ -52,6 +52,12 @@ Version drafts stay separate when switching versions. An unsaved marker identifi
 each edited release. **Discard** restores that version's saved values. A failed
 save keeps the draft for retry. Drafts are held in the current page; save before
 leaving or closing it.
+
+Accidentally pressed **Back**? The page offers **Keep editing** or **Discard and
+leave** before navigating away. The same protection covers Forward, other tabs
+and links within Orbiters. Refreshing or closing the browser uses its own unsaved
+changes warning. These prompts protect the current session; they do not save a
+draft for your next visit.
 
 ## Configure MCB options
 

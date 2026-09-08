@@ -15,8 +15,9 @@ lastVerified: 2026-09-08
 
 The `/community-events` API stores event drafts, destination communities and
 community-specific website grants. JWT authentication and human-account checks
-apply throughout. List/detail routes read local state; explicit actions and
-authorized delivery jobs perform provider requests.
+apply throughout. Event and community list/detail routes read local state;
+team lists and member searches check current provider authority, as do privileged
+actions and authorized delivery jobs.
 
 ## Persistence and authorization
 
@@ -29,6 +30,25 @@ session material.
 `EventCommunityGrant` assigns website admin/moderator access. Provider-native
 authority is checked before mutations. Delegation records its originating native
 administrator; their current authority is checked when a delegate acts.
+Team reads and member searches require management authority through the same
+check. A saved admin grant alone is insufficient after its native authority is lost.
+
+## Banner retention and refresh timing
+
+Banner uploads are private File records. Every five minutes, a bounded cleanup
+scan checks uploads older than 24 hours. Any saved event reference protects its
+banner, regardless of event status. Saving an event and cleanup lock the same
+File row: cleanup cannot race a save into deleting the newly referenced image.
+
+Unreferenced uploads become inactive before deletion. Cleanup removes their local
+and Orbiters object-storage copies, then the File record to release upload quota.
+A storage failure retains the inactive record for retry and still counts against
+quota. This does not remove images already delivered to VRChat's gallery.
+
+The Events page refreshes every five seconds while work is busy or due. A future
+scheduled action sets a timer for its due time instead of polling throughout the
+wait. Hidden tabs pause automatic refresh; returning resumes it. The backend
+worker continues independently of whether anyone has the page open.
 
 `CommunityEvent` contains a creator, revision, event data and per-step delivery
 receipts. Reads and edits are creator-scoped. Revisions reject stale edits.
