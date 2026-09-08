@@ -8,7 +8,7 @@ id: orbiters.development.testing-strategy
 domain: website
 type: how-to
 owner: orbiters-engineering
-lastVerified: 2026-09-06
+lastVerified: 2026-09-08
 ---
 
 # Test the failure that would hurt a user
@@ -56,6 +56,26 @@ flowchart TD
 
 Use an explicitly isolated database, never one selected accidentally from application environment files. Backfill required columns before schema sync enforces `NOT NULL`.
 
-For startup checks set `FAIL_FAST=true`, `EXIT_AFTER_DATABASE_INIT=true`, `SKIP_EXTERNAL_STARTUP=true` and an alternate port such as `4200`. Ports 4000, 4100, 3000 and 3100 may already belong to development services.
+For database preflight checks set `FAIL_FAST=true`, `EXIT_AFTER_DATABASE_INIT=true`, `SKIP_EXTERNAL_STARTUP=true` and an alternate port such as `4200`. These flags skip workers and HTTP listening: they do not prove the backend can start. Ports 4000, 4100, 3000 and 3100 may already belong to development services.
+
+## Exercise enabled worker startup
+
+Startup changes need a separate regression through `server.js` to an HTTP response
+from `/healthz`, with the changed initializer running. Stub provider effects and
+use fixtures or a disposable database so validation cannot contact real bots or
+modify community data. Test the worker with `SKIP_EXTERNAL_STARTUP` unset and
+`false`, then test the disabled path separately. Check repeated starts and timer
+callbacks, and close test resources with a bounded timeout.
+
+`backend/test/vrchatAdultStartup.test.js` covers this boundary for the adult-role
+worker. Its server smoke check uses real Express, the entrypoint and the worker,
+with fixture database initialization, routes, WebSocket setup and other services.
+It proves worker startup and HTTP readiness; database migrations and live provider
+behavior require their own checks. The test runs in `npm test`.
+
+A local helper named `process` previously shadowed Node's global and made
+`process.env.SKIP_EXTERNAL_STARTUP` throw before HTTP listening. Database-only
+preflights missed it. Use descriptive helper names such as `processScope`, and
+report the tested startup boundary explicitly when handing off a change.
 
 The outbox upgrade test requires `RUN_OUTBOX_DB_TESTS=true`, `OUTBOX_TEST_PG_HOST=127.0.0.1` and a disposable PostgreSQL port of at least 54000. It uses fixture credentials and creates its own database. Read `backend/test/outboxLeaseDatabase.test.js` before running it.
