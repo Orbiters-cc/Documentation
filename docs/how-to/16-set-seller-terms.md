@@ -44,14 +44,11 @@ does not enable PayPal in the separate Orbiters Stripe checkout.
 
 <audience include="admin,dev">
 
-**PayPal missing from Stripe Checkout?** The current ReFit integration explicitly
-requests `payment_method_types: ['card']`. Enabling PayPal in the Stripe Dashboard
-does not override that list. Supporting it requires a checkout integration change
-and payment-lifecycle tests, not a second artist API key. Stripe documents
-[PayPal availability and activation](https://docs.stripe.com/payments/paypal) and
-[separate authorisation and capture](https://docs.stripe.com/payments/place-a-hold-on-a-payment-method).
-Check the same Stripe account and test/live environment used by Orbiters. Existing
-checkout sessions retain the payment-method configuration they were created with.
+**PayPal missing from Stripe Checkout?** Open **Admin → Stripe** and check the
+connected account, test/live mode and PayPal preference. New ReFit requests use
+Stripe's eligible payment preferences instead of the former card-only setting.
+See [Choose Stripe Payment Methods](17-manage-stripe-payment-methods.md) for
+activation, delayed-capture restrictions and the scope of these settings.
 
 </audience>
 
