@@ -22,7 +22,8 @@ Combine words to narrow results: **Stripe PayPal** searches across both the sect
 name and the setting's explanation.
 
 Select a result, or use the arrow keys and **Enter**, to open its section. A visible
-matching label is highlighted and brought into view. For settings inside an editor
+matching label gets a soft, rounded background glow and is brought into view, with
+the text kept sharp. For settings inside an editor
 or sub-tab, first select the relevant record, server or sub-tab. Search never changes
 a setting, opens a destructive confirmation, or submits a form for you.
 
