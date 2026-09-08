@@ -48,6 +48,18 @@ claim gives one worker a ten-minute lease. Every step records `sending` before i
 provider mutation, then persists the returned ID and `done` state. Interrupted
 `sending` steps become `uncertain`; they are not automatically recreated.
 
+Workers and manual recovery reserve provider IDs under a PostgreSQL transaction
+advisory lock before saving their receipts. The lookup includes all other events
+in the same community and delivery kind; instance IDs also include the world in
+their scope. Existing receipts cannot be reassigned to another event. Recovery
+checks scheduled start/end times for calendar and Discord records, and the
+generated schedule text for announcements.
+
+Account closure clears the event schedule and invalidates its lease token in the
+same transaction. A worker holding the old token cannot persist another step or
+restore the schedule. An already-sent provider request may finish, but the worker
+stops when its next lease-checked write fails.
+
 | Step | Provider operation |
 | --- | --- |
 | VRChat calendar | Create `POST /calendar/{groupId}/event`; edit `PUT /calendar/{groupId}/{calendarId}/event` |
@@ -71,6 +83,8 @@ creation-only access fields and disable repeat creation notifications.
 Cancellation uses the same durable steps. New instances are never created while
 cancelling. Failed operations require explicit retry; uncertain operations require
 provider inspection, verification of an existing ID, or explicit retry authorization.
+Cancellation permission checks cover only pending operations with an existing
+provider ID, so an absent instance does not require instance-management access.
 
 ## Validation and release boundary
 

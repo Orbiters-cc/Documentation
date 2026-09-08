@@ -147,11 +147,20 @@ provider, then either enter the existing resource ID for verification or explici
 confirm that nothing was created before retrying. A backend restart does not
 silently repeat an unconfirmed creation.
 
+Use the provider record for this exact occurrence of the event. Recovery checks
+the title and scheduled times and rejects a record already linked to another
+Orbiters event, including another week of a recurring meetup.
+
 **Cancel event** asks for confirmation, then cancels the Discord event, removes
 the VRChat calendar entry, marks its announcement cancelled and closes an instance
 created for it. Cancellation stops pending instance creation. Active Discord events
 are completed; already completed or removed records are treated as finished.
 Review individual statuses if any cancellation step fails.
+
+Cancellation checks permissions for the remaining actions. If no instance was
+created, instance-management permission is not required; closing an existing
+instance still requires it. Completed cancellation steps do not require renewed
+access to their provider.
 
 Provider rate limits, permission changes or disconnected accounts can delay or
 block delivery. Orbiters does not claim completion until each action is confirmed.
@@ -159,6 +168,8 @@ An instance that missed the event's end time is not created later.
 
 Account closure removes private drafts and website team assignments and stops
 queued work. Already published records remain on their respective platforms.
+Closure also invalidates active delivery leases so workers stop before subsequent
+steps. A provider request already in flight may still complete.
 
 <audience include="dev">
 
