@@ -8,7 +8,7 @@ id: orbiters.account.vrchat-community
 domain: website
 type: how-to
 owner: orbiters-docs
-lastVerified: 2026-09-05
+lastVerified: 2026-09-08
 ---
 
 # Manage a VRChat community
@@ -47,6 +47,10 @@ below the group tools.
 This community connection is separate from your personal identity in
 **Overview → Connections → VRChat**. Linking a personal identity does not grant
 Community Leader access or connect a community-management session.
+
+To schedule a gathering across Discord and VRChat, open **Admin → Events**.
+[Create and manage community events](manage-community-events.md) explains group
+selection, website team access, announcements and configurable instance opening.
 
 ## Choose a group
 
