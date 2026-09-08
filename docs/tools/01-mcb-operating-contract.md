@@ -34,7 +34,7 @@ the preserved copy of `A`.
 
 **Create new version** opens a separate, resizable window containing the existing
 Blender connector, model inputs, customization settings, and Build/Publish controls.
-The form fills the window without an outer card or asset-name header.
+The form fills the window with a small edge padding, without an outer card or asset-name header.
 The asset's version timeline remains in the inspector. Clicking the action again
 focuses the open window. Closing and reopening it keeps the draft while the same
 MCB inspector remains active. Changing assets or disposing that inspector closes
