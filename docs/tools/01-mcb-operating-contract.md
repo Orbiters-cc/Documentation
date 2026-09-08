@@ -30,6 +30,15 @@ the preserved copy of `A`.
 
 <alpha>
 
+## Installed version options after editor reloads
+
+MCB restores the installed version's metadata before drawing its action button and
+customization options, including ReFit and blendshape controls. Shared mesh assets
+are checked as a complete set: one reused mesh alone does not identify a release.
+If the saved version marker is stale, MCB recovers only when the applied meshes
+identify one available version. When several versions use identical meshes, the
+explicit installed version determines which options belong to the avatar.
+
 ## Responsive gallery cards
 
 Gallery cards expand evenly to fill each row as the inspector is resized. The
