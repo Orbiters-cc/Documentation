@@ -8,7 +8,7 @@ id: orbiters.mcb.adaptive-delivery
 domain: mcb
 type: reference
 owner: orbiters-mcb
-lastVerified: 2026-09-07
+lastVerified: 2026-09-08
 relations: orbiters.mcb.version-pipeline-benchmarks, orbiters.tools.mcb-operating-contract
 ---
 
@@ -22,6 +22,8 @@ measurements do not add a waiting step to Apply.
 **Release status:** implemented and validated locally on 7 September 2026.
 The Unity package, backend and admin interface have not been released or deployed.
 This page describes that implementation; it is not an announcement of availability.
+The live documentation chart and image recovery fixes were added locally on
+8 September. Publishing this documentation alone does not deploy those changes.
 
 ## What the user experiences
 
@@ -105,6 +107,36 @@ of them. Existing versions are not rebuilt automatically.
 
 ## Measurements available to staff
 
+### Live decision plot
+
+```orbiters
+{"kind":"mcb-delivery-live"}
+```
+
+The chart above reads the current environment's authenticated performance endpoint;
+it does not contain sample points or a saved screenshot. Sign in as an admin, owner
+or developer. It refreshes every minute while visible, on returning to the page,
+or when you select **Refresh live data**. Each refresh covers the last 30 days and
+loads every page without sampling. Loading, incomplete results and an empty window
+are displayed explicitly. If the website has not received the chart implementation
+yet, the explanation below remains usable without the interactive view.
+
+Each dot is one reported, calibrated download decision with both codecs available.
+Its horizontal position is the predicted LZ4 transfer plus decode time; its vertical
+position is the same prediction for Zstd. The dashed diagonal means equal time.
+Above it, LZ4 should finish sooner; below it, Zstd should finish sooner. The blue and
+purple regions show these two outcomes, while the dot's color shows what MCB actually
+selected. For example, a point at LZ4 0.8 seconds and Zstd 0.5 seconds lies below the
+diagonal and predicts a 0.3-second saving with Zstd.
+
+Hover over a point for its timestamp and failed-download indicator. Identical
+predictions can overlap. Missing calibration and single-codec downloads stay in
+the admin summary instead of appearing as misleading zero-time dots. These are
+predictions for transfer and decode; they exclude Unity mesh construction, avatar
+assignment and progress animations, so they do not measure the full Apply time.
+
+### Admin measurements and retention
+
 **Administration > My Custom Base > Delivery performance** is available to admins, owners and developers.
 It shows reporting installations, download decisions, codec shares, failures,
 median decode time per MB, and the mean estimated saving against the alternative.
@@ -158,6 +190,33 @@ it does not disable version downloads. Network probes use the same configured
 private file-delivery service as versions, with cache avoidance and exact byte-count
 validation. The large probe is conditional on the client's small-probe result.
 
+## Identical meshes across versions: current boundary
+
+The current cache avoids rebuilding a previously prepared mesh when reapplying
+that same downloaded version. It validates the payload hash, payload format and
+compression before reuse. This does **not** yet deduplicate different versions.
+The generated-asset path and preparation key include the version, and downloading
+another version retrieves its complete selected ZIP archive.
+
+The current payload hashes identify encoded payload bytes. LZ4 and Zstd versions
+of identical geometry therefore have different hashes. A whole payload can also
+contain several renderer meshes. Applying a cached payload still assigns renderer
+meshes and restores the version's bindings and customization state.
+
+The remaining design work is to introduce codec-independent, per-mesh content
+identity and shared storage, followed by a manifest download that requests only
+missing authorized blobs. Local generated meshes would share that content identity,
+with applied-version provenance stored separately from the shared file path.
+Deletion must retain meshes referenced by other installed versions. An assignment
+skip must check renderer bindings as well as mesh identity, while still applying
+changes to materials, logic and customization. Geometry, blendshape frames, skin
+weights and bind poses all belong in the identity contract.
+
+This is an assessment, not an implemented optimization. Validate an A-to-B switch
+with identical Body geometry and changed materials/logic, one changed Hair mesh,
+a codec change, deletion of A while B still uses its mesh, and different avatar
+bone palettes before enabling shared reuse.
+
 ## Public package support
 
 Open **My Custom Base > Package versions**, select one or several releases, choose
@@ -183,6 +242,19 @@ this is not a server-side ban on requests from old clients. Policies are stored 
 `mcb_package_policies`, with the last editing staff ID and timestamp.
 
 ## Connection recovery and installation dependencies
+
+Profile pictures and gallery images reject destroyed Unity texture handles instead
+of treating a dictionary entry as a successful cache hit. Owned UI textures stay
+loaded through unused-asset sweeps and are released on assembly reload. Images can
+reload from disk, and a failed image request becomes eligible for retry after
+30 seconds. Profile elements update as image loading completes, with a periodic
+check while attached to the panel.
+
+In development mode, the shared URL resolver maps the development API's absolute
+image URLs to the active local API, preserving their paths and query parameters.
+Independent CDN origins remain unchanged. Backend image conversion endpoints
+request PNG for Unity. Gallery rows center their cards as the available width
+changes, including the final partially filled row.
 
 A transient backend transport failure retains the offline report and saved versions.
 The Editor quietly probes again after 2 seconds, backing off to at most one probe
@@ -239,6 +311,17 @@ Fresh and populated-schema rehearsals each booted twice, preserving existing row
 and the new support policy; points and their preceding calibration were verified.
 A simulated offline incident in the live Editor recovered without reloading it.
 The locally constructed release archive validated 224 files with zero Python files.
+
+The 8 September documentation/image follow-up passed 61 Unity EditMode tests and
+23 frontend tests, plus the production frontend build. The image regressions cover
+destroyed Unity texture handles, disk reload, bounded failure retry and development
+API/CDN URL separation. Live Editor checks confirmed a valid account avatar and
+all four checked gallery thumbnails. Unity's layout engine centered full and
+partial card rows at 340, 540 and 800 pixels. A fixture-only browser rehearsal
+rendered the real documentation Markdown and live-data widget at desktop and phone
+widths, exercised refresh, and kept the admin plots and package controls working
+with no browser errors. The authenticated local telemetry endpoint was also checked
+separately. Application source remains local and undeployed.
 
 Final local totals: 49 Unity EditMode tests passed; 527 backend tests passed with
 14 existing skips; two dashboard tests passed. The backend and frontend were

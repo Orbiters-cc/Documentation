@@ -8,7 +8,7 @@ id: orbiters.development.editorial-experiences
 domain: website
 type: how-to
 owner: orbiters-docs
-lastVerified: 2026-09-06
+lastVerified: 2026-09-08
 ---
 
 # Write a guide worth exploring
@@ -45,11 +45,21 @@ The reader recognizes a fenced block whose language is `orbiters`. Its contents 
 ```
 ````
 
-Available fixed kinds: `release-access`, `commission-receipt`, `workspace-states`, `discord-roles`, `audience-lens`, `mcb-version-tour`.
+Available fixed examples: `release-access`, `commission-receipt`, `workspace-states`, `discord-roles`, `audience-lens`, `mcb-version-tour`.
+
+The additional `mcb-delivery-live` kind embeds the staff-only, live decision plot
+from [MCB Adaptive Version Delivery](../reference/mcb-adaptive-delivery.md). It is
+implemented locally and requires the updated website frontend. Unlike the fictional
+examples, it reads authenticated operational measurements. It accepts no URL or
+query from the document: its shared data service fixes the endpoint, pagination and
+30-day window. It refreshes every minute while visible, pauses while hidden, cancels
+requests when detached and explains loading, failure and access states. Place its
+fence only in staff documentation with an explanation that remains useful without
+the widget. The backend still enforces telemetry access independently of page visibility.
 
 For a page-specific question, use `kind: "challenge"`, a `title`, a `question`, and two to four `options`. Each option has a short `label`, a boolean `correct`, and an `explanation`. Exactly one answer is correct. Explain the tempting wrong answer kindly and concretely; avoid trivia that merely repeats a nearby heading.
 
-The registry lives in `DocExperience`; each concept has a small component. Components use local state and make no account, provider or payment requests. Motion occurs in response to interaction and honors reduced-motion preferences. Inputs work with keyboard and touch. Results use live regions.
+The registry lives in `DocExperience`; each concept has a small component. Fictional examples use local state and make no account, provider or payment requests. Motion occurs in response to interaction and honors reduced-motion preferences. Inputs work with keyboard and touch. Results use live regions.
 
 Unknown kinds or invalid JSON show a readable fallback. `scripts/validate-docs.js` rejects malformed examples before publication. Both the validator and the frontend parser must be updated when adding a new kind.
 

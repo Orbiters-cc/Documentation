@@ -1,4 +1,4 @@
-const KINDS = new Set(['release-access', 'commission-receipt', 'workspace-states', 'discord-roles', 'audience-lens', 'mcb-version-tour']);
+const KINDS = new Set(['release-access', 'commission-receipt', 'workspace-states', 'discord-roles', 'audience-lens', 'mcb-version-tour', 'mcb-delivery-live']);
 const text = (value, limit = 1200) => typeof value === 'string' && value.trim().length > 0 && value.length <= limit;
 function validateExperiences(content) {
     const errors = [];
