@@ -36,9 +36,15 @@ the preserved copy of `A`.
 Blender connector, model inputs, customization settings, and Build/Publish controls.
 The form fills the window with a small edge padding, without an outer card or asset-name header.
 The asset's version timeline remains in the inspector. Clicking the action again
-focuses the open window. Closing and reopening it keeps the draft while the same
-MCB inspector remains active. Changing assets or disposing that inspector closes
-the window, preventing a draft from being built against a different asset.
+focuses the open window. The window stays bound to its original avatar and asset
+even when the inspector selection changes. Draft metadata and the success screen
+survive editor reloads and closing/reopening the window within the Unity session.
+
+After building, a **Version built successfully** screen offers a large **Upload
+version** button, followed by **Create new version** and all unpublished builds
+for that asset with individual **Upload** buttons. Upload sends the saved artifact
+through the same validation and publishing pipeline as the version timeline.
+Failures leave the build available for retry and show the error in the window.
 
 The parent picker combines server versions with saved published versions for the
 selected asset, including the applied version. An empty server response does not
@@ -53,6 +59,11 @@ whether the creator window is open or closed. Download a server-only version
 first to make its content available for export.
 
 ## Advanced mesh build and publication
+
+When the server generates missing version metadata, its Gemini structured-output
+request uses the `APPLICATION_JSON` MIME enum. Provider failures return a readable
+502 response without exposing request credentials. Supplied titles and changelogs
+are preserved; supplying both avoids the metadata-generation request.
 
 The locally validated implementation defaults new MCB components to **Use Advanced
 Mesh Replacement**. Explicit saved choices remain intact. Creator builds map every
