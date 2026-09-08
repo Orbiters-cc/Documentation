@@ -43,6 +43,39 @@ or searching its members checks your current authority with the provider.
 community, changing team access and publishing an event make the necessary
 provider requests. Future instance creation is part of the publication you authorize.
 
+## Optional Discord announcement and opt-in invites
+
+In the event editor, enable **Post a Discord announcement**, choose a text or
+announcement channel, and write the message. The Discord-style preview uses the
+same presentation as Verification, including markdown and the bot identity.
+**Refresh channels** explicitly reloads channel information; ordinary browsing
+uses saved Discord information. Both you and the bot need Send Messages and
+View Channel, and the bot needs Embed Links. Mentions in the message do not ping
+members, roles or everyone.
+
+The message is sent when you publish, and subsequent edits update that same
+message in its original channel. The instance join button appears once the
+instance opens. Cancelling the event disables the invite and join buttons.
+
+Enable **Add “Invite me when it starts”** to let members opt in. Choose either
+the scheduled start or **more than** a chosen number of people in the instance.
+Attendance checks run at most every two minutes while people are waiting, only
+after an instance exists. If the threshold is never reached before the event
+ends, no invites are sent. Invitations are delivered gradually in small batches.
+
+Members need an Orbiters account linked to their Discord and VRChat accounts,
+and must be friends with the selected VRChat community account. The private
+button response includes that account's profile link and a **Don’t invite me**
+button. Group membership and role restrictions still apply. Changing the linked
+VRChat account withdraws the old opt-in. One confirmed invite is sent per member
+per event; unconfirmed sends are never automatically repeated.
+
+The event card shows waiting, sent, failed, unconfirmed and withdrawn counts.
+After fixing a connection or friendship problem, a member can click the button
+again to retry a failed invite. Disabling invites or cancelling/ending the event
+stops pending deliveries. Unconfirmed invites require checking VRChat; they cannot
+be retriggered by repeatedly clicking the button.
+
 ## Give your team access
 
 Open **Manage team** on the relevant community. Search for an Orbiters member by
