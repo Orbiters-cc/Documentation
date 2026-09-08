@@ -48,4 +48,15 @@ Helpers remain outside the renderer's deforming bone list.
 transitions in a temporary preview scene and compares baked vertices with picking
 endpoints. This fix is local and has not been released.
 
+## Multi-frame blendshape edges
+
+The local edge-overlay fix follows Unity's blendshape evaluation when a shape has
+multiple frames, including weights above the final frame and zero weights when
+frames start below zero. These cases previously placed edges away from the
+rendered surface. Single-frame shapes keep their existing scaling behavior.
+
+`Orbiters.XRayGizmos.Editor.Tests.XRayBlendShapeTests.RunOrThrow()` compares the
+overlay calculation with Unity's baked mesh in a temporary preview scene. This
+fix is local and has not been released.
+
 </alpha>

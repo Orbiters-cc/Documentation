@@ -51,6 +51,14 @@ staged separately from later edits, leaves untracked files untracked, and restor
 release metadata. An existing Git index lock is respected rather than removed.
 Successful upload checkpoints still include the full pending project state.
 
+## Diff comparison labels
+
+The local diff-header fix updates the comparison labels when the selected file
+changes between unstaged, staged, and mixed changes. For example, staging the
+selected file updates its headings to `HEAD` and `Staged` as its diff refreshes.
+The existing pane stays open, preserving its scroll and search state. This fix
+is local and has not been released.
+
 </alpha>
 
 ## Large change sets
