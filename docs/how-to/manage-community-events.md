@@ -79,6 +79,12 @@ Explicit searches check your community access and reuse recent matching results.
 If a VRChat banner upload cannot be confirmed, replace the banner before retrying
 publication. Confirmed uploads are reused for subsequent event edits.
 
+Events without a banner omit the optional VRChat image field. If a provider step
+fails, **Retry failed steps** retries only those steps; a synced Discord event
+is kept. A VRChat validation error shows the HTTP status and, when available,
+which fields to check. Validation errors do not put the account into a cooldown;
+rate limits and network failures still do.
+
 1. Choose **Create event**. Enter a name, description and start/end times. The editor
    shows your browser's time zone; Orbiters stores the times in UTC.
 2. Select the Discord server and VRChat group.
