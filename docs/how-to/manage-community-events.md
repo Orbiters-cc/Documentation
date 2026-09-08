@@ -63,6 +63,22 @@ account; it is not required for a teammate to use an assigned community.
 
 ## Create an event
 
+Add an optional **event banner** using Upload banner. PNG, JPEG and WebP images
+up to 10 MB are supported. Orbiters removes embedded metadata and center-crops
+the image to 16:9; review the preview before publishing. Replace or Remove changes
+the draft, and saving a published event updates its Discord cover and VRChat
+calendar/announcement image. Changing the VRChat community clears the banner so
+you can choose one for the new destination. Draft uploads stay private on Orbiters.
+
+In **The VRChat instance**, enter a world name and press **Search** or Enter.
+Results show thumbnails and authors; select a card to fill the world ID. Use
+**Next results** for another page, or paste a world ID or world URL directly.
+Typing, choosing a result, and opening the editor do not make VRChat API requests.
+Explicit searches check your community access and reuse recent matching results.
+
+If a VRChat banner upload cannot be confirmed, replace the banner before retrying
+publication. Confirmed uploads are reused for subsequent event edits.
+
 1. Choose **Create event**. Enter a name, description and start/end times. The editor
    shows your browser's time zone; Orbiters stores the times in UTC.
 2. Select the Discord server and VRChat group.
