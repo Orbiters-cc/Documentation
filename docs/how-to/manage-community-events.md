@@ -60,6 +60,19 @@ The event banner appears inside the Discord announcement and its preview. The
 bot needs **Attach Files** to include it. Selected roles are notified on first
 publication only: edits, step switches and cancellation do not ping them again.
 
+With a banner selected, **Use banner on VRChat** controls whether it also appears
+on the VRChat calendar and group announcement. New gallery uploads require
+VRChat+ on the connected community account, as described in
+[VRChat's group requirements](https://help.vrchat.com/hc/en-us/articles/11706395001875-Creating-a-Group).
+Group management permissions alone do not grant gallery upload access.
+
+If VRChat rejects the gallery upload, edit the event, turn off **Use banner on
+VRChat**, and save the update to publish those entries without an image. Discord
+keeps the banner. Alternatively, resolve gallery access on the community account
+and retry the failed steps. Calendar and announcement can both show the same
+banner error because the upload is a shared prerequisite; Orbiters attempts a
+rejected upload only once within that publication attempt.
+
 The message is sent when you publish, and subsequent edits update that same
 message in its original channel. The instance join button appears once the
 instance opens. Cancelling the event disables the invite and join buttons.

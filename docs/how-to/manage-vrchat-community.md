@@ -54,6 +54,16 @@ checks; the websocket cannot guarantee a complete roster. Viewing the tab makes
 no provider requests. Disabling stops synchronization and leaves existing roles
 and account records in place. Existing privacy-closed member records are not reopened.
 
+VRChat does not let the community account change roles for members at equal or
+higher rank, including the group owner. These members appear under **Manual role
+changes needed**, with the required assignment or removal. Other members continue
+syncing. Make the listed changes in VRChat using an account allowed to manage those
+members, then **Rescan group members** to reconcile their status. Orbiters does not
+automatically retry the same rejected role change on every worker pass.
+
+Other permission, session or unsafe-role errors pause synchronization. Correct the
+connection or permissions and rescan explicitly to resume.
+
 When someone later connects their VRChat identity, an unclaimed imported record
 merges into their signed-in account automatically. Staff can see **Automatically
 created from a VRChat group** in the member's verification details.
