@@ -82,6 +82,24 @@ URL is too long for that field.
 
 ## Edit, retry or cancel
 
+### If the page cannot load
+
+An empty event list is normal before your first event. A **Could not load** message
+is a server or connection problem, not a requirement to connect more communities.
+Use **Retry loading**. This reads saved information without contacting Discord or
+VRChat.
+
+If the message says **Events setup is incomplete**, an administrator needs to
+restart the updated backend so its database upgrade can finish, then retry the
+page. Existing community records and role settings are preserved. For other
+persistent load failures, ask an administrator to check the backend logs.
+
+Administrators without a personal Community Leader account start with the shared
+Orbiters VRChat account selected. Choose its group from the saved list, or refresh
+the group list explicitly if it has not been loaded yet.
+
+### Manage an existing event
+
 **My events** shows a separate status for the Discord event, VRChat calendar,
 announcement and instance. Changes to a published event update the saved provider
 records. They do not publish a second announcement or resend its notification.
