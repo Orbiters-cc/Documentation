@@ -108,6 +108,21 @@ provider ID, so an absent instance does not require instance-management access.
 
 ## Validation and release boundary
 
+Additional step `startsAt` values may be omitted or null. These instances have no
+due time until their creator calls `POST /community-events/:id/steps/:stepId/start`
+with the current revision during the published event. The transaction checks
+ownership and the creator's personal VRChat link, pauses other steps, and stores
+the requested start and organizer-invite receipt inside the event's existing JSON
+deliveries. The regular leased worker creates or reuses the instance before
+sending the organizer invite. Each invite records `sending` before contacting
+VRChat; uncertain results are not automatically resent. No schema change is needed.
+
+Discord announcements carry explicitly selected role IDs in message content and
+an allow-list on initial creation. Updated messages disable notifications. Banner
+bytes are read from the owner's private event file and attached as
+`event-banner.png`; edits replace attachments and removing a banner clears them.
+The sender checks role mention authority and the bot's Attach Files permission.
+
 Deterministic tests cover payloads, timing, revisions, creator isolation,
 delegation revocation, partial failure, worker claims and cancellation. Isolated
 PostgreSQL checks boot fresh and populated schemas twice and preserve pre-existing

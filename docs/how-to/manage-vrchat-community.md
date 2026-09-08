@@ -34,8 +34,10 @@ of each leader's account, credentials, rate limits and selected group.
 
 ## Manage the group's 18+ role
 
-After selecting a group, check **Enable 18+ features**. Orbiters creates an **18+**
-role or reuses the existing one. It must not be self-assignable, granted on join,
+After selecting a group, check **Enable 18+ features**. Orbiters creates an **18 Plus**
+role or reuses an existing **18+** or **18 Plus** role. VRChat rejects `18+` as a
+new role name with “name has invalid text”; the accepted name does not change its
+adult-verification purpose. The role must not be self-assignable, granted on join,
 a default/management role, or grant permissions. The community account needs
 Manage Roles, Assign Roles and View All Members, or group ownership.
 
@@ -118,4 +120,5 @@ New posts preserve earlier announcement history. If sending returns an uncertain
 result, refresh that history before composing a new submission; repeating the same
 submission cannot automatically create another post.
 
-These tools do not yet create event instances, assign meetup roles or invite members.
+Use [Community events](manage-community-events.md) to create meetup instances and
+send opt-in invitations. The 18+ controls above manage the adult-verification role.

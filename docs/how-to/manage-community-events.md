@@ -50,8 +50,15 @@ announcement channel, and write the message. The Discord-style preview uses the
 same presentation as Verification, including markdown and the bot identity.
 **Refresh channels** explicitly reloads channel information; ordinary browsing
 uses saved Discord information. Both you and the bot need Send Messages and
-View Channel, and the bot needs Embed Links. Mentions in the message do not ping
-members, roles or everyone.
+View Channel, and the bot needs Embed Links. Select **Mention roles** to notify
+specific roles above the announcement. Only selected roles can ping; typing a
+mention in the message does not notify anyone. Non-mentionable roles require
+Mention Everyone permission for both you and the bot in that channel. The role
+selector includes the server's saved roles; **Refresh channels** also refreshes roles.
+
+The event banner appears inside the Discord announcement and its preview. The
+bot needs **Attach Files** to include it. Selected roles are notified on first
+publication only: edits, step switches and cancellation do not ping them again.
 
 The message is sent when you publish, and subsequent edits update that same
 message in its original channel. The instance join button appears once the
@@ -80,19 +87,43 @@ be retriggered by repeatedly clicking the button.
 
 ## Plan an event in steps
 
-Use **The itinerary** to name the first step and add up to four more: for example,
-Game 1, Game 2, then Chill. Each additional step has its own start time, searchable
-world and invite trigger. Steps must run in chronological order inside the event's
-start/end times. A step ends when the next starts; the final step ends with the event.
+Name the first step in **The first step**, then use **The itinerary** to add up to
+four more: for example, Game 1, Game 2, then Chill. Each has a searchable world and
+invite trigger. Additional steps wait for the organizer by default. Turn on
+**Schedule a start time** only when you want automatic opening. Scheduled times
+must be in chronological order inside the event's start/end times.
 
 Every step gets its own group instance, using the event's audience, region and
-chosen opening schedule. Enabling Discord invite buttons adds one website link
+chosen audience settings. Enabling Discord invite buttons adds one website link
 per step to the announcement. Members can subscribe to several steps independently;
 withdrawing from one does not withdraw from the others. Invites stop when that
 step ends. The event card shows each instance's delivery status separately.
 
 Published steps cannot be removed or reordered. An open step cannot change its
 world or start time. Cancel the event to cancel all its remaining deliveries.
+
+## Run the meetup at your own pace
+
+During a published meetup, open **My events → Run your meetup** and choose
+**Start step** on any step. You can skip ahead or return to an earlier step.
+Orbiters queues that instance and sends an invite to your linked personal VRChat
+account once it exists. The first step has its own name and controls too.
+
+Your personal VRChat account must be linked in **Connections** and able to receive
+invites from the community account. Your earlier instance stays available: join
+the new one, then place a portal yourself for the group. Portal placement is not
+automated. Switching to an already created step reuses its instance.
+
+Taking manual control pauses other steps, including their scheduled openings,
+until you select them. Pending attendee invites for those steps stop; selecting a
+step again reopens sign-ups. People who received an invite are not sent another
+automatically. The selected step's start-triggered invites become eligible when
+its instance exists; attendance-triggered invites still wait for their threshold.
+
+The card reports instance and organizer-invite outcomes separately. **Invite me
+again** is an explicit new request. Unconfirmed sends are not repeated; use
+**Open instance** to join directly if your invite could not be confirmed. Controls
+are available only between the meetup's start and end times.
 
 ## Give your team access
 
@@ -121,8 +152,8 @@ account; it is not required for a teammate to use an assigned community.
 Add an optional **event banner** using Upload banner. PNG, JPEG and WebP images
 up to 10 MB are supported. Orbiters removes embedded metadata and center-crops
 the image to 16:9; review the preview before publishing. Replace or Remove changes
-the draft, and saving a published event updates its Discord cover and VRChat
-calendar/announcement image. Changing the VRChat community clears the banner so
+the draft, and saving a published event updates its Discord cover, Discord
+announcement attachment and VRChat calendar/announcement image. Changing the VRChat community clears the banner so
 you can choose one for the new destination. Draft uploads stay private on Orbiters.
 
 **Trying a few covers? Save a draft when you find the right one.** Uploads that
@@ -131,7 +162,7 @@ automatically. Saved drafts keep their banners, as do published and cancelled
 events. Replaced or removed covers become eligible once no saved event uses them.
 An abandoned editor cannot keep an upload indefinitely; upload it again if needed.
 
-In **The VRChat instance**, enter a world name and press **Search** or Enter.
+In **The first step**, enter a world name and press **Search** or Enter.
 Results show thumbnails and authors; select a card to fill the world ID. Use
 **Next results** for another page, or paste a world ID or world URL directly.
 Typing, choosing a result, and opening the editor do not make VRChat API requests.
