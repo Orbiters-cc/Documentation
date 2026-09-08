@@ -79,18 +79,19 @@ The creator serializes the existing native mesh representation once and produces
 its supported codec alternatives. Each uses independent 4 MiB blocks, Zstd level 9
 or LZ4's standard encoder, followed by the existing original-base XOR wrapping.
 Already compressed `.bin` entries use ZIP storage mode to avoid another compression
-pass. The server validates variant paths, sizes and hashes before creating separate
-downloadable archives. Both remain private and use the existing entitlement and
-source-compatibility checks.
+pass. For renderer-based versions, the server validates variant paths, sizes and
+hashes, then stores a common package and private codec blobs. It does not create
+two complete downloadable archives. All requests use the existing entitlement and
+source-compatibility checks. Earlier dual-codec packages retain their stored archives.
 
 Each downloaded archive contains one representation of every advanced mesh, under
 the canonical patch filenames, plus `mcb-delivery.json`. The client verifies that
 this sidecar matches the variants declared by the authorized version. It updates
 only compression and payload-hash fields. Source model IDs, source paths, renderer
 mappings, bone paths, bind poses and the mesh serialization layout retain their
-existing roles. The decrypted payload hash is verified before decompression or
-mesh construction. Invalid delivery metadata or corrupted data fails before mesh
-assignment.
+existing roles. Encoded blobs are verified before decoding, and renderer-based
+versions also verify the decoded content identity before mesh construction.
+Invalid delivery metadata or corrupted data fails before mesh assignment.
 
 Generated local mesh assets now prefer binary serialization and explicitly select
 their main asset. Shared Windows-native SHA-256, buffered writes and bounded
@@ -190,32 +191,79 @@ it does not disable version downloads. Network probes use the same configured
 private file-delivery service as versions, with cache avoidance and exact byte-count
 validation. The large probe is conditional on the client's small-probe result.
 
-## Identical meshes across versions: current boundary
+## Identical meshes across versions
 
-The current cache avoids rebuilding a previously prepared mesh when reapplying
-that same downloaded version. It validates the payload hash, payload format and
-compression before reuse. This does **not** yet deduplicate different versions.
-The generated-asset path and preparation key include the version, and downloading
-another version retrieves its complete selected ZIP archive.
+The local implementation now packages each renderer separately. Changing Hair can
+reuse an unchanged Body, including its already constructed blendshapes. This needs
+the matching backend and client; application source is not yet deployed.
 
-The current payload hashes identify encoded payload bytes. LZ4 and Zstd versions
-of identical geometry therefore have different hashes. A whole payload can also
-contain several renderer meshes. Applying a cached payload still assigns renderer
-meshes and restores the version's bindings and customization state.
+Each renderer has a SHA-256 identity over its decoded native payload. Geometry,
+blendshape frames, weights, bind poses, renderer paths, bone bindings and authoring
+pose belong to that identity. Source FBX identity and payload format are included
+too. This deliberately refuses reuse when geometry matches but its rig context
+differs. LZ4 and Zstd representations share the same decoded identity.
 
-The remaining design work is to introduce codec-independent, per-mesh content
-identity and shared storage, followed by a manifest download that requests only
-missing authorized blobs. Local generated meshes would share that content identity,
-with applied-version provenance stored separately from the shared file path.
-Deletion must retain meshes referenced by other installed versions. An assignment
-skip must check renderer bindings as well as mesh identity, while still applying
-changes to materials, logic and customization. Geometry, blendshape frames, skin
-weights and bind poses all belong in the identity contract.
+Before downloading, the client requests the authorized version manifest. It checks
+its descriptors against the version metadata, verifies cached encoded blobs, and
+chooses compression using only the remaining download/decode work. Up to three
+missing blobs transfer concurrently. A cached supported representation can be
+retained even when another renderer uses a different codec. When everything is
+cached, only common version files transfer. Downloads and local ZIP assembly stream
+through disk rather than keeping a complete reconstructed archive in RAM.
 
-This is an assessment, not an implemented optimization. Validate an A-to-B switch
-with identical Body geometry and changed materials/logic, one changed Hair mesh,
-a codec change, deletion of A while B still uses its mesh, and different avatar
-bone palettes before enabling shared reuse.
+Generated Unity meshes are shared within an asset and Unity Editor version. Apply
+preserves unchanged mesh objects through base restoration, validates and reapplies
+the target's bone bindings, and still applies the new logic, materials and
+customization. The component records which version is applied separately from the
+shared mesh path, so identical meshes do not make two versions indistinguishable.
+
+Creator builds seed the encoded-blob cache. Deleting a local version retains shared
+meshes and blobs for other versions and future downloads. **Delete unused generated
+meshes** preserves references from open avatars and saved scenes, prefabs and assets.
+Encoded blobs remain in MCB's data cache outside the Unity Assets folder. Saved
+offline Unity packages still include their primary mesh representation.
+
+The server keeps blobs private and version-owned. A known hash cannot retrieve a
+blob that the requested authorized version does not declare. Physical deduplication
+between different server version records is not part of this change. Existing
+published packages are not rewritten into renderer-based versions automatically;
+creators must rebuild to obtain per-renderer reuse.
+
+The 8 September local integration run used the real UltiPaw reference, five
+renderers and 497 Body blendshapes. A local fixture server exercised the actual
+package-processing service and authorized model route with isolated identities
+and storage. The Editor exercised download, extraction, the full version Apply
+coroutine and Reset in a temporary preview scene.
+
+| Operation | Meshes downloaded | Transfer bytes | Apply time |
+| --- | ---: | ---: | ---: |
+| A, empty cache | 5 | 25,789,595 | 34.52 s |
+| B, only ManeHair changed | 1 | 378,197 | 1.38 s |
+| C, meshes previously seen in A; new logic/defaults | 0 | 1,558 | 0.74 s |
+
+B avoided 98.5% of the baseline transfer bytes. C used already constructed meshes,
+including the earlier Hair from A. Four mesh references stayed assigned directly
+through B-to-C; the changed Hair returned to its cached A representation. Reset
+restored the original base in approximately 93 ms. These are single-run local
+observations, not Internet speed estimates or guarantees. Geometry verification,
+rendering and UI completion animation are excluded from the Apply timings.
+
+All renderer geometry, skin weights, bind poses, bone paths and blendshape layouts
+passed reference comparison. Position deltas stayed within the existing Unity
+precision tolerance of 0.00001; this is not a claim of bit-exact blendshape deltas.
+The test confirmed the changed Hair shape, new logic, new blendshape defaults,
+version provenance, safe version-cache deletion and reset. The source FBX hash
+remained unchanged. Deterministic checks additionally cover codec-independent
+cache reuse and bone palette association. Evidence is stored in
+`Editor/Benchmarks/results/2026-09-08-cross-version-reuse.json` in the package.
+
+The follow-up passed 63 Unity EditMode tests and all deterministic health checks,
+plus 532 backend tests with 14 existing environment-dependent skips. Backend
+coverage includes inaccessible versions, incorrect source hashes, unrelated blob
+hashes, private storage, offline export restoration and editing common texture
+files without invalidating mesh identities. Fully cached common-only downloads
+are not reported as compression choices, since no mesh compression decision is
+needed. No production upload or deployment was performed.
 
 ## Public package support
 
