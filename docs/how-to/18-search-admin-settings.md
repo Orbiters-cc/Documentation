@@ -16,6 +16,9 @@ lastVerified: 2026-09-08
 Open **Admin** and type into **Search settings, options and help…**. You can also
 focus search with **Ctrl K** on Windows or **Command K** on macOS.
 
+Prefer browsing? Start with a section card on **Overview**. See
+[Admin and Documentation sections](19-browse-workspace-sections.md) for the hierarchy.
+
 Try **PayPal**, **auto-kick**, **backup**, or **permissions**. Results appear as you
 type, with matching words highlighted and a breadcrumb showing where each setting lives.
 Combine words to narrow results: **Stripe PayPal** searches across both the section

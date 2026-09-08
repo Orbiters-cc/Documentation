@@ -15,6 +15,15 @@ lastVerified: 2026-09-07
 
 Use this page as a route planner. Read a task guide when you want to do something; open a reference when you need exact rules.
 
+<beta>
+
+The documentation overview groups pages by task, from **Account & community** to
+**Unity tools**. Choose a section card, then a topic. The sidebar expands only the
+current section. See [section navigation](../how-to/19-browse-workspace-sections.md)
+for filters, release stages and browsing on small screens.
+
+</beta>
+
 ## Use Orbiters
 
 1. [Sign in and connect your accounts](/documentation/orbiters.how-to.account-and-discord-login).
