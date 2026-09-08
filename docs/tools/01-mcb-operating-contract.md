@@ -8,7 +8,7 @@ id: orbiters.tools.mcb-operating-contract
 domain: mcb
 type: invariant
 owner: orbiters-mcb
-lastVerified: 2026-09-07
+lastVerified: 2026-09-08
 relations: orbiters.how-to.mcb-and-unity-tools, orbiters.general.vpm-package-contract
 ---
 
@@ -29,6 +29,23 @@ the preserved copy of `A`.
 - XOR patch generation and version switching must use the preserved default source.
 
 <alpha>
+
+## Creator version window
+
+**Create new version** opens a separate, resizable window containing the existing
+Blender connector, model inputs, customization settings, and Build/Publish controls.
+The asset's version timeline remains in the inspector. Clicking the action again
+focuses the open window. Closing and reopening it keeps the draft while the same
+MCB inspector remains active. Changing assets or disposing that inspector closes
+the window, preventing a draft from being built against a different asset.
+
+The parent picker combines server versions with saved published versions for the
+selected asset, including the applied version. An empty server response does not
+erase known local parents. Unpublished drafts and other assets are excluded.
+The initial selection prefers the applied parent and suggests the next patch after
+the highest known published version: an installed 0.5.2 suggests 0.5.3. Refreshing
+the list preserves the chosen parent and edited version number. This local
+implementation is not yet released.
 
 ## Advanced mesh build and publication
 
