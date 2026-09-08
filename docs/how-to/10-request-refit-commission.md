@@ -57,6 +57,12 @@ retry before proceeding to checkout.
 
 ## What happens to the request fee?
 
+The yellow receipt combines the Orbiters request-service explanation and both
+payment estimates. Only the €2 request fee is authorised in Stripe; the artist's
+price is agreed and paid separately. Open **Contract & seller details** below each
+selected artist to review delivery, payment, revisions, licence and cancellation
+terms without leaving your preference list.
+
 The two amounts on a commission do different jobs. Try the moments below; the artist's €40 price is fictional, while the Orbiters request fee is €2.
 
 ```orbiters
