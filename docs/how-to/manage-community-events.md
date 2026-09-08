@@ -134,6 +134,12 @@ Create another event when you need a different destination or room configuration
 Rescheduling requires a future start time. Existing times can stay unchanged when
 you edit an ongoing event's description or title, subject to provider restrictions.
 
+If the editor saves your draft but cannot confirm publication, your saved draft
+is retained. Retry in the editor to check whether publication succeeded before
+sending another change. If it succeeded, the editor returns to your event list;
+otherwise you can retry using the saved draft. If another window changed the
+draft, close and reopen it to review those changes first.
+
 **Retry failed steps** retries rejected actions while preserving successful
 results. A lost response is different: the provider may have created the resource
 without returning confirmation. Orbiters marks that step unconfirmed. Check the

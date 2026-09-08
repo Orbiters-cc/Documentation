@@ -35,6 +35,12 @@ receipts. Reads and edits are creator-scoped. Revisions reject stale edits.
 The client submission UUID prevents duplicate drafts. Named indexes and separate
 tables avoid alterations to populated user tables. New models sync without alter.
 
+The editor retains the ID and revision returned by a successful save before
+requesting publication. If publication fails or its response is lost, it reads
+the event to reconcile the outcome. A confirmed publication is not resubmitted;
+an unavailable reconciliation must succeed before another write. A draft changed
+by another editor requires reopening rather than silently adopting its revision.
+
 ## Delivery
 
 The worker scans locally for due work every ten seconds. A conditional database

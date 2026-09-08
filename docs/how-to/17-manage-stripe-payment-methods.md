@@ -60,5 +60,11 @@ uncertain. If the configuration changed after you loaded it, refresh and review
 before saving again. Restricted Stripe keys need permission to read and update
 payment-method configurations and read the account.
 
+Orbiters saves changes to one configuration in sequence, even when two
+administrators save at once. The later save must use the refreshed settings;
+it cannot rely on another method remaining enabled in an older snapshot.
+You can switch a method off and back on again: each save is a new operation.
+Changes made directly in Stripe or by another integration still require a refresh.
+
 Only administrators can read or change these settings. No payment is created,
 captured or refunded by this page.
