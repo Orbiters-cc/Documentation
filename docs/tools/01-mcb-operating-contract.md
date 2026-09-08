@@ -34,6 +34,7 @@ the preserved copy of `A`.
 
 **Create new version** opens a separate, resizable window containing the existing
 Blender connector, model inputs, customization settings, and Build/Publish controls.
+The form fills the window without an outer card or asset-name header.
 The asset's version timeline remains in the inspector. Clicking the action again
 focuses the open window. Closing and reopening it keeps the draft while the same
 MCB inspector remains active. Changing assets or disposing that inspector closes
@@ -46,6 +47,10 @@ The initial selection prefers the applied parent and suggests the next patch aft
 the highest known published version: an installed 0.5.2 suggests 0.5.3. Refreshing
 the list preserves the chosen parent and edited version number. This local
 implementation is not yet released.
+
+**Export offline version** is available on every version with local content,
+whether the creator window is open or closed. Download a server-only version
+first to make its content available for export.
 
 ## Advanced mesh build and publication
 
