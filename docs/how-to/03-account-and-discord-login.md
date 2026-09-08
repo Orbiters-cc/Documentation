@@ -20,6 +20,25 @@ Sign in to Orbiters with Discord or Telegram. Connecting both providers lets you
 use either one to reach the same account, purchases, and creator permissions.
 Discord server verification and role automation require a Discord connection.
 
+## Bring duplicate accounts together
+
+If a connection belongs to an automatically imported VRChat group member record,
+Orbiters silently merges that unclaimed record into the account you are using.
+The account's verification and connection are preserved.
+
+If both accounts were created manually, Orbiters shows a merge review. Connecting
+Discord or Telegram verifies the provider's identity before this review. A VRChat
+collision first asks you to sign in to the other account with its Discord or Telegram
+connection. Selecting a public friend request alone cannot unlock another person's
+Orbiters account.
+
+Choose **Merge my accounts** to move connections, assets and history into your
+current account. Your current profile and preferences take priority; the absorbed
+account's sessions are invalidated. **Keep accounts separate** makes no changes.
+The request expires after fifteen minutes. Accounts with different connections
+to the same provider, or incompatible overlapping records, need those conflicts
+resolved first. A failed merge leaves both accounts unchanged.
+
 ## Sign In
 
 1. Select **Login / Sign Up**.
@@ -47,8 +66,9 @@ After login, the frontend stores a short-lived JWT and uses a refresh cookie to 
 
 Connect the second provider here before using it to sign in separately. A separate
 first sign-in creates a separate account. Orbiters does not merge accounts based
-on matching names or email addresses, and rejects a connection already owned by
-another account. Existing connections cannot be replaced or disconnected here.
+on matching names or email addresses. A connection already owned by another
+account opens the merge flow described above. Disconnect unwanted providers
+from the account's privacy controls before replacing them.
 
 Connecting Telegram preserves an existing Orbiters profile. Connecting Discord
 uses your Discord profile and enables Discord synchronization. **Sync with Discord**

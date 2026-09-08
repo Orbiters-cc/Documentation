@@ -63,18 +63,36 @@ Attendance checks run at most every two minutes while people are waiting, only
 after an instance exists. If the threshold is never reached before the event
 ends, no invites are sent. Invitations are delivered gradually in small batches.
 
-Members need an Orbiters account linked to their Discord and VRChat accounts,
-and must be friends with the selected VRChat community account. The private
-button response includes that account's profile link and a **Don’t invite me**
-button. Group membership and role restrictions still apply. Changing the linked
+The invite button opens the website. Members already signed in with VRChat linked
+are added immediately and see **See ya !**. Otherwise, the same page offers Discord
+or Telegram login, then the usual VRChat linking frame. Their selected step survives
+the sign-in journey. Members must be friends with the selected VRChat community
+account; the success page includes its profile link and **Don’t invite me**.
+Group membership and role restrictions still apply. Changing the linked
 VRChat account withdraws the old opt-in. One confirmed invite is sent per member
-per event; unconfirmed sends are never automatically repeated.
+per step; unconfirmed sends are never automatically repeated.
 
 The event card shows waiting, sent, failed, unconfirmed and withdrawn counts.
 After fixing a connection or friendship problem, a member can click the button
 again to retry a failed invite. Disabling invites or cancelling/ending the event
 stops pending deliveries. Unconfirmed invites require checking VRChat; they cannot
 be retriggered by repeatedly clicking the button.
+
+## Plan an event in steps
+
+Use **The itinerary** to name the first step and add up to four more: for example,
+Game 1, Game 2, then Chill. Each additional step has its own start time, searchable
+world and invite trigger. Steps must run in chronological order inside the event's
+start/end times. A step ends when the next starts; the final step ends with the event.
+
+Every step gets its own group instance, using the event's audience, region and
+chosen opening schedule. Enabling Discord invite buttons adds one website link
+per step to the announcement. Members can subscribe to several steps independently;
+withdrawing from one does not withdraw from the others. Invites stop when that
+step ends. The event card shows each instance's delivery status separately.
+
+Published steps cannot be removed or reordered. An open step cannot change its
+world or start time. Cancel the event to cancel all its remaining deliveries.
 
 ## Give your team access
 

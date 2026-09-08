@@ -32,6 +32,30 @@ of each leader's account, credentials, rate limits and selected group.
 
 </audience>
 
+## Manage the group's 18+ role
+
+After selecting a group, check **Enable 18+ features**. Orbiters creates an **18+**
+role or reuses the existing one. It must not be self-assignable, granted on join,
+a default/management role, or grant permissions. The community account needs
+Manage Roles, Assign Roles and View All Members, or group ownership.
+
+Enabling starts a paced import of group members. Each person gets an automatically
+created, unclaimed Orbiters record if their VRChat identity is not already linked.
+These records cannot sign in. A visible VRChat **18+** label establishes adult
+verification; a hidden or absent label does not establish adulthood. Valid existing
+Orbiters evidence also counts. Verified members receive the group role; losing
+verification queues its removal. Review-required accounts do not receive the role.
+
+Progress and connection errors appear below the checkbox. **Rescan group members**
+starts another explicit scan. Available membership updates from VRChat also queue
+checks; the websocket cannot guarantee a complete roster. Viewing the tab makes
+no provider requests. Disabling stops synchronization and leaves existing roles
+and account records in place. Existing privacy-closed member records are not reopened.
+
+When someone later connects their VRChat identity, an unclaimed imported record
+merges into their signed-in account automatically. Staff can see **Automatically
+created from a VRChat group** in the member's verification details.
+
 ## Connect your community account
 
 1. Open **Account → VRChat** and enter the dedicated account's username and password.
