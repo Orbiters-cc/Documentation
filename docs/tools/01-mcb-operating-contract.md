@@ -83,6 +83,27 @@ checkpoint failure cannot turn a successful upload into an unsubmitted version.
 These fixes are local and unreleased. See [the measured version pipeline](../reference/mcb-version-pipeline-benchmarks.md)
 for timings, fidelity checks and remaining first-use costs.
 
+## Saved accessory ReFits per version
+
+ReFit operations started through MCB save the fitted accessory mesh and renderer
+state for the current custom-base version. Returning to the original base restores
+the accessories' original state; applying the custom version again restores its
+saved fits without running ReFit again. Switching between custom versions restores
+each version's own fits. Accessories with no saved fit use their original state.
+
+Saved data lives under `Assets/MCB/refits/<MCB component ID>/<asset ID>/v<version>-<identity>/`.
+It includes the mesh, bone paths, captured pose, bounds, blendshape weights and
+transferred-shape mapping. The component identity separates avatars, and the
+version identity includes the default-base version. These are local authoring
+assets, separate from downloaded version packages; save the avatar scene to retain
+its component identity across sessions.
+
+Unchecking an accessory and applying in the ReFit panel also disables its saved
+fit for the current version. Fitting it again replaces that choice. A manually
+replaced accessory mesh is not overwritten by a saved fit. Missing or incompatible
+armature paths skip restoration with a Console warning. These changes are local
+and unreleased.
+
 </alpha>
 
 ## Validation
