@@ -8,7 +8,7 @@ id: orbiters.tools.xray-gizmos-operating-contract
 domain: xraygizmos
 type: reference
 owner: orbiters-xraygizmos
-lastVerified: 2026-07-12
+lastVerified: 2026-09-08
 relations: orbiters.tools.refit-operating-contract
 ---
 
@@ -33,3 +33,19 @@ Unity Scene view. Open it from `Tools > Orbiters > XRay Gizmos`.
 Generated objects must stay hidden, editor-only, and unsaved. Armature identity is
 derived from usable `SkinnedMeshRenderer` bone arrays, and multiple renderers that
 resolve to the same armature are displayed once.
+
+<alpha>
+
+## Leaf-helper refresh
+
+The local fix refreshes affected armature gizmos when a non-deforming tail helper
+is added, moved, or removed. The visible leaf endpoint, picking region, and hover
+highlight follow the updated helper without toggling XRay off and on. Ordinary
+avatar movement and bone rotation use skinning without rebuilding the gizmo mesh.
+Helpers remain outside the renderer's deforming bone list.
+
+`Orbiters.XRayGizmos.Editor.Tests.XRayGeometryTests.RunOrThrow()` checks these
+transitions in a temporary preview scene and compares baked vertices with picking
+endpoints. This fix is local and has not been released.
+
+</alpha>

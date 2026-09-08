@@ -8,7 +8,7 @@ id: orbiters.tools.refit-operating-contract
 domain: refit
 type: reference
 owner: orbiters-refit
-lastVerified: 2026-09-05
+lastVerified: 2026-09-08
 relations: orbiters.tools.mcb-operating-contract, orbiters.tools.unitgit-operating-contract, orbiters.tools.xray-gizmos-operating-contract
 ---
 
@@ -100,6 +100,16 @@ restores local history after testing. The optional read-only
 The result screen lists creators who currently accept manual ReFit commissions.
 Creator profile pictures are center-cropped and circular; missing pictures use the
 same circular fallback frame.
+
+<alpha>
+The local banner fix requests the PNG variant of uploaded Orbiters creator
+banners so Unity can decode them. ReFit uses MCB's shared image URL helper when
+installed and supports the same banner request in a standalone installation.
+External image CDN URLs keep their existing format and query parameters.
+`ReFitCommissionImageTests.RunOrThrow()` covers both URL paths. This fix has not
+been released.
+</alpha>
+
 Each card shows the artist's price range beside their name. Clicking a card immediately
 starts a short-lived, one-time browser handoff with that artist selected; there is no
 separate Next button in Unity. When MCB authentication is available, that handoff also

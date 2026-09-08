@@ -8,7 +8,7 @@ id: orbiters.tools.unitgit-operating-contract
 domain: unitgit
 type: reference
 owner: orbiters-unitgit
-lastVerified: 2026-09-07
+lastVerified: 2026-09-08
 relations: orbiters.general.vpm-package-contract, orbiters.tools.refit-operating-contract
 ---
 
@@ -44,6 +44,12 @@ the completed index is retained for recovery; the Console gives its location.
 The regression tests exercise ignored package outputs, mixed staged/unstaged
 unrelated changes, and failed checkpoint rollback in temporary repositories.
 This implementation is validated locally and has not been released.
+
+The same index protection now covers full-project upload checkpoints and plain
+full-project commits. A signing or commit failure preserves the contents you had
+staged separately from later edits, leaves untracked files untracked, and restores
+release metadata. An existing Git index lock is respected rather than removed.
+Successful upload checkpoints still include the full pending project state.
 
 </alpha>
 
