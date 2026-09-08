@@ -26,7 +26,9 @@ Open **Communities & team** before creating your first event.
    Events permission. The Orbiters or creator bot must already be connected to the
    server through **Creator → Integrations** and have **Manage Events** permission.
 2. Connect a dedicated VRChat account in [Manage a VRChat community](manage-vrchat-community.md).
-   In Events, refresh its group list explicitly, choose a group and add it.
+   In Events, the community group selected in the VRChat tab is available and
+   preselected from saved information. Click **Add group** to enable events and
+   check current permissions. To choose another group, refresh the group list explicitly.
    Website administrators can select the shared Orbiters account instead.
 
 The VRChat account needs permission to manage the group's calendar and
