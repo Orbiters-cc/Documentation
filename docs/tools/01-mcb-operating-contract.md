@@ -30,6 +30,12 @@ the preserved copy of `A`.
 
 <alpha>
 
+## Responsive gallery cards
+
+Gallery cards expand evenly to fill each row as the inspector is resized. The
+grid keeps consistent edge spacing and gaps, adds columns when there is enough
+room, and keeps thumbnails square. Incomplete final rows remain centered.
+
 ## Creator version window
 
 **Create new version** opens a separate, resizable window containing the existing
