@@ -60,3 +60,19 @@ overlay calculation with Unity's baked mesh in a temporary preview scene. This
 fix is local and has not been released.
 
 </alpha>
+
+
+<audience include="dev">
+
+## Build a GitHub release
+
+Open [Build Release](https://github.com/Orbiters-cc/XRayGizmos/actions/workflows/release.yml)
+and select **Run workflow** on `master`. The repository variable `PACKAGE_NAME`
+is `XRayGizmos`. Set the intended version in `package.json` before running it.
+
+The workflow packages the allowed runtime and editor files, validates the ZIP,
+creates the version tag, and publishes the ZIP plus `package.json` as GitHub
+release assets. Missing configuration or assets fail the build. Check that both
+`config` and `build` succeeded; the config job alone does not publish a release.
+
+</audience>

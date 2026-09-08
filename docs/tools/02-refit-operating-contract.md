@@ -145,3 +145,19 @@ graphics support and do not run the deformation pipeline.
 On Orbiters, the user can reorder creators, override each response time, or ask all
 selected creators at once and take the first acceptance. See [Request a Manual
 ReFit Commission](/documentation/orbiters.how-to.request-refit-commission).
+
+
+<audience include="dev">
+
+## Build a GitHub release
+
+Open [Build Release](https://github.com/Orbiters-cc/ReFit/actions/workflows/release.yml)
+and select **Run workflow** on `master`. The repository variable `PACKAGE_NAME`
+is `ReFit`. Set the intended version in `package.json` before running it.
+
+The workflow packages the allowed runtime and editor files, validates the ZIP,
+creates the version tag, and publishes the ZIP plus `package.json` as GitHub
+release assets. Missing configuration or assets fail the build. Check that both
+`config` and `build` succeeded; the config job alone does not publish a release.
+
+</audience>
