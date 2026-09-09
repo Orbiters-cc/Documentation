@@ -117,6 +117,14 @@ deliveries. The regular leased worker creates or reuses the instance before
 sending the organizer invite. Each invite records `sending` before contacting
 VRChat; uncertain results are not automatically resent. No schema change is needed.
 
+Pausing sets the instance receipt's `paused` flag without setting `endedAt`.
+Attendee sign-ups remain `pending` while paused, and the invite worker excludes
+paused steps even when an instance already exists. Starting the step resumes
+eligible pending invites. Event cancellation, the event end time, and disabling
+invites still withdraw pending sign-ups. Withdrawing through the Discord handler
+preserves `sending`, `uncertain`, and `sent` receipts, so signing up again cannot
+erase an unconfirmed delivery and send a duplicate.
+
 Discord announcements carry explicitly selected role IDs in message content and
 an allow-list on initial creation. Updated messages disable notifications. Banner
 bytes are read from the owner's private event file and attached as

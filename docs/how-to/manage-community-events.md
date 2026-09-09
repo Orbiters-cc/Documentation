@@ -95,8 +95,10 @@ per step; unconfirmed sends are never automatically repeated.
 The event card shows waiting, sent, failed, unconfirmed and withdrawn counts.
 After fixing a connection or friendship problem, a member can click the button
 again to retry a failed invite. Disabling invites or cancelling/ending the event
-stops pending deliveries. Unconfirmed invites require checking VRChat; they cannot
-be retriggered by repeatedly clicking the button.
+stops pending deliveries. Unconfirmed invites require checking VRChat; withdrawing
+and signing up again does not resend them. An invite already being sent cannot be
+recalled, so **Don’t invite me** keeps its delivery history instead of promising
+that it was cancelled.
 
 ## Plan an event in steps
 
@@ -128,8 +130,10 @@ the new one, then place a portal yourself for the group. Portal placement is not
 automated. Switching to an already created step reuses its instance.
 
 Taking manual control pauses other steps, including their scheduled openings,
-until you select them. Pending attendee invites for those steps stop; selecting a
-step again reopens sign-ups. People who received an invite are not sent another
+until you select them. Pending attendee sign-ups stay saved, including for steps
+that have not started yet. No attendee invites are sent while a step is paused,
+even if its instance is already open. Selecting it resumes those sign-ups without
+asking members to register again. People who received an invite are not sent another
 automatically. The selected step's start-triggered invites become eligible when
 its instance exists; attendance-triggered invites still wait for their threshold.
 
