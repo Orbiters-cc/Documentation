@@ -43,6 +43,20 @@ When MCB invokes ReFit, the default base is model A, the applied custom base is
 model B, generated files are committed through Unit Git, and reset must restore the
 original meshes after a Unity restart.
 
+<alpha>
+## Closed Tubular Accessories
+
+The local development implementation enables **Preserve closed tubes** in Advanced settings by default,
+including MCB requests. It recognizes closed, approximately planar tubular rings and fits a shared centerline
+while preserving their cross-sectional offsets. Inward-facing tube faces do not force correspondence to a
+distant body surface. Open clothing continues to use its existing surface-fitting workflow.
+
+This targets thin ring artifacts, not arbitrary rigid props or general collision repair. Existing clipping
+and intersections between separate rings can remain. Inspect a result that reports `tube-contact-unresolved`;
+the sampled contact correction did not converge within 1 mm. Regenerate an old ReFit result to use this logic:
+saved output meshes and MCB version snapshots are not rewritten automatically. This change is not released.
+</alpha>
+
 ## Environment
 
 ReFit Settings exposes the same **Dev Environment** switch as MCB. Production uses

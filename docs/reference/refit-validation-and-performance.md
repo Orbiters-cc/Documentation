@@ -8,7 +8,7 @@ id: orbiters.refit.validation-performance
 domain: refit
 type: reference
 owner: orbiters-refit
-lastVerified: 2026-09-05
+lastVerified: 2026-09-09
 relations: orbiters.tools.refit-operating-contract
 ---
 
@@ -61,6 +61,57 @@ Same vertex/triangle counts or unchanged shape names are insufficient. Missing o
 mismatched provenance causes recomputation, not reuse of potentially stale output.
 
 ## Geometry and Performance
+
+### Closed Tube Preservation
+
+The local implementation adds `settings.preserveClosedTubes` (default `true`) and the Advanced
+**Preserve closed tubes** toggle. Recognition uses welded closed genus-one topology, an approximately planar
+loop and a thin cross-section. It does not depend on names or a component being smaller than its neighbors.
+Non-matching meshes retain the cloth path; this is not a general rigid-prop solver.
+
+Detected rings use nearest-surface correspondence without a skin-facing normal constraint on individual tube
+faces. Configured body-region policies remain in use. A low-frequency periodic centerline field transports
+original cross-sectional offsets. Its coupled contact constraints replace independent cloth clearance pushes
+on those groups. `tube-contact-unresolved` warns above 1 mm sampled residual; the residual is explicitly not
+a full collision test. Projection debug notes identify the tube policy and preserve fallback/unbound notes.
+`tube-geometry-invalid` rejects over-8x edge strain, collapsed faces and folds relative to the transported local
+frame. The service does not apply or save an unsuccessful result. This guard does not replace intersection tests.
+
+The binding/settings identity changes invalidate old transfer metadata. Existing output mesh files and MCB
+version snapshots are not regenerated automatically. Refit the original accessory to obtain new geometry.
+
+The September 10 Unity validation passed 64 deterministic checks, with two explicit opt-in scene/build skips
+and no failures. Both authored FBX fixtures and existing Hoodie checks passed. New analytic rings cover equal
+component sizes, thickness, transformed/scaled input, zero deformation, different A/B default radii, open cloth rejection, complete engine
+output, batch consistency and five intermediate slider weights. Standalone compilation passed with other
+Orbiters/project assemblies excluded. Existing regression thresholds remain unchanged.
+Private results also passed Unity mesh serialization round trips and preservation of original skin weights.
+All 24 authored glowstick shapes individually preserve world geometry within 0.001 mm with generated shapes
+disabled. The Hoodie has 0.009156 mm original-to-output authored-shape drift from pose baking, identical in the
+feature-enabled and feature-disabled controls; it is not claimed to have zero original-to-output drift.
+
+Private camera renders were inspected from front, three-quarter, arm, leg and rear shoulder. The glowstick
+spikes/ribbons disappeared. All 24 loops have no within-ring self-intersections, reversed or collapsed triangles
+at the sampled weights. Maximum edge stretch dropped from 66.615x to 2.488x; 148 triangles still exceed 2x around
+strongly changing lower-leg geometry. Separate rings still overlap, as they do in the original accessory.
+Nearest-surface vertex/triangle-center checks, cross-checked against solid-angle winding, confirmed no new
+outside-to-inside penetration greater than 1 mm. This is finite sampling, not continuous collision detection.
+
+The Hoodie produces no detected tube components and its output with preservation enabled/disabled agrees
+within 0.001 mm. An existing rear-triceps clipping spot remains visible and unchanged. This change must not be
+described as fixing that separate limitation. The private replay keeps the accessory under a copied target
+avatar; a standalone clone would take a different staging path and invalidate the comparison.
+
+Paired engine-only trials measured 4.22-4.47 seconds with preservation versus 4.05-4.18 seconds without for one
+shape, and 10.97-11.10 versus 10.58-10.88 seconds for seven available body/face shapes. Single/batch muscle deltas
+matched exactly. No native/GPU dependencies were added. These are local quality/performance results, not a release.
+
+`ReFitTubeTests.RunOrThrow()` is public-fixture-only and included in the deterministic runner.
+`ReFitAccessoryValidation.RunGlowsticks()`, `RunHoodie()` and `BenchmarkGlowsticks()` are explicit private-scene
+checks requiring MCB and graphics support. Their PNGs/reports stay under `Temp/ReFitTests/accessories`; do not
+commit private models or renders. Offscreen cameras do not require desktop interaction.
+
+### Shared Geometry Work
 
 Source/target BVHs and bindings are shared within an operation. A deformed-body
 index is built once per clearance pass and reused by guards/final measurement.
