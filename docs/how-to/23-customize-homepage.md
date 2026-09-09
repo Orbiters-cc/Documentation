@@ -1,0 +1,111 @@
+---
+title: Customize Your Homepage
+section: Website
+order: 102
+audience: public, user, creator, admin, dev
+stage: alpha
+id: orbiters.how-to.customize-homepage
+domain: website
+type: how-to
+owner: orbiters-product
+lastVerified: 2026-09-09
+---
+
+# Customize Your Homepage
+
+The widget homepage is an alpha feature. It brings your workspace, characters and
+discoveries into one continuous page. Pinned widgets come first; the discovery
+feed follows immediately, including space in the final pinned row when it fits.
+
+## Pin something you want to keep
+
+Hover over a feed widget and select the pin in its top-right corner. The same
+control appears when you focus the widget with the keyboard and stays visible on
+touch screens. The widget moves into your pinned collection. Use **Undo** in the
+confirmation if you change your mind.
+
+Your initial pins are **Sona catalog**, **Latest blog post** and **Age verification**.
+Creators with a configured default commission board also start with **Commission
+board**. You can remove any of these. Removing all pins keeps the homepage empty
+of pins; it does not restore the defaults.
+
+## Arrange your widgets
+
+1. Select **Customize** at the top of Home. You can also hold the pointer still
+   on a non-interactive part of a widget for two seconds. A progress indicator
+   confirms the hold; moving, releasing or scrolling cancels it. Buttons, links,
+   form fields and the commission board's controls keep their normal behavior.
+2. Drag a pinned widget by its **Move** handle. Neighbors preview the new placement
+   as you move. Release to place it. Dropping beyond the pinned widgets moves it
+   to the end of that collection, ahead of the feed.
+3. On touch, use the same handle. You can also select one widget, then select a
+   destination. Keyboard users can focus a handle and use the arrow keys, or use
+   the **Move earlier** and **Move later** controls.
+4. Use the corner removal button to unpin a widget. **Undo** in the bottom toolbar
+   reverses your most recent change.
+5. Select **Done** to save and return to normal interaction.
+
+The grid compacts widgets automatically. It does not store empty cells. Some
+combinations of fixed widget sizes cannot fill every cell: in that case, keeping
+all pinned widgets before the feed takes priority. Resizing the window repacks the
+same collection for the new column count.
+
+## Add from the catalog
+
+In customization mode, select **Add widget** in the floating bottom toolbar. It
+expands into a searchable catalog with previews and size labels. Select a widget
+type, choose its content when offered, then select **Add widget**.
+
+| Widget | Width × height in cells | Content |
+| --- | --- | --- |
+| Commission board | Full width × 3 | Your configured board, with its normal task controls |
+| Sona catalog | 2 × 2 | Your characters and reference images |
+| Latest blog post | 3 × 2 | Automatically follows the newest published post |
+| Age verification | 1 × 1 | Your current verification status |
+| Gallery image | 1 × 1 | A selected image; open it for a larger preview |
+| Discover an asset | 1 × 1 | A selected asset |
+| From the blog | 3 × 2 | A selected older post |
+| Documentation update | 3 × 1 | A selected guide with its latest recorded change date |
+| Creator card | 2 × 1 | A selected creator and profile link |
+| Commissions in progress | 2 × 1 | Your active requests and progress |
+
+Gallery images, assets, older posts, documentation pages and creators can each have
+multiple pins with different content. The same selection can only be pinned once.
+You can keep up to 64 pinned widgets. The catalog explains when a widget requires
+sign-in or a configured default board.
+
+## How the page adapts
+
+Home keeps 24 pixels of space at each side and 16 pixels between widgets. Rows are
+200 pixels high. Columns start at a minimum width of 200 pixels and stretch equally
+to fill the available width. Wider widgets include the gaps between their cells.
+On narrow screens, a widget's width reduces to the available columns while its
+content adapts. For example, a 3 × 2 blog widget becomes one column wide on a phone
+and keeps its two-row height.
+
+The feed adds content as you scroll. Loading another page keeps already displayed
+widgets in place. Older blog posts are mixed through the feed; the latest post has
+its own widget. Asset discoveries exclude assets already in your collection.
+
+Motion springs give rearranging, opening the catalog and pressing controls a
+consistent response. The homepage respects your system's reduced-motion setting.
+
+## Saved layouts and unavailable content
+
+Signed-in layouts follow your account across devices. Pins added outside
+customization save automatically; **Done** saves edits made inside customization.
+Without signing in, your changes last for the current visit.
+
+If saving fails, your changes stay on the page and **Retry save** appears. If another
+tab saved a different layout first, **Reload saved layout** loads that version and
+discards this tab's unsaved changes. Orbiters never silently overwrites the other
+tab's newer layout.
+
+Pins keep references to content, not permanent copies. Removed content or a change
+in your access can make a pin unavailable. You can unpin it and choose something
+else. Pinning does not grant additional access or change what other people see.
+
+Creators can configure their board in
+[Manage Your Commission Workspace](/documentation/orbiters.how-to.manage-commission-workspace).
+Developers can find the persistence and layout contracts in
+[Homepage Widgets](/documentation/orbiters.development.homepage-widgets).

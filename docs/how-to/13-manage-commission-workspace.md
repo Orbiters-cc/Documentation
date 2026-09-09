@@ -8,7 +8,7 @@ id: orbiters.how-to.manage-commission-workspace
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-05
+lastVerified: 2026-09-09
 ---
 
 # Your Commission Workspace
@@ -30,6 +30,16 @@ choose your **Default Board** and starting column, then save. This shared settin
 applies to art and ReFit work and selects that Board automatically on Home. You
 can temporarily browse another Board using Home's selector without changing the
 saved default.
+
+<alpha>
+
+In the widget homepage, a configured default board starts as a pinned, full-width
+widget. Its task controls remain interactive while browsing. Enter **Customize**
+to move or unpin the whole widget, or add it again from the catalog. See
+[Customize Your Homepage](/documentation/orbiters.how-to.customize-homepage).
+
+</alpha>
+
 On small screens, the Creator page uses a **Creator section** selector instead
 of a wide sidebar. The top shortcuts jump to Board and announcement settings.
 
