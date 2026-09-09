@@ -76,3 +76,17 @@ release assets. Missing configuration or assets fail the build. Check that both
 `config` and `build` succeeded; the config job alone does not publish a release.
 
 </audience>
+
+
+<alpha>
+
+## Mesh-edge skinning refresh
+
+The local skinning refresh fix keeps mesh edges aligned when a renderer's bone
+list or root bone changes without replacing its mesh. Explicit refresh and the
+periodic editor check synchronize the overlay's bindings and skin quality.
+Ordinary bone movement continues through skinning; these updates preserve the
+existing edge mesh. Toggling edge mode is no longer needed after retargeting.
+This fix is not yet included in a published package release.
+
+</alpha>

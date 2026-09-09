@@ -110,3 +110,16 @@ Before a release or after changing Git parsing/process behavior, run
 
 The package directory is its own repository. Validate and version it independently
 from the parent Unity project.
+
+
+<alpha>
+
+## Quoted asset filenames
+
+The local filename fix decodes Git's quoted UTF-8 paths, so accented and other
+non-ASCII filenames resolve correctly in the changes list and diff preview.
+Rename records preserve both filenames, including escaped characters. This does
+not require changing Git's global `core.quotePath` setting. The fix is not yet
+included in a published package release.
+
+</alpha>
