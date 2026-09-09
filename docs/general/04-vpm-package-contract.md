@@ -27,6 +27,22 @@ archive URL and author identity. Keep `name`, `displayName`, `version`, `url`,
 - Keep old released versions in the listing so source-controlled projects can
   resolve their recorded dependency state.
 
+## MCB Resolver Dependency
+
+<alpha>
+MCB's local package manifest now declares `com.vrchat.core.vpm-resolver` with
+the range `>=0.1.29 <0.2.0`. Its dependency installer uses the library supplied
+by this package, so the resolver must be installed in the Unity project; the
+VCC desktop application does not need to be installed or running.
+
+When this manifest is published, VPM-compatible managers such as VCC and ALCOM
+can resolve the dependency while installing MCB. Copying the MCB folder manually
+does not install its dependencies. For an existing project missing the resolver,
+install **VRChat Package Resolver Tool** through the package manager before
+opening MCB, since the missing library prevents its Editor code from compiling.
+This declaration is implemented locally and has not yet been released.
+</alpha>
+
 ## Package Layout
 
 - Code referencing `UnityEditor` belongs in an Editor assembly.
