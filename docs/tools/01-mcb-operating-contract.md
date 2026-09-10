@@ -172,3 +172,25 @@ materials, blendshapes, sliders, or applied-version caches. The batch entrypoint
 
 New editor UI belongs in UI Toolkit using the package styles; do not extend the
 legacy surface with new IMGUI flows.
+
+
+<alpha>
+
+## Recover banners and reload versions
+
+The local banner-recovery fix lets a selected asset retry an image after a temporary
+backend outage. Failed image requests pause for 30 seconds before the inspector
+tries again; a failed banner no longer remains unavailable for the whole session.
+
+For an immediate refresh, open **Advanced Options** from MCB and select
+**Reload versions and banners** at the top of the advanced settings window.
+This fetches the selected asset's version list without using the version cache,
+and reloads asset banners and thumbnails from the server as they are displayed.
+Image failures and cached disk images are bypassed. If a version fetch is already
+running, a fresh request follows it. Applied versions and local asset files stay
+unchanged. Progress and errors remain visible in the MCB inspector.
+
+The button needs an active server connection. An outage still needs to recover
+before a reload can succeed. These changes are local and not yet released.
+
+</alpha>
