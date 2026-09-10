@@ -53,7 +53,9 @@ same collection for the new column count.
 ## Add from the catalog
 
 In customization mode, select **Add widget** in the floating bottom toolbar. It
-expands into a compact, searchable catalog. The homepage stays visible and
+expands into a compact, searchable catalog, starting on **Highlights**: a scrollable
+gallery of widget previews. Drag a preview to place it, or select **Options** to
+choose its content and size. The homepage stays visible and
 scrollable without a blurred background. Select a widget type, choose its content
 and size when offered, then drag its preview directly onto the homepage. The
 catalog folds away as you lift the preview. Release over a pinned widget to place
@@ -107,10 +109,30 @@ setting. The glass follows live page content. Refraction is available in
 Chromium browsers such as Chrome and Edge; other browsers keep a translucent
 frame with the same controls and layout.
 
+## Verify your age from Home
+
+Select **Verify** on the Age verification widget (or **View status** if already
+verified). The dialog offers **VRChat linking**, **Trusted server role** and
+**Verify with an administrator**. VRChat opens the existing friend-request linking
+flow directly in the dialog; you do not need to visit Account or enter a password.
+The linked VRChat profile must have a verified 18+ status to supply age evidence.
+
+For Discord, connect the account holding a qualifying role from a trusted server.
+An existing connection is recognized. Joining a server alone does not grant
+verification. **Check status** reads the currently recorded result; staff can check
+role synchronization if evidence is missing. Manual verification opens Orbiters
+Discord so you can arrange a private ID check with an administrator. Do not post
+identity documents in public channels or upload them to the homepage.
+
+You can return to the methods list or close the dialog without leaving Home.
+Staff review holds must be resolved by staff, even when another source confirms
+18+ status. Verification updates refresh the homepage widget.
+
 ## Saved layouts and unavailable content
 
 Signed-in layouts follow your account across devices. Pins added outside
 customization save automatically; **Done** saves edits made inside customization.
+Background saves do not insert a status message or move the widget grid.
 Without signing in, your changes last for the current visit.
 
 If saving fails, your changes stay on the page and **Retry save** appears. If another

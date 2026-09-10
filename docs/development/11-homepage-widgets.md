@@ -49,6 +49,9 @@ and 520 pixels high on narrow screens, with viewport margins. Catalog and toolba
 content crossfade through a 10-pixel blur; reduced motion disables blur, scale and
 the spring. Hidden content is inert and excluded from the accessibility tree.
 The catalog is non-modal: there is no backdrop blur, scroll lock or focus trap.
+Each explicit **Add widget** opening starts on Highlights, a scrollable preview
+gallery with direct dragging and access to the existing type/content/size picker.
+Cancelling a catalog drag restores the selection instead of resetting it.
 
 Dragging a catalog preview collapses the panel. `useWidgetDrag` previews insertion
 among pins, appends before the feed, and restores the catalog after an invalid or
@@ -89,7 +92,7 @@ the defaults and never reads development overrides from browser storage.
 The **Lens**, **Light** and **Surface** groups expose refractive index, depth,
 surface height and curve, edge width, displacement strength, light direction,
 ambient/directional highlights, highlight focus/width/inset, blur, saturation,
-tint opacity, rim sheen and both corner radii. Sliders update live;
+tint opacity, rim sheen, shadow opacity and both corner radii. Sliders update live;
 numeric entries apply on blur or Enter. Edge width cannot exceed the current
 corner radius. Zero strength or refractive index 1 disables displacement.
 
@@ -97,7 +100,7 @@ Changes apply to the catalog and toolbar and persist only in this browser under
 `orbiters:dev:homepage-glass`; they are not account preferences. **Compare defaults**
 temporarily displays the shipped settings without replacing your values. Editing
 a control ends comparison. **Preview toolbar** collapses the catalog so you can
-inspect the smaller lens; opening it again returns to the tuner. **Reset** restores
+inspect the smaller lens; reopening Add widget starts on Highlights. **Reset** restores
 the defaults. **Copy settings** exports every value as JSON, with selectable text
 available if clipboard access is denied. Send that JSON to the developer to apply
 the chosen values in `glassSettings`; copying does not change shared defaults.
@@ -105,6 +108,28 @@ the chosen values in `glassSettings`; copying does not change shared defaults.
 Stored and edited values are restricted to the declared numeric ranges. Lens
 images regenerate only for lens or lighting changes; blur, tint, saturation and
 strength do not regenerate them. The geometry observer remeasures corner changes.
+The approved defaults are refractive index 2.5, depth 80, surface height 7.5,
+edge width 40 (clamped to radius), surface curve 2.4, strength 3, light direction
+183 degrees, ambient 0.37, directional highlight 0.27, focus 3, highlight width 8,
+inset 0, blur 4.3, saturation 1.25, tint 0.78, rim 1, shadow 1, catalog radius 28
+and toolbar radius 32. The drop shadow uses a separate noninteractive sibling so
+the lens's rounded clipping does not cut it off.
+
+## Inline age verification
+
+`AgeVerificationDialog` uses the existing HeroUI modal semantics with spring
+entry and a finite blur/fade exit. It retains focus trapping, Escape dismissal,
+focus restoration and reduced-motion support. Its animated children use the same
+`framer-motion` runtime as HeroUI so exit completion removes the modal overlay.
+`VrchatMemberLink` renders directly
+inside the selected method, reusing the existing authenticated linking endpoints.
+No frontend action creates age evidence or clears review holds. Discord connection
+state comes from `/auth/connections`; staff verification remains a Discord review.
+Successful updates dispatch `orbiters:connections-changed` to refresh Home.
+
+Homepage dirty checks compare canonical widget descriptors, preserving pin order
+while ignoring JSON property order. Repeated saves of unchanged layouts are skipped.
+Saving has no in-flow homepage status message; failures retain the existing retry UI.
 
 ## Account preferences API
 
