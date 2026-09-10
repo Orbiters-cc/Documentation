@@ -105,3 +105,18 @@ navigation away during loading, and the WebGL failure/retry state. The scene ren
 on changes, pauses drawing offscreen, and releases textures, geometry, controls,
 observers, and its renderer on unmount. Model loading failures leave the inspector
 available and expose a scene retry button.
+
+## Dev dependency refresh
+
+The dev frontend uses a persistent `node_modules` volume. Its startup command runs
+`npm install` before the development server so changes to `package.json` or
+`package-lock.json` are reflected after a normal `frontend-dev` restart. This is
+required for browser dependencies such as `three`; otherwise webpack can retain an
+older volume and report that the dependency cannot be resolved even when the source
+manifest already declares it.
+
+If a running dev server reports a missing package immediately after a dependency
+change, run `npm install` inside that frontend container once, then restart only
+`frontend-dev`. Verify the route in a browser after webpack reports a successful
+compile. Do not delete the volume as a first response: it can contain unrelated
+development dependencies.
