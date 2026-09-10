@@ -20,7 +20,7 @@ responsible for every widget's content.
 
 ## Layout contract
 
-`widgetRegistry` defines the ten types, dimensions, singleton rules and content
+`widgetRegistry` defines the twelve types, dimensions, singleton rules and content
 sources. `homeLayout` packs rectangles against occupied grid cells. It chooses the
 earliest fitting pinned widget at each cursor position before considering feed
 widgets. Reading order uses each widget's top-left cell. Empty cells are never
@@ -34,6 +34,8 @@ The saved value is an ordered list, independent of viewport width. Appending fee
 pages reuses earlier placements when the pin order, sizes, column count and existing
 feed prefix are unchanged. Content bodies outside the viewport margin unmount, while
 their measured grid footprints remain. Pinned bodies stay mounted.
+
+`feedCandidates` shuffles discovery candidates using one random seed per page mount. Event slots are filled in ascending start-time/ID order; their identical dimensions preserve this order during packing. Later pages append without reshuffling existing non-event slots. Event edits reconcile only event slots. Started events leave discovery on the next 30-second clock tick; focus refreshes their source.
 
 `appendCandidates` limits the accumulated discovery feed to three documentation
 cards, deduplicating before counting. Further source pages and refreshes cannot
@@ -55,10 +57,9 @@ remove spatial transitions when requested by the system.
 
 In customization, the entire pinned widget receives drag input, except its
 explicit buttons. The lower-corner resize grip appears as a translucent rounded
-arc around the corner, with a 56-pixel hit target. `useWidgetResize` captures the
+arc straddling the corner and protruding slightly beyond the widget, with a 56-pixel hit target. The handle sits 10 pixels outward; its painted arc extends about 2 pixels past the straight edges. The arc has a flat white tint and backdrop blur, without gradients, outlines or internal glass effects. `useWidgetResize` captures the
 pointer; `widgetResize` chooses the nearest registered shape in grid
-units, merging equivalent dimensions on narrow screens. Pointer movement stretches
-the preview and blurs it by 14 pixels. Variant contents crossfade while neighbors
+units, merging equivalent dimensions on narrow screens. Pointer movement stretches the preview. Blur follows the normalized distance to the two nearest legal shapes: zero at a valid dimension, rising continuously to 90% of the 18-pixel maximum (16.2 pixels) at the boundary where layouts crossfade. During the gesture it follows the pointer directly; release eases any remaining blur away. Variant contents crossfade while neighbors
 preview the packed result. Release commits one size change; Escape, pointer
 cancellation, window blur or viewport resizing restores the original. Undo and
 the keyboard size button remain available. Reduced motion removes stretching,
@@ -109,7 +110,7 @@ A `ResizeObserver` updates the filter bounds and tile positions during the sprin
 Straight edge strips stretch to fit; lens pixels regenerate only when the rounded
 corner radius or lens/lighting settings change. The observer and SVG definitions
 disappear when editing ends. SVG backdrop refraction currently requires Chromium. Other browsers retain
-the translucent frame, rim and controls without the refractive lens.
+a plain backdrop blur with the same tint color and opacity. `glassSupport` gates SVG rendering to Chromium with accepted backdrop-filter syntax; unsupported engines skip lens generation and do not receive a URL filter that could invalidate their blur. The decorative rim overlay is omitted in that fallback.
 
 ### Tune the glass in development
 
@@ -143,6 +144,10 @@ edge width 40 (clamped to radius), surface curve 2.4, strength 3, light directio
 inset 0, blur 4.3, saturation 1.25, tint 0.78, rim 1, shadow 1, catalog radius 28
 and toolbar radius 32. The drop shadow uses a separate noninteractive sibling so
 the lens's rounded clipping does not cut it off.
+
+## Gallery expansion
+
+`GalleryWidget` shares a Framer Motion layout ID between its image surface and a HeroUI modal, following the age-verification animation/runtime pattern. A spring expands and returns the surface, with a separately animated backdrop, inset close control and focus restoration. Existing `GalleryImage` keeps signed-source refresh and access handling; the modal uses its refreshed full URL. The preview is viewport bounded and reports image-load failures. Reduced motion removes spatial expansion.
 
 ## Inline age verification
 
@@ -180,8 +185,7 @@ An explicit `pins: []` is a saved empty collection. Entries have a known `type` 
 for content widgets, a canonical string `entityId`. The API rejects unknown types,
 duplicate identities, invalid IDs and lists longer than 64. Entries may include
 an optional `size` from the type's whitelist: gallery supports `1x1`, `2x1`, `1x2`,
-`2x2`, `3x1` and `3x2`; creator and commissions support `2x1` and `1x1`. Other types
-have a fixed size. Invalid variants are rejected. Preferences store only these
+`2x2`, `3x1` and `3x2`; creator and commissions support `2x1` and `1x1`. Sona supports `2x2`, `1x1`, `1x2` and `2x1`; both blog types support `3x2`, `2x1` and `2x2`. Coming events is a `2x2` singleton; coming event is a `2x1` content widget with a canonical lowercase UUID. Other types have a fixed size. Invalid variants are rejected. Preferences store only these
 references and size choices; client-supplied image URLs and arbitrary fields are
 discarded.
 
@@ -198,7 +202,7 @@ and advances its revision so stale clients cannot overwrite it.
 ## Content sources
 
 The homepage composes existing blog, creator, asset, Sona, age-verification,
-commission and board APIs. Gallery and documentation reads paginate; failed
+commission and board APIs. Gallery, documentation and upcoming-event reads paginate; failed
 sources expose retries independently. Reads are aborted on unmount and bounded by
 timeouts. Signed URLs and private content are not stored in layout preferences.
 
@@ -213,6 +217,8 @@ The index obtains dates with one bounded Git history read per metadata refresh;
 `lastVerified` is not a publication date. Missing repository history produces no
 dated recommendations. A specific pinned document resolves through the existing
 `GET /knowledge/:id` visibility checks.
+
+`GET /community-events/upcoming?limit=24&offset=0` returns `{ items, nextOffset }` in ascending `data.startsAt`, then UUID order. `GET /community-events/upcoming/:id` resolves a pinned event beyond the current page. Both read routes precede organizer authentication and expose only published events with `groupAccessType: public` and a future start. Drafts, cancelled events, members/plus audiences and past starts are excluded on both paths. Responses contain only ID, title, description, start/end and category, with no management destinations, delivery state or credentials. Reads use the database only, never provider APIs. There are no schema or worker changes.
 
 ## Validation
 

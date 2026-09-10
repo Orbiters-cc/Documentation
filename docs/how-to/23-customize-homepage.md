@@ -21,7 +21,7 @@ feed follows immediately, including space in the final pinned row when it fits.
 
 Hover over a feed widget and select the pin in its top-right corner. The same
 control appears when you focus the widget with the keyboard and stays visible on
-touch screens. The widget moves into your pinned collection. Use **Undo** in the
+touch screens. The outline pin becomes a filled pin when saved. In customization, the crossed-out pin removes it. The widget moves into your pinned collection. Use **Undo** in the
 confirmation if you change your mind.
 
 Your initial pins are **Sona catalog**, **Latest blog post** and **Age verification**.
@@ -68,26 +68,26 @@ without dragging; the catalog stays open so you can add another widget.
 | Widget | Width × height in cells | Content |
 | --- | --- | --- |
 | Commission board | Full width × 3 | Your configured board, with its normal task controls |
-| Sona catalog | 2 × 2 | Your characters and reference images |
-| Latest blog post | 3 × 2 | Automatically follows the newest published post |
+| Sona catalog | 1 × 1, 1 × 2, 2 × 1 or 2 × 2 | Your characters and reference images |
+| Latest blog post | 2 × 1, 2 × 2 or 3 × 2 | Automatically follows the newest published post |
 | Age verification | 1 × 1 | Your current verification status |
 | Gallery image | 1 × 1, 2 × 1, 1 × 2, 2 × 2, 3 × 1 or 3 × 2 | A selected image; open it for a larger preview |
 | Discover an asset | 1 × 1 | A selected asset |
-| From the blog | 3 × 2 | A selected older post |
+| From the blog | 2 × 1, 2 × 2 or 3 × 2 | A selected older post |
 | Documentation update | 3 × 1 | A selected guide with its latest recorded change date |
 | Creator card | 2 × 1 or 1 × 1 | A selected creator and profile link |
+| Coming events | 2 × 2 | The next three public community events; select a row for details |
+| Coming event | 2 × 1 | One selected coming event and its local date/time |
 | Commissions in progress | 2 × 1 or 1 × 1 | Your active requests and progress |
 
-Gallery images, assets, older posts, documentation pages and creators can each have
+Gallery images, assets, older posts, documentation pages, creators and individual events can each have
 multiple pins with different content. The same selection can only be pinned once.
 You can keep up to 64 pinned widgets. The catalog explains when a widget requires
 sign-in or a configured default board.
 
-To resize a pinned image, creator or progress widget, drag its curved, translucent
-lower-corner grip.
+To resize a pinned image, Sona catalog, blog post, creator or progress widget, drag its curved lower-corner grip. Its flat, softly blurred white surface straddles the widget corner and sticks out slightly so it stays easy to see.
 At the right edge of the grid, the grip appears on the left so you can widen inward.
-The content stretches and blurs as you move; nearby widgets preview the closest
-supported size. Release to keep it, or press **Escape** to cancel. On narrow screens,
+The content stretches as you move and becomes clearer near a supported size. Blur is strongest where it fades into another layout, then clears as you settle onto the next size. Nearby widgets preview that placement. Release to keep it, or press **Escape** to cancel. On narrow screens,
 some widths look identical, so the grip only changes dimensions that fit.
 Keyboard users can use the size control between the movement arrows.
 You can also select the same content in the catalog, choose
@@ -103,6 +103,8 @@ On narrow screens, a widget's width reduces to the available columns while its
 content adapts. For example, a 3 × 2 blog widget becomes one column wide on a phone
 and keeps its two-row height.
 
+The unpinned feed is shuffled each time you reload Home; your pins keep their order. Individual coming-event cards appear from nearest to furthest in time within that mix. Only published public events with a future start are included. Event dates use your local timezone, and selecting an event shows its description without leaving Home.
+
 The feed adds content as you scroll. Loading another page keeps already displayed
 widgets in place. Older blog posts are mixed through the feed; the latest post has
 its own widget. Asset discoveries exclude assets already in your collection.
@@ -114,8 +116,11 @@ consistent response. The floating toolbar and catalog share a refracting glass
 frame, with a small bounce as it expands or contracts. Their contents fade and
 blur during the transition. The homepage respects your system's reduced-motion
 setting. The glass follows live page content. Refraction is available in
-Chromium browsers such as Chrome and Edge; other browsers keep a translucent
-frame with the same controls and layout.
+Chromium browsers such as Chrome and Edge; other browsers use a simple background blur with the same tint color and opacity, controls and layout.
+
+## Open a gallery image
+
+Select an image to expand its card into a larger preview with the same gentle spring as age verification. The background fades in and out. Close with the inset top-right button, **Close**, **Escape**, or a click outside; the preview returns to its card and restores keyboard focus. Reduced motion uses fades without spatial expansion. **Open gallery** takes you to the image's gallery.
 
 ## Verify your age from Home
 
