@@ -176,4 +176,4 @@ Creators can configure their board in
 Developers can find the persistence and layout contracts in
 [Homepage Widgets](/documentation/orbiters.development.homepage-widgets).
 
-Feed images may use smaller supported sizes to keep the end of the homepage compact. Pinned sizes and already displayed cards stay in place when more content loads. Image previews keep their photo and details in the same arrangement while opening and loading.
+Only the final six feed cards may adjust their supported sizes to keep the end compact. Earlier images keep their varied, proportion-based sizes. Pinned sizes and already displayed cards stay in place when more content loads. Image previews keep their photo and details in the same arrangement while opening and loading.
