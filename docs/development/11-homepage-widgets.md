@@ -64,7 +64,7 @@ pointer; `widgetResize` chooses the nearest registered shape in grid
 units, merging equivalent dimensions on narrow screens. Pointer movement stretches the preview. Blur follows the normalized distance to the two nearest legal shapes: zero at a valid dimension, rising continuously to 90% of the 18-pixel maximum (16.2 pixels) at the boundary where layouts crossfade. During the gesture it follows the pointer directly; release eases any remaining blur away. Variant contents crossfade while neighbors
 preview the packed result. Beyond a legal minimum or maximum, each axis uses an exponential resistance curve with up to 64 pixels of visual leeway. That overshoot is never persisted; release springs back to the nearest legal rectangle, even if its size has not changed. Left-edge resizing retains the opposite edge.
 
-Gallery variants keep the same mounted image, disable the detail-window shared layout during editing, and stretch a fixed copy of the starting crop. They do not remount or start a second layout animation at size boundaries.
+Gallery variants keep the same mounted image and disable the detail-window shared layout during editing. The live image uses the nearest legal crop immediately, stretched to the pointer dimensions. At each variant boundary, a temporary image layer crossfades the outgoing crop over 180 milliseconds. The actual gallery image and signed-source state never remount, and there is no second shared-layout animation during resizing.
 
 Release commits one size change; Escape, pointer
 cancellation, window blur or viewport resizing restores the original. Undo and
@@ -154,6 +154,16 @@ the lens's rounded clipping does not cut it off.
 ## Gallery expansion
 
 `GalleryWidget` shares a Framer Motion layout ID between its image surface and a HeroUI modal, following the age-verification animation/runtime pattern. A spring expands and returns the surface, with a separately animated backdrop, inset close control and focus restoration. Existing `GalleryImage` keeps signed-source refresh and access handling; the modal uses its refreshed full URL. The preview is viewport bounded and reports image-load failures. `GalleryImageDetails` is shared with the gallery page: author, posted date, reactions, attachment position and reporting controls remain consistent. Its content scrolls when details or the report form exceed the available height. Reduced motion removes spatial expansion.
+
+The image window follows the image's natural aspect ratio within viewport limits, rather than reserving a fixed-height image area. Metadata sits above one compact action row containing reporting, gallery navigation and closing. Expanding the report form retains access to the actions through the scrollable content.
+
+Unpinned gallery widgets choose a registered size from the image width/height and the rendered column geometry. The closest aspect ratio wins, with smaller tiles preferred for near ties. Missing dimensions use 1×1. Resizing the browser recomputes feed sizes; pinned dimensions remain the user's choice.
+
+## Desktop content previews
+
+At viewport widths of 1024 pixels or more, creator, asset, latest/archive article and documentation links expand their card into a shared-layout preview. `WidgetPreview` uses the same Framer Motion runtime as HeroUI, a fading backdrop, inset close button, focus restoration and reduced-motion handling. Explicit modified clicks retain normal link behavior. Below the breakpoint, links navigate directly; narrowing an open preview closes it.
+
+`WidgetPreviewContent` reads the existing user profile, asset, blog-post or stable documentation detail endpoint only when opened. Requests have a 15-second timeout, abort on unmount, and offer retry on failure. Content uses the existing sanitized Markdown renderer and permission-filtered detail responses. The preview body scrolls, and the bottom action opens the complete page. Creator previews include their profile text and up to four created assets; asset previews include their image and description; articles and guides render their body content. Loading/content changes fade, slide and blur while the window height follows a spring.
 
 ## Inline age verification
 

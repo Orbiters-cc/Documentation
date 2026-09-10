@@ -122,7 +122,15 @@ Chromium browsers such as Chrome and Edge; other browsers use a simple backgroun
 
 Select an image to expand its card into a larger preview with the same gentle spring as age verification. The background fades in and out. Close with the inset top-right button, **Close**, **Escape**, or a click outside; the preview returns to its card and restores keyboard focus. Reduced motion uses fades without spatial expansion. **Open gallery** takes you to the image's gallery. Images from asset galleries are also available in the feed and widget catalog; their link opens the asset and scrolls to its gallery after loading.
 
-The expanded preview shows the same author, posted date, reaction count and image position as the gallery viewer, including **Report a problem**. Reporting does not require leaving the preview.
+The expanded preview fits the image's proportions and shows the same author, posted date, reaction count and image position as the gallery viewer, including **Report a problem**. Reporting does not require leaving the preview.
+
+Feed images automatically use the closest available widget proportions: portrait pictures favor tall tiles, while wide pictures favor horizontal tiles. Pinned pictures keep your chosen size. When resizing, the crop crossfades to the nearest layout during the drag, before you release the pointer.
+
+## Preview creators, assets, articles and guides
+
+On desktop windows at least 1024 pixels wide, **View profile**, **Explore**, **Read story** and **Read guide** open a preview over your homepage. Read the content without losing your place, then use the button at the bottom to open its full page. Close using the top-right button, **Escape**, or the backdrop.
+
+Smaller windows open the full page directly. If you narrow the browser while a preview is open, it closes and the links return to normal navigation. Modified clicks still let you open a page in another tab.
 
 ## Verify your age from Home
 
