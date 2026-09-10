@@ -8,7 +8,7 @@ id: orbiters.development.homepage-widgets
 domain: website
 type: reference
 owner: orbiters-product
-lastVerified: 2026-09-09
+lastVerified: 2026-09-10
 ---
 
 # Homepage Widgets
@@ -31,8 +31,8 @@ widths stretch equally. Rows stay 200 pixels high with 16-pixel gaps, inside fix
 24-pixel page gutters. Spans clamp to the available column count.
 
 The saved value is an ordered list, independent of viewport width. Appending feed
-pages reuses earlier placements when the pin order, column count and existing feed
-prefix are unchanged. Content bodies outside the viewport margin unmount, while
+pages reuses earlier placements when the pin order, sizes, column count and existing
+feed prefix are unchanged. Content bodies outside the viewport margin unmount, while
 their measured grid footprints remain. Pinned bodies stay mounted.
 
 Motion is imported from `motion/react`. Shared spring presets drive layout
@@ -40,6 +40,32 @@ projection, the toolbar/catalog shared element, category selection, drag pickup,
 feedback and press states. Pointer movement positions the drag preview directly;
 it does not wait for a spring to catch up. `MotionConfig` and reduced-motion hooks
 remove spatial transitions when requested by the system.
+
+## Catalog and glass frame
+
+`WidgetDock` keeps one mounted frame and glass canvas while animating its actual
+width and height with a spring. It expands to at most 620 × 440 pixels on desktop
+and 520 pixels high on narrow screens, with viewport margins. Catalog and toolbar
+content crossfade through a 10-pixel blur; reduced motion disables blur, scale and
+the spring. Hidden content is inert and excluded from the accessibility tree.
+The catalog is non-modal: there is no backdrop blur, scroll lock or focus trap.
+
+Dragging a catalog preview collapses the panel. `useWidgetDrag` previews insertion
+among pins, appends before the feed, and restores the catalog after an invalid or
+cancelled drop. `placeCatalogWidget` shares insertion logic between preview and
+commit. Identity remains `type:entityId` regardless of size, so resizing replaces
+a descriptor without creating another copy.
+
+The frame uses the actual `@specy/liquid-glass` renderer, loaded dynamically when
+customization starts. Its transmissive material bends the painted page around a
+rounded lens. See the [author's explanation](https://specy.app/blog/posts/liquid-glass-in-the-web).
+`glassPaintLayer` makes a bounded viewport snapshot source from visible homepage
+widgets. This avoids allocating a texture as tall as the infinite feed. It captures
+no other page surfaces, stores no screenshots and uploads nothing. Scroll, resize
+and layout changes refresh the local paint cache; controls and drag overlays are
+excluded. Cleanup removes the paint layer, observers, listeners, cache subscription
+and WebGL context when editing ends. If WebGL is unavailable, the solid frame keeps
+the controls readable and usable.
 
 ## Account preferences API
 
@@ -53,8 +79,12 @@ private, no-store` and `Vary: Authorization`.
 
 An explicit `pins: []` is a saved empty collection. Entries have a known `type` and,
 for content widgets, a canonical string `entityId`. The API rejects unknown types,
-duplicate identities, invalid IDs and lists longer than 64. It persists only these
-references. Client-supplied image URLs and arbitrary fields are discarded.
+duplicate identities, invalid IDs and lists longer than 64. Entries may include
+an optional `size` from the type's whitelist: gallery supports `1x1`, `2x1`, `1x2`,
+`2x2`, `3x1` and `3x2`; creator and commissions support `2x1` and `1x1`. Other types
+have a fixed size. Invalid variants are rejected. Preferences store only these
+references and size choices; client-supplied image URLs and arbitrary fields are
+discarded.
 
 `UserHomepage` has one row per user, with JSONB pins and an integer revision.
 Saving locks the owner row within a transaction, including the first save. A
@@ -91,7 +121,9 @@ Frontend tests cover the supplied resizing examples, mixed-size packing,
 non-overlap, the pinned prefix, stable feed append, stationary-hold cancellation,
 explicit empty layouts, undo, reference-only saves and revision conflicts.
 Headless browser checks use intercepted local fixtures for desktop/mobile layout,
-catalog transitions, pointer interaction, saving and reload.
+catalog transitions, pointer interaction, saving and reload. They also check card
+content alignment, round corner pins, the real glass canvas surviving expansion,
+bounded paint dimensions, direct catalog dragging and persisted compact variants.
 
 Backend tests cover preference validation, ownership, concurrent revision writes,
 gallery visibility and documentation dates. The opt-in `homepageDatabase` test

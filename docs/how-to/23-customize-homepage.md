@@ -8,7 +8,7 @@ id: orbiters.how-to.customize-homepage
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-09
+lastVerified: 2026-09-10
 ---
 
 # Customize Your Homepage
@@ -53,8 +53,15 @@ same collection for the new column count.
 ## Add from the catalog
 
 In customization mode, select **Add widget** in the floating bottom toolbar. It
-expands into a searchable catalog with previews and size labels. Select a widget
-type, choose its content when offered, then select **Add widget**.
+expands into a compact, searchable catalog. The homepage stays visible and
+scrollable without a blurred background. Select a widget type, choose its content
+and size when offered, then drag its preview directly onto the homepage. The
+catalog folds away as you lift the preview. Release over a pinned widget to place
+it there, or over the feed to add it after your existing pins.
+
+Dropping outside the homepage or pressing **Escape** during a drag cancels it and
+returns to the catalog. You can also select **Add widget** to append the selection
+without dragging; the catalog stays open so you can add another widget.
 
 | Widget | Width × height in cells | Content |
 | --- | --- | --- |
@@ -62,17 +69,22 @@ type, choose its content when offered, then select **Add widget**.
 | Sona catalog | 2 × 2 | Your characters and reference images |
 | Latest blog post | 3 × 2 | Automatically follows the newest published post |
 | Age verification | 1 × 1 | Your current verification status |
-| Gallery image | 1 × 1 | A selected image; open it for a larger preview |
+| Gallery image | 1 × 1, 2 × 1, 1 × 2, 2 × 2, 3 × 1 or 3 × 2 | A selected image; open it for a larger preview |
 | Discover an asset | 1 × 1 | A selected asset |
 | From the blog | 3 × 2 | A selected older post |
 | Documentation update | 3 × 1 | A selected guide with its latest recorded change date |
-| Creator card | 2 × 1 | A selected creator and profile link |
-| Commissions in progress | 2 × 1 | Your active requests and progress |
+| Creator card | 2 × 1 or 1 × 1 | A selected creator and profile link |
+| Commissions in progress | 2 × 1 or 1 × 1 | Your active requests and progress |
 
 Gallery images, assets, older posts, documentation pages and creators can each have
 multiple pins with different content. The same selection can only be pinned once.
 You can keep up to 64 pinned widgets. The catalog explains when a widget requires
 sign-in or a configured default board.
+
+To resize a pinned image, creator or progress widget, use its size control between
+the movement arrows. You can also select the same content in the catalog, choose
+a different size and select **Update size**. This updates the existing pin in
+place. **Undo** also reverses size changes.
 
 ## How the page adapts
 
@@ -88,7 +100,10 @@ widgets in place. Older blog posts are mixed through the feed; the latest post h
 its own widget. Asset discoveries exclude assets already in your collection.
 
 Motion springs give rearranging, opening the catalog and pressing controls a
-consistent response. The homepage respects your system's reduced-motion setting.
+consistent response. The floating toolbar and catalog share a refracting glass
+frame, with a small bounce as it expands or contracts. Their contents fade and
+blur during the transition. The homepage respects your system's reduced-motion
+setting.
 
 ## Saved layouts and unavailable content
 
