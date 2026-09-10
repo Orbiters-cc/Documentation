@@ -49,6 +49,8 @@ Widget surfaces, edit overlays, drag visuals and catalog previews use
 (24 to 48 pixels for widgets, 18 to 36 for previews). Other browsers retain their
 ordinary radius. The glass dock keeps its lens geometry unchanged.
 
+Viewport reflow updates widget geometry without springs or layout projection, including column-count changes. Editing and release animations remain separate from browser resizing.
+
 Motion is imported from `motion/react`. Shared spring presets drive layout
 projection, the toolbar/catalog shared element, category selection, drag pickup,
 feedback and press states. Pointer movement positions the drag preview directly;
@@ -57,10 +59,14 @@ remove spatial transitions when requested by the system.
 
 In customization, the entire pinned widget receives drag input, except its
 explicit buttons. The lower-corner resize grip appears as a translucent rounded
-arc straddling the corner and protruding slightly beyond the widget, with a 56-pixel hit target. The handle sits 10 pixels outward; its painted arc extends about 2 pixels past the straight edges. The arc has a flat white tint and backdrop blur, without gradients, outlines or internal glass effects. `useWidgetResize` captures the
+arc straddling the corner and protruding slightly beyond the widget, with a 56-pixel hit target. The handle has no hover or press zoom. It sits 10 pixels outward; its painted arc extends about 2 pixels past the straight edges. The arc has a flat white tint and backdrop blur, without gradients, outlines or internal glass effects. `useWidgetResize` captures the
 pointer; `widgetResize` chooses the nearest registered shape in grid
 units, merging equivalent dimensions on narrow screens. Pointer movement stretches the preview. Blur follows the normalized distance to the two nearest legal shapes: zero at a valid dimension, rising continuously to 90% of the 18-pixel maximum (16.2 pixels) at the boundary where layouts crossfade. During the gesture it follows the pointer directly; release eases any remaining blur away. Variant contents crossfade while neighbors
-preview the packed result. Release commits one size change; Escape, pointer
+preview the packed result. Beyond a legal minimum or maximum, each axis uses an exponential resistance curve with up to 64 pixels of visual leeway. That overshoot is never persisted; release springs back to the nearest legal rectangle, even if its size has not changed. Left-edge resizing retains the opposite edge.
+
+Gallery variants keep the same mounted image, disable the detail-window shared layout during editing, and stretch a fixed copy of the starting crop. They do not remount or start a second layout animation at size boundaries.
+
+Release commits one size change; Escape, pointer
 cancellation, window blur or viewport resizing restores the original. Undo and
 the keyboard size button remain available. Reduced motion removes stretching,
 blur and spring movement. At the right edge the grip moves to the lower-left
@@ -147,7 +153,7 @@ the lens's rounded clipping does not cut it off.
 
 ## Gallery expansion
 
-`GalleryWidget` shares a Framer Motion layout ID between its image surface and a HeroUI modal, following the age-verification animation/runtime pattern. A spring expands and returns the surface, with a separately animated backdrop, inset close control and focus restoration. Existing `GalleryImage` keeps signed-source refresh and access handling; the modal uses its refreshed full URL. The preview is viewport bounded and reports image-load failures. Reduced motion removes spatial expansion.
+`GalleryWidget` shares a Framer Motion layout ID between its image surface and a HeroUI modal, following the age-verification animation/runtime pattern. A spring expands and returns the surface, with a separately animated backdrop, inset close control and focus restoration. Existing `GalleryImage` keeps signed-source refresh and access handling; the modal uses its refreshed full URL. The preview is viewport bounded and reports image-load failures. `GalleryImageDetails` is shared with the gallery page: author, posted date, reactions, attachment position and reporting controls remain consistent. Its content scrolls when details or the report form exceed the available height. Reduced motion removes spatial expansion.
 
 ## Inline age verification
 
@@ -206,8 +212,12 @@ commission and board APIs. Gallery, documentation and upcoming-event reads pagin
 sources expose retries independently. Reads are aborted on unmount and bounded by
 timeouts. Signed URLs and private content are not stored in layout preferences.
 
+`GET /galleries/asset-images` contributes an independently paginated asset-gallery source. The homepage merges its placement identities into the gallery catalog and shuffled feed. Listing visibility, active placements, attachment eligibility and source hiding are checked; commission listings that redirect to a different detail page without this gallery are excluded. No Discord request is made while listing.
+
+Asset-image responses include `assetId` and their existing signed-source refresh endpoint. **Open gallery** links to `/assets/:id#gallery`. `AssetGallerySection` scrolls after the asset loads, re-aligns as the gallery or preceding preview images finish loading, and stops repositioning after user input.
+
 `GET /galleries/images/:placementId` resolves a pinned image beyond the current
-feed page. It applies gallery visibility, attachment eligibility, source visibility
+feed page, including asset placements. Asset placements recheck listing and source visibility; ordinary galleries apply gallery visibility, attachment eligibility, source visibility
 and current-user access before returning the same display shape as the gallery
 feed. Unavailable or inaccessible placements return **404**.
 

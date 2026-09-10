@@ -45,7 +45,7 @@ of pins; it does not restore the defaults.
    reverses your most recent change.
 5. Select **Done** to save and return to normal interaction.
 
-The grid compacts widgets automatically. It does not store empty cells. Some
+Changing the browser width repacks the grid without a bounce. The grid compacts widgets automatically. It does not store empty cells. Some
 combinations of fixed widget sizes cannot fill every cell: in that case, keeping
 all pinned widgets before the feed takes priority. Resizing the window repacks the
 same collection for the new column count.
@@ -87,7 +87,7 @@ sign-in or a configured default board.
 
 To resize a pinned image, Sona catalog, blog post, creator or progress widget, drag its curved lower-corner grip. Its flat, softly blurred white surface straddles the widget corner and sticks out slightly so it stays easy to see.
 At the right edge of the grid, the grip appears on the left so you can widen inward.
-The content stretches as you move and becomes clearer near a supported size. Blur is strongest where it fades into another layout, then clears as you settle onto the next size. Nearby widgets preview that placement. Release to keep it, or press **Escape** to cancel. On narrow screens,
+The content stretches as you move and becomes clearer near a supported size. Blur is strongest where it fades into another layout, then clears as you settle onto the next size. Nearby widgets preview that placement. At the smallest and largest dimensions, you can stretch a little farther with increasing resistance; releasing springs back to the supported size. The grip stays the same size when hovered. Release to keep it, or press **Escape** to cancel. On narrow screens,
 some widths look identical, so the grip only changes dimensions that fit.
 Keyboard users can use the size control between the movement arrows.
 You can also select the same content in the catalog, choose
@@ -120,7 +120,9 @@ Chromium browsers such as Chrome and Edge; other browsers use a simple backgroun
 
 ## Open a gallery image
 
-Select an image to expand its card into a larger preview with the same gentle spring as age verification. The background fades in and out. Close with the inset top-right button, **Close**, **Escape**, or a click outside; the preview returns to its card and restores keyboard focus. Reduced motion uses fades without spatial expansion. **Open gallery** takes you to the image's gallery.
+Select an image to expand its card into a larger preview with the same gentle spring as age verification. The background fades in and out. Close with the inset top-right button, **Close**, **Escape**, or a click outside; the preview returns to its card and restores keyboard focus. Reduced motion uses fades without spatial expansion. **Open gallery** takes you to the image's gallery. Images from asset galleries are also available in the feed and widget catalog; their link opens the asset and scrolls to its gallery after loading.
+
+The expanded preview shows the same author, posted date, reaction count and image position as the gallery viewer, including **Report a problem**. Reporting does not require leaving the preview.
 
 ## Verify your age from Home
 
