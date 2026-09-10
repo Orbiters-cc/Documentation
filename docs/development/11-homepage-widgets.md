@@ -59,12 +59,19 @@ a descriptor without creating another copy.
 The frame uses the actual `@specy/liquid-glass` renderer, loaded dynamically when
 customization starts. Its transmissive material bends the painted page around a
 rounded lens. See the [author's explanation](https://specy.app/blog/posts/liquid-glass-in-the-web).
-`glassPaintLayer` makes a bounded viewport snapshot source from visible homepage
-widgets. This avoids allocating a texture as tall as the infinite feed. It captures
+`glassPaintLayer` captures a strip around the viewport, capped at 2.5 viewport
+heights and 4096 pixels. Scrolling moves the existing texture every animation frame;
+it does not take another snapshot for every scroll event. A new capture is needed
+when the lens approaches the strip boundary, the layout changes or content updates.
+The replacement origin is committed with its texture so the old image never jumps
+to new coordinates while capture is pending. This avoids allocating a texture as
+tall as the infinite feed. It captures
 no other page surfaces, stores no screenshots and uploads nothing. Scroll, resize
 and layout changes refresh the local paint cache; controls and drag overlays are
 excluded. Cleanup removes the paint layer, observers, listeners, cache subscription
-and WebGL context when editing ends. If WebGL is unavailable, the solid frame keeps
+and WebGL context when editing ends. The canvas stretches during the spring and
+resizes its drawing buffer once the frame settles. Rounded clipping on both the
+frame and canvas host contains the lens during expansion and collapse. If WebGL is unavailable, the solid frame keeps
 the controls readable and usable.
 
 ## Account preferences API
