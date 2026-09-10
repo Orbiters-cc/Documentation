@@ -8,7 +8,7 @@ id: orbiters.tools.mcb-operating-contract
 domain: mcb
 type: invariant
 owner: orbiters-mcb
-lastVerified: 2026-09-08
+lastVerified: 2026-09-10
 relations: orbiters.how-to.mcb-and-unity-tools, orbiters.general.vpm-package-contract
 ---
 
@@ -129,6 +129,37 @@ fit for the current version. Fitting it again replaces that choice. A manually
 replaced accessory mesh is not overwritten by a saved fit. Missing or incompatible
 armature paths skip restoration with a Console warning. These changes are local
 and unreleased.
+
+### Automatic flex transfer and animation links
+
+MCB ReFit now includes every blendshape on the selected custom-base Body mesh whose
+name contains `flex`, ignoring case, as well as the version's exposed blendshapes.
+Flex shapes do not need an MCB slider definition. Exact names are preserved and
+duplicate requests are removed.
+
+During avatar preprocessing, MCB's existing BlendShapeLink service copies body flex
+animation curves to the corresponding generated accessory shapes. For example,
+animating `biceps flex right` on Body also animates its transferred shape on each
+currently refitted accessory. Mapped output names, including a `refit_` prefix,
+are supported. These are build-time animation links, not an Edit Mode live watcher.
+No additional VRCFury Blendshape Link component, runtime script, factor parameter
+or wrapper blend tree is created. The existing build pipeline's temporary-controller
+requirement still applies; original authoring clips are not edited.
+
+Run ReFit again on accessories fitted before this change: restoring a saved fit
+does not generate missing flex shapes. Reset or manually replaced accessory meshes
+are excluded. Do not strip transferred flex shapes with a build optimizer; if a
+captured renderer or shape disappears, preprocessing reports an error instead of
+silently producing a broken link. This feature is local and unreleased.
+
+<audience include="dev">
+`MCBReFitFlexTests` covers mesh-only shape discovery, exact source/output mappings,
+direct curve transfer and sampled animation values, repeated application without
+new clip variants, authoring-controller isolation, and build-copy capture across
+renderer renaming and mesh cloning. The capture callback runs at `-10001`; the
+existing link callback applies direct copies after version/manual correctives at
+`-9000`. References are scoped to the build avatar, not a same-named scene avatar.
+</audience>
 
 </alpha>
 
