@@ -75,9 +75,36 @@ offset from 0.5 by that scale.
 
 A `ResizeObserver` updates the filter bounds and tile positions during the spring.
 Straight edge strips stretch to fit; lens pixels regenerate only when the rounded
-corner radius changes. The observer and SVG definitions disappear when editing
-ends. SVG backdrop refraction currently requires Chromium. Other browsers retain
+corner radius or lens/lighting settings change. The observer and SVG definitions
+disappear when editing ends. SVG backdrop refraction currently requires Chromium. Other browsers retain
 the translucent frame, rim and controls without the refractive lens.
+
+### Tune the glass in development
+
+Open **Customize → Add widget → Customize glass**. The editor is available in a
+development frontend build or when the configured backend URL identifies the dev
+environment, matching the homepage's dev-environment convention. Production uses
+the defaults and never reads development overrides from browser storage.
+
+The **Lens**, **Light** and **Surface** groups expose refractive index, depth,
+surface height and curve, edge width, displacement strength, light direction,
+ambient/directional highlights, highlight focus/width/inset, blur, saturation,
+tint opacity, rim sheen and both corner radii. Sliders update live;
+numeric entries apply on blur or Enter. Edge width cannot exceed the current
+corner radius. Zero strength or refractive index 1 disables displacement.
+
+Changes apply to the catalog and toolbar and persist only in this browser under
+`orbiters:dev:homepage-glass`; they are not account preferences. **Compare defaults**
+temporarily displays the shipped settings without replacing your values. Editing
+a control ends comparison. **Preview toolbar** collapses the catalog so you can
+inspect the smaller lens; opening it again returns to the tuner. **Reset** restores
+the defaults. **Copy settings** exports every value as JSON, with selectable text
+available if clipboard access is denied. Send that JSON to the developer to apply
+the chosen values in `glassSettings`; copying does not change shared defaults.
+
+Stored and edited values are restricted to the declared numeric ranges. Lens
+images regenerate only for lens or lighting changes; blur, tint, saturation and
+strength do not regenerate them. The geometry observer remeasures corner changes.
 
 ## Account preferences API
 
