@@ -54,8 +54,9 @@ it does not wait for a spring to catch up. `MotionConfig` and reduced-motion hoo
 remove spatial transitions when requested by the system.
 
 In customization, the entire pinned widget receives drag input, except its
-explicit buttons. The lower-corner resize grip uses pointer capture and
-`useWidgetResize`; `widgetResize` chooses the nearest registered shape in grid
+explicit buttons. The lower-corner resize grip appears as a translucent rounded
+arc around the corner, with a 56-pixel hit target. `useWidgetResize` captures the
+pointer; `widgetResize` chooses the nearest registered shape in grid
 units, merging equivalent dimensions on narrow screens. Pointer movement stretches
 the preview and blurs it by 14 pixels. Variant contents crossfade while neighbors
 preview the packed result. Release commits one size change; Escape, pointer
@@ -95,7 +96,11 @@ access to the page behind it.
 and Snell's law. Eight small images describe only the lens: four corners and four
 straight edge strips. An unattached 2D canvas encodes those mathematical pixels;
 it never draws page content. Red and green encode displacement, blue encodes the
-specular rim. The SVG filter combines the tiles, corrects neutral red/green to
+specular rim. Mathematical masks use asynchronous PNG encoding and readback-friendly
+canvas storage so encoding does not block the opening spring. The previous lens
+stays visible until the new maps are ready; obsolete results are discarded.
+The SVG filter combines
+the tiles, corrects neutral red/green to
 exactly 0.5, displaces the backdrop, and blends the highlight. Its displacement
 scale is twice the maximum ray distance because SVG multiplies the channel's
 offset from 0.5 by that scale.
@@ -145,7 +150,9 @@ the lens's rounded clipping does not cut it off.
 originating card. The dialog expands from that card with a slightly bouncy spring,
 keeping its grid footprint intact, and collapses back on dismissal. It retains
 HeroUI focus trapping, Escape/outside dismissal and focus restoration. Its animated
-children use the same `framer-motion` runtime as HeroUI so exit completion removes
+backdrop fades over 220 milliseconds. The explicit top-right close button sits
+12 pixels inward, has a 44-pixel target and stays above the animated page content.
+Animated children use the same `framer-motion` runtime as HeroUI so exit completion removes
 the modal overlay. `VerificationStage` crossfades pages with directional sliding
 and blur; a measured height spring follows the incoming page and subsequent
 linking status changes. Reduced motion disables geometry projection, blur and bounce.

@@ -83,7 +83,8 @@ multiple pins with different content. The same selection can only be pinned once
 You can keep up to 64 pinned widgets. The catalog explains when a widget requires
 sign-in or a configured default board.
 
-To resize a pinned image, creator or progress widget, drag its lower-corner grip.
+To resize a pinned image, creator or progress widget, drag its curved, translucent
+lower-corner grip.
 At the right edge of the grid, the grip appears on the left so you can widen inward.
 The content stretches and blurs as you move; nearby widgets preview the closest
 supported size. Release to keep it, or press **Escape** to cancel. On narrow screens,
@@ -134,6 +135,8 @@ identity documents in public channels or upload them to the homepage.
 You can return to the methods list or close the dialog without leaving Home.
 Method changes slide, fade and blur, and the window smoothly adjusts its height.
 Closing returns it to the original card. These effects respect reduced motion.
+The background fades in and out with the window. Close it with the top-right
+button, the footer's **Close**, **Escape**, or a click outside the window.
 Staff review holds must be resolved by staff, even when another source confirms
 18+ status. Verification updates refresh the homepage widget.
 
