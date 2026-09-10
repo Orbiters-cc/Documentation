@@ -271,3 +271,5 @@ They are separate from the HTTP startup regression, which executes the real
 authentication, preference reads and writes on loopback ports above 4200.
 
 Preview presentation crossfades follow actual bounds progress between 20% and 65% of expansion, reversing during collapse. The source card presentation remains beneath the transition. Gallery windows retain their final photo-and-metadata arrangement while opening; only the decoded image crossfades. During closing, the window crossfades into the exact thumbnail crop before reaching the widget. The source presentation uses the widget heading styles and container sizing so typography remains identical at the handoff.
+
+Saved preferences are normalized through the current widget registry when they load and after a save response. If a size option has been removed, its stale `size` field is dropped and the widget uses its current default before any later layout update is sent. Valid sizes and content identities remain unchanged. This prevents one obsolete descriptor from making every subsequent homepage save fail validation.

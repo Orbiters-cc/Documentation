@@ -177,3 +177,5 @@ Developers can find the persistence and layout contracts in
 [Homepage Widgets](/documentation/orbiters.development.homepage-widgets).
 
 Only the final six feed cards may adjust their supported sizes to keep the end compact. Earlier images keep their varied, proportion-based sizes. Pinned sizes and already displayed cards stay in place when more content loads. Image previews keep their photo and details in the same arrangement while opening and loading.
+
+When available widget sizes change after an update, a saved widget that used a removed size returns to that widget's current default size automatically. Your other pinned widgets, their order and their supported custom sizes remain intact, and the updated layout can be saved normally.
