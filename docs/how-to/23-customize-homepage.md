@@ -74,7 +74,7 @@ without dragging; the catalog stays open so you can add another widget.
 | Gallery image | 1 × 1, 2 × 1, 1 × 2, 2 × 2, 3 × 1 or 3 × 2 | A selected image; open it for a larger preview |
 | Discover an asset | 1 × 1 | A selected asset |
 | From the blog | 2 × 1, 2 × 2 or 3 × 2 | A selected older post |
-| Documentation update | 1 × 1, 1 × 2, 2 × 1, 2 × 2, 3 × 1 | A selected guide with its latest recorded change date |
+| Documentation update | 1 × 1, 2 × 1, 2 × 2, 3 × 1 | A selected guide with its latest recorded change date |
 | Creator card | 2 × 1 or 1 × 1 | A selected creator and profile link |
 | Coming events | 2 × 2 | The next three public community events; select a row for details |
 | Coming event | 2 × 1 | One selected coming event and its local date/time |
