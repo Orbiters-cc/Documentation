@@ -74,7 +74,7 @@ without dragging; the catalog stays open so you can add another widget.
 | Gallery image | 1 × 1, 2 × 1, 1 × 2, 2 × 2, 3 × 1 or 3 × 2 | A selected image; open it for a larger preview |
 | Discover an asset | 1 × 1 | A selected asset |
 | From the blog | 2 × 1, 2 × 2 or 3 × 2 | A selected older post |
-| Documentation update | 3 × 1 | A selected guide with its latest recorded change date |
+| Documentation update | 1 × 1, 1 × 2, 2 × 1, 2 × 2, 3 × 1 | A selected guide with its latest recorded change date |
 | Creator card | 2 × 1 or 1 × 1 | A selected creator and profile link |
 | Coming events | 2 × 2 | The next three public community events; select a row for details |
 | Coming event | 2 × 1 | One selected coming event and its local date/time |
@@ -122,9 +122,9 @@ Chromium browsers such as Chrome and Edge; other browsers use a simple backgroun
 
 Select an image to expand its card into a larger preview with the same gentle spring as age verification. The background fades in and out. Close with the inset top-right button, **Close**, **Escape**, or a click outside; the preview returns to its card and restores keyboard focus. Reduced motion uses fades without spatial expansion. **Open gallery** takes you to the image's gallery. Images from asset galleries are also available in the feed and widget catalog; their link opens the asset and scrolls to its gallery after loading.
 
-The expanded preview fits the image's proportions and shows the same author, posted date, reaction count and image position as the gallery viewer, including **Report a problem**. Reporting does not require leaving the preview.
+The expanded preview fits the image's proportions and shows the same author, posted date, reaction count and image position as the gallery viewer, including **Report a problem**. Reporting does not require leaving the preview. The widget thumbnail stays visible while the full image loads, then gently fades into the sharper version. If that image cannot load, the thumbnail remains available.
 
-Feed images automatically use the closest available widget proportions: portrait pictures favor tall tiles, while wide pictures favor horizontal tiles. Pinned pictures keep your chosen size. When resizing, the crop crossfades to the nearest layout during the drag, before you release the pointer.
+Feed images initially use the closest available widget proportions: portrait pictures favor tall tiles, while wide pictures favor horizontal tiles. Near the end, the feed can adjust the order and supported sizes of new widgets to reduce empty space. Pictures already on screen stay in place when more load, and pinned pictures keep your chosen size. When resizing, the crop crossfades to the nearest layout during the drag, before you release the pointer. Article and guide layouts overlap during their fade so the card does not go blank between sizes.
 
 ## Preview creators, assets, articles and guides
 
