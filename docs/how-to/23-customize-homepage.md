@@ -175,3 +175,5 @@ Creators can configure their board in
 [Manage Your Commission Workspace](/documentation/orbiters.how-to.manage-commission-workspace).
 Developers can find the persistence and layout contracts in
 [Homepage Widgets](/documentation/orbiters.development.homepage-widgets).
+
+Feed images may use smaller supported sizes to keep the end of the homepage compact. Pinned sizes and already displayed cards stay in place when more content loads. Image previews keep their photo and details in the same arrangement while opening and loading.
