@@ -35,10 +35,10 @@ of pins; it does not restore the defaults.
    on a non-interactive part of a widget for two seconds. A progress indicator
    confirms the hold; moving, releasing or scrolling cancels it. Buttons, links,
    form fields and the commission board's controls keep their normal behavior.
-2. Drag a pinned widget by its **Move** handle. Neighbors preview the new placement
+2. Drag anywhere on a pinned widget, apart from its buttons. Neighbors preview the new placement
    as you move. Release to place it. Dropping beyond the pinned widgets moves it
    to the end of that collection, ahead of the feed.
-3. On touch, use the same handle. You can also select one widget, then select a
+3. On touch, drag the widget in the same way. You can also select one widget, then select a
    destination. Keyboard users can focus a handle and use the arrow keys, or use
    the **Move earlier** and **Move later** controls.
 4. Use the corner removal button to unpin a widget. **Undo** in the bottom toolbar
@@ -83,8 +83,13 @@ multiple pins with different content. The same selection can only be pinned once
 You can keep up to 64 pinned widgets. The catalog explains when a widget requires
 sign-in or a configured default board.
 
-To resize a pinned image, creator or progress widget, use its size control between
-the movement arrows. You can also select the same content in the catalog, choose
+To resize a pinned image, creator or progress widget, drag its lower-corner grip.
+At the right edge of the grid, the grip appears on the left so you can widen inward.
+The content stretches and blurs as you move; nearby widgets preview the closest
+supported size. Release to keep it, or press **Escape** to cancel. On narrow screens,
+some widths look identical, so the grip only changes dimensions that fit.
+Keyboard users can use the size control between the movement arrows.
+You can also select the same content in the catalog, choose
 a different size and select **Update size**. This updates the existing pin in
 place. **Undo** also reverses size changes.
 
@@ -100,6 +105,8 @@ and keeps its two-row height.
 The feed adds content as you scroll. Loading another page keeps already displayed
 widgets in place. Older blog posts are mixed through the feed; the latest post has
 its own widget. Asset discoveries exclude assets already in your collection.
+The discovery feed shows at most three documentation updates in total. You can
+still explicitly pin additional guides from the catalog.
 
 Motion springs give rearranging, opening the catalog and pressing controls a
 consistent response. The floating toolbar and catalog share a refracting glass
@@ -112,7 +119,7 @@ frame with the same controls and layout.
 ## Verify your age from Home
 
 Select **Verify** on the Age verification widget (or **View status** if already
-verified). The dialog offers **VRChat linking**, **Trusted server role** and
+verified). The card expands into a window offering **VRChat linking**, **Trusted server role** and
 **Verify with an administrator**. VRChat opens the existing friend-request linking
 flow directly in the dialog; you do not need to visit Account or enter a password.
 The linked VRChat profile must have a verified 18+ status to supply age evidence.
@@ -125,6 +132,8 @@ Discord so you can arrange a private ID check with an administrator. Do not post
 identity documents in public channels or upload them to the homepage.
 
 You can return to the methods list or close the dialog without leaving Home.
+Method changes slide, fade and blur, and the window smoothly adjusts its height.
+Closing returns it to the original card. These effects respect reduced motion.
 Staff review holds must be resolved by staff, even when another source confirms
 18+ status. Verification updates refresh the homepage widget.
 

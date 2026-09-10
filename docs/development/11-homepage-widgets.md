@@ -35,11 +35,35 @@ pages reuses earlier placements when the pin order, sizes, column count and exis
 feed prefix are unchanged. Content bodies outside the viewport margin unmount, while
 their measured grid footprints remain. Pinned bodies stay mounted.
 
+`appendCandidates` limits the accumulated discovery feed to three documentation
+cards, deduplicating before counting. Further source pages and refreshes cannot
+increase that total or reorder earlier feed cards. Once the cap is reached, feed
+scrolling stops requesting document pages; the catalog can still load more.
+Explicit user pins remain
+independent of this discovery limit.
+
+Widget surfaces, edit overlays, drag visuals and catalog previews use
+`corner-shape: squircle` inside an `@supports` rule. Their border radius doubles
+(24 to 48 pixels for widgets, 18 to 36 for previews). Other browsers retain their
+ordinary radius. The glass dock keeps its lens geometry unchanged.
+
 Motion is imported from `motion/react`. Shared spring presets drive layout
 projection, the toolbar/catalog shared element, category selection, drag pickup,
 feedback and press states. Pointer movement positions the drag preview directly;
 it does not wait for a spring to catch up. `MotionConfig` and reduced-motion hooks
 remove spatial transitions when requested by the system.
+
+In customization, the entire pinned widget receives drag input, except its
+explicit buttons. The lower-corner resize grip uses pointer capture and
+`useWidgetResize`; `widgetResize` chooses the nearest registered shape in grid
+units, merging equivalent dimensions on narrow screens. Pointer movement stretches
+the preview and blurs it by 14 pixels. Variant contents crossfade while neighbors
+preview the packed result. Release commits one size change; Escape, pointer
+cancellation, window blur or viewport resizing restores the original. Undo and
+the keyboard size button remain available. Reduced motion removes stretching,
+blur and spring movement. At the right edge the grip moves to the lower-left
+corner so widening does not require dragging outside the viewport. Grips are
+hidden when the available columns leave no distinct physical size choices.
 
 ## Catalog and glass frame
 
@@ -117,10 +141,14 @@ the lens's rounded clipping does not cut it off.
 
 ## Inline age verification
 
-`AgeVerificationDialog` uses the existing HeroUI modal semantics with spring
-entry and a finite blur/fade exit. It retains focus trapping, Escape dismissal,
-focus restoration and reduced-motion support. Its animated children use the same
-`framer-motion` runtime as HeroUI so exit completion removes the modal overlay.
+`AgeWidget` and `AgeVerificationDialog` share a layout identity scoped to the
+originating card. The dialog expands from that card with a slightly bouncy spring,
+keeping its grid footprint intact, and collapses back on dismissal. It retains
+HeroUI focus trapping, Escape/outside dismissal and focus restoration. Its animated
+children use the same `framer-motion` runtime as HeroUI so exit completion removes
+the modal overlay. `VerificationStage` crossfades pages with directional sliding
+and blur; a measured height spring follows the incoming page and subsequent
+linking status changes. Reduced motion disables geometry projection, blur and bounce.
 `VrchatMemberLink` renders directly
 inside the selected method, reusing the existing authenticated linking endpoints.
 No frontend action creates age evidence or clears review holds. Discord connection
@@ -184,6 +212,9 @@ dated recommendations. A specific pinned document resolves through the existing
 Frontend tests cover the supplied resizing examples, mixed-size packing,
 non-overlap, the pinned prefix, stable feed append, stationary-hold cancellation,
 explicit empty layouts, undo, reference-only saves and revision conflicts.
+Resize tests check supported shapes, mobile width aliases, preview-only movement,
+release at the last pointer position, cancellation and pointer identity. Feed
+tests check the three-document limit across repeated pages.
 Headless browser checks use intercepted local fixtures for desktop/mobile layout,
 catalog transitions, pointer interaction, saving and reload. They also check card
 content alignment, round corner pins, the SVG definitions surviving expansion,
