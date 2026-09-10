@@ -43,7 +43,7 @@ remove spatial transitions when requested by the system.
 
 ## Catalog and glass frame
 
-`WidgetDock` keeps one mounted frame and glass canvas while animating its actual
+`WidgetDock` keeps one mounted frame and SVG filter while animating its actual
 width and height with a spring. It expands to at most 620 × 440 pixels on desktop
 and 520 pixels high on narrow screens, with viewport margins. Catalog and toolbar
 content crossfade through a 10-pixel blur; reduced motion disables blur, scale and
@@ -56,23 +56,28 @@ cancelled drop. `placeCatalogWidget` shares insertion logic between preview and
 commit. Identity remains `type:entityId` regardless of size, so resizing replaces
 a descriptor without creating another copy.
 
-The frame uses the actual `@specy/liquid-glass` renderer, loaded dynamically when
-customization starts. Its transmissive material bends the painted page around a
-rounded lens. See the [author's explanation](https://specy.app/blog/posts/liquid-glass-in-the-web).
-`glassPaintLayer` captures a strip around the viewport, capped at 2.5 viewport
-heights and 4096 pixels. Scrolling moves the existing texture every animation frame;
-it does not take another snapshot for every scroll event. A new capture is needed
-when the lens approaches the strip boundary, the layout changes or content updates.
-The replacement origin is committed with its texture so the old image never jumps
-to new coordinates while capture is pending. This avoids allocating a texture as
-tall as the infinite feed. It captures
-no other page surfaces, stores no screenshots and uploads nothing. Scroll, resize
-and layout changes refresh the local paint cache; controls and drag overlays are
-excluded. Cleanup removes the paint layer, observers, listeners, cache subscription
-and WebGL context when editing ends. The canvas stretches during the spring and
-resizes its drawing buffer once the frame settles. Rounded clipping on both the
-frame and canvas host contains the lens during expansion and collapse. If WebGL is unavailable, the solid frame keeps
-the controls readable and usable.
+`LiquidGlassFilter` applies an SVG displacement filter directly to the frame's
+CSS `backdrop-filter`, following the [CSS/SVG glass construction](https://kube.io/blog/liquid-glass-css-svg/).
+The browser supplies the live page pixels, including scrolling and changing
+content. There are no page snapshots, cloned content, WebGL contexts or JavaScript
+refresh loops. The frame has one uniform translucent tint and rounded clipping.
+The backdrop filter belongs to the frame itself so a clipped child does not lose
+access to the page behind it.
+
+`glassRefraction` derives inward ray displacement from a convex squircle surface
+and Snell's law. Eight small images describe only the lens: four corners and four
+straight edge strips. An unattached 2D canvas encodes those mathematical pixels;
+it never draws page content. Red and green encode displacement, blue encodes the
+specular rim. The SVG filter combines the tiles, corrects neutral red/green to
+exactly 0.5, displaces the backdrop, and blends the highlight. Its displacement
+scale is twice the maximum ray distance because SVG multiplies the channel's
+offset from 0.5 by that scale.
+
+A `ResizeObserver` updates the filter bounds and tile positions during the spring.
+Straight edge strips stretch to fit; lens pixels regenerate only when the rounded
+corner radius changes. The observer and SVG definitions disappear when editing
+ends. SVG backdrop refraction currently requires Chromium. Other browsers retain
+the translucent frame, rim and controls without the refractive lens.
 
 ## Account preferences API
 
@@ -129,8 +134,11 @@ non-overlap, the pinned prefix, stable feed append, stationary-hold cancellation
 explicit empty layouts, undo, reference-only saves and revision conflicts.
 Headless browser checks use intercepted local fixtures for desktop/mobile layout,
 catalog transitions, pointer interaction, saving and reload. They also check card
-content alignment, round corner pins, the real glass canvas surviving expansion,
-bounded paint dimensions, direct catalog dragging and persisted compact variants.
+content alignment, round corner pins, the SVG definitions surviving expansion,
+direct catalog dragging and persisted compact variants. Lens unit tests verify
+finite symmetric displacement, neutral interiors and bounded tile geometry.
+Browser pixel checks compare refraction against zero displacement, change a live
+checkerboard backdrop without regenerating maps, and check rounded clipping.
 
 Backend tests cover preference validation, ownership, concurrent revision writes,
 gallery visibility and documentation dates. The opt-in `homepageDatabase` test

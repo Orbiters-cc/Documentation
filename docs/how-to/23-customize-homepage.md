@@ -103,7 +103,9 @@ Motion springs give rearranging, opening the catalog and pressing controls a
 consistent response. The floating toolbar and catalog share a refracting glass
 frame, with a small bounce as it expands or contracts. Their contents fade and
 blur during the transition. The homepage respects your system's reduced-motion
-setting.
+setting. The glass follows live page content. Refraction is available in
+Chromium browsers such as Chrome and Edge; other browsers keep a translucent
+frame with the same controls and layout.
 
 ## Saved layouts and unavailable content
 
