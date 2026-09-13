@@ -8,7 +8,7 @@ id: orbiters.how-to.manage-commission-workspace
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-09
+lastVerified: 2026-09-13
 ---
 
 # Your Commission Workspace
@@ -68,16 +68,26 @@ Imagine moving Mika's jacket task into your review pile at the end of the day. T
 
 <audience include="dev">
 
-- Scroll the modal with the mouse wheel or touch. It uses one scroll area and a
-  160 ms opening and 100 ms closing animation. Large dialogs use a smaller tilt;
-  reduced-motion preferences disable movement. Closing stops intercepting clicks
-  immediately, so you can select another card while it fades out.
+- Scroll the modal with the mouse wheel or touch. Its bounds expand from the
+  originating card with a restrained spring; card and detail content crossfade
+  during the movement. Closing reverses the transition and removes the overlay.
+  Reduced-motion preferences remove spatial movement.
   HeroUI skeletons reserve reference space during loading. Recent proposal details
   and image blobs are kept in memory for up to 30 seconds (32 entries / 32 MiB),
   isolated by login token. Reopened details refresh in the background; nothing is
   written to persistent browser storage.
 
 </audience>
+
+<alpha>
+
+Click a card's title or description to edit it inline, including image drops.
+Use **Link commission asset** to associate an existing agreement with an art
+asset, select clients, configure extras and record its payment. These controls
+also appear on full proposal and GitHub issue pages. See
+[Edit Board Cards and Link Existing Commissions](/documentation/orbiters.how-to.link-board-commissions).
+
+</alpha>
 
 Accepting an art request creates one private task in your configured commission
 Board. Without a configured Board, it uses your Creations Board. ReFit keeps its

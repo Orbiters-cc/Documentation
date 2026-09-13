@@ -8,7 +8,7 @@ id: orbiters.website.art-commissions-and-sonas
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-05
+lastVerified: 2026-09-13
 relations: orbiters.website.knowledge-map, orbiters.website.public-profile
 ---
 
@@ -105,6 +105,25 @@ variant at +28, making the pack USD 47. An optional complex-design extra at +13
 makes that configured pack USD 60. A listing supports up to 20 variants and 20
 options. Prices use two decimal places; a configured total cannot exceed 100,000
 units of the chosen currency. Creators can save up to 100 commission listings.
+
+<alpha>
+
+Under **Options**, choose **Add slider** for a variable supplement. Enter its
+starting and maximum prices, endpoint labels and number of steps (1–100).
+For example, **Simple +0 → Complex +13** with 13 steps adds one currency unit
+per step. Customers and creators choose the same slider when configuring a
+request; its selected position and resulting price are retained in the quote.
+
+New requests also offer **Add a special request**. Enter the agreed description
+and extra amount, or zero for a free extra. These additions are shown to the
+artist for review, included in the configured total, and retained with the
+request. A customer's proposed extra is still subject to the artist accepting
+the request.
+
+Already arranged work can be linked from an existing board card. See
+[Edit Board Cards and Link Existing Commissions](/documentation/orbiters.how-to.link-board-commissions).
+
+</alpha>
 
 Published listings appear in the Assets gallery and on your public profile.
 Turning off **Accept requests** keeps the listing visible but pauses new requests.
