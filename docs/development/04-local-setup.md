@@ -60,6 +60,19 @@ polling on Windows. Do not replace internal React Router links with document `hr
 navigation: a full request downloads and recompiles the development bundle and makes
 otherwise-fast local pages appear slow.
 
+When a new frontend dependency is added, installing it on the Windows host does not
+update that running container volume. A missing lazy editor module such as
+`@tiptap/react` can therefore appear only after clicking a description. Refresh the
+development container dependencies from its lockfile and restart that service:
+
+```bash
+docker exec frontend-dev npm ci --no-audit --no-fund
+docker restart frontend-dev
+```
+
+Wait for the development compiler to succeed, then reload the browser to discard
+the failed chunk. These commands target the development frontend only.
+
 Production-shaped local run:
 
 ```bash

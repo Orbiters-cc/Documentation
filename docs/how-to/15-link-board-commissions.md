@@ -13,7 +13,7 @@ lastVerified: 2026-09-13
 
 # Edit Board Cards and Link Existing Commissions
 
-Use an existing proposal, Trello card or GitHub project issue to track artwork
+Use an existing proposal, Trello card, Notion task or GitHub project issue to track artwork
 already agreed with a client. You need an Orbiters commission asset of your own
 and an Orbiters account for each client.
 
@@ -41,7 +41,11 @@ to that Trello card. GitHub editing updates the issue title and body using the
 board repository's configured write credential; linking a GitHub identity alone
 does not grant repository write access.
 
-Images embedded in either provider are hosted by Orbiters under unguessable
+Notion tasks use the connected creator's workspace authorization. See
+[Connect Notion task boards](16-connect-notion.md) for database imports, status columns,
+advanced blocks and optional Files-property attachments.
+
+Images embedded in these providers are hosted by Orbiters under unguessable
 links that the external service can display. Anyone who receives such an image
 link can open it. The GitHub issue body contains those image links; GitHub does
 not receive a separate binary upload through its issue API. Share only the

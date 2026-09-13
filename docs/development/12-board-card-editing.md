@@ -37,6 +37,8 @@ GitHub writes use `GITHUB_REPOSITORY_WRITE`, scoped to the configured repository
 not an identity token. Orbiters uses the official
 [issue update endpoint](https://docs.github.com/en/rest/issues/issues#update-an-issue).
 Trello uses its [card and attachment endpoints](https://developer.atlassian.com/cloud/trello/rest/api-group-cards/).
+Notion tasks use the same editor API with a workspace-owned provider, remote version
+checks and advanced-block preservation; see [Notion board integration](16-notion-boards.md).
 Configure `PUBLIC_API_URL` with the externally reachable API origin so both
 providers can display inline images. Image capabilities are stored hashed in
 file metadata; the original link is retained on the authorized card attachment.
