@@ -18,10 +18,10 @@ real HTML recreation of the supplied MCB Inspector reference. The preceding
 presentation remains at `/my-custom-base-old`. This page describes the local
 implementation; it does not establish a production deployment.
 
-The desktop frame uses the reference's 1054 × 867 proportions. At widths of 1100
-CSS pixels and above, it occupies 61.2% of the presentation area, up to 1054 pixels,
-leaving room for the handwritten-style benefits around the Install button.
-Smaller windows use the full presentation width. Below 760 CSS pixels, the scene
+The desktop frame stays 1054 × 867 while the page has enough horizontal space.
+When space runs out, its scene column narrows first while the Inspector retains
+its 456-pixel width and original UI scale. At a 912-pixel frame width the columns
+reach a 50/50 split; only then does the whole editor scale down. Below 760 CSS pixels, the scene
 and inspector stack vertically so the inspector remains readable. The surrounding Orbiters navigation
 and footer continue to work normally.
 
@@ -45,7 +45,8 @@ The scene follows [Unity's Scene view navigation](https://docs.unity3d.com/Manua
 The canvas must have focus to receive keyboard commands. Arrow keys orbit,
 Shift + arrows pan, and plus/minus zoom. Escape, loss of focus, pointer cancellation,
 and hiding the page stop active navigation. Touch supports one-finger orbit and
-two-finger pan/pinch. Scene controls below the frame explain these bindings.
+two-finger pan/pinch. The foldable **Scene controls** panel at the bottom left
+inside the scene explains these bindings. Escape closes it and restores its summary focus.
 
 The orientation gizmo projects its six cones and centre cube from the scene
 camera's inverse rotation. It rotates during orbit/look controls and stays fixed
@@ -54,16 +55,18 @@ corresponding view; the centre restores the reference view.
 
 ## Guided walkthrough
 
-On arrival, an automatic three-second introduction demonstrates **1 Click apply**,
-**1 Click update**, and **1 Click rollback**, one second each. These are HTML
-version rows with simulated button presses, progress fills, and installed-state
-changes. The supplied brush circle draws around the MCB logo while six rays
-appear. After the third step, the same logo and labels shrink into the header;
-the other benefits and brush arrows reveal over roughly one second as the
-interactive frame appears. **Skip intro** proceeds directly to this transition.
-Reduced motion starts with the finished header. The introduction timer pauses
-while the document is hidden and is cleared on unmount. Tutorial replay resets
-the interactive steps without replaying the introduction.
+On arrival, the introduction waits for the visitor to click **Apply UltiRex**,
+**Update UltiRex**, and **Reset to Original Avatar** in sequence. Each action
+shows loading progress and an installed-state change, then waits for the next
+click. A handwritten **Click!** arrow moves gently beside the available button.
+Repeated clicks while loading cannot skip a step. The supplied brush circle
+draws around the MCB logo while six rays appear. After Reset completes, the same
+logo and three labels move into the header together. The other benefits and
+arrows reveal quickly from their centers while the interactive frame appears.
+**Skip intro** opens the final header immediately. Reduced motion retains all
+three interactive actions with shorter progress feedback and no spatial motion.
+Loading timers pause in hidden tabs and are cleared on unmount. Tutorial replay
+resets the interactive Unity steps without replaying the introduction.
 
 The page begins with the avatar's `orbit muscles` weight and normal-map intensity
 both at zero. The Inspector initially contains the avatar object header and its
@@ -112,7 +115,13 @@ and omit the decorative arrows so that the copy remains readable.
 Outside tutorial step 4, **Install** opens the shared `MCBInstallWizard` used by
 `/my-custom-base-old`. Visitors are sent to login. Signed-in users receive the
 real VCC repository, package installation, Unity component, and account-sync
-instructions. The expanded installer closes with its close button, Escape, or an
+instructions. The same mounted Dynamic Island grows from the Install button;
+the surrounding labels, arrows, and Unity frame move apart to reserve its space.
+Its height follows the actual step content, including wrapped text and sync feedback;
+measurements are applied outside ResizeObserver delivery. Browser resizing updates
+the surrounding layout without carrying over the expansion animation.
+There is no modal or extra card around the island. Arrow tips remain outside its
+bounds. The expanded installer closes with its close button, Escape, or an
 outside pointer press; explicit dismissal restores focus to Install. Entering
 tutorial step 4 closes the installer and temporarily uses its trigger for the
 preview's website sync action. After both preview sync actions, Install opens
@@ -122,7 +131,7 @@ The account row and banner author use the signed-in user's username and profile
 image through the shared avatar URL helper. Login, profile changes, and logout
 update them without reloading the page. Visitors use `blackorbit` and the supplied
 avatar. A missing or failed signed-in image falls back to the user's initial.
-The `dev` badge and **Create new version** button are absent. The version graph
+The `dev` badge, **Edit**, and **Create new version** buttons are absent. The version graph
 starts at **0.5.3** and ends at the base node, with a short solid section followed
 by fine dashes.
 
@@ -130,7 +139,7 @@ The guided tutorial is a browser demonstration: its sync and apply controls chan
 They do not copy authentication tokens, link an actual Unity project, download a
 package into Unity, or mutate backend data. The installed/public badges describe
 the demonstration, not the user's real project or package access. The Inspector's
-remaining reference controls, including Edit, Logout, save/delete, and ReFit,
+remaining reference controls, including Logout, save/delete, and ReFit,
 remain real buttons with no external action at this stage. The separate real
 installer can open VCC and prepare an account token through its explicit controls,
 exactly as on the old page; those actions are never run automatically by the intro
@@ -141,11 +150,21 @@ or tutorial.
 Scrolling below the scene reveals a locally adapted
 [React Bits Drift Wall](https://reactbits.dev/components/drift-wall) populated
 from `GET /mcb/showcase`. The endpoint is anonymous and returns at most 24 recent
-public custom-base avatar listings with a non-default thumbnail and at least one
-public version. Hidden, restricted, and commission listings are excluded. The
+public custom-base avatar listings with a non-default thumbnail. A public version
+is not required: listings with beta versions or no uploaded versions also appear.
+Hidden, restricted, and commission listings are excluded. The
 response contains only IDs, titles, thumbnail URLs, and public destination links;
 it exposes no version payloads or packages and uses `Cache-Control: no-store`.
-Valid store links open their listing; assets without one lead to the asset browser.
+Clicking a tile opens the same expanding asset preview used by homepage widgets.
+The wall pauses through the preview's exit so its source stays in place. Escape,
+outside dismissal, and the close button return to the wall; keyboard focus is
+restored. Modified clicks retain normal asset-page links.
+
+`GET /mcb/showcase/:id` serves the preview to visitors as well as signed-in users.
+It repeats the listing visibility checks and returns only ID, name, thumbnail,
+short description, and description. Invalid or unavailable listings return 404;
+temporary failures return a generic 503 with retry UI. It does not grant access
+to beta versions or expose any package, ownership, or authentication data.
 
 The wall fetches when it approaches the viewport, aborts abandoned requests, and
 offers a retry on failure. Empty results show a publication message rather than
@@ -162,6 +181,9 @@ It retains all 243 named blendshapes and their source weights in the asset. The
 walkthrough overrides `orbit muscles` to `0` before the first avatar render, then
 animates it to `1` after Apply. The supplied color and normal textures are
 separate cached WebP derivatives; the original assets remain untouched.
+The color texture uses sRGB; the normal texture explicitly uses `NoColorSpace`.
+Its normal scale is `(intensity, -intensity)` to compensate for the supplied
+normal map's green-axis convention, including throughout the Apply animation.
 
 `MCBPresentation` accepts a `blendshapes` object keyed by the exact exported names:
 
@@ -218,7 +240,7 @@ installed editor's resource file and the MCB package's Editor directory:
 python scripts/extract-mcb-editor-assets.py "/path/to/Unity/Editor/Data/Resources/unity editor resources" "/path/to/orbiters.mcb/Editor" public/assets/mcb/presentation/editor --unity-version 2022.3.22f1
 ```
 
-Focused frontend tests cover the intro timing, workflow reducer, ordered virtual-key input,
+Focused frontend tests cover intro click gating and completion, workflow state, ordered virtual-key input,
 profile updates, resize delivery, named blendshape updates, camera behavior, and
 gizmo projection:
 
