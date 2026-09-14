@@ -153,21 +153,46 @@ before/after hoodie images, a Caveat caption and a drawn arrow. The original
 image dimensions are retained in WebP copies; provenance is recorded in
 `public/assets/mcb/presentation/refit/sources.json`. Images and arrow reveal as
 the section enters view. Narrow screens place the caption above the image pair.
+The comparison sits directly on the page background, without a gray panel.
 
-The next section illustrates the **FBX diff path**, with creator and recipient
+The file diagram illustrates the **FBX diff path**, with creator and recipient
 on either side of the server. Its file, broken-file diff, XOR, binary payload,
 SHA-256 and verification symbols reveal in workflow order. Narrow screens stack
 creator, server and recipient; reduced motion shows the completed illustrations.
 The explanatory text remains available independently of the decorative SVGs.
+Its heading uses the requested ownership wording; the previous subtitle and
+technical footnote are absent from the presentation.
 
 The diagram matches `HdiffService` and the FBX output hash in
 `FileManagerService`: build a diff from the original and custom FBX, XOR-wrap it
 using the original bytes, then unwrap and reconstruct with the recipient's
 original. The reconstructed output is checked against its SHA-256 hash.
-It describes this payload as excluding the original FBX, not as a guarantee of
-zero security risk. SHA-256 is an integrity check, not encryption. Other delivery
+This payload excludes the original FBX; that mechanism does not establish a
+guarantee of zero security risk. SHA-256 is an integrity check, not encryption. Other delivery
 formats, including native mesh payloads and full-file XOR, are outside this
 simplified diagram; see [MCB Adaptive Delivery](../reference/mcb-adaptive-delivery.md).
+
+## Video walkthroughs and documentation grid
+
+Three video rows show customization, custom-base creation and version creation,
+with a rounded poster and play icon beside each label. They use the supplied
+recordings with lossless fast-start remuxing and generated WebP posters. The
+source manifest is `public/assets/mcb/presentation/videos/sources.json`.
+Only posters load before activation. Clicking or keyboard-activating a poster
+opens the shared homepage `CardPreviewDialog` from its bounds and starts the
+recording with native playback controls. Closing pauses playback immediately,
+collapses back to the source, unmounts the player and restores trigger focus.
+Escape, outside dismissal and the inset close button remain available. Reduced
+motion removes spatial expansion; playback controls are unchanged.
+
+The final section loads its cards from `GET /knowledge?domain=mcb&stage=alpha`.
+It follows every response page rather than maintaining a fixed list. Existing
+audience permissions still apply; alpha includes all release stages visible to
+the caller, with non-stable stages labeled on the cards and carried into reader
+links. The grid refreshes every minute while visible, on tab return/focus, and
+when account identity changes. Additions, edits and deletions appear after the
+documentation index refreshes, without a frontend rebuild. Requests are aborted
+on cleanup, and loading, empty and retry states are provided.
 
 ## Inspector profile
 
@@ -224,7 +249,9 @@ offers a retry on failure. Empty results show a publication message rather than
 invented thumbnails. Drift pauses offscreen, in hidden tabs, on hover, and through
 the **Pause motion** control. Reduced motion keeps it static. A separate list of
 unique links provides keyboard and assistive-technology access without repeated
-tab stops. The vendored component includes its upstream MIT + Commons Clause
+tab stops. This row is visually hidden until keyboard focus enters it. Pointer
+preview dismissal restores focus to the wall's Explore link without revealing
+the hidden row. The vendored component includes its upstream MIT + Commons Clause
 license in `presentation/drift/LICENSE.md`.
 
 ## Model and blendshapes
