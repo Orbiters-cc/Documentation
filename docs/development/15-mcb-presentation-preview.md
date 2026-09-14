@@ -20,7 +20,7 @@ implementation; it does not establish a production deployment.
 
 The desktop frame uses the reference's 1054 × 867 proportions. At widths of 1100
 CSS pixels and above, it occupies 61.2% of the presentation area, up to 1054 pixels,
-leaving room for the supplied handwritten artwork around the Install button.
+leaving room for the handwritten-style benefits around the Install button.
 Smaller windows use the full presentation width. Below 760 CSS pixels, the scene
 and inspector stack vertically so the inspector remains readable. The surrounding Orbiters navigation
 and footer continue to work normally.
@@ -54,6 +54,17 @@ corresponding view; the centre restores the reference view.
 
 ## Guided walkthrough
 
+On arrival, an automatic three-second introduction demonstrates **1 Click apply**,
+**1 Click update**, and **1 Click rollback**, one second each. These are HTML
+version rows with simulated button presses, progress fills, and installed-state
+changes. The supplied brush circle draws around the MCB logo while six rays
+appear. After the third step, the same logo and labels shrink into the header;
+the other benefits and brush arrows reveal over roughly one second as the
+interactive frame appears. **Skip intro** proceeds directly to this transition.
+Reduced motion starts with the finished header. The introduction timer pauses
+while the document is hidden and is cleared on unmount. Tutorial replay resets
+the interactive steps without replaying the introduction.
+
 The page begins with the avatar's `orbit muscles` weight and normal-map intensity
 both at zero. The Inspector initially contains the avatar object header and its
 three existing components. The numbered cyan guides follow these actions:
@@ -65,7 +76,7 @@ three existing components. The numbered cyan guides follow these actions:
    text shows an empty result state, and clicking **M** starts a fresh search.
 3. Select **My Custom Base (MCB)**. Enter selects the match; Arrow Down focuses it.
    Escape or clicking outside dismisses the picker without adding the component.
-4. The website's single **Install** button turns into **Magic sync**, with a brief
+4. The website's single **Install** button turns into **Magic Sync**, with a brief
    glow and sheen. Click it and **Magic Sync** in the Inspector. Either order
    works, but both actions are required before the asset appears. If the website
    is clicked first, it shows **Synced** while waiting for the Inspector. After
@@ -91,11 +102,21 @@ sits near the bottom of the viewport, and the search field avoids opening the
 system keyboard over it. Reduced motion uses brief opacity fades without blur,
 cable drawing, or the button's attention animation.
 
-The handwritten benefits use the supplied transparent PNG unchanged. On desktop,
-the artwork surrounds the single website button. Smaller screens expose **Why
-MCB?** below the button, with the benefits set in readable text. The image
-is decorative to assistive technology; an accompanying text description provides
-the benefit copy.
+The benefits are selectable HTML text in locally hosted Caveat, with Solitreo
+and Brush Script MT fallbacks. The logo, circle, ray, and arrow SVGs retain the
+supplied Figma artwork. Their provenance is recorded in
+`public/assets/mcb/presentation/intro/sources.json`; the font directory includes
+the fonts' OFL licenses. Narrow screens arrange the benefit text in two columns
+and omit the decorative arrows so that the copy remains readable.
+
+Outside tutorial step 4, **Install** opens the shared `MCBInstallWizard` used by
+`/my-custom-base-old`. Visitors are sent to login. Signed-in users receive the
+real VCC repository, package installation, Unity component, and account-sync
+instructions. The expanded installer closes with its close button, Escape, or an
+outside pointer press; explicit dismissal restores focus to Install. Entering
+tutorial step 4 closes the installer and temporarily uses its trigger for the
+preview's website sync action. After both preview sync actions, Install opens
+the real wizard again.
 
 The account row and banner author use the signed-in user's username and profile
 image through the shared avatar URL helper. Login, profile changes, and logout
@@ -105,13 +126,34 @@ The `dev` badge and **Create new version** button are absent. The version graph
 starts at **0.5.3** and ends at the base node, with a short solid section followed
 by fine dashes.
 
-This is a browser demonstration: sync and apply change only the preview state.
+The guided tutorial is a browser demonstration: its sync and apply controls change only the preview state.
 They do not copy authentication tokens, link an actual Unity project, download a
 package into Unity, or mutate backend data. The installed/public badges describe
-the demonstration, not the user's real project or package access. Install and
-the remaining reference controls, including Edit, Logout, save/delete, and ReFit,
-remain real buttons with no external action at this stage. The old page's installer
-is still available at `/my-custom-base-old`.
+the demonstration, not the user's real project or package access. The Inspector's
+remaining reference controls, including Edit, Logout, save/delete, and ReFit,
+remain real buttons with no external action at this stage. The separate real
+installer can open VCC and prepare an account token through its explicit controls,
+exactly as on the old page; those actions are never run automatically by the intro
+or tutorial.
+
+## Custom-base wall
+
+Scrolling below the scene reveals a locally adapted
+[React Bits Drift Wall](https://reactbits.dev/components/drift-wall) populated
+from `GET /mcb/showcase`. The endpoint is anonymous and returns at most 24 recent
+public custom-base avatar listings with a non-default thumbnail and at least one
+public version. Hidden, restricted, and commission listings are excluded. The
+response contains only IDs, titles, thumbnail URLs, and public destination links;
+it exposes no version payloads or packages and uses `Cache-Control: no-store`.
+Valid store links open their listing; assets without one lead to the asset browser.
+
+The wall fetches when it approaches the viewport, aborts abandoned requests, and
+offers a retry on failure. Empty results show a publication message rather than
+invented thumbnails. Drift pauses offscreen, in hidden tabs, on hover, and through
+the **Pause motion** control. Reduced motion keeps it static. A separate list of
+unique links provides keyboard and assistive-technology access without repeated
+tab stops. The vendored component includes its upstream MIT + Commons Clause
+license in `presentation/drift/LICENSE.md`.
 
 ## Model and blendshapes
 
@@ -176,7 +218,7 @@ installed editor's resource file and the MCB package's Editor directory:
 python scripts/extract-mcb-editor-assets.py "/path/to/Unity/Editor/Data/Resources/unity editor resources" "/path/to/orbiters.mcb/Editor" public/assets/mcb/presentation/editor --unity-version 2022.3.22f1
 ```
 
-Focused frontend tests cover the workflow reducer, ordered virtual-key input,
+Focused frontend tests cover the intro timing, workflow reducer, ordered virtual-key input,
 profile updates, resize delivery, named blendshape updates, camera behavior, and
 gizmo projection:
 
@@ -188,7 +230,9 @@ npm run build
 Browser checks should include mouse and touch entry of **M**, **C**, **B**, mixed
 physical input, key focus handoff, picker dismissal, partial cable drawing, and the
 non-retracting blurred exit. Check the single website button before, during, and
-after sync, plus the handwriting and expanded mobile notes. Also include the entire
+after sync, the real installer and its dismissal/focus behavior, the Caveat notes,
+and the intermediate intro-to-header transition. Check wall loading, retry, empty
+results, hover/pause, reduced motion, and actual thumbnail links. Also include the entire
 walkthrough in both sync orders, the loading and intermediate appearance states,
 replay, signed-in/visitor identities,
 orbit, pan, zoom, flythrough, keyboard navigation, orientation buttons, touch
