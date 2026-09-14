@@ -135,12 +135,41 @@ the desktop VCC application; the website does not operate VCC's project controls
 The island's height follows the actual step content, including wrapped text and sync feedback;
 measurements are applied outside ResizeObserver delivery. Browser resizing updates
 the surrounding layout without carrying over the expansion animation.
+Step contents slide horizontally with a blur and fade; the outgoing and incoming
+panels overlap while the island resizes. Titles and descriptions move with their
+panel rather than adding a separate vertical animation. Reduced motion removes
+translation and blur. An outgoing panel cannot clear the incoming panel's size observer.
 There is no modal or extra card around the island. Arrow tips remain outside its
 bounds. The expanded installer closes with its close button, Escape, or an
 outside pointer press; explicit dismissal restores focus to Install. Entering
 tutorial step 4 closes the installer and temporarily uses its trigger for the
 preview's website sync action. After both preview sync actions, Install opens
 the real wizard again.
+
+## ReFit and file workflow illustrations
+
+Below the interactive editor, the ReFit integration comparison uses the supplied
+before/after hoodie images, a Caveat caption and a drawn arrow. The original
+image dimensions are retained in WebP copies; provenance is recorded in
+`public/assets/mcb/presentation/refit/sources.json`. Images and arrow reveal as
+the section enters view. Narrow screens place the caption above the image pair.
+
+The next section illustrates the **FBX diff path**, with creator and recipient
+on either side of the server. Its file, broken-file diff, XOR, binary payload,
+SHA-256 and verification symbols reveal in workflow order. Narrow screens stack
+creator, server and recipient; reduced motion shows the completed illustrations.
+The explanatory text remains available independently of the decorative SVGs.
+
+The diagram matches `HdiffService` and the FBX output hash in
+`FileManagerService`: build a diff from the original and custom FBX, XOR-wrap it
+using the original bytes, then unwrap and reconstruct with the recipient's
+original. The reconstructed output is checked against its SHA-256 hash.
+It describes this payload as excluding the original FBX, not as a guarantee of
+zero security risk. SHA-256 is an integrity check, not encryption. Other delivery
+formats, including native mesh payloads and full-file XOR, are outside this
+simplified diagram; see [MCB Adaptive Delivery](../reference/mcb-adaptive-delivery.md).
+
+## Inspector profile
 
 The account row and banner author use the signed-in user's username and profile
 image through the shared avatar URL helper. Login, profile changes, and logout
