@@ -8,7 +8,7 @@ id: orbiters.reference.notion-connection-setup
 domain: website
 type: reference
 owner: orbiters-engineering
-lastVerified: 2026-09-13
+lastVerified: 2026-09-14
 ---
 
 # Notion Connection Setup
@@ -27,13 +27,19 @@ interface, selecting the intended environment.
 | --- | --- |
 | `NOTION_CLIENT_ID` | Public connection OAuth client ID |
 | `NOTION_CLIENT_SECRET` | Public connection OAuth client secret |
-| `NOTION_REDIRECT_URL` | Exact frontend Creator integrations URL, including `?tab=integrations` |
+| `NOTION_REDIRECT_URL` | Exact frontend Creator URL, such as `https://dev.orbiters.cc/creator` |
 
-For development, the callback is `https://dev.orbiters.cc/creator?tab=integrations`.
-For production, it is `https://orbiters.cc/creator?tab=integrations`. Register the exact
+For development, the callback is `https://dev.orbiters.cc/creator`.
+For production, it is `https://orbiters.cc/creator`. Register the exact
 value with Notion; the browser returns to that page and exchanges its authorization
 code through the authenticated Orbiters backend. Local HTTP callbacks are accepted
 only for localhost or 127.0.0.1. Use separate environment credentials where appropriate.
+
+The Creator page recognizes the pending Notion OAuth state and opens Integrations
+even when the callback contains only `code` and `state`, without a `tab` parameter.
+Completion removes the authorization parameters from the URL. If an earlier attempt
+returned to Assets without connecting, reload Orbiters and start **Connect workspace**
+again; do not reuse the old authorization URL or code.
 
 The backend requires `API_CREDENTIAL_ENCRYPTION_KEY`. Workspace access and refresh
 tokens are encrypted as internal `NOTION_ACCOUNT` credentials owned by the creator.
