@@ -55,12 +55,15 @@ corresponding view; the centre restores the reference view.
 
 ## Guided walkthrough
 
-On arrival, the introduction waits for the visitor to click **Apply UltiRex**,
+On arrival, the page resets to the top, including when entered through browser
+history after scrolling another page. The introduction waits for the visitor to click **Apply UltiRex**,
 **Update UltiRex**, and **Reset to Original Avatar** in sequence. Each action
 shows loading progress and an installed-state change, then waits for the next
 click. A handwritten **Click!** arrow moves gently beside the available button.
 Repeated clicks while loading cannot skip a step. The supplied brush circle
-draws around the MCB logo while six rays appear. After Reset completes, the same
+draws counterclockwise from the thick upper end around the MCB logo while six
+rays appear. The version-history rail connects the first and last dots even when
+the update step adds the expand/collapse row. After Reset completes, the same
 logo and three labels move into the header together. The other benefits and
 arrows reveal quickly from their centers while the interactive frame appears.
 **Skip intro** opens the final header immediately. Reduced motion retains all
@@ -109,15 +112,27 @@ The benefits are selectable HTML text in locally hosted Caveat, with Solitreo
 and Brush Script MT fallbacks. The logo, circle, ray, and arrow SVGs retain the
 supplied Figma artwork. Their provenance is recorded in
 `public/assets/mcb/presentation/intro/sources.json`; the font directory includes
-the fonts' OFL licenses. Narrow screens arrange the benefit text in two columns
-and omit the decorative arrows so that the copy remains readable.
+the fonts' OFL licenses. Narrow screens give the labels and all eight arrows
+separate positions above and below the button; the arrows remain visible down
+to a 320-pixel viewport.
 
 Outside tutorial step 4, **Install** opens the shared `MCBInstallWizard` used by
 `/my-custom-base-old`. Visitors are sent to login. Signed-in users receive the
 real VCC repository, package installation, Unity component, and account-sync
 instructions. The same mounted Dynamic Island grows from the Install button;
 the surrounding labels, arrows, and Unity frame move apart to reserve its space.
-Its height follows the actual step content, including wrapped text and sync feedback;
+
+On the repository step, **Or add the repo manually** displays the same repository
+URL used by **Add Orbiters in VCC**. **Copy** copies that URL and confirms success;
+if clipboard access fails, the selectable URL remains available. On wide screens
+the guide sits to the left with a horizontal arrow pointing toward the installer.
+On smaller screens it moves below the header and reserves space above the scene.
+On the package step, viewports at least 1200 pixels wide show the supplied VCC
+reference artwork on both sides: **Manage Project** is circled on the left and
+the **+** beside MCB is circled on the right. These are visual instructions for
+the desktop VCC application; the website does not operate VCC's project controls.
+
+The island's height follows the actual step content, including wrapped text and sync feedback;
 measurements are applied outside ResizeObserver delivery. Browser resizing updates
 the surrounding layout without carrying over the expansion animation.
 There is no modal or extra card around the island. Arrow tips remain outside its
@@ -156,6 +171,15 @@ Hidden, restricted, and commission listings are excluded. The
 response contains only IDs, titles, thumbnail URLs, and public destination links;
 it exposes no version payloads or packages and uses `Cache-Control: no-store`.
 Clicking a tile opens the same expanding asset preview used by homepage widgets.
+The visible, raised card is the pointer target. Primary presses capture the
+pointer and pause drift so movement between press and release cannot lose the
+click. Drags beyond eight pixels and cancelled touch gestures do not activate a
+card. The preview captures its four projected corners, morphs from the tilted
+surface into the detail window, and returns to the resting perspective and
+shading on close. The thumbnail stays aligned with the detail image during the
+crossfade; the final pixels fade into the wall's original edge mask. Reduced
+motion omits the perspective travel. Ordinary homepage previews retain their
+existing rectangular transitions.
 The wall pauses through the preview's exit so its source stays in place. Escape,
 outside dismissal, and the close button return to the wall; keyboard focus is
 restored. Modified clicks retain normal asset-page links.
