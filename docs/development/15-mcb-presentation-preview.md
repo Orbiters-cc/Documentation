@@ -8,7 +8,7 @@ id: orbiters.development.mcb-presentation-preview
 domain: mcb
 type: reference
 owner: mcb-maintainers
-lastVerified: 2026-09-11
+lastVerified: 2026-09-14
 ---
 
 # MCB Presentation Preview
@@ -18,9 +18,11 @@ real HTML recreation of the supplied MCB Inspector reference. The preceding
 presentation remains at `/my-custom-base-old`. This page describes the local
 implementation; it does not establish a production deployment.
 
-The desktop frame uses the reference's 1054 × 867 proportions. It scales down to
-fit smaller desktop windows. Below 760 CSS pixels, the scene and inspector stack
-vertically so the inspector remains readable. The surrounding Orbiters navigation
+The desktop frame uses the reference's 1054 × 867 proportions. At widths of 1100
+CSS pixels and above, it occupies 61.2% of the presentation area, up to 1054 pixels,
+leaving room for the supplied handwritten artwork around the Install button.
+Smaller windows use the full presentation width. Below 760 CSS pixels, the scene
+and inspector stack vertically so the inspector remains readable. The surrounding Orbiters navigation
 and footer continue to work normally.
 
 ## Preview controls
@@ -57,12 +59,17 @@ both at zero. The Inspector initially contains the avatar object header and its
 three existing components. The numbered cyan guides follow these actions:
 
 1. Select **Add Component** to open the Unity-style component picker.
-2. Type **MCB** into its search field. Matching is case-insensitive and ignores
-   surrounding whitespace. Other text shows an empty result state.
+2. Type **MCB** into its search field, or click **M**, **C**, then **B** on the
+   floating keyboard. Only the next letter is enabled. Physical and on-screen
+   input can be mixed; matching ignores case and surrounding whitespace. Other
+   text shows an empty result state, and clicking **M** starts a fresh search.
 3. Select **My Custom Base (MCB)**. Enter selects the match; Arrow Down focuses it.
    Escape or clicking outside dismisses the picker without adding the component.
-4. Click **Magic sync** on the website and **Magic Sync** in the Inspector. Either
-   order works, but both actions are required before the asset appears.
+4. The website's single **Install** button turns into **Magic sync**, with a brief
+   glow and sheen. Click it and **Magic Sync** in the Inspector. Either order
+   works, but both actions are required before the asset appears. If the website
+   is clicked first, it shows **Synced** while waiting for the Inspector. After
+   both clicks, the same website button returns to **Install**.
 5. Select **Apply Ultirex**. The button displays a green progress fill with download,
    avatar-definition, and blendshape stages modeled on the real tool. After loading
    completes, the muscle weight and normal intensity rise together to 100%.
@@ -73,6 +80,22 @@ Guides enter and leave with restrained motion. Reduced motion removes the spatia
 transitions and applies the final appearance immediately after loading. On narrow
 screens, the next sync control is brought into view when needed; completion brings
 the scene back into view so the result is visible.
+
+The three-key keyboard appears only during step 2. It fades into focus while its
+cable draws from the keyboard along a curved path to behind the frame's right
+edge. Completing the search or dismissing the picker blurs and fades the entire
+keyboard and cable together; the cable does not retract. Exiting keys are disabled.
+Keyboard activation advances focus to the next key, then returns focus to the
+search field after **B**. Escape still dismisses the picker. On phones the keyboard
+sits near the bottom of the viewport, and the search field avoids opening the
+system keyboard over it. Reduced motion uses brief opacity fades without blur,
+cable drawing, or the button's attention animation.
+
+The handwritten benefits use the supplied transparent PNG unchanged. On desktop,
+the artwork surrounds the single website button. Smaller screens expose **Why
+MCB?** below the button, with the benefits set in readable text. The image
+is decorative to assistive technology; an accompanying text description provides
+the benefit copy.
 
 The account row and banner author use the signed-in user's username and profile
 image through the shared avatar URL helper. Login, profile changes, and logout
@@ -153,16 +176,21 @@ installed editor's resource file and the MCB package's Editor directory:
 python scripts/extract-mcb-editor-assets.py "/path/to/Unity/Editor/Data/Resources/unity editor resources" "/path/to/orbiters.mcb/Editor" public/assets/mcb/presentation/editor --unity-version 2022.3.22f1
 ```
 
-Focused frontend tests cover the workflow reducer, profile updates, resize delivery,
-named blendshape updates, camera behavior, and gizmo projection:
+Focused frontend tests cover the workflow reducer, ordered virtual-key input,
+profile updates, resize delivery, named blendshape updates, camera behavior, and
+gizmo projection:
 
 ```sh
 npm test -- --watchAll=false --runInBand --testPathPattern=components/mcb/presentation
 npm run build
 ```
 
-Browser checks should include the entire walkthrough in both sync orders, the
-loading and intermediate appearance states, replay, signed-in/visitor identities,
+Browser checks should include mouse and touch entry of **M**, **C**, **B**, mixed
+physical input, key focus handoff, picker dismissal, partial cable drawing, and the
+non-retracting blurred exit. Check the single website button before, during, and
+after sync, plus the handwriting and expanded mobile notes. Also include the entire
+walkthrough in both sync orders, the loading and intermediate appearance states,
+replay, signed-in/visitor identities,
 orbit, pan, zoom, flythrough, keyboard navigation, orientation buttons, touch
 gestures, narrow-screen overflow, reduced motion, navigation away during loading,
 and the WebGL failure/retry state. The frame uses CSS aspect ratio for its layout;
