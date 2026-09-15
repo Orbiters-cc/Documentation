@@ -178,6 +178,8 @@ Three video rows show customization, custom-base creation and version creation,
 with a rounded poster and play icon beside each label. They use the supplied
 recordings with lossless fast-start remuxing and generated WebP posters. The
 source manifest is `public/assets/mcb/presentation/videos/sources.json`.
+The section deliberately uses half-scale posters, labels, spacing and corner
+radii so it remains a compact guide between the larger presentation sections.
 Only posters load before activation. Clicking or keyboard-activating a poster
 opens the shared homepage `CardPreviewDialog` from its bounds and starts the
 recording with native playback controls. Closing pauses playback immediately,
