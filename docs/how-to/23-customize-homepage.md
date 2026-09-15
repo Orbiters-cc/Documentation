@@ -67,6 +67,7 @@ without dragging; the catalog stays open so you can add another widget.
 
 | Widget | Width × height in cells | Content |
 | --- | --- | --- |
+| MCB | 1 × 1, 2 × 1 or 2 × 2 | My Custom Base artwork and a **Try MCB** link to the interactive presentation |
 | Commission board | Full width × 3 | Your configured board, with its normal task controls |
 | Sona catalog | 1 × 1, 1 × 2, 2 × 1 or 2 × 2 | Your characters and reference images |
 | Latest blog post | 2 × 1, 2 × 2 or 3 × 2 | Automatically follows the newest published post |
@@ -84,6 +85,11 @@ Gallery images, assets, older posts, documentation pages, creators and individua
 multiple pins with different content. The same selection can only be pinned once.
 You can keep up to 64 pinned widgets. The catalog explains when a widget requires
 sign-in or a configured default board.
+
+**MCB** also appears in the discovery feed for visitors and signed-in users.
+Search for **MCB** or **My Custom Base** in the catalog to add it. It can be pinned
+once; pinning it removes its duplicate from the feed. **Try MCB** opens
+`/my-custom-base`. Its wide layout is the default, with compact and square options.
 
 To resize a pinned image, Sona catalog, blog post, creator or progress widget, drag its curved lower-corner grip. Its flat, softly blurred white surface straddles the widget corner and sticks out slightly so it stays easy to see.
 At the right edge of the grid, the grip appears on the left so you can widen inward.

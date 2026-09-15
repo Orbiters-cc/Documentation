@@ -20,11 +20,18 @@ responsible for every widget's content.
 
 ## Layout contract
 
-`widgetRegistry` defines the twelve types, dimensions, singleton rules and content
+`widgetRegistry` defines the available types, dimensions, singleton rules and content
 sources. `homeLayout` packs rectangles against occupied grid cells. It chooses the
 earliest fitting pinned widget at each cursor position before considering feed
 widgets. Reading order uses each widget's top-left cell. Empty cells are never
 persisted; imperfect tiling is allowed when needed to preserve the pinned prefix.
+
+The `mcb` singleton appears in discovery for visitors and signed-in users and is
+available in catalog search and Highlights. It uses the local MCB logo and banner
+without a remote content source. The **Try MCB** link opens `/my-custom-base`.
+Supported sizes are `2x1` (default), `1x1` and `2x2`; the server's homepage
+preferences validator accepts the same variants and rejects duplicate MCB pins
+or an entity selection. Existing saved pin order and defaults are preserved.
 
 Columns use `floor((containerWidth + 16) / 216)`, with at least one column. Their
 widths stretch equally. Rows stay 200 pixels high with 16-pixel gaps, inside fixed
