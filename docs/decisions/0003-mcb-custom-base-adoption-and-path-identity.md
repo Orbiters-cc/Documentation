@@ -8,7 +8,7 @@ id: orbiters.decision.mcb-custom-base-path-identity
 domain: mcb
 type: decision
 owner: mcb-maintainers
-lastVerified: 2026-07-12
+lastVerified: 2026-09-15
 ---
 
 # ADR 0003 - MCB Custom Base Adoption And Path Identity
@@ -141,6 +141,13 @@ The rules are:
 The original/default branch should create or validate `.originalbase` as soon as an exact default hash is known. This protects creators who later edit the live target in place instead of supplying a separate custom FBX.
 
 Local file changes and component changes form one operation. A failed or timed-out asset-creation request must not leave a newly created backup, source key, or path override that claims the server asset was created successfully.
+
+Custom-base creation uses a stable, lowercase 32-character request identifier in the
+`Idempotency-Key` HTTP header. The Unity editor keeps the same key when retrying an
+unchanged creation payload and generates a new key after the payload changes. The
+backend validates the header before creating files or database rows and returns the
+previously created asset when the same user retries the same key. Keeping the key in
+an HTTP header makes it independent from the larger multipart metadata and image body.
 
 ## Original Source Import
 
