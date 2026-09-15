@@ -8,7 +8,7 @@ id: orbiters.tools.mcb-operating-contract
 domain: mcb
 type: invariant
 owner: orbiters-mcb
-lastVerified: 2026-09-10
+lastVerified: 2026-09-15
 relations: orbiters.how-to.mcb-and-unity-tools, orbiters.general.vpm-package-contract
 ---
 
@@ -183,7 +183,9 @@ backend outage. Failed image requests pause for 30 seconds before the inspector
 tries again; a failed banner no longer remains unavailable for the whole session.
 
 For an immediate refresh, open **Advanced Options** from MCB and select
-**Reload versions and banners** at the top of the advanced settings window.
+**Reload versions and banners** inside **Advanced Settings**, below **Refresh
+account state**. It uses the same standard Unity button style as the surrounding
+controls, with immediate feedback while the refresh is queued.
 This fetches the selected asset's version list without using the version cache,
 and reloads asset banners and thumbnails from the server as they are displayed.
 Image failures and cached disk images are bypassed. If a version fetch is already
@@ -192,5 +194,25 @@ unchanged. Progress and errors remain visible in the MCB inspector.
 
 The button needs an active server connection. An outage still needs to recover
 before a reload can succeed. These changes are local and not yet released.
+
+## Photoshoot eyes and scene culling
+
+Photoshoot poses preserve customized bone positions and scales, including the
+eyes, while applying pose rotations and the clip's hips translation. A humanoid
+pose must not move customized eyes back inside the head.
+
+Advanced mesh assignment calculates skinned renderer bounds from the posed mesh
+in root-bone coordinates. This keeps hair and other generated meshes visible when
+the scene camera moves close. It does not require continuous offscreen skinning.
+The same bounds calculation runs after posing the photoshoot preview. These fixes
+are local and unreleased.
+
+## Multiple original base versions
+
+Creators can name and register several original FBX sets for one custom asset,
+select the originals supported by each new custom release, and add support to
+saved releases. See [support several original base versions](../how-to/mcb-original-base-versions.md)
+for creation, matching, and historical backfill. The Unity and backend changes
+must both be released before this workflow is available outside the local build.
 
 </alpha>

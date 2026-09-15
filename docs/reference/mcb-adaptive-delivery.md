@@ -25,6 +25,12 @@ This page describes that implementation; it is not an announcement of availabili
 The live documentation chart and image recovery fixes were added locally on
 8 September. Publishing this documentation alone does not deploy those changes.
 
+The local [multiple-original workflow](../how-to/mcb-original-base-versions.md)
+adds a separate package and codec inventory for each supported original FBX set.
+Original-file matching selects that inventory before adaptive delivery chooses a
+codec. Cached encrypted payloads and download folders retain the original identity;
+identical decoded meshes may still share the existing generated-mesh cache.
+
 ## What the user experiences
 
 After authenticated MCB initialization, calibration starts when the Editor is idle.
