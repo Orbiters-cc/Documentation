@@ -157,6 +157,12 @@ user, canonicalized creation metadata, and uploaded image hashes. This fallback 
 retries idempotent without requiring an editor restart and changes whenever the logical
 creation payload changes.
 
+Creation names are normalized with Unicode compatibility normalization before they are
+validated. Unicode whitespace becomes an ordinary space, repeated whitespace is
+collapsed, and invisible zero-width formatting marks are removed. The resulting name
+must still contain only letters, numbers, and spaces. This keeps the editor's visible
+value and the backend's stored value consistent when text was pasted from another app.
+
 ## Original Source Import
 
 For an already-customized base, MCB accepts either:
