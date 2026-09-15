@@ -8,7 +8,7 @@ id: orbiters.development.board-card-editing
 domain: website
 type: reference
 owner: orbiters-engineering
-lastVerified: 2026-09-14
+lastVerified: 2026-09-15
 ---
 
 # Board Card Editing and Imported Commissions
@@ -80,6 +80,27 @@ The browser loads the rich-text editor on demand. A dropped image gets a local
 preview node; its identifier follows edits during upload, then its source is
 replaced with the permanent URL. Saving is disabled until uploads finish.
 Markdown tables and task lists have explicit editor extensions.
+
+Image uploads reserve both the 80-image card capacity and the uploader's
+500-image library capacity before writing bytes. User and source-card row locks
+serialize reservations; pending uploads count toward both limits. Publishing
+the File and adding its attachment happen in one transaction.
+
+If storage or attachment publication fails, cleanup re-reads committed File
+state, removes the private R2 object and local file, then releases the reservation.
+The R2 destination is recorded before upload so a lost PUT response or failed
+metadata write cannot hide it. An already published image is never reclaimed,
+including when the caller loses the commit response.
+
+Deletion failures retain an inactive reservation and its destination for retry.
+Before another upload, Orbiters retries up to ten failed uploads belonging to
+that uploader, plus interrupted pending uploads older than 24 hours. These
+records still count toward quota until deletion succeeds. This is request-driven
+cleanup, not a background worker; it introduces no schema migration.
+`boardImageFailures.test.js` covers capacity, write/publication failures and
+cleanup retries with deterministic fixtures. `boardImagesDatabase.test.js`
+checks rollback and competing uploaders against a newly initialized disposable
+`board_images_fixture` PostgreSQL database (`BOARD_IMAGES_DATABASE_TEST=true`).
 
 Focused backend tests use model, storage and provider fixtures. The browser
 tests also cover client validation, separate asset agreements and a Notion callback

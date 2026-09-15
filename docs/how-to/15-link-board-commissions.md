@@ -8,7 +8,7 @@ id: orbiters.how-to.link-board-commissions
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-14
+lastVerified: 2026-09-15
 ---
 
 # Edit Board Cards and Link Existing Commissions
@@ -29,6 +29,12 @@ they belong. Each image can be at most 10 MB and 25 megapixels. Orbiters optimiz
 it to a single PNG or JPEG up to 1600 pixels per side, and retains it under
 **Images attached to this card**. Removing an image from the text leaves the
 attachment available.
+
+A card can hold 80 images, and your board-image library can hold 500. Uploads
+already in progress reserve a slot. If an upload fails, Orbiters removes its
+unused files and releases that slot. If storage is temporarily unavailable,
+try again later; your next upload also retries the failed cleanup. Removing an
+image from the description alone does not free an attachment slot.
 
 Select **Save changes**, or press **Ctrl/⌘ + Enter**. You can cancel text edits;
 uploaded attachments remain attached. Leaving with unsaved edits asks you to
