@@ -151,7 +151,11 @@ after the payload changes. The backend validates the identifier before creating 
 or database rows and returns the previously created asset when the same user retries
 the same key. The dedicated header keeps the primary idempotency signal independent
 from the larger multipart metadata and image body without breaking an already-open
-editor during package rollout.
+editor during package rollout. If an already-loaded intermediate editor sends neither
+location, the backend derives the same 32-character identifier from the authenticated
+user, canonicalized creation metadata, and uploaded image hashes. This fallback keeps
+retries idempotent without requiring an editor restart and changes whenever the logical
+creation payload changes.
 
 ## Original Source Import
 
