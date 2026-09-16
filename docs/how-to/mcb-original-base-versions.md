@@ -50,7 +50,9 @@ payload before encrypting it for the newly selected originals.
    required fields change. If it remains unavailable, the message directly above
    it identifies the first missing or incomplete field, such as the asset name,
    a valid target FBX, a base-avatar choice, an original-source mapping, or an
-   incomplete original-version card.
+   incomplete original-version card. A request error describes the last submitted
+   values and clears as soon as any form input changes, so it cannot be mistaken
+   for the validation state of an edited form.
 
 Package selection extracts FBX entries into temporary storage; it does not import
 the package into the scene. Verified original keys are retained locally under
