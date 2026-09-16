@@ -142,26 +142,12 @@ The original/default branch should create or validate `.originalbase` as soon as
 
 Local file changes and component changes form one operation. A failed or timed-out asset-creation request must not leave a newly created backup, source key, or path override that claims the server asset was created successfully.
 
-Custom-base creation uses a stable, lowercase 32-character request identifier. Current
-editor builds send it in both the `Idempotency-Key` HTTP header and multipart metadata;
-installed builds from the active package transition may send the metadata field only.
-When both values are present, the backend requires an exact match. The Unity editor
-keeps the same key when retrying an unchanged creation payload and generates a new key
-after the payload changes. The backend validates the identifier before creating files
-or database rows and returns the previously created asset when the same user retries
-the same key. The dedicated header keeps the primary idempotency signal independent
-from the larger multipart metadata and image body without breaking an already-open
-editor during package rollout. If an already-loaded intermediate editor sends neither
-location, the backend derives the same 32-character identifier from the authenticated
-user, canonicalized creation metadata, and uploaded image hashes. This fallback keeps
-retries idempotent without requiring an editor restart and changes whenever the logical
-creation payload changes.
-
-Creation names are normalized with Unicode compatibility normalization before they are
-validated. Unicode whitespace becomes an ordinary space, repeated whitespace is
-collapsed, and invisible zero-width formatting marks are removed. The resulting name
-must still contain only letters, numbers, and spaces. This keeps the editor's visible
-value and the backend's stored value consistent when text was pasted from another app.
+Custom-base creation uses a stable, lowercase 32-character request identifier in the
+`Idempotency-Key` HTTP header. The Unity editor keeps the same key when retrying an
+unchanged creation payload and generates a new key after the payload changes. The
+backend validates the header before creating files or database rows and returns the
+previously created asset when the same user retries the same key. Keeping the key in
+an HTTP header makes it independent from the larger multipart metadata and image body.
 
 ## Original Source Import
 
