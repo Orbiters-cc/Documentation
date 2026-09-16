@@ -60,6 +60,11 @@ submits the asset details without needing a thumbnail or banner. The local
 previously the server could report a name error even for a valid name because
 it did not receive the form metadata.
 
+A newly created asset without a banner shows **No banner yet**. This is a normal
+state: no image request, resource warning, or automatic retry is needed. Creators
+can use **Edit** to add images when the custom base is ready. Uploaded banners
+still use normal download recovery if a temporary network failure occurs.
+
 Package selection extracts FBX entries into temporary storage; it does not import
 the package into the scene. Verified original keys are retained locally under
 `Assets/MCB/original-base-keys/`. They are not included in custom-version uploads.
