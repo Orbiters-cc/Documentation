@@ -54,6 +54,12 @@ payload before encrypting it for the newly selected originals.
    values and clears as soon as any form input changes, so it cannot be mistaken
    for the validation state of an edited form.
 
+In **Original/default base** mode, photoshoot and images are optional: **Next**
+submits the asset details without needing a thumbnail or banner. The local
+17 September fix preserves multipart encoding for these image-free requests;
+previously the server could report a name error even for a valid name because
+it did not receive the form metadata.
+
 Package selection extracts FBX entries into temporary storage; it does not import
 the package into the scene. Verified original keys are retained locally under
 `Assets/MCB/original-base-keys/`. They are not included in custom-version uploads.
