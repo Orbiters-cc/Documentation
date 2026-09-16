@@ -8,7 +8,7 @@ id: orbiters.mcb.original-base-versions
 domain: mcb
 type: how-to
 owner: orbiters-mcb
-lastVerified: 2026-09-15
+lastVerified: 2026-09-16
 relations: orbiters.tools.mcb-operating-contract, orbiters.mcb.adaptive-delivery
 ---
 
@@ -46,7 +46,11 @@ payload before encrypting it for the newly selected originals.
 5. Check the original FBX selected for each target slot. MCB selects an exact
    filename match, or the sole file when there is only one target. Resolve any
    remaining choices before continuing.
-6. Finish creating the custom asset.
+6. Select **Next** to create the asset. The button revalidates immediately as
+   required fields change. If it remains unavailable, the message directly above
+   it identifies the first missing or incomplete field, such as the asset name,
+   a valid target FBX, a base-avatar choice, an original-source mapping, or an
+   incomplete original-version card.
 
 Package selection extracts FBX entries into temporary storage; it does not import
 the package into the scene. Verified original keys are retained locally under
