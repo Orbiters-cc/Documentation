@@ -54,3 +54,20 @@ The website administrator controls sticker availability and the separate accepta
 </audience>
 
 Related: [Set your seller terms](16-set-seller-terms.md), [Create, publish and measure an asset](24-create-and-measure-assets.md).
+
+## Compare materials and check every design
+
+When creating a printing choice, select a sample in the **Choose your finish**
+grid. Glossy, matte, broken-glass holo, starry holo and glitter each have a 3D
+preview. Drag or use arrow keys on one preview to rotate all the samples together;
+zoom is shared too. **Reset views** restores the same starting angle. The samples
+illustrate the material rather than guaranteeing the physical print's appearance.
+
+When ordering, use the design thumbnails or previous/next controls to inspect each
+uploaded design. Changing the selected design changes the bordered 3D preview.
+The receipt separates printing choices, the printing total and any Orbiters request
+fee; shipping remains governed by the creator's delivery terms.
+
+Creators can use **See as normal user** to send themselves a test order. Test
+orders charge no fee, consume no printing capacity and cannot record real payment.
+The creator can simulate the payment step to continue through production.

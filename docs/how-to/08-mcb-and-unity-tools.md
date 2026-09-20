@@ -8,7 +8,7 @@ id: orbiters.how-to.mcb-and-unity-tools
 domain: mcb
 type: how-to
 owner: mcb-maintainers
-lastVerified: 2026-09-02
+lastVerified: 2026-09-20
 ---
 
 # MCB and Unity Tools
@@ -32,7 +32,7 @@ The tools can call Orbiters to:
 
 ## User Flow
 
-1. Log in to Orbiters with Discord.
+1. Sign in to Orbiters with Discord or Telegram. On `/my-custom-base`, **Install** expands into both login choices in place. After provider sign-in, the page returns directly to the first installation step without replaying the introduction. **Escape** or **Close installer** collapses the choices without starting installation.
 2. Open the compatible asset page or MCB page.
 3. Connect the tool when prompted.
 4. Choose an asset and version that your account can access.

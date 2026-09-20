@@ -104,3 +104,37 @@ it does not supply a film stream or playback rights. Check TMDB's terms for your
 application use. The interface includes TMDB attribution.
 
 [TMDB API setup](https://developer.themoviedb.org/docs/getting-started)
+
+## Read everyone's choices while voting
+
+The shared page shows the event banner above numbered steps. Availability colors
+and vote counts include your unsaved choices, so you can compare your answer with
+the group immediately. **Save response** is still required to share them. Expand
+**Compare participants** to inspect individual responses. World and movie polls
+allow multiple choices where indicated; available movie or episode runtimes appear
+alongside the title.
+
+**Display timezone** opens an interactive map with your detected timezone selected.
+Hover or focus a region to inspect it; click or press Enter to select it. Zoom for
+small regions, reset with **World**, or select **Use my timezone**. This changes
+display only, never the stored availability instants. The selected date determines
+the daylight-saving offset.
+
+Signed-in users can find eligible polls in homepage **Events waiting for votes**
+widgets and open them in a desktop window. Public-group polls can be discovered;
+private-group polls appear to their organizer and previous respondents. A shared
+link still supports new participants under the poll's normal access rules. Closed
+or resolved polls leave the discovery feed.
+
+The availability grid grows to show all of its rows, using the page or modal's
+main vertical scroll. Very wide multi-day tables can still scroll horizontally.
+The event window's blurred banner extends to its top edge; the clear image retains
+its proportions and rounded corners.
+
+Poll widgets support 1×1, 2×1, 2×2 and 3×2 sizes. Compact cards prioritize the
+event title, responses and voting action over the event artwork. Larger cards show
+proposed world thumbnails and movie posters, with a fuller description when there
+is room. The event banner is used when available; polls without images retain a
+clear voting action.
+
+Closing a homepage voting window with unsaved choices replaces its contents with a visible confirmation. **Keep editing** restores your choices and scroll position; **Discard and close** closes without saving. The same protection applies when editing Sonas through their homepage widget.

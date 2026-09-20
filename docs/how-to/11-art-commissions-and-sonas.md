@@ -8,7 +8,7 @@ id: orbiters.website.art-commissions-and-sonas
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-13
+lastVerified: 2026-09-20
 relations: orbiters.website.knowledge-map, orbiters.website.public-profile
 ---
 
@@ -201,3 +201,16 @@ unused uploads become eligible for cleanup after 24 hours.
 ```orbiters
 {"kind": "challenge", "title": "You changed the collar after sending the request.", "question": "Does editing the Sona in your library rewrite the brief the artist already received?", "options": [{"label": "Yes, the artist always sees the latest library version", "correct": false, "explanation": "A submitted request keeps the references selected at submission. Otherwise a brief could change underneath work already in progress."}, {"label": "No, discuss the change on the existing request", "correct": true, "explanation": "The submitted brief is a snapshot. Tell the artist about the change and agree its impact; editing your library does not rewrite their existing request."}]}
 ```
+
+## Browse your character library
+
+The Sona page shows a searchable library with reference counts. Open a character
+to browse its images and edit its notes. In the editor, **Use as cover** puts that
+reference first. Removing a character requires confirmation; earlier commission
+snapshots remain intact.
+
+On desktop, opening **Your Sonas** from its homepage widget expands a window from
+that widget. You can browse, create and edit without leaving Home. Closing returns
+to the original card; unsaved changes require saving or discarding first. Smaller
+screens use the regular account page. Escape and the close control remain
+available, except while a save or upload is in progress.

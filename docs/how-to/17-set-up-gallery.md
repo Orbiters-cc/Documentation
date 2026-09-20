@@ -121,3 +121,9 @@ Run `node --test test/galleryDelivery.test.js test/galleryFeed.test.js` from the
 These changes need the matching frontend and backend deployment; publishing this documentation alone does not deploy the optimization.
 
 </audience>
+
+## Open a picture and browse its author
+
+Pictures on Gallery and homepage gallery widgets use the same expanding image viewer. The loaded thumbnail stays visible while the full image loads. Close with the inset button, Escape or a click outside; the viewer returns to its source picture and restores keyboard focus. Reduced motion removes the spatial expansion.
+
+Select the author’s avatar or name to open Gallery with an author filter across the galleries available to you. You can select a particular gallery while retaining that filter, change sorting or load further pages. **Show all authors** clears it. Private galleries and hidden images retain their existing access rules. Filtered pagination is bound to the author as well as the viewer, gallery set and sort.

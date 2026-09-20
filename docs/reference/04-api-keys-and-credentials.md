@@ -189,3 +189,16 @@ Use field names from `backend/src/services/apiKeyDefinitions.js`.
 ## Safety
 
 Do not paste real secrets into documentation, issue reports, Discord channels, or screenshots. Use safe examples and refer to field names.
+
+## Documentation publishing
+
+**Documentation publishing** uses `DOCUMENTATION_GITHUB_TOKEN`, scoped to the
+`Orbiters-cc/Documentation` repository with Contents read/write permission. Configure
+it under Admin → API Keys in the matching environment. This enables the administrator
+and developer **Home → Post → Documentation** workflow; other users cannot publish
+through it.
+
+The destination is fixed to the repository's `main` branch. Requests create a new
+Markdown page with required metadata and validated local links. Existing pages are
+never overwritten. The token is used server-side and is not returned to the browser.
+A missing credential leaves this composer unavailable with setup guidance.

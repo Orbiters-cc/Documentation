@@ -66,3 +66,34 @@ A click on **Get on Gumroad** or **Get on Jinxxy** is an outbound click. Provide
 Visitors control aggregate measurement and personalized recommendations in their privacy settings. Creators receive totals rather than visitor identities.
 
 Related: [Connect store integrations](05-connect-store-integrations.md), [Publish posts and stream announcements](25-publish-posts-and-streams.md), [Order and fulfill stickers](26-order-and-fulfill-stickers.md).
+
+## Bring in a store product
+
+In **Store links**, select a vendor icon. A connected Gumroad, Jinxxy or Lemon
+Squeezy account can show its available catalog; Payhip shows products configured
+in the connection. The list omits products already linked to your assets or
+matched by name. Search or load more products, then select one to fill missing
+name, description, summary and thumbnail details. Existing writing and uploaded
+thumbnails are preserved. Missing prices, currency and other facts remain missing.
+Commission templates still require an uploaded listing image.
+
+Inspect the imported information and complete its public HTTPS product link if
+missing. Saving keeps the draft private. Publishing attaches the product's store
+reference to the asset so later synchronization can identify it. If it was added
+elsewhere before publication, open that existing asset instead.
+
+A connection without a catalog, a disconnected store, or a failed lookup still
+allows a manual public link. **Website** is available for other destinations.
+Removing a link from the draft does not disconnect your store account.
+
+## Walk through your own commission
+
+On your own asset page, select **See as normal user**. For art commissions and
+stickers, this enables a clearly marked test request so you can exercise both sides
+of the process. Switch between customer and creator views on the request.
+
+Tests never create a real payment or payment record, authorize a request fee, or
+reserve sticker capacity. They do not send commission notifications or create a
+board proposal. Quotes, uploaded references and the request workflow are retained
+for inspection. This option only works for the listing's owner; it does not waive
+payment on another creator's commission. Return to creator view when finished.

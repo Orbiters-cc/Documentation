@@ -8,7 +8,7 @@ id: orbiters.how-to.customize-homepage
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-10
+lastVerified: 2026-09-20
 ---
 
 # Customize Your Homepage
@@ -185,3 +185,25 @@ Developers can find the persistence and layout contracts in
 Only the final six feed cards may adjust their supported sizes to keep the end compact. Earlier images keep their varied, proportion-based sizes. Pinned sizes and already displayed cards stay in place when more content loads. Image previews keep their photo and details in the same arrangement while opening and loading.
 
 When available widget sizes change after an update, a saved widget that used a removed size returns to that widget's current default size automatically. Your other pinned widgets, their order and their supported custom sizes remain intact, and the updated layout can be saved normally.
+
+## Post without leaving Home
+
+Select **+ Post** beside **Customize**. The button expands into a composer with
+three destinations:
+
+- **Orbiters blog** uses your existing blog-writing permission and supports drafts
+  and publication.
+- **Socials** uses your connected creator accounts and the same scheduling and
+  delivery history as **Creator → Posts**. Enable creator tools first if needed.
+- **Documentation** is available to administrators and developers once its
+  dedicated GitHub credential is configured. Enter a title, page address,
+  documentation type, audience, release stage and Markdown. The verification date
+  is set to the publication date.
+  Preview the page, then publish to create a new documentation commit.
+
+Closing or switching away from unsaved content asks whether to discard it. During
+submission, wait for confirmation. If documentation publication is uncertain,
+retry the same unchanged page: its request identifier checks for the original
+commit. Existing documentation pages cannot be overwritten from this composer.
+The documentation becomes visible after the website's documentation checkout
+updates; a GitHub confirmation alone does not update a running website.
