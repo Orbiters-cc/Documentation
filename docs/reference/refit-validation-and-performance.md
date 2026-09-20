@@ -62,6 +62,44 @@ mismatched provenance causes recomputation, not reuse of potentially stale outpu
 
 ## Geometry and Performance
 
+### Lower-Torso Blendshape Transfer
+
+The September 21 local fix bypasses upper-body hem damping for direct shape
+transfers where source and target are the same avatar. The fitting heuristic
+previously suppressed most of the tanktop's Belly motion. The transfer must carry
+the complete authored displacement, including its tangential components;
+clearance correction cannot recover a large motion removed by the hem restraint.
+Source-to-target conversion keeps its existing hem damping. Primary fitting and
+all clearance correction limits are unchanged.
+
+The transfer settings identity includes an algorithm revision so previously
+cached damped deltas are recomputed. Valid binding provenance remains reusable.
+Previously saved meshes still require regeneration from their original inputs.
+
+`ReFitDeterministicTestRunner.TransferredBelly_FollowsLowerTorsoInAllAxes()` checks
+actual Unity `BakeMesh` positions against an analytic lower-torso expansion at
+0, 25, 50, 75 and 100 percent. It covers blendshape-only and mesh-plus-blendshape
+modes with source equal to target and clothing nested under that target, including
+a rotated FBX-style mesh basis. It checks outward, sideways and downward motion.
+The test fails with the former damping and passes with the fix.
+The full local deterministic suite reports 65 passed, two explicit scene/build
+skips and no failures; existing regression thresholds are unchanged.
+
+Original-input replays also compare the hoodie against the original-code control:
+base vertices, topology, bindposes, weights and all generated shape data match
+exactly. Its existing rear-triceps clipping remains visible. The glowstick control
+also matches, with all 24 authored shapes and 24 closed rings retained; final
+triangles show no collapsed/reversed faces or within-ring intersections at the
+five checked weights.
+
+For the tanktop, inspect fresh Unity `BakeMesh` geometry through offscreen Unity
+cameras at the same five weights. Editor captures can otherwise show stale GPU
+skinning after mesh replacement. Independent nearest-surface and volume checks
+found no new penetrations deeper than 1 mm among sampled vertices and triangle
+centers after the fix. This is sampled evidence, not a complete collision proof.
+Normal-turn and edge-stretch counts alone are not acceptance tests for a large
+authored Belly expansion; inspect the flagged region and the rendered silhouette.
+
 ### Closed Tube Preservation
 
 The local implementation adds `settings.preserveClosedTubes` (default `true`) and the Advanced

@@ -44,6 +44,18 @@ model B, generated files are committed through Unit Git, and reset must restore 
 original meshes after a Unity restart.
 
 <alpha>
+## Belly and Other Lower-Torso Shapes
+
+When clothing already fits the target avatar, the local fix lets transferred body
+blendshapes carry the lower part of a top with the body. Previously, the hem
+restraint used for fitting clothing between different avatars also reduced direct
+Belly transfers, leaving the tanktop inside the expanded belly. Direct transfers
+now retain the full shape motion, including sideways and downward movement.
+Source-to-target fitting and clearance protections retain their existing behavior.
+
+Revert the previous ReFit result to its original input before generating it again.
+Existing saved meshes are not rewritten automatically. This fix is not released.
+
 ## Closed Tubular Accessories
 
 The local development implementation enables **Preserve closed tubes** in Advanced settings by default,
