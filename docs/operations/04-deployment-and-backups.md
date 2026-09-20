@@ -111,6 +111,15 @@ which uses the configured database name as well as its user.
 
 ## Before approving a release
 
+Production HTTPS ends at Cloudflare. The tunnel connects to Caddy over the private
+Docker network; Caddy and Express must both trust that proxy path so the original
+HTTPS scheme reaches the session middleware. Keep `Secure`, `HttpOnly` and
+`SameSite=Lax` on the OAuth state cookie. If both Discord and Telegram immediately
+report an expired login, check that each authorization redirect sets that cookie
+and that a callback from the same browser accepts its state. A healthy `/healthz`
+response alone does not validate login. CI exercises both state flows through the
+production Caddy configuration with an isolated provider fixture.
+
 Configure `SMTP_PASSWORD` explicitly; email is disabled when it is missing and
 Orbiters does not use a built-in mail password. Removing credentials from the
 current Git tree does not revoke values in earlier commits. Rotate any still-active
