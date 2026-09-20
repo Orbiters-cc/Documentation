@@ -47,7 +47,7 @@ Open **General** and use **Hide** to keep the asset in the database while removi
 
 ## Understand the numbers
 
-The creator's asset cards show recent impressions, visits and clicks. Open **General** for daily detail and a breakdown by placement, including the homepage, assets catalog and recommendation cards. Outbound store clicks are shown separately by provider.
+The creator's asset cards show recent impressions, visits and clicks. Open **General** for the selected period's totals and a breakdown by placement, including the homepage, assets catalog and recommendation cards. Outbound store clicks are shown separately by provider.
 
 An impression requires at least half the card to be visible for one second while the browser tab is visible. Creator self-views do not count. Repeated visits can count more than once: these are event totals, not unique people.
 
