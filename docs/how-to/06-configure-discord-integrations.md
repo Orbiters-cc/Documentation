@@ -1,14 +1,14 @@
 ---
 title: Configure Discord Integrations
-section: Creator Tools
+section: Community
 order: 42
-audience: creator, admin, dev
+audience: user, creator, admin, dev
 stage: stable
 id: orbiters.how-to.configure-discord-integrations
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-07-12
+lastVerified: 2026-09-20
 ---
 
 # Configure Discord Integrations
@@ -16,7 +16,7 @@ lastVerified: 2026-07-12
 A customer can download their asset, but the owner role never arrives in Discord. Before changing their purchase, check the bot’s position: a connected bot can still be unable to assign the role.
 
 
-Discord integrations connect creator servers to Orbiters workflows such as asset roles, verification, and appeals.
+Discord integrations connect community-owned servers to Orbiters workflows such as asset roles, verification, and appeals.
 
 ## Make the permission problem visible
 
@@ -33,12 +33,16 @@ The bot must have permission to manage roles and sit above the role it is assign
 > If website access works but the role does not, inspect delivery. If the website access is missing too, investigate the purchase or access grant. These two reports lead to different fixes.
 
 
+Only the community owner can change connections. Connecting a server requires a
+linked Discord account with server ownership or **Manage Server** permission,
+verified against Discord before saving. Website staff ranks do not bypass this check.
+
 ## Shared Bot Mode
 
 Use shared bot mode when the Orbiters bot can serve the creator server.
 
-1. Open **Creator**.
-2. Open **Integrations**.
+1. Create your community from **Account → Overview → Your community** if needed.
+2. Open **Community → Connections**.
 3. Choose an available Discord guild.
 4. Invite or activate the shared Orbiters bot when prompted.
 5. Configure roles and verification behavior.
@@ -49,7 +53,7 @@ Use custom bot mode when the creator needs a dedicated bot identity.
 
 1. Create a Discord application and bot.
 2. Invite the bot to the server with the required permissions.
-3. Enter the bot token and client ID in the creator integration form.
+3. Enter the bot token and client ID in **Community → Connections**.
 4. Save the integration.
 5. Verify that the bot is online and can manage the configured roles.
 

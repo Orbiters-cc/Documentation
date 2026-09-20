@@ -29,6 +29,13 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Verify your community age status | user, creator, mod, admin, dev | beta | — | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Manage a VRChat community | user, creator, admin, dev | beta | — | ✓ | ✓ | ✓ | ✓ | ✓ |
 
+## Administration
+
+| Page | Audience tags | Stage | Visitor | Member | Creator | Mod | Admin | Dev / owner |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Choose Stripe Payment Methods | admin, dev | beta | — | — | — | — | ✓ | ✓ |
+| Find an Admin Setting | admin, dev | beta | — | — | — | — | ✓ | ✓ |
+
 ## Alpha
 
 | Page | Audience tags | Stage | Visitor | Member | Creator | Mod | Admin | Dev / owner |
@@ -50,13 +57,21 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Beta Documentation Notes | creator, admin, dev | beta | — | — | ✓ | — | ✓ | ✓ |
 
+## Community
+
+| Page | Audience tags | Stage | Visitor | Member | Creator | Mod | Admin | Dev / owner |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Configure Discord Integrations | user, creator, admin, dev | stable | — | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Manage community roles | user, creator, admin, dev | beta | — | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Create and manage community events | user, creator, mod, admin, dev | beta | — | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Community event delivery | dev | beta | — | — | — | — | — | ✓ |
+
 ## Creator Tools
 
 | Page | Audience tags | Stage | Visitor | Member | Creator | Mod | Admin | Dev / owner |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Build an asset people can actually use | creator, admin, dev | stable | — | — | ✓ | — | ✓ | ✓ |
 | Connect Store Integrations | creator, admin, dev | stable | — | — | ✓ | — | ✓ | ✓ |
-| Configure Discord Integrations | creator, admin, dev | stable | — | — | ✓ | — | ✓ | ✓ |
 | Gallery — connect a Discord room and import pictures | creator, admin, dev | stable | — | — | ✓ | — | ✓ | ✓ |
 | Supporter Tiers | creator, admin, dev | stable | — | — | ✓ | — | ✓ | ✓ |
 | Connect and Sync Trello | creator, admin, dev | alpha | — | — | ✓ | — | ✓ | ✓ |
@@ -65,6 +80,8 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Understand Platform Payment Revenue | admin, dev | stable | — | — | — | — | ✓ | ✓ |
 | Manage Your Commission Workspace | creator, admin, dev | beta | — | — | ✓ | — | ✓ | ✓ |
 | Announce Commission Assets in Your Channels | creator, admin, dev | beta | — | — | ✓ | — | ✓ | ✓ |
+| Edit Board Cards and Link Existing Commissions | creator, admin, dev | alpha | — | — | ✓ | — | ✓ | ✓ |
+| Connect Notion Task Boards | creator, admin, dev | alpha | — | — | ✓ | — | ✓ | ✓ |
 | Set Your Seller Information and Commission Terms | creator, admin, dev | beta | — | — | ✓ | — | ✓ | ✓ |
 | Edit releases in the version workspace | creator, admin, dev | beta | — | — | ✓ | — | ✓ | ✓ |
 
@@ -102,9 +119,14 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Boards, Proposals, and Forecasts | dev | alpha | — | — | — | — | — | ✓ |
 | Product Steward Agents | dev | alpha | — | — | — | — | — | ✓ |
 | Write a guide worth exploring | dev | stable | — | — | — | — | — | ✓ |
+| Board Card Editing and Imported Commissions | dev | alpha | — | — | — | — | — | ✓ |
+| Notion Board Integration | dev | alpha | — | — | — | — | — | ✓ |
+| Navbar logo motion | dev | alpha | — | — | — | — | — | ✓ |
+| MCB Presentation Preview | dev | alpha | — | — | — | — | — | ✓ |
 | Community age verification reference | dev, admin | beta | — | — | — | — | ✓ | ✓ |
 | Mermaid Documentation Diagrams | dev | stable | — | — | — | — | — | ✓ |
 | Orbiters Foundations Initialization | dev | stable | — | — | — | — | — | ✓ |
+| Homepage Widgets | dev | alpha | — | — | — | — | — | ✓ |
 
 ## Explanation
 
@@ -131,6 +153,7 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Turn a purchase into Orbiters access | public, user | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Find the version that belongs in your project | public, user | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Account Login and Connections | public, user | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Support Several Original Base Versions | creator, dev | alpha | — | — | ✓ | — | — | ✓ |
 
 ## Moderation
 
@@ -161,6 +184,7 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Access is several decisions, not one rank | creator, admin, dev | stable | — | — | ✓ | — | ✓ | ✓ |
 | Store Provider Reference | creator, admin, dev | stable | — | — | ✓ | — | ✓ | ✓ |
 | API Keys and Credentials | admin, dev | stable | — | — | — | — | ✓ | ✓ |
+| Notion Connection Setup | admin, dev | alpha | — | — | — | — | ✓ | ✓ |
 | Board Data and Route Reference | dev | alpha | — | — | — | — | — | ✓ |
 | GitHub Connection Setup Reference | dev | alpha | — | — | — | — | — | ✓ |
 | Steward API and Token Reference | dev | alpha | — | — | — | — | — | ✓ |
@@ -168,6 +192,7 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Telegram Login Setup | admin, dev | beta | — | — | — | — | ✓ | ✓ |
 | MCB Version Pipeline Benchmarks | dev | alpha | — | — | — | — | — | ✓ |
 | MCB Adaptive Version Delivery | admin, dev | alpha | — | — | — | — | ✓ | ✓ |
+| MCB First Apply Optimization Research | dev | alpha | — | — | — | — | — | ✓ |
 
 ## Start Here
 
@@ -175,6 +200,7 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | A field guide to making things with Orbiters | public | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Pick a path through the documentation | public | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Navigate Admin and Documentation Sections | public | beta | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 ## Tools
 
@@ -202,4 +228,5 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Find the right part of Orbiters | public, user, creator, mod, admin, dev | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Public Profile and Activity | public, user, creator, mod, admin, dev | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Customize Your Homepage | public, user, creator, admin, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Art Commissions and Sonas | public, user, creator, admin, dev | beta | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |

@@ -48,7 +48,7 @@ offer **Browse all pages** instead of an endless sidebar list.
 | People & access | Users, roles, features and session security |
 | Assets & products | Assets, avatar bases and user ownership |
 | Creators & payments | Creator applications and Stripe |
-| Community & moderation | Reports, privacy requests, appeals, verification, Discord, VRChat and issues |
+| Platform moderation | Reports, privacy requests, appeals, verification, Discord, VRChat and issues |
 | Connections | API keys and GitHub |
 | Knowledge & AI | Knowledge Base, AI, Product Stewards and MCP |
 | System & operations | Background jobs, MCB performance, deployment, storage, backups, notifications and redirects |

@@ -13,24 +13,18 @@ lastVerified: 2026-09-20
 
 # Manage a VRChat community
 
-Community Leaders can connect a dedicated VRChat account in **Account → VRChat**
-to manage a community group. Community Leader is separate from Creator status
-and can only be granted by an administrator. The tab stays hidden for other users.
+Any personal Orbiters account can create a community from **Account → Overview →
+Your community**. Choose a name and confirm, then open **Community → VRChat**.
+No website staff approval or creator status is required.
 
-<audience include="admin,dev">
+The community owner connects the dedicated account and selects its group.
+Explicit Community Admins can manage group tools; only the owner can change its
+connection. Website staff ranks provide no access to another owner's community.
+See [Manage community roles](manage-community-roles.md) for setup and team permissions.
 
-## Grant Community Leader access
-
-Open **Admin → Users → More** for a human account and enable **Community Leader**.
-The member can reload their Account page to see the VRChat tab and the Community
-Leader status in Overview. Disable the same switch to revoke access immediately.
-Existing saved credentials stay encrypted; deleting the Orbiters account removes
-its saved community session.
-
-The shared Orbiters account remains under **Admin → VRChat**. It is independent
-of each leader's account, credentials, rate limits and selected group.
-
-</audience>
+The shared website account stays in **Admin → Website VRChat**, with independent
+credentials, rate limits and selected group. It cannot be selected for managed
+community role synchronization.
 
 ## Manage the group's 18+ role
 
@@ -82,9 +76,9 @@ below the group tools.
 
 This community connection is separate from your personal identity in
 **Overview → Connections → VRChat**. Linking a personal identity does not grant
-Community Leader access or connect a community-management session.
+community ownership or connect a community-management session.
 
-To schedule a gathering across Discord and VRChat, open **Admin → Events**.
+To schedule a gathering across Discord and VRChat, open **Community → Manage events**.
 [Create and manage community events](manage-community-events.md) explains group
 selection, website team access, announcements and configurable instance opening.
 
@@ -104,8 +98,8 @@ saved page still shows initials after an update, use its **Refresh** button once
 to replace the saved member snapshot. Initials remain the fallback when a member
 has no available picture.
 
-Creators can connect group roles to their Orbiters community roles in
-**Admin → Community**. See [Manage community roles](manage-community-roles.md)
+Community owners and Community Admins can connect group roles to their Orbiters
+community roles in **Community → Roles**. See [Manage community roles](manage-community-roles.md)
 for assignments and per-role sync directions.
 
 ## Browse saved information

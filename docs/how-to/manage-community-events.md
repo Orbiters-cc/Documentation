@@ -8,14 +8,17 @@ id: orbiters.community.events
 domain: website
 type: how-to
 owner: orbiters-docs
-lastVerified: 2026-09-08
+lastVerified: 2026-09-20
 ---
 
 # Create and manage community events
 
-**Admin → Community & moderation → Events** brings your Discord scheduled event,
+**Community → Manage events** brings your Discord scheduled event,
 VRChat calendar entry, group announcement and group instance together. Each event
 belongs to its creator, who can return to edit it and check delivery status.
+If you help manage events without owning a managed community, use **Events** in
+the navbar. Both entry points open `/community/events`; no website staff rank is
+required. Event permissions remain separate from the managed community team.
 
 ## Connect your communities
 
@@ -24,7 +27,7 @@ Open **Communities & team** before creating your first event.
 1. Add a Discord server from the list or paste its server ID. Your linked Discord
    account must own it or have Administrator, Manage Server, Manage Events or Create
    Events permission. The Orbiters or creator bot must already be connected to the
-   server through **Creator → Integrations** and have **Manage Events** permission.
+   server through **Community → Connections** and have **Manage Events** permission.
 2. Connect a dedicated VRChat account in [Manage a VRChat community](manage-vrchat-community.md).
    In Events, the community group selected in the VRChat tab is available and
    preselected from saved information. Click **Add group** to enable events and
@@ -161,7 +164,7 @@ That includes viewing the team and searching for members: an old website assignm
 does not keep those lists accessible after its authority is revoked.
 
 Global Orbiters staff rank alone does not authorize another person's community.
-Community Leader status controls who can connect a personal community-management
+Creating a managed community enables its owner to connect a dedicated community-management
 account; it is not required for a teammate to use an assigned community.
 
 ## Create an event
@@ -227,7 +230,7 @@ restart the updated backend so its database upgrade can finish, then retry the
 page. Existing community records and role settings are preserved. For other
 persistent load failures, ask an administrator to check the backend logs.
 
-Administrators without a personal Community Leader account start with the shared
+Administrators without a personal managed community start with the shared
 Orbiters VRChat account selected. Choose its group from the saved list, or refresh
 the group list explicitly if it has not been loaded yet.
 

@@ -1,8 +1,8 @@
 ---
 title: Manage community roles
-section: Creator
+section: Community
 order: 149
-audience: creator, admin, dev
+audience: user, creator, admin, dev
 stage: beta
 id: orbiters.creator.community-roles
 domain: website
@@ -13,10 +13,55 @@ lastVerified: 2026-09-20
 
 # Manage community roles
 
-Open **Admin → Community & moderation → Community** to create roles for your
-creator community. Creator accounts can open this area without receiving global
-staff access. Every role, rule and member assignment belongs to the creator who
-created it; community roles do not change Orbiters staff ranks or feature access.
+Any signed-in personal account can create a community. Open **Account → Overview →
+Your community → Create my community**, choose its name, continue and confirm.
+The button expands into a focused dialog, like Connect VRChat; closing it saves
+nothing. The same setup is available in the homepage **Create a community** widget.
+
+After confirmation, **Community** appears in the navbar and the account card shows
+**Manage my community**. Each account can own one community and help manage others.
+Choose a community from the page selector when you have more than one.
+Sections use the same left sidebar as the Creator workspace on desktop and a
+compact **Community section** selector on mobile. Back and Forward restore your
+selected section.
+
+The homepage **Create a community** and **Creator status** widgets disappear once
+you own a community or receive creator status respectively, including pinned
+copies. Pending creator requests remain visible. These widgets share the normal
+homepage pinning and layout controls; the homepage has no separate creation button.
+
+Open **Community → Roles** for membership roles and automatic platform equivalents.
+Community ownership and management never grant website Admin, Moderator or Creator
+status. Website staff ranks never grant access to someone else's managed community.
+
+## The default Orbiters community
+
+The official **Orbiters** community is created automatically for the website owner.
+If that owner already created a community, setup reuses its identity and preserves
+its roles, assignments, connections and management team. It adopts the Orbiters
+name instead of creating a duplicate workspace.
+
+The name Orbiters is reserved for this official community and cannot be changed
+in Settings. Website Admins and Moderators do not automatically join its management
+team: the owner explicitly grants community access, just as for other communities.
+Other members can create their own differently named communities.
+
+## Manage your team and settings
+
+The owner can connect platforms, rename the community in **Settings**, and invite
+registered users through **Management team**. Community Admins manage roles,
+verification, VRChat group tools and appeals. Community Moderators review appeals.
+Only the owner can change connections or the selected VRChat group and grant or
+revoke management access. These explicit management permissions are separate from
+membership roles, even when a role is named “Admin” or “Community manager”.
+
+**Verification** and **Appeals** operate only on Discord servers connected to the
+selected community. Website-wide verification, appeals and the platform VRChat
+service account remain separate in Admin. Creator integrations now contain stores
+and creator tools; community connections live under **Community → Connections**.
+Use **Manage events** to open your event workspace. Events keep their own provider
+and event-team permissions; community management access does not grant event-team
+access automatically. Event access never exposes the website Admin workspace.
 
 This implementation requires the matching frontend and backend release.
 Publishing this guide does not deploy the feature.
@@ -44,25 +89,27 @@ You can have up to 30 active roles. Search finds roles by name or description.
 
 ## Prepare your connections
 
-For Discord, connect the server in **Creator → Integrations**. Your linked Discord
+For Discord, connect the server in **Community → Connections**. Your linked Discord
 account must own the server or have **Manage Roles**, and the chosen role must be
 below your highest role unless you own the server. Exporting also requires the
 bot's **Manage Roles** permission and a bot role above the equivalent. Managed
 integration roles, `@everyone` and roles configured as Orbiters staff ranks are
 excluded.
 
-For VRChat, a Community Leader first connects an account and selects a group in
-**Account → VRChat**. Administrators can also use the shared account configured in
-**Admin → VRChat**. The account needs group ownership or **View All Members** and
+For VRChat, the community owner connects a dedicated account and selects a group
+in **Community → VRChat**. The website service account is not available as a role
+equivalent. The connected account needs group ownership or **View All Members** and
 **Manage Roles**; exporting requires **Assign Roles** too. VRChat's hierarchy can
-still protect an individual member from role changes. See
-[Manage a VRChat community](manage-vrchat-community.md).
-Private connection access is checked again during synchronization. Revoking
-Community Leader access stops rules from using that connection.
+still protect individual members. See [Manage a VRChat community](manage-vrchat-community.md).
+Connection ownership and platform permissions are checked again during synchronization.
 
 Only registered Orbiters accounts participate in role rules. Members must link
 their personal Discord or VRChat identity and join the corresponding community.
-Rules do not create accounts or join people to servers or groups.
+Rules do not create accounts or join people to servers or groups. Local accounts
+without a valid linked platform ID do not trigger provider requests. Unknown users
+or non-members are treated as unconnected, rather than as platform outages.
+Old automatic error-only entries are removed on the next scan when no linked
+membership or outstanding delivery remains; manual Orbiters assignments are kept.
 
 ## Assign or exclude a member
 
@@ -120,12 +167,21 @@ before another write. Completed work on the other platform remains recorded.
 
 ## Implementation and validation
 
-The JWT-authenticated `/community` API exposes capabilities, creator-owned roles,
+Default-community setup runs after database synchronization and can complete after
+the owner's first sign-in. It prefers the configured primary owner identity; without
+one, it accepts a single active account with website Owner rank. It never guesses
+between multiple owners or picks an arbitrary administrator. A database advisory
+lock and unique owner/system-key indexes prevent duplicate setup. The explicit
+nullable-column migration preserves existing communities and can be rerun.
+
+
+The JWT-authenticated `/community` API exposes capabilities and self-service community creation. Scoped `/community/:id` routes expose community-owned roles,
 connection role choices, registered-user search and paginated assignments. Updates
 use a role revision; saving an outdated editor returns a conflict. Provider roles
-have a database uniqueness constraint across all creator rules, including retiring
+have a database uniqueness constraint across all community rules, including retiring
 mappings. No provider IDs supplied by a browser bypass owner or permission checks.
 
+`ManagedCommunity` and `CommunityManager` persist ownership and explicit team grants.
 `CommunityRole`, `CommunityRoleLink` and `CommunityRoleMember` are separate tables
 created without altering existing user or Discord-role tables. Role processing and
 configuration use the same PostgreSQL advisory lock. Each external assignment has
@@ -142,7 +198,7 @@ are scheduled again after five minutes; provider outages remain visible and retr
 without deactivating unrelated assignments. Reads in the UI refresh saved status
 every fifteen seconds only while the document is visible.
 
-The focused community-role tests cover rule evaluation, creator isolation,
+The focused community-role tests cover rule evaluation, community and website permission isolation,
 idempotent grant recovery, provider-owned roles, relinking, HTTP access, worker
 startup and HTTP readiness. The opt-in database test requires a disposable
 loopback PostgreSQL instance, creates fresh databases, and boots both fresh and

@@ -27,7 +27,7 @@ original account ID internally. Replacing an account does not transfer authority
 over its event destinations. The public serializer excludes connection keys and
 session material.
 
-`EventCommunityGrant` assigns website admin/moderator access. Provider-native
+`EventCommunityGrant` assigns event-community admin/moderator access, independently of website staff ranks. Provider-native
 authority is checked before mutations. Delegation records its originating native
 administrator; their current authority is checked when a delegate acts.
 Team reads and member searches require management authority through the same

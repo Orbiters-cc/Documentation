@@ -104,7 +104,7 @@ failures. Unclaimed requests remain available for the member-linking flow.
 Select a **Community group** to browse members and announcement history, and
 publish announcements when the account has permission. See
 [Manage a VRChat community](/documentation/orbiters.account.vrchat-community) for the group workflow
-and admin-granted Community Leader accounts.
+and self-service managed-community accounts.
 
 Use **Check connection** to validate a session and refresh the account profile.
 Select **Change account** to reveal the replacement login form. Replacement login preserves the

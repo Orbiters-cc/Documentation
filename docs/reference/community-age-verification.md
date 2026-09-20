@@ -20,7 +20,7 @@ restrict instances, issue bans or change SFW content rules.
 
 Separate Sequelize tables hold `AgeStatus`, `AgeEvidence`, `AgeAudit`,
 `VrchatConnection`, `VrchatLinkSession`, `VrchatFriendClaim`, `AgeDiscordPolicy`,
-`AgeDiscordObservation`, `VrchatServiceState`, `CommunityLeadership`,
+`AgeDiscordObservation`, `VrchatServiceState`, `ManagedCommunity`, `CommunityManager`,
 `VrchatFriendAcceptance` and `VrchatAnnouncement` records. Startup creates missing
 tables without altering existing user columns or inferring age from old roles.
 Subsequent schema changes to these tables require explicit migrations.
@@ -82,9 +82,9 @@ no-store`.
 | `/age-verification/admin/users/:id/connection` | Associate, reassign or unlink a VRChat account | Admin or owner |
 | `/age-verification/admin/servers` | Directory, searchable history, policy preview/save, server and member refresh | Admin or owner |
 | `/age-verification/vrchat-service` | Shared account login, health, friends, groups and announcements | Admin or owner |
-| `/vrchat-community/capabilities` | Current user's Community Leader status | Current member |
-| `/vrchat-community/leaders/:id` | Read or change Community Leader access | Admin or owner |
-| `/vrchat-community/account` | Own community login, health, friends, groups and announcements | Community Leader |
+| `/vrchat-community/capabilities` | Current user's community ownership | Current member |
+| `/community` | Create a named managed community | Current human member |
+| `/community/:id/vrchat` | Community login, health, friends, groups and announcements | Community owner or explicit Community Admin; connection changes owner-only |
 
 The configured primary administrator retains access. Developer rank alone does
 not confer age-management or service-account permissions. Staff reasons are
