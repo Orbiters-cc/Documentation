@@ -52,6 +52,10 @@ Public scope includes public releases. Beta adds beta releases. Alpha includes a
 If a purchase is recognized but access still looks wrong, investigate the product mapping and scope before asking the buyer to purchase again. [Connect store integrations](/documentation/orbiters.how-to.connect-store-integrations) explains where those links come from.
 
 <beta>
+The next creator-tools release adds private drafts, assisted image imports,
+product previews, Hide/Delete controls and asset metrics. See
+[Create, publish and measure an asset](24-create-and-measure-assets.md).
+
 In an avatar asset's **General** tab, **Change thumbnail** uploads the square image
 used in asset lists and MCB. Choose PNG, JPEG or WebP up to 10 MB; it is saved as a
 centered 512 × 512 crop. The preview updates after saving. The MCB banner is edited
