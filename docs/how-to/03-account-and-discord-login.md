@@ -8,7 +8,7 @@ id: orbiters.how-to.account-and-discord-login
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-04
+lastVerified: 2026-09-20
 ---
 
 # Account Login and Connections
@@ -19,6 +19,12 @@ Your purchases live with your Orbiters account. Discord and Telegram are ways to
 Sign in to Orbiters with Discord or Telegram. Connecting both providers lets you
 use either one to reach the same account, purchases, and creator permissions.
 Discord server verification and role automation require a Discord connection.
+
+Discord login, account linking and verification request your profile, email,
+server list, and membership information for servers you already belong to.
+They do not request **Join servers for you**. To join a community, follow its
+invite link yourself. Installing the Orbiters bot in a managed server is a
+separate creator action.
 
 ## Bring duplicate accounts together
 
