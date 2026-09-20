@@ -8,7 +8,7 @@ id: orbiters.how-to.set-up-gallery
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-06
+lastVerified: 2026-09-20
 ---
 
 # Gallery: connect a Discord room and import pictures
@@ -91,6 +91,17 @@ The September 6 optimization separates image-list delivery from Discord URL refr
 - **All** returns one card per imported Discord image, even when several accessible galleries share that image. Separate uploads of similar-looking pictures are still separate sources; this is not visual similarity detection.
 - Supported image MIME types or image filename extensions determine eligibility. Video dimensions no longer qualify an attachment as a picture. The same rule filters existing imported records at read time, so no destructive flush or recrawl is required to remove video slots.
 - A failed source refresh or failed image decode removes the card from the current view and closes its space. **Retry skipped images** tries those sources again. This does not delete or globally hide the pictures. Network failures are bounded rather than leaving indefinite loading tiles.
+
+The skipped-image count deliberately has no matching gray error frames: those
+cards have been removed from the current gallery layout. A homepage widget keeps
+its saved footprint and offers **Retry image** and **Open galleries** instead.
+
+The September 20 fix makes expired Discord attachment refreshes bypass the
+Discord.js message cache. A cached message can still contain an expired signed
+URL even after the database row has been updated. Refreshing through Discord's
+REST API obtains the new signature; simultaneous attachments from one message
+still share one in-flight request. The fix needs a backend deployment, and the
+homepage retry button needs a frontend deployment.
 - Masonry positions come from stored dimensions and available width. Loading another page does not recompute earlier positions from recycled DOM measurements. Tilts fit within each card's allocated space, including very tall images. Four columns fit the reported desktop width, with fewer columns on phones.
 
 ### Stable relevance while browsing

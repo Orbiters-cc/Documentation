@@ -8,7 +8,7 @@ id: orbiters.account.vrchat-community
 domain: website
 type: how-to
 owner: orbiters-docs
-lastVerified: 2026-09-08
+lastVerified: 2026-09-20
 ---
 
 # Manage a VRChat community
@@ -98,6 +98,15 @@ The selected group's banner, icon, name and member count identify it above the
 **Members** and **Announcements** tabs. Members include profile pictures and
 profile links. Both lists support pagination and refresh. **Change group** opens
 the picker again; leaving a group in VRChat removes access to its management tools.
+
+Member pictures use the icon returned by VRChat's group-member directory. If a
+saved page still shows initials after an update, use its **Refresh** button once
+to replace the saved member snapshot. Initials remain the fallback when a member
+has no available picture.
+
+Creators can connect group roles to their Orbiters community roles in
+**Admin → Community**. See [Manage community roles](manage-community-roles.md)
+for assignments and per-role sync directions.
 
 ## Browse saved information
 

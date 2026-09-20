@@ -8,7 +8,7 @@ id: orbiters.development.navbar-logo-motion
 domain: website
 type: reference
 owner: orbiters-docs
-lastVerified: 2026-09-09
+lastVerified: 2026-09-20
 ---
 
 # Navbar logo motion
@@ -25,6 +25,21 @@ The animation settles on the normal logo after 4.2 seconds. Only the eye at the 
 
 The mark retains its 34px width. Transparent padding around the artwork extends beyond its layout box to leave room for the entrance, colored echoes, and motion. The assets live in `frontend/src/assets/brand/` and receive build-generated filenames.
 
-## Verification
+## iPhone safe-area blur
+
+The viewport uses `viewport-fit=cover`. The navbar adds `safe-area-inset-top` to
+its 5rem height and places interactive content below that inset. Every progressive
+blur layer remains at full mask strength across the safe area; the existing fade
+starts below it. The strongest layer uses a 32px backdrop blur. Standard and WebKit
+prefixed backdrop and mask properties share the same values. Horizontal safe-area
+padding protects controls in landscape, and the mobile menu includes bottom inset
+padding. This follows [WebKit's safe-area layout guidance](https://webkit.org/blog/7929/designing-websites-for-iphone-x/).
+
+The headless browser regression injects a 59px top inset and checks sticky geometry,
+content clearance and the full-strength mask after scrolling. This simulates layout;
+it does not replace testing Safari's browser chrome on a physical iPhone. These
+changes require a frontend release.
+
+## Logo checks
 
 Four focused component regressions pass: initial playback in StrictMode with route transitions and Back, remount suppression, new-document playback, reduced-motion asset selection, and the static error fallback. The production frontend build passes. Headless Chromium checks against that build confirm that navigation and Back preserve the image element, reload restarts playback, and reduced motion remains static. Desktop (1280px) and mobile (390px) layouts were visually reviewed. External requests were blocked during these checks; backend integrations and deployment were outside this validation.
