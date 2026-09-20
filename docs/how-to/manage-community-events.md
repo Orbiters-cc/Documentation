@@ -13,14 +13,17 @@ lastVerified: 2026-09-20
 
 # Create and manage community events
 
-**Community → Manage events** brings your Discord scheduled event,
+**Community → Events** brings your Discord scheduled event,
 VRChat calendar entry, group announcement and group instance together. Each event
 belongs to its creator, who can return to edit it and check delivery status.
 If you help manage events without owning a managed community, use **Events** in
-the navbar. Both entry points open `/community/events`; no website staff rank is
+the navbar. The standalone workspace is `/community/events`; no website staff rank is
 required. Event permissions remain separate from the managed community team.
 
 ## Connect your communities
+
+To collect availability, world votes or movie/episode choices before publication,
+follow [Find a time, world and movie together](plan-event-availability.md).
 
 Open **Communities & team** before creating your first event.
 

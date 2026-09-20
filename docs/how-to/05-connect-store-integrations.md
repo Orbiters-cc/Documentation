@@ -8,7 +8,7 @@ id: orbiters.how-to.connect-store-integrations
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-07-14
+lastVerified: 2026-09-20
 ---
 
 # Connect Store Integrations
@@ -50,13 +50,21 @@ Use one identifiable product and a permitted test purchase when validating setup
 ## Connect A Store
 
 1. Open **Creator**.
-2. Open **Integrations**.
-3. Choose the store provider.
+2. Open **Connections**.
+3. Choose a store icon at the bottom of **Store Connections**. The icon expands
+   into that provider's connection form, with a step-by-step setup guide.
 4. Choose **Connect** when OAuth is available, or enter provider credentials when
    you prefer a manual token or the provider has no account authorization flow.
 5. Save the integration.
 6. Run a sync if the first sync does not start automatically.
 7. Link imported products to Orbiters assets.
+
+The revised icon launcher and guides require the matching application release.
+**Escape**, Cancel or the inset close control dismiss the form; focus returns to
+the store icon. Reduced-motion preferences remove the expansion movement.
+OAuth-capable stores offer sign-in first, with **Use API key instead** for manual
+credentials. Provider guides distinguish creator tokens, buyer license keys,
+optional webhook secrets and account-specific setup requirements.
 
 ## Provider Credentials
 

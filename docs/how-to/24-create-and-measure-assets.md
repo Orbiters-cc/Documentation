@@ -19,15 +19,19 @@ This guide covers the creator tools prepared for the next release. Availability 
 
 1. Open **Creator → Assets → + Create**.
 2. Choose **General**, **Custom base**, **Commission**, or **Stickers**. **Copy from** reuses an asset you own as a starting point.
-3. Fill the form, or paste your post, notes and public store links into **Drop your ideas here**. Add PNG, JPEG, WebP images or an embedded GLB preview, up to 20 MB each and 20 files per draft.
+3. Fill the form and choose a currency from the dropdown, or paste your post, notes and public store links into **Drop your ideas here**, under **AutoFill**. Add PNG, JPEG, WebP images or an embedded GLB preview, up to 20 MB each and 20 files per draft.
 4. Select **Send to LLM and auto-fill**. Text and resized images are sent to the administrator's configured AI provider. GLB files are previews, not AI image inputs.
 5. Check the suggestions and warnings. **Use this** applies one field; **Undo** restores its previous value. Unknown information stays blank or missing. Conflicting measurements appear as warnings.
-6. Select the thumbnail, optional banner, gallery images and 3D preview. Only the selected media becomes public.
+6. Use the dedicated **Thumbnail** and **Banner** fields to upload an image or select one already added to the draft. Select gallery images and a 3D preview below AutoFill. Only the selected media becomes public.
 7. **Save draft** keeps incomplete work private. **Verify and post** checks the fields required by the chosen template and opens the published page.
 
 You can keep up to 100 active drafts. Publishing a commission or sticker service also requires saved seller details and terms. A custom base needs an original avatar base. The editor does not invent prices, currency or licensing terms.
 
 Open an asset's **General** settings and choose **Edit asset page** to change its page using the same editor. Changes remain private until published. If another window or a provider sync changed the asset in the meantime, the editor asks you to reopen from the current version before overwriting it.
+
+**General** also has direct thumbnail and **Page banner** controls. Banner upload,
+replacement and removal apply immediately to the asset page. The avatar-specific
+**MCB Banner** is a separate image for the MCB tooling.
 
 ## Publish to a connected shop
 
@@ -38,6 +42,10 @@ Leave publication unchecked to create a Gumroad draft first. Complete the shop's
 You can link an existing vendor product ID. Enable automatic updates to apply later Orbiters page changes. If someone edited the same fields directly on Gumroad, synchronization stops with a conflict for you to resolve. If creation cannot be confirmed, check the shop and link the product ID shown there; Orbiters will not create another product automatically.
 
 Jinxxy, Payhip and Lemon Squeezy continue to support their existing import and purchase features. Their connections are shown without a publishing action when no supported public write API is available.
+
+Every connection shows its provider icon/name and the connected account name.
+**Import connection** identifies stores whose product pages cannot currently be
+published through Orbiters; this does not mean the account connection is broken.
 
 ## Hide or remove a stale asset
 

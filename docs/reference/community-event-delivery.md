@@ -8,7 +8,7 @@ id: orbiters.community.event-delivery
 domain: website
 type: reference
 owner: orbiters-docs
-lastVerified: 2026-09-08
+lastVerified: 2026-09-20
 ---
 
 # Community event delivery
@@ -20,6 +20,40 @@ team lists and member searches check current provider authority, as do privilege
 actions and authorized delivery jobs.
 
 ## Persistence and authorization
+
+`CommunityEventResponse` stores one versioned availability/vote response per event
+and user. Planning events have no delivery schedule until final choices are resolved
+and published. Shared first-step questions and audience stay fixed; an optional deadline
+only closes voting. Slots store UTC instants generated from IANA timezone rules,
+including repeated hours and overnight ranges.
+
+`GET /community-events/:id/planning` returns signed-in participant results with
+private invite choices separated into the caller's own response. `PUT` and `DELETE`
+on `/:id/planning/response` use response revisions to prevent lost updates and
+withdraw/rejoin races. A withdrawn response keeps a revision tombstone while being
+excluded from results. Voting and invite changes commit together after membership
+eligibility checks. Response exports escape spreadsheet formula prefixes.
+
+Movie search uses fixed TMDB endpoints and global environment credentials. Adult
+catalog entries are excluded; series resolve to specific season/episode identities.
+Provider errors omit credentials and response bodies. No media playback is supplied.
+
+`followupDatabase.test.js` runs planning transactions, concurrent responses, closure
+and metering checks in a disposable database when `FOLLOWUP_DATABASE_TEST=true`.
+Its loopback fixture database must be `creator_tools_fixture` on a port above 50000.
+Provider authority and membership checks are fixtures in this test.
+
+Later-step world polls use `planning.stepWorlds`, keyed by step ID, with matching
+`stepWorlds` response entries. Shared and published events may add or edit unopened
+steps. Pending polls suppress scheduled and manual instance opening until final
+choices are saved. Reopened later-step voting preserves confirmed first-step votes.
+
+`GET /community-events/:id/step-votes` is organizer-only. It returns participant
+counts and confirmation tokens derived from current response revisions. Saving a
+step removal checks the token under the event lock, removes its receipt and invites,
+and prunes only affected responses, advancing their revisions. New votes invalidate
+the confirmation. Open instances and uncertain instance/organizer-invite deliveries
+prevent destructive step edits.
 
 `EventCommunity` binds a Discord server or VRChat group to a server-controlled
 connection. VRChat connections retain their encrypted service-state key and

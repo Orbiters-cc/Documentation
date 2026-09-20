@@ -19,7 +19,7 @@ The creator-growth implementation has local fixture validation. This page does n
 
 | Feature | Configuration | Required setup |
 | --- | --- | --- |
-| AI asset importer and promotion classifier | Existing Gemini configuration; **Admin → AI** image limits | Longest image edge 256–4096 px, default 1280; 1–12 images, default 8. Proportional downscaling preserves aspect ratio and never enlarges smaller images. |
+| AI asset importer and promotion classifier | Global Gemini, DeepSeek or Z.ai credentials; **Admin → AI** routing and image limits | Longest image edge 256–4096 px, default 1280; 1–12 images, default 8. Proportional downscaling preserves aspect ratio and never enlarges smaller images. |
 | Twitch | `TWITCH_APP` | Client ID/secret, registered HTTPS website `/creator?tab=streams` callback, public API `/creator-streams/twitch/webhook`, alphanumeric webhook secret of 32–100 characters. |
 | X | `X_PUBLISH_APP` | `CLIENT_ID`, `CLIENT_SECRET`, `REDIRECT_URI` pointing to the HTTPS website `/creator?tab=posts`. Enable OAuth 2.0 with tweet read/write, user read, media write and offline access. Provider account access and usage costs apply. |
 | TikTok | `TIKTOK_PUBLISH_APP` | Same three field names; `CLIENT_ID` is TikTok's client key. Register the website `/creator?tab=posts` callback. Enable `user.info.basic` and `video.publish`. Verify the public API media URL domain for pull-from-URL photo delivery. Public Direct Post requires the provider's approval. |
@@ -34,7 +34,16 @@ Provider references: [Twitch EventSub](https://dev.twitch.tv/docs/eventsub/), [X
 
 ## Enable community assistance
 
+See [Configure AI models, prompts and usage](14-ai-models-and-prompts.md) for default
+models, per-feature overrides, metering and initiating-user history.
+
 Open **Community → Self promotion** as its owner or administrator. Choose a connected Discord server and room, eligible promotion categories, optional wording and the per-person cooldown. Enable the feature after explaining it to the community: eligible post text and images go to the configured AI provider.
+
+Use **Preview offer type** to inspect each category's example wording and button
+in the Discord-style public/ephemeral previews. **Generate preview** runs an example
+post through the same configured AI feature as the bot, without posting to Discord.
+It counts toward AI usage and records the initiating administrator. Examples are
+illustrative; real responses depend on the source post and configured prompt.
 
 The bot needs access to message content and attachments, room visibility, message sending and history. The invitation is public, updates every two seconds and is deleted after ten seconds. A button interaction acknowledges privately before database work; the original author alone can claim its offer. Expired invitations still leave ordinary Creator tools available.
 

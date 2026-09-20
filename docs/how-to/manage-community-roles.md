@@ -21,7 +21,7 @@ nothing. The same setup is available in the homepage **Create a community** widg
 After confirmation, **Community** appears in the navbar and the account card shows
 **Manage my community**. Each account can own one community and help manage others.
 Choose a community from the page selector when you have more than one.
-Sections use the same left sidebar as the Creator workspace on desktop and a
+Sections use the same grouped sidebar as Admin and Creator on desktop and a
 compact **Community section** selector on mobile. Back and Forward restore your
 selected section.
 
@@ -42,13 +42,13 @@ its roles, assignments, connections and management team. It adopts the Orbiters
 name instead of creating a duplicate workspace.
 
 The name Orbiters is reserved for this official community and cannot be changed
-in Settings. Website Admins and Moderators do not automatically join its management
+after creation. Website Admins and Moderators do not automatically join its management
 team: the owner explicitly grants community access, just as for other communities.
 Other members can create their own differently named communities.
 
-## Manage your team and settings
+## Manage your team
 
-The owner can connect platforms, rename the community in **Settings**, and invite
+The owner can connect platforms and invite
 registered users through **Management team**. Community Admins manage roles,
 verification, VRChat group tools and appeals. Community Moderators review appeals.
 Only the owner can change connections or the selected VRChat group and grant or
@@ -56,10 +56,10 @@ revoke management access. These explicit management permissions are separate fro
 membership roles, even when a role is named “Admin” or “Community manager”.
 
 **Verification** and **Appeals** operate only on Discord servers connected to the
-selected community. Website-wide verification, appeals and the platform VRChat
-service account remain separate in Admin. Creator integrations now contain stores
+selected community. Discord Verification Management is in this workspace; website
+appeals and the platform VRChat service account remain separate in Admin. Creator connections contain stores
 and creator tools; community connections live under **Community → Connections**.
-Use **Manage events** to open your event workspace. Events keep their own provider
+Use **Events** to open your event workspace. Events keep their own provider
 and event-team permissions; community management access does not grant event-team
 access automatically. Event access never exposes the website Admin workspace.
 
@@ -68,7 +68,11 @@ Publishing this guide does not deploy the feature.
 
 ## Create a role
 
-1. Select **Create role**, enter a name and optional description, and choose a color.
+1. Select **Create role**. Its button expands into the editor. Choose a Discord
+   server icon (the first is selected initially), then search its roles. The role
+   supplies the initial name and color. **Discord role color** restores that color
+   after a swatch choice; **Custom color** opens a picker and hex input. A manual
+   role can simply use a typed name.
 2. Choose how membership is decided:
 
 | Direction | Behavior |

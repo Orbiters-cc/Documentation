@@ -41,6 +41,12 @@ Use the request's messages for details. After acceptance, inspect the creator's 
 
 Choose **Creator → Assets → + Create → Stickers**. Save your seller information and terms, then define material, shipping, turnaround and printing choices. Each choice has its own price, order capacity, dimensions, finish, total sticker quantity and number of designs, up to 20. Leave capacity empty for unlimited availability.
 
+**Total printed copies** is the complete order quantity, not copies per design.
+For example, 50 copies can be shared across 5 **Different designs**. Every design
+needs at least one copy, so 1 copy across 7 designs is invalid. The form identifies
+this disagreement without changing either number. Incomplete choices can still be
+saved in a private draft; publishing requires valid choices.
+
 Review incoming orders in the sticker inbox under **Creator → Requests**. Download the print pack to receive original artwork, bordered PNGs, proofs and an order manifest. Existing orders retain their accepted configuration if you later change or delete the listing.
 
 The website administrator controls sticker availability and the separate acceptance fee under **Admin → Features → Stickers**. Disabling the fee affects new requests; existing payment terms remain fixed.

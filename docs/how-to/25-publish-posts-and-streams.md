@@ -22,7 +22,7 @@ These workflows are prepared for the next release. Provider application setup is
 3. Write your post or use **Start from an asset**. Add up to four PNG, JPEG or WebP photos, 20 MB each. Add photo descriptions for Bluesky alt text.
 4. Choose destinations. Expand **Customize text for this destination** when the wording should differ between services.
 5. For TikTok, select visibility explicitly and complete the comment, commercial-content, AI-content and upload-consent choices. This integration publishes photo posts. Your app's approval and account permissions determine whether public posting is available.
-6. Use **Post now**, or enable **Schedule for later** and choose a time up to 90 days ahead. The form displays your local time zone; the saved job uses an absolute time.
+6. Use **Post now**, or enable **Schedule for later** and choose a date in the calendar and a time in the time field, up to 90 days ahead. The form displays your local time zone; the saved job uses an absolute time.
 7. Check **Scheduled & recent posts** for each destination's result.
 
 Provider limits are checked before submission, including X's weighted character count, Bluesky's grapheme and byte limits, and Telegram's shorter photo-caption limit. The shared caption may need shortening or a destination-specific version.

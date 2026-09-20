@@ -8,7 +8,7 @@ id: orbiters.reference.privacy-security
 domain: website
 type: reference
 owner: orbiters-engineering
-lastVerified: 2026-09-05
+lastVerified: 2026-09-20
 ---
 
 # Privacy and Credential Security Architecture
@@ -28,6 +28,25 @@ flowchart TD
 The implementation is local development work awaiting application release. Public
 privacy and seller controls use existing account and commission surfaces with
 HeroUI disclosures, status messages and reduced-motion support.
+
+## Browser authentication and CSRF boundaries
+
+REST bearer authentication and websocket tokens accept HS256 and check the current
+account status/token version. Express sessions hold OAuth flow state; they do not
+provide authenticated REST identities. `/auth/me` uses the same JWT strategy as
+other member endpoints. Browser refresh, logout and login-code exchange require an
+exact configured website/API Origin, with a matching Referer fallback. Missing,
+opaque, sibling-subdomain and lookalike origins are rejected. CORS uses those same
+configured origins. Webhooks retain their separate provider-signature contracts.
+
+Discord verification binds its random state to the initiating browser session and
+consumes it once before OAuth exchange. The role-changing verification endpoint
+uses POST. Production sessions use secure cookies. `TRUST_PROXY` explicitly names
+trusted proxy networks; the production Compose configuration supplies its private
+proxy network ranges. A direct installation should configure only its real proxy.
+
+These safeguards are validated with local HTTP fixtures; they are not a claim of
+exhaustive penetration testing of every application route.
 
 ## Service Boundaries
 
@@ -50,6 +69,13 @@ All private responses use authenticated access; privacy and tax responses disabl
 
 ## Credentials and Local Setup
 
+Actual `.env`, `.env.common`, `.env.dev` and `.env.prod` runtime files are ignored;
+copy their `.example` templates for a new installation and supply private values
+locally. Removing files from the current Git index does not remove past commits.
+Any previously committed passwords or signing secrets need an operator-led rotation
+and, where appropriate, coordinated history cleanup. Do not destroy the current
+credential-encryption key: encrypted data requires a separate migration plan.
+
 A dedicated **API_CREDENTIAL_ENCRYPTION_KEY** is required before database initialization.
 AES-256-GCM uses a random nonce per write; account/provider and seller-tax payloads
 also bind authenticated context. Runtime reads never fall back to plaintext or the
@@ -58,7 +84,7 @@ JWT signing key. Empty credential objects contain no encrypted secret.
 For local development, create `backend/.env.credentials.dev` with the key variable.
 The file is ignored by Git and Docker build contexts. Local startup loads it before
 ordinary development configuration. Development Compose loads it as the last backend
-environment file. Do not add the key to an already tracked `.env.dev` file.
+environment file. Keep the key outside tracked files.
 
 Generate a random key once into a new file from the repository root:
 

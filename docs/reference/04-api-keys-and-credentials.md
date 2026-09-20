@@ -8,7 +8,7 @@ id: orbiters.reference.api-keys-and-credentials
 domain: website
 type: reference
 owner: orbiters-security
-lastVerified: 2026-09-02
+lastVerified: 2026-09-20
 ---
 
 # API Keys and Credentials
@@ -23,6 +23,8 @@ Runtime credentials are stored in the `APIKeys` table instead of hardcoded envir
 - `DISCORD`: OAuth application and bot credentials.
 - `R2`: Cloudflare R2 storage credentials and quota settings.
 - `GEMINI`: AI provider key.
+- `DEEPSEEK` and `ZAI`: global environment-specific website AI keys.
+- `TMDB`: global API Read Access Token for event movie/episode metadata.
 - `GUMROAD`: Gumroad application and access token fields.
 - `JINXXY`: Jinxxy API key and webhook secret.
 - `PAYHIP`: Payhip product JSON and account API key.
@@ -34,6 +36,16 @@ Runtime credentials are stored in the `APIKeys` table instead of hardcoded envir
 - `STRIPE`: global administrator-owned platform publishable key, secret key, and
   Account webhook signing secret for ReFit request fees.
 - `VAPID`: Web push public/private keys and subject.
+
+The updated Stripe form labels each credential separately and validates its prefix
+next to that field: `pk_test_`/`pk_live_` for the publishable key,
+`sk_test_`/`sk_live_` for the secret key, and `whsec_` for webhook signing.
+Publishable and secret keys must use the same mode. Leading/trailing clipboard
+whitespace is removed on creation and editing. A secret key does not substitute
+for a publishable key. These form changes require the matching application release.
+
+See [Configure AI models, prompts and usage](../operations/14-ai-models-and-prompts.md)
+for feature routing and request history.
 
 <alpha>
 

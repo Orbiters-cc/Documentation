@@ -26,6 +26,13 @@ The shared website account stays in **Admin → Website VRChat**, with independe
 credentials, rate limits and selected group. It cannot be selected for managed
 community role synchronization.
 
+The service-account password field submits **Connect service account** when Enter
+is pressed. Once connected, the owner can change its profile picture in the same
+card: choose a PNG, JPEG or WebP up to 10 MB and confirm the preview. Orbiters
+normalizes it to a square and updates the connected VRChat profile. If upload
+succeeds but the profile update cannot be confirmed, retrying the same image
+reuses the confirmed upload.
+
 ## Manage the group's 18+ role
 
 After selecting a group, check **Enable 18+ features**. Orbiters creates an **18 Plus**
