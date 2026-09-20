@@ -111,6 +111,14 @@ which uses the configured database name as well as its user.
 
 ## Before approving a release
 
+Configure `SMTP_PASSWORD` explicitly; email is disabled when it is missing and
+Orbiters does not use a built-in mail password. Removing credentials from the
+current Git tree does not revoke values in earlier commits. Rotate any still-active
+values with their consumers, keep replacements in private runtime configuration,
+and verify database and SMTP authentication without sending test messages.
+Rotating both JWT signing secrets requires users to sign in again. The separate
+`API_CREDENTIAL_ENCRYPTION_KEY` must remain available to decrypt stored connections.
+
 Verify a fresh backup can be decrypted and its database dump restored in an isolated
 database. Keep the age private key outside the server as well as in protected recovery
 storage. The backup key is separate from `API_CREDENTIAL_ENCRYPTION_KEY`.

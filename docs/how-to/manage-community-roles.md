@@ -91,6 +91,10 @@ Publishing this guide does not deploy the feature.
 
 You can have up to 30 active roles. Search finds roles by name or description.
 
+Selecting another Discord role restores that role's color and closes the custom
+picker. You can then choose a preset or open **Custom color** again. Dragging
+through a preset color inside the custom picker keeps the picker open.
+
 ## Prepare your connections
 
 For Discord, connect the server in **Community → Connections**. Your linked Discord

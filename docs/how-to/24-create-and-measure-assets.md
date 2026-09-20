@@ -27,6 +27,10 @@ This guide covers the creator tools prepared for the next release. Availability 
 
 You can keep up to 100 active drafts. Publishing a commission or sticker service also requires saved seller details and terms. A custom base needs an original avatar base. The editor does not invent prices, currency or licensing terms.
 
+Published product pages and their shop buttons are visible without signing in.
+Signing in refreshes your ownership on the same page; signing out restores the
+visitor view. Viewing a product does not grant access to its purchased files.
+
 Open an asset's **General** settings and choose **Edit asset page** to change its page using the same editor. Changes remain private until published. If another window or a provider sync changed the asset in the meantime, the editor asks you to reopen from the current version before overwriting it.
 
 **General** also has direct thumbnail and **Page banner** controls. Banner upload,
