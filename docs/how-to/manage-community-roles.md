@@ -57,6 +57,8 @@ For VRChat, a Community Leader first connects an account and selects a group in
 **Manage Roles**; exporting requires **Assign Roles** too. VRChat's hierarchy can
 still protect an individual member from role changes. See
 [Manage a VRChat community](manage-vrchat-community.md).
+Private connection access is checked again during synchronization. Revoking
+Community Leader access stops rules from using that connection.
 
 Only registered Orbiters accounts participate in role rules. Members must link
 their personal Discord or VRChat identity and join the corresponding community.
@@ -77,6 +79,7 @@ search result directly. Existing assignments have three modes:
 Manual changes update the Orbiters assignment immediately; platform work is queued.
 The member list refreshes saved status while it is visible. It shows the evidence
 behind automatic membership, pending synchronization and actionable errors.
+Assignments stay visible while a save or refresh loads the updated status.
 **Refresh members** checks saved status immediately; **Sync** on the role card queues
 a fresh scan.
 
