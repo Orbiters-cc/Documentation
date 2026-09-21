@@ -59,7 +59,11 @@ The import also handles the community owner's linked identity. Each completed
 batch saves its member updates and progress together. If another operation is
 using the same VRChat account, an interactive action reports that the account is
 busy: wait briefly and retry. Background synchronization retries on a later pass;
-it does not queue database connections while waiting for the account.
+it does not queue database connections while waiting for the account. Imports and
+identity linking use the same lock order across communities, including communities
+whose owners belong to each other's groups. Linking, unlinking or merging may also
+report busy during an import batch; retrying after that batch preserves the
+existing connection until the action can complete.
 
 VRChat does not let the community account change roles for members at equal or
 higher rank, including the group owner. These members appear under **Manual role
