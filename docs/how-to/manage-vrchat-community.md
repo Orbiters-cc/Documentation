@@ -8,7 +8,7 @@ id: orbiters.account.vrchat-community
 domain: website
 type: how-to
 owner: orbiters-docs
-lastVerified: 2026-09-20
+lastVerified: 2026-09-21
 ---
 
 # Manage a VRChat community
@@ -54,6 +54,12 @@ starts another explicit scan. Available membership updates from VRChat also queu
 checks; the websocket cannot guarantee a complete roster. Viewing the tab makes
 no provider requests. Disabling stops synchronization and leaves existing roles
 and account records in place. Existing privacy-closed member records are not reopened.
+
+The import also handles the community owner's linked identity. Each completed
+batch saves its member updates and progress together. If another operation is
+using the same VRChat account, an interactive action reports that the account is
+busy: wait briefly and retry. Background synchronization retries on a later pass;
+it does not queue database connections while waiting for the account.
 
 VRChat does not let the community account change roles for members at equal or
 higher rank, including the group owner. These members appear under **Manual role

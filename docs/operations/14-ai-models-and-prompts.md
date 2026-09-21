@@ -8,7 +8,7 @@ id: orbiters.operations.ai-models-prompts
 domain: website
 type: how-to
 owner: orbiters-platform
-lastVerified: 2026-09-20
+lastVerified: 2026-09-21
 ---
 
 # Configure AI models, prompts and usage
@@ -20,6 +20,11 @@ live provider validation remain separate from publishing this documentation.
 
 In **Admin → API Keys**, create a global key for the current environment: **Gemini**,
 **DeepSeek**, or **Z.ai (GLM)**. Creator-owned keys are not used for website AI.
+All three provider forms are restricted to administrators and save global keys
+automatically. After saving, reopen **AI** to refresh availability in Models and
+Playground. A key must be active and belong to the current environment. If an
+earlier Gemini key was saved as personal, an administrator must change its scope
+to global before website AI can use it.
 Open **Admin → AI → Models** to inspect the seeded models or register a provider's
 model ID. Initial options are Gemini Flash Lite, DeepSeek V4.1 Flash
 (`deepseek-flash`), GLM-5.3 and image-capable GLM-5.3-Flash.

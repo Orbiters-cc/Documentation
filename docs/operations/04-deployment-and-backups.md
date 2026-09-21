@@ -8,7 +8,7 @@ id: orbiters.operations.deployment-and-backups
 domain: operations
 type: runbook
 owner: orbiters-operations
-lastVerified: 2026-07-12
+lastVerified: 2026-09-21
 ---
 
 # Deployment and Backups
@@ -96,13 +96,20 @@ The manual production workflow:
 5. Checks out the selected ref and installs the production credential key.
 6. Runs two database initialization passes against a clone using the running PostgreSQL image.
 7. Rebuilds and recreates frontend and backend containers.
-8. Waits for `/healthz`.
+8. Waits for `/readyz` to confirm an HTTP response and a working database query.
 9. Writes deployment status metadata.
 10. Restores the production Caddy config.
 
 If public health checks fail, maintenance is restored. A failure after checkout
 leaves maintenance active for investigation; never restart old code against a
 migrated database without checking the recovery procedure.
+
+`/healthz` checks process liveness only. `/readyz` returns 200 when the backend can
+complete a database query within two seconds, or 503 when the database connection
+pool is stalled or unavailable. Concurrent readiness probes share one outstanding
+query, and responses expose no database details. Deployment checks `/readyz` both
+locally and through the public API with a five-second network timeout. Neither
+endpoint alone verifies external providers or a complete user journey.
 
 Application deployment recreates only the frontend and backend, without restarting
 PostgreSQL or unrelated services. PostgreSQL and production application containers
