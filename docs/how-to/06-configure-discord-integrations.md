@@ -8,7 +8,7 @@ id: orbiters.how-to.configure-discord-integrations
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-20
+lastVerified: 2026-09-22
 ---
 
 # Configure Discord Integrations
@@ -57,6 +57,15 @@ Use custom bot mode when the creator needs a dedicated bot identity.
 4. Save the integration.
 5. Verify that the bot is online and can manage the configured roles.
 
+<beta>
+In the next application release, additional servers must use the same custom bot
+identity. Orbiters verifies that the token matches the application ID before
+saving. To switch bots, disconnect the previous bot's servers first. Concurrent
+connection changes ask you to retry instead of replacing another saved token.
+A server stays pending when the configured bot is absent; invite that same bot
+again before relying on role, verification or appeal delivery.
+</beta>
+
 ## Role Requirements
 
 The bot must be able to manage the target role. In Discord, that means the bot role must be above the role it grants or removes, and the bot must have the required server permissions.
@@ -64,6 +73,17 @@ The bot must be able to manage the target role. In Discord, that means the bot r
 ## Verification And Appeals
 
 Verification rules and appeals are scoped per guild. A user can be verified in one server and unverified in another.
+
+<beta>
+In the next release, closing a progress window stops its live display without
+reporting success. The server may finish work already started. Reopen the window
+to check the saved result. A completion message is required before Orbiters reports
+that Discord information or role-permission setup finished successfully.
+
+In **Admin → Users → View Info**, the close button stays above the content and
+Escape remains available during refresh. Closing restores focus to **View Info**.
+Server details and long role lists share the dialog's main scroll area.
+</beta>
 
 <audience include="dev">
 

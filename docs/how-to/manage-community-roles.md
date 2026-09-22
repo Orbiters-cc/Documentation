@@ -8,7 +8,7 @@ id: orbiters.creator.community-roles
 domain: website
 type: how-to
 owner: orbiters-docs
-lastVerified: 2026-09-20
+lastVerified: 2026-09-22
 ---
 
 # Manage community roles
@@ -172,6 +172,18 @@ when synchronization or another edit occupies the available role-processing
 capacity. Wait a moment and retry the action. Background work skips busy roles
 and checks them again on a later scan.
 
+<beta>
+The next release marks the affected member for checking when Orbiters receives a
+Discord member-role change. The existing worker performs the sync; changes do not
+wait for the next five-minute full scan. Events received during another sync are
+queued durably. Older page refreshes cannot overwrite the result of a newer role
+action, and repeated polling does not overlap.
+
+Closing the owner's account disables its rules and queues removal of roles those
+rules granted. See [Close your account](15-manage-privacy-and-shared-content.md#close-your-account)
+for delayed provider cleanup.
+</beta>
+
 A failed platform read does not count as proof that a member lost their role.
 Uncertain writes are recorded and checked against current provider membership
 before another write. Completed work on the other platform remains recorded.
@@ -220,6 +232,13 @@ Pending manual changes take priority over the normal cursor scan. Completed scan
 are scheduled again after five minutes; provider outages remain visible and retry
 without deactivating unrelated assignments. Reads in the UI refresh saved status
 every fifteen seconds only while the document is visible.
+
+The next release uses `community.role.invalidate` jobs when a live Discord change
+cannot acquire the role lock. `community.roles.close` jobs retain encrypted
+provider sessions and grant receipts after owner closure, retry incomplete
+removals, and delete role records only after completion. Completed removals are
+not repeated. Exhausted cleanup jobs remain visible as failed outbox jobs and
+require operator review; never mark one processed merely to hide the failure.
 
 The focused community-role tests cover rule evaluation, community and website permission isolation,
 idempotent grant recovery, provider-owned roles, relinking, HTTP access, worker

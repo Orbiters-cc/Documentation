@@ -8,7 +8,7 @@ id: orbiters.how-to.create-and-measure-assets
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-20
+lastVerified: 2026-09-22
 ---
 
 # Create, publish and measure an asset
@@ -41,6 +41,15 @@ installation method or original-base association.
 **General** also has direct thumbnail and **Page banner** controls. Banner upload,
 replacement and removal apply immediately to the asset page. The avatar-specific
 **MCB Banner** is a separate image for the MCB tooling.
+
+<beta>
+The next application release preserves a usable MCB banner preview after
+**Refresh from Gumroad**. Assets without current product or commission details
+show an **Old-format asset** warning in Creator and General settings. They are
+excluded from public recommendations. Open **Edit asset page**, review the
+current product details, then publish to update the existing asset. No automatic
+conversion or additional legacy asset format is introduced.
+</beta>
 
 ## Publish to a connected shop
 
@@ -84,6 +93,14 @@ A click on **Get on Gumroad** or **Get on Jinxxy** is an outbound click. Provide
 **You might also like** combines other visible assets from the same creator with assets visited or used in the same opted-in sessions. Behavioral suggestions need at least five distinct contributing accounts. Hidden assets and unpublished commissions are excluded.
 
 Visitors control aggregate measurement and personalized recommendations in their privacy settings. Creators receive totals rather than visitor identities.
+
+<beta>
+The next release waits for a signed-in visitor's saved measurement preference
+before sending any events. If that preference cannot load, tracking stays off.
+Temporary delivery failures retry the same event IDs in order, within a bounded
+in-memory queue. Opting out or changing accounts clears pending events. Measurement
+is best effort: closing the page or exhausting retries can still lose events.
+</beta>
 
 Related: [Connect store integrations](05-connect-store-integrations.md), [Publish posts and stream announcements](25-publish-posts-and-streams.md), [Order and fulfill stickers](26-order-and-fulfill-stickers.md).
 

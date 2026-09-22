@@ -8,7 +8,7 @@ id: orbiters.how-to.privacy-and-shared-content
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-05
+lastVerified: 2026-09-22
 ---
 
 # Manage Privacy and Shared Content
@@ -86,6 +86,15 @@ Closure removes website membership, sign-in credentials, account connections,
 profile information, private settings and private library records. It disables
 future account sync and invalidates account access and export downloads.
 The browser returns to the homepage with website login, draft and preference storage cleared.
+
+<beta>
+The next application release also removes Discord and VRChat roles that your
+community rules granted. Roles assigned independently remain in place. If a role
+sync is currently running, closure asks you to wait briefly and try again before
+changing your account. Provider outages can delay removals after closure; encrypted
+cleanup credentials and delivery receipts remain only for retrying those removals
+and are cleared once they finish. Contact support if a role remains unexpectedly.
+</beta>
 
 Shared native discussions remain with a **Deleted account** attribution. Imported
 messages keep their external source attribution. Commissions, deliveries and

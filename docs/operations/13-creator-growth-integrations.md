@@ -8,7 +8,7 @@ id: orbiters.operations.creator-growth-integrations
 domain: website
 type: runbook
 owner: orbiters-platform
-lastVerified: 2026-09-20
+lastVerified: 2026-09-22
 ---
 
 # Configure creator-growth integrations
@@ -83,6 +83,23 @@ AI copies are bounded by decoded pixels, file size, image count and resized payl
 Visit receipts expire after one day, opted-in journeys after 90 days, and aggregate metrics after 395 days. Aggregate events omit user/session identifiers. Personal journeys require the explicit personalization preference; withdrawing it deletes the account's stored journeys. Creator statistics expose totals, not visitor identities. Terminal social history expires after 180 days; uncertain deliveries remain available for resolution.
 
 ## Validate before release
+
+The next release includes recommendation visibility checks for both the requested
+asset and every candidate: a current product or published commission is required.
+The creator-facing old-format warning provides a manual path through the current
+asset editor; there is no compatibility fallback that exposes private metadata.
+
+`communityStartup.test.js` exercises the real Discord client manager, role-listener
+initializer and outbox dispatcher, including disabled startup, repeated starts,
+scheduled work and HTTP `/healthz`. Provider clients, database operations and
+unrelated startup services are local fixtures. `bugScanConcurrencyDatabase.test.js`
+adds competing custom-bot saves and transactional closure snapshots in disposable
+PostgreSQL. No production database or external role is changed by these checks.
+
+`src/scripts/adminDiscordModalQa.cjs` exercises Admin → Users → View Info with
+local HTTP and WebSocket fixtures. It checks close-button hit testing, repeated
+closure during refresh, Escape/outside dismissal, focus restoration, mobile
+layout and reduced motion. Build with a local `REACT_APP_BACKEND_URL` first.
 
 Run backend tests with a fixture environment that cannot connect to developer or production databases. The creator-tools startup regression uses the real initializer and HTTP `/healthz` wiring with provider side effects stubbed. Database initialization alone is a separate check.
 
