@@ -8,10 +8,15 @@ id: orbiters.development.navbar-logo-motion
 domain: website
 type: reference
 owner: orbiters-docs
-lastVerified: 2026-09-20
+lastVerified: 2026-09-22
 ---
 
 # Navbar logo motion
+
+The next frontend release keeps desktop navigation at widths of **1200 CSS pixels
+and above**, switching to the mobile menu below 1200px. Resizing an open mobile menu
+back to desktop closes it and releases its scroll lock. Other page breakpoints
+are unchanged.
 
 The frontend implements the Gremlin Takeover reveal on the small navbar mark. This page describes the local implementation; deployment is a separate release step.
 

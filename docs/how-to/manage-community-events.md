@@ -8,7 +8,7 @@ id: orbiters.community.events
 domain: website
 type: how-to
 owner: orbiters-docs
-lastVerified: 2026-09-20
+lastVerified: 2026-09-22
 ---
 
 # Create and manage community events
@@ -18,7 +18,15 @@ VRChat calendar entry, group announcement and group instance together. Each even
 belongs to its creator, who can return to edit it and check delivery status.
 If you help manage events without owning a managed community, use **Events** in
 the navbar. The standalone workspace is `/community/events`; no website staff rank is
-required. Event permissions remain separate from the managed community team.
+required.
+
+In the next matching frontend/backend release, a **Community Admin** can create
+events using the owner's already registered Discord server and selected VRChat
+group. No separate account connection or event-team invitation is needed. These
+choices show **Community admin** in Communities & team. Publication rechecks the
+appointment, active connections and owner's current platform permissions. Removing
+the appointment or connection removes this inherited access. Community Moderators
+still need their own event permissions; managing the event team remains separate.
 
 ## Connect your communities
 

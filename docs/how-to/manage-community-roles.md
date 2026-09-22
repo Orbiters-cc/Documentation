@@ -59,9 +59,12 @@ membership roles, even when a role is named “Admin” or “Community manager�
 selected community. Discord Verification Management is in this workspace; website
 appeals and the platform VRChat service account remain separate in Admin. Creator connections contain stores
 and creator tools; community connections live under **Community → Connections**.
-Use **Events** to open your event workspace. Events keep their own provider
-and event-team permissions; community management access does not grant event-team
-access automatically. Event access never exposes the website Admin workspace.
+Use **Events** to open your event workspace. In the next matching release,
+Community Admins can create events using the owner's registered destinations for
+the community's connected Discord server and selected VRChat group. Removing admin
+access removes this inherited permission. Community Moderators need separate event
+permissions. Managing the event team remains separate; community access does not
+grant that authority. Event access never exposes the website Admin workspace.
 
 This implementation requires the matching frontend and backend release.
 Publishing this guide does not deploy the feature.
