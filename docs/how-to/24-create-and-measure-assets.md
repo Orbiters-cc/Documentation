@@ -54,6 +54,13 @@ You can link an existing vendor product ID. Enable automatic updates to apply la
 recovery message. Before resuming, link the existing Gumroad product ID so Orbiters
 can verify it. Pausing does not turn an uncertain creation into a fresh attempt.
 
+Hiding an asset or applying a moderation restriction stops subsequent shop writes,
+including publication after draft creation. A request already admitted for delivery
+may finish; its product ID is retained so resuming updates that product. Hiding an
+Orbiters page does not unpublish an existing Gumroad product. Restore visibility
+and resume synchronization when appropriate; unresolved creations still require
+linking the existing product ID.
+
 Jinxxy, Payhip and Lemon Squeezy continue to support their existing import and purchase features. Their connections are shown without a publishing action when no supported public write API is available.
 
 Every connection shows its provider icon/name and the connected account name.

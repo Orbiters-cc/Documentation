@@ -58,6 +58,23 @@ Keep the recovery message until a verified product link resolves that uncertaint
 `vendorPublishing.test.js` covers lost creation responses followed by repeated
 pause/resume attempts, invalid then corrected asset details, and successful
 recovery by linking the existing product.
+Before each Gumroad write, the worker rechecks creator access, asset ownership,
+connection availability and owner/moderator visibility. Write admission shares
+the asset row lock with hiding and moderation decisions. Database locks are
+released before provider requests; an admitted request may finish, and its receipt
+is saved before any subsequent step. Hiding during preparation prevents creation;
+hiding during creation stops later updates, thumbnail upload and publication.
+Interrupted creations without a receipt retain `uncertain` recovery requirements.
+
+`bugScanConcurrencyDatabase.test.js` verifies the visibility fences and community
+role pool admission using real PostgreSQL transactions and minimal model fixtures.
+Enable it with `RUN_BUGSCAN_DB_TESTS=true` and `BUGSCAN_TEST_PG_PORT` pointing to a
+disposable loopback PostgreSQL instance on port 50000–65535. The fixture connection
+uses database/user `scan_fixture` and password `scan-fixture-only`, creates a new
+random database, and never reuses application data. Remove the disposable instance
+after testing. Provider requests, audit storage and notifications are fixtures;
+this check does not establish production startup or provider acceptance.
+
 `creatorDraftEditing.test.js` checks that publishing page edits preserves existing
 installation settings while new general assets keep their creation defaults.
 

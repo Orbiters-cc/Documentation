@@ -167,6 +167,11 @@ correct role hierarchy or permissions, or have the member link their account and
 join the community. Then choose **Sync**. Background scans are bounded and may
 take longer in large communities; they are not instantaneous.
 
+The next release returns a retryable **Community roles are busy syncing** message
+when synchronization or another edit occupies the available role-processing
+capacity. Wait a moment and retry the action. Background work skips busy roles
+and checks them again on a later scan.
+
 A failed platform read does not count as proof that a member lost their role.
 Uncertain writes are recorded and checked against current provider membership
 before another write. Completed work on the other platform remains recorded.
@@ -198,6 +203,16 @@ an account cleans up the receipt's original identity before granting a replaceme
 Personal data exports include the member's Orbiters assignments and the creator's
 role definitions, without internal provider delivery receipts. Account merges
 transfer model-owned assignments and update the saved VRChat connection reference.
+
+The next release uses a nonblocking advisory-lock attempt and admits role work
+before acquiring a database connection. Each admitted operation budgets one lock
+connection plus two for its independent receipt transactions and reads. With the
+default five-connection pool, one role operation runs per process at a time.
+Contention returns HTTP 409 for interactive changes and skips background work.
+Pools smaller than three connections cannot admit role work. Provider receipts
+remain independently committed before remote writes. The disposable PostgreSQL
+regression covers same-role and different-role saturation, cross-process lock
+contention and connection reuse after completion.
 
 The worker starts through `server.js`, skips explicitly disabled external startup,
 and scans up to three due roles per ten-second tick, with ten accounts per role.
