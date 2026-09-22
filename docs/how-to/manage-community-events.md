@@ -20,20 +20,23 @@ If you help manage events without owning a managed community, use **Events** in
 the navbar. The standalone workspace is `/community/events`; no website staff rank is
 required.
 
-In the next matching frontend/backend release, a **Community Admin** can create
-events using the owner's already registered Discord server and selected VRChat
-group. No separate account connection or event-team invitation is needed. These
-choices show **Community admin** in Communities & team. Publication rechecks the
-appointment, active connections and owner's current platform permissions. Removing
-the appointment or connection removes this inherited access. Community Moderators
-still need their own event permissions; managing the event team remains separate.
+A **Community Admin** can create events using the owner's already registered
+Discord server and selected VRChat group. For the official Orbiters community,
+this includes its shared VRChat service account. No separate account connection,
+server registration or event-team invitation is needed. **Communities & team**
+shows these choices as **Community admin** and replaces the connection setup forms
+with a ready state. Publication rechecks the appointment, active connections and
+the owner's current platform permissions. Removing the appointment or connection
+removes this inherited access. Community Moderators still need their own event
+permissions; managing the event team remains separate.
 
 ## Connect your communities
 
 To collect availability, world votes or movie/episode choices before publication,
 follow [Find a time, world and movie together](plan-event-availability.md).
 
-Open **Communities & team** before creating your first event.
+Owners open **Communities & team** before creating their first event. Community
+Admins use the owner's existing connections and do not repeat these steps.
 
 1. Add a Discord server from the list or paste its server ID. Your linked Discord
    account must own it or have Administrator, Manage Server, Manage Events or Create
