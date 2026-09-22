@@ -53,6 +53,14 @@ Prompt cleanup retries after interruptions. A lost send response is not permissi
 
 Posting and publishing use durable outbox jobs with separate provider results. An uncertain create/send must be reconciled before retrying. Completed independent destinations remain completed. Gumroad updates stop when synchronized fields changed at the vendor; downloads and checkout fields are never replaced.
 
+For Gumroad, a paused publication can remain `uncertain` with `enabled: false`.
+Keep the recovery message until a verified product link resolves that uncertainty.
+`vendorPublishing.test.js` covers lost creation responses followed by repeated
+pause/resume attempts, invalid then corrected asset details, and successful
+recovery by linking the existing product.
+`creatorDraftEditing.test.js` checks that publishing page edits preserves existing
+installation settings while new general assets keep their creation defaults.
+
 AI copies are bounded by decoded pixels, file size, image count and resized payload size. Source text and images are not retained in ordinary AI interaction content for these imports. Private drafts and selected public media have separate access rules. Unreferenced creator uploads are eligible for cleanup after a day; active drafts, published media, retained orders and social posts protect their references.
 
 Visit receipts expire after one day, opted-in journeys after 90 days, and aggregate metrics after 395 days. Aggregate events omit user/session identifiers. Personal journeys require the explicit personalization preference; withdrawing it deletes the account's stored journeys. Creator statistics expose totals, not visitor identities. Terminal social history expires after 180 days; uncertain deliveries remain available for resolution.

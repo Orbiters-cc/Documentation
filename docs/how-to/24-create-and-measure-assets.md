@@ -33,6 +33,11 @@ visitor view. Viewing a product does not grant access to its purchased files.
 
 Open an asset's **General** settings and choose **Edit asset page** to change its page using the same editor. Changes remain private until published. If another window or a provider sync changed the asset in the meantime, the editor asks you to reopen from the current version before overwriting it.
 
+Publishing page edits preserves an existing texture or accessory's installation
+method and original avatar base. A custom-base draft still lets you explicitly
+choose its original base. New general assets, including copies, start without an
+installation method or original-base association.
+
 **General** also has direct thumbnail and **Page banner** controls. Banner upload,
 replacement and removal apply immediately to the asset page. The avatar-specific
 **MCB Banner** is a separate image for the MCB tooling.
@@ -44,6 +49,10 @@ In **General → Publish to connected stores**, select a supported store, inspec
 Leave publication unchecked to create a Gumroad draft first. Complete the shop's files, checkout and payout requirements, then enable publication when ready. Orbiters does not replace vendor download files or checkout settings. Configurable commissions and physical sticker orders stay on Orbiters.
 
 You can link an existing vendor product ID. Enable automatic updates to apply later Orbiters page changes. If someone edited the same fields directly on Gumroad, synchronization stops with a conflict for you to resolve. If creation cannot be confirmed, check the shop and link the product ID shown there; Orbiters will not create another product automatically.
+
+**Pause sync** stops future work but keeps an uncertain creation result and its
+recovery message. Before resuming, link the existing Gumroad product ID so Orbiters
+can verify it. Pausing does not turn an uncertain creation into a fresh attempt.
 
 Jinxxy, Payhip and Lemon Squeezy continue to support their existing import and purchase features. Their connections are shown without a publishing action when no supported public write API is available.
 
