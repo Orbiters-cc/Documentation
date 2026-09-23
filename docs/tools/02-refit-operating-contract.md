@@ -25,11 +25,11 @@ mesh assets are never modified.
 
 ## Website installation guide
 
-The unlisted `/refit` page shows the ReFit logo, a particle logo/title and a thin yellow outlined `beta` badge.
+The unlisted `/refit` page shows the ReFit logo and title with a shared particle effect.
 The normal Orbiters navbar remains visible, but has no link to this page. Search
 engines receive `noindex, nofollow`; the URL is public, not access-controlled.
 
-**Install** is blue and uses the same installer component, controls, typography
+**Install** and **Next** use black backgrounds with white text. The guide uses the same installer component, controls, typography
 and transitions as `/my-custom-base`, with these ReFit steps:
 
 1. Add the Orbiters VPM repository in Creator Companion. The button opens VCC.
@@ -42,7 +42,8 @@ and transitions as `/my-custom-base`, with these ReFit steps:
 The guide works without signing into Orbiters. Steps are advanced manually; the
 website does not detect or confirm installation in Unity. Close, Escape and clicking outside remain available. Reduced motion uses a static title and immediate
 step changes. Particle animation pauses when hidden or outside the viewport. The logo and title
-share the same effect, with repel strength 6 and a 250 px interaction radius.
+share a viewport-sized effect, with repel strength 6 and a 250 px interaction radius.
+Particles fade out around the installer so they never overlap its controls.
 
 ## Output
 
