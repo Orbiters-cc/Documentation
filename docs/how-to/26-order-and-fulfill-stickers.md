@@ -19,8 +19,8 @@ This workflow is prepared for the next release. A creator must publish a sticker
 
 1. Open the sticker asset and choose a printing option: finished size, quantity, number of designs, thickness and finish. The price and remaining order capacity belong to that option.
 2. Upload each design, including PNG artwork with a transparent background. Allocate the printed quantity across the required designs.
-3. Set the white border width in millimeters. The preview follows the opaque outline and preserves the artwork's proportions.
-4. Drag the unframed 3D preview to inspect the finish, or use arrow keys and zoom. Glossy, matte, broken-glass holographic, starry holographic and glitter finishes have approximate material previews.
+3. Set the white border width in millimeters. The main gallery replaces the sample with your uploaded artwork, follows the opaque outline and preserves the artwork's proportions. Selecting another uploaded design updates that same preview; removing it restores the sample.
+4. Drag the unframed 3D preview to inspect the finish, or use arrow keys. Scrolling over the preview scrolls the page. Glossy, matte, broken-glass holographic, starry holographic and glitter finishes have approximate material previews.
 5. Enter a delivery address and choose **Get delivery estimates**, then select a service if one is offered. Platform prices are separate from public carrier prices; confirm that the creator can book the selected platform price. Check the creator's delivery terms, the printing total and any separate request fee. Shipping is arranged and paid directly with the creator; the quoted range is not a checkout charge.
 6. Use **Send request** in the upper-right corner of **Make your stickers** after reviewing the terms.
 
@@ -46,7 +46,7 @@ For each printing choice, optionally use its **Sample sticker artwork** file fie
 
 Every published sticker asset with valid printing choices has finish previews. Without uploaded sample artwork, the standard illustrative artwork shows the configured finish and size; it is labelled as illustrative. Private draft uploads are never used as public previews.
 
-For these assets, **Sticker samples** is also available as a homepage widget. It shows one to three gently moving 3D samples according to widget size and links directly to the asset. Offscreen widgets stop rendering until visible again; reduced-motion settings keep the samples still.
+For these assets, **Sticker samples** is also available as a homepage widget. It shows the artist name, asset name and one to three gently floating samples according to widget size, with a lightweight version of the creator background. It links directly to the asset. Dragging tilts the material with increasing resistance; the back cannot be exposed. Scrolling never zooms the sticker. Stationary previews do not continuously redraw; textures are capped to the displayed size and public artwork decoding is shared. Offscreen widgets stop rendering until visible again; reduced-motion settings keep the samples still.
 
 Open **Creator â†’ Preferences â†’ Shipping** to save the sender address and typical packed parcel weight and dimensions. The sender address is private; it is sent to the configured carrier quote providers when a customer requests rates, but is not returned to the customer. Changing the origin or parcel invalidates outstanding quotes. A request with a selected carrier shows the customer's delivery address, service and saved cost range in **Creator â†’ Requests**. Confirm actual postage with the customer before buying a label.
 

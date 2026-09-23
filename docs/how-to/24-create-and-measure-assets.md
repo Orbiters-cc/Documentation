@@ -140,3 +140,10 @@ reserve sticker capacity. They do not send commission notifications or create a
 board proposal. Quotes, uploaded references and the request workflow are retained
 for inspection. This option only works for the listing's owner; it does not waive
 payment on another creator's commission. Return to creator view when finished.
+
+## Open or share the public asset
+
+The asset configuration **General** tab provides **Open public asset page** in a
+new tab and **Copy page link**. Copying uses the current site's public asset URL;
+it does not include editor or customer-preview parameters. These actions do not
+publish a draft or change who can access the asset.
