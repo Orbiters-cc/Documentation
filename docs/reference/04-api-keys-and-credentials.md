@@ -98,6 +98,12 @@ The current guides cover every credential type that can be created from those ta
   then configure a creator shipping origin and parcel to obtain live carrier estimates.
   If **API Keys** is missing, [EasyPost support](https://support.easypost.com/hc/en-us/articles/360004588571-API-Keys)
   advises contacting support@easypost.com. Do not assume buying a plan unlocks it.
+- **Sendcloud / Easyship:** for dashboard-generated European platform credentials,
+  follow [Connect shipping estimates for France and Europe](../how-to/shipping-platform-api-setup.md).
+  Save Sendcloud's `SENDCLOUD_PUBLIC_KEY` and `SENDCLOUD_SECRET_KEY`, or Easyship's
+  production `EASYSHIP_API_TOKEN` with `public.rate:read`, globally for this environment.
+  Platform prices remain separate from public carrier rates. Easyship Rates can
+  incur per-call fees even with a Free account; inspect current billing before saving.
 - **UPS:** create an application with Rating API access in the [UPS developer portal](https://developer.ups.com/).
   Save production `UPS_CLIENT_ID` and `UPS_CLIENT_SECRET` globally. Orbiters requests
   published Shop rates without negotiated pricing and does not buy labels.

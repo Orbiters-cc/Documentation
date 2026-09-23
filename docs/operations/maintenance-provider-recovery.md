@@ -38,12 +38,14 @@ review the configured repository scope before retrying.
 
 ## Shipping provider failures
 
-Configure any combination of EasyPost, UPS and FedEx through the global
+Configure any combination of EasyPost, UPS, FedEx, Sendcloud and Easyship through the global
 [API Keys settings](../reference/04-api-keys-and-credentials.md). The shipping
 estimator queries providers independently and retains successful public-rate
 results when another provider fails. A partially available estimate identifies
-the sources that supplied its rates. Never substitute a discounted account price
-or invent a zero-cost quote when no public rate is available.
+the sources that supplied its rates. Sendcloud and Easyship appear in a separate
+platform-price section; never substitute their account prices into public ranges.
+Never invent a zero-cost quote when no rate is available. See the
+[platform setup guide](../how-to/shipping-platform-api-setup.md) for billing and scopes.
 
 Production rating access and provider account approval must be verified separately
 from fixture tests. The website environment selects credential scope; it does not
