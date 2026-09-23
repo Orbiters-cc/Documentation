@@ -18,6 +18,12 @@ Identify the resource and authorized tool before changing state and checking the
 
 Administrative access depends on rank and feature access. Moderators may see a smaller operational surface than admins or developers.
 
+<beta>
+For the updated Community moderation workspace, returning from impersonation,
+VRChat imported-account labels and reorganized role settings, see
+[Test accounts and use the updated staff workspace](admin-account-and-workspace.md).
+</beta>
+
 ## Users
 
 Admins can inspect users, diagnose account problems, review Discord identity, and update ranks where permitted.

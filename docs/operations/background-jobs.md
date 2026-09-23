@@ -17,6 +17,16 @@ Open **Admin → Background jobs** when repeated failures or worker interruption
 
 The list shows job IDs, operation types, state, failed attempts, interrupted attempts and the next scheduled attempt. It omits payloads and raw error text, which can contain private provider or customer details.
 
+<beta>
+Select **View failure details** to inspect the operation, queued time, first and
+latest attempt times, latest failure time, HTTP status and provider error code
+when recorded. Gallery and asset-showcase crawls can also identify their Discord
+room and initiating user. Resource references help locate other affected records.
+Explanations exclude raw payloads, credentials and provider responses. Jobs
+attempted before diagnostics were introduced show unrecorded fields explicitly;
+missing data is not inferred from the last update time.
+</beta>
+
 ## A worker vanishes halfway through a payment
 
 Picture the uncomfortable case: a provider received the request, but the worker stopped before saving the response. “Try again from scratch” might repeat something that already happened. “Mark it successful” would invent an outcome.

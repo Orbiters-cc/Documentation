@@ -8,7 +8,7 @@ id: orbiters.community.events
 domain: website
 type: how-to
 owner: orbiters-docs
-lastVerified: 2026-09-22
+lastVerified: 2026-09-23
 ---
 
 # Create and manage community events
@@ -59,6 +59,20 @@ or searching its members checks your current authority with the provider.
 **Refresh groups from VRChat**, adding a
 community, changing team access and publishing an event make the necessary
 provider requests. Future instance creation is part of the publication you authorize.
+
+## Restrict an event to adults
+
+In the creation form, enable **18+ event**. The selected VRChat community must
+already have 18+ features enabled and its safe **18 Plus** role configured under
+**Community → VRChat**. Orbiters selects that exact role automatically and forces
+members-only group access; public/plus access and manual role selection are disabled.
+
+Every created instance, including additional itinerary steps, is restricted to
+that role. Announcements identify the event as 18+. The restriction is checked
+again before provider delivery, so a disabled setup, changed group or unsafe role
+stops delivery instead of opening an unrestricted instance. Resolve the group
+configuration before retrying. The adult-only choice cannot change once the draft
+has been shared or published.
 
 ## Optional Discord announcement and opt-in invites
 

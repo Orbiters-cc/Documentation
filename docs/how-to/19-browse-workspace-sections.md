@@ -8,7 +8,7 @@ id: orbiters.how-to.workspace-sections
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-08
+lastVerified: 2026-09-23
 ---
 
 # Navigate Admin and Documentation Sections
@@ -45,10 +45,10 @@ offer **Browse all pages** instead of an endless sidebar list.
 
 | Section | Tools |
 | --- | --- |
-| People & access | Users, roles, features and session security |
+| People & access | Users, features and session security |
 | Assets & products | Assets, avatar bases and user ownership |
 | Creators & payments | Creator applications and Stripe |
-| Platform moderation | Reports, privacy requests, appeals, verification, Discord, VRChat and issues |
+| Platform services | Discord servers, website VRChat and issues |
 | Connections | API keys and GitHub |
 | Knowledge & AI | Knowledge Base, AI, Product Stewards and MCP |
 | System & operations | Background jobs, MCB performance, deployment, storage, backups, notifications and redirects |
@@ -57,7 +57,10 @@ Section pages show their purpose, scope notes and cards for tools you can access
 Live operational data loads only when you open its tool. Opening the overview does
 not fetch every deployment, storage or backup panel.
 
-Existing individual tab links still open their tool. The former **Developer** link
+Website reports and appeals are now in **Community → Website moderation**.
+Role-to-asset mapping is in **Creator → Assets → Discord role assets**; appeal
+reviewer roles are in **Community → Appeals → Settings & reviewers**.
+Other individual tab links still open their tool. The former **Developer** link
 opens **System & operations**; choose the dedicated tool there. Search can find both
 section names and individual settings. It never changes a setting for you.
 
