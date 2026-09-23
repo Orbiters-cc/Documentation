@@ -78,8 +78,8 @@ for new tests.
 
 AutoFill asset imports retain submitted source text, instructions, selected image IDs and model answers in AI history, including malformed or truncated answers. Creators can inspect their own draft's request and response; authorized AI administrators can inspect history. Older redacted records cannot be reconstructed. Other operations explicitly configured not to retain content still store only placeholders, usage and safe diagnostics. Provider credentials and private model reasoning are not stored in these diagnostic records.
 
-AutoFill streams model output and reports received tokens to the draft editor. Counts marked as estimates use streamed character length until provider usage is available. DeepSeek extraction disables thinking mode to avoid spending its output budget on reasoning for structured field extraction. The configured output limit still applies; a `length` or `MAX_TOKENS` finish exposes the partial answer and suggests shorter sources or an administrator-reviewed limit change. Sources are consumed when queued and are not reused automatically; failed requests require a new explicit submission.
-AutoFill requests use structured JSON output for Gemini and JSON mode for DeepSeek and Z.ai, followed by local schema validation. AutoFill uses a larger default output budget for compatible providers to reduce truncation; an explicit administrator output-token limit takes precedence. Valid fields are applied to the private draft as soon as extraction finishes; edits made while extraction runs are not overwritten. The creator still reviews the draft before publishing. The default prompt interprets bare dollar prices as USD unless contradicted and maps ordered commission price ranges to slider options. Invalid or unsupported fields are not applied; a response with no applicable fields shows a warning.
+AutoFill streams model output and reports received tokens to the draft editor. Counts marked as estimates use streamed character length until provider usage is available. DeepSeek extraction disables thinking mode to avoid spending its output budget on reasoning for structured field extraction. DeepSeek AutoFill uses a minimum 32,768-token output budget and retries once at 65,536 after a `length` finish; higher administrator settings take priority. Both attempts are billed by the provider and retained in history, with combined live token feedback. Connection, authentication and format errors are not retried. Sources are consumed when queued and are not reused by later submissions. A retry within that submission uses the same selected inputs. The maximum request duration defaults to 180 seconds per attempt and remains bounded by `AI_REQUEST_TIMEOUT_MS` when configured. In **Models → Maximum output tokens**, DeepSeek settings support up to 393,216; other providers keep their existing limits.
+AutoFill requests use structured JSON output for Gemini and JSON mode for DeepSeek and Z.ai, followed by local schema validation. DeepSeek extraction uses the AutoFill minimum budget described above; other operations keep their configured limits. Valid fields are applied to the private draft as soon as extraction finishes; edits made while extraction runs are not overwritten. The creator still reviews the draft before publishing. The default prompt interprets bare dollar prices as USD unless contradicted and maps ordered commission price ranges to slider options. Invalid or unsupported fields are not applied; a response with no applicable fields shows a warning.
 Asset extraction normalizes presentation text before schema validation: null text
 becomes blank or absent, string lists become lines, and ambiguous non-text values
 are omitted with review warnings. Numeric fields, IDs, enums and the response
@@ -87,21 +87,24 @@ envelope remain strict. The required prompt contract explains required empty
 strings and source-provided duration units even when an administrator has saved a
 custom pre-prompt. History retains the original answer alongside normalized data.
 
-Sticker extraction then adds editable starter defaults for missing setup values:
-3 mm border, 0.2 mm preview/parcel thickness, vinyl, made-to-order availability,
-and production/shipping confirmation wording. Starter size, quantity, design count
-and finish default to 50 mm, 50 copies, one design and glossy only when absent.
-The required prompt instead chooses the smallest source-provided options when
-available and uses the advertised minimum price for a single assumed starter
-combination. It preserves the remaining options and price range in the description.
-Default application is reported in draft warnings. It never manufactures a price,
-overwrites supplied values, or fills seller/legal information. Existing sticker
-configuration is untouched when the model omits the sticker section entirely.
+Sticker extraction preserves all independent choices using `stickerOptions` arrays,
+then expands their Cartesian product locally (maximum 1000). This reduces repeated
+output without reducing catalog completeness. Exact priced offers are retained;
+missing combination prices can be interpolated within a supplied price range using
+relative printed area and quantity, without assumed finish/design surcharges. Draft
+warnings clearly identify those estimates. Missing price evidence stays missing.
+No automatic single-starter fallback remains. The required contract prioritizes
+complete useful information, including when an administrator has saved a custom
+pre-prompt. Editable production defaults still fill missing vinyl/material, border,
+preview thickness and confirmation wording. Supplied facts and seller/legal details
+are not overwritten. Existing sticker configuration remains untouched when no
+sticker information is returned.
 
 Account export includes attributable retained interactions. Account closure removes
 personal content and attribution while preserving anonymous usage totals; an answer
 arriving after erasure cannot restore the removed content.
 
 Provider references: [DeepSeek JSON output](https://api-docs.deepseek.com/guides/json_mode/),
+[DeepSeek request limits](https://api-docs.deepseek.com/api/create-chat-completion/),
 [Gemini structured outputs](https://ai.google.dev/gemini-api/docs/structured-output),
 [Z.ai structured output](https://docs.z.ai/guides/capabilities/struct-output).
