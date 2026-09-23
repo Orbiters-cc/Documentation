@@ -88,3 +88,16 @@ fee; any chosen carrier range is shown separately. Shipping remains governed by 
 Creators can use **See as normal user** to send themselves a test order. Test
 orders charge no fee, consume no printing capacity and cannot record real payment.
 The creator can simulate the payment step to continue through production.
+
+## Preview the artwork and printing
+
+The sticker asset page places the large 3D finish showcase and product photos next
+to the printing choices. Use the photo thumbnails to switch between the 3D preview
+and the creator's gallery. The description appears below the showcase. Printing
+cards represent complete creator-configured combinations of size, finish, quantity
+and design count; the form does not invent combinations the creator cannot offer.
+
+Sticker previews use a small idle tilt, never a full spin. Dragging resists rotation
+near the viewing limits, which keep the printed front visible. Arrow keys tilt,
+plus/minus zoom and Home resets the view. Reduced-motion preferences disable idle
+movement. Artwork without a creator-supplied sample remains marked as illustrative.

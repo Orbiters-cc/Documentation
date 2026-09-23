@@ -83,3 +83,26 @@ shipping. Existing EasyPost, UPS and FedEx connections remain usable independent
 See [API keys and credentials](../reference/04-api-keys-and-credentials.md) for
 environment scopes and [Order and fulfill stickers](26-order-and-fulfill-stickers.md)
 for quote expiry and customer request handling.
+
+## When a valid address returns no estimate
+
+Use an ISO country code through the country selector. France does not require a
+state/province code. Orbiters omits free-text French regions from carrier payloads;
+Sendcloud requires ISO subdivision codes instead of names. For US, Canadian and
+Australian destinations, enter the state/province abbreviation.
+
+If Sendcloud rejects detailed address matching or returns no eligible price,
+Orbiters retries once using country, city and postal code. Such prices are labelled
+as **postal-area** estimates; they do not verify the street or include every possible
+address surcharge. The original delivery address is preserved for the creator.
+
+If no connected API returns a price, supported parcels from metropolitan France
+can use a clearly labelled rough Colissimo public-tariff estimate. The current
+fallback uses [La Poste's 2026 home-delivery tariff](https://www.laposte.fr/tarif-colissimo),
+up to 2 kg, for supported France/Europe destinations. Packaging, additional services
+and customs charges are excluded. Unsupported territories, oversized parcels and
+expired tariff years do not receive a guessed price. Refresh the tariff before 2027.
+
+Expand **Why some providers returned no estimate** for account, billing, rate-limit,
+address-format or service-availability reasons. A valid API key alone does not enable
+all carriers on a platform account.
