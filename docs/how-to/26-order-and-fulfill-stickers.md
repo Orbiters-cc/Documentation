@@ -40,15 +40,21 @@ Use the request's messages for details. After acceptance, inspect the creator's 
 
 ## Offer printing
 
-Choose **Creator → Assets → + Create → Stickers**. Save your seller information and terms, then define material, shipping, turnaround and printing choices. Each choice has its own price, order capacity, dimensions, finish, total sticker quantity and number of designs, up to 20. Leave capacity empty for unlimited availability.
+Choose **Creator â†’ Assets â†’ + Create â†’ Stickers**. Save your seller information and terms, then define material, shipping, turnaround and printing choices. Each choice has its own price, order capacity, dimensions, finish, total sticker quantity and number of designs, up to 20. Leave capacity empty for unlimited availability.
 
 For each printing choice, optionally use its **Sample sticker artwork** file field. This is separate from the AutoFill files. The uploaded image replaces the default artwork in the finish previews while editing. After **Verify and post** or **Publish changes**, published samples appear in a 3D carousel between the asset banner and description, with the selected printing's finish and dimensions. Only samples attached to a published printing become public; draft images remain private.
 
-When a published sticker asset has samples, **Sticker samples** is also available as a homepage widget. It shows one to three gently moving 3D samples according to widget size and links directly to the asset. Offscreen widgets stop rendering until visible again; reduced-motion settings keep the samples still.
+Every published sticker asset with valid printing choices has finish previews. Without uploaded sample artwork, the standard illustrative artwork shows the configured finish and size; it is labelled as illustrative. Private draft uploads are never used as public previews.
 
-Open **Creator → Preferences → Shipping** to save the sender address and typical packed parcel weight and dimensions. The sender address is private; it is sent to the configured carrier quote provider when a customer requests rates, but is not returned to the customer. Changing the origin or parcel invalidates outstanding quotes. A request with a selected carrier shows the customer's delivery address, service and saved cost range in **Creator → Requests**. Confirm actual postage with the customer before buying a label.
+For these assets, **Sticker samples** is also available as a homepage widget. It shows one to three gently moving 3D samples according to widget size and links directly to the asset. Offscreen widgets stop rendering until visible again; reduced-motion settings keep the samples still.
 
-Carrier estimates require an administrator to select **EasyPost shipping** in **Admin → API Keys** and save its production `EASYPOST_API_KEY` as a global key for the website environment. The application shows retail counter rates when returned, otherwise published list rates; it never uses the potentially discounted purchase rate as the displayed estimate. Each displayed range starts at that rate and adds a 15% upper buffer for the typical parcel. Test-mode rates, missing credentials, unavailable routes and carrier errors show an unavailable state rather than a made-up price. Quotes expire after 30 minutes and must match the customer's address and the current creator shipping profile.
+Open **Creator â†’ Preferences â†’ Shipping** to save the sender address and typical packed parcel weight and dimensions. The sender address is private; it is sent to the configured carrier quote providers when a customer requests rates, but is not returned to the customer. Changing the origin or parcel invalidates outstanding quotes. A request with a selected carrier shows the customer's delivery address, service and saved cost range in **Creator â†’ Requests**. Confirm actual postage with the customer before buying a label.
+
+Carrier estimates can use **EasyPost shipping**, **UPS published shipping rates**, and **FedEx list shipping rates**. An administrator connects any combination in **Admin → API Keys** with production rating credentials saved globally for the website environment. Each provider runs independently: a failed provider does not discard another provider's estimates. See [API keys and credentials](../reference/04-api-keys-and-credentials.md) for setup.
+
+EasyPost uses retail counter prices, otherwise published list prices. UPS uses published Shop prices and FedEx keeps only LIST prices. Discounted purchase and negotiated account prices are excluded. Matching carrier services in the same currency combine into a rounded range with source names; for example, EUR 3.24 and EUR 6.11 become approximately EUR 3–7. Different currencies and services stay separate. A single source retains a 15% upper allowance, with outward rounding. These are estimates for the creator's typical parcel, not guaranteed postage or customs totals.
+
+Test-mode EasyPost rates, missing credentials, unavailable routes and provider errors do not produce made-up prices. Quotes expire after 30 minutes and must match the customer, asset, delivery address and current creator shipping profile. Add a state or province code where required by the carrier. Delivery details are shared with configured carriers for rating; the sender address is not returned to customers. No label is purchased.
 
 **Total printed copies** is the complete order quantity, not copies per design.
 For example, 50 copies can be shared across 5 **Different designs**. Every design
@@ -56,9 +62,9 @@ needs at least one copy, so 1 copy across 7 designs is invalid. The form identif
 this disagreement without changing either number. Incomplete choices can still be
 saved in a private draft; publishing requires valid choices.
 
-Review incoming orders in the sticker inbox under **Creator → Requests**. Download the print pack to receive original artwork, bordered PNGs, proofs and an order manifest. Existing orders retain their accepted configuration if you later change or delete the listing.
+Review incoming orders in the sticker inbox under **Creator â†’ Requests**. Download the print pack to receive original artwork, bordered PNGs, proofs and an order manifest. Existing orders retain their accepted configuration if you later change or delete the listing.
 
-The website administrator controls sticker availability and the separate acceptance fee under **Admin → Features → Stickers**. Disabling the fee affects new requests; existing payment terms remain fixed.
+The website administrator controls sticker availability and the separate acceptance fee under **Admin â†’ Features â†’ Stickers**. Disabling the fee affects new requests; existing payment terms remain fixed.
 
 </audience>
 

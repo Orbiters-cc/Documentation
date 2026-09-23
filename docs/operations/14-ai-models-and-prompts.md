@@ -18,14 +18,14 @@ live provider validation remain separate from publishing this documentation.
 
 ## Connect a provider
 
-In **Admin → API Keys**, create a global key for the current environment: **Gemini**,
+In **Admin â†’ API Keys**, create a global key for the current environment: **Gemini**,
 **DeepSeek**, or **Z.ai (GLM)**. Creator-owned keys are not used for website AI.
 All three provider forms are restricted to administrators and save global keys
 automatically. After saving, reopen **AI** to refresh availability in Models and
 Playground. A key must be active and belong to the current environment. If an
 earlier Gemini key was saved as personal, an administrator must change its scope
 to global before website AI can use it.
-Open **Admin → AI → Models** to inspect the seeded models or register a provider's
+Open **Admin â†’ AI â†’ Models** to inspect the seeded models or register a provider's
 model ID. Initial options are Gemini Flash Lite, DeepSeek V4.1 Flash
 (`deepseek-flash`), GLM-5.3 and image-capable GLM-5.3-Flash.
 
@@ -66,7 +66,7 @@ The token graph in **Features & usage** plots daily provider-reported totals by
 model over 30 days, 90 days or one year. Filter it by feature and by user; the
 user picker is ordered by each user's reported total. All-users totals retain
 unattributed usage after account deletion; deleted users do not appear in the
-picker. The graph counts successful responses in the selected period and shows
+picker. The graph includes provider-reported usage from both successful and failed responses in the selected period and shows
 how many lack provider token counts. It does not estimate missing usage or cost.
 
 **History** filters by feature, model and initiating user ID. Select a session to
@@ -76,8 +76,8 @@ Self-promotion records the actual Discord post author; someone without an Orbite
 account appears by Discord ID. Feature histories are read-only; use **Playground**
 for new tests.
 
-Asset-import and promotion source text/images are not retained in AI history. The full model response is retained in the administrator-only session detail, including output that fails JSON or schema validation and the partial text returned at the token limit. The detail also shows the format issue or finish reason when available. Earlier requests whose output was not saved cannot be reconstructed. A model response may repeat information from the source, so treat this output as personal data and limit access accordingly.
-AutoFill requests use structured JSON output for Gemini and JSON mode for DeepSeek and Z.ai, followed by local schema validation. AutoFill allows a larger output budget than general requests to reduce truncated descriptions. Valid fields are applied to the private draft as soon as extraction finishes; edits made while extraction runs are not overwritten. The creator still reviews the draft before publishing. The default prompt interprets bare dollar prices as USD unless contradicted and maps ordered commission price ranges to slider options. Invalid or unsupported fields are not applied; a response with no applicable fields shows a warning.
+Private asset-import and promotion operations do not retain their source or model response in AI history. Responses can repeat private source information, including malformed or truncated output. Their history records contain completion/failure placeholders, provider-reported usage, timing and safe format/finish metadata. Ordinary retained playground sessions keep their output for diagnosis. This behavior does not retroactively erase content saved by earlier versions; review any existing private-response records separately before deciding on cleanup.
+AutoFill requests use structured JSON output for Gemini and JSON mode for DeepSeek and Z.ai, followed by local schema validation. AutoFill uses a larger default output budget for compatible providers to reduce truncation; an explicit administrator output-token limit takes precedence. Valid fields are applied to the private draft as soon as extraction finishes; edits made while extraction runs are not overwritten. The creator still reviews the draft before publishing. The default prompt interprets bare dollar prices as USD unless contradicted and maps ordered commission price ranges to slider options. Invalid or unsupported fields are not applied; a response with no applicable fields shows a warning.
 Account export includes attributable retained interactions. Account closure removes
 personal content and attribution while preserving anonymous usage totals; an answer
 arriving after erasure cannot restore the removed content.

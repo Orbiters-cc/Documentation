@@ -83,7 +83,7 @@ at least three numbered steps plus a link to the provider's official setup
 documentation.
 The creator view shows creator-owned credential types; the admin view also shows
 global and administrator-only types such as R2, the two configurable GitHub
-credentials, the Trello application, Stripe platform payments, and EasyPost shipping.
+credentials, the Trello application, Stripe platform payments, and EasyPost, UPS and FedEx shipping.
 
 The current guides cover every credential type that can be created from those tabs:
 
@@ -96,6 +96,16 @@ The current guides cover every credential type that can be created from those ta
   record its project name and number with the credential.
 - **EasyPost:** create a production API key, save it globally for this environment,
   then configure a creator shipping origin and parcel to obtain live carrier estimates.
+  If **API Keys** is missing, [EasyPost support](https://support.easypost.com/hc/en-us/articles/360004588571-API-Keys)
+  advises contacting support@easypost.com. Do not assume buying a plan unlocks it.
+- **UPS:** create an application with Rating API access in the [UPS developer portal](https://developer.ups.com/).
+  Save production `UPS_CLIENT_ID` and `UPS_CLIENT_SECRET` globally. Orbiters requests
+  published Shop rates without negotiated pricing and does not buy labels.
+- **FedEx:** follow the [production setup guide](https://developer.fedex.com/api/en-us/get-started/shipper.html)
+  to enable Rates and Transit Times and associate a shipping account. Save
+  `FEDEX_CLIENT_ID`, `FEDEX_CLIENT_SECRET` and `FEDEX_ACCOUNT_NUMBER` globally.
+  Orbiters uses LIST prices only. Review current provider terms, quotas and approval
+  requirements; account signup does not guarantee unlimited free API access.
 - **Gumroad:** create the Orbiters application, generate the connected-account
   access token, then save the application values and API URL.
 - **Jinxxy:** create a dedicated Creator API key, configure the Orbiters webhook,
@@ -195,8 +205,8 @@ Do not paste real secrets into documentation, issue reports, Discord channels, o
 
 **Documentation publishing** uses `DOCUMENTATION_GITHUB_TOKEN`, scoped to the
 `Orbiters-cc/Documentation` repository with Contents read/write permission. Configure
-it under Admin → API Keys in the matching environment. This enables the administrator
-and developer **Home → Post → Documentation** workflow; other users cannot publish
+it under Admin â†’ API Keys in the matching environment. This enables the administrator
+and developer **Home â†’ Post â†’ Documentation** workflow; other users cannot publish
 through it.
 
 The destination is fixed to the repository's `main` branch. Requests create a new
