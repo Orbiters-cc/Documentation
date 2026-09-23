@@ -14,9 +14,10 @@ lastVerified: 2026-09-23
 # Personalize your creator pages
 
 Open **Creator → Personalization** to choose the appearance of your public profile
-and full-page product, sticker and art/YCH asset pages. Sticker widgets show your artist name and a lightweight miniature of your chosen
-background palette. Other homepage widgets and detail windows keep the Orbiters
-appearance. The miniature uses static gradients rather than another graphics renderer.
+and full-page product, sticker and art/YCH asset pages. Sticker widgets show your
+artist name and a still rendered from the same background and palette. The still
+is cached and its graphics renderer is released after capture. Other homepage
+widgets and detail windows keep the Orbiters appearance.
 
 1. Start with Aurora, Ember, Lagoon or Daydream, or keep your existing palette.
 2. Select a rounded color swatch to open the custom picker. Drag its color field,
@@ -25,7 +26,10 @@ appearance. The miniature uses static gradients rather than another graphics ren
 3. Choose an atmosphere using the visual cards: **Orbiters**, **Aero Shards**,
    **Grainient** or **Gradient Waves**.
 4. Tune the Base, Glow and Highlight colors in the live preview.
-5. Choose **Save appearance**. Changes in the preview are private until saved.
+5. Adjust **Surface blur** from 0 to 24 px. It softens the background behind page
+   cards without blurring artwork or text. Set it to 0 to turn blur off. The live
+   preview includes a card so you can judge the effect.
+6. Choose **Save appearance**. Changes in the preview are private until saved.
 
 **Discard changes** returns to the saved appearance. **Reset to default** prepares
 the default colors and background; choose **Save appearance** to publish the reset.
@@ -48,7 +52,7 @@ Appearance is stored in the nullable `Users.creatorAppearance` JSON column.
 `PUT /creator-tools/personalization` is creator-authenticated and always writes the
 current user's record. The public `GET /creator-tools/personalization/:id` returns
 only validated appearance settings. Background identifiers and six-digit hex
-colors are allowlisted. No creator-supplied CSS, HTML, script or remote background
+colors are allowlisted. `surfaceBlur` is an integer from 0 to 24 (default 8). No creator-supplied CSS, HTML, script or remote background
 URL is accepted. Page-scoped CSS variables do not change the document theme.
 
 Development containers keep dependencies in their own volume. After changing the

@@ -30,6 +30,12 @@ the owner's current platform permissions. Removing the appointment or connection
 removes this inherited access. Community Moderators still need their own event
 permissions; managing the event team remains separate.
 
+The **Create event** button opens the editor from the button's position, using the
+same window transition as asset and role creation. Closing returns to the button
+and restores keyboard focus. Escape and the close button dismiss the editor
+without saving; saving or publishing remains an explicit action. The editor uses
+one scrolling window, adapts to mobile, and respects reduced motion.
+
 ## Connect your communities
 
 To collect availability, world votes or movie/episode choices before publication,

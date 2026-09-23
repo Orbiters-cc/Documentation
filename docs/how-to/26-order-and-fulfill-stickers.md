@@ -82,8 +82,11 @@ illustrate the material rather than guaranteeing the physical print's appearance
 
 When ordering, use the design thumbnails or previous/next controls to inspect each
 uploaded design. Changing the selected design changes the bordered 3D preview.
-The receipt separates printing choices, the printing total and any Orbiters request
-fee; any chosen carrier range is shown separately. Shipping remains governed by the creator's delivery terms.
+The yellow receipt separates the printing subtotal, selected delivery range and
+any Orbiters request fee. **Estimated total** adds the selected shipping range to
+printing. If the currencies differ, both amounts remain separate without an
+assumed conversion. Until you choose shipping, the total is labelled printing
+only. The request fee remains separate; the creator confirms final delivery costs.
 
 Creators can use **See as normal user** to send themselves a test order. Test
 orders charge no fee, consume no printing capacity and cannot record real payment.
@@ -92,12 +95,15 @@ The creator can simulate the payment step to continue through production.
 ## Preview the artwork and printing
 
 The sticker asset page places the large 3D finish showcase and product photos next
-to the printing choices. Use the photo thumbnails to switch between the 3D preview
-and the creator's gallery. The description appears below the showcase. Printing
+to the printing choices. One carousel contains every 3D finish followed by the
+creator's photos in their configured order. Use previous/next or thumbnails to
+switch; photos are ordinary images. Uploaded customer artwork takes the first
+slide and replaces its matching sample. The asset banner fills its header card
+from edge to edge. The description appears below the showcase. Printing
 cards represent complete creator-configured combinations of size, finish, quantity
 and design count; the form does not invent combinations the creator cannot offer.
 
 Sticker previews use a small idle tilt, never a full spin. Dragging resists rotation
 near the viewing limits, which keep the printed front visible. Arrow keys tilt,
-plus/minus zoom and Home resets the view. Reduced-motion preferences disable idle
+and Home resets the view. Wheel scrolling always scrolls the page; zoom is disabled. Reduced-motion preferences disable idle
 movement. Artwork without a creator-supplied sample remains marked as illustrative.
