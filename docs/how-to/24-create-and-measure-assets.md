@@ -32,19 +32,24 @@ you scroll. Editing an existing asset uses **Publish changes**. If publishing is
 rejected, the action bar shows the issue; **Show issue** moves focus to its full
 message. Your draft remains available for correction.
 
-For stickers, AutoFill preserves every advertised finish, size, quantity and design
-count. Independent options are expanded into all combinations: 3 sizes, 3 quantities,
-7 design counts and 4 finishes produce 252 editable choices. The model extracts the
-option lists once instead of repeating the same information hundreds of times.
-Exact supplied combination prices and special packages are preserved. With only an
-overall price range, missing prices become clearly labelled draft estimates based
-on relative printed area and quantity, without assumed finish or design surcharges.
-Review these estimates before publishing. Without price evidence, prices stay blank.
+For stickers, AutoFill creates one variant per finish: Glossy, Matte, Broken Glass
+Holo and Starry Holo are four variants. Size, copies **per design**, and design count
+are shared selectable options. Seven designs at 200 copies means 1,400 stickers.
+The editor lets you change the lists and the price range once, then edit each
+finish's artwork, thickness, availability and price weight independently.
 
-The editor supports up to 1000 choices, with search and expandable editors. Only
-opened choices load their finish previews. Larger catalogs fail with an explicit
-message instead of silently dropping choices. Identical visual samples share a
-carousel preview regardless of quantity/design-count variants.
+With only a price range, AutoFill creates an editable estimate based on printed
+area, copies per design, design count and finish weight. Glossy/matte default to
+weight 1; holographic/glitter default to 1.25. The smallest basic order matches the
+minimum (€20 in the example); the largest premium order matches the maximum
+(€630). Review these estimates before publishing. No price evidence means blank
+prices, not a free offer. These are draft assumptions, not extracted exact prices.
+
+For a draft already containing separate combinations, **Group by finish and enable
+size & quantity options** reduces it to finish variants and takes the option lists
+and price bounds from those rows. Review order limits and samples after grouping;
+existing requests keep their original snapshots. Save and publish when ready.
+Finish previews load only when their editor is opened.
 
 Missing sticker setup uses a 3 mm maximum border, 0.2 mm preview/parcel thickness,
 made-to-order availability, and wording that production time and shipping will be

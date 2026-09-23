@@ -87,12 +87,15 @@ envelope remain strict. The required prompt contract explains required empty
 strings and source-provided duration units even when an administrator has saved a
 custom pre-prompt. History retains the original answer alongside normalized data.
 
-Sticker extraction preserves all independent choices using `stickerOptions` arrays,
-then expands their Cartesian product locally (maximum 1000). This reduces repeated
-output without reducing catalog completeness. Exact priced offers are retained;
-missing combination prices can be interpolated within a supplied price range using
-relative printed area and quantity, without assumed finish/design surcharges. Draft
-warnings clearly identify those estimates. Missing price evidence stays missing.
+Sticker extraction returns independent `stickerOptions` lists and creates one
+variant per finish. Sizes, copies per design and design counts remain selectable
+options; they are never expanded into a Cartesian product of variants. Seven
+designs at quantity 200 means 1400 copies. The supplied price range anchors an
+editable interpolation over printed area × total copies × finish weight, with
+weights 1 for glossy/matte and 1.25 for holographic/glitter. The backend computes
+prices and validates selections; the browser uses the same formula with parity
+regressions. Captured request snapshots contain the resolved dimensions and price.
+Draft warnings identify estimates; missing price evidence stays missing.
 No automatic single-starter fallback remains. The required contract prioritizes
 complete useful information, including when an administrator has saved a custom
 pre-prompt. Editable production defaults still fill missing vinyl/material, border,

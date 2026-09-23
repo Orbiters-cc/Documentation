@@ -100,8 +100,12 @@ creator's photos in their configured order. Use previous/next or thumbnails to
 switch; photos are ordinary images. Uploaded customer artwork takes the first
 slide and replaces its matching sample. The asset banner fills its header card
 from edge to edge. The description appears below the showcase. Printing
-cards represent complete creator-configured combinations of size, finish, quantity
-and design count; the form does not invent combinations the creator cannot offer.
+cards represent finishes. Choose a finish, then a size, copies per design and
+number of designs from the creator's options. For example, 200 copies of each of
+7 designs totals 1,400 stickers. The receipt updates immediately using the creator's
+editable pricing rule; changing options preserves uploaded designs that still fit
+the selected count. The selected size also controls the uploaded artwork preview.
+Fixed printing offers continue to show their creator-defined package details.
 
 Sticker previews use a small idle tilt, never a full spin. Dragging resists rotation
 near the viewing limits, which keep the printed front visible. Arrow keys tilt,
