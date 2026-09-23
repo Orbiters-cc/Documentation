@@ -80,6 +80,12 @@ Resetting an MCB-tracked asset from standalone ReFit immediately updates an alre
 
 Creators configure avatar base data, version metadata, banners, and package files from the creator asset tools. Users only see versions allowed by their access scope.
 
+<alpha>
+
+For linked Blender projects, see [Sync avatar edits from Blender](mcb-blender-sync.md) for connection states, exports, and native mesh previews.
+
+</alpha>
+
 ## Connection Problems
 
 If the tool cannot connect:
