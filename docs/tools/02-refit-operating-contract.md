@@ -23,6 +23,27 @@ ReFit transfers clothing or accessory deformation from model A to model B and
 writes the result as non-destructive blendshapes on duplicated mesh assets. Source
 mesh assets are never modified.
 
+## Website installation guide
+
+The unlisted `/refit` page shows the ReFit logo, a particle title and a Beta badge.
+The normal Orbiters navbar remains visible, but has no link to this page. Search
+engines receive `noindex, nofollow`; the URL is public, not access-controlled.
+
+**Install** expands into a Dynamic Island guide:
+
+1. Add the Orbiters VPM repository in Creator Companion. The button opens VCC;
+   **Add it manually** exposes the repository URL and a copy action.
+2. Install **ReFit** from the Orbiters repository in your project's package list.
+3. Open the Unity project, right-click the target object in the **Hierarchy**, and
+   choose **ReFit**.
+4. Follow the instructions in the ReFit window.
+5. **Done!** Close the guide with **Finish**.
+
+The guide works without signing into Orbiters. Steps are advanced manually; the
+website does not detect or confirm installation in Unity. Back, Close, Escape and
+clicking outside remain available. Reduced motion uses a static title and immediate
+step changes. Particle animation pauses when hidden or outside the viewport.
+
 ## Output
 
 - Generated meshes live under `Assets/ReFit/<asset name>/` and receive a `refit`
