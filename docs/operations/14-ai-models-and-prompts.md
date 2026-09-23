@@ -87,6 +87,17 @@ envelope remain strict. The required prompt contract explains required empty
 strings and source-provided duration units even when an administrator has saved a
 custom pre-prompt. History retains the original answer alongside normalized data.
 
+Sticker extraction then adds editable starter defaults for missing setup values:
+3 mm border, 0.2 mm preview/parcel thickness, vinyl, made-to-order availability,
+and production/shipping confirmation wording. Starter size, quantity, design count
+and finish default to 50 mm, 50 copies, one design and glossy only when absent.
+The required prompt instead chooses the smallest source-provided options when
+available and uses the advertised minimum price for a single assumed starter
+combination. It preserves the remaining options and price range in the description.
+Default application is reported in draft warnings. It never manufactures a price,
+overwrites supplied values, or fills seller/legal information. Existing sticker
+configuration is untouched when the model omits the sticker section entirely.
+
 Account export includes attributable retained interactions. Account closure removes
 personal content and attribution while preserving anonymous usage totals; an answer
 arriving after erasure cannot restore the removed content.

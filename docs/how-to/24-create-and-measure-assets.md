@@ -23,9 +23,30 @@ The search field at the top of Creator finds accessible sections and settings by
 2. Choose **General**, **Custom base**, **Commission**, or **Stickers**. **Copy from** reuses an asset you own as a starting point.
 3. Fill the form yourself, or use **AutoFill**: paste your post, notes or public store links into **Ideas and source text**, then add only the images you want analyzed with **Add AI source files**.
 4. Select **Send to LLM and auto-fill**. The source text and resized images selected there go to the administrator's configured AI provider. The separate **Media library** holds asset images and GLB previews without sending them to AutoFill; you can explicitly select **Use in AutoFill** on an existing image. A draft accepts up to 20 files of 20 MB each.
-5. Supported details are applied to the private draft automatically. Newly filled fields are purple until you edit them, and the AutoFill panel shows what was added and any warnings. Review the result before publishing; unknown information remains blank.
+5. Supported details are applied to the private draft automatically. Newly filled fields are purple until you edit them, and the AutoFill panel shows what was added and any warnings. Review the result before publishing; sticker starter defaults are identified separately from extracted facts.
 6. Use the dedicated **Thumbnail** and **Banner** fields or the Media library to choose public media. Use **Product photos → Add product photos** to upload up to eight images at once. Move them earlier/later to set their page order, or remove them from the gallery without deleting the library files. Choose a GLB preview in the Media library. Only the selected media becomes public.
 7. **Save draft** keeps incomplete work private. **Verify and post** checks the fields required by the chosen template and opens the published page.
+
+Save and publish actions float at the bottom of the editor and stay visible while
+you scroll. Editing an existing asset uses **Publish changes**. If publishing is
+rejected, the action bar shows the issue; **Show issue** moves focus to its full
+message. Your draft remains available for correction.
+
+For stickers, AutoFill prepares a starter offer from the smallest advertised size,
+quantity and design count, the first listed finish and the advertised starting
+price when the source gives only an overall price range. That combination is an
+editable assumption. Other advertised options and the full range remain in the
+description; their individual prices are not invented. For example, 5/7/10 cm,
+50/100/200 copies, 1–7 designs and €20–630 produces a suggested 5 cm, 50-copy,
+one-design offer at €20, ready for your review.
+
+Missing sticker setup uses a 3 mm maximum border, 0.2 mm preview/parcel thickness,
+made-to-order availability, and wording that production time and shipping will be
+confirmed before ordering. Missing starter size/quantity/design count/finish use
+50 mm, 50 copies, one design and glossy. Material defaults to vinyl. Supplied
+values take priority, and AutoFill lists the defaults it used. A submitted image
+can supply the thumbnail when one has not been selected. Missing prices, seller
+details and terms are still required; AutoFill never invents them.
 
 AutoFill shows live server stages: waiting for a worker, preparing images, reading sources, waiting for the AI response, and checking/applying fields. Expand or collapse the activity list; the clock shows elapsed time, not a completion percentage. A connection interruption is shown separately from a failed job. Edits you make while it runs take priority over suggestions.
 
