@@ -8,7 +8,7 @@ id: orbiters.how-to.customize-homepage
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-20
+lastVerified: 2026-09-23
 ---
 
 # Customize Your Homepage
@@ -74,6 +74,7 @@ without dragging; the catalog stays open so you can add another widget.
 | Age verification | 1 × 1 | Your current verification status |
 | Gallery image | 1 × 1, 2 × 1, 1 × 2, 2 × 2, 3 × 1 or 3 × 2 | A selected image; open it for a larger preview |
 | Discover an asset | 1 × 1 | A selected asset |
+| Sticker samples | 1 × 1, 2 × 1, 2 × 2 or 3 × 2 | A sticker commission's published sample finishes, shown in 3D with a link to the asset |
 | From the blog | 2 × 1, 2 × 2 or 3 × 2 | A selected older post |
 | Documentation update | 1 × 1, 2 × 1, 2 × 2, 3 × 1 | A selected guide with its latest recorded change date |
 | Creator card | 2 × 1 or 1 × 1 | A selected creator and profile link |
@@ -81,7 +82,7 @@ without dragging; the catalog stays open so you can add another widget.
 | Coming event | 2 × 1 | One selected coming event and its local date/time |
 | Commissions in progress | 2 × 1 or 1 × 1 | Your active requests and progress |
 
-Gallery images, assets, older posts, documentation pages, creators and individual events can each have
+Gallery images, assets, sticker commissions, older posts, documentation pages, creators and individual events can each have
 multiple pins with different content. The same selection can only be pinned once.
 You can keep up to 64 pinned widgets. The catalog explains when a widget requires
 sign-in or a configured default board.

@@ -8,24 +8,28 @@ id: orbiters.how-to.create-and-measure-assets
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-22
+lastVerified: 2026-09-23
 ---
 
 # Create, publish and measure an asset
 
 This guide covers the creator tools prepared for the next release. Availability depends on the deployed website version.
 
+The search field at the top of Creator finds accessible sections and settings by name or related terms. Choose a result to open and highlight its target without activating the setting. Creator Preferences includes Shipping for sticker parcel origins and dimensions.
+
 ## Start with what you have
 
 1. Open **Creator → Assets → + Create**.
 2. Choose **General**, **Custom base**, **Commission**, or **Stickers**. **Copy from** reuses an asset you own as a starting point.
-3. Fill the form and choose a currency from the dropdown, or paste your post, notes and public store links into **Drop your ideas here**, under **AutoFill**. Add PNG, JPEG, WebP images or an embedded GLB preview, up to 20 MB each and 20 files per draft.
-4. Select **Send to LLM and auto-fill**. Text and resized images are sent to the administrator's configured AI provider. GLB files are previews, not AI image inputs.
+3. Fill the form and choose a currency. If you use **AutoFill**, paste your post, notes or public store links into **Ideas and source text**, then add only the images you want analyzed with **Add AI source files**. You can instead skip AutoFill entirely.
+4. Select **Send to LLM and auto-fill**. The source text and resized images selected there go to the administrator's configured AI provider. The separate **Media library** holds asset images and GLB previews without sending them to AutoFill; you can explicitly select **Use in AutoFill** on an existing image. A draft accepts up to 20 files of 20 MB each.
 5. Check the suggestions and warnings. **Use this** applies one field; **Undo** restores its previous value. Unknown information stays blank or missing. Conflicting measurements appear as warnings.
-6. Use the dedicated **Thumbnail** and **Banner** fields to upload an image or select one already added to the draft. Select gallery images and a 3D preview below AutoFill. Only the selected media becomes public.
+6. Use the dedicated **Thumbnail** and **Banner** fields or the Media library to choose public media. Select gallery images and a 3D preview there. Only the selected media becomes public.
 7. **Save draft** keeps incomplete work private. **Verify and post** checks the fields required by the chosen template and opens the published page.
 
 You can keep up to 100 active drafts. Publishing a commission or sticker service also requires saved seller details and terms. A custom base needs an original avatar base. The editor does not invent prices, currency or licensing terms.
+
+In **Account → Overview → AI-assisted features**, you can turn off AI requests for your account. AutoFill is then hidden, and missing MCB version titles or release notes must be entered manually. You can turn AI back on later; queued requests check the preference again before calling a provider.
 
 Published product pages and their shop buttons are visible without signing in.
 Signing in refreshes your ownership on the same page; signing out restores the

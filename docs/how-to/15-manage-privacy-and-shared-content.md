@@ -8,7 +8,7 @@ id: orbiters.how-to.privacy-and-shared-content
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-22
+lastVerified: 2026-09-23
 ---
 
 # Manage Privacy and Shared Content
@@ -20,6 +20,8 @@ Open **Account → Privacy & data** to download your information, make a privacy
 request, review reports or close your account. Each control expands inside the
 page. Downloads are prepared in the background, so you can continue using Orbiters.
 On a phone, choose **Privacy & data** from the compact **Account section** selector.
+
+In **Account → Overview → AI-assisted features**, turn AI off to prevent new AutoFill, automatic MCB version writing and other account AI calls. You can still complete those forms manually. Source prompts for AutoFill are not kept in AI history; model responses are retained for administrator-only troubleshooting and removed on account closure.
 
 ## Choose by the result you want
 
