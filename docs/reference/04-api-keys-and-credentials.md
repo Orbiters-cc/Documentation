@@ -78,13 +78,12 @@ connection status responses.
 
 ## Setup Guides in the Website
 
-The **API Keys** tabs in Creator and Admin expose a short setup guide as soon as a
-provider is selected. Each guide appears before the credential fields and contains
+The **API Keys** tabs in Creator and Admin show an icon and service-name grid. Selecting a service opens its credential form and a short setup guide. Each guide appears before the credential fields and contains
 at least three numbered steps plus a link to the provider's official setup
 documentation.
 The creator view shows creator-owned credential types; the admin view also shows
 global and administrator-only types such as R2, the two configurable GitHub
-credentials, the Trello application, and Stripe platform payments.
+credentials, the Trello application, Stripe platform payments, and EasyPost shipping.
 
 The current guides cover every credential type that can be created from those tabs:
 
@@ -95,6 +94,8 @@ The current guides cover every credential type that can be created from those ta
   files domain.
 - **Gemini:** select the billing project in Google AI Studio, create the key, then
   record its project name and number with the credential.
+- **EasyPost:** create a production API key, save it globally for this environment,
+  then configure a creator shipping origin and parcel to obtain live carrier estimates.
 - **Gumroad:** create the Orbiters application, generate the connected-account
   access token, then save the application values and API URL.
 - **Jinxxy:** create a dedicated Creator API key, configure the Orbiters webhook,

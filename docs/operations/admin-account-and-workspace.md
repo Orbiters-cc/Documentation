@@ -28,7 +28,7 @@ network error can be retried; a revoked session requires signing in again.
 
 ## Find moderation and role settings
 
-- **Community → Website moderation** contains website member review, website
+- **Admin → Community moderation** contains website member review, website
   appeals, reports and privacy requests, filtered by existing staff permissions.
 - **Community → Appeals → Settings & reviewers** controls which roles can review
   the selected Discord server's appeals. These changes save immediately.

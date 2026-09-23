@@ -57,7 +57,7 @@ Section pages show their purpose, scope notes and cards for tools you can access
 Live operational data loads only when you open its tool. Opening the overview does
 not fetch every deployment, storage or backup panel.
 
-Website reports and appeals are now in **Community → Website moderation**.
+Website reports and appeals are in **Admin → Community moderation** for authorized staff.
 Role-to-asset mapping is in **Creator → Assets → Discord role assets**; appeal
 reviewer roles are in **Community → Appeals → Settings & reviewers**.
 Other individual tab links still open their tool. The former **Developer** link
