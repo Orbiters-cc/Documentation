@@ -62,6 +62,12 @@ Gemini requests. It reports request/error counts and provider-reported input,
 output, cached-input and total tokens. Missing or malformed historical usage is
 unavailable rather than invented. These are token totals, not billing estimates.
 
+**Token usage** compares input and output tokens by model. Its user picker is
+ordered by each user's reported total, and filtering recalculates the model
+comparison. All-users totals retain unattributed usage after account deletion;
+deleted users do not appear in the picker. Requests without provider token
+counts remain marked unknown rather than being estimated.
+
 **History** filters by feature, model and initiating user ID. Select a session to
 see its initiator and the pre-prompt used for each request. Another administrator
 continuing a playground session has their user ID recorded on that request.
@@ -70,7 +76,7 @@ account appears by Discord ID. Feature histories are read-only; use **Playground
 for new tests.
 
 Asset-import and promotion source text/images are not retained in AI history. The full model response is retained in the administrator-only session detail, including output that fails JSON or schema validation and the partial text returned at the token limit. The detail also shows the format issue or finish reason when available. Earlier requests whose output was not saved cannot be reconstructed. A model response may repeat information from the source, so treat this output as personal data and limit access accordingly.
-AutoFill requests use structured JSON output for Gemini and JSON mode for DeepSeek and Z.ai, followed by local schema validation. AutoFill allows a larger output budget than general requests to reduce truncated descriptions. A completed response with no supported listing fields shows an explicit warning rather than implying fields were filled.
+AutoFill requests use structured JSON output for Gemini and JSON mode for DeepSeek and Z.ai, followed by local schema validation. AutoFill allows a larger output budget than general requests to reduce truncated descriptions. Valid fields are applied to the private draft as soon as extraction finishes; edits made while extraction runs are not overwritten. The creator still reviews the draft before publishing. The default prompt interprets bare dollar prices as USD unless contradicted and maps ordered commission price ranges to slider options. Invalid or unsupported fields are not applied; a response with no applicable fields shows a warning.
 Account export includes attributable retained interactions. Account closure removes
 personal content and attribution while preserving anonymous usage totals; an answer
 arriving after erasure cannot restore the removed content.
