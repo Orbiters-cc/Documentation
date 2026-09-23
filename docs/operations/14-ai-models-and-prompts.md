@@ -80,6 +80,13 @@ AutoFill asset imports retain submitted source text, instructions, selected imag
 
 AutoFill streams model output and reports received tokens to the draft editor. Counts marked as estimates use streamed character length until provider usage is available. DeepSeek extraction disables thinking mode to avoid spending its output budget on reasoning for structured field extraction. The configured output limit still applies; a `length` or `MAX_TOKENS` finish exposes the partial answer and suggests shorter sources or an administrator-reviewed limit change. Sources are consumed when queued and are not reused automatically; failed requests require a new explicit submission.
 AutoFill requests use structured JSON output for Gemini and JSON mode for DeepSeek and Z.ai, followed by local schema validation. AutoFill uses a larger default output budget for compatible providers to reduce truncation; an explicit administrator output-token limit takes precedence. Valid fields are applied to the private draft as soon as extraction finishes; edits made while extraction runs are not overwritten. The creator still reviews the draft before publishing. The default prompt interprets bare dollar prices as USD unless contradicted and maps ordered commission price ranges to slider options. Invalid or unsupported fields are not applied; a response with no applicable fields shows a warning.
+Asset extraction normalizes presentation text before schema validation: null text
+becomes blank or absent, string lists become lines, and ambiguous non-text values
+are omitted with review warnings. Numeric fields, IDs, enums and the response
+envelope remain strict. The required prompt contract explains required empty
+strings and source-provided duration units even when an administrator has saved a
+custom pre-prompt. History retains the original answer alongside normalized data.
+
 Account export includes attributable retained interactions. Account closure removes
 personal content and attribution while preserving anonymous usage totals; an answer
 arriving after erasure cannot restore the removed content.

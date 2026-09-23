@@ -43,6 +43,12 @@ reasons. These records are available to you and authorized AI administrators. Ol
 redacted responses cannot be recovered. After a failure, add the sources you want to
 retry; failed requests are not automatically sent to the provider again.
 
+Minor text-format mistakes do not reject otherwise valid AutoFill results. Unknown
+text returned as `null` stays blank, and lists of text lines are joined. Ambiguous
+numbers or objects in text fields are left blank with a review warning; AutoFill
+does not guess duration units. Prices, measurements, image IDs and choice values
+still require their correct types. Request details preserve the original response.
+
 You can keep up to 100 active drafts. Publishing a commission or sticker service also requires saved seller details and terms. A custom base needs an original avatar base. AutoFill can interpret an unqualified `$` price as USD unless the source indicates another dollar currency; it does not invent absent prices, rights or links. For commissions, a simple-to-complex price range becomes a slider when the source supports one, while independent upgrades stay separate options. Variant and option amounts add to the base price.
 
 In **Account → Overview → AI-assisted features**, you can turn off AI requests for your account. AutoFill is then hidden, and missing MCB version titles or release notes must be entered manually. You can turn AI back on later; queued requests check the preference again before calling a provider.
