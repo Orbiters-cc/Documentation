@@ -29,6 +29,20 @@ The search field at the top of Creator finds accessible sections and settings by
 
 AutoFill shows live server stages: waiting for a worker, preparing images, reading sources, waiting for the AI response, and checking/applying fields. Expand or collapse the activity list; the clock shows elapsed time, not a completion percentage. A connection interruption is shown separately from a failed job. Edits you make while it runs take priority over suggestions.
 
+Each submission consumes its selected sources: the notes and AutoFill image selection
+clear after the request is queued, while uploaded files remain in your media library.
+Later requests send only newly entered notes or explicitly selected images, without
+including existing asset fields or automatically reusing the gallery.
+
+While the model streams its output, the connected activity steps show received output
+tokens. A `~` marks an estimate from streamed text; the provider's reported count
+replaces it when available. This is activity feedback, not a completion percentage.
+Open **Request & response details** to inspect the submitted text, image selection,
+instructions, output format and returned answer, including partial answers and failure
+reasons. These records are available to you and authorized AI administrators. Older
+redacted responses cannot be recovered. After a failure, add the sources you want to
+retry; failed requests are not automatically sent to the provider again.
+
 You can keep up to 100 active drafts. Publishing a commission or sticker service also requires saved seller details and terms. A custom base needs an original avatar base. AutoFill can interpret an unqualified `$` price as USD unless the source indicates another dollar currency; it does not invent absent prices, rights or links. For commissions, a simple-to-complex price range becomes a slider when the source supports one, while independent upgrades stay separate options. Variant and option amounts add to the base price.
 
 In **Account → Overview → AI-assisted features**, you can turn off AI requests for your account. AutoFill is then hidden, and missing MCB version titles or release notes must be entered manually. You can turn AI back on later; queued requests check the preference again before calling a provider.
