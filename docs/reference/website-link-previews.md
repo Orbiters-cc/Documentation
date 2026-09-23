@@ -36,6 +36,12 @@ file server will only serve the default HTML metadata, so it does not provide
 record-specific previews. `npm start` also injects route metadata through the
 development middleware.
 
+The client metadata component is `frontend/src/metadata/PageMetadata.jsx` and
+the route description data is `frontend/src/metadata/routeDescriptions.json`.
+Keep the component import's `.jsx` extension explicit: on a Windows bind mount,
+an extensionless import can resolve to a stale JSON path and prevent the
+development frontend from compiling.
+
 | Setting | Purpose |
 | --- | --- |
 | `PORT` | Frontend listener, default 3000 in its container; use an unused alternative locally |
