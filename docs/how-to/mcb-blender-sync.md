@@ -42,6 +42,14 @@ With the advanced Blender link enabled, each export is converted into persistent
 
 The original target FBX remains unchanged. MCB also retains the external export for creator submission. Repeated exports update the preview; earlier generated mesh assets remain available for Undo and existing scene references. Syncing a preview does not publish a version.
 
+## Optional Avatar definition
+
+**Custom Base Avatar (Transformed, Optional)** is required if you modified the armature. For mesh-only changes, leave this field empty to keep using the original FBX Avatar definition.
+
+**Generate** accepts either an imported custom FBX or the existing **External Blender FBX** export. The generated humanoid Avatar is saved as a separate Unity asset and assigned to the avatar's Animator. **Update** refreshes that generated asset while preserving its reference. A manually assigned original Avatar definition is not overwritten.
+
+For an external Blender export, **Apply** assigns the selected Avatar definition to the scene Animator without replacing the original FBX or its imported Avatar definition. The external FBX is imported temporarily for generation; the saved Avatar remains valid after that temporary import is removed.
+
 ## If the body does not update
 
 Keep the intended avatar scene open, reconnect the two tools, and export the body again. Read any MCB sync error in the Unity Console. Missing renderer mappings or unresolved skin bones must be corrected before applying the export; MCB reports those failures rather than claiming an unchanged avatar was updated.
