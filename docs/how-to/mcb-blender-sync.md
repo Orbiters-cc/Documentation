@@ -42,6 +42,16 @@ With the advanced Blender link enabled, each export is converted into persistent
 
 The original target FBX remains unchanged. MCB also retains the external export for creator submission. Repeated exports update the preview; earlier generated mesh assets remain available for Undo and existing scene references. Syncing a preview does not publish a version.
 
+## Choose which models belong in a version
+
+A row with no custom FBX, external Blender FBX, or custom Avatar is unchanged and is skipped by **Build Version**. Use **Use original** to clear all three assignments for that model. This excludes its changes from the version; it does not delete the Blender export file.
+
+A full Blender export can populate several model rows even when you intended to change only the body. Leave the body export assigned and choose **Use original** on unchanged accessory rows. A populated external path counts as a supplied replacement; an empty imported-FBX field does not cancel it.
+
+MCB matches incoming exports to the target FBX path and preserves those associations when detection or asset selection reorders the source list. A supplied replacement still needs the mapped skinned meshes and skin bindings. A static hair export is not a valid replacement for a skinned hair renderer: exclude it when unchanged, or correct its Blender export when intentionally modified.
+
+An empty optional Avatar field stays empty during packaging; **Build Version** does not generate an Avatar replacement automatically.
+
 ## Optional Avatar definition
 
 **Custom Base Avatar (Transformed, Optional)** is required if you modified the armature. For mesh-only changes, leave this field empty to keep using the original FBX Avatar definition.
