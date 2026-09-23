@@ -62,11 +62,12 @@ Gemini requests. It reports request/error counts and provider-reported input,
 output, cached-input and total tokens. Missing or malformed historical usage is
 unavailable rather than invented. These are token totals, not billing estimates.
 
-**Token usage** compares input and output tokens by model. Its user picker is
-ordered by each user's reported total, and filtering recalculates the model
-comparison. All-users totals retain unattributed usage after account deletion;
-deleted users do not appear in the picker. Requests without provider token
-counts remain marked unknown rather than being estimated.
+The token graph in **Features & usage** plots daily provider-reported totals by
+model over 30 days, 90 days or one year. Filter it by feature and by user; the
+user picker is ordered by each user's reported total. All-users totals retain
+unattributed usage after account deletion; deleted users do not appear in the
+picker. The graph counts successful responses in the selected period and shows
+how many lack provider token counts. It does not estimate missing usage or cost.
 
 **History** filters by feature, model and initiating user ID. Select a session to
 see its initiator and the pre-prompt used for each request. Another administrator
