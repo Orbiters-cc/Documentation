@@ -8,7 +8,7 @@ id: orbiters.how-to.create-and-measure-assets
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-23
+lastVerified: 2026-09-24
 ---
 
 # Create, publish and measure an asset
@@ -16,6 +16,24 @@ lastVerified: 2026-09-23
 This guide covers the creator tools prepared for the next release. Availability depends on the deployed website version.
 
 The search field at the top of Creator finds accessible sections and settings by name or related terms. Choose a result to open and highlight its target without activating the setting. Creator Preferences includes Shipping for sticker parcel origins and dimensions.
+
+## Commission visibility and announcements
+
+The Commission template offers the same **Public on Assets**, **Accept requests**
+and **Announce your commission** choices as **Commissions → New commission
+asset**. Public visibility and accepting requests are independent: you can keep a
+public form visible while requests are closed. Turn off public visibility to keep
+it out of the public listing; announcements require a public form.
+
+Connect Discord or Telegram channels, or connect an X/Bluesky publishing account
+and select **Use X for commissions** or **Use Bluesky for commissions**. Select the
+announcement destinations before publishing. Social announcements include the
+commission name, starting price, public form link and up to four preview images.
+Replies on X and Bluesky stay on those services.
+
+Seller information must be saved before publishing a public commission. The save
+action explains missing country selection or seller-term confirmation. Editing
+seller details requires confirming the reviewed information again.
 
 ## Start with what you have
 

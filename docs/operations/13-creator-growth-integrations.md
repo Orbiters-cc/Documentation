@@ -8,7 +8,7 @@ id: orbiters.operations.creator-growth-integrations
 domain: website
 type: runbook
 owner: orbiters-platform
-lastVerified: 2026-09-22
+lastVerified: 2026-09-24
 ---
 
 # Configure creator-growth integrations
@@ -20,7 +20,7 @@ The creator-growth implementation has local fixture validation. This page does n
 | Feature | Configuration | Required setup |
 | --- | --- | --- |
 | AI asset importer and promotion classifier | Global Gemini, DeepSeek or Z.ai credentials; **Admin → AI** routing and image limits | Longest image edge 256–4096 px, default 1280; 1–12 images, default 8. Proportional downscaling preserves aspect ratio and never enlarges smaller images. |
-| Twitch | `TWITCH_APP` | Client ID/secret, registered HTTPS website `/creator?tab=streams` callback, public API `/creator-streams/twitch/webhook`, alphanumeric webhook secret of 32–100 characters. |
+| Twitch | `TWITCH_APP` | Client ID/secret, registered HTTPS website `/creator?tab=streams` callback, public API `/creator-streams/twitch/webhook`, random printable ASCII webhook secret (10–100 characters accepted; 32–100 recommended, punctuation supported). |
 | X | `X_PUBLISH_APP` | `CLIENT_ID`, `CLIENT_SECRET`, `REDIRECT_URI` pointing to the HTTPS website `/creator?tab=posts`. Enable OAuth 2.0 with tweet read/write, user read, media write and offline access. Provider account access and usage costs apply. |
 | TikTok | `TIKTOK_PUBLISH_APP` | Same three field names; `CLIENT_ID` is TikTok's client key. Register the website `/creator?tab=posts` callback. Enable `user.info.basic` and `video.publish`. Verify the public API media URL domain for pull-from-URL photo delivery. Public Direct Post requires the provider's approval. |
 | Bluesky | Creator app-password connection | Currently supports Bluesky-hosted personal data servers. No shared application credential is required. |

@@ -8,7 +8,7 @@ id: orbiters.development.homepage-widgets
 domain: website
 type: reference
 owner: orbiters-product
-lastVerified: 2026-09-10
+lastVerified: 2026-09-24
 ---
 
 # Homepage Widgets
@@ -280,3 +280,30 @@ authentication, preference reads and writes on loopback ports above 4200.
 Preview presentation crossfades follow actual bounds progress between 20% and 65% of expansion, reversing during collapse. The source card presentation remains beneath the transition. Gallery windows retain their final photo-and-metadata arrangement while opening; only the decoded image crossfades. During closing, the window crossfades into the exact thumbnail crop before reaching the widget. The source presentation uses the widget heading styles and container sizing so typography remains identical at the handoff.
 
 Saved preferences are normalized through the current widget registry when they load and after a save response. If a size option has been removed, its stale `size` field is dropped and the widget uses its current default before any later layout update is sent. Valid sizes and content identities remain unchanged. This prevents one obsolete descriptor from making every subsequent homepage save fail validation.
+
+## Board pins and image gestures
+
+Board descriptors carry a numeric-string `entityId`; each selected board has its
+own widget identity. The owned-board source controls availability without requiring
+a commission profile. The default-board descriptor resolves the configured board,
+or the first owned board when none is configured. Pin-to-top saves through the
+same revision-checked homepage endpoint. It preserves other pins and their order.
+
+The dock's filtered glass is an inert, pointer-transparent sibling underneath its
+interactive layers. Applying the SVG backdrop filter to the interactive ancestor
+can disrupt Chromium hit testing. Verify the ordinary Add widget click, selection
+and close buttons using a production build.
+
+`useImageZoom` captures pointers only over the opened image. Pinch changes its
+motion values from 1 to 5, focal-point panning is clamped to the image viewport,
+and `touch-action: none` prevents browser page zoom there. The rest of the page
+retains normal touch behavior. Resize resets zoom; pointer cancellation removes
+the corresponding touch. The image keeps its loaded thumbnail during full-image
+decode. The dialog and its clipped layers retain rounded or supported squircle
+corners.
+
+Run `frontend/scripts/test-general-improvements.cjs` against a fresh production
+build for headless Chromium checks. Its API, media and identity fixtures stay
+local; it does not post to external accounts. It checks dock hit targets,
+unavailable widgets, independent boards, direct post entry, gallery reuse,
+mobile pinch bounds and modal cleanup with reduced motion.

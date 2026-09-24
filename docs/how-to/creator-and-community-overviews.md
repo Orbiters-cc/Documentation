@@ -8,7 +8,7 @@ id: orbiters.website.overviews
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-20
+lastVerified: 2026-09-24
 ---
 
 # Use the creator and community overviews
@@ -20,6 +20,7 @@ to existing tools; the detailed tabs remain available in the page navigation.
 
 Open **Creator → Overview** for:
 
+- Your default commission board and incoming column, with **Set as default commission board** and **Pin board to top of homepage** after saving. Other homepage boards can be pinned independently.
 - Revenue from the last 30 days, with individual currencies or an explicitly
   labelled converted estimate. Incomplete synchronization and unknown amounts are
   identified. Open Revenues for the full report.

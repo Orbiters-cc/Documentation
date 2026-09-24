@@ -8,7 +8,7 @@ id: orbiters.how-to.customize-homepage
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-23
+lastVerified: 2026-09-24
 ---
 
 # Customize Your Homepage
@@ -25,8 +25,7 @@ touch screens. The outline pin becomes a filled pin when saved. In customization
 confirmation if you change your mind.
 
 Your initial pins are **Sona catalog**, **Latest blog post** and **Age verification**.
-Creators with a configured default commission board also start with **Commission
-board**. You can remove any of these. Removing all pins keeps the homepage empty
+Creators with a configured default commission board also start with **Board**. You can remove any of these. Removing all pins keeps the homepage empty
 of pins; it does not restore the defaults.
 
 ## Arrange your widgets
@@ -68,7 +67,7 @@ without dragging; the catalog stays open so you can add another widget.
 | Widget | Width × height in cells | Content |
 | --- | --- | --- |
 | MCB | 1 × 1, 2 × 1 or 2 × 2 | My Custom Base artwork and a **Try MCB** link to the interactive presentation |
-| Commission board | Full width × 3 | Your configured board, with its normal task controls |
+| Board | Full width × 3 | Any board you own, with its normal task controls |
 | Sona catalog | 1 × 1, 1 × 2, 2 × 1 or 2 × 2 | Your characters and reference images |
 | Latest blog post | 2 × 1, 2 × 2 or 3 × 2 | Automatically follows the newest published post |
 | Age verification | 1 × 1 | Your current verification status |
@@ -82,10 +81,20 @@ without dragging; the catalog stays open so you can add another widget.
 | Coming event | 2 × 1 | One selected coming event and its local date/time |
 | Commissions in progress | 2 × 1 or 1 × 1 | Your active requests and progress |
 
-Gallery images, assets, sticker commissions, older posts, documentation pages, creators and individual events can each have
+Boards, gallery images, assets, sticker commissions, older posts, documentation pages, creators and individual events can each have
 multiple pins with different content. The same selection can only be pinned once.
-You can keep up to 64 pinned widgets. The catalog explains when a widget requires
-sign-in or a configured default board.
+You can keep up to 64 pinned widgets. Unavailable widgets are dimmed in the catalog and excluded from Highlights. Creator
+and community onboarding widgets become unavailable after you complete those steps.
+
+A **Board** widget requires at least one board you own, without requiring creator
+status or a default commission board. Select a board in the catalog and add it;
+repeat with another board for independent widgets. Each widget keeps its selected
+board after saving. Switching to a board already pinned asks you to choose another.
+
+In **Creator → Overview** or **Commissions**, choose the default commission board
+and incoming column. Once saved, **Pin board to top of homepage** adds or moves
+that board ahead of your other pins. The default routes incoming commissions;
+other pinned boards remain independent.
 
 **MCB** also appears in the discovery feed for visitors and signed-in users.
 Search for **MCB** or **My Custom Base** in the catalog to add it. It can be pinned
@@ -132,6 +141,11 @@ Select an image to expand its card into a larger preview with the same gentle sp
 The expanded preview fits the image's proportions and shows the same author, posted date, reaction count and image position as the gallery viewer, including **Report a problem**. Reporting does not require leaving the preview. The widget thumbnail stays visible while the full image loads, then gently fades into the sharper version. If that image cannot load, the thumbnail remains available.
 
 Feed images initially use the closest available widget proportions: portrait pictures favor tall tiles, while wide pictures favor horizontal tiles. Near the end, the feed can adjust the order and supported sizes of new widgets to reduce empty space. Pictures already on screen stay in place when more load, and pinned pictures keep your chosen size. When resizing, the crop crossfades to the nearest layout during the drag, before you release the pointer. Article and guide layouts overlap during their fade so the card does not go blank between sizes.
+
+Pinch inside the opened photo to zoom between its fitted size and 5×, then drag
+to pan within the image. This does not zoom the surrounding page. Double-click
+also toggles zoom. **Reset zoom** returns to the fitted image. Keyboard users can
+focus the image and use **+** to zoom or **0**/**−** to reset.
 
 ## Preview creators, assets, articles and guides
 
@@ -190,12 +204,12 @@ When available widget sizes change after an update, a saved widget that used a r
 ## Post without leaving Home
 
 Select **+ Post** beside **Customize**. The button expands into a composer with
-three destinations:
+the actions your account can use. If only one is available, it opens directly:
 
 - **Orbiters blog** uses your existing blog-writing permission and supports drafts
   and publication.
 - **Socials** uses your connected creator accounts and the same scheduling and
-  delivery history as **Creator → Posts**. Enable creator tools first if needed.
+  delivery history as **Creator → Posts**. It is available with creator tools.
 - **Documentation** is available to administrators and developers once its
   dedicated GitHub credential is configured. Enter a title, page address,
   documentation type, audience, release stage and Markdown. The verification date
