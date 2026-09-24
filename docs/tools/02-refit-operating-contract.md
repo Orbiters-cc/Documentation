@@ -29,7 +29,8 @@ The unlisted `/refit` page shows the ReFit logo and title with a shared particle
 The normal Orbiters navbar remains visible, but has no link to this page. Search
 engines receive `noindex, nofollow`; the URL is public, not access-controlled.
 
-**Install** and **Next** use black backgrounds with white text. The guide uses the same installer component, controls, typography
+**Install** and **Next** are blue with white text. The Install trigger is transparent
+over the single animated island surface, avoiding overlapping colored layers. The guide uses the same installer component, controls, typography
 and transitions as `/my-custom-base`, with these ReFit steps:
 
 1. Add the Orbiters VPM repository in Creator Companion. The button opens VCC.
