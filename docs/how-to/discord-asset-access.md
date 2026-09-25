@@ -32,17 +32,24 @@ roles cannot be assigned through asset synchronization.
 ## Add a rule
 
 1. Open the asset's **Configuration → Access → Discord role access**.
-2. Select a Discord server and a named role. If the name is missing, enter its
-   **Discord role ID** and **Role name**, then choose **Save role name**.
+2. Search for the **Ownership Discord server**, then choose its named ownership
+   role. Under **Add discord role to list**, enter an unknown role's ID and matching
+   name before selecting it.
 3. Choose **Public**, **Beta** or **Alpha**. Alpha includes Beta and Public; Beta
    includes Public.
-4. Choose the direction and select **Add access rule**.
+4. Search for your **Destination Discord server**, then choose the **Asset
+   destination role** members receive there.
+5. Choose the direction and select **Add access rule**.
 
 | Direction | Result |
 | --- | --- |
-| Discord role → Asset access | A recorded role grants the selected scope. Orbiters also assigns the asset's associated role when configured. |
-| Asset access → Discord role | Independently held access at the selected scope grants the selected Discord role. |
-| Both directions | Either independently held role membership or access can drive the corresponding side. A role assigned by this sync cannot create its own continuing entitlement. |
+| Ownership role → Asset + destination role | The external ownership role grants the selected access type and the destination role. |
+| Also allow the destination role to grant asset access | A manually assigned destination role also grants that access type, without requiring the external ownership role. |
+
+For example, **Owns Rexouium** in Rexouria can grant Ultirex access and **💪ultirex**
+in Orbiters Hideout. With the second option, manually assigning **💪ultirex** also
+grants Ultirex access. Orbiters never assigns the external ownership role. A role
+assigned by this synchronization cannot keep its own entitlement alive.
 
 You can add different rules for different scopes, up to 30 active rules per asset.
 Remove a rule before changing its direction. Existing purchased and manual
@@ -64,16 +71,15 @@ assignment errors and the cleanup notice without changing the rules.
 1. Expand **Collect role names with the Chrome extension** in the role catalog.
 2. Download and extract **Orbiters Role Names**. Open `chrome://extensions`, enable
    **Developer mode**, select **Load unpacked**, and choose the extracted folder.
-3. Choose **Create extension connection** in Orbiters. Paste that code into the
-   extension, choose the matching Orbiters environment, and select **Connect and
-   collect role names**.
+3. Return to Orbiters while signed in, in the same browser. The extension connects
+   automatically. Its popup shows the connection and lets you pause collection.
 4. Browse `discord.com`: open server role settings or member profiles. The extension
    collects role ID/name pairs exposed by rendered role elements or role-list
    responses. It does not make additional Discord API requests.
 5. Return to Orbiters and choose **Refresh roles**. Only named roles are selectable.
 
-Connections last one hour, expire when Chrome closes, and can be ended with
-**Disconnect**. Codes only authorize saving role labels in servers available to
+Connections last one hour, renew while Orbiters is open, expire when Chrome closes,
+and can be ended with **Disconnect**. Scoped credentials only authorize saving role labels in servers available to
 your Orbiters account. They cannot authenticate other Orbiters APIs. The extension
 does not read messages, Discord credentials or network authorization headers.
 
