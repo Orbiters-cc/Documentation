@@ -32,8 +32,9 @@ release step; a passing local test or GitHub Pages workflow does not establish i
    For production, prefer the guarded **Bootstrap Orbiters VPM production**
    workflow. Supply the exact deployed application SHA and both reviewed file
    hashes. It refuses a different checkout, requires database readiness, resolves
-   exactly one active owner with a connected Creator VPM GitHub identity, imports
-   through temporary container files, and compares every public package/version
+   exactly one active owner using a connected Creator VPM identity or the owner's
+   existing persisted GitHub ID/login, imports through temporary container files,
+   and compares every public package/version
    URL and checksum after the transaction. Its sanitized evidence output includes
    the deployed frontend/backend SHAs and latest structured deployment event.
 
