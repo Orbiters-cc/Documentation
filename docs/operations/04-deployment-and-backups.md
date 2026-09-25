@@ -121,6 +121,12 @@ not complete or upload, pass its basename through the deployment workflow's
 `discard_incomplete_backup` input. The workflow rejects paths and unexpected names,
 and refuses to continue when the named file is absent.
 
+After recording the encrypted archive checksum, production deployment verifies the
+matching R2 object and releases the local copy before building images. Unverified
+archives remain local and stop the deployment. The preflight also releases Docker's
+disposable build cache after producing the tagged backend image, leaving room for
+the cloned-database checks without removing images referenced by containers.
+
 If public health checks fail, maintenance is restored. A failure after checkout
 leaves maintenance active for investigation; never restart old code against a
 migrated database without checking the recovery procedure.
