@@ -8,7 +8,7 @@ id: orbiters.operations.creator-growth-integrations
 domain: website
 type: runbook
 owner: orbiters-platform
-lastVerified: 2026-09-24
+lastVerified: 2026-09-25
 ---
 
 # Configure creator-growth integrations
@@ -106,3 +106,21 @@ Run backend tests with a fixture environment that cannot connect to developer or
 `creatorToolsUpgrade.test.js` is opt-in with `CREATOR_TOOLS_UPGRADE_TEST=true`. It requires a disposable PostgreSQL service on loopback with a port above 50000 and database `creator_tools_fixture`; it creates and drops random databases. It exercises fresh and populated upgrades twice, preserves existing rows, and verifies asset deletion keeps order snapshots while removing access references.
 
 The browser checks use local builds and provider fixtures. A live release must separately verify application credentials, OAuth redirects, webhook delivery and authorized test posts. Do not interpret fixture results as confirmation that external services accepted a production post.
+
+
+## Creator editor regression checks
+
+`creatorPersonalization.test.js` covers malformed and empty link URLs returning
+validation errors instead of uncaught URL exceptions. Public appearance reads also
+handle invalid stored links without crashing.
+
+`creatorExtractionSafety.test.js` verifies that AutoFill cannot change commission
+publication, acceptance or announcement destinations. Unsupported commission
+suggestions leave other valid fields usable.
+
+`commissionAnnouncements.test.js` covers creator-upload previews, general asset
+announcements, duplicate-send protection, hidden/moderated listings and disabled
+creator accounts. After provider permission verification, send admission locks and
+rechecks the account, asset and destination in the database transaction. Provider
+calls happen after the transaction; an already admitted request can still finish.
+These tests use deterministic model and provider fixtures, not live account posts.

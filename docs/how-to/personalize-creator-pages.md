@@ -8,7 +8,7 @@ id: orbiters.creator.personalization
 domain: website
 type: how-to
 owner: orbiters-platform
-lastVerified: 2026-09-24
+lastVerified: 2026-09-25
 ---
 
 # Personalize your creator pages
@@ -32,10 +32,14 @@ widgets and detail windows keep the Orbiters appearance.
 6. Choose a **Profile and asset font**: Solitreo, Caveat, Montserrat, Roboto Mono, Roboto Slab, Libre Baskerville, Cormorant Garamond or Amiri. **Orbiters default** uses the website font. Fonts load from Google Fonts when selected.
 7. Choose **Card corners**: Rounded, Squircle, Bevel, Rabbet or Sharp. Browser support determines the native corner rendering; bevel and rabbet have CSS clipping fallbacks, while squircle falls back to rounded corners.
 8. Add and arrange your profile links in **Your links**. Give each link a title and an HTTP/HTTPS URL; up to 20 links are supported, including services Orbiters does not integrate with.
-9. Choose **Save appearance**. Changes in the preview are private until saved.
+9. Choose **Save appearance** above the live preview, in the right-hand column on wide screens. Changes in the preview are private until saved.
 
 **Discard changes** returns to the saved appearance. **Reset to default** prepares
 the default colors, background, font and shape while preserving your links; choose **Save appearance** to publish the reset.
+
+An untouched empty link row is omitted when saving. A partially filled or invalid
+link must be completed or removed; your unsaved appearance remains available if
+validation fails. Only HTTP/HTTPS links without embedded credentials are accepted.
 
 **Your links** shows measured profile visits and clicks on each link over the last
 30 days. These are event counts, not unique visitors. Your own visits and visitors

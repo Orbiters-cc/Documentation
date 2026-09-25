@@ -8,7 +8,7 @@ id: orbiters.development.homepage-widgets
 domain: website
 type: reference
 owner: orbiters-product
-lastVerified: 2026-09-24
+lastVerified: 2026-09-25
 ---
 
 # Homepage Widgets
@@ -292,7 +292,10 @@ same revision-checked homepage endpoint. It preserves other pins and their order
 The dock's filtered glass is an inert, pointer-transparent sibling underneath its
 interactive layers. Applying the SVG backdrop filter to the interactive ancestor
 can disrupt Chromium hit testing. Verify the ordinary Add widget click, selection
-and close buttons using a production build.
+and close buttons using a production build. Keep `clip-path` on the glass layer
+itself: clipping its ancestor makes Chromium sample an isolated backdrop and
+removes the visible refraction. The browser regression compares displacement
+against a zero-strength filter over a checkerboard, then exercises normal clicks.
 
 `useImageZoom` captures pointers only over the opened image. Pinch changes its
 motion values from 1 to 5, focal-point panning is clamped to the image viewport,
@@ -306,4 +309,7 @@ Run `frontend/scripts/test-general-improvements.cjs` against a fresh production
 build for headless Chromium checks. Its API, media and identity fixtures stay
 local; it does not post to external accounts. It checks dock hit targets,
 unavailable widgets, independent boards, direct post entry, gallery reuse,
-mobile pinch bounds and modal cleanup with reduced motion.
+mobile pinch bounds and modal cleanup with reduced motion. It also checks
+transparent post-input hover styling, blank-link appearance saves, save controls
+above the preview, announcements across all asset templates, commission AutoFill
+and the overview section order.

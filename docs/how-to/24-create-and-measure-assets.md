@@ -8,7 +8,7 @@ id: orbiters.how-to.create-and-measure-assets
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-24
+lastVerified: 2026-09-25
 ---
 
 # Create, publish and measure an asset
@@ -17,19 +17,26 @@ This guide covers the creator tools prepared for the next release. Availability 
 
 The search field at the top of Creator finds accessible sections and settings by name or related terms. Choose a result to open and highlight its target without activating the setting. Creator Preferences includes Shipping for sticker parcel origins and dimensions.
 
-## Commission visibility and announcements
+## Visibility and announcements
 
-The Commission template offers the same **Public on Assets**, **Accept requests**
-and **Announce your commission** choices as **Commissions → New commission
-asset**. Public visibility and accepting requests are independent: you can keep a
-public form visible while requests are closed. Turn off public visibility to keep
-it out of the public listing; announcements require a public form.
+**Commissions → New commission asset** opens the shared private draft editor with
+the Commission template selected, including AutoFill, source files and draft saving.
+The Commission template offers **Public on Assets** and **Accept requests**.
+Public visibility and accepting requests are independent: you can keep a public
+form visible while requests are closed. AutoFill preserves both choices.
 
-Connect Discord or Telegram channels, or connect an X/Bluesky publishing account
-and select **Use X for commissions** or **Use Bluesky for commissions**. Select the
-announcement destinations before publishing. Social announcements include the
-commission name, starting price, public form link and up to four preview images.
-Replies on X and Bluesky stay on those services.
+Every template includes **Announce your commission**, including General, Custom
+base and Stickers. Choose destinations before publishing. Commission announcements
+require **Public on Assets**; other templates announce their published asset page.
+Saving a private draft never posts an announcement.
+
+Connect Discord or Telegram channels, or an X/Bluesky publishing account. Each
+selected channel receives one announcement per asset, with its public page link,
+price when provided, and selected public preview images. AutoFill source files
+are never announcement attachments. X and Bluesky can include up to four images;
+replies stay on those services. Discord/Telegram discussion synchronization applies
+to commission listings. Hidden or moderated listings and unavailable creator
+accounts are checked again before queued announcements are admitted for sending.
 
 Seller information must be saved before publishing a public commission. The save
 action explains missing country selection or seller-term confirmation. Editing

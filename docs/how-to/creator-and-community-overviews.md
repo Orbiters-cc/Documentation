@@ -8,7 +8,7 @@ id: orbiters.website.overviews
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-24
+lastVerified: 2026-09-25
 ---
 
 # Use the creator and community overviews
@@ -20,12 +20,14 @@ to existing tools; the detailed tabs remain available in the page navigation.
 
 Open **Creator → Overview** for:
 
-- Your default commission board and incoming column, with **Set as default commission board** and **Pin board to top of homepage** after saving. Other homepage boards can be pinned independently.
 - Revenue from the last 30 days, with individual currencies or an explicitly
   labelled converted estimate. Incomplete synchronization and unknown amounts are
   identified. Open Revenues for the full report.
 - Your latest assets and **Create**, which opens the same private draft editor as
   the Assets tab. Asset images use the same access rules as the full asset list.
+- **Your commission workspace**, directly below **Latest assets**, with the default
+  commission board and incoming column. Set the default, then use **Pin board to
+  top of homepage**. Other homepage boards can be pinned independently.
 - Your galleries with their five latest images. Use **+** to create a gallery,
   select its Discord room and layout, and choose whether to make it public.
   New galleries start private. Import earlier images from the Galleries tab.
