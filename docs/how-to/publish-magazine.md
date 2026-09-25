@@ -51,3 +51,9 @@ verified optional authentication for draft visibility and logged-in view counts.
 
 Direct links to the editor wait for your signed-in session and feature access
 to load.
+
+Blog thumbnails and magazine spreads accept decoded PNG, JPEG, WebP, AVIF or GIF
+images, up to the upload size limit and 64 megapixels. Orbiters rewrites their
+pixels and removes embedded metadata. SVG and damaged files are rejected rather
+than published unchanged. Magazine spreads retain full resolution; thumbnails
+are optimized for cards.

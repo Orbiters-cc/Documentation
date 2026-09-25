@@ -74,9 +74,16 @@ assignment errors and the cleanup notice without changing the rules.
 3. Return to Orbiters while signed in, in the same browser. The extension connects
    automatically. Its popup shows the connection and lets you pause collection.
 4. Browse `discord.com`: open server role settings or member profiles. The extension
-   collects role ID/name pairs exposed by rendered role elements or role-list
+   collects role IDs, names and colors exposed by rendered role/member elements or role-list
    responses. It does not make additional Discord API requests.
-5. Return to Orbiters and choose **Refresh roles**. Only named roles are selectable.
+5. The popup lists collected roles with **Queued**, **Saved** (a confirmation check),
+   or **Not sent**. It also identifies development connections. Use **Retry uploads**
+   after resolving an error.
+6. In the admin server view, **Server roles** refreshes every five seconds without
+   clearing manual edits. Unnamed roles appear as their IDs; names and color swatches
+   appear when collected. **Open in Discord** opens the selected server directly.
+   In asset configuration, choose **Refresh roles**; access-rule selectors require
+   named roles.
 
 Connections last one hour, renew while Orbiters is open, expire when Chrome closes,
 and can be ended with **Disconnect**. Scoped credentials only authorize saving role labels in servers available to
@@ -85,8 +92,8 @@ does not read messages, Discord credentials or network authorization headers.
 
 Discovery depends on what Discord exposes while you browse; it cannot enumerate
 every server role automatically. A recorded name is preserved. Administrators can
-correct it manually in **Admin → Discord servers → selected server → Known Discord
-roles**, including naming previously unnamed roles. The catalog supports search
+correct it manually in **Admin → Discord servers → selected server → Add discord
+role to list**, including naming previously unnamed roles. The catalog supports search
 and pagination.
 
 <audience include="dev">
@@ -98,7 +105,9 @@ and pagination.
 `POST /discord-role-catalog/extension/:guildId`. The extension token has a separate
 signing key derived from the application key, its own audience, account-version
 revocation checks and no general API authority. Extension imports only fill
-missing names, even for administrators.
+missing names and colors, even for administrators. ID-only observations are also
+recorded. The response confirms each persisted role; the extension never treats
+a failed or unconfirmed submission as saved.
 
 `AssetDiscordAccessRules` and `AssetDiscordAccessMembers` are separate tables with
 named unique indexes. Delivery receipts are written before Discord mutations so
@@ -118,8 +127,18 @@ assignment require a connected account and bot in the deployed environment.
 
 Administrators can open **Admin → Discord servers → Collect roles** to install
 or connect the same extension. The window opens from its button and returns
-focus there when closed. Extension 1.2 connects to an already-open Orbiters tab
+focus there when closed. Extension 1.3 connects to an already-open Orbiters tab
 when installed or when its popup opens. To update an unpacked installation,
 replace the extension folder with the new download and click **Reload** on
 `chrome://extensions`. **Connect installed extension** retries the website
 handshake; manual token copying is not required.
+
+The popup retains up to 2,000 observations per browser session and shows them in
+expandable groups. Pending uploads survive renewal for the same account. Logging
+out, disconnecting or changing accounts/environments clears local observations.
+Already saved roles remain in Orbiters. Installing an updated unpacked extension
+requires replacing its files and reloading it; an old local copy does not update
+when the website deploys.
+
+After reloading an updated unpacked extension, refresh open Discord tabs so they
+use the updated page observer.
