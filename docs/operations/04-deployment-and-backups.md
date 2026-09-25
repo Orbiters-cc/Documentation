@@ -8,7 +8,7 @@ id: orbiters.operations.deployment-and-backups
 domain: operations
 type: runbook
 owner: orbiters-operations
-lastVerified: 2026-09-21
+lastVerified: 2026-09-25
 ---
 
 # Deployment and Backups
@@ -99,6 +99,20 @@ The manual production workflow:
 8. Waits for `/readyz` to confirm an HTTP response and a working database query.
 9. Writes deployment status metadata.
 10. Restores the production Caddy config.
+
+The workflow creates one encrypted pre-deploy archive before changing the checkout
+and passes that exact archive into the deployment report and schema preflight. It
+does not create a second full archive after checkout. After R2 confirms an object
+exists, local retention keeps the newest archive in each backup directory and may
+remove older uploaded copies. An archive without a verified remote object remains
+on the host. This bounds local disk use while preserving the encrypted recovery
+copy and its recorded checksum.
+
+Before creating a new pre-deploy archive, the workflow runs the same remote-object
+verification against older local archives. If disk pressure interrupted an archive,
+the incomplete file is retained for investigation because no matching R2 object can
+be proven. Remove it only after confirming it is incomplete and another usable,
+uploaded backup exists.
 
 If public health checks fail, maintenance is restored. A failure after checkout
 leaves maintenance active for investigation; never restart old code against a
@@ -198,5 +212,9 @@ node scripts/orbiters-data.js hydrate --archive orbiters-prod.zip --env prod --f
 <audience include="dev">
 
 The production preflight runs backend database initialization with `EXIT_AFTER_DATABASE_INIT=true`, `SKIP_EXTERNAL_STARTUP=true`, `FAIL_FAST=true`, and `PORT=4200` against a cloned Postgres container. It should catch schema sync failures before touching the live database schema.
+
+The backend image switches Debian package sources to HTTPS and retries transient
+index downloads before Puppeteer installs Chrome dependencies. A package-signature
+failure still stops preflight; never bypass signature validation.
 
 </audience>
