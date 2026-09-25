@@ -110,9 +110,12 @@ copy and its recorded checksum.
 
 Before creating a new pre-deploy archive, the workflow runs the same remote-object
 verification against older local archives. If disk pressure interrupted an archive,
-the incomplete file is retained for investigation because no matching R2 object can
-be proven. Remove it only after confirming it is incomplete and another usable,
-uploaded backup exists.
+encryption leaves a `.partial` file rather than publishing the final archive name;
+the next verified cleanup removes those temporary files. Older releases may have
+left an incomplete final filename. After the failed run proves that exact file did
+not complete or upload, pass its basename through the deployment workflow's
+`discard_incomplete_backup` input. The workflow rejects paths and unexpected names,
+and refuses to continue when the named file is absent.
 
 If public health checks fail, maintenance is restored. A failure after checkout
 leaves maintenance active for investigation; never restart old code against a
