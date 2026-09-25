@@ -18,6 +18,9 @@ to existing tools; the detailed tabs remain available in the page navigation.
 
 ## Creator overview
 
+The **Public profile** button beside the overview title opens your public page
+and includes your avatar. The same shortcut is in the navbar avatar menu.
+
 Open **Creator → Overview** for:
 
 - Revenue from the last 30 days, with individual currencies or an explicitly

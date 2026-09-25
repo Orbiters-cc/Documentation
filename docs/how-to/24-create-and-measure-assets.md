@@ -52,6 +52,11 @@ seller details requires confirming the reviewed information again.
 6. Use the dedicated **Thumbnail** and **Banner** fields or the Media library to choose public media. Use **Product photos → Add product photos** to upload up to eight images at once. Move them earlier/later to set their page order, or remove them from the gallery without deleting the library files. Choose a GLB preview in the Media library. Only the selected media becomes public.
 7. **Save draft** keeps incomplete work private. **Verify and post** checks the fields required by the chosen template and opens the published page.
 
+**Back to asset types** saves the current private draft before returning to the
+template chooser. Choose another type to start a separate draft; your previous
+work remains in the draft list. This button is available when creating an asset,
+not when editing an already published asset.
+
 Save and publish actions float at the bottom of the editor and stay visible while
 you scroll. Editing an existing asset uses **Publish changes**. If publishing is
 rejected, the action bar shows the issue; **Show issue** moves focus to its full
@@ -71,18 +76,31 @@ minimum (€20 in the example); the largest premium order matches the maximum
 prices, not a free offer. These are draft assumptions, not extracted exact prices.
 
 For a draft already containing separate combinations, **Group by finish and enable
-size & quantity options** reduces it to finish variants and takes the option lists
+size & quantity options** opens a confirmation. Choose **Cancel grouping** to keep
+the original choices, or **Group printing choices** to apply the change. Grouping reduces it to finish variants and takes the option lists
 and price bounds from those rows. Review order limits and samples after grouping;
 existing requests keep their original snapshots. Save and publish when ready.
 Finish previews load only when their editor is opened.
 
 Missing sticker setup uses a 3 mm maximum border, 0.2 mm preview/parcel thickness,
-made-to-order availability, and wording that production time and shipping will be
-confirmed before ordering. Missing size/quantity/design count/finish use
+made-to-order availability, and wording that production time will be confirmed
+before printing when no saved estimate is available. Missing size/quantity/design count/finish use
 50 mm, 50 copies, one design and glossy. Material defaults to vinyl. Supplied
 values take priority, and AutoFill lists the defaults it used. A submitted image
 can supply the thumbnail when one has not been selected. Missing prices, seller
 details and terms are still required; AutoFill never invents them.
+
+**Seller information → Production / completion time** describes the time to make
+or complete the order, excluding shipping transit time for physical items. New
+sticker drafts prefill **Production time** from your saved seller estimate. Saving
+seller information within an empty sticker form fills that estimate without
+replacing a production time you already entered.
+
+**Shipping and delivery** is optional and disabled on a new blank form. Turn on
+**Add shipping and delivery information** to add terms; turning it off clears the
+text. Shipping details supplied by an existing listing or your AutoFill sources
+remain editable. Carrier estimates and customer delivery-address requirements
+are independent of this optional listing text.
 
 AutoFill shows live server stages: waiting for a worker, preparing images, reading sources, waiting for the AI response, and checking/applying fields. Expand or collapse the activity list; the clock shows elapsed time, not a completion percentage. A connection interruption is shown separately from a failed job. Edits you make while it runs take priority over suggestions.
 

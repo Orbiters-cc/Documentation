@@ -52,6 +52,9 @@ either an owned `assetId` or `create: { name, type }`. `DELETE
 Writes lock the integration, role and asset in a transaction. They recheck guild
 and asset ownership, use the existing `Asset.relatedRoleId` and role classification,
 and insert missing `UserAsset` rows in batches without replacing existing rows.
-No new database columns or schema migration are required.
+Assets that use explicit scoped Discord access rules skip this permanent-license
+backfill, including after those rules are removed. See
+[Configure Discord access to an asset](discord-asset-access.md).
+The older mapping itself adds no database columns.
 
 </audience>

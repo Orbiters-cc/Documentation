@@ -52,6 +52,9 @@ Public scope includes public releases. Beta adds beta releases. Alpha includes a
 If a purchase is recognized but access still looks wrong, investigate the product mapping and scope before asking the buyer to purchase again. [Connect store integrations](/documentation/orbiters.how-to.connect-store-integrations) explains where those links come from.
 
 <beta>
+Use **Configuration → Access → Discord role access** for scoped, reversible rules
+per Public/Beta/Alpha scope. See [Configure Discord access to an asset](discord-asset-access.md).
+
 Configure Discord role-to-asset mappings per server in **Creator → Assets →
 Discord role assets**. See [Grant assets through Discord roles](manage-discord-role-assets.md).
 
