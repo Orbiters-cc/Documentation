@@ -16,7 +16,26 @@ lastVerified: 2026-09-25
 This workflow requires the matching Orbiters VPM release. Open **Creator → Your
 work → VPM** to manage public Unity package listings for Creator Companion.
 
-## Create your listing
+## Import an existing VPM repository
+
+Paste your repository under **Bring your existing VPM** and choose **Import
+repository**. HTTPS links, `.git` links, SSH clone URLs such as
+`git@github.com:artist/tools.git`, and `artist/tools` are accepted. Orbiters reads
+its listing configuration and published catalog, preserves the package versions,
+download URLs and checksums, and creates its hosted address. If no catalog has
+been published, the repository's release ZIPs are imported in the background.
+Both the VRChat single-package and package-listing templates are supported.
+
+After **Connect GitHub**, Orbiters discovers public VPM repositories you can
+manage and imports them automatically. **Find my VPM repositories** runs discovery
+again. Importing the same repository again opens its existing listing; it does
+not duplicate packages or reset hidden/removed versions. Repository permissions
+still apply to builds and webhook setup.
+
+The **Creator Companion listing URL** uses a copyable snippet. Copy the complete
+JSON address into VCC, or choose **Add to Creator Companion**.
+
+## Create a new listing
 
 1. Choose **New listing**, enter its name and a URL slug, then **Create listing**.
    The address is fixed after creation so installed repositories keep working.
@@ -35,7 +54,8 @@ the exact archive. Public GitHub releases, including prereleases, are imported;
 draft releases and private repositories are excluded.
 
 One creator can manage ten listings, with up to 30 sources per listing and 1,000
-release ZIPs per source. Each archive is limited to 128 MB and its manifest to
+release ZIPs per source. A listing holds up to 3,000 versions and 6 MB of package
+metadata. Each archive is limited to 128 MB and its manifest to
 256 KB. A failed source refresh keeps its last good catalog and reports an error.
 
 ## Connect release webhooks and builds
@@ -88,3 +108,7 @@ See [VPM migration runbook](../development/vpm-migration.md) before changing the
 official listing or GitHub Pages address.
 
 </audience>
+
+ZIP attachments without a root package manifest are skipped when refreshing
+GitHub releases. A malformed package manifest stops that refresh and leaves the
+last valid catalog available.

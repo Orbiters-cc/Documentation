@@ -115,3 +115,11 @@ changing its sources. Tests use local fixtures; live Discord collection and role
 assignment require a connected account and bot in the deployed environment.
 
 </audience>
+
+Administrators can open **Admin → Discord servers → Collect roles** to install
+or connect the same extension. The window opens from its button and returns
+focus there when closed. Extension 1.2 connects to an already-open Orbiters tab
+when installed or when its popup opens. To update an unpacked installation,
+replace the extension folder with the new download and click **Reload** on
+`chrome://extensions`. **Connect installed extension** retries the website
+handshake; manual token copying is not required.
