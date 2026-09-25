@@ -29,6 +29,14 @@ release step; a passing local test or GitHub Pages workflow does not establish i
    node src/scripts/importOrbitersVpm.js OWNER_ID /reviewed/source.json /reviewed/index.json
    ```
 
+   For production, prefer the guarded **Bootstrap Orbiters VPM production**
+   workflow. Supply the exact deployed application SHA and both reviewed file
+   hashes. It refuses a different checkout, requires database readiness, resolves
+   exactly one active owner with a connected Creator VPM GitHub identity, imports
+   through temporary container files, and compares every public package/version
+   URL and checksum after the transaction. Its sanitized evidence output includes
+   the deployed frontend/backend SHAs and latest structured deployment event.
+
    This creates `/vpm/orbiters`, preserves every published manifest, URL and
    checksum, and registers its repository/ZIP sources. Re-running it preserves
    visibility choices and rejects a conflicting owner or checksum. It does not
