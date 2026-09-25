@@ -127,7 +127,7 @@ assignment require a connected account and bot in the deployed environment.
 
 Administrators can open **Admin → Discord servers → Collect roles** to install
 or connect the same extension. The window opens from its button and returns
-focus there when closed. Extension 1.3 connects to an already-open Orbiters tab
+focus there when closed. Extension 1.3.1 connects to an already-open Orbiters tab
 when installed or when its popup opens. To update an unpacked installation,
 replace the extension folder with the new download and click **Reload** on
 `chrome://extensions`. **Connect installed extension** retries the website
@@ -142,3 +142,9 @@ when the website deploys.
 
 After reloading an updated unpacked extension, refresh open Discord tabs so they
 use the updated page observer.
+
+Extension 1.3.1 keeps collection and popup controls responsive while an upload is
+pending. Failed servers retry separately so the next server can still upload.
+Switching servers within Discord is supported without a page reload. The popup's
+outer surface is rectangular. Update the installed files and reload the extension
+once to receive this fix; refreshing Orbiters does not update an unpacked copy.

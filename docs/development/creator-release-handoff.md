@@ -35,8 +35,8 @@ Release these together:
   webhooks, workflow dispatch, native frontend/Caddy routes and install links.
 - Separate external ownership and destination Discord roles, per-scope access,
   bidirectional destination access, migration and privacy export changes.
-- Extension 1.3.0, automatic website connection, role ID/name/color collection,
-  per-role upload confirmations/retries and rounded popup surface.
+- Extension 1.3.1, automatic website connection, role ID/name/color collection,
+  per-role upload confirmations, independent retries and rectangular popup surface.
 - Admin role collection dialog, searchable role list with unnamed IDs, live
   refresh, manual naming and Open in Discord. Tools page labels and AGENTS rules.
 - Upload path validation, rejection of damaged/active image content and removal
@@ -70,6 +70,9 @@ They are local evidence, not production acceptance. The backend suite passed
 970 tests with 29 deliberate skips; frontend passed 121 suites / 353 tests.
 The extension fixture runs a real extension in an isolated headless Edge profile,
 with website/Discord/API fixtures. Provider calls and production writes are absent.
+Extension 1.3.1 additionally passes nine focused regressions and an isolated browser
+check for server switching, 150 roles, reopening the popup during an upload, and
+late confirmations after disconnect. This does not verify the real Rexouria server.
 
 `diagnostics/monthly-vpm-upgrade.log` records the earlier isolated PostgreSQL
 fresh/populated/partially migrated schema checks, with two boots each. The
@@ -96,7 +99,7 @@ git -c safe.directory=H:/metaverse/ORBITERS/server/Documentation -C Documentatio
 ```
 
 Check the extension ZIP contains exactly the current nine source files and that
-its manifest version is 1.3.0. Do not deploy a ZIP from an older build. Run:
+its manifest version is 1.3.1. Do not deploy a ZIP from an older build. Run:
 
 ```sh
 cd backend
