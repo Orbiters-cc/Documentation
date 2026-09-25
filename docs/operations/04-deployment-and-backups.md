@@ -126,6 +126,9 @@ matching R2 object and releases the local copy before building images. Unverifie
 archives remain local and stop the deployment. The preflight also releases Docker's
 disposable build cache after producing the tagged backend image, leaving room for
 the cloned-database checks without removing images referenced by containers.
+At the start of a later retry, the workflow performs the same remote verification
+for earlier local archives and releases disposable BuildKit cache before writing a
+new backup, so failed attempts cannot accumulate into another disk-space failure.
 
 If public health checks fail, maintenance is restored. A failure after checkout
 leaves maintenance active for investigation; never restart old code against a
