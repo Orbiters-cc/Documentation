@@ -111,7 +111,11 @@ copy and its recorded checksum.
 Before creating a new pre-deploy archive, the workflow runs the same remote-object
 verification against older local archives. If disk pressure interrupted an archive,
 encryption leaves a `.partial` file rather than publishing the final archive name;
-the next verified cleanup removes those temporary files. Older releases may have
+the next verified cleanup removes those temporary files. A failed raw archive is
+also removed before the next attempt because pre-deploy backups must be encrypted
+before they are usable. The workflow transfers the reviewed backup/encryption
+helpers before checkout, so recovery receives these protections even while the
+host is still running an older release. Older releases may have
 left an incomplete final filename. After the failed run proves that exact file did
 not complete or upload, pass its basename through the deployment workflow's
 `discard_incomplete_backup` input. The workflow rejects paths and unexpected names,
