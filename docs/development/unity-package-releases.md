@@ -76,6 +76,17 @@ Events caused by a workflow using its `GITHUB_TOKEN` generally do not start anot
 workflow; automation that commits version bumps needs an appropriate GitHub App
 or personal access token if it is expected to trigger this release workflow.
 
+My Avatar, Toolkit, ReFit and Unit Git use the shared Orbiters VPM feed at
+`https://orbiters.cc/vpm/orbiters/index.json`. Their published GitHub releases are
+imported through signed release webhooks; they do not need a separate Pages
+listing build. The VPM GitHub connection must remain authorized. If a source
+reports an expired authorization, reconnect GitHub in the VPM tab and refresh the
+source to recover releases published while disconnected.
+
+Package archive checks must list that package's own required assets and declared
+external assembly dependencies. Shared Toolkit styles belong to the Toolkit
+archive, rather than being required in the MCB or My Avatar archive.
+
 The existing packaging and downstream listing workflows remain responsible for
 their own outputs. A successful release does not by itself verify that a VPM feed
 has refreshed or that installation succeeds in Creator Companion.
