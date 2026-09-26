@@ -3,7 +3,7 @@ title: Capture Unity editor windows through MCP
 section: Development
 order: 91
 audience: dev, admin
-stage: alpha
+stage: stable
 id: orbiters.development.unity-editor-window-capture
 domain: operations
 type: how-to
@@ -13,9 +13,10 @@ lastVerified: 2026-09-26
 
 # Capture Unity editor windows through MCP
 
-The local `orbiters.toolkit` package adds `orbiters_editor_window` to MCP for
-Unity. It captures the rendered content of an editor window, including UI Toolkit
-controls. The implementation is local and has not been published as a package.
+The `orbiters.toolkit` package adds `orbiters_editor_window` to MCP for Unity.
+It captures the rendered content of an editor window, including UI Toolkit
+controls. [Toolkit 0.1.0](https://github.com/Orbiters-cc/Toolkit/releases/tag/0.1.0)
+is published with a package ZIP and `package.json`.
 
 ## Requirements
 
@@ -25,6 +26,40 @@ references the MCP editor assembly; install MCP for Unity through its documented
 Git URL before installing this package. A separate MCP server or fork is not needed.
 
 If discovery is stale, rescan tools in MCP for Unity or reconnect the MCP client.
+
+## Install the assistant skill
+
+Open **Tools > Orbiters > Toolkit**, select **Codex**, **Claude Code**, or both,
+and click **Install / update AI integration**. The window displays installation
+status for each client and adds instructions to this Unity project:
+
+- Codex: `.agents/skills/orbiters-toolkit/SKILL.md`
+- Claude Code: `.claude/skills/orbiters-toolkit/SKILL.md`
+
+The skill teaches discovery, window selection, background capture, polling and
+image inspection. It preserves the user's control over foreground activation.
+It does not install MCP for Unity or configure a client's MCP connection. Start a
+new chat or reload skills if the assistant has not discovered the new instructions.
+
+The installer records ownership and a content hash beside each installed skill.
+Unchanged installations are skipped; toolkit-owned copies can be updated. If a
+user has edited the skill or another file already occupies the destination,
+the installer preserves it and reports the conflict before writing either client.
+It does not follow linked destination directories into another workspace.
+
+## Package releases
+
+The [Toolkit repository](https://github.com/Orbiters-cc/Toolkit) uses the same
+**Build Release** workflow as ReFit. `PACKAGE_NAME` is `Toolkit`, and `master` is
+the automatic-release branch. Push a new unused version in `package.json` to
+publish the package, or dispatch the workflow manually.
+
+The [first release run](https://github.com/Orbiters-cc/Toolkit/actions/runs/36257978449)
+succeeded for commit `10801a4`. The downloaded `Toolkit-0.1.0.zip` passed the
+archive validator, and all eight files matched that commit exactly, including
+the bundled skill. The installer passed live Unity checks for both clients,
+repeat installation, owned updates and preservation of custom edits. Its window
+was inspected through the toolkit's background capture tool.
 
 ## Capture ReFit
 
