@@ -8,7 +8,7 @@ id: orbiters.how-to.create-and-measure-assets
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-25
+lastVerified: 2026-09-26
 ---
 
 # Create, publish and measure an asset
@@ -148,11 +148,19 @@ replacement and removal apply immediately to the asset page. The avatar-specific
 
 <beta>
 The next application release preserves a usable MCB banner preview after
-**Refresh from Gumroad**. Assets without current product or commission details
-show an **Old-format asset** warning in Creator and General settings. They are
-excluded from public recommendations. Open **Edit asset page**, review the
-current product details, then publish to update the existing asset. No automatic
-conversion or additional legacy asset format is introduced.
+**Refresh from Gumroad**.
+
+Assets that Orbiters creates for you (store sync, the MCB custom-base wizard,
+Discord role assets, admin tools) and assets converted from the old format start
+as **Not published**. They are not listed on Assets, in recommendations or link
+previews, and signed-out visitors cannot open them; you and people with access
+still can. Orbiters sends you a notification when such assets are created: open
+it to go to the asset (or your Creator assets filtered to **Not published**) and
+choose **Publish** to make it public. **Publish** is also available in the asset's
+settings header, on Creator asset cards and in the owner toolbar on the asset page.
+Old-format assets are converted once, during the release, and keep their names,
+descriptions, media, installation settings and access. **Edit asset page** still
+lets you review the full product details before publishing.
 </beta>
 
 ## Publish to a connected shop

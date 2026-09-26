@@ -8,7 +8,7 @@ id: orbiters.community.event-planning
 domain: website
 type: how-to
 owner: orbiters-docs
-lastVerified: 2026-09-20
+lastVerified: 2026-09-26
 ---
 
 # Find a time, world and movie together
@@ -21,8 +21,10 @@ the matching application release; documentation does not enable an older deploym
 
 Choose **Set a date & time** when the schedule is known. Otherwise select
 **Get people’s availabilities** and specific dates or days of a typical week.
-Select up to 31 dates, an earliest/latest time, timezone, slot size and expected
-duration. A latest time earlier than the earliest ends the following day.
+Select up to 31 dates, an earliest/latest time, **Your timezone**, slot size and
+expected duration. **Your timezone** starts from your browser's timezone; the
+dates and hours you choose are in that zone. If an event was set up in another
+zone, the form says so and offers to switch to yours. A latest time earlier than the earliest ends the following day.
 
 An optional voting deadline closes responses at that instant. It does not publish
 automatically: the organizer chooses the final plan. Typical-week polls show their
@@ -40,8 +42,8 @@ until the organizer confirms the plan. A saved draft stays private.
 
 Sign in, then drag across the availability grid to mark or clear a rectangle.
 Keyboard users move with arrow keys and toggle with Space. Touch users drag cells
-and scroll at the grid's edges. Change **Display timezone** without changing the
-stored instants. Repeated daylight-saving hours remain distinct; nonexistent times
+and scroll at the grid's edges. Change **Your timezone** to view the grid in another
+zone without changing the stored instants. Repeated daylight-saving hours remain distinct; nonexistent times
 are omitted.
 
 Vote for worlds and movies, then expand **Invite me** to choose event steps.
@@ -114,7 +116,7 @@ the group immediately. **Save response** is still required to share them. Expand
 allow multiple choices where indicated; available movie or episode runtimes appear
 alongside the title.
 
-**Display timezone** opens an interactive map with your detected timezone selected.
+**Your timezone** opens an interactive map with your detected timezone selected.
 Hover or focus a region to inspect it; click or press Enter to select it. Zoom for
 small regions, reset with **World**, or select **Use my timezone**. This changes
 display only, never the stored availability instants. The selected date determines
