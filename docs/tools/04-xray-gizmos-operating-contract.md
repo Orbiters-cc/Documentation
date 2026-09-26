@@ -90,3 +90,24 @@ existing edge mesh. Toggling edge mode is no longer needed after retargeting.
 This fix is not yet included in a published package release.
 
 </alpha>
+
+<alpha>
+
+## Shared mirror posing service
+
+The local 0.2.0 implementation adds a Mirror toggle to the Scene-view toolbar and
+window. XRayGizmos resolves the selected avatar and presents status; matching,
+reference frames, reflected rotation/translation and Undo handling live in
+`Orbiters.Toolkit.Editor.Posing.MirrorPoseService`. The editor assembly explicitly
+references `Orbiters.Toolkit.Editor`, and the manifest requires
+`orbiters.toolkit >=0.2.0 <0.3.0` through `vpmDependencies`.
+
+The service watches explicit Undo transform modifications on one enabled rig.
+It does not continuously drive scene bones. Humanoid mappings precede unambiguous
+mirrored hierarchy paths. It uses mesh bind frames, or an enable-time relative
+reference for pairs missing complete bind data. Both-side edits take precedence
+over mirroring. Rotation and movement are supported; scale and animation recording
+are excluded. See [controls and troubleshooting](/documentation/orbiters.tools.xraygizmos-controls)
+for usage and boundaries. This implementation is local and unreleased.
+
+</alpha>

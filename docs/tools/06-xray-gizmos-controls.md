@@ -67,3 +67,39 @@ XRayGizmos can discover ReFit debug labels from available snapshots. ReFit is op
 | The result looks stale after editing the scene | Use Refresh and check the resolved target list again. |
 
 The overlay is a diagnostic view. A visible skeleton or weight gradient does not by itself prove that a rig, ReFit result, or exported avatar is correct.
+
+<alpha>
+
+## Mirror posing (local 0.2.0 implementation)
+
+Requires XRayGizmos 0.2.0 and Orbiters Toolkit 0.2.x. These changes are local and
+not released yet. Toolkit owns the posing service; MCP for Unity is optional.
+
+Select an avatar or one of its bones and enable **Mirror** in the Scene-view
+XRay Gizmos toolbar or the full window. Rotate or move one paired bone; its
+partner follows across the avatar root's local X plane. The window identifies
+the active rig, pair count, reference strategy and selected partner. Mirror
+stays on that rig when selection changes. Toggle it off and on to switch rigs.
+
+Enabling Mirror leaves the pose as it is. Subsequent edits replace the opposite
+side's edited channels. The opposite bone is included in the same Undo operation,
+and prefab-instance changes are recorded as overrides. Selecting and editing
+both partners in one operation preserves both explicit edits.
+
+Humanoid mappings take priority, followed by matching left/right hierarchy paths.
+Common Left/Right prefixes and suffixes, .L/.R, _L/_R, -L/-R and space-separated
+markers are supported, including lowercase markers and namespaced rig names.
+Unpaired, ambiguous and center bones are skipped. Bind-pose reference frames
+account for different local bone axes. Pairs without complete bind-pose data use
+their enable-time pose as a relative reference; the status reports their count.
+
+Mirror does not mirror scale, solve IK or record animation. It pauses during
+animation preview and disables on play-mode changes, script reload or changes
+to the captured hierarchy. Bone and ancestor scales must be positive and uniform.
+Disable Mirror before changing scale or rig structure, then enable it again.
+**Clear** still controls the display overlays; switch **Mirror** off separately.
+
+Publish Toolkit 0.2.0 before XRayGizmos 0.2.0 so VPM can resolve the dependency.
+For a manual installation, install both packages together.
+
+</alpha>

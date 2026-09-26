@@ -123,3 +123,16 @@ Internal Unity API changes can break capture; unsupported APIs produce an error.
 Other Unity versions, mixed-DPI monitors, minimized windows and
 headless rendering have not been verified. A successful pixel read is not a
 substitute for inspecting the image before declaring UI appearance correct.
+
+<alpha>
+
+## Optional MCP adapter in Toolkit 0.2.0
+
+The local 0.2.0 implementation separates the core `Orbiters.Toolkit.Editor`
+assembly from `Orbiters.Toolkit.MCP.Editor`. The core contains mirror posing and
+the skill installer and does not reference MCP. The capture adapter is compiled
+when `com.coplaydev.unity-mcp` 9.7.1 or newer is installed. Screenshot tool calls
+and background-capture behavior remain the same. Mirror posing works without
+an MCP installation. Toolkit 0.2.0 is not published yet.
+
+</alpha>
