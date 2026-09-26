@@ -38,14 +38,21 @@ these parameters:
 }
 ```
 
-Capture focuses the selected Unity window and waits for repaint. Opening a closed
-window requires explicit `open_if_missing: true`; the tool uses Unity's generic
-window creation API. For tools that require menu-specific initialization, execute
-their menu first. Capture does not press controls or run the window's operation.
+Capture defaults to `focus: false`: it repaints the selected view and reads its
+framebuffer while Unity stays in the background. It does not call window focus,
+switch applications or restore focus afterward. Explicit `focus: true` permits
+bringing Unity forward and selecting a tab.
+
+Opening a closed window requires both `open_if_missing: true` and `focus: true`,
+since opening can activate Unity. The tool uses Unity's generic window creation
+API. For tools that require menu-specific initialization, execute their menu first.
+Capture does not press controls or run the window's operation.
 
 Use `action: list` to get window IDs and types. When several instances share a
-type, select one with `window_id` instead of `window_type`. With `focus: false`,
-the target must already be Unity's focused window. The selected window stays open.
+type, select one with `window_id` instead of `window_type`. In background mode,
+the target must be the selected tab within its own dock, but it does not need
+keyboard focus. An inactive tab returns an error instead of silently selecting it
+or capturing the dock's other tab. The selected window stays open.
 
 The server polls pending work automatically. Clients can also request
 `action: status` with the returned `job_id`. Domain reload clears jobs; request a
@@ -66,12 +73,18 @@ inspected for orientation and content. Both images matched ReFit's stylesheet
 background colors exactly: body `#2d2d2d` and header `#383838`. Window listing,
 missing-window rejection and invalid-resolution rejection also passed through MCP.
 
+A subsequent ReFit capture passed with Unity in the background. A Windows
+foreground-window monitor sampled every 20 ms during the capture and observed
+the same other application throughout; Unity reported unfocused before and after.
+The PNG was visually inspected. An inactive Game tab correctly returned an error
+without being selected.
+
 The tool reads Unity's view framebuffer with the internal `GUIView.GrabPixels`
 API. It avoids applying a second sRGB conversion to display-encoded editor pixels.
 It does not read the desktop or render a scene camera. The capture covers window
 content, not the operating-system title bar or separate popups.
 
 Internal Unity API changes can break capture; unsupported APIs produce an error.
-Other Unity versions, mixed-DPI monitors, minimized windows, hidden windows and
+Other Unity versions, mixed-DPI monitors, minimized windows and
 headless rendering have not been verified. A successful pixel read is not a
 substitute for inspecting the image before declaring UI appearance correct.
