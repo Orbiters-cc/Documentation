@@ -56,6 +56,25 @@ release step; a passing local test or GitHub Pages workflow does not establish i
 The GitHub repository URL itself cannot redirect externally; its README and
 homepage point at Orbiters. Do not delete old release archives.
 
+## Orbiters package release notifications
+
+As of 2026-09-26, the canonical Orbiters listing has active GitHub `release`
+webhooks for MyCustomBase, ReFit, UnitGit, Unity-Package-Manager, XRayGizmos and
+Toolkit. Each repository uses its own source endpoint and signing secret,
+configured through the VPM webhook service. Do not copy another source's URL or
+secret. ReFit's existing configuration was retained when adding the other hooks.
+
+A version-changing push runs the package's Build Release workflow. Publishing the
+release notifies Orbiters, which queues the package import. Commits without a
+release do not trigger this import. The package repository's separate GitHub Pages
+listing workflow is not required for the canonical Orbiters feed to import a
+GitHub release. Existing VCC subscriptions using the old mirrored listing can
+still wait for its refresh interval and VCC's own cache refresh.
+
+GitHub's initial webhook ping returning HTTP 200 confirms endpoint/signature
+acceptance, not a completed package import. Check the source status and public
+feed after a real release. Toolkit 0.2.0 was released before its webhook was
+installed, so its initial import was queued separately.
 ## Discord access upgrade in the same release
 
 Role rules now distinguish `roleId` (ownership proof) from `targetRoleId`
