@@ -76,7 +76,7 @@ Requires XRayGizmos 0.2.0 and Orbiters Toolkit 0.2.x. These changes are local an
 not released yet. Toolkit owns the posing service; MCP for Unity is optional.
 
 Select an avatar or one of its bones and enable **Mirror** in the Scene-view
-XRay Gizmos toolbar or the full window. Rotate or move one paired bone; its
+XRay Gizmos toolbar (the butterfly icon) or the full window. The toolbar icon has no text label; hover it for Mirror status. Rotate or move one paired bone; its
 partner follows across the avatar root's local X plane. The window identifies
 the active rig, pair count, reference strategy and selected partner. Mirror
 stays on that rig when selection changes. Toggle it off and on to switch rigs.
@@ -96,7 +96,7 @@ their enable-time pose as a relative reference; the status reports their count.
 Mirror does not mirror scale, solve IK or record animation. It pauses during
 animation preview and disables on play-mode changes, script reload or changes
 to the captured hierarchy. Bone and ancestor scales must be positive and uniform.
-Disable Mirror before changing scale or rig structure, then enable it again.
+Tiny imported scale differences (up to 0.01% between components) are tolerated. If activation fails, a Scene-view notification explains the cause; an invalid-scale message identifies the bone. Disable Mirror before changing scale or rig structure, then enable it again.
 **Clear** still controls the display overlays; switch **Mirror** off separately.
 
 Publish Toolkit 0.2.0 before XRayGizmos 0.2.0 so VPM can resolve the dependency.
