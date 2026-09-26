@@ -123,3 +123,11 @@ not require changing Git's global `core.quotePath` setting. The fix is not yet
 included in a published package release.
 
 </alpha>
+
+## My Avatar texture checkpoints
+
+My Avatar uses `CommitProjectFilesAsync` from Unit Git 0.1.1 to create a scoped
+`texture change` commit. The explicit project root lets Git run off the Unity
+main thread. Paths must remain within that project, ignored checkpoint files
+cause a clear error, and unrelated staged files are preserved. The selected
+scene is committed as a whole, including any other pending changes in it.

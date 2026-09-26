@@ -216,3 +216,11 @@ for creation, matching, and historical backfill. The Unity and backend changes
 must both be released before this workflow is available outside the local build.
 
 </alpha>
+
+## Shared Toolkit account and Inspector
+
+MCB 1.7.2 depends on Orbiters Toolkit 0.2.1. The authentication store, API URL
+policy, account controls, Inspector shell, animated glow and warning cards are
+shared with [My Avatar](/documentation/orbiters.tools.myavatar-textures).
+MCB retains its existing authentication requirement. My Avatar can match textures
+offline. Logging out in either tool clears the shared account for that environment.

@@ -24,6 +24,8 @@ release artifacts and a Git tag named exactly after the version.
 | Unit Git | `Orbiters-cc/UnitGit` | `master` |
 | Unity Package Manager | `Orbiters-cc/Unity-Package-Manager` | `main` |
 | XRayGizmos | `Orbiters-cc/XRayGizmos` | `master` |
+| Orbiters Toolkit | `Orbiters-cc/Toolkit` | `master` |
+| My Avatar | `Orbiters-cc/MyAvatar` | `master` |
 
 ## Publish a new version
 
