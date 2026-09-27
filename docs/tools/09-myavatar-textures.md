@@ -20,7 +20,9 @@ Your settings and last material snapshot are saved with the scene.
 This page describes texture matching in My Avatar 0.2.0 and later: locked-shader
 support, name matching that works with any naming convention, the morphing drop
 field and optional Unit Git. For thumbnails, see
-[Create a VRChat thumbnail with My Avatar](10-myavatar-thumbnail.md).
+[Create a VRChat thumbnail with My Avatar](10-myavatar-thumbnail.md); for posing,
+hair/tail/toe physics and parameters, see
+[Pose, physics and parameters with My Avatar](11-myavatar-posing-and-physics.md).
 
 ## Install and apply a texture set
 
@@ -80,7 +82,7 @@ reimported. Image statistics for matching use tiny GPU readbacks that take a few
 milliseconds for a whole set.
 
 My Avatar and MCB use the same Toolkit Inspector shell, background glow, account
-row, buttons and inline warning cards. Magic Sync is optional for My Avatar:
+row, buttons and inline warning cards. An account is optional for My Avatar:
 you can apply clear local matches without an account or network connection.
 
 ## Undo and save
@@ -111,10 +113,18 @@ separate images into combined texture channels.
 
 ## Orbiters account and automatic AI assistance
 
-The account row shares MCB's saved account. Magic Sync connects it; Logout clears
-that shared account. AI assistance is automatic while connected and enabled in
-your **Orbiters website account settings**. There is no separate switch in Unity.
-The backend enforces this preference.
+To connect, click **Login with Discord** or **Login with Telegram** at the top of
+the component. Your browser opens on that login; Orbiters then asks you to confirm
+the connection once and shows a four-letter code, the same one Unity shows while it
+waits. Only confirm when you just clicked Login in Unity. The link works once and
+expires after ten minutes. The account is shared with the other Orbiters tools;
+Logout clears it for all of them.
+
+The robot in the top-right corner of the drop field shows AI assistance: crossed out
+while you are not connected or AI is off. Once connected, click it to turn AI
+assistance on or off; hover it for what that means. It is the same setting as
+**AI-assisted features** in your Orbiters website account settings, and the backend
+enforces it.
 
 AI is only asked about textures local matching could not place, after the local
 matches are already applied. The request contains those textures' filenames,

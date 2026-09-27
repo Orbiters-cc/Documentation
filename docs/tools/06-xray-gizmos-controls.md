@@ -68,18 +68,19 @@ XRayGizmos can discover ReFit debug labels from available snapshots. ReFit is op
 
 The overlay is a diagnostic view. A visible skeleton or weight gradient does not by itself prove that a rig, ReFit result, or exported avatar is correct.
 
-<alpha>
+## Mirror posing
 
-## Mirror posing (local 0.2.0 implementation)
+Requires XRay Gizmos 0.2.1 and Orbiters Toolkit 0.2.5. Toolkit owns the posing
+service; MCP for Unity is optional. My Avatar's **Symmetry** switch uses the same mode.
 
-Requires XRayGizmos 0.2.0 and Orbiters Toolkit 0.2.x. These changes are local and
-not released yet. Toolkit owns the posing service; MCP for Unity is optional.
-
-Select an avatar or one of its bones and enable **Mirror** in the Scene-view
-XRay Gizmos toolbar (the butterfly icon) or the full window. The toolbar icon has no text label; hover it for Mirror status. Rotate or move one paired bone; its
-partner follows across the avatar root's local X plane. The window identifies
-the active rig, pair count, reference strategy and selected partner. Mirror
-stays on that rig when selection changes. Toggle it off and on to switch rigs.
+Enable **Mirror** in the Scene-view XRay Gizmos toolbar (the butterfly icon) or the
+full window. The toolbar icon has no text label; hover it for Mirror status. Mirror is
+a mode: it stays on while nothing can be mirrored and mirrors the rig of the next
+avatar or bone you select, the nearest humanoid above the selection, or the XRay
+armature when there is none. Selecting something outside any rig, such as a light,
+keeps the current rig. Rotate or move one paired bone; its partner follows across
+the avatar root's local X plane. The window identifies the active rig, pair count,
+reference strategy and selected partner.
 
 Enabling Mirror leaves the pose as it is. Subsequent edits replace the opposite
 side's edited channels. The opposite bone is included in the same Undo operation,
@@ -91,15 +92,14 @@ Common Left/Right prefixes and suffixes, .L/.R, _L/_R, -L/-R and space-separated
 markers are supported, including lowercase markers and namespaced rig names.
 Unpaired, ambiguous and center bones are skipped. Bind-pose reference frames
 account for different local bone axes. Pairs without complete bind-pose data use
-their enable-time pose as a relative reference; the status reports their count.
+the pose at binding time as a relative reference; the status reports their count.
 
 Mirror does not mirror scale, solve IK or record animation. It pauses during
-animation preview and disables on play-mode changes, script reload or changes
-to the captured hierarchy. Bone and ancestor scales must be positive and uniform.
-Tiny imported scale differences (up to 0.01% between components) are tolerated. If activation fails, a Scene-view notification explains the cause; an invalid-scale message identifies the bone. Disable Mirror before changing scale or rig structure, then enable it again.
+animation preview and play mode, stays on through script reloads, and binds again
+when the captured hierarchy changes. A pair is mirrored only when both bones and
+their ancestors have positive, uniform scale (tiny imported differences, up to 0.01%
+between components, are tolerated); other pairs are skipped and counted in the
+status. Scaled props or accessories elsewhere in the hierarchy do not block Mirror.
 **Clear** still controls the display overlays; switch **Mirror** off separately.
-
-Publish Toolkit 0.2.0 before XRayGizmos 0.2.0 so VPM can resolve the dependency.
 For a manual installation, install both packages together.
 
-</alpha>
