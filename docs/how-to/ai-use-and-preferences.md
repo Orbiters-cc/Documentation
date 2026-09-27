@@ -47,12 +47,12 @@ model is shown explicitly. A loading error offers a retry instead of guessing a
 model name. Showing a configured model does not establish that provider credentials
 are available or that the provider is responding.
 
-## Content storage differs by feature
+## Content storage
 
-- My Avatar texture matching and promotion classification omit request and response
-  content from AI history, but retain usage and diagnostic metadata.
-- AutoFill, MCB metadata and administrator chats retain request and response text.
-  AutoFill also records submitted image references.
+- Only administrator playground conversations retain request and response text.
+- AutoFill, MCB metadata, My Avatar texture matching and promotion classification
+  omit request and response content from AI history, but retain usage and
+  diagnostic metadata. AutoFill also records submitted image references.
 - Drafts, uploaded files, saved titles/changelogs and promotion invitations have
   their own storage. Disabling AI does not delete them.
 
