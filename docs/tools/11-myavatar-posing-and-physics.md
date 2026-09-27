@@ -13,8 +13,10 @@ lastVerified: 2026-09-27
 
 # Pose, physics and parameters with My Avatar
 
-Below the thumbnail, the My Avatar component has three more sections: **Posing**,
-**Hair, tail & toes** and **Parameters**. This page describes My Avatar 0.4.0 with
+Below the thumbnail, the My Avatar component has three more parts: **Posing**, one
+card each for **Hair**, **Tail** and **Toes**, and **Parameters**. A bottom toolbar opens
+**Settings** (production or development server; production is the default) and, when
+MCB is installed, the **Blendshape Links** tool. This page describes My Avatar 0.4.0 with
 Orbiters Toolkit 0.2.5 and XRay Gizmos 0.2.1.
 
 ## Posing
@@ -38,17 +40,19 @@ explanation.
 Pose edits remain normal Unity edits: one Undo reverts the avatar and the mirrored
 or following bones together.
 
-## Hair, tail & toes
+## Hair, tail and toes
 
 My Avatar finds the hair, tail and toe PhysBones by name, such as `Hair_Front`,
 `Ponytail`, `Tail1`, `Toe_L` or toe beans, from the bone a PhysBone starts at or the
-object holding it. Each part has a card:
+object holding it. Each part has its own card; the cards flow into as many columns
+as the Inspector is wide.
 
-- **Grab**: who can grab it in VRChat, **Nobody**, **Only me** or **Everyone**.
+- **Grab**: who can grab it in VRChat: **Nobody**, **Only me** or **Everyone**, each an
+  icon button.
 - **Pose**: who can leave it in a new pose after grabbing it. It cannot be wider
   than **Grab**; choosing a narrower **Grab** narrows **Pose** too.
-- **Stretch**: how much longer it gets when pulled, from off to three times its
-  length. Drag the ruler; double-click turns it off.
+- **Stretch**: a slider for how much longer it gets when pulled, from off to three
+  times its length.
 
 VRChat has no friends-only choice, so it is not offered. A choice applies to every
 PhysBone of that part and can be undone. When the PhysBones of a part differ, no
