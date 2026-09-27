@@ -8,14 +8,14 @@ id: orbiters.development.myavatar-integration
 domain: general
 type: reference
 owner: orbiters-engineering
-lastVerified: 2026-09-26
+lastVerified: 2026-09-27
 ---
 
 # My Avatar integration contract
 
 ## Package boundaries
 
-- `orbiters.myavatar` 0.0.1 owns the persistent avatar component, texture import,
+- `orbiters.myavatar` 0.1.0 owns the persistent avatar component, texture import,
   shader-slot discovery, assignment snapshots and Inspector workflow.
 - `orbiters.toolkit` 0.2.1 owns the common Inspector shell and styles, glowing
   surface, vector logo renderer, account UI, authentication store and API roots.
@@ -38,21 +38,34 @@ Both routes require the ordinary Orbiters Bearer authentication and return
 
 | Route | Behavior |
 | --- | --- |
-| `GET /myavatar/connection` | Returns connection state and the account AI preference. |
-| `POST /myavatar/texture-plan` | Validates context and preview, calls the configured AI feature, returns assignment IDs and warnings. |
+| `GET /myavatar/connection` | Returns connection state and the account AI preference (account row only). |
+| `POST /myavatar/texture-plan` | Validates text context, calls the configured AI feature, returns assignment IDs and warnings. |
 
 The request supplies up to 48 textures and 512 visible 2D shader slots, each with
-a unique request-local ID. One JPEG contact sheet contains six columns of 112px
-tiles; its base64 field is capped and decoded bytes cannot exceed 512 KiB. The
-global JSON body limit remains 1 MiB. No URLs are fetched from this request.
+a unique request-local ID. Textures carry name, source dimensions, filename role and
+pixel statistics measured in Unity (`grayscaleFraction`, `normalColorFraction`,
+`blackFraction`, `brightFraction`, `meanBrightness`) plus a nullable provisional
+`localSlotId`. No image data is accepted. The prompt groups slots by material and
+states each slot's existing texture as `name WxH`. The global JSON body limit
+remains 1 MiB. No URLs are fetched from this request.
+
+The Unity client applies local matches first and then sends only unresolved textures
+and the slots this drop left free. A 2026-09-27 DeepSeek comparison (two ambiguous
+eye textures, three runs each) found: reasoning on hit the 4,096-token output limit
+in most runs after 13–22 s; reasoning off answered in 1.2–3.9 s; with reasoning off,
+including resolved textures produced wrong placements in all three runs, while
+unresolved-only produced no wrong placements (one complete, two partial answers).
 
 Output is schema-constrained JSON with `assignments` (`textureId`, `slotId`,
 `confidence`, `reason`) and `warnings`. Unknown IDs, duplicate assignments,
-occupied local slots and incompatible known roles are rejected or excluded.
+answers repeating a texture's own local slot and incompatible known roles are
+rejected or excluded; an answer may move a provisional local match.
 The client independently validates the returned IDs and available slots before
 assigning any material.
 
-The `MYAVATAR_TEXTURES` feature uses existing AI provider routing, model settings,
+The `MYAVATAR_TEXTURES` feature defaults to reasoning off. Admin → AI → Features
+has a per-feature **Model reasoning** switch that overrides a feature's default; the
+setting is recorded on each request in AI history. The feature uses existing AI provider routing, model settings,
 user AI preference enforcement and private-content history handling. No separate
 provider credential is needed. Source names and image contents are explicitly
 untrusted prompt data. The endpoint allows 20 requests per user per hour, one
@@ -63,19 +76,35 @@ active request per user and at most 32 active requests in this process.
 The package repository is `Orbiters-cc/MyAvatar`, branch `master`, with repository
 variable `PACKAGE_NAME=MyAvatar`. It uses the standard **Build Release** workflow.
 Publish Toolkit and Unit Git dependency releases before publishing My Avatar.
-The first My Avatar release is 0.0.1. The release webhook refreshes the canonical
-Orbiters VPM source; an Actions success alone does not prove VCC installation.
+The first My Avatar release is 0.0.1; 0.1.0 adds the local-first texture pipeline.
+The release webhook refreshes the canonical Orbiters VPM source; an Actions success
+alone does not prove VCC installation.
 
-## Texture workflow update after 0.0.1
+## Texture workflow in 0.1.0
 
-The next package update reuses project assets and uses a bounded persistent source-file
-cache in Library. Unchanged source and cached-asset timestamps skip content reads;
-new sources are copied and SHA-256 hashed in one worker-thread pass. No project-wide
-FindAssets or file-size/hash scan runs during a drop. New copies live in a content-addressed texture
-folder; file staging is outside Assets. Unity asset operations remain on the main
-thread and use bounded import batches. There is no global texture postprocessor
-or whole-project refresh in the drop/apply path. Incorrectly imported normal maps
-get an owned copy so the source importer remains untouched.
+The package reuses project assets and uses a bounded persistent source-file cache in
+Library keyed by source path, size and modification time. New sources are copied in
+parallel on worker threads without content hashing, into one texture folder per drop;
+file staging is outside Assets. No project-wide FindAssets or file scan runs during a
+drop. A minimal `.meta` with the owned importer settings (texture type, sRGB, not
+readable) is written before import, so each file imports once; the result was
+verified identical to Unity's defaults. Unity asset operations remain on the main
+thread in one `StartAssetEditing` batch. There is no global texture postprocessor or
+whole-project refresh in the drop/apply path; Unity's Parallel Import did not apply
+to these imports in the test project. Incorrectly imported normal maps get an owned
+copy so the source importer remains untouched.
+
+Measured on a 13-texture, 236 MB set (Unity in the background): existing textures
+reach assigned materials in about 0.7 s (previously 22–25 s, mostly waiting for AI);
+a first import of the whole set takes about 8 s (previously about 25 s of
+preparation and import alone).
+
+Applied file → slot choices are remembered per avatar in
+`Library/OrbitersMyAvatar/mappings.json` and take precedence over filename matching
+and AI. Pixel statistics are read with synchronous 64 px readbacks (about 15 ms for
+13 textures). Background AI answers merge into the applied batch: generated materials
+are reused, the batch snapshot keeps its original `before` state, and stale answers
+are rejected after another drop, slot edit, Undo/Redo or renderer change.
 
 The component keeps renderer before/after snapshots and swaps entry state for
 Undo and Redo. A new successful apply replaces the redo snapshot. Renderer
@@ -83,12 +112,9 @@ assignment conflicts prevent overwriting subsequent user edits. Unit Git include
 reused texture files and metadata in the scoped checkpoint.
 
 Matching considers all existing textures on each material and separates primary
-slots from detail layers. Filename conflicts remain eligible for AI matching. Client and server accept
-well-supported color/emission role changes while keeping normal/mask channel
-constraints. The server computes blackFraction, brightFraction and meanBrightness
-from each JPEG tile, excluding padding. Unresolved cases retain a suggested target
-for explicit selection. The AI request carries actual project-relative asset paths.
-The backend image adapter must distinguish a Node Buffer from upload objects:
-Buffer.buffer is an ArrayBuffer and must not be passed to the image validator.
-This fixes the misleading 20 MB rejection for small contact sheets. The updated
-AI prompt also uses whole-material context and primary/detail distinctions.
+slots from detail layers. A colour-slot collision where exactly one image is mostly
+black with bright details resolves locally to the material's emission slot. Client
+and server accept well-supported color/emission role changes while keeping
+normal/mask channel constraints. Unresolved cases retain a suggested target for
+explicit selection. The backend image adapter distinguishes a Node Buffer from upload
+objects (Buffer.buffer is an ArrayBuffer and must not reach the image validator).

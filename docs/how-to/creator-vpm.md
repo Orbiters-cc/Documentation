@@ -8,7 +8,7 @@ id: orbiters.how-to.creator-vpm
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-25
+lastVerified: 2026-09-27
 ---
 
 # Publish and manage a VPM listing
@@ -63,11 +63,17 @@ metadata. Each archive is limited to 128 MB and its manifest to
 **Connect GitHub** grants separate repository authorization for VPM management.
 Ordinary GitHub identity linking does not retain a repository token. GitHub's
 OAuth API requires the `repo` scope for workflow dispatch; Orbiters encrypts the
-retained token. **Disconnect GitHub builds** disables that authorization locally
-before attempting remote revocation.
+retained token. GitHub's short-lived access token is renewed automatically, and the
+longer-lived renewal token is kept current in the background, so the connection
+stays valid until you disconnect it or revoke the Orbiters app in GitHub.
+**Disconnect GitHub builds** disables that authorization locally before
+attempting remote revocation.
 
-- **Set up webhook** creates a Releases webhook for a repository where you have
-  GitHub administrator permission. **Manual webhook setup** shows its URL and
+- Adding a GitHub source while GitHub is connected creates its Releases webhook
+  automatically when you have GitHub administrator permission on the repository.
+  The source card shows whether new releases update the listing automatically.
+- **Set up webhook** creates or reconnects that webhook later, for example after
+  you gain administrator permission. **Manual webhook setup** shows its URL and
   a one-time secret: add these in GitHub repository Settings → Webhooks, select
   `application/json`, keep SSL verification enabled, and select Releases.
 - A release event queues a refresh. Signed delivery IDs are deduplicated and failed
@@ -87,8 +93,9 @@ available again if its release still exists upstream. Removing/hiding a version
 can stop projects with a pinned dependency from resolving it; installed files are
 not deleted. A deleted upstream release becomes unavailable after a refresh.
 
-**Remove source** removes its versions from Orbiters. Also delete its webhook in
-GitHub repository settings. You can add the source again intentionally.
+**Remove source** removes its versions from Orbiters and deletes the webhook
+Orbiters created on GitHub. Delete a manually added webhook in GitHub repository
+settings. You can add the source again intentionally.
 
 The public listing includes package search, dependencies, version downloads and
 installation guidance. MCB, ReFit and the asset installation wizard use the
