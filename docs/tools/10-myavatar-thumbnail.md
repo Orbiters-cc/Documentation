@@ -15,7 +15,7 @@ lastVerified: 2026-09-27
 
 The **Thumbnail** section of the My Avatar component makes the 4:3 image VRChat
 shows for your avatar. It uses the Orbiters photoshoot, the same one MCB uses for
-custom base media. This page describes My Avatar 0.3.0 with Orbiters Toolkit 0.2.3.
+custom base media. This page describes My Avatar 0.3.0 with Orbiters Toolkit 0.2.4.
 
 ## See it where it will appear
 
