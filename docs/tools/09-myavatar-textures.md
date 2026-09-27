@@ -8,7 +8,7 @@ id: orbiters.tools.myavatar-textures
 domain: general
 type: how-to
 owner: orbiters-engineering
-lastVerified: 2026-09-26
+lastVerified: 2026-09-27
 ---
 
 # Change avatar textures with My Avatar
@@ -16,6 +16,9 @@ lastVerified: 2026-09-26
 My Avatar is a component on your avatar root. It imports texture sets, matches
 them to the avatar's materials and keeps unresolved choices in the Inspector.
 Your settings and last material snapshot are saved with the scene.
+
+The import reuse, Redo and suggested-target controls below are part of the next
+package update after 0.0.1; they are not present in the original 0.0.1 release.
 
 ## Install and apply a texture set
 
@@ -28,10 +31,12 @@ Your settings and last material snapshot are saved with the scene.
 4. Clear matches apply automatically. The Inspector lists files that still need
    attention. Choose a material slot, then **Apply selected matches**.
 5. Choose between competing variations yourself, such as two eye colors. My
-   Avatar keeps them unassigned until you make that choice.
+   Avatar keeps them unassigned until you make that choice. When the material is
+   known, **Use this on …** applies your chosen variation directly to that slot.
 
 The tool considers the current shader's visible 2D texture slots, current texture
-names and material names. Each drop supports up to 48 files, 256 MB per file and
+names across each material and material names. Primary slots take precedence over
+detail layers for ordinary color and normal maps. Each drop supports up to 48 files, 256 MB per file and
 1 GB in total. It copies imports and creates material copies under
 `Assets/Orbiters/MyAvatar/`; source images and source materials remain unchanged.
 
@@ -41,7 +46,9 @@ you can apply clear local matches without an account or network connection.
 
 ## Undo and save
 
-**Undo last apply** restores the previous renderer material assignments. It works
+**Undo last apply** restores the previous renderer material assignments, then
+becomes **Redo last apply**. Redo restores the saved result without importing
+textures or repeating AI matching. Both actions preserve the saved snapshot. It works
 after a scene reload when the component and scene were saved. A subsequent apply
 replaces this persistent snapshot. Unity's regular Undo also records the changes.
 If renderer assignments were changed separately since the apply, My Avatar asks

@@ -65,3 +65,25 @@ variable `PACKAGE_NAME=MyAvatar`. It uses the standard **Build Release** workflo
 Publish Toolkit and Unit Git dependency releases before publishing My Avatar.
 The first My Avatar release is 0.0.1. The release webhook refreshes the canonical
 Orbiters VPM source; an Actions success alone does not prove VCC installation.
+
+## Texture workflow update after 0.0.1
+
+The next package update reuses project assets and matches external file content
+with SHA-256 on a worker thread. New copies live in a content-addressed texture
+folder; file staging is outside Assets. Unity asset operations remain on the main
+thread and use bounded import batches. There is no global texture postprocessor
+or whole-project refresh in the drop/apply path. Incorrectly imported normal maps
+get an owned copy so the source importer remains untouched.
+
+The component keeps renderer before/after snapshots and swaps entry state for
+Undo and Redo. A new successful apply replaces the redo snapshot. Renderer
+assignment conflicts prevent overwriting subsequent user edits. Unit Git includes
+reused texture files and metadata in the scoped checkpoint.
+
+Matching considers all existing textures on each material and separates primary
+slots from detail layers. Conflicting variations retain a suggested target for
+explicit selection. The AI request carries actual project-relative asset paths.
+The backend image adapter must distinguish a Node Buffer from upload objects:
+Buffer.buffer is an ArrayBuffer and must not be passed to the image validator.
+This fixes the misleading 20 MB rejection for small contact sheets. The updated
+AI prompt also uses whole-material context and primary/detail distinctions.
