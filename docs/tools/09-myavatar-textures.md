@@ -30,15 +30,18 @@ package update after 0.0.1; they are not present in the original 0.0.1 release.
    files together or select a folder. A folder includes its immediate images.
 4. Clear matches apply automatically. The Inspector lists files that still need
    attention. Choose a material slot, then **Apply selected matches**.
-5. Choose between competing variations yourself, such as two eye colors. My
-   Avatar keeps them unassigned until you make that choice. When the material is
-   known, **Use this on …** applies your chosen variation directly to that slot.
+5. If filenames point multiple images at one slot, connected AI inspects the
+   previews before treating them as alternatives. For example, an eye image with
+   mostly black pixels may be emission while another BaseColor image is albedo.
+   Remaining uncertain matches offer **Use this on …** or a manual slot choice.
 
 The tool considers the current shader's visible 2D texture slots, current texture
 names across each material and material names. Primary slots take precedence over
 detail layers for ordinary color and normal maps. Each drop supports up to 48 files, 256 MB per file and
-1 GB in total. Existing project textures are reused. Background content matching
-also reuses identical files dropped from outside the project. New texture copies
+1 GB in total. Existing project textures are reused. A persistent cache checks only
+the external files you drop, using file size and modification timestamps. Unchanged
+files skip hashing and copying. New files are copied and hashed in one background
+pass; the tool never scans or hashes the project texture library. New texture copies
 are cached under `Assets/Orbiters/MyAvatar/Textures/`, so repeated drops reuse them.
 A normal map with incompatible import settings gets a correctly configured copy;
 source settings stay unchanged. Material copies stay under `Assets/Orbiters/MyAvatar/`.
@@ -93,5 +96,8 @@ provider's configured data policy.
 
 The model can only suggest IDs from the supplied texture set and available slots.
 Existing local matches are preserved, assignments below 90% confidence are
-ignored, and conflicting alternatives remain for your choice. Provider or
+ignored. Filename roles are hints: visual evidence can distinguish color from
+emission despite misleading names. The backend measures black coverage and
+brightness in each preview, excluding tile padding. Black pixels alone are not
+enough to prove emission. Unresolved alternatives remain for your choice. Provider or
 connection errors appear inline and local matching remains available.

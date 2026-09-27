@@ -68,8 +68,10 @@ Orbiters VPM source; an Actions success alone does not prove VCC installation.
 
 ## Texture workflow update after 0.0.1
 
-The next package update reuses project assets and matches external file content
-with SHA-256 on a worker thread. New copies live in a content-addressed texture
+The next package update reuses project assets and uses a bounded persistent source-file
+cache in Library. Unchanged source and cached-asset timestamps skip content reads;
+new sources are copied and SHA-256 hashed in one worker-thread pass. No project-wide
+FindAssets or file-size/hash scan runs during a drop. New copies live in a content-addressed texture
 folder; file staging is outside Assets. Unity asset operations remain on the main
 thread and use bounded import batches. There is no global texture postprocessor
 or whole-project refresh in the drop/apply path. Incorrectly imported normal maps
@@ -81,8 +83,11 @@ assignment conflicts prevent overwriting subsequent user edits. Unit Git include
 reused texture files and metadata in the scoped checkpoint.
 
 Matching considers all existing textures on each material and separates primary
-slots from detail layers. Conflicting variations retain a suggested target for
-explicit selection. The AI request carries actual project-relative asset paths.
+slots from detail layers. Filename conflicts remain eligible for AI matching. Client and server accept
+well-supported color/emission role changes while keeping normal/mask channel
+constraints. The server computes blackFraction, brightFraction and meanBrightness
+from each JPEG tile, excluding padding. Unresolved cases retain a suggested target
+for explicit selection. The AI request carries actual project-relative asset paths.
 The backend image adapter must distinguish a Node Buffer from upload objects:
 Buffer.buffer is an ArrayBuffer and must not be passed to the image validator.
 This fixes the misleading 20 MB rejection for small contact sheets. The updated
