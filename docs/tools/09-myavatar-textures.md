@@ -5,7 +5,7 @@ order: 190
 audience: public, creator, dev
 stage: beta
 id: orbiters.tools.myavatar-textures
-domain: general
+domain: myavatar
 type: how-to
 owner: orbiters-engineering
 lastVerified: 2026-09-27
@@ -17,8 +17,10 @@ My Avatar is a component on your avatar root. It imports texture sets, matches
 them to the avatar's materials and keeps unresolved choices in the Inspector.
 Your settings and last material snapshot are saved with the scene.
 
-This page describes My Avatar 0.2.0: locked-shader support, name matching that
-works with any naming convention, the morphing drop field and optional Unit Git.
+This page describes texture matching in My Avatar 0.2.0 and later: locked-shader
+support, name matching that works with any naming convention, the morphing drop
+field and optional Unit Git. For thumbnails, see
+[Create a VRChat thumbnail with My Avatar](10-myavatar-thumbnail.md).
 
 ## Install and apply a texture set
 

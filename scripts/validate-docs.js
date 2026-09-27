@@ -12,7 +12,7 @@ const REQUIRED_FIELDS = [
 ];
 const AUDIENCES = new Set(['public', 'user', 'creator', 'mod', 'admin', 'dev']);
 const STAGES = new Set(['stable', 'beta', 'alpha']);
-const DOMAINS = new Set(['general', 'website', 'mcb', 'refit', 'unitgit', 'xraygizmos', 'operations']);
+const DOMAINS = new Set(['general', 'website', 'mcb', 'refit', 'unitgit', 'xraygizmos', 'myavatar', 'operations']);
 const TYPES = new Set(['tutorial', 'how-to', 'reference', 'explanation', 'decision', 'runbook', 'invariant']);
 const STALE_AFTER_DAYS = 180;
 
