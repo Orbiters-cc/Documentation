@@ -37,8 +37,16 @@ package update after 0.0.1; they are not present in the original 0.0.1 release.
 The tool considers the current shader's visible 2D texture slots, current texture
 names across each material and material names. Primary slots take precedence over
 detail layers for ordinary color and normal maps. Each drop supports up to 48 files, 256 MB per file and
-1 GB in total. It copies imports and creates material copies under
-`Assets/Orbiters/MyAvatar/`; source images and source materials remain unchanged.
+1 GB in total. Existing project textures are reused. Background content matching
+also reuses identical files dropped from outside the project. New texture copies
+are cached under `Assets/Orbiters/MyAvatar/Textures/`, so repeated drops reuse them.
+A normal map with incompatible import settings gets a correctly configured copy;
+source settings stay unchanged. Material copies stay under `Assets/Orbiters/MyAvatar/`.
+
+File discovery, hashing and copying run in the background. Preview readback uses
+asynchronous GPU requests on supported devices. Unity still performs new asset
+imports on its main thread, in batches; adjusting new texture settings can require
+a second batch. Existing reusable images are not reimported.
 
 My Avatar and MCB use the same Toolkit Inspector shell, background glow, account
 row, buttons and inline warning cards. Magic Sync is optional for My Avatar:
@@ -56,7 +64,7 @@ you to resolve those edits before restoring its snapshot.
 
 **Save · Unit Git** saves the avatar scene and commits `texture change` in the
 Unity project's Git repository. Initialize the repository in Unit Git first.
-The commit includes this scene's current changes, generated files and their Unity
+The commit includes this scene's current changes, generated files, reused texture assets and their Unity
 metadata. Other project paths and staged changes are excluded. If a required
 generated file is ignored by Git, fix the ignore rule and try again. Save does
 not push. Undo after saving creates another local change; it does not rewrite
