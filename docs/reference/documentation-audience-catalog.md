@@ -26,6 +26,7 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Page | Audience tags | Stage | Visitor | Member | Creator | Mod | Admin | Dev / owner |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Manage Privacy and Shared Content | public | beta | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Understand and control AI use | public | beta | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Verify your community age status | user, creator, mod, admin, dev | beta | — | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Manage a VRChat community | user, creator, admin, dev | beta | — | ✓ | ✓ | ✓ | ✓ | ✓ |
 
@@ -57,6 +58,12 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Beta Documentation Notes | creator, admin, dev | beta | — | — | ✓ | — | ✓ | ✓ |
 
+## Commissions
+
+| Page | Audience tags | Stage | Visitor | Member | Creator | Mod | Admin | Dev / owner |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Order and fulfill custom stickers | public | beta | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+
 ## Community
 
 | Page | Audience tags | Stage | Visitor | Member | Creator | Mod | Admin | Dev / owner |
@@ -65,6 +72,7 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Manage community roles | user, creator, admin, dev | beta | — | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Create and manage community events | user, creator, mod, admin, dev | beta | — | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Community event delivery | dev | beta | — | — | — | — | — | ✓ |
+| Find a time, world and movie together | user, creator, mod, admin, dev | beta | — | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 ## Creator Tools
 
@@ -77,12 +85,19 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Connect and Sync Trello | creator, admin, dev | alpha | — | — | ✓ | — | ✓ | ✓ |
 | Request a Manual ReFit Commission | user, creator, admin, dev | stable | — | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Accept ReFit Commissions | creator, admin, dev | stable | — | — | ✓ | — | ✓ | ✓ |
+| Grant assets through Discord roles | creator, admin, dev | beta | — | — | ✓ | — | ✓ | ✓ |
 | Understand Platform Payment Revenue | admin, dev | stable | — | — | — | — | ✓ | ✓ |
 | Manage Your Commission Workspace | creator, admin, dev | beta | — | — | ✓ | — | ✓ | ✓ |
 | Announce Commission Assets in Your Channels | creator, admin, dev | beta | — | — | ✓ | — | ✓ | ✓ |
 | Edit Board Cards and Link Existing Commissions | creator, admin, dev | alpha | — | — | ✓ | — | ✓ | ✓ |
 | Connect Notion Task Boards | creator, admin, dev | alpha | — | — | ✓ | — | ✓ | ✓ |
+| Write formatted content | creator, admin, dev | alpha | — | — | ✓ | — | ✓ | ✓ |
+| Create, publish and measure an asset | creator, admin, dev | beta | — | — | ✓ | — | ✓ | ✓ |
 | Set Your Seller Information and Commission Terms | creator, admin, dev | beta | — | — | ✓ | — | ✓ | ✓ |
+| Publish posts and stream announcements | creator, admin, dev | beta | — | — | ✓ | — | ✓ | ✓ |
+| Configure Discord access to an asset | creator, admin, dev | beta | — | — | ✓ | — | ✓ | ✓ |
+| Publish a Monthly Orbiters magazine | creator, admin, dev | beta | — | — | ✓ | — | ✓ | ✓ |
+| Publish and manage a VPM listing | creator, admin, dev | beta | — | — | ✓ | — | ✓ | ✓ |
 | Edit releases in the version workspace | creator, admin, dev | beta | — | — | ✓ | — | ✓ | ✓ |
 
 ## Decisions
@@ -121,6 +136,12 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Write a guide worth exploring | dev | stable | — | — | — | — | — | ✓ |
 | Board Card Editing and Imported Commissions | dev | alpha | — | — | — | — | — | ✓ |
 | Notion Board Integration | dev | alpha | — | — | — | — | — | ✓ |
+| VPM migration runbook | dev, admin | beta | — | — | — | — | ✓ | ✓ |
+| Creator features production release handoff | dev, admin | beta | — | — | — | — | ✓ | ✓ |
+| Publish Unity package releases | dev, admin | stable | — | — | — | — | ✓ | ✓ |
+| Capture Unity editor windows through MCP | dev, admin | stable | — | — | — | — | ✓ | ✓ |
+| My Avatar integration contract | dev, admin | beta | — | — | — | — | ✓ | ✓ |
+| Stripe integration review, September 2026 | dev | alpha | — | — | — | — | — | ✓ |
 | Navbar logo motion | dev | alpha | — | — | — | — | — | ✓ |
 | MCB Presentation Preview | dev | alpha | — | — | — | — | — | ✓ |
 | Community age verification reference | dev, admin | beta | — | — | — | — | ✓ | ✓ |
@@ -155,6 +176,13 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Account Login and Connections | public, user | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Support Several Original Base Versions | creator, dev | alpha | — | — | ✓ | — | — | ✓ |
 
+## How-to
+
+| Page | Audience tags | Stage | Visitor | Member | Creator | Mod | Admin | Dev / owner |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Connect shipping estimates for France and Europe | admin, creator, dev | beta | — | — | ✓ | — | ✓ | ✓ |
+| Personalize your creator pages | creator, admin, dev | beta | — | — | ✓ | — | ✓ | ✓ |
+
 ## Moderation
 
 | Page | Audience tags | Stage | Visitor | Member | Creator | Mod | Admin | Dev / owner |
@@ -167,12 +195,16 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Admin and Moderation | mod, admin, dev | stable | — | — | — | ✓ | ✓ | ✓ |
 | Verification and Appeals | creator, mod, admin, dev | stable | — | — | ✓ | ✓ | ✓ | ✓ |
+| Test accounts and use the updated staff workspace | mod, admin, dev | beta | — | — | — | ✓ | ✓ | ✓ |
 | Webhook Troubleshooting | creator, admin, dev | stable | — | — | ✓ | — | ✓ | ✓ |
 | Deployment and Backups | admin, dev | stable | — | — | — | — | ✓ | ✓ |
 | Structured Deployment Reports | admin, dev | alpha | — | — | — | — | ✓ | ✓ |
 | Recover Background Jobs | admin, dev | stable | — | — | — | — | ✓ | ✓ |
 | Privacy and Compliance Operations | mod, admin, dev | beta | — | — | — | ✓ | ✓ | ✓ |
 | Local Development and OAuth | admin, dev | stable | — | — | — | — | ✓ | ✓ |
+| Configure creator-growth integrations | admin, dev | beta | — | — | — | — | ✓ | ✓ |
+| Configure AI models, prompts and usage | admin, dev | beta | — | — | — | — | ✓ | ✓ |
+| Recover provider maintenance and shipping estimates | admin, dev | beta | — | — | — | — | ✓ | ✓ |
 
 ## Reference
 
@@ -188,11 +220,13 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Board Data and Route Reference | dev | alpha | — | — | — | — | — | ✓ |
 | GitHub Connection Setup Reference | dev | alpha | — | — | — | — | — | ✓ |
 | Steward API and Token Reference | dev | alpha | — | — | — | — | — | ✓ |
+| ReFit Lower-Body Surface Coverage | dev | alpha | — | — | — | — | — | ✓ |
 | ReFit Validation and Performance | dev | alpha | — | — | — | — | — | ✓ |
 | Telegram Login Setup | admin, dev | beta | — | — | — | — | ✓ | ✓ |
 | MCB Version Pipeline Benchmarks | dev | alpha | — | — | — | — | — | ✓ |
 | MCB Adaptive Version Delivery | admin, dev | alpha | — | — | — | — | ✓ | ✓ |
 | MCB First Apply Optimization Research | dev | alpha | — | — | — | — | — | ✓ |
+| Website icons and shared-link previews | admin, dev | beta | — | — | — | — | ✓ | ✓ |
 
 ## Start Here
 
@@ -207,6 +241,7 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Page | Audience tags | Stage | Visitor | Member | Creator | Mod | Admin | Dev / owner |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | MCB and Unity Tools | public, user, creator, admin, dev | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Sync avatar edits from Blender | creator, dev | alpha | — | — | ✓ | — | — | ✓ |
 | MCB Operating Contract | creator, dev | stable | — | — | ✓ | — | — | ✓ |
 | ReFit Operating Contract | creator, dev | stable | — | — | ✓ | — | — | ✓ |
 | Unit Git Operating Contract | creator, dev | stable | — | — | ✓ | — | — | ✓ |
@@ -215,6 +250,9 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | XRayGizmos controls and troubleshooting | public | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Make your first project checkpoint with UnitGit | public | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Work with UnitGit branches, shelves, and history | public | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Change avatar textures with My Avatar | public, creator, dev | beta | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Create a VRChat thumbnail with My Avatar | public, creator, dev | beta | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Pose, physics and parameters with My Avatar | public, creator, dev | beta | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 ## Tutorials
 
@@ -230,3 +268,5 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Public Profile and Activity | public, user, creator, mod, admin, dev | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Customize Your Homepage | public, user, creator, admin, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Art Commissions and Sonas | public, user, creator, admin, dev | beta | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Use the creator and community overviews | creator, mod, admin, dev | beta | — | — | ✓ | ✓ | ✓ | ✓ |
+| Open avatar tools and your public profile | public | beta | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |

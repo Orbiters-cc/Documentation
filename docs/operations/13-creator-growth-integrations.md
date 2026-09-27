@@ -78,7 +78,7 @@ this check does not establish production startup or provider acceptance.
 `creatorDraftEditing.test.js` checks that publishing page edits preserves existing
 installation settings while new general assets keep their creation defaults.
 
-AI copies are bounded by decoded pixels, file size, image count and resized payload size. Source text and images are not retained in ordinary AI interaction content for these imports. Private drafts and selected public media have separate access rules. Unreferenced creator uploads are eligible for cleanup after a day; active drafts, published media, retained orders and social posts protect their references.
+AI copies are bounded by decoded pixels, file size, image count and resized payload size. Asset AutoFill retains submitted source text, selected image references and model answers in AI history. Promotion classification omits request and response content from that history while keeping usage and diagnostic metadata. Private drafts and selected public media have separate access rules. Unreferenced creator uploads are eligible for cleanup after a day; active drafts, published media, retained orders and social posts protect their references. See [AI use and preferences](../how-to/ai-use-and-preferences.md) for the account switch and feature-specific storage explanation.
 
 Visit receipts expire after one day, opted-in journeys after 90 days, and aggregate metrics after 395 days. Aggregate events omit user/session identifiers. Personal journeys require the explicit personalization preference; withdrawing it deletes the account's stored journeys. Creator statistics expose totals, not visitor identities. Terminal social history expires after 180 days; uncertain deliveries remain available for resolution.
 
