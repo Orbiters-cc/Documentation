@@ -15,14 +15,15 @@ lastVerified: 2026-09-27
 
 ## Package boundaries
 
-- `orbiters.myavatar` 0.1.0 owns the persistent avatar component, texture import,
+- `orbiters.myavatar` 0.2.0 owns the persistent avatar component, texture import,
   shader-slot discovery, assignment snapshots and Inspector workflow.
 - `orbiters.toolkit` 0.2.1 owns the common Inspector shell and styles, glowing
   surface, vector logo renderer, account UI, authentication store and API roots.
   MCB 1.7.2 consumes the same shared services. The `Orbiters.Toolkit` assembly
   guards its editor services with `UNITY_EDITOR`; no editor logic enters players.
-- `orbiters.unitgit` 0.1.1 exposes `CommitProjectFilesAsync(projectRoot, title,
-  paths)`. It validates paths under the project, rejects ignored checkpoint files,
+- `orbiters.unitgit` 0.1.1 is optional since My Avatar 0.2.0. When installed, the
+  `MYAVATAR_UNITGIT` version define enables the commit step, which calls
+  `CommitProjectFilesAsync(projectRoot, title, paths)`. It validates paths under the project, rejects ignored checkpoint files,
   performs Git work off the main thread and notifies consumers after completion.
   Existing scoped-index behavior preserves unrelated staged work.
 
@@ -76,7 +77,10 @@ active request per user and at most 32 active requests in this process.
 The package repository is `Orbiters-cc/MyAvatar`, branch `master`, with repository
 variable `PACKAGE_NAME=MyAvatar`. It uses the standard **Build Release** workflow.
 Publish Toolkit and Unit Git dependency releases before publishing My Avatar.
-The first My Avatar release is 0.0.1; 0.1.0 adds the local-first texture pipeline.
+The first My Avatar release is 0.0.1; 0.1.0 adds the local-first texture pipeline;
+0.2.0 adds locked-shader support, convention-independent matching, the morphing drop
+field and makes Unit Git optional. The repository's release webhook is source 12 of
+the canonical listing, created automatically when the source was added.
 The release webhook refreshes the canonical Orbiters VPM source; an Actions success
 alone does not prove VCC installation.
 

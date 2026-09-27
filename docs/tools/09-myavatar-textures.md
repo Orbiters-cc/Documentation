@@ -17,32 +17,52 @@ My Avatar is a component on your avatar root. It imports texture sets, matches
 them to the avatar's materials and keeps unresolved choices in the Inspector.
 Your settings and last material snapshot are saved with the scene.
 
-The import reuse, Redo, suggested-target, remembered-slot and background AI
-behavior below requires My Avatar 0.1.0 or later.
+This page describes My Avatar 0.2.0: locked-shader support, name matching that
+works with any naming convention, the morphing drop field and optional Unit Git.
 
 ## Install and apply a texture set
 
-1. Install **My Avatar** through the Orbiters VPM listing. Its dependencies are
-   Orbiters Toolkit, Unit Git and the VRChat avatar SDK, on Unity 2022.3.
+1. Install **My Avatar** through the Orbiters VPM listing. It needs Orbiters
+   Toolkit and the VRChat avatar SDK on Unity 2022.3. Unit Git is optional.
 2. Select your avatar root in an open scene and add **Orbiters > My Avatar** from
    Add Component. The GameObject menu has the same command.
-3. Drop your PNG, JPG or TGA images into the dashed input. You can drop several
-   files together or select a folder. A folder includes its immediate images.
+3. Drop your PNG, JPG or TGA images into the dashed field. You can drop several
+   files together or select a folder. A folder includes its immediate images. The
+   field turns into a progress bar, then shows the result with **Undo** and **Save**.
+   You can drop another set on it at any time.
 4. Clear matches apply immediately, usually within a second for textures already
-   in the project. The Inspector lists files that still need attention. Choose a
-   material slot, then **Apply selected matches**.
+   in the project. A texture that still needs a slot appears as one row below the
+   field: **Use on …** accepts the suggestion and **Choose slot…** picks another;
+   either applies right away.
 5. When two colour images point at one slot and exactly one is mostly black with
    bright details, it goes to the material's emission slot; for example an eye
    emission image named like a second BaseColor. If textures remain unmatched and
    AI is available, Orbiters checks them in the background and applies confident
-   answers when they arrive. Remaining uncertain matches offer **Use this on …**
-   or a manual slot choice.
-6. Dropping the same texture set on the same avatar again reuses the slots you
-   applied before, including choices you made manually.
+   answers when they arrive.
+6. Slots you choose by hand are remembered for that file on that avatar and reused
+   on the next drop. Automatic matches are recomputed each time, so a wrong guess
+   never becomes permanent.
 
-The tool considers the current shader's visible 2D texture slots, current texture
-names across each material and material names. Primary slots take precedence over
-detail layers for ordinary color and normal maps. Each drop supports up to 48 files, 256 MB per file and
+### How matching works
+
+- Every visible 2D texture slot of every material below the component is considered,
+  including locked/optimized shaders such as Poiyomi's. A locked shader only keeps
+  the features that were enabled when it was locked; when a texture's set belongs on
+  a material that lacks the slot (for example emission), My Avatar says so. Enable
+  the feature, unlocking the shader if needed, and drop again.
+- File names are split into words and compared with the name of the texture now in
+  each slot, the material and mesh names, and the material's other textures. Role
+  words such as BaseColor, Normal, `_N` or Emissive decide the kind of slot. Words
+  shared by many materials (a base or author name) count little, and words shared by
+  most dropped files (an export prefix) are ignored, so any naming convention works.
+- Visible objects come first; disabled variants and particle or trail materials rank
+  last. Primary slots are preferred over detail, matcap and rim layers.
+- Files of one set follow the material their siblings matched. Materials of one mesh
+  that share the same UV layout, such as colour variants of the same hair strands,
+  receive the set together. A texture also replaces the old one wherever the old one
+  was used in the same kind of slot.
+
+Each drop supports up to 48 files, 256 MB per file and
 1 GB in total. Existing project textures are reused. A persistent cache checks only
 the external files you drop, using their path, file size and modification timestamps;
 unchanged files are not copied again. New files are copied in parallel without
@@ -63,20 +83,20 @@ you can apply clear local matches without an account or network connection.
 
 ## Undo and save
 
-**Undo last apply** restores the previous renderer material assignments, then
-becomes **Redo last apply**. Redo restores the saved result without importing
+**Undo** restores the previous renderer material assignments, then becomes
+**Redo**. Redo restores the saved result without importing
 textures or repeating AI matching. Both actions preserve the saved snapshot. It works
 after a scene reload when the component and scene were saved. Each drop is one
-operation: AI matches that arrive later and **Apply selected matches** extend it, so
+operation: AI matches that arrive later and slots you choose extend it, so
 Undo returns to the materials from before the drop. A new drop replaces this
 persistent snapshot. Unity's regular Undo also records the changes, with background
 AI matches as their own step.
 If renderer assignments were changed separately since the apply, My Avatar asks
 you to resolve those edits before restoring its snapshot.
 
-**Save · Unit Git** saves the avatar scene and commits `texture change` in the
-Unity project's Git repository. Initialize the repository in Unit Git first.
-The commit includes this scene's current changes, generated files, reused texture assets and their Unity
+**Save** saves the avatar scene and the generated assets. When Unit Git is installed
+it also commits `texture change` in the Unity project's Git repository, once the
+repository is initialized in Unit Git. The commit includes this scene's current changes, generated files, reused texture assets and their Unity
 metadata. Other project paths and staged changes are excluded. If a required
 generated file is ignored by Git, fix the ignore rule and try again. Save does
 not push. Undo after saving creates another local change; it does not rewrite
