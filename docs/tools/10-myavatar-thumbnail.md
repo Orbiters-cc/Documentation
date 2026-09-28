@@ -82,3 +82,12 @@ state even if the photoshoot was already open. Camera and framing changes still
 reuse an unchanged clone. See [Unity package safety and avatar workflow fixes](unity-package-safety-fixes.md).
 
 </alpha>
+
+<alpha>
+
+The unreleased thumbnail fix saves each capture to a distinct PNG, preserving the
+previous pixels for Unity Undo and Redo. This changes the file-replacement behavior
+described above for the published version. See
+[Unit Git history and My Avatar texture fixes](unity-history-and-texture-fixes.md).
+
+</alpha>

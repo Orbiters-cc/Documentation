@@ -15,7 +15,8 @@ lastVerified: 2026-09-28
 
 This page describes local, unreleased changes to My Custom Base, Orbiters Toolkit
 and the My Avatar parameter display. Installing the currently published packages
-does not establish that these changes are included. Unit Git is unchanged.
+does not establish that these changes are included. Additional Unit Git and My Avatar
+changes are covered in [Unit Git history and My Avatar texture fixes](unity-history-and-texture-fixes.md).
 
 ## Version storage and downloads
 

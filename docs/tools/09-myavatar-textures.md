@@ -142,3 +142,12 @@ Assignments below 90% confidence are ignored. An answer is discarded if you drop
 again, change a slot, or use Undo/Redo while it is pending. Unresolved alternatives
 remain for your choice. Provider or connection errors appear inline and the local
 matches stay applied.
+
+<alpha>
+
+Local, unreleased fixes cancel pending AI answers when AI is turned off or the
+Inspector closes, serialize preference writes, keep same-named textures from
+different sources separate, and treat unchanged saves as successful. See
+[Unit Git history and My Avatar texture fixes](unity-history-and-texture-fixes.md).
+
+</alpha>

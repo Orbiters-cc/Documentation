@@ -68,3 +68,12 @@ Amending rewrites the previous commit. Prefer a new follow-up commit when other 
 | A command fails | Read Console for the actual Git error before repeating the action. |
 
 UnitGit operates on real project files and Git history. Review the action's confirmation, especially before deleting a shelf or rewriting a commit.
+
+<alpha>
+
+Local, unreleased fixes protect Rename and Squash from concurrent checkouts, refresh
+selected branch state before Update, load older history through Next, preserve
+header-like diff content and identify all unresolved conflict states. See
+[Unit Git history and My Avatar texture fixes](unity-history-and-texture-fixes.md).
+
+</alpha>
