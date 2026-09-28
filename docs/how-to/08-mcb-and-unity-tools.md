@@ -8,7 +8,7 @@ id: orbiters.how-to.mcb-and-unity-tools
 domain: mcb
 type: how-to
 owner: mcb-maintainers
-lastVerified: 2026-09-20
+lastVerified: 2026-09-28
 ---
 
 # MCB and Unity Tools
@@ -34,9 +34,28 @@ The tools can call Orbiters to:
 
 1. Sign in to Orbiters with Discord or Telegram. On `/my-custom-base`, **Install** expands into both login choices in place. After provider sign-in, the page returns directly to the first installation step without replaying the introduction. **Escape** or **Close installer** collapses the choices without starting installation.
 2. Open the compatible asset page or MCB page.
-3. Connect the tool when prompted.
+3. Connect the tool when prompted (see [Connect a Unity tool](#connect-a-unity-tool)).
 4. Choose an asset and version that your account can access.
 5. Install or update through the tool.
+
+## Connect a Unity tool
+
+Unity tools sign in in one of two ways:
+
+- **Login with Discord** or **Login with Telegram** in the tool opens Orbiters in
+  your browser. Sign in if needed, check that the four-character code matches the
+  one shown in Unity, and choose **Connect**. The tool then receives its own
+  credential; nothing is copied by hand. A link lasts ten minutes and works once.
+  If it expired or was already used, click Login again in Unity. If Orbiters
+  could not be reached, **Try again** rechecks the same link; if your session
+  ended, the page asks you to sign in again.
+- **Magic Sync** on the website copies an `orbit-…` token to your clipboard;
+  **Magic Sync** in the tool reads it.
+
+A credential is only released to the tool that holds that login's secret or the
+copied token. Being on the same network or IP address as your browser is not
+enough: older tool versions that waited for a token without either of these
+keep waiting. Use Login or Magic Sync instead.
 
 ## Read the interface before changing the avatar
 
@@ -101,9 +120,12 @@ If the tool cannot connect:
 <audience include="dev">
 
 The legacy `unity-wizard` routes and newer `mcb` routes expose the same token
-response contracts through one shared WizardToken lifecycle service. Recent
-IP-based discovery remains limited to one minute, while direct token reuse records
-each IP address and user agent in `WizardTokenUses`. Change lifecycle behavior in
+response contracts through one shared WizardToken lifecycle service. IP-based
+discovery is removed: `token=notoken` never returns a credential and always answers
+425 with a message to copy the token or use Login, so older tools keep waiting
+instead of failing. Credentials are released only to a caller that presents the
+clipboard `orbit-…` token or the browser login's poll secret (`editorLinkService`).
+Direct token reuse records each IP address and user agent in `WizardTokenUses`. Change lifecycle behavior in
 the shared service so the two route families cannot drift.
 
 MCB UI Toolkit builds must not be re-entered by cache or network callbacks. User-info cache hits defer completion until after the current editor callback returns. Version rows request user metadata only when it is absent and subscribe separately to avatar-image completion. Asset thumbnails, banners, and author images update existing image controls through the bounded dynamic-content refresh instead of recursively rebuilding the complete inspector. Preserve this separation when adding asynchronous UI data.

@@ -8,7 +8,7 @@ id: orbiters.development.myavatar-integration
 domain: general
 type: reference
 owner: orbiters-engineering
-lastVerified: 2026-09-27
+lastVerified: 2026-09-28
 ---
 
 # My Avatar integration contract
@@ -41,6 +41,7 @@ Both routes require the ordinary Orbiters Bearer authentication and return
 | --- | --- |
 | `GET /myavatar/connection` | Returns connection state and the account AI preference (account row only). |
 | `POST /myavatar/texture-plan` | Validates text context, calls the configured AI feature, returns assignment IDs and warnings. |
+| `POST /myavatar/accessory-plan` | Validates accessory and avatar bone context, calls the configured AI feature, returns a variant, rigid target, bone links, setup rows and warnings. |
 
 The request supplies up to 48 textures and 512 visible 2D shader slots, each with
 a unique request-local ID. Textures carry name, source dimensions, filename role and
@@ -71,6 +72,31 @@ user AI preference enforcement and private-content history handling. No separate
 provider credential is needed. Source names and image contents are explicitly
 untrusted prompt data. The endpoint allows 20 requests per user per hour, one
 active request per user and at most 32 active requests in this process.
+
+### Accessory placement
+
+The alpha accessory drop asks `POST /myavatar/accessory-plan` only for what local logic
+could not decide. The request has `avatar.bones` (at most 400: `id` `aN`, `name`,
+`path`, nullable `human`), `accessory` (`name`; at most 24 `candidates` with `id` `cN`,
+`name`, package-relative `path`, `kind`, `setup` component types, `renderers`, `bones`;
+nullable `selected`; at most 400 `bones` with `id` `sN`, `name`, `path`, nullable
+`parent` and `match`; `unresolved` bone IDs; `rigid`; at most 80 notable `objects` with
+`id` `oN`, `path`, `components`) and at most 6 `docs` (`name`, `text` up to 4,000
+characters, 12,000 in total). IDs must be unique and every reference must resolve inside
+the request; a request with a single candidate, no rigid target, no unresolved bones and
+no objects is rejected because nothing is left to decide. The prompt groups bones by
+parent path. The documentation is untrusted text and the feature contract says so.
+
+The response is `{ candidate, target, links: [{ bone, avatarBone, confidence }],
+setup: [{ object, reason }], warnings }`. The schema only offers IDs from the request:
+`candidate` only when there are several candidates, `target` only for rigid
+accessories, link `bone` only from `unresolved`. The server again drops unknown IDs and
+links below 0.8 confidence, keeps the most confident link per bone and one setup row per
+object, and caps reasons at 160 and warnings at 200 characters (at most 4).
+`MYAVATAR_ACCESSORIES` defaults to reasoning off, is overridable in Admin → AI →
+Features, and uses the same preference enforcement, private history handling and
+limits as texture matching (20 per user per hour in its own bucket, one active request
+per user, 32 per process).
 
 ## Release
 

@@ -112,9 +112,31 @@ custom-command group. ReFit preselects that accessory and its containing
 avatar when identifiable. Multiple candidate meshes or an unidentified avatar keep
 the corresponding selection step; opening the wizard does not modify the scene.
 
-The blendshape picker uses a search field and wrapping name suggestions. An empty
-search shows up to three recently refitted shapes that exist on the selected body.
-Successful wizard and MCB transfers update this local history; failed runs do not.
+The blendshape picker supports selecting multiple body shapes for one ReFit run.
+Search filters the full list without clearing selections. Recent successful shapes
+appear first when the search is empty. Select individual wrapping buttons, use **Select all shown**
+to add the current matches, remove a selected name below the list, or use **Clear**.
+The selected count stays visible; **Next** requires at least one selection. Going
+back preserves selections, while starting over clears them. If the target body
+changes, names absent from its mesh are removed.
+
+The summary lists every selected shape. ReFit generates a separate output blendshape
+for each selection on one duplicated asset mesh; it does not combine the shapes into
+a single deformation. The optional source avatar still lets the same run fit the
+base mesh before transferring the selected shapes. Successful wizard and MCB
+transfers update local recent history; failed runs do not.
+
+Blendshape choices use compact wrapping buttons inside a list capped at 220 pixels high. Large lists scroll inside that area. Selected chips have a separate 88-pixel height cap, so selecting hundreds of shapes keeps the source field and Next button close by.
+The floating ReFit window raises its minimum height to fit the current page after
+searches, selection changes, navigation and expanding options. A window made larger
+by the user is not automatically shrunk. Growth stops at the available desktop
+height with room for window chrome; long pages keep a scrollbar at that limit.
+Docked and maximized windows retain Unity's layout and scroll when needed.
+This standalone multi-selection is a local development change and is not released.
+It uses the same batch request as MCB, sharing staging and surface binding work.
+Geometry runs off the editor thread and uses the engine's existing parallel vertex
+calculations. Shapes are processed in order; total time depends on mesh size,
+selection count and correction settings.
 **Back** and **Settings** are now in the top banner.
 
 The main page shows active ReFit commissions below refitted assets. Each compact row

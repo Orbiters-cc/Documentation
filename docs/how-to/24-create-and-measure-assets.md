@@ -8,7 +8,7 @@ id: orbiters.how-to.create-and-measure-assets
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-26
+lastVerified: 2026-09-28
 ---
 
 # Create, publish and measure an asset
@@ -45,7 +45,7 @@ seller details requires confirming the reviewed information again.
 ## Start with what you have
 
 1. Open **Creator → Assets → + Create**.
-2. Choose **General**, **Custom base**, **Commission**, or **Stickers**. **Copy from** reuses an asset you own as a starting point.
+2. Under **Create an asset**, choose one of the four types: **General**, **Custom base**, **Commission** or **Stickers**. To start from an asset you own, first pick it in the optional **Copy from an existing asset** field.
 3. Fill the form yourself, or use **AutoFill**: paste your post, notes or public store links into **Ideas and source text**, then add only the images you want analyzed with **Add AI source files**.
 4. Select **Send to LLM and auto-fill**. The source text and resized images selected there go to the administrator's configured AI provider. The separate **Media library** holds asset images and GLB previews without sending them to AutoFill; you can explicitly select **Use in AutoFill** on an existing image. A draft accepts up to 20 files of 20 MB each.
 5. Supported details are applied to the private draft automatically. Newly filled fields are purple until you edit them, and the AutoFill panel shows what was added and any warnings. Review the result before publishing; sticker setup defaults are identified separately from extracted facts.
@@ -65,20 +65,23 @@ message. Your draft remains available for correction.
 For stickers, AutoFill creates one variant per finish: Glossy, Matte, Broken Glass
 Holo and Starry Holo are four variants. Size, copies **per design**, and design count
 are shared selectable options. Seven designs at 200 copies means 1,400 stickers.
-The editor lets you change the lists and the price range once, then edit each
-finish's artwork, thickness, availability and price weight independently.
+The editor lets you change the lists and the shared pricing once, then edit each
+finish's artwork, thickness, availability and surcharge independently.
 
-With only a price range, AutoFill creates an editable estimate based on printed
-area, copies per design, design count and finish weight. Glossy/matte default to
-weight 1; holographic/glitter default to 1.25. The smallest basic order matches the
-minimum (€20 in the example); the largest premium order matches the maximum
-(€630). Review these estimates before publishing. No price evidence means blank
-prices, not a free offer. These are draft assumptions, not extracted exact prices.
+With only a price range, AutoFill fits an editable price curve to it: the smallest
+basic order matches the minimum (€20 in the example) and the largest order matches
+the maximum (€630). Holographic and glitter finishes get a +25% surcharge; glossy
+and matte have none. If no valid curve fits the range, the listing keeps the
+**Two prices** method instead. Review the curve and surcharges before publishing.
+No price evidence means blank prices, not a free offer. These are draft
+assumptions, not extracted exact prices. See
+[Price the shared options](26-order-and-fulfill-stickers.md#price-the-shared-options)
+for the pricing methods.
 
 For a draft already containing separate combinations, **Group by finish and enable
 size & quantity options** opens a confirmation. Choose **Cancel grouping** to keep
-the original choices, or **Group printing choices** to apply the change. Grouping reduces it to finish variants and takes the option lists
-and price bounds from those rows. Review order limits and samples after grouping;
+the original choices, or **Group printing choices** to apply the change. Grouping reduces it to finish variants, takes the option lists from those
+rows and starts the **Curve** pricing method from their prices. Review order limits and samples after grouping;
 existing requests keep their original snapshots. Save and publish when ready.
 Finish previews load only when their editor is opened.
 
@@ -96,9 +99,8 @@ sticker drafts prefill **Production time** from your saved seller estimate. Savi
 seller information within an empty sticker form fills that estimate without
 replacing a production time you already entered.
 
-**Shipping and delivery** is optional and disabled on a new blank form. Turn on
-**Add shipping and delivery information** to add terms; turning it off clears the
-text. Shipping details supplied by an existing listing or your AutoFill sources
+**Shipping and delivery** is optional and hidden on a new blank form. Turn on
+**Shipping details** to add terms; turning it off clears the text. Shipping details supplied by an existing listing or your AutoFill sources
 remain editable. Carrier estimates and customer delivery-address requirements
 are independent of this optional listing text.
 
@@ -115,11 +117,16 @@ replaces it when available. This is activity feedback, not a completion percenta
 Open **Request & response details** to inspect the submitted text, image selection,
 instructions, output format and returned answer, including partial answers and failure
 reasons. These records are available to you and authorized AI administrators. Older
-redacted responses cannot be recovered. After a failure, add the sources you want to
-retry. DeepSeek output truncation receives one automatic higher-budget attempt within
-the same submission; other failures are not automatically resubmitted. Progress
-identifies the retry and totals tokens across both attempts. Both attempts remain
-visible in request history.
+redacted responses cannot be recovered. AutoFill makes up to three attempts within one
+submission. DeepSeek output truncation is retried at once with a larger output
+budget. A provider or connection failure, a rate limit, a response that ended early
+or one that did not match the required format is retried after a short pause; a
+format retry reminds the model of the required format. Unsupported images, AI being
+turned off or a missing provider key are not retried. Progress shows
+**Retrying (attempt 2 of 3)…** with the reason, and token totals include every
+attempt; each attempt remains visible in request history. Retries stop when the
+draft is published or a newer AutoFill replaces the request. If every attempt fails,
+the error says how many were made; add the sources you want and submit again.
 
 Minor text-format mistakes do not reject otherwise valid AutoFill results. Unknown
 text returned as `null` stays blank, and lists of text lines are joined. Ambiguous
@@ -135,14 +142,14 @@ Published product pages and their shop buttons are visible without signing in.
 Signing in refreshes your ownership on the same page; signing out restores the
 visitor view. Viewing a product does not grant access to its purchased files.
 
-Open an asset's **General** settings and choose **Edit asset page** to change its page using the same editor. Changes remain private until published. If another window or a provider sync changed the asset in the meantime, the editor asks you to reopen from the current version before overwriting it.
+Open an asset's settings and choose **Edit asset page** in the header to change its page using the same editor. Changes remain private until published. If another window or a provider sync changed the asset in the meantime, the editor asks you to reopen from the current version before overwriting it.
 
 Publishing page edits preserves an existing texture or accessory's installation
 method and original avatar base. A custom-base draft still lets you explicitly
 choose its original base. New general assets, including copies, start without an
 installation method or original-base association.
 
-**General** also has direct thumbnail and **Page banner** controls. Banner upload,
+The settings **Page** tab also has direct **Thumbnail** and **Page banner** controls. Banner upload,
 replacement and removal apply immediately to the asset page. The avatar-specific
 **MCB Banner** is a separate image for the MCB tooling.
 
@@ -159,7 +166,11 @@ it to go to the asset (or your Creator assets filtered to **Not published**) and
 choose **Publish** to make it public. **Publish** is also available in the asset's
 settings header, on Creator asset cards and in the owner toolbar on the asset page.
 Old-format assets are converted once, during the release, and keep their names,
-descriptions, media, installation settings and access. **Edit asset page** still
+descriptions, media, installation settings and access. Assets you had already
+published yourself stay published; only listings that earlier pre-release code
+published automatically become **Not published**. A one-time repair restores
+assets published through the asset editor that the first version of this migration
+had unpublished. **Edit asset page** still
 lets you review the full product details before publishing.
 </beta>
 
@@ -190,13 +201,13 @@ published through Orbiters; this does not mean the account connection is broken.
 
 ## Hide or remove a stale asset
 
-Open **General** and use **Hide** to keep the asset in the database while removing public access to its page and media. **Show asset** makes it visible again, subject to moderation restrictions.
+In the settings **Page** tab, turn off **Visible to visitors** under **Visibility** to keep the asset in the database while removing public access to its page and media. Turning it back on makes it visible again, subject to moderation restrictions.
 
 **Delete** requires entering the asset name. It removes the asset and its access references. Existing commission and sticker order snapshots remain available to their participants. Later vendor or Discord-role synchronization can recreate a deleted asset; use Hide when you want it to remain suppressed while keeping the integration.
 
 ## Understand the numbers
 
-The creator's asset cards show recent impressions, visits and clicks. Open **General** for the selected period's totals and a breakdown by placement, including the homepage, assets catalog and recommendation cards. Outbound store clicks are shown separately by provider.
+The creator's asset cards show recent impressions, visits and clicks. Open the settings **Performance** tab for the selected period's totals and a breakdown by placement, including the homepage, assets catalog and recommendation cards. Outbound store clicks are shown separately by provider.
 
 An impression requires at least half the card to be visible for one second while the browser tab is visible. Creator self-views do not count. Repeated visits can count more than once: these are event totals, not unique people.
 
@@ -249,7 +260,7 @@ payment on another creator's commission. Return to creator view when finished.
 
 ## Open or share the public asset
 
-The asset configuration **General** tab provides **Open public asset page** in a
-new tab and **Copy page link**. Copying uses the current site's public asset URL;
+The asset settings header provides **View public page** in a new tab and a
+**Copy asset link** button. Copying uses the current site's public asset URL;
 it does not include editor or customer-preview parameters. These actions do not
 publish a draft or change who can access the asset.

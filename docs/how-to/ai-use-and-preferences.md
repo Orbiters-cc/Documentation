@@ -8,7 +8,7 @@ id: orbiters.how-to.ai-use
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-27
+lastVerified: 2026-09-28
 ---
 
 # Understand and control AI use
@@ -25,8 +25,8 @@ Both controls save the same account preference immediately. If saving fails, the
 control keeps the last confirmed choice and shows an error so you can retry.
 
 The choice applies to new requests for your account, including asset AutoFill,
-MCB version titles and changelogs, and My Avatar texture matching. Complete those
-tasks manually when assistance is off. It does not undo completed work, erase
+MCB version titles and changelogs, and My Avatar texture matching and accessory
+placement. Complete those tasks manually when assistance is off. It does not undo completed work, erase
 stored content, or recall a request already sent to a provider.
 
 For Discord promotion assistance, link the Discord identity to your Orbiters
@@ -35,10 +35,11 @@ control whether assistance is enabled in their designated promotion channel.
 
 ## Understand the feature list
 
-The page covers My Avatar texture matching, MCB version metadata, asset draft
-AutoFill, community self-promotion classification and the administrator playground.
-Each entry explains its inputs. My Avatar sends texture/material names and measured
-statistics, not image pixels. AutoFill and promotion classification can send images
+The page covers My Avatar texture matching and accessory placement, MCB version
+metadata, asset draft AutoFill, community self-promotion classification and the
+administrator playground. Each entry explains its inputs. My Avatar sends
+texture/material names and measured statistics, or accessory and avatar bone names,
+hierarchy paths and included text documentation; never image pixels. AutoFill and promotion classification can send images
 for analysis; this is not image generation.
 
 The model list follows the server's default and per-feature overrides. The admin
@@ -50,8 +51,8 @@ are available or that the provider is responding.
 ## Content storage
 
 - Only administrator playground conversations retain request and response text.
-- AutoFill, MCB metadata, My Avatar texture matching and promotion classification
-  omit request and response content from AI history, but retain usage and
+- AutoFill, MCB metadata, My Avatar texture matching and accessory placement, and
+  promotion classification omit request and response content from AI history, but retain usage and
   diagnostic metadata. AutoFill also records submitted image references.
 - Drafts, uploaded files, saved titles/changelogs and promotion invitations have
   their own storage. Disabling AI does not delete them.

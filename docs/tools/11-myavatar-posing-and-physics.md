@@ -8,7 +8,7 @@ id: orbiters.tools.myavatar-posing-physics
 domain: myavatar
 type: how-to
 owner: orbiters-engineering
-lastVerified: 2026-09-27
+lastVerified: 2026-09-28
 ---
 
 # Pose, physics and parameters with My Avatar
@@ -30,12 +30,14 @@ explanation.
   side. It stays on while nothing can be mirrored and starts as soon as you select a
   bone or an avatar. See [XRay Gizmos controls](06-xray-gizmos-controls.md) for the
   details it shares with **Mirror**.
-- **Clothing** keeps clothing and accessories that are not merged yet in the avatar's
-  pose. These have their own armature under the avatar and are merged at build by
-  VRCFury Armature Link or a similar tool. Each clothing bone keeps its rest offset
-  from the matching avatar bone, so the result matches what the build produces. The
-  list under the switches shows each accessory and how many of its bones matched the
-  avatar; click one to select its armature.
+- **Clothing** (beta) keeps clothing and accessories that are not merged yet in the
+  avatar's pose. It follows each accessory as it will be attached at build: VRCFury
+  Armature Links, the links My Avatar creates for accessories and clothes, and rigid
+  props that follow one bone. Each clothing bone keeps its rest offset from its avatar
+  bone, so the result matches what the build produces. The list under the switches
+  shows each accessory and how many of its bones matched the avatar; click one to
+  select its armature. The preview is temporary: switching Clothing off puts the
+  accessories back where they were.
 
 Pose edits remain normal Unity edits: one Undo reverts the avatar and the mirrored
 or following bones together.

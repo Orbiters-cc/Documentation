@@ -8,7 +8,7 @@ id: orbiters.how-to.creator-vpm
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-27
+lastVerified: 2026-09-28
 ---
 
 # Publish and manage a VPM listing
@@ -66,6 +66,10 @@ OAuth API requires the `repo` scope for workflow dispatch; Orbiters encrypts the
 retained token. GitHub's short-lived access token is renewed automatically, and the
 longer-lived renewal token is kept current in the background, so the connection
 stays valid until you disconnect it or revoke the Orbiters app in GitHub.
+If GitHub or the database is briefly unavailable during a renewal, the action
+reports a temporary error to try again in a moment and the background renewal
+retries on its next run; you are only asked to reconnect when GitHub rejects the
+authorization.
 **Disconnect GitHub builds** disables that authorization locally before
 attempting remote revocation.
 

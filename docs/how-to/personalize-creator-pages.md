@@ -8,7 +8,7 @@ id: orbiters.creator.personalization
 domain: website
 type: how-to
 owner: orbiters-platform
-lastVerified: 2026-09-25
+lastVerified: 2026-09-28
 ---
 
 # Personalize your creator pages
@@ -24,22 +24,30 @@ widgets and detail windows keep the Orbiters appearance.
    adjust hue, or enter a six-digit hex color. Arrow keys adjust the color field;
    hold Shift for larger steps. Buttons use contrasting foreground text automatically.
 3. Choose an atmosphere using the visual cards: **Orbiters**, **Aero Shards**,
-   **Grainient** or **Gradient Waves**.
+   **Grainient** or **Gradient Waves**. Each card shows a still rendered from that
+   background in your current colors; it updates shortly after you stop changing a color.
 4. Tune the Base, Glow and Highlight colors in the live preview.
 5. Adjust **Surface blur** from 0 to 24 px. It softens the background behind page
    cards without blurring artwork or text. Set it to 0 to turn blur off. The live
    preview includes a card so you can judge the effect.
 6. Choose a **Profile and asset font**: Solitreo, Caveat, Montserrat, Roboto Mono, Roboto Slab, Libre Baskerville, Cormorant Garamond or Amiri. **Orbiters default** uses the website font. Fonts load from Google Fonts when selected.
-7. Choose **Card corners**: Rounded, Squircle, Bevel, Rabbet or Sharp. Browser support determines the native corner rendering; bevel and rabbet have CSS clipping fallbacks, while squircle falls back to rounded corners.
-8. Add and arrange your profile links in **Your links**. Give each link a title and an HTTP/HTTPS URL; up to 20 links are supported, including services Orbiters does not integrate with.
+7. Choose **Card corners**: Rounded, Squircle, Bevel, Rabbet or Sharp. Each option previews a small card drawn with the same corner rules as your pages, including the fallback your browser would use. Browser support determines the native corner rendering; bevel and rabbet have CSS clipping fallbacks, while squircle falls back to rounded corners.
+8. Add your profile links in **Your links**: paste a web address or an email address and choose **Add** (or press Enter). The platform is detected and shown with its icon; unknown sites get a website icon. The name is optional: when left empty it becomes the profile handle found in the link (for example `@nova`), otherwise the platform name, otherwise the site's address. Drag a link by its handle or use the up and down buttons to reorder it, and the pencil to edit its name or address. Up to 20 links are supported, including services Orbiters does not integrate with.
 9. Choose **Save appearance** above the live preview, in the right-hand column on wide screens. Changes in the preview are private until saved.
 
 **Discard changes** returns to the saved appearance. **Reset to default** prepares
 the default colors, background, font and shape while preserving your links; choose **Save appearance** to publish the reset.
 
-An untouched empty link row is omitted when saving. A partially filled or invalid
-link must be completed or removed; your unsaved appearance remains available if
-validation fails. Only HTTP/HTTPS links without embedded credentials are accepted.
+A link with an invalid address shows **Link needs fixing** and must be corrected or
+removed before saving; your unsaved appearance remains available if validation
+fails. Links must be HTTP/HTTPS addresses without embedded credentials, or a single
+email address (a `mailto:` link without extra fields such as a subject). Addresses
+typed without `https://`, such as `instagram.com/you`, are completed for you.
+
+On your public profile, your links appear as icons next to your profile picture,
+after your connected account and store links; a link already shown there is not
+repeated. They also appear as tiles with their icon and name under your bio. Email
+links open your visitor's mail app instead of a new tab.
 
 **Your links** shows measured profile visits and clicks on each link over the last
 30 days. These are event counts, not unique visitors. Your own visits and visitors
@@ -77,7 +85,8 @@ Appearance is stored in the nullable `Users.creatorAppearance` JSON column.
 current user's record. The public `GET /creator-tools/personalization/:id` returns
 only validated appearance settings. Background identifiers and six-digit hex
 colors, fonts and shapes are allowlisted. Link IDs are stable, unique 16-character
-hex identifiers; URLs reject executable protocols and embedded credentials.
+hex identifiers; URLs must be HTTP/HTTPS without embedded credentials, or `mailto:`
+with one plain address and no query or fragment.
 `GET /creator-tools/profile-metrics` returns only the authenticated creator's
 30-day view and outbound-link aggregates. Outbound tracking validates that the
 link belongs to the target creator and respects measurement preferences. `surfaceBlur` is an integer from 0 to 24 (default 8). No creator-supplied CSS, HTML, script or remote background

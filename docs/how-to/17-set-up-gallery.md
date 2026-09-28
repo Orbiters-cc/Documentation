@@ -20,7 +20,7 @@ To add a room to the **Gallery** page, open **Creator → Galleries**. Create a 
 | You want pictures to appear… | Configure them here |
 | --- | --- |
 | Under a named room in the main **Gallery** page | **Creator → Galleries** |
-| Under one asset's description, such as Ultirex | Open that asset in Creator and select **Showcase** |
+| Under one asset's description, such as Ultirex | Open that asset's settings: **Page** tab → **Showcase gallery** |
 
 These are separate configurations. Connecting a room to an asset showcase does not automatically create a room in the Gallery sidebar. The same Discord picture can appear in both places.
 
@@ -67,7 +67,7 @@ The source author can hide their own picture across Orbiters galleries and showc
 
 ## Set up an asset showcase
 
-Open the asset's **Showcase** settings in Creator, select its **Showcase Rooms**, choose a layout, and select **Save Showcase**. Then use **Crawl Past Images** there. This import belongs to that asset, independently of the main Gallery configuration.
+Open the asset's settings and find **Showcase gallery** in the **Page** tab. Choose **Set up showcase**, add its **Rooms**, choose a **Layout**, and select **Save showcase**. Then use **Crawl past images** under **Earlier images**. This import belongs to that asset, independently of the main Gallery configuration.
 
 ## Troubleshooting
 

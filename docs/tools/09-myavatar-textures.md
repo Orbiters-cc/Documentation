@@ -24,6 +24,13 @@ field and optional Unit Git. For thumbnails, see
 hair/tail/toe physics and parameters, see
 [Pose, physics and parameters with My Avatar](11-myavatar-posing-and-physics.md).
 
+<alpha>
+
+To add clothing and props, see
+[Add accessories and clothes with My Avatar](12-myavatar-accessories.md).
+
+</alpha>
+
 ## Install and apply a texture set
 
 1. Install **My Avatar** through the Orbiters VPM listing. It needs Orbiters
@@ -110,6 +117,18 @@ Imported files remain after Undo or cancellation to preserve valid references.
 Custom shaders may need a feature toggle or unlocking before a texture is visible.
 My Avatar does not change shaders or UVs, convert roughness to smoothness, or pack
 separate images into combined texture channels.
+
+## Quick optimization
+
+After a drop that placed images, the result offers **Quick optimization**. It caps the
+avatar's textures at 512 px and sets PC compression: BC1 for opaque colour, BC7 for
+textures with alpha and BC5 for normal maps, without crunch compression and with mipmap
+streaming. A texture that another avatar in the scene also uses is duplicated first, so
+that avatar keeps its textures; other textures are changed in place. Undo restores the
+previous import settings, even after restarting Unity.
+
+When it is done, My Avatar suggests d4rkAvatarOptimizer for the rest of the avatar. If
+it is installed, **Add to avatar** adds it to the avatar root.
 
 ## Orbiters account and automatic AI assistance
 

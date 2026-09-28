@@ -8,7 +8,7 @@ id: orbiters.how-to.configure-creator-assets
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-07-14
+lastVerified: 2026-09-28
 ---
 
 # Build an asset people can actually use
@@ -62,10 +62,36 @@ The next creator-tools release adds private drafts, assisted image imports,
 product previews, Hide/Delete controls and asset metrics. See
 [Create, publish and measure an asset](24-create-and-measure-assets.md).
 
-In an avatar asset's **General** tab, **Change thumbnail** uploads the square image
-used in asset lists and MCB. Choose PNG, JPEG or WebP up to 10 MB; it is saved as a
-centered 512 × 512 crop. The preview updates after saving. The MCB banner is edited
-separately and is not changed by a thumbnail upload.
+### Find your way around the asset settings
+
+Open an asset's settings at `/assets/<id>/config`. The header shows the thumbnail,
+name, asset type and state chips (**Published** or **Not published**, **Visible** or
+**Hidden**, **Old format**). Its actions are **Publish** for an unpublished asset,
+**Edit asset page** (**Convert to current format** for an old-format asset),
+**View public page** in a new tab, a copy-link button and, for
+Gumroad products, **Refresh from Gumroad**.
+
+The tabs are **Page**, **Access**, **Stores**, **Versions** (avatar assets only)
+and **Performance**. **Page** holds what customers see, in this order:
+
+1. **Thumbnail and banner**. Drop an image on a tile or click it to upload.
+   **Thumbnail** is the square image used by asset cards, search and MCB: PNG, JPEG
+   or WebP up to 10 MB, saved as a centered 512 × 512 crop. Its tile marks the band
+   an asset card keeps. **Page banner** is the wide image at the top of the asset
+   page, shown whole; 16:10 fills the frame. It accepts up to 20 MB and can be removed.
+   Avatar assets also have an **MCB banner**, used only by MCB in Unity. A warning
+   under a tile flags an image too small to stay sharp.
+2. **What customers see** previews the asset card, the asset page on a desktop and on
+   a phone. Pointing at or focusing a tile highlights where that image appears.
+3. **Showcase gallery**: Discord rooms whose new images appear on the asset page,
+   the gallery layout, **Image managers** (Discord roles that can hide images), and
+   the scan for earlier images. Choose **Set up showcase**, add a room, then
+   **Save showcase**. Leaving with unsaved showcase changes asks for confirmation.
+4. **Visibility**, **Avatar base** (avatar assets) and the **Danger zone** for deletion.
+
+Older links ending in `?tab=showcase` open the **Page** tab at the showcase gallery.
+**Performance** shows the placement and store-click numbers described in
+[Create, publish and measure an asset](24-create-and-measure-assets.md).
 
 The next release adds a graph and guided editor for uploaded avatar versions.
 See [Edit releases in the version workspace](22-edit-asset-versions.md) for parent
