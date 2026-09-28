@@ -8,14 +8,14 @@ id: orbiters.tools.myavatar-thumbnail
 domain: myavatar
 type: how-to
 owner: orbiters-engineering
-lastVerified: 2026-09-27
+lastVerified: 2026-09-28
 ---
 
 # Create a VRChat thumbnail with My Avatar
 
 The **Thumbnail** section of the My Avatar component makes the 4:3 image VRChat
 shows for your avatar. It uses the Orbiters photoshoot, the same one MCB uses for
-custom base media. This page describes My Avatar 0.3.0 with Orbiters Toolkit 0.2.4.
+custom base media. This page describes My Avatar 0.5.1 with Orbiters Toolkit 0.2.6.
 
 ## See it where it will appear
 
@@ -46,7 +46,7 @@ and with the same crop, between faint neighbouring cards. The card shows:
 4. Press **Capture**. The image is saved at once as
    `Assets/Orbiters/MyAvatar/Thumbnails/<avatar> <id>/<avatar> thumbnail.png` and
    the card flashes. The studio stays live, so you can capture again; a new capture
-   replaces the file. **Browse** uses an image file instead and closes the studio.
+   uses a distinct filename so Undo and Redo preserve the previous pixels. **Browse** uses an image file instead and closes the studio.
 5. Press **Done** to close the studio. The card then shows the saved thumbnail.
 
 Light presets include studio looks, **High Key**, **Low Key**, and the dark
@@ -74,20 +74,7 @@ uploaded automatically.
   hidden scene. Later changes reuse that copy; framing updates take a few
   milliseconds, and a new pose or expression measures the posed meshes again.
 
-<alpha>
-
-The unreleased local photoshoot update refreshes its clone when source meshes,
+Orbiters Toolkit 0.2.6 refreshes its clone when source meshes,
 material assignments or object visibility change. Saving a thumbnail checks source
 state even if the photoshoot was already open. Camera and framing changes still
 reuse an unchanged clone. See [Unity package safety and avatar workflow fixes](unity-package-safety-fixes.md).
-
-</alpha>
-
-<alpha>
-
-The unreleased thumbnail fix saves each capture to a distinct PNG, preserving the
-previous pixels for Unity Undo and Redo. This changes the file-replacement behavior
-described above for the published version. See
-[Unit Git history and My Avatar texture fixes](unity-history-and-texture-fixes.md).
-
-</alpha>

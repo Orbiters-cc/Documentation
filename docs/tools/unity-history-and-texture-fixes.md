@@ -3,7 +3,7 @@ title: Unit Git history and My Avatar texture fixes
 section: Tools
 order: 196
 audience: creator, dev
-stage: alpha
+stage: beta
 id: orbiters.tools.unity-history-and-texture-fixes
 domain: myavatar
 type: reference
@@ -13,11 +13,18 @@ lastVerified: 2026-09-28
 
 # Unit Git history and My Avatar texture fixes
 
-These fixes are implemented locally and are unreleased. The currently published
-package versions do not establish that they include this behavior. This page covers
-Unit Git history and My Avatar textures and thumbnails; earlier storage, reporting,
-physics and photoshoot changes are covered in
-[Unity package safety and avatar workflow fixes](unity-package-safety-fixes.md).
+These fixes ship in **Unit Git 0.1.3** and **My Avatar 0.5.1**. My Avatar requires
+Toolkit 0.2.6 or newer in the 0.2 series. Its optional Git checkpoint integration
+requires Unit Git 0.1.3 or newer; without that version, Save still saves the scene
+and assets. Earlier storage, reporting, physics and photoshoot changes are covered
+in [Unity package safety and avatar workflow fixes](unity-package-safety-fixes.md).
+
+| Package | Release |
+| --- | --- |
+| Orbiters Toolkit | [0.2.6](https://github.com/Orbiters-cc/Toolkit/releases/tag/0.2.6) |
+| Unit Git | [0.1.3](https://github.com/Orbiters-cc/UnitGit/releases/tag/0.1.3) |
+| My Avatar | [0.5.1](https://github.com/Orbiters-cc/MyAvatar/releases/tag/0.5.1) |
+| My Custom Base | [1.7.6](https://github.com/Orbiters-cc/MyCustomBase/releases/tag/1.7.6) |
 
 ## Unit Git branches and history
 
@@ -85,6 +92,10 @@ assets were saved but the Git checkpoint failed.
 <audience include="dev">
 
 ## Verification and implementation
+
+MCB 1.7.6 corrects the package download URL to match GitHub's normalized ZIP
+filename. Its safety code is unchanged from 1.7.5. The other package versions
+remain Toolkit 0.2.6, Unit Git 0.1.3 and My Avatar 0.5.1.
 
 Focused EditMode regressions exercise concurrent checkouts during Rename and
 Squash, concurrent branch advancement, stale branch selections, a 602-commit

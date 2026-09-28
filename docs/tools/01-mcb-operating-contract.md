@@ -28,17 +28,16 @@ the preserved copy of `A`.
 - An absent backup is valid only before the default base has ever been replaced.
 - XOR patch generation and version switching must use the preserved default source.
 
-<alpha>
+## Safety updates in MCB 1.7.6
 
-## Unreleased safety updates
-
-The local update contains version path validation, transactional extraction,
+MCB 1.7.6 contains version path validation, transactional extraction,
 manifest-based download availability, rollback of every affected ordinary FBX,
 and optional MCB-only diagnostic reporting with redaction and bounded requests.
 MCB slider counts are estimates before VRCFury's build-time compression. See
 [Unity package safety and avatar workflow fixes](unity-package-safety-fixes.md)
-for behavior, recovery details and validation. These package changes are not yet
-released.
+for behavior, recovery details and validation.
+
+<alpha>
 
 ## Installed version options after editor reloads
 

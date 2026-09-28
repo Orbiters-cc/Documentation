@@ -78,12 +78,8 @@ parameters** switch adds or removes a deprecated component and does not control
 that behavior. Use VRCFury's global compression settings and check the completed
 build for actual parameter use.
 
-<alpha>
-
-The unreleased local update replaces that switch with the actual compression
+My Avatar 0.5.1 with Toolkit 0.2.6 replaces that switch with the actual compression
 status and labels counts **before compression**. Independent Full Controllers no
 longer merge their local parameter names in the estimate. Ignored PhysBone branches
 remain eligible for discovery, and clothing offsets follow scale changes. See
 [Unity package safety and avatar workflow fixes](unity-package-safety-fixes.md).
-
-</alpha>

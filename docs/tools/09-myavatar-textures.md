@@ -8,7 +8,7 @@ id: orbiters.tools.myavatar-textures
 domain: myavatar
 type: how-to
 owner: orbiters-engineering
-lastVerified: 2026-09-27
+lastVerified: 2026-09-28
 ---
 
 # Change avatar textures with My Avatar
@@ -27,7 +27,7 @@ hair/tail/toe physics and parameters, see
 ## Install and apply a texture set
 
 1. Install **My Avatar** through the Orbiters VPM listing. It needs Orbiters
-   Toolkit and the VRChat avatar SDK on Unity 2022.3. Unit Git is optional.
+   Toolkit and the VRChat avatar SDK on Unity 2022.3. Unit Git 0.1.3 or newer is optional.
 2. Select your avatar root in an open scene and add **Orbiters > My Avatar** from
    Add Component. The GameObject menu has the same command.
 3. Drop your PNG, JPG or TGA images into the dashed field. You can drop several
@@ -143,11 +143,7 @@ again, change a slot, or use Undo/Redo while it is pending. Unresolved alternati
 remain for your choice. Provider or connection errors appear inline and the local
 matches stay applied.
 
-<alpha>
-
-Local, unreleased fixes cancel pending AI answers when AI is turned off or the
-Inspector closes, serialize preference writes, keep same-named textures from
-different sources separate, and treat unchanged saves as successful. See
+My Avatar 0.5.1 cancels pending AI answers when AI is turned off or the
+Inspector closes, serializes preference writes, keeps same-named textures from
+different sources separate, and treats unchanged saves as successful. See
 [Unit Git history and My Avatar texture fixes](unity-history-and-texture-fixes.md).
-
-</alpha>

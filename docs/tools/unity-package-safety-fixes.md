@@ -3,7 +3,7 @@ title: Unity package safety and avatar workflow fixes
 section: Tools
 order: 195
 audience: creator, dev
-stage: alpha
+stage: beta
 id: orbiters.tools.unity-package-safety-fixes
 domain: mcb
 type: reference
@@ -13,10 +13,10 @@ lastVerified: 2026-09-28
 
 # Unity package safety and avatar workflow fixes
 
-This page describes local, unreleased changes to My Custom Base, Orbiters Toolkit
-and the My Avatar parameter display. Installing the currently published packages
-does not establish that these changes are included. Additional Unit Git and My Avatar
-changes are covered in [Unit Git history and My Avatar texture fixes](unity-history-and-texture-fixes.md).
+These fixes ship in **My Custom Base 1.7.6**, **Orbiters Toolkit 0.2.6** and
+**My Avatar 0.5.1**. MCB and My Avatar require Toolkit 0.2.6 or newer in the 0.2
+series. Additional Unit Git and My Avatar changes are covered in
+[Unit Git history and My Avatar texture fixes](unity-history-and-texture-fixes.md).
 
 ## Version storage and downloads
 
