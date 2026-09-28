@@ -73,3 +73,12 @@ uploaded automatically.
 - **The photoshoot opens slowly:** the first preview copies the avatar into a
   hidden scene. Later changes reuse that copy; framing updates take a few
   milliseconds, and a new pose or expression measures the posed meshes again.
+
+<alpha>
+
+The unreleased local photoshoot update refreshes its clone when source meshes,
+material assignments or object visibility change. Saving a thumbnail checks source
+state even if the photoshoot was already open. Camera and framing changes still
+reuse an unchanged clone. See [Unity package safety and avatar workflow fixes](unity-package-safety-fixes.md).
+
+</alpha>

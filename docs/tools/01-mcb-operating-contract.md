@@ -30,6 +30,16 @@ the preserved copy of `A`.
 
 <alpha>
 
+## Unreleased safety updates
+
+The local update contains version path validation, transactional extraction,
+manifest-based download availability, rollback of every affected ordinary FBX,
+and optional MCB-only diagnostic reporting with redaction and bounded requests.
+MCB slider counts are estimates before VRCFury's build-time compression. See
+[Unity package safety and avatar workflow fixes](unity-package-safety-fixes.md)
+for behavior, recovery details and validation. These package changes are not yet
+released.
+
 ## Installed version options after editor reloads
 
 MCB restores the installed version's metadata before drawing its action button and

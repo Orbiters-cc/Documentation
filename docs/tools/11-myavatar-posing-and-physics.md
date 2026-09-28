@@ -73,6 +73,17 @@ expression parameters, what VRCFury toggles, sliders and full controllers add, a
 what is left. The count updates as you edit the hierarchy; the refresh icon counts
 again.
 
-**Compress parameters** adds or removes VRCFury's Parameter Compressor on the avatar.
-The line under it shows how many bits it saves, or would save. Without VRCFury the
-switch is unavailable and only the avatar's own expression parameters are counted.
+VRCFury 1.1334.0 controls compression during its build. The older **Compress
+parameters** switch adds or removes a deprecated component and does not control
+that behavior. Use VRCFury's global compression settings and check the completed
+build for actual parameter use.
+
+<alpha>
+
+The unreleased local update replaces that switch with the actual compression
+status and labels counts **before compression**. Independent Full Controllers no
+longer merge their local parameter names in the estimate. Ignored PhysBone branches
+remain eligible for discovery, and clothing offsets follow scale changes. See
+[Unity package safety and avatar workflow fixes](unity-package-safety-fixes.md).
+
+</alpha>
