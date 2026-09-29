@@ -28,6 +28,34 @@ the preserved copy of `A`.
 - An absent backup is valid only before the default base has ever been replaced.
 - XOR patch generation and version switching must use the preserved default source.
 
+<alpha>
+
+## Code Import Invariant
+
+The following import and rollback changes are local and unreleased.
+
+Code in a downloaded version (scripts, assemblies, native plugins, including those
+inside a nested `.unitypackage`) reaches `Assets/` only when its creator is trusted
+or the user confirmed the warning. Cancelling leaves no file under `Assets/`. See
+[MCB and Unity Tools](../how-to/08-mcb-and-unity-tools.md#code-in-downloaded-versions)
+for who is trusted and the server fields that carry the decision.
+
+Package inspection rejects ambiguous or truncated archives before extraction. Logic
+packages import only missing dependencies under `Assets/`; installed asset GUIDs
+and paths, and the `Packages/` directory, are protected.
+
+Network requests, nested package imports and native payload preparation finish
+before the version-switch rollback snapshot is captured. Avatar and FBX mutation
+then runs synchronously, so unrelated edits made while preparation was pending
+remain outside rollback. Reset plus saved-custom FBX installation is one rollback
+unit: a copy or import failure restores the prior files, importer state and avatar.
+A failed Blender recovery retains its recovery copy for a retry.
+
+See [Unity safety verification follow-up](unity-safety-verification-september-2026.md)
+for the related editor and package changes.
+
+</alpha>
+
 ## Safety updates in MCB 1.7.6
 
 MCB 1.7.6 contains version path validation, transactional extraction,

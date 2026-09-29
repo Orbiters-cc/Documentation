@@ -8,7 +8,7 @@ id: orbiters.tools.myavatar-accessories
 domain: myavatar
 type: how-to
 owner: orbiters-engineering
-lastVerified: 2026-09-28
+lastVerified: 2026-09-29
 ---
 
 # Add accessories and clothes with My Avatar
@@ -36,19 +36,53 @@ its own VRCFury components do the rest at build.
 Other packages are attached non-destructively:
 
 - When every clothing bone has an avatar bone of exactly the same name, My Avatar adds a
-  VRCFury **Armature Link**.
+  VRCFury **Armature Link**, when VRCFury is installed.
 - Otherwise My Avatar links each clothing bone to the matching avatar bone itself. These
   links are applied only on the build copy of the avatar, never on the avatar in your scene.
 - A rigid prop without its own armature, such as a hat or a watch, follows one avatar bone.
-- Each accessory gets an automatic VRCFury toggle in the menu under
+- With VRCFury installed, each accessory gets an automatic VRCFury toggle in the menu under
   `Accessories/<name>`.
 - Blendshapes of the body are copied to clothing blendshapes of the same name, so a
   shrink or body-shape slider also shapes the clothing.
-- Empty Unity constraints in the package are wired to avatar bones by name and converted
-  to VRChat constraints.
+- Supported empty Unity constraints are wired to avatar bones by name. Constraints
+  with animated settings remain Unity constraints so their shared clips keep working;
+  unsupported constraint kinds remain for manual setup.
 
 Every accessory added by one drop is a single **Undo** step. The accessory list below the
 field shows what is installed; **Remove** takes an accessory off the avatar again.
+
+## Builds without VRCFury
+
+In the local, unreleased Toolkit 0.3.1 update, My Avatar attachments also work
+without VRCFury. Toolkit places the linked objects under their avatar bones on the
+build copy and rewrites private copies of their animation controllers. It adds no
+VRChat parent constraints for these links, so they consume no extra constraint
+slots. Bone scale follows through the hierarchy. Existing constraints supplied by
+an accessory remain part of that accessory.
+
+Original controllers, clips, masks and the avatar in your scene remain unchanged.
+Offset frames preserve local motion, and copied parent animation keeps clothing
+toggles and animated parent transforms affecting bones moved out of the clothing.
+Matching animated body blendshapes also reach moved clothing renderers.
+
+These hierarchy frames still have a transform cost; this is not a guarantee that
+an accessory has no effect on avatar performance. A singular or sheared armature
+transform stops the build with an explanation. Apply non-uniform armature scale
+before retrying. If a nested Animator animates bones moved outside its root, move
+those animations into the avatar playable layers first.
+
+## Import warnings and recovery
+
+The same local update inspects all files before importing a drop. A package with
+scripts or plugins lists the code and asks for **Import anyway**; **Cancel**, Escape
+and closing the warning leave the project unchanged by that drop. Malformed or
+ambiguous archives are rejected. Imports are queued across Orbiters tools, including
+packages with identical filenames. A script reload retains each avatar's progress
+and pending texture/AI follow-up work.
+
+Late AI results do not overwrite a manual bone choice, placement, material-slot
+edit, account change or disabled AI preference. Accessory textures stay scoped to
+that accessory even when a generated material becomes shared by another renderer.
 
 ## Variants
 

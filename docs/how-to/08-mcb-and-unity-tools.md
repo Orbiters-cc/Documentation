@@ -57,6 +57,70 @@ copied token. Being on the same network or IP address as your browser is not
 enough: older tool versions that waited for a token without either of these
 keep waiting. Use Login or Magic Sync instead.
 
+<alpha>
+
+## Code in downloaded versions
+
+This describes the local, unreleased MCB 1.8.1 and Toolkit 0.3.1 changes. The server trust endpoint must ship before the client.
+
+A version can contain Unity scripts, compiled assemblies or native plugins, either
+directly or inside a `.unitypackage`. Unity compiles and runs that code as soon as
+it is imported, before you apply anything. MCB therefore checks each download
+before it writes any file under `Assets/`:
+
+- Versions published by Orbiters and by creators Orbiters has marked as trusted
+  install without a question.
+- A version from any other creator that contains code opens a warning with the
+  author and the list of code files. Orbiters does not control the content of
+  those files. Choose **Cancel** unless you trust the author: MCB discards the
+  download and adds nothing to your project.
+- Your own versions also install without a question after MCB confirms your current identity against the fresh creator metadata.
+- Versions without code never show the warning.
+
+<audience include="creator">
+
+If your versions include scripts or plugins, people who download them see this
+warning unless Orbiters has marked your account as a trusted creator. Leave code
+out of a version when the avatar does not need it.
+
+</audience>
+
+<audience include="admin">
+
+To mark a creator as trusted, open **Admin → Users**, open the member, select
+**Roles**, turn on **Trusted creator**, choose **Save roles** and confirm. Admins
+and owners are always trusted. Turning the switch off brings the warning back for
+that creator's versions that contain code.
+
+</audience>
+
+<audience include="dev">
+
+`isTrustedCreator` in `mcbCreatorTrustService` decides trust: `User.trustedCreator`,
+an admin or owner rank, or the designated administrator account. A version belongs
+to its uploader, or to the asset owner when no uploader is recorded.
+
+| Response | Trust data |
+| --- | --- |
+| `GET /mcb/:assetId/model-trust` | Current creator trust and exact resolved version/source identity; authenticated, uncached, without download accounting |
+| `GET /mcb/:assetId/versions` | Each version: `creatorTrusted` and `creatorName` |
+| `POST /mcb/assets/by-avatar-base` | Each asset: `creatorTrusted` for the owner, next to `ownerUsername` |
+| `GET /mcb/:assetId/model` | Header `X-Orbiters-Creator-Trusted: true` or `false` on the package, `meshManifest`, `meshCommon` and `meshBlob` responses |
+
+When the package is stored in R2, the header is on the Orbiters `302` response,
+not on the storage response the redirect leads to. Before writing the downloaded
+content, MCB requests `/model-trust` with the same version and source selection.
+It skips consent only when the fresh response identifies this exact download and
+its creator is trusted or is the current user. A failed request, missing endpoint,
+unknown trust or mismatched identity keeps the warning enabled. Cached listing
+flags never override a revocation. Only the
+designated administrator changes trust, through `PATCH /admin/users/:id/moderation`
+with `{ rank, creator, trustedCreator }`.
+
+</audience>
+
+</alpha>
+
 ## Read the interface before changing the avatar
 
 ```orbiters
