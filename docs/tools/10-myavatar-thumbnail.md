@@ -3,7 +3,7 @@ title: Create a VRChat thumbnail with My Avatar
 section: Tools
 order: 191
 audience: public, creator, dev
-stage: beta
+stage: stable
 id: orbiters.tools.myavatar-thumbnail
 domain: myavatar
 type: how-to

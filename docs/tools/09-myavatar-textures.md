@@ -3,7 +3,7 @@ title: Change avatar textures with My Avatar
 section: Tools
 order: 190
 audience: public, creator, dev
-stage: beta
+stage: stable
 id: orbiters.tools.myavatar-textures
 domain: myavatar
 type: how-to

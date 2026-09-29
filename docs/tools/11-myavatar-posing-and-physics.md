@@ -3,7 +3,7 @@ title: Pose, physics and parameters with My Avatar
 section: Tools
 order: 192
 audience: public, creator, dev
-stage: beta
+stage: stable
 id: orbiters.tools.myavatar-posing-physics
 domain: myavatar
 type: how-to
