@@ -21,6 +21,11 @@ on the normal website background unless the account has a real banner; it does n
 add an opaque black hero backdrop. Unavailable fields are omitted rather than
 replaced with sample metrics.
 
+The banner is the one uploaded on the account page, next to the profile picture;
+without one, the account's Discord banner is used, animated banners included.
+The account page can replace the banner or go back to the Discord one. Discord
+banners refresh on every Discord sign-in.
+
 Avatar resolution is consistent across profiles, comments, Boards, reports, and
 other actor displays. A Discord avatar is preferred when the User has a Discord ID
 and avatar hash. A stored Orbiters avatar is the next choice, and the linked GitHub

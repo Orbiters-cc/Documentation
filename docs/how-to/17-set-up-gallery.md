@@ -67,7 +67,7 @@ The source author can hide their own picture across Orbiters galleries and showc
 
 ## Set up an asset showcase
 
-Open the asset's settings and find **Showcase gallery** in the **Page** tab. Choose **Set up showcase**, add its **Rooms**, choose a **Layout**, and select **Save showcase**. Then use **Crawl past images** under **Earlier images**. This import belongs to that asset, independently of the main Gallery configuration.
+Open the asset's settings and find **Showcase gallery** in the **Page** tab. Choose **Set up showcase**, add its **Rooms** (grouped by Discord server), choose a **Layout**, and select **Save**. Saving new rooms starts importing their earlier images automatically; progress appears in the earlier-images row, and **Crawl past images** runs the import again. This import belongs to that asset, independently of the main Gallery configuration.
 
 ## Troubleshooting
 

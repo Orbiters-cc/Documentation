@@ -86,7 +86,8 @@ and **Performance**. **Page** holds what customers see, in this order:
 3. **Showcase gallery**: Discord rooms whose new images appear on the asset page,
    the gallery layout, **Image managers** (Discord roles that can hide images), and
    the scan for earlier images. Choose **Set up showcase**, add a room, then
-   **Save showcase**. Leaving with unsaved showcase changes asks for confirmation.
+   **Save**. Saving new rooms starts scanning their earlier images automatically.
+   Leaving with unsaved showcase changes asks for confirmation.
 4. **Visibility**, **Avatar base** (avatar assets) and the **Danger zone** for deletion.
 
 Older links ending in `?tab=showcase` open the **Page** tab at the showcase gallery.
