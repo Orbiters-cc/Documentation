@@ -90,6 +90,13 @@ and **Performance**. **Page** holds what customers see, in this order:
    Leaving with unsaved showcase changes asks for confirmation.
 4. **Visibility**, **Avatar base** (avatar assets) and the **Danger zone** for deletion.
 
+Orbiters prepares every **MCB banner** for MCB: it crops the image to 1600 × 900,
+blurs the lower third and fades it to dark grey so the author row MCB shows over
+it stays readable. Upload the plain image; one that already has this effect is
+blurred twice. A custom base published with **Edit asset page** also uses its page
+banner as MCB banner, unless its MCB banner was uploaded from MCB in Unity or with
+the **MCB banner** tile.
+
 Older links ending in `?tab=showcase` open the **Page** tab at the showcase gallery.
 **Performance** shows the placement and store-click numbers described in
 [Create, publish and measure an asset](24-create-and-measure-assets.md).

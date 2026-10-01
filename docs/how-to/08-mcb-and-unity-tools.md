@@ -190,7 +190,9 @@ discovery is removed: `token=notoken` never returns a credential and always answ
 instead of failing. Credentials are released only to a caller that presents the
 clipboard `orbit-…` token or the browser login's poll secret (`editorLinkService`).
 Direct token reuse records each IP address and user agent in `WizardTokenUses`. Change lifecycle behavior in
-the shared service so the two route families cannot drift.
+the shared service so the two route families cannot drift. Avatar versions are
+uploaded only through `POST /mcb/newVersion`; the `unity-wizard` routes no longer
+accept uploads.
 
 MCB UI Toolkit builds must not be re-entered by cache or network callbacks. User-info cache hits defer completion until after the current editor callback returns. Version rows request user metadata only when it is absent and subscribe separately to avatar-image completion. Asset thumbnails, banners, and author images update existing image controls through the bounded dynamic-content refresh instead of recursively rebuilding the complete inspector. Preserve this separation when adding asynchronous UI data.
 

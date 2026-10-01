@@ -227,6 +227,7 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Telegram Login Setup | admin, dev | beta | — | — | — | — | ✓ | ✓ |
 | MCB Version Pipeline Benchmarks | dev | alpha | — | — | — | — | — | ✓ |
 | MCB Adaptive Version Delivery | admin, dev | alpha | — | — | — | — | ✓ | ✓ |
+| MCB Banner Effect | dev | alpha | — | — | — | — | — | ✓ |
 | MCB First Apply Optimization Research | dev | alpha | — | — | — | — | — | ✓ |
 | Website icons and shared-link previews | admin, dev | beta | — | — | — | — | ✓ | ✓ |
 
