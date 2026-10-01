@@ -8,7 +8,7 @@ id: orbiters.reference.api-keys-and-credentials
 domain: website
 type: reference
 owner: orbiters-security
-lastVerified: 2026-09-20
+lastVerified: 2026-10-01
 ---
 
 # API Keys and Credentials
@@ -23,7 +23,8 @@ Runtime credentials are stored in the `APIKeys` table instead of hardcoded envir
 - `DISCORD`: OAuth application and bot credentials.
 - `R2`: Cloudflare R2 storage credentials and quota settings.
 - `GEMINI`: AI provider key.
-- `DEEPSEEK` and `ZAI`: global environment-specific website AI keys.
+- `DEEPSEEK`, `ZAI` and `GROQ`: global environment-specific website AI keys. Groq serves
+  OpenAI's text-only GPT-OSS models.
 - `TMDB`: global API Read Access Token for event movie/episode metadata.
 - `GUMROAD`: Gumroad application and access token fields.
 - `JINXXY`: Jinxxy API key and webhook secret.

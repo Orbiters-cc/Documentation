@@ -69,7 +69,9 @@ The `MYAVATAR_TEXTURES` feature defaults to reasoning off. Admin → AI → Feat
 has a per-feature **Model reasoning** switch that overrides a feature's default; the
 setting is recorded on each request in AI history. The feature uses existing AI provider routing, model settings,
 user AI preference enforcement and private-content history handling. No separate
-provider credential is needed. Source names and image contents are explicitly
+provider credential is needed. Because only text is sent, text-only models such as
+GPT-OSS on Groq can serve it; GPT-OSS answers through Groq's strict JSON schema output
+and runs at low reasoning effort while reasoning is off. Source names and image contents are explicitly
 untrusted prompt data. The endpoint allows 20 requests per user per hour, one
 active request per user and at most 32 active requests in this process.
 

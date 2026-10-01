@@ -37,8 +37,28 @@ its 5rem height and places interactive content below that inset. Every progressi
 blur layer remains at full mask strength across the safe area; the existing fade
 starts below it. The strongest layer uses a 32px backdrop blur. Standard and WebKit
 prefixed backdrop and mask properties share the same values. Horizontal safe-area
-padding protects controls in landscape, and the mobile menu includes bottom inset
-padding. This follows [WebKit's safe-area layout guidance](https://webkit.org/blog/7929/designing-websites-for-iphone-x/).
+padding protects controls in landscape. The mobile menu sheet keeps at least the page
+gutter from the side insets and 12px from the bottom inset, and scrolls inside itself
+when a short landscape screen cannot fit it. This follows [WebKit's safe-area layout guidance](https://webkit.org/blog/7929/designing-websites-for-iphone-x/).
+
+## Mobile menu
+
+Below 1200px the toggle opens `MobileMenu.jsx`, a sheet rendered in a portal under
+the bar. It lists the same destinations as the desktop bar, grouped by
+`mobileMenuGroups.js` into Browse, Workspace and Resources; a destination added to
+the bar later lands in the last group. The current page uses `aria-current="page"`.
+Signed-in readers get their profile, **My account** and **Log out** first; guests get
+Discord and Telegram sign-in with the real app icons and the usual terms notice.
+
+The sheet opens from the toggle corner with the homepage `settleSpring`, fading and
+un-blurring with `blurTween`; groups follow with the shared stagger. Only opacity,
+transform and filter animate, so nothing reflows. Reduced motion keeps a short fade.
+Focus moves into the sheet, Tab cycles between the sheet and the toggle, and Escape,
+the backdrop or a tap on the bar closes it. Escape and the backdrop return focus to
+the toggle. The HeroUI navbar's scroll lock still applies while it is open.
+
+The notification bell moves beside the toggle below 1200px. A media query mounts one
+bell at a time, so notifications are polled once. Desktop markup is unchanged.
 
 The headless browser regression injects a 59px top inset and checks sticky geometry,
 content clearance and the full-strength mask after scrolling. This simulates layout;

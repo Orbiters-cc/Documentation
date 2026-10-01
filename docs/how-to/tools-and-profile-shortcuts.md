@@ -23,5 +23,10 @@ To see your profile as a visitor-facing page, click your navbar avatar and choos
 **Public profile**. The button includes your avatar. Creators have the same shortcut
 at the top of **Creator → Overview**. It opens `/user/<your Orbiters user ID>`.
 
+On phones and tablets, open the menu button. Your name at the top opens the same
+profile page, the gear opens **My account** and the exit icon logs you out. The
+menu groups pages into **Browse**, **Workspace** and **Resources** and highlights the
+page you are on. Notifications keep their own bell beside the menu button.
+
 Blog articles display their saved cover image above the article text. The cover
 does not need to be inserted again into the article's Markdown.

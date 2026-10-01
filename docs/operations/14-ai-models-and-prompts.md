@@ -8,7 +8,7 @@ id: orbiters.operations.ai-models-prompts
 domain: website
 type: how-to
 owner: orbiters-platform
-lastVerified: 2026-09-28
+lastVerified: 2026-10-01
 ---
 
 # Configure AI models, prompts and usage
@@ -19,15 +19,17 @@ live provider validation remain separate from publishing this documentation.
 ## Connect a provider
 
 In **Admin â†’ API Keys**, create a global key for the current environment: **Gemini**,
-**DeepSeek**, or **Z.ai (GLM)**. Creator-owned keys are not used for website AI.
-All three provider forms are restricted to administrators and save global keys
+**DeepSeek**, **Z.ai (GLM)** or **Groq**. Creator-owned keys are not used for website AI.
+All four provider forms are restricted to administrators and save global keys
 automatically. After saving, reopen **AI** to refresh availability in Models and
 Playground. A key must be active and belong to the current environment. If an
 earlier Gemini key was saved as personal, an administrator must change its scope
 to global before website AI can use it.
 Open **Admin â†’ AI â†’ Models** to inspect the seeded models or register a provider's
 model ID. Initial options are Gemini Flash Lite, DeepSeek V4.1 Flash
-(`deepseek-flash`), GLM-5.3 and image-capable GLM-5.3-Flash.
+(`deepseek-flash`), GLM-5.3, image-capable GLM-5.3-Flash, and Groq's text-only
+GPT-OSS 120B (`openai/gpt-oss-120b`) and GPT-OSS 20B (`openai/gpt-oss-20b`). Providers that
+send the model ID in the request body accept namespaced IDs such as `openai/gpt-oss-120b`.
 
 Check provider capabilities before changing **Model supports image input**.
 Declaring support does not add it to a text-only model. Model identity cannot
@@ -45,8 +47,14 @@ survive application restarts.
    conversation keeps its chosen model and prompt snapshot.
 
 The registry covers the admin playground, MCB version metadata, asset draft
-auto-fill and community self-promotion. Image features require an image-capable
-model. Move their overrides first if choosing a text-only website default.
+auto-fill and community self-promotion. Asset draft auto-fill and community
+self-promotion read images only when a request has them, so they can run on a text-only
+model such as GPT-OSS. Their requests with images then go to the model chosen under
+**Requests with images**; **Automatic** uses the website default when it reads images,
+otherwise Gemini Flash Lite. A text-only model never receives images, and History notes
+when a request with images skipped it. Settings that would leave images without a model
+that reads them are refused with the reason, and a model serving image requests cannot
+be disabled or lose image support until another model takes over.
 Switching off a custom prompt restores the built-in instruction. Required output
 schemas, validation, private drafting and the rule against inventing missing
 listing facts remain enforced regardless of custom wording.
@@ -62,6 +70,9 @@ Off sends the lowest thinking setting the model supports:
 - Gemini 2.5 models use a thinking budget. Off sets 0 on Flash models; 2.5 Pro
   cannot go below its 128-token minimum.
 - Earlier Gemini models do not think, so the switch has no effect.
+
+GPT-OSS on Groq always reasons: Off sends `reasoning_effort: low`, and its model settings
+offer low, medium or high (Groq's default is medium). The reasoning text is never returned.
 
 When reasoning is off and the feature's model cannot switch it off, the feature
 shows a note under the switch that Off uses the model's lowest reasoning level.
@@ -93,8 +104,10 @@ for new tests.
 
 Only administrator playground conversations retain request and response text in AI history, including malformed or truncated answers. Every other feature, including AutoFill, stores placeholders instead of source text and model answers, alongside instructions, selected image IDs, usage and safe diagnostics. Creators can inspect those records for their own draft; authorized AI administrators can inspect history. Records written before this rule keep their existing content. Provider credentials and private model reasoning are not stored in these diagnostic records.
 
-AutoFill streams model output and reports received tokens to the draft editor. Counts marked as estimates use streamed character length until provider usage is available. DeepSeek extraction disables thinking mode to avoid spending its output budget on reasoning for structured field extraction. DeepSeek AutoFill uses a minimum 32,768-token output budget; higher administrator settings take priority. One submission makes at most three provider calls. A DeepSeek `length` finish is retried at once with a 65,536-token budget. Connection failures, provider 408/429/5xx responses, streams that end early and responses that fail the output format are retried after 1.5 and then 4 seconds; a format retry adds a reminder of the required JSON schema to the prompt. Truncation that the larger budget cannot fix, unsupported images, AI disabled for the account and missing provider keys are not retried. Retries stop when the draft is published or a newer AutoFill replaces the job. Every attempt is billed by the provider and recorded in history, with combined live token feedback and the attempt number in the draft's progress. Sources are consumed when queued and are not reused by later submissions. A retry within that submission uses the same selected inputs. The maximum request duration defaults to 180 seconds per attempt and remains bounded by `AI_REQUEST_TIMEOUT_MS` when configured. In **Models → Maximum output tokens**, DeepSeek settings support up to 393,216; other providers keep their existing limits.
-AutoFill requests use structured JSON output for Gemini and JSON mode for DeepSeek and Z.ai, followed by local schema validation. DeepSeek extraction uses the AutoFill minimum budget described above; other operations keep their configured limits. Valid fields are applied to the private draft as soon as extraction finishes; edits made while extraction runs are not overwritten. The creator still reviews the draft before publishing. The default prompt interprets bare dollar prices as USD unless contradicted and maps ordered commission price ranges to slider options. Invalid or unsupported fields are not applied; a response with no applicable fields shows a warning.
+AutoFill streams model output and reports received tokens to the draft editor. Counts marked as estimates use streamed character length until provider usage is available. DeepSeek extraction disables thinking mode to avoid spending its output budget on reasoning for structured field extraction. DeepSeek AutoFill uses a minimum 32,768-token output budget; higher administrator settings take priority. One submission makes at most three provider calls. A DeepSeek `length` finish is retried at once with a 65,536-token budget. Connection failures, provider 408/429/5xx responses, streams that end early and responses that fail the output format are retried after 1.5 and then 4 seconds; a format retry adds a reminder of the required JSON schema to the prompt. Truncation that the larger budget cannot fix, unsupported images, AI disabled for the account and missing provider keys are not retried. Retries stop when the draft is published or a newer AutoFill replaces the job. Every attempt is billed by the provider and recorded in history, with combined live token feedback and the attempt number in the draft's progress. Sources are consumed when queued and are not reused by later submissions. A retry within that submission uses the same selected inputs. The maximum request duration defaults to 180 seconds per attempt and remains bounded by `AI_REQUEST_TIMEOUT_MS` when configured. In **Models → Maximum output tokens**, DeepSeek settings support up to 393,216 and Groq up to 65,536; other providers keep their existing limits.
+AutoFill requests use structured JSON output for Gemini and JSON mode for DeepSeek, Z.ai and Groq, followed by local schema validation. GPT-OSS uses Groq's strict JSON schema output when a feature's schema allows it (all fields required, closed objects), as for My Avatar texture matching.
+
+Groq does not stream structured output, so GPT-OSS AutoFill shows the generating stage without live token counts. Groq counts the prompt plus the maximum output tokens against the tokens-per-minute limit (8,000 for GPT-OSS on the free plan); a single larger request is retried once with an output limit that fits. A 429 is retried after Groq's Retry-After when that is at most 20 seconds, and a JSON validation failure is retried like a format failure. From `backend/`, `npm run smoke:groq` with `GROQ_API_KEY` in the environment runs texture matching and AutoFill against Groq once; it is not part of `npm test` and never prints the key. DeepSeek extraction uses the AutoFill minimum budget described above; other operations keep their configured limits. Valid fields are applied to the private draft as soon as extraction finishes; edits made while extraction runs are not overwritten. The creator still reviews the draft before publishing. The default prompt interprets bare dollar prices as USD unless contradicted and maps ordered commission price ranges to slider options. Invalid or unsupported fields are not applied; a response with no applicable fields shows a warning.
 Asset extraction normalizes presentation text before schema validation: null text
 becomes blank or absent, string lists become lines, and ambiguous non-text values
 are omitted with review warnings. Numeric fields, IDs, enums and the response
@@ -126,4 +139,7 @@ arriving after erasure cannot restore the removed content.
 Provider references: [DeepSeek JSON output](https://api-docs.deepseek.com/guides/json_mode/),
 [DeepSeek request limits](https://api-docs.deepseek.com/api/create-chat-completion/),
 [Gemini structured outputs](https://ai.google.dev/gemini-api/docs/structured-output),
-[Z.ai structured output](https://docs.z.ai/guides/capabilities/struct-output).
+[Z.ai structured output](https://docs.z.ai/guides/capabilities/struct-output),
+[Groq structured outputs](https://console.groq.com/docs/structured-outputs),
+[Groq reasoning](https://console.groq.com/docs/reasoning),
+[Groq rate limits](https://console.groq.com/docs/rate-limits).

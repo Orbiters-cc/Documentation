@@ -25,6 +25,7 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 
 | Page | Audience tags | Stage | Visitor | Member | Creator | Mod | Admin | Dev / owner |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Use Orbiters from ChatGPT and Codex | user, creator, mod, admin, dev | beta | — | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Manage Privacy and Shared Content | public | beta | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Understand and control AI use | public | beta | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Verify your community age status | user, creator, mod, admin, dev | beta | — | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -220,6 +221,7 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Board Data and Route Reference | dev | alpha | — | — | — | — | — | ✓ |
 | GitHub Connection Setup Reference | dev | alpha | — | — | — | — | — | ✓ |
 | Steward API and Token Reference | dev | alpha | — | — | — | — | — | ✓ |
+| ChatGPT plugin MCP and OAuth reference | dev | beta | — | — | — | — | — | ✓ |
 | ReFit Lower-Body Surface Coverage | dev | alpha | — | — | — | — | — | ✓ |
 | ReFit Validation and Performance | dev | alpha | — | — | — | — | — | ✓ |
 | Telegram Login Setup | admin, dev | beta | — | — | — | — | ✓ | ✓ |
@@ -250,9 +252,13 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | XRayGizmos controls and troubleshooting | public | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Make your first project checkpoint with UnitGit | public | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Work with UnitGit branches, shelves, and history | public | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Change avatar textures with My Avatar | public, creator, dev | beta | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Create a VRChat thumbnail with My Avatar | public, creator, dev | beta | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Pose, physics and parameters with My Avatar | public, creator, dev | beta | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Change avatar textures with My Avatar | public, creator, dev | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Create a VRChat thumbnail with My Avatar | public, creator, dev | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Pose, physics and parameters with My Avatar | public, creator, dev | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Add accessories and clothes with My Avatar | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Unity package safety and avatar workflow fixes | creator, dev | beta | — | — | ✓ | — | — | ✓ |
+| Unit Git history and My Avatar texture fixes | creator, dev | beta | — | — | ✓ | — | — | ✓ |
+| Unity safety verification follow-up | creator, dev | alpha | — | — | ✓ | — | — | ✓ |
 
 ## Tutorials
 

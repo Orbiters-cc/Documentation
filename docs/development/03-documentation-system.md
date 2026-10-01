@@ -122,6 +122,20 @@ sequenceDiagram
 
 The [visibility atlas](/documentation/orbiters.reference.visibility-atlas) explains account expansion. The [catalog](/documentation/orbiters.reference.documentation-audience-catalog) is generated from page metadata. Neither surface changes an application's resource authorization.
 
+## Copy markdown
+
+Every reader page has a **Copy markdown** icon button. It copies the Markdown the
+reader already received, so the server filter remains the only visibility decision:
+hidden audience and release blocks are never sent, and visible blocks arrive without
+their `<audience>`, `<beta>` or `<alpha>` tags. The copy starts with the page's `#`
+heading; when the visible text has none, the frontmatter title is added.
+
+Inspection labels are not page text. When an inspector turns them on, the document
+response also carries `cleanContent`: the same filtered Markdown without labels,
+which the copy uses. Regular reads omit the field. `documentMarkdown.js` builds the
+copied text; `documentationCopyMarkdown.test.js` covers the filtering per audience,
+release stage and source ceiling.
+
 ## Keep links and diagrams usable
 
 The reader builds its section navigation from Markdown headings and accepts both LF and Windows CRLF line endings.

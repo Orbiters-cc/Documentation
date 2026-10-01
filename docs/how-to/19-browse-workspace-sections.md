@@ -39,6 +39,11 @@ release stage in the URL. Back and Forward restore your section, topic and filte
 While reading, the sidebar shows nearby pages in the current topic. Large topics
 offer **Browse all pages** instead of an endless sidebar list.
 
+To reuse a page elsewhere, for example in an AI chat or a ticket, select the copy
+icon beside the reading time (**Copy markdown**). It copies the page title and the
+Markdown you can read at the selected release stage. Sections your account cannot
+see are never included.
+
 <audience include="admin, dev">
 
 ## Admin: choose the responsibility
