@@ -40,6 +40,10 @@ memberships are refreshed after six hours; a failed refresh retains the previous
 verification while the worker retries. Confirmed role removal, departure,
 untrusted policy, unlinking and explicit staff revocation can still withdraw a
 source. Independent sources remain separate and review holds still dominate.
+Community overview counts use active evidence without a deadline. The count excludes
+review-held members and covers current Discord presence or synchronized VRChat
+adult-role membership, counting each person once. Account merges keep the latest
+evidence check without adding an expiry.
 
 The transactional `permanentAgeEvidence` startup migration removes the deadline
 column. It restores a timer-only withdrawal only when its expiry audit follows
