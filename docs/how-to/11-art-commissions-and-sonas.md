@@ -60,7 +60,7 @@ quota instead of consuming a lifetime upload allowance.
 
 1. Open **Assets**, choose **Commissions** or **YCH** in the type chips, and select a listing.
 2. Read the description, deliverables, turnaround expectations, and artist's terms.
-3. Log in, choose one variant if offered, and select any optional extras.
+3. Log in and optionally choose a variant and extras. No variant is selected initially. Select **Clear variant** to return to the base version and base price.
 4. Check the configured price. It is the base price plus the selected variant's
    additional price and all selected extras, in the listing's currency.
 5. Choose a Sona. Add your request details and contact information for arranging
@@ -95,7 +95,7 @@ Check **My commissions** before starting again from another page.
    revision, and turnaround instructions.
 3. Upload previews; the first image is the cover.
 4. Set a base price and currency.
-5. Add variants for mutually exclusive choices and options for independent extras.
+5. Add variants for optional, mutually exclusive choices and options for independent extras. Each variant can have its own picture: upload it under **Variant picture**, replace it or remove it. Customers see that picture when choosing the variant. The selected picture is retained with submitted requests.
    Each price is an **addition** to the base price, not a replacement.
 6. Enable **Public on Assets** to publish. Keep it off to save a private draft.
 7. Enable **Accept requests** when you are ready, then save.

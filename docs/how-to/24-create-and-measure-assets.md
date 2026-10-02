@@ -28,7 +28,7 @@ form visible while requests are closed. AutoFill preserves both choices.
 Every template includes **Announce your commission**, including General, Custom
 base and Stickers. Choose destinations before publishing. Commission announcements
 require **Public on Assets**; other templates announce their published asset page.
-Saving a private draft never posts an announcement.
+Saving a private draft never posts an announcement. Each selected channel has an optional **Message for…** field. Leave it empty for the generated announcement; a custom message keeps the public listing link and required discussion notice. Provider length limits are checked before queueing. Save changes before using **Post again**; editing a message does not rewrite an already sent post.
 
 Connect Discord or Telegram channels, or an X/Bluesky publishing account. Each
 selected channel receives one announcement per asset, with its public page link,
@@ -44,7 +44,7 @@ seller details requires confirming the reviewed information again.
 
 ## Start with what you have
 
-1. Open **Creator → Assets → + Create**.
+1. Open **Creator → Assets → + Create**, **Creator → Overview → Latest assets → Create**, or, with creator access, **Assets → Create** beside **Add license key**. These open the same asset editor.
 2. Under **Create an asset**, choose one of the four types: **General**, **Custom base**, **Commission** or **Stickers**. To start from an asset you own, first pick it in the optional **Copy from an existing asset** field.
 3. Fill the form yourself, or use **AutoFill**: paste your post, notes or public store links into **Ideas and source text**, then add only the images you want analyzed with **Add AI source files**.
 4. Select **Send to LLM and auto-fill**. The source text and resized images selected there go to the administrator's configured AI provider. The separate **Media library** holds asset images and GLB previews without sending them to AutoFill; you can explicitly select **Use in AutoFill** on an existing image. A draft accepts up to 20 files of 20 MB each.

@@ -24,7 +24,7 @@ use **Browse documentation** or **Browse admin areas** above the page.
 | Start here | Orientation and first steps |
 | Account & community | Profiles, connected accounts, communities and privacy |
 | Assets & commissions | Licences, downloads, commission requests and Sonas |
-| Creator workspace | Publishing, versions, commissions, galleries and announcements |
+| Creator workspace | Publishing, versions, commissions and announcements |
 | Unity tools | My Custom Base, ReFit, XRayGizmos and UnitGit |
 | Administration | Staff workflows, payments, integrations and operations |
 | Developer resources | Architecture, APIs, documentation, AI and technical reference |

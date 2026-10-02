@@ -31,9 +31,6 @@ Open **Creator → Overview** for:
 - **Your commission workspace**, directly below **Latest assets**, with the default
   commission board and incoming column. Set the default, then use **Pin board to
   top of homepage**. Other homepage boards can be pinned independently.
-- Your galleries with their five latest images. Use **+** to create a gallery,
-  select its Discord room and layout, and choose whether to make it public.
-  New galleries start private. Import earlier images from the Galleries tab.
 - Supporter tiers and distinct active linked people in each tier. A person may
   appear in more than one tier; disabled or closed accounts are excluded.
 - Latest social posts and their delivery or scheduling state.
@@ -49,6 +46,8 @@ Connections** with that server chosen in the usual add dialog; if you have no
 community yet, create one first and the dialog opens right after. The same card
 appears for community owners on the community overview. Dismissing it with **×**
 hides it for good.
+
+Manage shared galleries under **Community → Galleries** as an owner or admin. Asset showcases stay in the asset settings.
 
 ## Community overview
 

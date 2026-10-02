@@ -1,40 +1,42 @@
 ---
 title: Gallery — connect a Discord room and import pictures
-section: Creator Tools
+section: Website
 order: 43
-audience: creator, admin, dev
+audience: user, creator, mod, admin, dev
 stage: stable
 id: orbiters.how-to.set-up-gallery
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-10-01
+lastVerified: 2026-10-02
 ---
 
 # Gallery: connect a Discord room and import pictures
 
-To add a room to the **Gallery** page, open **Creator → Galleries**. Create a named gallery, select its **Discord room**, then import earlier pictures with **Crawl Past Images**. The Gallery page itself is where you browse pictures; its sidebar does not create rooms.
+To add a room to the **Gallery** page, open **Community → Galleries**. Create a named gallery, select its **Discord room**, then import earlier pictures with **Crawl Past Images**. The Gallery page itself is where you browse pictures; its sidebar does not create rooms.
 
 ## Gallery or asset showcase?
 
 | You want pictures to appear… | Configure them here |
 | --- | --- |
-| Under a named room in the main **Gallery** page | **Creator → Galleries** |
+| Under a named room in the main **Gallery** page | **Community → Galleries** |
 | Under one asset's description, such as Ultirex | Open that asset's settings: **Page** tab → **Showcase gallery** |
 
 These are separate configurations. Connecting a room to an asset showcase does not automatically create a room in the Gallery sidebar. The same Discord picture can appear in both places.
 
 ## Before you start
 
-- Use an account with creator access.
-- [Connect a Discord integration](06-configure-discord-integrations.md) for the server under your creator account. Gallery room choices come from your connected servers.
+- Choose a community you own or administer. Creator status is not required. Community moderators cannot change galleries.
+- [Connect a Discord integration](06-configure-discord-integrations.md) for the server under **Community → Connections**. The community owner manages connections; admins use those connected servers for galleries.
 - Use a regular Discord **text channel**. The room picker does not list forum channels, threads, voice channels or categories.
 - Give the integration's bot **View Channel** and **Read Message History** in that room, including any channel permission overrides. For a custom bot, enable **Message Content Intent** in its Discord developer settings so image attachments are available. See Discord's [message-content requirements](https://docs.discord.com/developers/events/gateway#message-content-intent).
 - Choose a room whose pictures are appropriate for the gallery audience. Discord channel privacy does not automatically make an Orbiters gallery private.
 
+Existing galleries are available under their owner’s community. If you have not created a community yet, create one from **Community** first. Asset showcase galleries remain managed from their asset settings. Website staff status alone does not grant permission to edit a community gallery.
+
 ## Create the gallery
 
-1. Open **Creator → Galleries**.
+1. Open **Community**, select the community, then choose **Galleries**.
 2. Enter a **Gallery name**, such as `VRChat pics` (2–120 characters).
 3. Search the **Discord room** picker and select the text channel from the correct server. The form selects one room per gallery; create another named gallery for another room.
 4. Choose a **Gallery layout**: Masonry, Frame, Justified or Packing.
@@ -51,7 +53,7 @@ The importer reads image attachments from Discord messages. A link pasted into a
 | --- | --- |
 | Public | Signed-in Orbiters users |
 | Members | Signed-in users who are members of the gallery room's Discord server |
-| Private | Its creator; privileged staff can access it for administration |
+| Private | Community owner and admins; privileged website staff retain read access for administration |
 
 The Gallery page requires login for every gallery. **Members** galleries do not
 appear in the gallery list, the **All** feed or homepage gallery widgets for
@@ -105,6 +107,8 @@ Open the asset's settings and find **Showcase gallery** in the **Page** tab. Cho
 members-only gallery keeps `isPublic` false, so any check that only reads
 `isPublic` fails closed. The API accepts `visibility: private | members | public`
 (legacy `isPublic` still works) and returns `visibility` on every gallery.
+Management requests use `/community/:communityId/galleries` and require that community’s owner or admin. Gallery records use the community owner’s existing partition; imported images are retained.
+
 `services/discordImages/galleryAccess.js` is the single policy used by the gallery
 list, the per-gallery and combined feeds, single images (homepage pins), image
 sources, `GET /galleries/:id`, social-post imports and content reports. A viewer
