@@ -8,7 +8,7 @@ id: orbiters.community.events
 domain: website
 type: how-to
 owner: orbiters-docs
-lastVerified: 2026-09-23
+lastVerified: 2026-10-02
 ---
 
 # Create and manage community events
@@ -80,6 +80,45 @@ stops delivery instead of opening an unrestricted instance. Resolve the group
 configuration before retrying. The adult-only choice cannot change once the draft
 has been shared or published.
 
+## Frame Discord and VRChat covers
+
+In **Cover image**, **Use the same image for Discord and VRChat** is on by default.
+Turn it off for separate **Discord cover** and **VRChat cover** pickers. Each image
+has its own framing. Dropping or choosing a PNG, JPEG or WebP opens an editor:
+
+1. Drag the image, or focus it and use the arrow keys, to reposition it.
+2. Use **Zoom** to enlarge it. **Fill frame** resets the crop; **Fit whole image**
+   keeps the whole picture with dark padding where needed.
+3. Choose **Use image** to upload the framing, or **Cancel** to keep the previous cover.
+4. Save the event to retain both uploads. Unused uploads are reclaimed after 24 hours.
+
+Images must be still files up to 10 MB and 25 megapixels. Discord/shared images
+use a 16:9 frame; separate VRChat images use a 2:1 frame. The VRChat preview shows
+the calendar date, category, group icon, shortened title and local time on a
+transparent backdrop. Closing the cover controls keeps both previews loaded.
+
+## Create instances yourself
+
+Under **VRChat instance & calendar → Open the instance**, choose **I’ll create
+instances**. Orbiters still publishes the calendar and announcements, but does not
+create or close instances for this event or its steps. Create rooms in the selected
+VRChat group, using the step’s world and the event’s access and role restrictions.
+Instance-creation and calendar-link permissions are not required in this mode.
+Once any step has an open automatically created instance, its creation mode stays
+locked for the event.
+
+When **Auto Invites** is enabled and members have opted in, Orbiters checks after
+the step starts, at most every two minutes, for a matching active group instance.
+Unscheduled steps wait until you select **Start step** in My events. That action
+selects the step; it does not open a room or send an organizer invite in this mode.
+An attendance threshold, when selected, still applies. Invites stop at the step’s
+end, while it is paused, or when Auto Invites is disabled.
+
+If several rooms match the same group, world and access rules, Orbiters waits
+instead of choosing one. Use a unique matching room for the event. Rooms in other
+groups, other worlds, or with different role restrictions are not selected.
+Manually created rooms remain under your control when you cancel the event.
+
 ## Optional Discord announcement and opt-in invites
 
 In the event editor, enable **Post a Discord announcement**, choose a text or
@@ -111,10 +150,10 @@ banner error because the upload is a shared prerequisite; Orbiters attempts a
 rejected upload only once within that publication attempt.
 
 The message is sent when you publish, and subsequent edits update that same
-message in its original channel. The instance join button appears once the
+message in its original channel. For automatically created rooms, the instance join button appears once the
 instance opens. Cancelling the event disables the invite and join buttons.
 
-Enable **Add “Invite me when it starts”** to let members opt in. Choose either
+Enable **Auto Invites** in More options to let members opt in. New events have it enabled. Turning it off hides Invite me buttons on announcements and polls, closes sign-ups and stops pending attendee invites for every step. Choose either
 the scheduled start or **more than** a chosen number of people in the instance.
 Attendance checks run at most every two minutes while people are waiting, only
 after an instance exists. If the threshold is never reached before the event
@@ -145,7 +184,7 @@ invite trigger. Additional steps wait for the organizer by default. Turn on
 **Schedule a start time** only when you want automatic opening. Scheduled times
 must be in chronological order inside the event's start/end times.
 
-Every step gets its own group instance, using the event's audience, region and
+With automatic instance creation, every step gets its own group instance, using the event's audience, region and
 chosen audience settings. Enabling Discord invite buttons adds one website link
 per step to the announcement. Members can subscribe to several steps independently;
 withdrawing from one does not withdraw from the others. Invites stop when that
@@ -158,10 +197,10 @@ world or start time. Cancel the event to cancel all its remaining deliveries.
 
 During a published meetup, open **My events → Run your meetup** and choose
 **Start step** on any step. You can skip ahead or return to an earlier step.
-Orbiters queues that instance and sends an invite to your linked personal VRChat
+With automatic instance creation, Orbiters queues that instance and sends an invite to your linked personal VRChat
 account once it exists. The first step has its own name and controls too.
 
-Your personal VRChat account must be linked in **Connections** and able to receive
+For automatic instance creation, your personal VRChat account must be linked in **Connections** and able to receive
 invites from the community account. Your earlier instance stays available: join
 the new one, then place a portal yourself for the group. Portal placement is not
 automated. Switching to an already created step reuses its instance.
@@ -204,8 +243,8 @@ account; it is not required for a teammate to use an assigned community.
 ## Create an event
 
 Add an optional **event banner** using Upload banner. PNG, JPEG and WebP images
-up to 10 MB are supported. Orbiters removes embedded metadata and center-crops
-the image to 16:9; review the preview before publishing. Replace or Remove changes
+up to 10 MB are supported. Frame the image with the crop controls described above. Orbiters removes embedded metadata and saves
+the selected framing; review the preview before publishing. Replace or Remove changes
 the draft, and saving a published event updates its Discord cover, Discord
 announcement attachment and VRChat calendar/announcement image. Changing the VRChat community clears the banner so
 you can choose one for the new destination. Draft uploads stay private on Orbiters.

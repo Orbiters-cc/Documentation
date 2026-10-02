@@ -8,7 +8,7 @@ id: orbiters.community.event-delivery
 domain: website
 type: reference
 owner: orbiters-docs
-lastVerified: 2026-09-20
+lastVerified: 2026-10-02
 ---
 
 # Community event delivery
@@ -174,3 +174,28 @@ and opening editors cause no provider writes.
 These are local tests with simulated providers. A release still needs a controlled
 live check using authorized Discord and VRChat communities; automated tests do not
 establish compatibility with future changes to VRChat's unofficial API.
+
+## Event covers and organizer-created instances
+
+Event JSON accepts `autoInvites`, `separateBanners`, `vrchatBannerFileId` and
+`instanceTiming: "manual"`. No database column change is needed. `bannerFileId`
+is the shared/Discord image; `vrchatBannerFileId` is selected for VRChat only when
+`separateBanners` is true. Both file references are ownership/community checked
+under the save transaction and retained by banner cleanup. Banner upload accepts
+`format=common` (1200×675) or `format=vrchat` (1200×600); server decoding strips
+metadata regardless of client cropping.
+
+The global Auto Invites flag overrides every projected step, website/poll sign-up,
+Discord announcement button and attendee delivery. Sending/uncertain histories
+retain the existing no-automatic-resend rule. Disabling attendee invites does not
+change organizer invites when automatic instance creation is used.
+
+Manual instance timing projects to all steps and has no instance-creation due
+time. The provider layer also refuses instance creation/deletion in this mode.
+The invite worker discovers a unique active room through the selected group's
+instances and validates its world, group owner, access and role restrictions.
+Discovery is cached for two minutes per event revision and step, bounds detail
+reads to ten candidates, and pauses on ambiguity. It only runs for pending opt-ins
+after the step starts, with provider permissions and cancellation checked under
+the existing event lock. Discovered rooms are not persisted as Orbiters-created
+receipts and are never closed by event cancellation.
