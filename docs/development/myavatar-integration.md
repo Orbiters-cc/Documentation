@@ -150,3 +150,25 @@ and server accept well-supported color/emission role changes while keeping
 normal/mask channel constraints. Unresolved cases retain a suggested target for
 explicit selection. The backend image adapter distinguishes a Node Buffer from upload
 objects (Buffer.buffer is an ArrayBuffer and must not reach the image validator).
+
+<alpha>
+
+## Versioning refresh during script reload
+
+The local process-lifetime fix queues My Avatar history refreshes until Unity
+finishes compilation and asset updating. Focus changes coalesce into a pending
+refresh instead of immediately launching Git. The section subscribes while
+attached, cancels its history read when detached and ignores results from an
+older attachment. Returning to the panel still refreshes the project history.
+
+`UnitGitOverview.LoadAsync` accepts a cancellation token and passes cancellation
+to the service's existing superseded-read path. Toolkit's shared process runner
+also refuses new work during reload or shutdown. The same runner is used by
+Unit Git's command, merge and binary-output paths and MCB's PowerShell connectivity
+probe, so a timeout cannot be bypassed by waiting indefinitely for process output.
+
+The affected assemblies compile against Unity 2022.3.22f1. This source change is
+local and has not been released; the open project's reload and panel behavior
+still need validation after restarting its previously wedged editor.
+
+</alpha>

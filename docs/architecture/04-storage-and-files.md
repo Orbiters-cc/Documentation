@@ -8,7 +8,7 @@ id: orbiters.architecture.storage-and-files
 domain: website
 type: explanation
 owner: orbiters-engineering
-lastVerified: 2026-07-12
+lastVerified: 2026-10-02
 ---
 
 # Storage and Files
@@ -26,6 +26,14 @@ R2 configuration is loaded from a global `R2` API key. Important fields include:
 - public files base URL,
 - fallback threshold,
 - free storage and operation limits.
+
+Public file delivery checks that the CDN hostname resolves before redirecting a
+browser. DNS checks are shared between requests, bounded to one second, and cached
+for five minutes on success or one minute on failure. An unresolved hostname uses
+the existing signed R2 URL, or the local mirror when R2 delivery is disabled.
+Thumbnail and PNG requests retain their selected variant. This protects blog covers
+and other API-served images from a missing CDN DNS record; it does not replace
+configuring a working public domain in `FILES_PUBLIC_BASE_URL`.
 
 ## Usage Counters
 

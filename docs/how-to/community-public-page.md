@@ -8,7 +8,7 @@ id: orbiters.community.public-page
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-10-01
+lastVerified: 2026-10-02
 ---
 
 # Publish a community page
@@ -39,12 +39,31 @@ Only the community owner can change the page. Open **Community → Public page**
 Saving or **Refresh** reads the latest group and server details. Visitors only see
 that saved copy, which Orbiters updates in the background every few hours.
 
+## Banner and description
+
+The settings preview and public page use the selected Discord server's banner
+and description by default. After choosing a different server, save to load its
+details. If Discord has no banner or description, the corresponding area stays
+empty until you add your own.
+
+Click the banner preview or drop a still PNG, JPEG or WebP image up to 5 MB.
+Drag and zoom to frame it, then choose **Use image** and **Save**. The original
+must be at most 25 megapixels. **Use Discord banner** restores the server banner
+after saving. Uploaded banners are public image files.
+
+Turn off **Use Discord description** to write your own text, up to 2,000
+characters. A blank custom description hides the About text. Turn the switch
+back on and save to follow Discord again. Refreshing server details preserves
+your manual banner and description. Unsaved edits disable Refresh so they cannot
+be overwritten accidentally.
+
 ## What appears, and what never does
 
 | Section | Source |
 | --- | --- |
 | Name | The community's name on Orbiters |
-| Icon, banner, description | The VRChat group first, then the Discord server |
+| Icon | The public VRChat group first, then the Discord server |
+| Banner, description | Your manual override, otherwise the selected Discord server |
 | Discord | Server name, icon, member and online counts, Verified or Partnered badge |
 | VRChat | Group name, code, join state, member and online counts, group links |
 | Events | Published events with a public audience that have not started yet |

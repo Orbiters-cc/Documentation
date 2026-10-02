@@ -34,3 +34,8 @@ does not need to be inserted again into the article's Markdown.
 Custom-base assets belong to **MCB** and are excluded from both the **My Avatar**
 widget and its expanded list. My Avatar lists owned avatars, texture sets and
 accessories for its Unity texture and thumbnail workflows.
+
+The **My Avatar** page ends after its introduction, animated avatar preview and
+Install control. The former “See what it does” link and lower demo sections have
+been removed. Its animated background continues behind the footer to the bottom
+of the page, without a separate background strip.
