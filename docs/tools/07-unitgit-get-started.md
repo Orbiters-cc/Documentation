@@ -24,6 +24,19 @@ Use a Unity 2022.3 project with the **Unit Git** package installed and Git avail
 
 Save your Unity scenes and assets before making a checkpoint. Unsaved Inspector or scene changes are not yet files that Git can record.
 
+## Commit progress and interruptions
+
+In Unit Git 0.2.3, clicking **Commit** while files are being included queues the
+commit immediately after staging finishes. The commit panel lists the files Git
+is preparing and the elapsed time. Preparation errors stay visible in the panel;
+**Console** contains the command output. Large files, Git filters, hooks or signing
+can take time, so a click does not promise an instantaneous Git operation.
+
+If Unity reloads during a requested commit, the draft message is retained and the
+panel explains the interruption. Check **Log** before retrying: Git may already
+have written the commit. Unit Git does not automatically repeat a commit or push
+after a reload. The checkboxes refresh from Git's actual index.
+
 ## Prepare the repository
 
 If the project already has a root Git repository with commits, continue to Local Changes.
