@@ -40,6 +40,14 @@ Use `EXIT_AFTER_DATABASE_INIT=true` when you only need schema startup validation
 
 The frontend reads `REACT_APP_BACKEND_URL`. Make sure it points to the backend environment you are testing.
 
+Production builds keep the source-directory import restriction enabled. The Webpack
+override allows Babel's CommonJS runtime helper directory because shared CommonJS
+modules use it alongside CRA's ESM helpers. The regression test checks that those
+helpers resolve while unrelated files outside "src" remain blocked. Verify a clean
+lockfile install in CI as well as the local build; cached dependencies can hide
+a helper-resolution failure.
+
+
 ```bash
 cd frontend
 npm run start
