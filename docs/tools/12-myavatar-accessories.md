@@ -100,6 +100,16 @@ existing copy added by hand can be taken over instead of duplicated. Clothing fr
 different body can be resized and aligned to matching armature bones; **Cancel** restores
 the transforms that still match the fit, preserving subsequent manual edits.
 
+## Clothing while posing
+
+The local Clothing preview update follows the anatomical bone matches used to fit
+installed garments and accessories. This includes fitted items with a creator's
+VRCFury setup whose arm names differ from the target avatar. Enabling **Posing >
+Clothing** preserves the fitted pose; later avatar bone edits carry the item along.
+Hood strings and other unmatched extra bones inherit their matched parents.
+Clothing also follows edits from tools that do not emit Undo property notifications. The preview refreshes rendered skinning matrices so the visible mesh follows its bones. Switching Clothing off restores the item transforms and renderer settings. The creator's build components
+remain intact; this update changes the editor preview.
+
 ## Pose fitting and texture controls
 
 The local update also fits clothing when its pose differs but its size already

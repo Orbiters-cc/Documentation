@@ -17,6 +17,13 @@ relations: orbiters.how-to.mcb-and-unity-tools, orbiters.general.vpm-package-con
 MCB applies custom avatar-base versions while preserving the original default FBX
 as the source for resets and binary patches.
 
+## Clothing in mesh comparison
+
+The local **See mesh differences** viewer fix preserves the current clothing pose
+and fitted size when clothing is enabled. Skinned context meshes include the
+current bone transforms and blendshape weights, with scale applied once in the
+avatar's comparison space. Viewing differences does not modify the worn clothing.
+
 ## Backup Invariant
 
 If the default FBX is `A` and applied versions are `B` or `C`, `*.fbx.old` remains

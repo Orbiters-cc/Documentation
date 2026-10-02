@@ -214,7 +214,7 @@ source avatar, target avatar, mode, blendshape), and four rendered preview image
 Clicking the card captures front, three-quarter, side and elevated views in an
 offscreen renderer. The primary refit shape is forced to 100% on the temporary
 renderer; the current pose and other shape values are preserved. Live scene values
-are unchanged. Debug snapshots are excluded. It does not upload the Unity asset,
+are unchanged. The local capture fix preserves fitted bone positions, rotations and scale, including clothing resized under an avatar; renderer scale is applied only once. Debug snapshots are excluded. It does not upload the Unity asset,
 mesh, scene file, local paths, or authentication token as commission content.
 
 Preview images travel as multipart `previews` with a JSON `payload` field to the
