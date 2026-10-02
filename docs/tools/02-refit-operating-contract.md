@@ -92,6 +92,28 @@ the sampled contact correction did not converge within 1 mm. Regenerate an old R
 saved output meshes and MCB version snapshots are not rewritten automatically. This change is not released.
 </alpha>
 
+<alpha>
+## Optional body coverage after fitting
+
+The local 0.5.2 API adds `ReFitSettings.coverDifferentBaseBody` (default `false`).
+My Avatar uses it for identified body clothing fitted across different rig
+proportions. The Toolkit request carries `CoverDifferentBaseBody`; it participates
+in cache identity so a normal result cannot satisfy a coverage request.
+
+The pass follows the normal primary deformation and closed-tube correction. It
+adds dense body support for triangle interiors, smooths the added displacement,
+limits neighboring displacement differences, and protects openings, the head
+region and closed tubular pieces. Generated body shapes receive the corresponding
+coverage constraints. It leaves armature replacement and weight-transfer choices
+to the caller; My Avatar keeps the existing skeleton and skin weights.
+
+`surface-coverage-limited` reports unsatisfied constraints after bounded correction.
+This is a support diagnostic, not proof of mesh intersections or a claim that all
+poses are clipping-free. Inspect exterior renders and the actual body shape
+combinations, including the original input and previous output. The change is
+implemented locally and has not been published.
+</alpha>
+
 ## Environment
 
 ReFit Settings exposes the same **Dev Environment** switch as MCB. Production uses

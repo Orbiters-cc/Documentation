@@ -117,6 +117,27 @@ Removing a Standard shader emission map also turns off its emission color and
 keyword, so the material stops glowing. Other shader-specific effects may have
 separate controls in their material Inspector.
 
+## Coverage for clothing from another base
+
+The local My Avatar 0.8.4 update requests an additional coverage pass from ReFit
+0.5.2 for pants, hoodies, shirts and underwear when the recorded armature fit
+changed the rig dimensions, or creator metadata identifies the original base.
+A different pose or placement alone does not trigger it. Recognition uses the
+object and prefab names; it does not infer the source base from missing blendshapes.
+
+After normal ReFit, the pass expands remaining clipped fabric and spreads that
+movement through neighboring vertices to retain smooth folds. It checks triangle
+interiors as well as vertices, preserves small closed accessories and intentional
+openings, and leaves the head region out of this body-clothing pass. Source meshes
+and skin weights are preserved. Unity **Undo** restores the previous result.
+
+Inspect the result with the body shapes you use. Coverage has movement and geometry
+limits: a rough-result message means some constraints could not be satisfied
+without excessive deformation. It is not a guarantee for every pose or combination
+of shapes. Existing generated meshes are not rewritten automatically; refit them
+again or restore and re-add the clothing. These package versions are local and have
+not been published yet.
+
 ## Accessories that need more setup
 
 Some accessories cannot be finished automatically, for example a VRCLens installer or an
