@@ -61,10 +61,9 @@ Printing is made to order by default. Turn on **Limit orders** on a printing cho
 to set **Orders you can accept**; existing requests count towards it and cancelled
 requests release their place.
 
-Choose **White vinyl** or **Holographic vinyl** in each printing choice. White vinyl
-supports **Glossy**, **Matte**, **Broken glass holo**, **Starry holo** or **Glitter**
-finishing. These are alternative finishing foils. Holographic vinyl supports
-**Glossy** only. Each paper/finishing combination can have its own price weight or
+Choose **White vinyl** or **Holographic vinyl** in each printing choice. Both papers support **Glossy**, **Matte**, **Broken glass holo**, **Starry holo** or **Glitter**
+finishing. Paper and finishing are independent choices; switching paper keeps the
+selected finishing foil. Each paper/finishing combination can have its own price weight or
 surcharge and sample artwork.
 
 Under **Margin by size**, set a margin in millimeters for every offered size.
