@@ -8,7 +8,7 @@ id: orbiters.tools.myavatar-accessories
 domain: myavatar
 type: how-to
 owner: orbiters-engineering
-lastVerified: 2026-09-29
+lastVerified: 2026-10-02
 ---
 
 # Add accessories and clothes with My Avatar
@@ -87,8 +87,18 @@ that accessory even when a generated material becomes shared by another renderer
 ## Variants
 
 Packages often contain several prefabs of the same accessory. When the variants differ by
-hand (left, right or both hands), My Avatar asks which one you want. Other variants are
-picked by default: a VRCFury variant over a manual one, and PC over Quest or Android.
+hand (left, right or both hands), My Avatar asks which one you want. Other variants of the
+same item prefer VRCFury over manual setup, and PC over Quest or Android.
+
+In My Avatar 0.8.2, a drop containing different items shows a picture and **Add** button
+for each item. **Add both** or **Add all** installs them together; **Done** dismisses
+the remaining choices. Items named as extras or add-ons are offered alongside the main
+item. AI assistance can simplify their names, while the item choice stays yours.
+
+If the same prefab is already worn, My Avatar offers replacement or another copy. An
+existing copy added by hand can be taken over instead of duplicated. Clothing from a
+different body can be resized and aligned to matching armature bones; **Cancel** restores
+the transforms that still match the fit, preserving subsequent manual edits.
 
 ## Accessories that need more setup
 

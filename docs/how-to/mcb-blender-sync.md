@@ -8,12 +8,12 @@ id: orbiters.how-to.mcb-blender-sync
 domain: mcb
 type: how-to
 owner: mcb-maintainers
-lastVerified: 2026-09-23
+lastVerified: 2026-10-02
 ---
 
 # Sync avatar edits from Blender
 
-Use the MCB Blender connector to edit a creator avatar and preview the exported meshes in Unity. This page describes the updated connector under local validation; it does not imply that an installed released package already contains the fix.
+Use the MCB Blender connector to edit a creator avatar and preview the exported meshes in Unity. The workflow below describes MCB 1.10.3 with Toolkit 0.3.7. Live streaming and XMuscles remain experimental.
 
 ## Connect and edit
 
@@ -25,6 +25,12 @@ Use the MCB Blender connector to edit a creator avatar and preview the exported 
 If connecting an already open Blender project, use **Sync with Unity MCB** in Blender and **Sync with Blender** in Unity. Reconnecting the same avatar retains its session and renderer mappings, including the linked project export folder when one was established by **Modify with Blender**.
 
 Saving the `.blend` file preserves the Blender project. Unity's **Import .blend** progress alone does not confirm that MCB applied the exported body. Check the connector's export result and the avatar in the scene.
+
+## Live preview and explicit sync
+
+A connected extension can stream vertex edits into temporary Unity meshes when the mesh mapping is valid. **Revert live** restores the avatar's own meshes; a later Blender edit can show live again. These temporary meshes are removed around scene saves, script reloads and export application. Use Blender's explicit **Sync** export to retain a change through the normal export workflow. A disconnected stream or a mapping error does not mean an export was committed.
+
+The connector requires protocol 2 on both sides. **Modify with Blender** installs the released MCB extension and, when X-Muscle System is installed in Blender, the optional XMuscle Orbit Helper. It does not install X-Muscle System. If a protocol mismatch is reported, update the indicated extension or Unity package and reconnect.
 
 ## Understand the status
 
@@ -70,7 +76,7 @@ See [MCB and Unity Tools](08-mcb-and-unity-tools.md) for the creator and version
 
 ## Script reload during project preparation
 
-In the local reload fix, the headless Blender preparation job uses Toolkit's
+In Toolkit 0.3.7, the headless Blender preparation job uses Toolkit's
 shared process runner. Preparation has a 30-minute deadline and stops if Unity
 reloads scripts or quits. This does not close an interactive Blender window
 opened for editing.
@@ -81,7 +87,6 @@ project launch. Its log is under
 `Library/MCB/BlenderLaunch/<session>/prepare.log` in the Unity project.
 
 The updated process runner passed standalone Windows Mono cleanup regressions.
-This change has not been released, and an end-to-end Blender preparation during
-an actual editor script reload has not yet been verified.
+The in-editor process regressions exercise cancellation and cleanup. End-to-end Blender preparation during an actual editor script reload still needs separate verification.
 
 </alpha>

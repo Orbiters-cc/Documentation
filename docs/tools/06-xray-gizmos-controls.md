@@ -8,7 +8,7 @@ id: orbiters.tools.xraygizmos-controls
 domain: xraygizmos
 type: reference
 owner: orbiters-xraygizmos
-lastVerified: 2026-09-07
+lastVerified: 2026-10-02
 relations: orbiters.tools.xraygizmos-get-started
 ---
 
@@ -32,7 +32,7 @@ Armatures come from usable skinned-mesh bone arrays. Multiple renderers sharing 
 | --- | --- |
 | Show XRay armatures | Displays skeleton overlays through the model |
 | Shape, Thickness, Color | Adjusts bone appearance |
-| Clickable scene bones | Highlights hovered bones and selects their source transforms |
+| Clickable scene bones | Highlights hovered bones and selects their source transforms; Shift adds to the selection and Ctrl/Cmd toggles a bone |
 | Show weight paint | Previews selected bone or root influence on skinned meshes |
 | Weight alpha | Adjusts weight-preview transparency |
 | Show mesh polygon edges | Displays mesh edges following bone and blendshape deformation |
@@ -51,6 +51,12 @@ Turning on **Bones** from this toolbar enables **Whole scene** and clickable bon
 **Extra** controls gizmos registered by other installed tools. Its dropdown can enable or disable entries individually or together. **No extra gizmos registered** simply means no tool has supplied an entry.
 
 XRayGizmos can discover ReFit debug labels from available snapshots. ReFit is optional; enabling XRayGizmos does not create a ReFit run or a debug snapshot.
+
+## Scene selection and handles
+
+XRayGizmos 0.2.6 participates in Unity's normal handle picking. Bone selection yields to an active drag or camera navigation, and only the visible part of a bone in front of the camera's near plane can receive clicks. Empty-space clicks remain available to Unity. Each Scene view keeps its own hover target.
+
+If an older installation appears to intercept Scene-view clicks, turn **Bones** off in the toolbar, then update XRayGizmos and Toolkit together. See [Restore Scene-view interaction](unity-scene-interaction-fixes.md).
 
 ## When something is missing
 

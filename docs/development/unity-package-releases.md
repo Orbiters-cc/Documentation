@@ -8,7 +8,7 @@ id: orbiters.development.unity-package-releases
 domain: operations
 type: how-to
 owner: orbiters-engineering
-lastVerified: 2026-09-27
+lastVerified: 2026-10-02
 ---
 
 # Publish Unity package releases
@@ -29,7 +29,7 @@ release artifacts and a Git tag named exactly after the version.
 
 ## Publish a new version
 
-1. Finish the package changes and set a new, unused version in `package.json`.
+1. Finish the package changes and set a new, unused version in `package.json`. Update its `url` to the ZIP for that same version and raise dependency minimums when the release uses new shared APIs or fixes.
 2. Commit and push to the branch above, or merge a pull request into that branch.
 3. Open **Actions > Build Release**. Check that `release-check`, `config`, and
    `build` all succeed, then inspect the tag and release assets under **Releases**.
@@ -67,8 +67,7 @@ runs when more are queued.
 
 GitHub Actions must be enabled, the repository variable `PACKAGE_NAME` must be set,
 and repository policy must permit the existing actions and `contents: write` for
-the build job. These settings were checked in all five repositories when this
-workflow was introduced. The automatic trigger requires no additional secret or
+the build job. The `PACKAGE_NAME` variables were checked in all seven active repositories on 2026-10-02. The automatic trigger requires no additional secret or
 personal access token.
 
 Use a normal authenticated Git push or pull-request merge for version bumps.

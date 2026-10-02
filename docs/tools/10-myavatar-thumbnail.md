@@ -8,14 +8,14 @@ id: orbiters.tools.myavatar-thumbnail
 domain: myavatar
 type: how-to
 owner: orbiters-engineering
-lastVerified: 2026-09-28
+lastVerified: 2026-10-02
 ---
 
 # Create a VRChat thumbnail with My Avatar
 
 The **Thumbnail** section of the My Avatar component makes the 4:3 image VRChat
 shows for your avatar. It uses the Orbiters photoshoot, the same one MCB uses for
-custom base media. This page describes My Avatar 0.5.1 with Orbiters Toolkit 0.2.6.
+custom base media. This page describes My Avatar 0.8.2 with Orbiters Toolkit 0.3.7.
 
 ## See it where it will appear
 
@@ -62,6 +62,8 @@ through the SDK's own thumbnail selection, as if you had chosen the file with
 treats the new image as a pending change: review it, then upload or discard as
 usual. A thumbnail you choose in the SDK afterwards is left alone. Nothing is
 uploaded automatically.
+
+Toolkit 0.3.7 releases pointer capture when a framing drag, dial or colour drag is cancelled, loses capture, or its preview surface is removed. Closing or rebuilding the studio during a drag should leave other editor controls usable.
 
 ## Troubleshooting
 
