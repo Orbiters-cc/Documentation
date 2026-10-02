@@ -30,3 +30,7 @@ page you are on. Notifications keep their own bell beside the menu button.
 
 Blog articles display their saved cover image above the article text. The cover
 does not need to be inserted again into the article's Markdown.
+
+Custom-base assets belong to **MCB** and are excluded from both the **My Avatar**
+widget and its expanded list. My Avatar lists owned avatars, texture sets and
+accessories for its Unity texture and thumbnail workflows.
