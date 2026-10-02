@@ -127,6 +127,32 @@ Removing a Standard shader emission map also turns off its emission color and
 keyword, so the material stops glowing. Other shader-specific effects may have
 separate controls in their material Inspector.
 
+## Repairing imported materials
+
+The local, unreleased update detects missing or unsupported shaders and embedded
+model materials whose solid white emission hides their color texture. On a new
+drop, My Avatar rebuilds those materials with **VRChat/Mobile/Toon Standard**
+before matching the supplied textures. Existing affected items show **Repair
+material** on their card. The VRChat SDK must provide that shader; otherwise the
+card explains what is missing.
+
+Repair keeps compatible texture maps, tiling and offsets, enables the Toon shader's
+normal-map features, and clears the broken import's white emission. It creates a
+material copy for that item: source assets and other items sharing them remain
+unchanged. Unity **Undo** restores the original assignment. Authored materials
+with intentional glow are not classified as broken just because they are bright.
+Toon Standard is opaque; effects requiring transparency or a custom shader still
+need their creator's material setup.
+
+## When the fit question appears
+
+On a recognized custom base with an available original base, an armature-fitted
+item still gets the fit question even when no nearby custom blendshape is missing.
+Matching bone placement and size does not establish a surface fit. Choose whether
+it already fits or needs ReFit. Explicit creator metadata for this custom base,
+an existing ReFit result and a previously dismissed question remain respected.
+The proximity check measures the worn mesh at its actual scale.
+
 ## Coverage for clothing from another base
 
 The local My Avatar 0.8.4 update requests an additional coverage pass from ReFit
