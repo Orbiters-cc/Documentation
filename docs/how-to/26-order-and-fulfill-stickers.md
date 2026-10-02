@@ -8,7 +8,7 @@ id: orbiters.how-to.order-and-fulfill-stickers
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-28
+lastVerified: 2026-10-02
 ---
 
 # Order and fulfill custom stickers
@@ -19,7 +19,7 @@ This workflow is prepared for the next release. A creator must publish a sticker
 
 1. Open the sticker asset and choose a printing option: finished size, quantity, number of designs, thickness and finish. The price and remaining order capacity belong to that option.
 2. Upload each design, including PNG artwork with a transparent background. Allocate the printed quantity across the required designs.
-3. Set the white border width in millimeters. The main gallery replaces the sample with your uploaded artwork, follows the opaque outline and preserves the artwork's proportions. Selecting another uploaded design updates that same preview; removing it restores the sample.
+3. The margin is set by the creator for your chosen size and updates automatically when you change size. A margin slider appears only if the creator allows adjustments. The main gallery replaces the sample with your uploaded artwork, follows the opaque outline and preserves the artwork's proportions. Selecting another uploaded design updates that same preview; removing it restores the sample.
 4. Drag the unframed 3D preview to inspect the finish, or use arrow keys. Scrolling over the preview scrolls the page. Glossy, matte, broken-glass holographic, starry holographic and glitter finishes have approximate material previews.
 5. Enter a delivery address and choose **Get delivery estimates**, then select a service if one is offered. Platform prices are separate from public carrier prices; confirm that the creator can book the selected platform price. Check the creator's delivery terms, the printing total and any separate request fee. Shipping is arranged and paid directly with the creator; the quoted range is not a checkout charge.
 6. Use **Send request** in the upper-right corner of **Make your stickers** after reviewing the terms.
@@ -59,8 +59,26 @@ Choose **Creator → Assets → + Create → Stickers**. Save your seller inform
 
 Printing is made to order by default. Turn on **Limit orders** on a printing choice
 to set **Orders you can accept**; existing requests count towards it and cancelled
-requests release their place. **Maximum white border (mm)** is under
-**More printing settings** and defaults to 3 mm for new listings. **Shipping details**
+requests release their place.
+
+Choose **White vinyl** or **Holographic vinyl** in each printing choice. White vinyl
+supports **Glossy**, **Matte**, **Broken glass holo**, **Starry holo** or **Glitter**
+finishing. These are alternative finishing foils. Holographic vinyl supports
+**Glossy** only. Each paper/finishing combination can have its own price weight or
+surcharge and sample artwork.
+
+Under **Margin by size**, set a margin in millimeters for every offered size.
+New sizes start at **2 mm below 10 cm** and **5 mm from 10 cm upward**; edit these
+values to suit your cutter. Buyers use these fixed values by default. Turn on
+**Allow buyers to adjust margins** to show the buyer a slider, and set its maximum.
+That maximum must accommodate every size's starting margin. Changing size restores
+that size's starting margin, while changing quantity keeps an allowed adjustment.
+Zero-margin artwork needs bleed beyond the cut line; confirm it in the proof.
+The preview and generated print files use the same saved margin. Downloads include
+original artwork, generated PNGs and the chosen size/margin in the order manifest.
+Existing submitted orders keep their saved measurements.
+
+ **Shipping details**
 shows the optional shipping and delivery text; turning it off clears the text.
 
 ### Price the shared options
@@ -150,8 +168,7 @@ Related: [Set your seller terms](16-set-seller-terms.md), [Create, publish and m
 
 ## Compare materials and check every design
 
-When creating a printing choice, select a sample in the **Choose your finish**
-grid. Glossy, matte, broken-glass holo, starry holo and glitter each have a 3D
+When creating a printing choice, choose the vinyl, then select a sample in the **Finishing** grid. Glossy, matte, broken-glass holo, starry holo and glitter each have a 3D
 preview. Drag or use arrow keys on one preview to rotate all the samples together;
 zoom is shared too. **Reset views** restores the same starting angle. The samples
 illustrate the material rather than guaranteeing the physical print's appearance.
