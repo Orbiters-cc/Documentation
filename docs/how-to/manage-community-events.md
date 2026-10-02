@@ -159,28 +159,28 @@ VRChat+ on the connected community account, as described in
 [VRChat's group requirements](https://help.vrchat.com/hc/en-us/articles/11706395001875-Creating-a-Group).
 Group management permissions alone do not grant gallery upload access.
 
-If VRChat rejects the gallery upload, edit the event, turn off **Use banner on
-VRChat**, and save the update to publish those entries without an image. Discord
-keeps the banner. Alternatively, resolve gallery access on the community account
-and retry the failed steps. Calendar and announcement can both show the same
-banner error because the upload is a shared prerequisite; Orbiters attempts a
-rejected upload only once within that publication attempt.
+If VRChat denies gallery access, those entries publish without the optional image
+and show a warning. Discord keeps its banner. Orbiters attempts a denied upload
+only once within that publication attempt. Other upload errors still require
+attention. Resolve gallery access before retrying an image update.
 
 The message is sent when you publish, and subsequent edits update that same
 message in its original channel. For automatically created rooms, the instance join button appears once the
 instance opens. Cancelling the event disables the invite and join buttons.
 
 Enable **Auto Invites** in More options to let members opt in. New events have it enabled. Turning it off hides Invite me buttons on announcements and polls, closes sign-ups and stops pending attendee invites for every step. Choose either
-the scheduled start or **more than** a chosen number of people in the instance.
+**At the start** or **Above attendance**, with a **More than** threshold, directly
+in the Auto Invites section. These controls do not depend on a Discord announcement.
 Attendance checks run at most every two minutes while people are waiting, only
 after an instance exists. If the threshold is never reached before the event
 ends, no invites are sent. Invitations are delivered gradually in small batches.
 
 The invite button opens the website. Members already signed in with VRChat linked
-are added immediately and see **See ya !**. Otherwise, the same page offers Discord
+are added immediately and see **You’re on the invite list**. Otherwise, the same page offers Discord
 or Telegram login, then the usual VRChat linking frame. Their selected step survives
 the sign-in journey. Members must be friends with the selected VRChat community
-account; the success page includes its profile link and **Don’t invite me**.
+account; the success page offers **Ok** to open the event overview at `/events/<id>`
+and **Don’t invite me** to withdraw. The overview does not sign them up again.
 Group membership and role restrictions still apply. Changing the linked
 VRChat account withdraws the old opt-in. One confirmed invite is sent per member
 per step; unconfirmed sends are never automatically repeated.
@@ -412,3 +412,20 @@ See [Community event delivery](../reference/community-event-delivery.md) for the
 provider contracts, durable receipts and database upgrade checks.
 
 </audience>
+
+
+## Send an announcement again
+
+In **Community → Events**, each published event has separate **Send Discord
+announcement again** and **Send VRChat announcement again** buttons. Confirm the
+selected service to post a new announcement there. Discord mentions the selected
+roles again; VRChat requests a new notification for group members. The calendar,
+scheduled Discord event and instances are unchanged. Previous announcement IDs
+remain in delivery history. A pending or unconfirmed delivery must finish or be
+resolved before another announcement can be sent.
+
+If VRChat denies gallery uploads, the calendar entry and group announcement publish
+without the optional banner. Their delivery cards explain the missing banner;
+Discord keeps its own image. Other upload failures still require attention.
+For an event already marked **failed**, use **Retry failed steps** after the fix is
+available, or use the relevant announcement button to retry just that announcement.

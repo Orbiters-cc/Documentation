@@ -220,3 +220,21 @@ reads to ten candidates, and pauses on ambiguity. It only runs for pending opt-i
 after the step starts, with provider permissions and cancellation checked under
 the existing event lock. Discovered rooms are not persisted as Orbiters-created
 receipts and are never closed by event cancellation.
+
+
+## Explicit announcement resends
+
+`POST /community-events/:id/announcements/:provider/resend` accepts `discord` or
+`vrchat`, the current `revision`, and `confirmed: true`. It locks the creator-owned
+published event, rejects busy, pending and uncertain deliveries, and queues only
+`discordAnnouncement` or `announcement`. Requests for the same provider are at
+least a minute apart. Existing provider receipts move into that delivery's `history`
+and remain protected against recovery into another event. The resend is audited.
+The worker creates a new message or post; ordinary subsequent edits never resend
+VRChat notifications. Resend intent is separate from the event's original notify
+setting, and the calendar and instances are not republished by this action.
+
+A classified `VRCHAT_GALLERY_ACCESS` denial skips the optional image and records a
+visible delivery warning while preserving calendar/post creation and notification
+flags. The denied upload is shared across the worker pass. Other authentication,
+validation, transport and unconfirmed upload failures are not silently downgraded.
