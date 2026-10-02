@@ -8,22 +8,24 @@ id: orbiters.reference.chatgpt-plugin-mcp
 domain: website
 type: reference
 owner: orbiters-product
-lastVerified: 2026-10-01
+lastVerified: 2026-10-02
 relations: orbiters.how-to.chatgpt-plugin, orbiters.development.knowledge-base-and-mcp
 ---
 
 # AI apps MCP and OAuth reference
 
 One MCP server and one OAuth 2.1 authorization server serve ChatGPT, Codex, Claude
-(web, desktop, mobile, Claude Code), Grok and Le Chat. Code lives in
+(web, desktop, mobile, Claude Code), Grok and Vibe. Code lives in
 `backend/src/services/mcp/{oauth,plugin}`.
 
 ## Endpoints
 
 | Path | Purpose |
 | --- | --- |
-| `POST /mcp` | Stateless Streamable HTTP MCP (JSON responses). `orb_oat_` OAuth tokens get the plugin tools; `orb_mcp_`/`orb_agent_` tokens keep the Knowledge tools. Without a token, `initialize` and `tools/list` work and only tools marked `auth: 'none'` can be called; calling another tool answers HTTP `401` with `WWW-Authenticate: Bearer error="invalid_token", …, resource_metadata="…", scope="read <tool scope>"` (lazy authentication). |
-| `GET /.well-known/oauth-protected-resource[/mcp]` | RFC 9728 metadata. |
+| `POST /mcp` | Stateless Streamable HTTP MCP (JSON responses). `orb_oat_` OAuth tokens get the plugin tools; `orb_mcp_` personal connector tokens (`metadata.toolSet=plugin`) get scoped plugin tools; other `orb_mcp_`/`orb_agent_` tokens get the Knowledge tools. Without a token, `initialize` and `tools/list` work and only tools marked `auth: 'none'` can be called; calling another tool answers HTTP `401` with `WWW-Authenticate: Bearer error="invalid_token", …, resource_metadata="…", scope="read <tool scope>"` (lazy authentication). |
+| `POST /mcp/connect` | Authenticated connector bootstrap for Grok and Vibe. Anonymous initialize/list calls receive a `401` OAuth discovery challenge. OAuth and personal connector tokens use the same plugin tools. |
+| `GET /.well-known/oauth-protected-resource[/mcp[/connect]]` | RFC 9728 metadata with the matching resource URL. Both MCP resources are accepted by OAuth resource validation. |
+| `GET/POST /oauth/connector-tokens`, `DELETE /oauth/connector-tokens/:id` | Human-member JWT API to list, generate and revoke personal Grok/Vibe tokens. POST accepts `app` and chosen `scopes`; `read` is required. Secrets are returned only by generation. |
 | `GET /.well-known/oauth-authorization-server` | RFC 8414 metadata, including `client_id_metadata_document_supported` and `none` among the token endpoint methods (both required by Claude for CIMD). |
 | `POST /oauth/register` | RFC 7591 dynamic registration. Redirect URIs must be HTTPS (or loopback) on a trusted host (`chatgpt.com`, `chat.openai.com`, `platform.openai.com`, `claude.ai`, `claude.com`, loopback, hosts trusted from the inbox, hosts of callback URLs pasted into connector keys). Refused hosts are recorded for the admin inbox. |
 | `GET /oauth/authorize`, `POST /oauth/token`, `POST /oauth/revoke` | Authorization code with PKCE `S256`, `iss` in responses, rotating refresh tokens, RFC 7009 revocation. Loopback redirects match on any port (RFC 8252). |
@@ -80,7 +82,7 @@ per cooldown (`pluginAlerts.js`).
 | --- | --- |
 | `CHATGPT_PLUGIN` | `CONNECTION_MODE` (`server`/`tunnel`), `TUNNEL_ID`, `CLIENT_REGISTRATION`, `OAUTH_CALLBACK_URL`, `OAUTH_CLIENT_ID`, `OAUTH_CLIENT_SECRET`, `OPENAI_APPS_CHALLENGE` |
 | `CLAUDE_CONNECTOR` | `CLIENT_REGISTRATION`, `OAUTH_CLIENT_ID`, `OAUTH_CLIENT_SECRET` (callback fixed to `https://claude.ai/api/mcp/auth_callback`) |
-| `GROK_CONNECTOR`, `MISTRAL_CONNECTOR` | `OAUTH_CALLBACK_URL` (trusts its host), `CLIENT_REGISTRATION`, `OAUTH_CLIENT_ID`, `OAUTH_CLIENT_SECRET` |
+| `GROK_CONNECTOR`, `MISTRAL_CONNECTOR` | `AUTHENTICATION` (`oauth`/`api_token`), `OAUTH_CALLBACK_URL` (trusts its host), `CLIENT_REGISTRATION`, `OAUTH_CLIENT_ID`, `OAUTH_CLIENT_SECRET` |
 | `MCP_PUBLIC_URL` | `PUBLIC_URL`: HTTPS origin of a named tunnel; while active it replaces `PUBLIC_API_URL` as issuer and resource (`knownMcpUrls` still accepts the old resource) |
 
 A manual ("your own") client is accepted only with its callback URLs while its key
@@ -110,6 +112,17 @@ Claude reaches the API from `160.79.104.0/21`. The DNS-AID record is
 unless it is updated after every tool change.
 
 ## Tokens and data
+
+Personal connector tokens are `MCP_ACCESS` keys with `metadata.toolSet=plugin`,
+`app`, plugin `scopes` and the member’s `userTokenVersion`. They have no automatic
+deadline; disabling/deleting the key or changing the account token version
+invalidates them. The server accepts case-insensitive Bearer schemes, checks
+human-account eligibility, current tool permissions, app availability and member
+budgets, and audits calls as `api_token`. Agent and Knowledge token scopes cannot
+be used to grant plugin permissions. Account Connections lists these personal
+tokens alongside OAuth connections and disconnects them through the owner-scoped
+revocation endpoint. Publishing retains the same two-step confirmation flow.
+
 
 - Access tokens (`orb_oat_…`) last 60 minutes and refresh tokens (`orb_ort_…`) 60
   days by default. Only SHA-256 hashes are stored; reuse of a rotated refresh

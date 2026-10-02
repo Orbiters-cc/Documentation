@@ -8,7 +8,7 @@ id: orbiters.moderation.age-verification
 domain: website
 type: how-to
 owner: orbiters-docs
-lastVerified: 2026-09-05
+lastVerified: 2026-10-02
 ---
 
 # Manage community age verification
@@ -59,7 +59,8 @@ verification, enable **Trusted**, and record how the partner verifies adulthood.
 Do not trust self-assigned roles or roles that merely mirror Orbiters approval.
 
 Select **Review changes**, review the proposed changes, then save.
-The preview uses fresh observations and may change as Discord updates. Old role
+The preview uses recorded complete membership observations and may change as
+Discord updates. Completed verification does not expire with the observation’s age. Old role
 records alone never grant approval. Background synchronization checks known active
 members after the policy is configured. Expand **Details & sync** on a member
 row to refresh that membership and its roles, even before configuring trust.

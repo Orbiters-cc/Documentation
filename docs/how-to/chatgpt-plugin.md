@@ -8,13 +8,13 @@ id: orbiters.how-to.chatgpt-plugin
 domain: website
 type: how-to
 owner: orbiters-docs
-lastVerified: 2026-10-01
+lastVerified: 2026-10-02
 relations: orbiters.community.events, orbiters.how-to.create-and-measure-assets, orbiters.how-to.discord-asset-access, orbiters.reference.chatgpt-plugin-mcp
 ---
 
 # Use Orbiters from ChatGPT, Claude and other AI apps
 
-The Orbiters plugin lets ChatGPT, Codex, Claude, Grok and Le Chat act with your
+The Orbiters plugin lets ChatGPT, Codex, Claude, Grok and Vibe act with your
 Orbiters account: plan community events, explain why an asset is locked, prepare
 asset drafts and brief you on commissions. It uses your current Orbiters
 permissions, so it can only do what you could do on the website. Searching
@@ -27,7 +27,7 @@ creators, assets and help works before you connect.
 | ChatGPT | **Apps**, add **Orbiters** (or mention `@Orbiters` in a chat) |
 | Claude | **Customize → Connectors**, add Orbiters from the directory or as a custom connector |
 | Grok | **Connectors → New Connector → Custom** |
-| Le Chat | **Connectors → Add custom connector** |
+| Vibe | **Connectors → Add custom connector** |
 
 1. Add Orbiters in the app. Custom connectors ask for the MCP address shown on
    the homepage widget or in this guide's reference page.
@@ -39,6 +39,29 @@ creators, assets and help works before you connect.
    `claude.ai`), then choose **Allow**.
 
 Codex and Claude Code open the same Orbiters page.
+
+### Grok and Vibe custom connectors
+
+Use the **Server** / **MCP server URL** copied from the app’s form in
+**Admin → API Keys**. For production it is
+`https://api.orbiters.cc/mcp/connect`. This address requires authentication before
+setup can finish. If Grok says **Connected** but tools keep asking for sign-in,
+disconnect the previous connector and reconnect with this address. For OAuth,
+finish Orbiters sign-in and approve permissions; an unfamiliar callback host
+must first be trusted in the admin registration inbox or saved in the Grok key.
+
+Vibe’s form follows **Connector name → Server → Description → Authentication →
+Authorization header value**. Choose **API Token Authentication**, then **Bearer**.
+Choose permissions under **Token permissions**, select **Generate personal token**,
+and paste the copied token into Vibe’s **Token** field. It is shown only once,
+acts as your own account and is stored as a hash. The default grants reading and
+draft edits; publishing requires its own permission and confirmation preview.
+Grok can also use a personal Bearer token. Choose OAuth instead if your app offers it.
+
+Personal tokens can be revoked under **Manage your tokens** in the connector
+form or disconnected in **Account → Connections → AI apps**. Revocation takes
+effect immediately. A global connector setup key does not make a personal token
+site-wide or let it act as other members.
 
 ## What it can do
 
@@ -96,8 +119,8 @@ you. Choose the disconnect button next to an app to end its access immediately.
   order with copy buttons and real logos: **ChatGPT & Codex plugin** (Server URL
   or Tunnel; **Create** asks OpenAI for a tunnel ID with a single-use admin key; the
   commands install `tunnel-client` when missing, for Windows, macOS, Linux or
-  Docker), **Claude connector**, **Grok connector** and **Mistral connector** (each
-  with an optional "your own client"), and **Public MCP address** for a named
+  Docker), **Claude connector**, **Grok connector** and **Vibe connector (Mistral)** (personal Bearer tokens
+  or OAuth, with an optional "your own client"), and **Public MCP address** for a named
   Cloudflare tunnel that lets every app reach a development backend.
 - Submission material is in `plugins/orbiters-chatgpt/SUBMISSION.md`;
   `plugins/orbiters-chatgpt/scripts/replay-cases.mjs` replays its checks against

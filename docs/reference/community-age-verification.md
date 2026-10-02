@@ -8,7 +8,7 @@ id: orbiters.development.age-verification
 domain: website
 type: reference
 owner: orbiters-docs
-lastVerified: 2026-09-05
+lastVerified: 2026-10-02
 ---
 
 # Community age verification reference
@@ -31,15 +31,22 @@ decisions are staff-managed. VRChat requires the literal `18+` value from
 Discord requires a trusted mapped role and a current, complete member snapshot.
 
 The decision is `review_required` when a review hold exists, otherwise `verified`
-when any active, unexpired evidence exists, otherwise `unverified`. Reads
-recalculate the persisted summary. A background job also processes expiration.
-Consumers must use the decision service to account for expiry, rather than
-reading the stored summary alone.
+when any active evidence exists, otherwise `unverified`. Reads recalculate the
+persisted summary, including withdrawal after a Discord account change.
 
-VRChat observations refresh only through explicit actions and expire after thirty days.
-Discord observations are refreshed after six hours and expire after one day.
-Refresh failures preserve evidence until its normal expiry, never grant new
-approval, and do not classify a member as a minor.
+Completed evidence has no deadline. `AgeEvidences` stores `checkedAt` and no
+`expiresAt`. VRChat observations refresh through explicit actions. Discord
+memberships are refreshed after six hours; a failed refresh retains the previous
+verification while the worker retries. Confirmed role removal, departure,
+untrusted policy, unlinking and explicit staff revocation can still withdraw a
+source. Independent sources remain separate and review holds still dominate.
+
+The transactional `permanentAgeEvidence` startup migration removes the deadline
+column. It restores a timer-only withdrawal only when its expiry audit follows
+the evidence’s last update and the source still matches the linked VRChat account
+or trusted Discord membership. Later withdrawals and changed Discord identities
+stay inactive. Restoration is audited once and persisted decisions are refreshed.
+Fresh and populated upgrade fixtures boot the backend twice.
 
 The scheduler runs once per minute, processing up to twenty Discord memberships.
 It does not poll VRChat profiles. It retries failed Discord checks after an

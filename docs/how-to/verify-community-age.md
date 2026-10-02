@@ -8,7 +8,7 @@ id: orbiters.account.age-verification
 domain: website
 type: how-to
 owner: orbiters-docs
-lastVerified: 2026-09-05
+lastVerified: 2026-10-02
 ---
 
 # Verify your community age status
@@ -63,8 +63,11 @@ VRChat must expose its explicit **18+** result. A hidden badge or general age
 verification does not establish adulthood for Orbiters. You can refresh the
 linked account from **Connections → VRChat → Manage → Refresh profile**.
 The connection represents your VRChat identity even without a visible age badge.
-VRChat evidence expires after thirty days unless refreshed through an explicit
-action; Orbiters does not run scheduled profile polling.
+Completed 18+ checks have no expiration date. The **Checked** date records when
+the source was observed; you do not need to repeat a check because time passed.
+Orbiters does not run scheduled VRChat profile polling. Explicit revocations,
+unlinking, account changes and staff review holds still apply. Discord refresh
+failures retain the previous verification while Orbiters retries.
 
 Other sources include manual staff verification, qualifying Furality convention
 evidence reviewed by staff, and a configured adult-verification role in a trusted
