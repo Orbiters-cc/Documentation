@@ -65,3 +65,23 @@ For an external Blender export, **Apply** assigns the selected Avatar definition
 Keep the intended avatar scene open, reconnect the two tools, and export the body again. Read any MCB sync error in the Unity Console. Missing renderer mappings or unresolved skin bones must be corrected before applying the export; MCB reports those failures rather than claiming an unchanged avatar was updated.
 
 See [MCB and Unity Tools](08-mcb-and-unity-tools.md) for the creator and version workflow.
+
+<alpha>
+
+## Script reload during project preparation
+
+In the local reload fix, the headless Blender preparation job uses Toolkit's
+shared process runner. Preparation has a 30-minute deadline and stops if Unity
+reloads scripts or quits. This does not close an interactive Blender window
+opened for editing.
+
+If preparation is interrupted, let Unity finish reloading and choose **Modify
+with Blender** again. An interrupted preparation is not treated as a successful
+project launch. Its log is under
+`Library/MCB/BlenderLaunch/<session>/prepare.log` in the Unity project.
+
+The updated process runner passed standalone Windows Mono cleanup regressions.
+This change has not been released, and an end-to-end Blender preparation during
+an actual editor script reload has not yet been verified.
+
+</alpha>

@@ -131,3 +131,37 @@ My Avatar uses `CommitProjectFilesAsync` from Unit Git 0.1.1 to create a scoped
 main thread. Paths must remain within that project, ignored checkpoint files
 cause a clear error, and unrelated staged files are preserved. The selected
 scene is committed as a whole, including any other pending changes in it.
+
+<alpha>
+
+## Script reload and process cleanup
+
+The local reload fix routes Git commands, binary file restoration and Unity's
+merge tool through Toolkit's shared editor process runner. It stops accepting
+new commands when Unity reloads scripts or quits and stops owned jobs during
+teardown. A command timeout also covers output capture; an inherited output pipe
+cannot keep cleanup waiting indefinitely. This fix has not been published in a
+package release.
+
+An interrupted action is not a completed checkpoint. After reload, refresh
+Local Changes and inspect the repository before retrying a commit, merge or
+restore. Multi-command actions are not promised to roll back automatically.
+
+<audience include="dev">
+The runner reads only available pipe bytes, without Mono's `BeginOutputReadLine`,
+`BeginErrorReadLine` or asynchronous stream completion callbacks. Windows jobs
+keep child processes owned even after their launcher exits. The overall command
+deadline and a one-second post-exit output deadline bound output capture. A
+missing executable, failed process ownership or incomplete output fails the
+operation instead of reporting success.
+
+Run `ProcessRunnerTests` from `Orbiters.Toolkit.Editor.Processes.Tests`. These
+tests cover large simultaneous stdout/stderr, Unicode boundaries, final lines,
+binary output, closed stdin, cancellation, timeouts, callback exceptions and
+Windows inherited-pipe cleanup. Keep the Unit Git deterministic health checks
+and repository tests when changing this shared integration. Standalone Windows
+Mono regression and domain-unload checks passed for this local fix; a reload of
+the affected live Unity project has not yet been verified.
+</audience>
+
+</alpha>
