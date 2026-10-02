@@ -100,6 +100,23 @@ existing copy added by hand can be taken over instead of duplicated. Clothing fr
 different body can be resized and aligned to matching armature bones; **Cancel** restores
 the transforms that still match the fit, preserving subsequent manual edits.
 
+## Pose fitting and texture controls
+
+The local update also fits clothing when its pose differs but its size already
+matches. Matched bones rotate toward the corresponding limb segments, so a
+T-pose sleeve follows a lowered arm while retaining the clothing rig's bone axes.
+Unmatched extra bones follow their parents. This armature fit does not reshape
+cloth around a different body; use ReFit when the garment still needs body fitting.
+**Cancel** restores the fitted transforms unless you edited them afterward.
+
+Each installed item's card lists its assigned **Textures**, grouped by material,
+with the shader slot, texture name and thumbnail. Collapse the list when you do
+not need it. **Remove** beside a map clears that slot on this item only. The
+original material and image stay intact, and Unity **Undo** restores the assignment.
+Removing a Standard shader emission map also turns off its emission color and
+keyword, so the material stops glowing. Other shader-specific effects may have
+separate controls in their material Inspector.
+
 ## Accessories that need more setup
 
 Some accessories cannot be finished automatically, for example a VRCLens installer or an
