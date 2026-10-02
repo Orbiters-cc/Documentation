@@ -8,7 +8,7 @@ id: orbiters.how-to.creator-vpm
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-28
+lastVerified: 2026-10-01
 ---
 
 # Publish and manage a VPM listing
@@ -97,6 +97,18 @@ available again if its release still exists upstream. Removing/hiding a version
 can stop projects with a pinned dependency from resolving it; installed files are
 not deleted. A deleted upstream release becomes unavailable after a refresh.
 
+### Hide a whole package
+
+Versions are grouped by package under each source. Select the eye button next
+to a package name to hide every version of that package, including versions that
+later releases or refreshes add. The package disappears from the listing JSON and
+from its public page, and moves to the collapsed **Hidden packages** group below
+the sources. Open the group to select the eye button again and restore it; the
+version choices you made before (hidden, removed or visible) come back unchanged.
+You can still hide, remove or restore single versions while the package is
+hidden. The MCB package in the official Orbiters listing cannot be hidden because
+Orbiters tools read its releases from the public feed.
+
 **Remove source** removes its versions from Orbiters and deletes the webhook
 Orbiters created on GitHub. Delete a manually added webhook in GitHub repository
 settings. You can add the source again intentionally.
@@ -114,6 +126,12 @@ every redirect, validate ZIP limits, and never extract files to disk. HMAC-SHA25
 webhooks verify the raw request body and configured repository. A per-source
 database lock serializes imports and source deletion; version publication is
 transactional. Visibility tombstones survive refreshes.
+
+`PUT /vpm/:id/packages/:name` with `{ "hidden": true | false }` stores the
+package state in `VpmPackages` (`listingId`, `name`, `hiddenAt`; unique on
+listing and name). Listing details return `hiddenPackages`. `publicFeed`
+excludes hidden package names in SQL and again in `feed()`, so no version of a
+hidden package reaches the public JSON. Hiding never edits `VpmVersion.visibility`.
 
 See [VPM migration runbook](../development/vpm-migration.md) before changing the
 official listing or GitHub Pages address.

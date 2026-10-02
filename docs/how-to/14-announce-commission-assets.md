@@ -8,7 +8,7 @@ id: orbiters.how-to.announce-commission-assets
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-05
+lastVerified: 2026-10-01
 ---
 
 # Announce a Commission Asset
@@ -17,8 +17,9 @@ You publish a new commission listing. The channel post appears, but your browser
 
 
 Connect a channel once, then select **Post on [channel]** when saving a public
-commission asset. Posting is optional and starts unchecked. Each listing gets
-one announcement per channel; editing it does not create repeated posts.
+commission asset. Posting is optional and starts unchecked. Saving gives each
+listing one announcement per channel; editing it does not create repeated posts.
+To share a published listing again, use **Post again** (see below).
 
 Start in **Creator → Commissions → Automate your commission announcements**.
 The setup guide checks bot readiness and your linked identity before you connect.
@@ -115,6 +116,39 @@ result is uncertain, first inspect the channel. **Check & retry** requires you t
 confirm that no post exists, because a network timeout can happen after sending.
 Do not confirm absence when a post is present. A Discord thread-setup retry reuses
 the existing post instead of publishing again.
+
+## Post a listing again
+
+Open **Creator → Commissions**, choose **Edit listing** on a published commission
+asset and select **Post again** beside **Refresh status**.
+
+1. Choose one or more connected channels. Each row shows the service icon and when
+   this listing was last posted there (**Posted 2 h ago**, **Not posted yet**,
+   **Last post not confirmed**). Search appears when you have six or more channels.
+   A channel that is still receiving a post cannot be selected.
+2. Select **Post to N channels**. The check step lists the channels again and
+   warns about channels that got this listing in the last 24 hours or whose last
+   post was not confirmed. It also notes unsaved edits: Post again sends the
+   **saved** listing, so save first to include changes.
+3. Select **Confirm and post**. Delivery results update live for each channel:
+   **Posted**, **Failed** with the reason, or **Not confirmed**. **Try again**
+   reopens the picker with only the failed channels selected.
+
+Protection against double posts:
+
+- Repeating the same confirmation (for example after a network error) returns the
+  posts already created instead of posting twice.
+- A channel cannot get the same listing again within five minutes of a delivery,
+  or while a previous post is queued or sending.
+- A failed attempt that is waiting for an automatic retry is replaced by the new
+  post, so only one of them can be delivered.
+- You can post again up to 30 times per day across your channels.
+
+Reposts use the same delivery jobs, permission checks and content as the first
+announcement. Discord reposts get their own discussion thread, and replies to a
+reposted Telegram or Discord message are mirrored like replies to the first post.
+X may reject an identical post made shortly after the previous one; the result
+then shows **Failed** with X's reason.
 
 Disconnecting stops further posting and comment import. It does not delete
 external posts or already imported comments. Unpublishing removes the listing

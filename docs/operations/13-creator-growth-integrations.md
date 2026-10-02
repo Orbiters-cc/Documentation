@@ -8,7 +8,7 @@ id: orbiters.operations.creator-growth-integrations
 domain: website
 type: runbook
 owner: orbiters-platform
-lastVerified: 2026-09-25
+lastVerified: 2026-10-01
 ---
 
 # Configure creator-growth integrations
@@ -48,6 +48,21 @@ illustrative; real responses depend on the source post and configured prompt.
 The bot needs access to message content and attachments, room visibility, message sending and history. The invitation is public, updates every two seconds and is deleted after ten seconds. A button interaction acknowledges privately before database work; the original author alone can claim its offer. Expired invitations still leave ordinary Creator tools available.
 
 Prompt cleanup retries after interruptions. A lost send response is not permission to post another invitation. Source snapshots expire after a day; claimed assets use the private draft's media references.
+
+Posts classified as **ych** or **commission** (in an enabled category, with at least
+one PNG/JPEG/WebP image) are also kept as private *commission suggestions* for their
+author (`CommissionSuggestions`). During the per-person offer cooldown the bot still
+classifies posts with images for suggestions only, up to ten per person, community
+and day, without posting an invitation. The classifier also returns the offer
+title, lowest price, currency and open slots when stated; invalid values are
+dropped. Suggestions keep the post text, image links and those facts for at most
+30 days. They are deleted when the Discord message is deleted, when the author
+disconnects Discord or closes the account, and when the community is removed.
+Adding or dismissing keeps only a content-free record so the post is not suggested
+again (removed after 90 days). Once the author has an Orbiters account, an outbox
+job (`creator.suggestion.media`) renews the Discord attachment links through the
+bot and copies the images into the author's private creator media; open suggestions
+protect those files from media cleanup.
 
 ## Delivery and retention
 

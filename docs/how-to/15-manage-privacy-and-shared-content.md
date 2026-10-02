@@ -71,6 +71,11 @@ keep the website hiding decision. A creator cannot hide somebody else's imported
 message merely because it appears under that creator's asset. Report it for staff
 review when there is a separate moderation or privacy concern.
 
+When an Orbiters link is pasted into Discord, Telegram or another app, its preview
+shows only what a signed-out visitor could see. Hidden, private, members-only,
+adult-only and draft content keeps a generic preview. An app that already fetched a
+preview may show it until that app refreshes the link.
+
 ## Preserve Commission History
 
 The commission creator controls public hiding through the commission privacy

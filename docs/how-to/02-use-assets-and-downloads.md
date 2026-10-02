@@ -8,7 +8,7 @@ id: orbiters.how-to.assets-and-downloads
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-02
+lastVerified: 2026-10-01
 ---
 
 # Find the version that belongs in your project
@@ -16,6 +16,29 @@ lastVerified: 2026-09-02
 You have the receipt. The asset is in your account. Then a tempting new version appears with a beta label—and its download is locked.
 
 That can be a perfectly healthy account. **Access to the asset and access to a release channel are separate.** Start with the public version unless the creator has invited you to test another one.
+
+## Find an asset on the Assets page
+
+**Assets → Discover** shows creators first, then one grid with every published
+listing: avatars, accessories, textures, products, stickers, and art or YCH
+commissions. Search, the type chips and **Newest / A–Z** apply to the whole grid;
+choose **Stickers** to see only sticker listings. Sticker cards carry a
+**Stickers** badge and show the starting price, or the full price range when the
+creator chose it, matching the sticker page. Signed-in members also see other
+assets they can get in the same grid. **Library** lists what you own with the same
+search, type filter and sort.
+
+<audience include="dev">
+
+The grid reads `GET /creator-tools/catalog?kind=all&type=&q=&sort=newest|name&offset=`
+(24 per page). `type=COMMISSION` or `YCH` returns published commission listings;
+other types return published products only. Product cards get `priceSummary`
+(`currency`, `minCents`, `maxCents`, `display: fixed | from | range`; sticker
+bounds come from `stickerSelection.priceBounds`) instead of the product
+configuration. Signed-in extras from `/assets/available` merge into the paged
+order client-side without moving cards already shown.
+
+</audience>
 
 ## Read the page like a receipt
 

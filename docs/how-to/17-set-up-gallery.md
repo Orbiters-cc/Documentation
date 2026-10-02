@@ -8,7 +8,7 @@ id: orbiters.how-to.set-up-gallery
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-20
+lastVerified: 2026-10-01
 ---
 
 # Gallery: connect a Discord room and import pictures
@@ -38,25 +38,41 @@ These are separate configurations. Connecting a room to an asset showcase does n
 2. Enter a **Gallery name**, such as `VRChat pics` (2–120 characters).
 3. Search the **Discord room** picker and select the text channel from the correct server. The form selects one room per gallery; create another named gallery for another room.
 4. Choose a **Gallery layout**: Masonry, Frame, Justified or Packing.
-5. Choose the audience using **Public gallery**. Leave it off to preview privately.
+5. Choose who can see it with **Private**, **Members** or **Public**. Keep **Private** to preview it yourself first.
 6. Select **Create Gallery**. Your saved gallery appears below the creation form.
 7. In its **Gallery Crawl** section, select **Crawl Past Images**. Watch the progress and any room-specific error. Saving the room alone does not import its history.
 8. Open **Gallery**, then select the gallery's name in the sidebar. **All** combines the galleries available to your account.
 
 The importer reads image attachments from Discord messages. A link pasted into a message is not the same as an attached picture. New image messages in configured rooms are picked up by the connected bot; the crawl brings in older messages. Imported pictures can appear while a crawl is still running.
 
-## What public and private mean
+## Who can see a gallery
 
 | Setting | Who can browse it? |
 | --- | --- |
-| Public gallery | Signed-in Orbiters users |
-| Private gallery | Its creator; privileged staff can access it for administration |
+| Public | Signed-in Orbiters users |
+| Members | Signed-in users who are members of the gallery room's Discord server |
+| Private | Its creator; privileged staff can access it for administration |
 
-The Gallery page currently requires login, including for public galleries. A private gallery is not a Discord-role access list. Development and production have separate saved configurations: a room set up in development must also be configured in production.
+The Gallery page requires login for every gallery. **Members** galleries do not
+appear in the gallery list, the **All** feed or homepage gallery widgets for
+people outside the server. A link to one shows **Server members only** with the
+server's name instead of the pictures; people without a linked Discord account
+are asked to link it first. Image addresses are only handed out after the same
+check, and an image pinned to someone's homepage shows the same locked message
+after they leave the server.
+
+Membership comes from the Discord server records Orbiters already keeps: the
+bot updates them when people join or leave, and signing in with Discord adds the
+servers you belong to. Someone who joins the server can see the gallery once that
+record exists (sign in with Discord again, or select **Sync with Discord** in
+**Account**). Members is not a role-based access list, and staff can still open
+every gallery for administration. Development and production have separate
+saved configurations: a room set up in development must also be configured in
+production.
 
 ## Change a room or recover an import
 
-Edit the saved gallery's name, room, layout or public switch, then select **Save**. Changing rooms removes the old room's placements from that gallery; crawl the new room to import its history.
+Edit the saved gallery's name, room, layout or audience, then select **Save**. Changing rooms removes the old room's placements from that gallery; crawl the new room to import its history.
 
 - **Resume** continues an interrupted crawl from its saved position when offered.
 - **Restart** starts the history scan again. Repeated imports match existing attachments instead of intentionally creating duplicates.
@@ -76,11 +92,30 @@ Open the asset's settings and find **Showcase gallery** in the **Page** tab. Cho
 | No rooms in the picker | Connect the server under this creator account, confirm the bot is connected, then reopen Galleries. Only regular text rooms are supported. |
 | Room missing or unavailable to the bot | Confirm the selected server, View Channel permission and channel overrides. |
 | Gallery exists but is empty | Run Crawl Past Images, inspect crawl errors, and confirm the room contains image attachments. Check Message Content Intent for a custom bot. |
-| Other people cannot see the gallery | Save with Public gallery enabled and ask them to sign in. |
-| Development works but production is empty | Check the production creator integration, room selection, public switch and crawl status separately. |
+| Other people cannot see the gallery | Save it as **Public**, or as **Members** for people in its Discord server, and ask them to sign in. |
+| A server member sees **Server members only** | They must sign in with the Discord account that is in the server. Ask them to select **Sync with Discord** in **Account**. |
+| Development works but production is empty | Check the production creator integration, room selection, audience and crawl status separately. |
 | One picture fails | The Discord source may have been removed or bot access may have changed. Other pictures should remain browsable; check the source before recrawling. |
 
 <audience include="dev">
+
+## Members-only access
+
+`Galleries.membersOnly` (boolean, default false) stores the Members audience; a
+members-only gallery keeps `isPublic` false, so any check that only reads
+`isPublic` fails closed. The API accepts `visibility: private | members | public`
+(legacy `isPublic` still works) and returns `visibility` on every gallery.
+`services/discordImages/galleryAccess.js` is the single policy used by the gallery
+list, the per-gallery and combined feeds, single images (homepage pins), image
+sources, `GET /galleries/:id`, social-post imports and content reports. A viewer
+needs an active `UserDiscordServerPresence` row for every guild of the gallery's
+active rooms; the creator and admin, dev and owner ranks always pass. Non-members
+receive `403` with `code: GALLERY_MEMBERS_ONLY` and `locked.servers` (guild id,
+name, icon), never the gallery name. Public and private galleries need no extra
+queries. `GET /files/serve/:id` no longer serves `discord_image` file pointers, so
+image URLs only leave through these checks. Run
+`node --test test/galleryMembersOnly.test.js`; the populated schema upgrade is
+covered by the opt-in `test/visibilityUpgradeDatabase.test.js`.
 
 ## Delivery changes awaiting application deployment
 

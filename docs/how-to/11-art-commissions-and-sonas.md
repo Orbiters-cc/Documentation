@@ -58,7 +58,7 @@ quota instead of consuming a lifetime upload allowance.
 
 ## Request Artwork
 
-1. Open **Assets → Art & YCH commissions** and select a listing.
+1. Open **Assets**, choose **Commissions** or **YCH** in the type chips, and select a listing.
 2. Read the description, deliverables, turnaround expectations, and artist's terms.
 3. Log in, choose one variant if offered, and select any optional extras.
 4. Check the configured price. It is the base price plus the selected variant's

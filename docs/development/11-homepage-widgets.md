@@ -8,7 +8,7 @@ id: orbiters.development.homepage-widgets
 domain: website
 type: reference
 owner: orbiters-product
-lastVerified: 2026-09-25
+lastVerified: 2026-10-01
 ---
 
 # Homepage Widgets
@@ -192,6 +192,48 @@ No frontend action creates age evidence or clears review holds. Discord connecti
 state comes from `/auth/connections`; staff verification remains a Discord review.
 Successful updates dispatch `orbiters:connections-changed` to refresh Home.
 
+## Tool and AI app widgets
+
+Four singletons cover Orbiters tools and AI apps. All support `2x1` (default),
+`1x1` and `2x2`, in `SIZE_VARIANTS` and in the server's preferences validator, and
+reject an entity selection. `AppWidget` renders them before the generic loading
+check, so a showcase never waits for data; only the member's own part loads.
+Each card wraps `InteractiveWidgetPreview` (with an optional `width`): at 1024
+pixels or more, the card's main link expands it into a window from a frozen copy
+of the card and collapses back to it. Smaller screens, modified clicks, editing
+and catalog previews keep the plain link.
+
+| Type | Content (`contentFor`) | Card | Window |
+| --- | --- | --- | --- |
+| `refit` | `REFIT` rows of the existing `commissions` source (`GET /commissions/mine?scope=active`) | Before/after hoodie with a sweeping divider (`@property --refit-split`; static at 50% with reduced motion). Commissions appear on a slip of the ReFit yellow receipt paper; **Open ReFit** links to `/refit` | Both shots, the member's commissions as a paper `Receipt` linking to each request, the three ReFit steps, ReFit page, documentation and all commissions |
+| `myAvatar` | Owned assets from `ownedAssets` (`GET /assets`) that My Avatar applies: texture sets (`TEXTURE` or `AVATAR_TEXTURE`), avatars and accessories (`ACCESSORY` or `AVATAR_ACCESSORY`) | The VRChat card from the Unity photoshoot cycling the real captures (preloaded, paused while editing or with reduced motion) and the member's sets linking to their asset pages; empty state describes the tool | Every set with its kind, one line on applying it in Unity, the photoshoot card, My Avatar page and documentation |
+| `chatgpt`, `claude` | `GET /ai-apps/widgets` (public) merged with the member's `GET /oauth/connections` rows whose client `vendor` is `openai` or `claude` | Orbiters and the app as two app tiles (`ServiceAppIcon`), connected/last used state, a cycling starter prompt (`2x2`: all prompts, copy on select, and the MCP URL), **Open ChatGPT**/**Open Claude**, a copy button for the MCP URL and **Setup** | Three connection steps, MCP URL copy row, starter prompts, **Open**, **Setup guide** and **Manage connection** (`/account?tab=connections`) when connected |
+
+There is no commercial call to action on these surfaces: no commission or
+purchase buttons. Copy buttons confirm with a check and a polite live region,
+without toasts.
+
+`GET /ai-apps/widgets` returns `{ chatgpt, claude }`, each with `enabled`,
+`name`, `description`, `mcpUrl`, `guideUrl`, `openUrl` and `prompts`; `enabled`
+follows the AI apps pause switch and the per-app switch in **Admin → AI apps →
+Overview**. The homepage applies three rules (`appWidgets.js`):
+
+- The catalog list, Highlights and the discovery feed offer an AI app widget only
+  while its settings say `enabled: true` (`aiAppEnabled`, `feedWidgetVisible`).
+  Disabled apps are omitted, not shown disabled.
+- A pinned AI app widget keeps its grid place with a skeleton while the settings
+  load, shows **Temporarily unavailable** with a retry if they fail, and
+  disappears once they say it is off (`aiAppHidden` through
+  `statusWidgetVisible`). The saved layout keeps the pin, so it returns in place
+  when an admin turns the widget back on.
+- Same-origin guide URLs stay in-app links; other URLs open in a new tab.
+
+`refit` and `myAvatar` join the discovery feed for every viewer, like `mcb`;
+`chatgpt` and `claude` join it for signed-in members while enabled. Default pins
+are unchanged, so existing and unsaved layouts are not rearranged. Both AI app
+sources refresh on window focus, so a connection made in ChatGPT or Claude shows
+when the member returns.
+
 Homepage dirty checks compare canonical widget descriptors, preserving pin order
 while ignoring JSON property order. Repeated saves of unchanged layouts are skipped.
 Saving has no in-flow homepage status message; failures retain the existing retry UI.
@@ -210,7 +252,7 @@ An explicit `pins: []` is a saved empty collection. Entries have a known `type` 
 for content widgets, a canonical string `entityId`. The API rejects unknown types,
 duplicate identities, invalid IDs and lists longer than 64. Entries may include
 an optional `size` from the type's whitelist: gallery supports `1x1`, `2x1`, `1x2`,
-`2x2`, `3x1` and `3x2`; creator and commissions support `2x1` and `1x1`. Sona supports `2x2`, `1x1`, `1x2` and `2x1`; both blog types support `3x2`, `2x1` and `2x2`. Coming events is a `2x2` singleton; coming event is a `2x1` content widget with a canonical lowercase UUID. Other types have a fixed size. Invalid variants are rejected. Preferences store only these
+`2x2`, `3x1` and `3x2`; creator and commissions support `2x1` and `1x1`. Sona supports `2x2`, `1x1`, `1x2` and `2x1`; both blog types support `3x2`, `2x1` and `2x2`. Coming events is a `2x2` singleton; coming event is a `2x1` content widget with a canonical lowercase UUID. ReFit, My Avatar, ChatGPT and Claude are singletons supporting `2x1`, `1x1` and `2x2`. Other types have a fixed size. Invalid variants are rejected. Preferences store only these
 references and size choices; client-supplied image URLs and arbitrary fields are
 discarded.
 
@@ -227,7 +269,9 @@ and advances its revision so stale clients cannot overwrite it.
 ## Content sources
 
 The homepage composes existing blog, creator, asset, Sona, age-verification,
-commission and board APIs. Gallery, documentation and upcoming-event reads paginate; failed
+commission and board APIs, plus the public AI apps widget settings
+(`GET /ai-apps/widgets`) and, for signed-in members, their AI app connections
+(`GET /oauth/connections`). Gallery, documentation and upcoming-event reads paginate; failed
 sources expose retries independently. Reads are aborted on unmount and bounded by
 timeouts. Signed URLs and private content are not stored in layout preferences.
 
@@ -238,7 +282,11 @@ Asset-image responses include `assetId` and their existing signed-source refresh
 `GET /galleries/images/:placementId` resolves a pinned image beyond the current
 feed page, including asset placements. Asset placements recheck listing and source visibility; ordinary galleries apply gallery visibility, attachment eligibility, source visibility
 and current-user access before returning the same display shape as the gallery
-feed. Unavailable or inaccessible placements return **404**.
+feed. Unavailable or inaccessible placements return **404**. A placement from a
+members-only gallery returns **403** with `code: GALLERY_MEMBERS_ONLY` when the
+viewer is not in its Discord server; the widget then shows **Server members only**
+with the Discord mark instead of the generic unavailable message, and does not
+offer a retry.
 
 `GET /knowledge?sort=updated` returns visible documents with a recorded Git change
 date, newest first. It preserves audience, source and release-stage restrictions.

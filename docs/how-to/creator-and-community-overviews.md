@@ -8,7 +8,7 @@ id: orbiters.website.overviews
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-25
+lastVerified: 2026-10-01
 ---
 
 # Use the creator and community overviews
@@ -41,6 +41,15 @@ Open **Creator → Overview** for:
 Each preview loads independently. If a connection fails, retry that preview;
 the other sections remain available.
 
+### Discord servers you own
+
+When your Discord sign-in shows servers you own that no community or event uses
+yet, the overview suggests adding them. **Add server** opens **Community →
+Connections** with that server chosen in the usual add dialog; if you have no
+community yet, create one first and the dialog opens right after. The same card
+appears for community owners on the community overview. Dismissing it with **×**
+hides it for good.
+
 ## Community overview
 
 Choose a community, then open **Overview**. Upcoming and planning events link to
@@ -60,6 +69,16 @@ members in VRChat, deduplicated by Orbiters account. They are not a claim that e
 external member has linked an Orbiters account. Refresh updates the overview;
 refresh the VRChat group separately when its snapshot is stale.
 
-Related: [Create an asset](24-create-and-measure-assets.md),
+### Add the website VRChat account
+
+Owners whose community has a VRChat group see a card suggesting they add the
+website account (the one in **Admin → Website VRChat**, usually **orbiters**) to
+the group with an admin role, so Orbiters can help with roles, events and
+announcements. Follow the two steps, then select **Check again**: Orbiters accepts
+the group invitation itself and confirms the role. The card disappears once the
+account is an admin, or when dismissed. Status is rechecked at most every 30
+minutes while the card is shown.
+
+Related: [Publish a community page](community-public-page.md), [Create an asset](24-create-and-measure-assets.md),
 [Manage community events](manage-community-events.md),
 [Customize the homepage](23-customize-homepage.md).

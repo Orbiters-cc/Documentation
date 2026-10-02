@@ -8,7 +8,7 @@ id: orbiters.how-to.publish-posts-and-streams
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-24
+lastVerified: 2026-10-01
 ---
 
 # Publish posts and stream announcements
@@ -53,6 +53,30 @@ destinations; streams currently use Discord and Telegram.
 A community can offer **Pssst, I have an idea !** after eligible self-promotion posts. The public invitation lasts ten seconds with a countdown. Only the original author can use its **what ?** button to receive the private follow-up.
 
 **Verify and post** opens a private asset draft. A stream offer opens **Set up stream announcements**. Sign-in preserves the destination. If you are not a creator yet, **Become a creator and continue** enables the tools immediately, without administrator approval. Existing moderation controls still apply.
+
+### Add your YCH and commission posts
+
+When the bot recognizes one of your self-promotion posts as a **YCH** or
+**Commission** offer with an image, Orbiters keeps it privately for you. After you
+sign in with (or link) that Discord account, **Creator → Overview**, **Assets** and
+**Commissions** show **Ready to add** at the top: one card per post with its image,
+title, and price and slots when the post states them.
+
+- Select a card to open the commission asset editor prefilled from the post: name,
+  description, YCH or Commission type, price and currency, and the post's images as
+  thumbnail and gallery. The post text is also in the AutoFill sources if you want
+  AutoFill to suggest variants and options.
+- **Add all as drafts** turns every shown post into a private draft in **Your
+  assets**. Nothing is published until you choose **Verify and post** in a draft.
+- The round **×** dismisses a card. Added and dismissed posts are never suggested
+  again, and a post you already turned into an asset or draft (for example through
+  the Discord button) is recognized and not suggested twice.
+
+Posts arriving during the offer cooldown are still recognized, up to ten per person
+and day in each community. Only categories the community enabled are recognized.
+Suggestions disappear after 30 days, when you delete the post in Discord, or when
+you disconnect Discord from your account. If you are not a creator yet, adding a
+post first offers **Become a creator and continue**.
 
 Community owners and administrators configure the channel, promotion categories, wording and cooldown in **Community → Self promotion**. **Events** is a normal Community tab using the same navigation style as Creator.
 

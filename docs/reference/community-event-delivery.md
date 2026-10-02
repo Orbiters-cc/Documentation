@@ -55,6 +55,27 @@ and prunes only affected responses, advancing their revisions. New votes invalid
 the confirmation. Open instances and uncertain instance/organizer-invite deliveries
 prevent destructive step edits.
 
+`CommunityEventDetail` stores an event's staff role slots and prizes apart from
+`data`, so event saves, validation and the AI-app event tools are unchanged. Staff
+slots hold a name, size, optional Discord role ID, member IDs and up to ten ordered
+backups; prizes hold a place, title, details and an optional private image file.
+`GET`/`PUT /community-events/:id/details` use a details revision (409 on a stale
+write). The organizer and the owner, admins and moderators of a managed community
+owning the event's destinations (by connector, or the official community for the
+shared VRChat account) may edit; others get 404/403. `GET /community-events/staff-people`
+searches active members for an event (`eventId`) or one of the caller's Discord
+destinations (`communityId`), filtered by a Discord role's cached members when the
+bot sees the server. Prize images upload through `POST /:id/details/prize-images` or,
+before an event exists, the banner upload; a saver can only attach their own upload
+for that event or VRChat group. Saved prize images are served publicly for shared
+events at `/community-events/public/:id/prizes/:prizeId/image` and protected from
+banner cleanup. Saving details on a published event with a posted announcement marks
+that delivery pending without changing the event revision; the announcement embed
+adds **Event staff** and **Prizes** fields. Planning and invite views include the
+public staff (active accounts only) and prizes. Account closure removes the person
+from every slot. `eventDetailsDatabase.test.js` covers permissions, revisions, closed
+accounts and announcement requeue in an isolated database (`EVENT_DETAILS_DATABASE_TEST=true`).
+
 `EventCommunity` binds a Discord server or VRChat group to a server-controlled
 connection. VRChat connections retain their encrypted service-state key and
 original account ID internally. Replacing an account does not transfer authority

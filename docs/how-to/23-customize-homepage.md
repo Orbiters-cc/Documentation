@@ -8,7 +8,7 @@ id: orbiters.how-to.customize-homepage
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-24
+lastVerified: 2026-10-01
 ---
 
 # Customize Your Homepage
@@ -80,6 +80,10 @@ without dragging; the catalog stays open so you can add another widget.
 | Coming events | 2 × 2 | The next three public community events; select a row for details |
 | Coming event | 2 × 1 | One selected coming event and its local date/time |
 | Commissions in progress | 2 × 1 or 1 × 1 | Your active requests and progress |
+| ReFit | 2 × 1, 1 × 1 or 2 × 2 | A before/after example and your ReFit commissions in progress; **Open ReFit** links to the tool |
+| My Avatar | 2 × 1, 1 × 1 or 2 × 2 | The avatars, texture sets and accessories you own, ready for My Avatar in Unity |
+| Orbiters in ChatGPT | 2 × 1, 1 × 1 or 2 × 2 | Whether your account is connected to ChatGPT, starter prompts, the MCP URL and setup links |
+| Orbiters in Claude | 2 × 1, 1 × 1 or 2 × 2 | The same for Claude |
 
 Boards, gallery images, assets, sticker commissions, older posts, documentation pages, creators and individual events can each have
 multiple pins with different content. The same selection can only be pinned once.
@@ -101,7 +105,7 @@ Search for **MCB** or **My Custom Base** in the catalog to add it. It can be pin
 once; pinning it removes its duplicate from the feed. **Try MCB** opens
 `/my-custom-base`. Its wide layout is the default, with compact and square options.
 
-To resize a pinned image, Sona catalog, blog post, creator or progress widget, drag its curved lower-corner grip. Its flat, softly blurred white surface straddles the widget corner and sticks out slightly so it stays easy to see.
+To resize a pinned image, Sona catalog, blog post, creator, progress, ReFit, My Avatar, ChatGPT or Claude widget, drag its curved lower-corner grip. Its flat, softly blurred white surface straddles the widget corner and sticks out slightly so it stays easy to see.
 At the right edge of the grid, the grip appears on the left so you can widen inward.
 The content stretches as you move and becomes clearer near a supported size. Blur is strongest where it fades into another layout, then clears as you settle onto the next size. Nearby widgets preview that placement. At the smallest and largest dimensions, you can stretch a little farther with increasing resistance; releasing springs back to the supported size. The grip stays the same size when hovered. Release to keep it, or press **Escape** to cancel. On narrow screens,
 some widths look identical, so the grip only changes dimensions that fit.
@@ -109,6 +113,26 @@ Keyboard users can use the size control between the movement arrows.
 You can also select the same content in the catalog, choose
 a different size and select **Update size**. This updates the existing pin in
 place. **Undo** also reverses size changes.
+
+### ReFit, My Avatar, ChatGPT and Claude
+
+**ReFit** and **My Avatar** appear in the discovery feed for everyone; **Orbiters in
+ChatGPT** and **Orbiters in Claude** appear for signed-in members. Each can be pinned
+once. On a desktop window, the card's main button expands it into a larger window:
+
+- **ReFit** shows the hoodie before and after ReFit, your ReFit commissions on the
+  ReFit receipt paper (select one to open it) and the three steps in Unity.
+- **My Avatar** lists every avatar, texture set and accessory you own; select one
+  to open its asset page and download its files. In Unity, right-click your avatar
+  → **Orbiters** → **My Avatar**, then drop the set's textures.
+- **Orbiters in ChatGPT** and **Orbiters in Claude** show whether your Orbiters
+  account is connected and when the app last used it. Copy the MCP URL, select a
+  starter prompt to copy it, open the app or read the setup guide. When you are
+  connected, **Manage connection** opens **Account → Connections**.
+
+An administrator can turn the ChatGPT or Claude widget off in **Admin → AI apps →
+Overview**. It then disappears from the catalog, the feed and your homepage; your
+layout keeps its place, so it returns there if it is turned back on.
 
 ## How the page adapts
 

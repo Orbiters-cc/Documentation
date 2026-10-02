@@ -8,7 +8,7 @@ id: orbiters.community.events
 domain: website
 type: how-to
 owner: orbiters-docs
-lastVerified: 2026-09-23
+lastVerified: 2026-10-01
 ---
 
 # Create and manage community events
@@ -32,9 +32,25 @@ permissions; managing the event team remains separate.
 
 The **Create event** button opens the editor from the button's position, using the
 same window transition as asset and role creation. Closing returns to the button
-and restores keyboard focus. Escape and the close button dismiss the editor
-without saving; saving or publishing remains an explicit action. The editor uses
-one scrolling window, adapts to mobile, and respects reduced motion.
+and restores keyboard focus. Escape, clicking outside and the close button dismiss
+the editor without saving; with unsaved changes the action bar first asks
+**Discard your changes?** (**Keep editing** or **Discard**). Saving or publishing
+remains an explicit action. The editor uses one scrolling window, adapts to mobile,
+and respects reduced motion.
+
+The editor puts the essentials first: the event name, **When**, **Where** (Discord
+server and VRChat group), the program (world, movie and steps), **Who can join** and
+**About**. A new event starts at the next 20:00 that is at least two hours away, lasts
+two hours, uses your first saved Discord server and VRChat group, and picks the VRChat
+region closest to your timezone. Your timezone, the end time and how far away the
+event is stay visible under the start. Cover image, Discord announcement, event
+staff, prizes, voting and VRChat instance & calendar settings open as sections; each
+collapsed section shows a one-line summary.
+
+A live preview beside the form (or under **Preview** on a phone) shows the Discord
+event, the Discord announcement and the VRChat calendar entry as you type. Problems
+appear next to their field once you leave it, and all of them when you save: the
+action bar counts them and **Show** opens the right section and focuses the field.
 
 ## Connect your communities
 
@@ -82,9 +98,10 @@ has been shared or published.
 
 ## Optional Discord announcement and opt-in invites
 
-In the event editor, enable **Post a Discord announcement**, choose a text or
-announcement channel, and write the message. The Discord-style preview uses the
-same presentation as Verification, including markdown and the bot identity.
+In the event editor, turn on **Discord announcement**, choose a text or
+announcement channel, and write the message. The live preview's Discord tab shows
+the message with markdown, the bot identity, mentioned roles, steps, movies, event
+staff and prizes. Turning the announcement off and on again keeps your draft.
 **Refresh channels** explicitly reloads channel information; ordinary browsing
 uses saved Discord information. Both you and the bot need Send Messages and
 View Channel, and the bot needs Embed Links. Select **Mention roles** to notify
@@ -139,11 +156,16 @@ that it was cancelled.
 
 ## Plan an event in steps
 
-Name the first step in **The first step**, then use **The itinerary** to add up to
-four more: for example, Game 1, Game 2, then Chill. Each has a searchable world and
-invite trigger. Additional steps wait for the organizer by default. Turn on
-**Schedule a start time** only when you want automatic opening. Scheduled times
-must be in chronological order inside the event's start/end times.
+A simple event is a single step: its world, movie and invite settings sit directly
+in the form. Choose **Add a step** to split the event, for example Game 1, Game 2,
+then Chill. The form then shows numbered steps; **Step 1** is the event itself and
+has the same fields as every other step: name, start, world (or a world vote),
+movie or movie vote, and invites. Step 1 starts with the event. Up to five steps
+are supported. Removing steps until only one remains returns to the simple form.
+
+Additional steps wait for the organizer by default. Turn on **Schedule a start
+time** only when you want automatic opening. Scheduled times must be in
+chronological order inside the event's start/end times.
 
 Every step gets its own group instance, using the event's audience, region and
 chosen audience settings. Enabling Discord invite buttons adds one website link
@@ -201,10 +223,34 @@ Global Orbiters staff rank alone does not authorize another person's community.
 Creating a managed community enables its owner to connect a dedicated community-management
 account; it is not required for a teammate to use an assigned community.
 
+## Event staff and prizes
+
+Open **Event staff** to name the people running the event. Add a role from the
+presets (Main host, Judges, Performers, Sound manager, Moderators) or a **Custom
+role**, set how many people it needs, and search Orbiters members to fill it. Once a
+role is full, further people become ordered backups (**Backup 1**, **Backup 2**, up
+to ten) who step in if someone can't make it; the arrow buttons move people between
+the role and its backups. **Based on a Discord role** uses one of the event server's
+roles as the pool of candidates: when the bot can see the server, the search lists
+linked members holding that role; otherwise all members are shown with a note.
+
+Open **Prizes** to list what can be won. **1st · 2nd · 3rd** adds a podium; **Add a
+prize** adds any other place or label, such as Crowd favourite. Each prize has a
+title, optional details and an optional image (PNG, JPEG or WebP up to 10 MB,
+cropped to 16:9).
+
+Staff and prizes save with the event and appear on the event's page, its invite
+pages and in the Discord announcement. Besides the organizer, the owner, Community
+Admins and Community Moderators of the community behind the event's Discord server
+or VRChat group can edit them: **Community → Overview** lists coming events with a
+staff and prizes button, and the event page shows **Edit staff & prizes**. Changes
+to a published event update its Discord announcement. Closed accounts are removed
+from staff lists. Cancelled events can't be edited.
+
 ## Create an event
 
-Add an optional **event banner** using Upload banner. PNG, JPEG and WebP images
-up to 10 MB are supported. Orbiters removes embedded metadata and center-crops
+Add an optional **event banner** in **Cover image**: click or drop a PNG, JPEG or
+WebP image up to 10 MB. Orbiters removes embedded metadata and center-crops
 the image to 16:9; review the preview before publishing. Replace or Remove changes
 the draft, and saving a published event updates its Discord cover, Discord
 announcement attachment and VRChat calendar/announcement image. Changing the VRChat community clears the banner so
@@ -216,9 +262,10 @@ automatically. Saved drafts keep their banners, as do published and cancelled
 events. Replaced or removed covers become eligible once no saved event uses them.
 An abandoned editor cannot keep an upload indefinitely; upload it again if needed.
 
-In **The first step**, enter a world name and press **Search** or Enter.
-Results show thumbnails and authors; select a card to fill the world ID. Use
-**Next results** for another page, or paste a world ID or world URL directly.
+In **World**, enter a world name and press **Search** or Enter. Results show
+thumbnails and authors; select a card to choose the world, and use the pencil
+button to change it later. Use **Next results** for another page, or paste a world
+ID or world URL directly.
 Typing, choosing a result, and opening the editor do not make VRChat API requests.
 Explicit searches check your community access and reuse recent matching results.
 
@@ -231,16 +278,19 @@ is kept. A VRChat validation error shows the HTTP status and, when available,
 which fields to check. Validation errors do not put the account into a cooldown;
 rate limits and network failures still do.
 
-1. Choose **Create event**. Enter a name, description and start/end times. The editor
-   shows your browser's time zone; Orbiters stores the times in UTC.
+1. Choose **Create event**. Enter a name, then the start and a length (1–4 hours or
+   **Custom** for any end time). The editor shows your browser's time zone; Orbiters
+   stores the times in UTC.
 2. Select the Discord server and VRChat group.
-3. Paste the VRChat world ID or world page URL. Choose the region and instance
-   audience: group members, Group+ or group public. Members-only instances can be
-   restricted to selected group roles.
-4. Choose **When I publish**, or **Before the event** and the number of minutes
-   before the start, from 0 to 1,440. The backend must be running at opening time.
-5. Choose a calendar category and whether the initial VRChat publication should
-   notify group members. This setting covers the calendar entry and announcement.
+3. Choose the VRChat world, and optionally a movie. Choose the instance audience:
+   **Members**, **Group+** or **Public**. Members-only instances can be limited to
+   selected group roles. Describe the event in **About**.
+4. In **VRChat instance & calendar**, choose the region, then **When I publish** or
+   **Before the start** and the number of minutes before the start, from 0 to 1,440.
+   The backend must be running at opening time.
+5. In the same section, choose a calendar category and whether the initial VRChat
+   publication should notify group members. This setting covers the calendar entry
+   and announcement.
 6. **Save draft** keeps the event on the website. **Publish event** starts delivery
    to both platforms and schedules the instance.
 

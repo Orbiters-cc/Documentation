@@ -8,7 +8,7 @@ id: orbiters.community.event-planning
 domain: website
 type: how-to
 owner: orbiters-docs
-lastVerified: 2026-09-26
+lastVerified: 2026-10-01
 ---
 
 # Find a time, world and movie together
@@ -19,18 +19,20 @@ the matching application release; documentation does not enable an older deploym
 
 ## Ask for availability
 
-Choose **Set a date & time** when the schedule is known. Otherwise select
-**Get people’s availabilities** and specific dates or days of a typical week.
+In **When**, choose **Pick a time** when the schedule is known. Otherwise choose
+**Find a time** and specific dates or days of a typical week. The poll starts on the
+day you had picked, 18:00–23:00, with the length you had chosen.
 Select up to 31 dates, an earliest/latest time, **Your timezone**, slot size and
 expected duration. **Your timezone** starts from your browser's timezone; the
 dates and hours you choose are in that zone. If an event was set up in another
 zone, the form says so and offers to switch to yours. A latest time earlier than the earliest ends the following day.
 
-An optional voting deadline closes responses at that instant. It does not publish
+An optional voting deadline, in the **Voting** section that appears once a poll
+exists, closes responses at that instant. It does not publish
 automatically: the organizer chooses the final plan. Typical-week polls show their
 reference week because daylight-saving offsets depend on dates.
 
-Enable **Let people vote for the world** to add 2–12 named worlds. Participants can
+In a step's **World**, turn on **Let people vote** to add 2–12 named worlds. Participants can
 vote for several. **Who can join** chooses Group members, Group+ or Group public;
 member-only events can also restrict access to selected group roles.
 
@@ -77,7 +79,7 @@ and retry rules continue to apply.
 
 ## Add or change later steps
 
-Open **Edit event → The itinerary → Add a step**, even after sharing a poll or
+Open **Edit event** and choose **Add a step**, even after sharing a poll or
 publishing the event. Every later step supports its own world and movie polls.
 Choose a fixed world/title or add multiple options, then save. The same planning
 link collects the new votes. For a published event, its confirmed first step stays
@@ -96,7 +98,7 @@ keep the itinerary consistent with instances and invitations already sent.
 
 ## Movie sessions
 
-Enable **Movie session** on the first step or an itinerary step. Search movies,
+Turn on **Movie session** in any step. Search movies,
 series or anime; a series opens a season/episode picker. One selection fixes the
 title; two or more create a poll for that step, up to 12 choices.
 

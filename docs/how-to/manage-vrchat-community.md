@@ -8,7 +8,7 @@ id: orbiters.account.vrchat-community
 domain: website
 type: how-to
 owner: orbiters-docs
-lastVerified: 2026-09-21
+lastVerified: 2026-10-01
 ---
 
 # Manage a VRChat community
@@ -24,7 +24,9 @@ See [Manage community roles](manage-community-roles.md) for setup and team permi
 
 The shared website account stays in **Admin → Website VRChat**, with independent
 credentials, rate limits and selected group. It cannot be selected for managed
-community role synchronization.
+community role synchronization. The community overview suggests inviting it to
+your group with an admin role; it accepts that invitation when you select **Check
+again**. See [Use the creator and community overviews](creator-and-community-overviews.md#add-the-website-vrchat-account).
 
 The service-account password field submits **Connect service account** when Enter
 is pressed. Once connected, the owner can change its profile picture in the same
