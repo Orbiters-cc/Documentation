@@ -153,26 +153,54 @@ it already fits or needs ReFit. Explicit creator metadata for this custom base,
 an existing ReFit result and a previously dismissed question remain respected.
 The proximity check measures the worn mesh at its actual scale.
 
+## Reviewing a completed refit
+
+The local, unreleased update keeps **Ask a creator** and **Cancel refit** in the
+item's card after ReFit finishes. You can ask for a commission even when ReFit
+reported no warning: inspect the result from several sides and try your body
+sliders before deciding. The actions remain available after closing the Inspector
+or reloading Unity because the completed fit is recorded on the clothing.
+
+**Ask a creator** opens ReFit's commission preparation window with the fitted
+clothing. It does not send a commission automatically. **Cancel refit** restores
+the clothing mesh and pose from before ReFit and asks about fitting again. It is
+separate from the armature-alignment **Cancel** action.
+
 ## Coverage for clothing from another base
 
-The local My Avatar 0.8.4 update requests an additional coverage pass from ReFit
-0.5.2 for pants, hoodies, shirts and underwear when the recorded armature fit
-changed the rig dimensions, or creator metadata identifies the original base.
-A different pose or placement alone does not trigger it. Recognition uses the
-object and prefab names; it does not infer the source base from missing blendshapes.
+The local, unreleased update requests additional coverage repair for pants,
+shorts, trousers, hoodies, jackets, shirts and underwear when recorded armature
+fitting changed the rig dimensions, or creator metadata identifies the original
+base. A different pose or placement alone does not trigger it. Recognition checks
+the garment objects and meshes inside an outfit pack as well as a standalone
+item's name. Bundled props do not opt in just because a neighboring mesh is clothing.
 
-After normal ReFit, the pass expands remaining clipped fabric and spreads that
-movement through neighboring vertices to retain smooth folds. It checks triangle
-interiors as well as vertices, preserves small closed accessories and intentional
-openings, and leaves the head region out of this body-clothing pass. Source meshes
-and skin weights are preserved. Unity **Undo** restores the previous result.
+After normal ReFit, the pass expands clipped fabric and spreads its movement
+through neighboring vertices. It checks both cloth vertices and triangle
+interiors, lets cuffs and waistbands expand with the surrounding fabric, and
+relaxes folded triangles without pulling their outward movement back into the
+body. Small closed details retain their shape; the head region stays outside
+this body-clothing pass. Small open fabric panels can still deform; they are not
+treated as rigid buttons just because they are separate pieces. Source meshes,
+topology and skin weights are preserved.
 
-Inspect the result with the body shapes you use. Coverage has movement and geometry
-limits: a rough-result message means some constraints could not be satisfied
-without excessive deformation. It is not a guarantee for every pose or combination
-of shapes. Existing generated meshes are not rewritten automatically; refit them
-again or restore and re-add the clothing. These package versions are local and have
-not been published yet.
+For a cross-base garment skinned to both thighs, fitting with the existing
+armature uses a temporary star stance on hidden copies. This separates the inner
+thigh surfaces while the crotch is fitted. The generated movement is converted
+back into the clothing's original pose; the scene avatar's stance is not changed.
+
+Recognized outer layers, such as a jacket over a shirt, are fitted after the
+inner garments. Their coverage checks include those fitted inner surfaces and
+their body blendshapes, so expanding the shirt does not simply push it through
+the jacket. Each transferred shape preserves the achieved base clearance instead
+of repeating the same base repair in every additive shape. Cached results include
+the inner garments' meshes and poses.
+
+Inspect the result with the poses and body shapes you use. Coverage has movement
+and geometry limits, and complex layering or very different garment construction
+can still need a creator's adjustments. Existing generated meshes are not
+rewritten automatically; refit them again or restore and re-add the clothing.
+These changes are local and have not been published as package releases.
 
 ## Accessories that need more setup
 
