@@ -8,7 +8,7 @@ id: orbiters.tools.myavatar-accessories
 domain: myavatar
 type: how-to
 owner: orbiters-engineering
-lastVerified: 2026-10-02
+lastVerified: 2026-10-03
 ---
 
 # Add accessories and clothes with My Avatar
@@ -108,7 +108,14 @@ VRCFury setup whose arm names differ from the target avatar. Enabling **Posing >
 Clothing** preserves the fitted pose; later avatar bone edits carry the item along.
 Hood strings and other unmatched extra bones inherit their matched parents.
 Clothing also follows edits from tools that do not emit Undo property notifications. The preview refreshes rendered skinning matrices so the visible mesh follows its bones. Switching Clothing off restores the item transforms and renderer settings. The creator's build components
-remain intact; this update changes the editor preview.
+remain intact in the editable scene. On the play/upload copy, fitted anatomical
+links replace a recursive creator link that would realign those same bones. This
+keeps sleeves attached when the garment and avatar use different bone names or
+extra chest bones. The fitted position, rotation and size stay intact; clothing
+toggles and unrelated creator features remain available. This fix is local and
+unreleased. Play Mode was checked with the Fishing Outfit on UltiPaw, at 0% and
+100% muscles and in a crouch. Small waist and shoulder intersections still need
+pose-specific garment refinement.
 
 ## Pose fitting and texture controls
 

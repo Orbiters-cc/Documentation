@@ -37,6 +37,24 @@ the preserved copy of `A`.
 
 <alpha>
 
+## Native mesh proportions in Play Mode
+
+The local native mesh update builds a humanoid definition from the same absolute
+skeleton stored with the applied mesh. A version without a separate custom avatar
+file therefore keeps its custom arm and leg lengths when animation starts.
+Authoring pose deltas are not added to that completed skeleton again. The original
+FBX and original humanoid asset remain unchanged.
+
+The play/upload build also checks the payload owning the assigned mesh, so an
+already-applied scene gets the corrected definition without downloading or
+reapplying its version. This does not require version metadata to survive cloning.
+Generated definitions are reused for repeated builds. Partial accessory payloads
+do not replace the body humanoid definition.
+
+This fix is local and unreleased. Verification includes native humanoid generation
+and repeat-application health checks, plus actual Play Mode on UltiPaw with the
+Fishing Outfit. It is not a VRChat upload or in-client verification.
+
 ## Code Import Invariant
 
 The following import and rollback changes are local and unreleased.
