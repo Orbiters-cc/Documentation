@@ -8,7 +8,7 @@ id: orbiters.tools.myavatar-thumbnail
 domain: myavatar
 type: how-to
 owner: orbiters-engineering
-lastVerified: 2026-10-02
+lastVerified: 2026-10-03
 ---
 
 # Create a VRChat thumbnail with My Avatar
@@ -82,6 +82,21 @@ state even if the photoshoot was already open. Camera and framing changes still
 reuse an unchanged clone. See [Unity package safety and avatar workflow fixes](unity-package-safety-fixes.md).
 
 <alpha>
+
+The local working version compares a saved thumbnail with VRChat before offering
+it to the SDK. It compares the SDK's cropped 800×600 upload image, so reopening
+the panel or reloading Unity does not queue the same image again. New images
+remain available, and a thumbnail selected directly in the SDK is left alone.
+If the comparison fails, My Avatar leaves the SDK thumbnail unchanged and logs a
+message; you can still choose **Select New Thumbnail** yourself.
+
+An SDK error saying **This file was already uploaded** can refer to the thumbnail.
+The SDK updates the thumbnail before the avatar bundle, so this failure can leave
+the in-game avatar on its previous outfit and rig even though the scene and local
+build are newer. Confirm the error's stack trace contains `UpdateAvatarImage`
+before treating it as a thumbnail issue. A successful local build does not mean
+that the avatar was published; retry **Build & Publish** after the duplicate image
+is no longer pending. Keep the existing blueprint ID.
 
 The local working version can capture avatars containing the drawing pen's ink,
 line renderers, or mesh renderers whose mesh filter is missing. These components
