@@ -115,8 +115,7 @@ your Git history.
 
 Imported files remain after Undo or cancellation to preserve valid references.
 Custom shaders may need a feature toggle or unlocking before a texture is visible.
-My Avatar does not change shaders or UVs, convert roughness to smoothness, or pack
-separate images into combined texture channels.
+Released versions leave channel packing and roughness conversion to the creator; see the local improvements below. UVs are unchanged.
 
 ## Quick optimization
 
@@ -166,3 +165,34 @@ My Avatar 0.5.1 cancels pending AI answers when AI is turned off or the
 Inspector closes, serializes preference writes, keeps same-named textures from
 different sources separate, and treats unchanged saves as successful. See
 [Unit Git history and My Avatar texture fixes](unity-history-and-texture-fixes.md).
+
+<alpha>
+
+## Matte defaults and surface-map conversion
+
+In the local working version, texture drops and clothing preparation default
+materials without a smoothness or roughness map to fully rough. Existing surface
+maps and their strengths remain intact. Removing the last surface map returns the
+material to the matte default.
+
+Separate grayscale roughness maps use `smoothness = 1 - roughness`. Smoothness
+maps keep their values. For supported slots, My Avatar writes smoothness to
+Standard's metallic-map alpha, Poiyomi's packed green channel, or Toon Standard's
+explicit gloss channel. Grayscale Toon Standard maps use red instead of their
+opaque alpha. Separate metallic and roughness images can fill one packed map
+without replacing each other's channels. Converted maps are imported as linear
+data; source images stay unchanged.
+
+Explicit `MetallicSmoothness`/`MetallicGloss` filenames identify red metallic and
+alpha smoothness. The `ORM`/`ARM`, `RMA`, and `MRA` filename tokens identify their
+respective channel layouts; roughness is inverted and supported occlusion slots
+are filled only when empty. An ambiguous custom packing still needs the creator
+to identify its layout rather than being assumed to match these conventions.
+
+Edits use generated material copies and support Undo. A locked shader's copy is
+returned to its installed editable shader so baked smoothness constants cannot
+override the new setting. If an old Poiyomi shader is unavailable, the installed
+Poiyomi Toon shader is used for that copy. Source materials and shared materials
+outside the dropped clothing's scope are preserved.
+
+</alpha>
