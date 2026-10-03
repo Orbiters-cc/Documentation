@@ -8,7 +8,7 @@ id: orbiters.development.unity-package-releases
 domain: operations
 type: how-to
 owner: orbiters-engineering
-lastVerified: 2026-10-02
+lastVerified: 2026-10-03
 ---
 
 # Publish Unity package releases
@@ -43,6 +43,30 @@ Other `package.json` edits can start the workflow, but the release jobs are skip
 when the version is unchanged. Pushes to other branches and tag pushes do not
 start automatic releases. Pushing only the workflow configuration does not release
 the current package version retroactively.
+
+## Coordinated avatar-tool updates, 3 October 2026
+
+Update these packages together so consumers receive the shared fitting, material,
+posing and capture fixes from Toolkit:
+
+| Package | Version | Main changes |
+| --- | --- | --- |
+| Orbiters Toolkit | 0.3.10 | Clothing pose and skinning, material surface maps, drawing pen support, Play Mode mirror overrides, thumbnail capture |
+| MCB | 1.10.4 | Native custom-base humanoid definitions, comparison placement, original-body reuse, player compilation |
+| My Avatar | 0.8.5 | Fit review actions, material repair, unchanged-thumbnail upload guard, drawing pen section and empty clothing section handling |
+| ReFit | 0.5.3 | Cross-base coverage, smoothing, separated-leg fitting, parallel work and preparation caching |
+| Unit Git | 0.2.4 | Material comparison spheres and temporary material naming |
+| XRayGizmos | 0.2.7 | Symmetry controls during Play Mode |
+
+The consumers require Toolkit 0.3.10 or newer within the 0.3 series. My Avatar
+requires XRayGizmos 0.2.7 or newer within the 0.2 series. Optional ReFit and MCB
+prompts now request versions containing these coordinated fixes.
+
+Publish Toolkit before its consumers, then verify each GitHub release ZIP against
+its manifest URL. Check the VPM feed separately: a successful GitHub workflow is
+not proof that Creator Companion has received the updated listing. Clothing
+fitting and the drawing pen retain their existing alpha status; these version
+numbers do not change those feature stages.
 
 ## Skips and retries
 
