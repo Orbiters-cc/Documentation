@@ -122,9 +122,20 @@ pose-specific garment refinement.
 The local update also fits clothing when its pose differs but its size already
 matches. Matched bones rotate toward the corresponding limb segments, so a
 T-pose sleeve follows a lowered arm while retaining the clothing rig's bone axes.
-Unmatched extra bones follow their parents. This armature fit does not reshape
-cloth around a different body; use ReFit when the garment still needs body fitting.
-**Cancel** restores the fitted transforms unless you edited them afterward.
+Unmatched extra bones follow their parents.
+
+The local, unreleased cross-base update also adjusts recognized body clothing
+around the avatar's visible body after aligning its bones. It adds clearance to
+intersecting fabric, with extra room for sleeves, and smooths the displacement
+across seams without smoothing away the garment's folds. Body-region matching
+prevents an arm from expanding against the torso or the opposite limb. Props and
+clothing that already match the base do not receive this extra pass.
+
+The initial fit creates a separate mesh copy and retains the garment's original
+bone weights, texture coordinates and blendshapes. It does not transfer the custom
+base's muscle shapes; use ReFit for that subsequent step. **Cancel** restores the
+original mesh and fitted transforms where they still match the generated fit,
+preserving later manual replacements or transform edits.
 
 Each installed item's card lists its assigned **Textures**, grouped by material,
 with the shader slot, texture name and thumbnail. Collapse the list when you do
@@ -150,6 +161,13 @@ unchanged. Unity **Undo** restores the original assignment. Authored materials
 with intentional glow are not classified as broken just because they are bright.
 Toon Standard is opaque; effects requiring transparency or a custom shader still
 need their creator's material setup.
+
+For blank FBX material placeholders, the local update first looks for one exactly
+named material in the model folder or its immediate package folder. A unique
+supplied setup preserves its shader and transparency; a missing shader then uses
+the Toon repair. Ambiguous variants are left for an explicit choice. This avoids
+turning an authored cutout decal into an opaque patch. Recovered materials are
+copied for the installed item rather than editing the package originals.
 
 When clothing and its texture folder are dropped together, automatic matching
 fills missing primary maps while preserving textures already assigned by the
