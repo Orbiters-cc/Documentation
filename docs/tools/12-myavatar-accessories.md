@@ -151,6 +151,14 @@ with intentional glow are not classified as broken just because they are bright.
 Toon Standard is opaque; effects requiring transparency or a custom shader still
 need their creator's material setup.
 
+When clothing and its texture folder are dropped together, automatic matching
+fills missing primary maps while preserving textures already assigned by the
+creator or material repair. Optional color variants and decal patterns cannot
+replace an existing base-color map, become emission, or fill an extra detail layer
+through a local or AI guess. To apply a variant deliberately, drop the texture on
+its own or choose its material slot manually. Previously confirmed choices remain
+available. This protection is part of the local, unreleased update.
+
 ## When the fit question appears
 
 On a recognized custom base with an available original base, an armature-fitted
