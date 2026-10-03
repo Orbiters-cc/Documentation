@@ -13,7 +13,7 @@ lastVerified: 2026-10-03
 
 # Add a drawing pen with My Avatar
 
-The local working version adds **Drawing pen** below **Clothes and accessories**.
+The local working version adds **Drawing pen** immediately below **Parameters**.
 It requires a humanoid scene avatar with a VRChat Avatar Descriptor and VRCFury
 installed. Install it outside Play Mode by pressing **Add drawing pen**.
 Adding it again returns the existing pen instead of creating another one.
