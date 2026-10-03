@@ -285,3 +285,6 @@ rows, and caps setup reasons at 160 and warnings at 200 characters. It allows 20
 per user per hour and one active request per user. The feature defaults to reasoning off;
 Admin → AI → Features can override its model, prompt and reasoning.
 </audience>
+
+
+For a built-in shared prop, see [Add a drawing pen with My Avatar](13-myavatar-drawing-pen.md).

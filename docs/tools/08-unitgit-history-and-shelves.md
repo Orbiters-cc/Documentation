@@ -8,7 +8,7 @@ id: orbiters.tools.unitgit-history-and-shelves
 domain: unitgit
 type: how-to
 owner: orbiters-unitgit
-lastVerified: 2026-10-02
+lastVerified: 2026-10-03
 relations: orbiters.tools.unitgit-get-started
 ---
 
@@ -73,3 +73,21 @@ Unit Git 0.1.3 protects Rename and Squash from concurrent checkouts, refreshes
 selected branch state before Update, loads older history through Next, preserves
 header-like diff content and identifies all unresolved conflict states. See
 [Unit Git history and My Avatar texture fixes](unity-history-and-texture-fixes.md).
+
+
+<alpha>
+
+## Compare materials visually
+
+In the local working version, select a `.mat` file and choose **Scene view**.
+The repository and current material appear on two spheres above the property
+changes. Commit history shows the material before and after that commit.
+Drag either preview to rotate both; scroll to zoom; double-click to reset.
+Both spheres use identical lighting and framing.
+
+Each side loads its own material settings. Referenced shaders and textures use
+the current project's assets; this does not restore historical dependencies.
+A missing material side or unsupported shader gets an explicit message.
+The previews do not create scene objects or modify the original material.
+
+</alpha>

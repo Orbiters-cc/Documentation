@@ -8,7 +8,7 @@ id: orbiters.tools.xraygizmos-controls
 domain: xraygizmos
 type: reference
 owner: orbiters-xraygizmos
-lastVerified: 2026-10-02
+lastVerified: 2026-10-03
 relations: orbiters.tools.xraygizmos-get-started
 ---
 
@@ -101,7 +101,7 @@ account for different local bone axes. Pairs without complete bind-pose data use
 the pose at binding time as a relative reference; the status reports their count.
 
 Mirror does not mirror scale, solve IK or record animation. It pauses during
-animation preview and play mode, stays on through script reloads, and binds again
+animation preview, stays on through script reloads, and binds again
 when the captured hierarchy changes. A pair is mirrored only when both bones and
 their ancestors have positive, uniform scale (tiny imported differences, up to 0.01%
 between components, are tolerated); other pairs are skipped and counted in the
@@ -109,3 +109,21 @@ status. Scaled props or accessories elsewhere in the hierarchy do not block Mirr
 **Clear** still controls the display overlays; switch **Mirror** off separately.
 For a manual installation, install both packages together.
 
+
+
+<alpha>
+
+### Pose symmetrically in Play Mode
+
+The local working version enables the XRay Gizmos **Mirror** control in Play Mode.
+Select an avatar bone and rotate or move it with Unity's normal handles. Only
+explicit edits are mirrored; ordinary animation is not copied across the body.
+The edited channels on both bones hold after animation and LateUpdate, leaving
+other bones and channels animated. Editing both partners together preserves both
+explicit edits.
+
+Switch **Mirror** off to release the holds. Exiting Play Mode discards the test
+pose. Play Mode edits do not record prefab overrides. My Avatar's inspector is
+still disabled in Play Mode; use the XRay Gizmos toolbar for live posing.
+
+</alpha>
