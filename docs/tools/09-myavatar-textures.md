@@ -183,8 +183,15 @@ opaque alpha. Separate metallic and roughness images can fill one packed map
 without replacing each other's channels. Converted maps are imported as linear
 data; source images stay unchanged.
 
-Explicit `MetallicSmoothness`/`MetallicGloss` filenames identify red metallic and
-alpha smoothness. The `ORM`/`ARM`, `RMA`, and `MRA` filename tokens identify their
+When a dropped surface image is already assigned to its destination slot, My Avatar
+keeps the material's authored channels, inversion, strength and UV settings. It does
+not repack the same image from its filename. This matters for clothing packs whose
+`MetallicSmoothnessMaps` image uses Poiyomi's green channel with inversion: reading
+its opaque alpha as smoothness would make the garment look glossy. The preserved
+setup also stays with the clothing through ReFit.
+
+For a newly assigned image, explicit `MetallicSmoothness`/`MetallicGloss` filenames
+identify red metallic and alpha smoothness. The `ORM`/`ARM`, `RMA`, and `MRA` filename tokens identify their
 respective channel layouts; roughness is inverted and supported occlusion slots
 are filled only when empty. An ambiguous custom packing still needs the creator
 to identify its layout rather than being assumed to match these conventions.
