@@ -8,7 +8,7 @@ id: orbiters.refit.validation-performance
 domain: refit
 type: reference
 owner: orbiters-refit
-lastVerified: 2026-09-09
+lastVerified: 2026-10-03
 relations: orbiters.tools.refit-operating-contract
 ---
 
@@ -61,6 +61,47 @@ Same vertex/triangle counts or unchanged shape names are insufficient. Missing o
 mismatched provenance causes recomputation, not reuse of potentially stale output.
 
 ## Geometry and Performance
+
+### Concurrent Shape Transfer (local, unreleased)
+
+Independent blendshape frames use up to eight CPU workers (half the logical CPU
+count by default, at least one). Each worker owns its frame arrays and diagnostic
+output; snapshots, spatial indices and body-coverage supports are read-only.
+Diagnostics and mesh frames are merged in input order. `new ReFitEngine(1)` runs
+frames sequentially for comparison. Inner garment dependencies remain sequential.
+
+Body-support queries run in parallel and are collected in vertex order. Coverage
+rest lengths and reference normals are calculated once per frame instead of
+repeatedly inside smoothing. A constraint pass that changes nothing skips its
+remaining identical repetitions; correction budgets and maximum iterations are
+unchanged.
+
+On the local 20-logical-CPU workstation, a fishing-shorts stress case transferring
+all 22 body shapes took 89.87 seconds before the changes and 29.76 seconds with
+four workers and cached constraint geometry. All 71 existing/generated shapes
+had exactly matching vertex deltas. These engine-only timings include staging
+and baking, but exclude saving a generated asset and the outfit's other garments.
+
+The complete three-piece fishing outfit, using My Avatar's 35 relevant shape
+transfers and inside-out layer ordering, completed uncached in 52.67-53.67 seconds,
+including application and saving. The final optimization preserved all 182
+existing/generated shapes across those three meshes exactly, along with their
+base vertices and skin weights. This workload still exceeds a 30-second total-fit
+target; it must not be described as a ten-second full-outfit fit. Repeating the
+unchanged outfit through the normal result cache took 0.37 seconds (three cache
+hits).
+
+The actual My Avatar original-body placement took 0.39 seconds. A separate cold
+backup-model import took 10.01 seconds and preserved body vertex/bone counts.
+Preparation bypasses the proximity map when MCB already supplies the body; a
+pending fallback detection reports an error after 20 seconds. Unity's synchronous
+model importer is not preempted by that timeout.
+
+Regression coverage includes sequential/parallel multi-frame equivalence,
+concurrent/reentrant spatial queries, cancellation before mesh application,
+shape ordering, additive coverage, dense body peaks, layered clothing and
+restoration of temporary fitting poses. These are local verification results,
+not a published package release or a universal runtime guarantee.
 
 ### Lower-Torso Blendshape Transfer
 

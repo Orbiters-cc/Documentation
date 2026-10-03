@@ -188,6 +188,19 @@ The proximity check measures the worn mesh at its actual scale.
 
 ## Reviewing a completed refit
 
+The local performance update prepares the original-body preview directly from
+MCB without waiting for blendshape proximity analysis. The progress card shows
+which stage or garment is running, completed blendshape counts and elapsed time.
+**Cancel** stops the current operation cooperatively: completed garments stay
+fitted and the in-progress garment retains its previous mesh. Backup-body loading
+imports only that model instead of refreshing all pending project assets.
+
+Blendshape frames run concurrently on a bounded number of CPU workers. Unity
+object reads, mesh baking and asset saving stay on the editor thread. Layered
+clothing still fits from the inside out so outer garments use the finished inner
+layer. First-time fitting of a complete outfit can exceed 30 seconds; the progress
+card remains active throughout. Repeating unchanged inputs can reuse saved fits.
+
 The local, unreleased update keeps **Ask a creator** and **Cancel refit** in the
 item's card after ReFit finishes. You can ask for a commission even when ReFit
 reported no warning: inspect the result from several sides and try your body
