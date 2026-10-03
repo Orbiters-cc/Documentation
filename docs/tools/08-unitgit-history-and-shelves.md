@@ -89,5 +89,8 @@ Each side loads its own material settings. Referenced shaders and textures use
 the current project's assets; this does not restore historical dependencies.
 A missing material side or unsupported shader gets an explicit message.
 The previews do not create scene objects or modify the original material.
+Historical materials keep their authored names, including versions from before
+a rename. Temporary imports use a matching asset name and filename so the preview
+does not emit name-mismatch warnings.
 
 </alpha>

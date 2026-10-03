@@ -80,3 +80,14 @@ Orbiters Toolkit 0.2.6 refreshes its clone when source meshes,
 material assignments or object visibility change. Saving a thumbnail checks source
 state even if the photoshoot was already open. Camera and framing changes still
 reuse an unchanged clone. See [Unity package safety and avatar workflow fixes](unity-package-safety-fixes.md).
+
+<alpha>
+
+The local working version can capture avatars containing the drawing pen's ink,
+line renderers, or mesh renderers whose mesh filter is missing. These components
+no longer interrupt the live preview or Capture with a missing MeshFilter error.
+You do not need to add a MeshFilter to a trail or remove the pen to take a thumbnail.
+Framing continues to use the avatar's visible surfaces, excluding trails, lines
+and particles from the framing bounds.
+
+</alpha>

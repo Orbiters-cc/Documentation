@@ -286,3 +286,17 @@ policy, account controls, Inspector shell, animated glow and warning cards are
 shared with [My Avatar](/documentation/orbiters.tools.myavatar-textures).
 MCB retains its existing authentication requirement. My Avatar can match textures
 offline. Logging out in either tool clears the shared account for that environment.
+
+<alpha>
+
+## Blender launcher and avatar builds
+
+The local working version fixes the `CS1024` compiler errors in
+`BlenderAddonService.cs` that prevented avatar builds. The Blender launcher stays
+editor-only: the MCB editor assembly is explicitly excluded from player builds,
+including its comparison windows. Its embedded Python also avoids invalid
+preprocessor lines
+when Unity compiles for the player. Extension installation and launch behavior
+are unchanged. This fix does not upload an avatar or change its blueprint ID.
+
+</alpha>
