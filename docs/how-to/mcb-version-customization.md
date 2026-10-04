@@ -99,6 +99,21 @@ original bytes can reconstruct a payload; it does not by itself validate every
 renderer layout. Test the intended avatar prefab separately. A Quest original
 key does not make a PC payload Quest-ready.
 
+The local implementation exposes each built original-source variant from its
+shared draft folder. Gallery filtering uses the selected avatar's matching source
+key; the union of all supported originals is not an active source key. These
+changes remain unpublished and require editor validation before release.
+
+For originals with different renderer layouts, source metadata can carry an
+explicit `rendererLayout` mapping. It names the original renderers and the custom
+renderer destinations, with each destination material slot pointing to an original
+renderer and slot index. Applying preserves the scene's material references,
+creates missing mapped renderers, and disables original pieces absent from the
+custom layout. Reset restores their materials and visibility and removes the
+created renderers. Unrelated objects at destination paths cause validation to fail
+before layout changes. Registering another hash without its layout mapping and
+an apply/reset check is insufficient evidence of support.
+
 <audience include="dev">
 
 ## MCP authoring
