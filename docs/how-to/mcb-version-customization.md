@@ -92,7 +92,10 @@ model, so resetting another base does not reuse an unrelated avatar's mapping.
 
 A custom base version belongs to an Orbiters asset. If a listing already exists
 with Gumroad or Jinxxy integration, reuse that asset ID. Creating a second listing
-splits its identity, access and store connections.
+splits its identity, access and store connections. When linking an existing listing,
+set its avatar-base identity as well as registering its supported source files.
+MCP registration accepts `avatarBaseId` for this association and preserves the
+listing's store metadata.
 
 Original FBXs are registered by verified content hash. A source key proves which
 original bytes can reconstruct a payload; it does not by itself validate every
@@ -101,8 +104,11 @@ key does not make a PC payload Quest-ready.
 
 The local implementation exposes each built original-source variant from its
 shared draft folder. Gallery filtering uses the selected avatar's matching source
-key; the union of all supported originals is not an active source key. These
-changes remain unpublished and require editor validation before release.
+key; the union of all supported originals is not an active source key. The local
+implementation is unpublished. Automatic discovery uses the avatar's current
+mesh sources and applied-version bindings, so an old automatically saved source
+from another avatar cannot keep unrelated custom bases in the matching gallery.
+Explicit manual source assignments remain available.
 
 For originals with different renderer layouts, source metadata can carry an
 explicit `rendererLayout` mapping. It names the original renderers and the custom
@@ -113,6 +119,12 @@ custom layout. Reset restores their materials and visibility and removes the
 created renderers. Unrelated objects at destination paths cause validation to fail
 before layout changes. Registering another hash without its layout mapping and
 an apply/reset check is insufficient evidence of support.
+
+A slot absent from a reduced original can explicitly reference a creator-bundled
+default material by GUID. Include those materials through the logic prefab's
+`NativeRendererMaterialLibrary` dependency list. Use separate material and texture
+assets to avoid overwriting the user's originals. Reset restores the original
+renderer layout and the actual local original's Animator Avatar definition.
 
 <audience include="dev">
 
