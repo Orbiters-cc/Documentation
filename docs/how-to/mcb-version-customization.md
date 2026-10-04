@@ -126,6 +126,28 @@ default material by GUID. Include those materials through the logic prefab's
 assets to avoid overwriting the user's originals. Reset restores the original
 renderer layout and the actual local original's Animator Avatar definition.
 
+## Local preview and publishing
+
+“See differences” reads a complete local build directly, including a source variant
+stored in another variant's shared build folder. An incomplete local build asks you
+to rebuild; it does not request an unpublished download. Added renderer meshes can
+also appear in the preview before applying the version.
+
+Publishing checks the immutable build and sends supported originals as separate
+packages through the existing source-support endpoint. Each package contains its
+own encrypted mesh payloads and the shared dependencies. This avoids combining all
+originals into one upload that exceeds the 600 MB per-package limit. It does not
+reduce the combined storage used by separately encrypted originals.
+
+File verification and packaging run in the background with progress and cancellation.
+A source whose stored mesh payloads already exceed the limit is rejected before ZIP
+creation. An interrupted upload keeps the local build unsubmitted. Retry checks the
+server's completed source variants and their settings and payload hashes before
+continuing; conflicting versions require a new version number. The build becomes
+published only after every source package succeeds. Status messages reserve their
+own space, and version controls become available again after success, failure or
+cancellation.
+
 <audience include="dev">
 
 ## MCP authoring
