@@ -35,8 +35,9 @@ that should not operate in that mode. Animation can still toggle children of
 that wrapper for posing. Avoid locking the individual contacts when their normal
 animations must still turn them off.
 
-The user chooses a mode in the installed version's **Genre** options. The choice
-is remembered per asset across version changes. If the next version has no mode
+The user chooses a mode with the installed version's **Genre** buttons. Additional
+modes wrap onto another row in a narrow Inspector. The choice is remembered per
+asset across version changes. If the next version has no mode
 with the same stable ID, MCB selects and remembers that version's default.
 Keep IDs stable when only changing a label. IDs are under **Advanced identity**.
 
