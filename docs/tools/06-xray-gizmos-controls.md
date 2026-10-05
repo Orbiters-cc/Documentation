@@ -8,7 +8,7 @@ id: orbiters.tools.xraygizmos-controls
 domain: xraygizmos
 type: reference
 owner: orbiters-xraygizmos
-lastVerified: 2026-10-03
+lastVerified: 2026-10-06
 relations: orbiters.tools.xraygizmos-get-started
 ---
 
@@ -51,6 +51,33 @@ Turning on **Bones** from this toolbar enables **Whole scene** and clickable bon
 **Extra** controls gizmos registered by other installed tools. Its dropdown can enable or disable entries individually or together. **No extra gizmos registered** simply means no tool has supplied an entry.
 
 XRayGizmos can discover ReFit debug labels from available snapshots. ReFit is optional; enabling XRayGizmos does not create a ReFit run or a debug snapshot.
+
+## Avatar budget
+
+With the VRChat avatar SDK in the project, XRayGizmos 0.2.8 adds an **Avatar budget**
+panel to the Scene view (bottom right; show or hide it from the Scene view's Overlays
+menu). It follows the selected avatar, or the scene's only active avatar, and estimates
+without building:
+
+| Bar | What it counts |
+| --- | --- |
+| Parameters | Bits of synced parameter memory once built, out of 256: the avatar's expression parameters and what VRCFury toggles, sliders and full controllers add |
+| Bones | Transforms skinned meshes use |
+| PhysBones | PhysBone components |
+| Contacts | Contact senders and receivers, except receivers only the wearer evaluates |
+
+Over 256 bits, when VRCFury's parameter compression is on in its global settings, the
+Parameters bar shows the bits left after compression, how many parameters VRCFury
+compresses and how long a full sync of them takes. As in VRCFury, only parameters a
+radial, toggle or puppet menu control drives can be compressed; buttons and parameters
+no menu uses keep their full cost. With compression off, an avatar over 256 bits fails
+its build.
+
+The other bars show the PC performance rank each count reaches, with ticks at the
+Excellent, Good, Medium and Poor limits read from the VRChat SDK. Players who hide Very
+Poor avatars see none of their PhysBones, colliders and contacts. On an MCB custom base,
+each bar shows the custom base's share apart from the avatar's, counted as built: the
+PhysBones its build adds and the bones it removes are included.
 
 ## Scene selection and handles
 

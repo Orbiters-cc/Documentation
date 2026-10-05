@@ -13,9 +13,9 @@ lastVerified: 2026-09-28
 
 # Pose, physics and parameters with My Avatar
 
-Below the thumbnail, the My Avatar component has three more parts: **Posing**, one
-card each for **Hair**, **Tail** and **Toes**, and **Avatar budget** (called
-**Parameters** before My Avatar 0.9.1). A bottom toolbar opens
+Below the thumbnail, the My Avatar component has more parts: **Posing** and one
+card each for **Hair**, **Tail** and **Toes** (and **Parameters** before My Avatar
+0.9.1). A bottom toolbar opens
 **Settings** (production or development server; production is the default) and, when
 MCB is installed, the **Blendshape Links** tool. This page describes My Avatar 0.4.0 with
 Orbiters Toolkit 0.2.5 and XRay Gizmos 0.2.1.
@@ -89,12 +89,7 @@ remain eligible for discovery, and clothing offsets follow scale changes. See
 
 ### Avatar budget
 
-My Avatar 0.9.1 with Toolkit 0.3.13 turns the section into **Avatar budget**, the same
-panel MCB shows in its version options. Below the parameter estimate, **Bones**,
-**PhysBones** and **Contacts** show the counts that most often set an avatar's PC
-performance rank and the rank each reaches. Tick marks show the Excellent, Good, Medium
-and Poor limits, read from the VRChat SDK. Players who hide Very Poor avatars see none
-of their PhysBones, colliders and contacts.
-
-On an MCB custom base, each bar shows the custom base's share apart from the avatar's,
-counted as built: the PhysBones its build adds and the bones it removes are included.
+My Avatar 0.9.1 removes the section. XRay Gizmos 0.2.8 shows the avatar budget in a
+panel over the Scene view instead: parameters as built, including what VRCFury's
+compression leaves, and the bones, PhysBones and contacts that set the PC performance
+rank. See [XRayGizmos controls](/documentation/orbiters.tools.xraygizmos-controls).
