@@ -15,7 +15,9 @@ lastVerified: 2026-10-03
 
 **Accessories and clothes** is an alpha feature of the My Avatar component. Turn it on
 per user in **Orbiters Settings > Features**, then use the main **Drop anything**
-field. Drop a clothing or accessory package there and My Avatar places it on
+field. In the local, unreleased My Avatar 0.9.0 it leaves alpha and is on by default,
+and items can also come from the
+[asset gallery](14-myavatar-asset-gallery.md). Drop a clothing or accessory package there and My Avatar places it on
 your avatar and attaches it without changing the avatar or the package. For textures,
 see [Change avatar textures with My Avatar](09-myavatar-textures.md).
 

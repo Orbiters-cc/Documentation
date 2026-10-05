@@ -172,6 +172,27 @@ last 180 days and adds it to the forecast for the selected ideas. The chart keep
 the two forecast areas separate and stacked, and labels the summary as the combined
 forecast. Turning continuity on never removes the selected-idea projection.
 
+<alpha>
+
+## Preferred store and My Avatar gallery purchases
+
+This part is a local development implementation and is not deployed.
+
+**Preferred store** appears under **Store Connections** once a store that sells assets
+is connected. Buyers in the My Avatar asset gallery see that store first, marked as the
+one that supports you best; every other store selling the asset stays available. Choose
+**No preference** to list stores without a mark. The choice is your default for every
+asset, and saves as soon as you pick it.
+
+When a buyer starts a purchase from the gallery, Orbiters watches the sales of your
+connected Gumroad or Jinxxy store for seven days. A sale to the buyer's Orbiters email,
+Gumroad email or linked Jinxxy account adds the asset to their library without a
+license key. A registered webhook makes this immediate; otherwise it happens with the
+next sales check. The asset must be linked to the store product for the sale to count.
+See [Publish clothes and accessories to the My Avatar gallery](publish-to-myavatar-gallery.md).
+
+</alpha>
+
 ## Integration Status
 
 - `ACTIVE`: usable by sync, redemption, and webhook flows.
