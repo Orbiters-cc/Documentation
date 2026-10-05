@@ -14,7 +14,8 @@ lastVerified: 2026-09-28
 # Pose, physics and parameters with My Avatar
 
 Below the thumbnail, the My Avatar component has three more parts: **Posing**, one
-card each for **Hair**, **Tail** and **Toes**, and **Parameters**. A bottom toolbar opens
+card each for **Hair**, **Tail** and **Toes**, and **Avatar budget** (called
+**Parameters** before My Avatar 0.9.1). A bottom toolbar opens
 **Settings** (production or development server; production is the default) and, when
 MCB is installed, the **Blendshape Links** tool. This page describes My Avatar 0.4.0 with
 Orbiters Toolkit 0.2.5 and XRay Gizmos 0.2.1.
@@ -85,3 +86,15 @@ status and labels counts **before compression**. Independent Full Controllers no
 longer merge their local parameter names in the estimate. Ignored PhysBone branches
 remain eligible for discovery, and clothing offsets follow scale changes. See
 [Unity package safety and avatar workflow fixes](unity-package-safety-fixes.md).
+
+### Avatar budget
+
+My Avatar 0.9.1 with Toolkit 0.3.13 turns the section into **Avatar budget**, the same
+panel MCB shows in its version options. Below the parameter estimate, **Bones**,
+**PhysBones** and **Contacts** show the counts that most often set an avatar's PC
+performance rank and the rank each reaches. Tick marks show the Excellent, Good, Medium
+and Poor limits, read from the VRChat SDK. Players who hide Very Poor avatars see none
+of their PhysBones, colliders and contacts.
+
+On an MCB custom base, each bar shows the custom base's share apart from the avatar's,
+counted as built: the PhysBones its build adds and the bones it removes are included.
