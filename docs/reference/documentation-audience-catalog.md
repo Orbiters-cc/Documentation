@@ -262,7 +262,7 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Create a VRChat thumbnail with My Avatar | public, creator, dev | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Pose, physics and parameters with My Avatar | public, creator, dev | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Add accessories and clothes with My Avatar | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Add a drawing pen with My Avatar | creator, dev | alpha | — | — | ✓ | — | — | ✓ |
+| Add the drawing pen from the My Avatar gallery | creator, dev | alpha | — | — | ✓ | — | — | ✓ |
 | Add clothes and accessories from the My Avatar asset gallery | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Unity package safety and avatar workflow fixes | creator, dev | beta | — | — | ✓ | — | — | ✓ |
 | Unit Git history and My Avatar texture fixes | creator, dev | beta | — | — | ✓ | — | — | ✓ |

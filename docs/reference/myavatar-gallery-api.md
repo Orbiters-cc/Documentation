@@ -124,6 +124,18 @@ in `Library/OrbitersMyAvatar/gallery-ledger.json` with their hashes, so Cleanup 
 modified and pre-existing files apart. Cleanup quarantines files under
 `Library/OrbitersMyAvatar/Gallery/Quarantine`.
 
+## MCP tool
+
+`myavatar_gallery` (My Avatar's `Orbiters.MyAvatar.MCP.Editor` assembly, compiled when
+MCP for Unity 9.7.1 or later is installed) uses `GalleryPublisher`, the service behind the
+Publish to the gallery window. Actions: `inspect`, `configure` (merges into the shared
+`GalleryCreatorDraft`; prefabs and setup prefabs by path; `reset`), `list_assets`,
+`build`, `test`, `preview_publish` / `confirm_publish`, `preview_withdraw` /
+`confirm_withdraw` and `status` for pending jobs. `configure` cannot set the rights
+confirmation or server ids; `confirm_publish` sets the rights only with the code from a
+preview of an unchanged draft, valid 15 minutes. A script reload ends running jobs;
+publishing resumes where it stopped because uploaded variants are recorded in the draft.
+
 Shared pieces live in Orbiters Toolkit: `OrbitersTransfer` (downloads and uploads),
 `SafeArchive`, `UnityPackageFiles`, `UnityPackagePreview`, `ContentTrust`,
 `VersionRecord`, `VersionTimeline`, `BaseFingerprint` and `VpmDependencyPlan`.

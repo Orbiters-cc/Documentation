@@ -32,8 +32,10 @@ or deployed. This guide does not announce a release.
   [Connect Store Integrations](05-connect-store-integrations.md).
 - Have the item set up in your project as a prefab, or as a `.unitypackage` you exported.
 
-Open **Asset gallery** in My Avatar and choose **Publish an asset**. The page has four
-steps.
+Open **Asset gallery** in My Avatar and choose **Publish** or **Publish an asset**. The
+form opens in its own **Publish to the gallery** window, so you can select prefabs and
+other objects in the project while you fill it in. What you enter is kept across script
+reloads until you publish. The form has four steps.
 
 ## 1. Asset
 
@@ -105,6 +107,21 @@ declare.
   your asset's **More info**: each of your published versions has **Withdraw**, which
   asks once more before acting. A withdrawn version leaves the gallery; copies already
   installed keep working.
+
+## Publish with an AI assistant (MCP)
+
+With MCP for Unity connected, an assistant can prepare and publish through the
+`myavatar_gallery` tool. It edits the same draft as the window, so you can watch and
+correct it there:
+
+1. `inspect` shows the draft, the avatars in the scene and the Orbiters server it
+   publishes to.
+2. `configure` fills in the asset, version and packages (prefabs by their project path).
+3. `build` packages them with the same rules as the window; `test` installs one on an
+   avatar of your scene.
+4. `preview_publish` returns a summary, the rights statement and a single-use code. The
+   assistant must show them to you; it can only publish with `confirm_publish` and that
+   code once you agree. Withdrawing a version works the same way.
 
 <audience include="admin, dev">
 My Avatar installs the packages a gallery asset depends on from repositories admins

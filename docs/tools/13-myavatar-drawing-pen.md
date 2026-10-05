@@ -1,5 +1,5 @@
 ---
-title: Add a drawing pen with My Avatar
+title: Add the drawing pen from the My Avatar gallery
 section: Tools
 order: 194
 audience: creator, dev
@@ -8,15 +8,23 @@ id: orbiters.tools.myavatar-drawing-pen
 domain: myavatar
 type: how-to
 owner: orbiters-engineering
-lastVerified: 2026-10-04
+lastVerified: 2026-10-05
 ---
 
-# Add a drawing pen with My Avatar
+# Add the drawing pen from the My Avatar gallery
 
-The local working version adds **Drawing pen** immediately below **Parameters**.
-It requires a humanoid scene avatar with a VRChat Avatar Descriptor and VRCFury
-installed. Install it outside Play Mode by pressing **Add drawing pen**.
-Adding it again returns the existing pen instead of creating another one. Existing pens keep their generated controller: remove and add the pen to rebuild it with updated interactions.
+The drawing pen is a free accessory in the
+[My Avatar asset gallery](14-myavatar-asset-gallery.md). Open **Asset gallery**, find
+**Drawing pen** and choose **Add**. It needs a humanoid scene avatar with a VRChat Avatar
+Descriptor and VRCFury, which the gallery offers to install. It is for PC avatars:
+its ink uses a shader Quest avatars do not allow.
+
+**Release status:** local development implementation (My Avatar 0.9.0, Orbiters
+Toolkit 0.3.12). Earlier local versions added the pen from a **Drawing pen** section
+of My Avatar; that section is gone. Pens already on an avatar keep working.
+
+When it is added, the pen fits itself to the avatar: it waits in front of the chest
+and is held at either wrist.
 
 ## Use the pen
 
@@ -42,18 +50,20 @@ Mobile behavior and real two-player grabbing have not yet been validated.
 
 ## Remove or undo
 
-Press **Remove pen** in My Avatar to remove the prop and its VRCFury integration.
-Unity Undo restores it. Generated materials, controller and menu assets remain
-under `Assets/Orbiters/DrawingPen` (or a numbered folder) so Undo and existing
-references remain usable. The avatar's authored controllers and menus are not
-rewritten; VRCFury merges the pen when building.
+**Remove** on the pen in **Clothes and accessories** takes it off the avatar; Unity
+Undo restores it. Its imported files stay until you run Cleanup. The avatar's authored
+controllers and menus are not rewritten; VRCFury merges the pen when building.
 
 <audience include="dev">
 
 ## Implementation and verification
 
-Toolkit's `DrawingPenInstaller` owns construction and the native Animator state
-machines. My Avatar owns only the card and immediate busy feedback. The shared
+Toolkit's `DrawingPenInstaller.CreatePrefab` builds the avatar-independent prefab
+and its native Animator state machines; `Bind` fits a placed pen to an avatar (spawn
+point from the chest, wrist sources for the hold constraint). Bind runs through
+`AttachmentHooks.Prepare`, which My Avatar calls on every placed accessory before
+analysing it, so a dropped prefab is fitted the same way. The gallery asset attaches
+with the `configured` mode: its own VRCFury setup does the rest. The shared
 VRCFury writer attaches the controller, submenu and five unsaved synced bool
 parameters through VRCFury's public API. Gesture and PhysBone parameters do not
 consume expression parameter slots.
