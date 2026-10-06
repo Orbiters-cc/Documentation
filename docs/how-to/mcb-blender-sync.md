@@ -74,6 +74,23 @@ See [MCB and Unity Tools](08-mcb-and-unity-tools.md) for the creator and version
 
 <alpha>
 
+## XMuscles flexing in VRChat
+
+With XMuscle Orbit Helper 0.10.0 and the MCB extension 0.2.0, each export bakes the X-Muscles linked to the exported body into corrective shape keys and tells Unity where to measure them. **Build rig on this avatar** in the Creator panel then turns those measurements into VRChat contacts:
+
+- **Stretch.** A receiver at the muscle's origin and a sender at its insertion read the distance between them, as the X-Muscle stretches. A triceps whose controller slides with a helper bone is baked through the elbow it slides with.
+- **Twist.** When a muscle's slide or length driver reads the twist of a bone (for example a biceps that follows the forearm's rotation), the bake also samples that twist, `Twist Range` each way, and a second contact pair follows it. Its receiver rides on a pivot kept along the forearm by a VRC Aim constraint, so bending the elbow does not change the twist reading.
+
+Each shape key contains only its muscle's effect. X-Muscle's Skin Corrector smooths the whole body and is not exported, so it is not added once per muscle.
+
+Contacts run for every player and scale with the avatar, so everyone sees the muscles. A VRC Raycast is not used: it needs colliders on the avatar, which are PC-only, and it hits a player's own colliders only on that player's client. Each muscle costs two contacts, plus two when it follows a twist.
+
+Bake the full range a joint reaches: beyond the last sample the shapes stay at their last pose. The bake follows each muscle's own joints only; for example, a biceps does not change with the shoulder's pose.
+
+</alpha>
+
+<alpha>
+
 ## Script reload during project preparation
 
 In Toolkit 0.3.7, the headless Blender preparation job uses Toolkit's
