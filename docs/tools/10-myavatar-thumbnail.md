@@ -38,15 +38,20 @@ and with the same crop, between faint neighbouring cards. The card shows:
    background has a picker with a hue bar, curated colours, a hex field and
    **Reset**.
 3. Frame the avatar right on the card: drag to move it, scroll to zoom and
-   Shift-drag to turn it. Double-click resets the framing. **Portrait**, **Half
-   body** and **Full body** frame the head, the torso or the whole avatar in any
-   pose and stay fitted when you change pose or turn. The **Turn** dial goes all the
-   way round and **Zoom** reaches 20×; both snap at their rest value, step with the
-   arrow keys and reset on double-click.
+   Shift-drag to turn and tilt it. Double-click resets the framing. **Portrait**,
+   **Half body** and **Full body** frame the head, the torso or the whole avatar in
+   any pose. Drag the sphere to turn the avatar (sideways) and tilt it toward or away
+   from the camera (up and down); its dot shows where the avatar faces. It snaps
+   facing the camera, steps with the arrow keys and double-click faces the camera
+   again. The avatar turns around whichever of its hips, chest and head is nearest
+   the middle of the view, and the camera stays still, so what you framed stays in
+   place. **Zoom** reaches 20×.
    **Look at the camera** makes the avatar look straight at the camera. The **Look**
    dial splits that turn between the head and the eyes: at **Head** only the head and
    neck turn (the eyes stay as posed), at **Eyes** only the eyes turn (the head stays
-   as posed), and in between each takes its share. Eyes are the avatar's humanoid eye bones,
+   as posed), and in between each takes its share. Eyes skinned partly to the head
+   turn further than the look so they still meet the camera, up to about 75° on
+   their bone, beyond which the skinning would squash the eyeball. Eyes are the avatar's humanoid eye bones,
    else the eyes set in the VRChat Avatar Descriptor's **Eye Look**.
 4. Press **Capture**. The image is saved at once as
    `Assets/Orbiters/MyAvatar/Thumbnails/<avatar> <id>/<avatar> thumbnail.png` and
