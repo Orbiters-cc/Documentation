@@ -114,6 +114,39 @@ combinations, including the original input and previous output. The change is
 implemented locally and has not been published.
 </alpha>
 
+<alpha>
+## Assets not made for this exact avatar
+
+After **Tightness**, the wizard asks whether the asset was made for this exact avatar. Clothing from another avatar is
+usually placed roughly over the body: it already sinks into it before a body blendshape makes that worse.
+
+- **Yes** keeps the previous behaviour: the asset fits as it is and ReFit only adds the blendshapes (or moves it to
+  another base).
+- **No** turns on the body coverage pass above. For an asset on its avatar, ReFit also refits the mesh onto the same
+  body, from where it was placed (`MeshAndBlendshape` with the target as source): clipping is removed as it is (the
+  refit shape at 100) and in each transferred blendshape. A part that already has a refit starts again from its
+  original mesh.
+- When the asset's object under the avatar holds other meshes, the summary offers **Refit its outfit with it** (on by
+  default): every part is refitted, innermost first. The order comes from the geometry (which part is closer to the
+  body where both cover it), not from names. Only the last part saves the outfit prefab.
+
+`ReFitSettings.coverageKeepsLayerOrder`, set by this path only (My Avatar's requests are unchanged), makes the coverage
+respect the outfit. `coverageLayers` then holds the outfit's other parts:
+
+- Each part keeps the side of the others it was authored on, with its authored gap up to 2 mm. Details made to pass
+  under another part stay there: a bowtie band under the collar, a jacket collar under the shirt's.
+- Only visible clipping is moved. A clipped area covered from every side by the garment's own outer fabric or by
+  another part stays where it is. A refitted part covers only from outside the body, so two parts clipping at the same
+  spot cannot hide each other.
+- In each blendshape, fabric stays beneath what lies over it (its own outer fabric or a refitted part). The layer
+  closer to the skin follows the body more and would otherwise pass through the other.
+- Small separate pieces (a pocket square, pins) move rigidly with the fabric they sit on.
+
+Known limits: a coarse garment over much larger muscles (a hoodie made for Rexouium on the Ultirex body) can still
+show the body through the middle of its large triangles, and the body's own protruding parts between the legs are not
+covered. This change is implemented locally and has not been published.
+</alpha>
+
 ## Environment
 
 ReFit Settings exposes the same **Dev Environment** switch as MCB. Production uses
