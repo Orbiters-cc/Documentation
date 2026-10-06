@@ -45,8 +45,9 @@ and with the same crop, between faint neighbouring cards. The card shows:
    arrow keys and reset on double-click.
    **Look at the camera** turns the head and eyes toward the camera. The **Look** dial
    chooses who does it: the head alone (eyes straight), the eyes alone (head as
-   posed), or in between, the head part of the way and the eyes the rest. The head
-   turns at most 70° and the eyes about 30°. Eyes are the avatar's humanoid eye bones,
+   posed), or in between, the head part of the way and the eyes the rest. Eyes turn
+   about 30° at most: when the pose faces further away (a profile), the head turns
+   just enough for the eyes to reach the camera, up to 70°. Eyes are the avatar's humanoid eye bones,
    else the eyes set in the VRChat Avatar Descriptor's **Eye Look**.
 4. Press **Capture**. The image is saved at once as
    `Assets/Orbiters/MyAvatar/Thumbnails/<avatar> <id>/<avatar> thumbnail.png` and
