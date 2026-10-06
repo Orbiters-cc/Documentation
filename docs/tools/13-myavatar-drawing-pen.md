@@ -30,8 +30,10 @@ and is held at either wrist.
 
 1. In VRChat, open **Drawing pen > Enable pen**. The pen appears in front of you.
 2. Grab its grip using VRChat's PhysBone interaction. The pen then follows your
-   wrist independently of that grab signal. Squeeze your fist to draw; relax the
-   squeeze to stop ink without dropping the pen. Either hand works.
+   wrist independently of that grab signal. Squeeze your fist, or put your thumb up
+   with the index down, to draw; relax the squeeze or point the index to stop ink
+   without dropping the pen. Either hand works. Pens added before Orbiters Toolkit
+   0.3.13 draw on the fist only until added again.
 3. Guests draw while grabbing the pen. Your avatar cannot read their fist gesture,
    so their drawing does not depend on your gesture.
 4. Fully open your hand, or choose **Drop pen**, to leave it fixed in the world. Guests release their normal grab to drop it.
