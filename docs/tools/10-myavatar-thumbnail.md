@@ -8,7 +8,7 @@ id: orbiters.tools.myavatar-thumbnail
 domain: myavatar
 type: how-to
 owner: orbiters-engineering
-lastVerified: 2026-10-03
+lastVerified: 2026-10-06
 ---
 
 # Create a VRChat thumbnail with My Avatar
@@ -43,6 +43,11 @@ and with the same crop, between faint neighbouring cards. The card shows:
    pose and stay fitted when you change pose or turn. The **Turn** dial goes all the
    way round and **Zoom** reaches 20×; both snap at their rest value, step with the
    arrow keys and reset on double-click.
+   **Look at the camera** turns the head and eyes toward the camera. The **Look** dial
+   chooses who does it: the head alone (eyes straight), the eyes alone (head as
+   posed), or in between, the head part of the way and the eyes the rest. The head
+   turns at most 70° and the eyes about 30°. Eyes are the avatar's humanoid eye bones,
+   else the eyes set in the VRChat Avatar Descriptor's **Eye Look**.
 4. Press **Capture**. The image is saved at once as
    `Assets/Orbiters/MyAvatar/Thumbnails/<avatar> <id>/<avatar> thumbnail.png` and
    the card flashes. The studio stays live, so you can capture again; a new capture
