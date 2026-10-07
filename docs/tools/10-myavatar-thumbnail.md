@@ -8,7 +8,7 @@ id: orbiters.tools.myavatar-thumbnail
 domain: myavatar
 type: how-to
 owner: orbiters-engineering
-lastVerified: 2026-10-06
+lastVerified: 2026-10-07
 ---
 
 # Create a VRChat thumbnail with My Avatar
@@ -63,6 +63,38 @@ Light presets include studio looks, **High Key**, **Low Key**, and the dark
 **Cinematic Rim** and **Neon Night**. Each preset sets its own ambient light on the
 photoshoot's copy of the avatar, so the result does not depend on your scene's
 lighting and your scene is not changed.
+
+<alpha>
+
+## Effects, your own backgrounds and the environment light
+
+These come with My Avatar 0.9.4 and Orbiters Toolkit 0.3.16, not released yet.
+
+- **Effects** (the last style tab): turn on as many as you like, each with its own strength. **Bloom** (bright parts
+  glow), **Comic halftone** (flat colours in 2 to 12 tones with ink outlines; **Dots** adds a print screen of ink dots,
+  larger in the shade, whose size you choose), **Ambient occlusion** (soft shadows in folds and creases), **Depth of
+  field** (sharp at the avatar's view position from its VRChat Avatar Descriptor, blurred before and behind it),
+  **Chromatic aberration**, **Grain**, **Lens distortion** and **Vignette** (darker edges, or brighter ones below
+  zero). Bloom, ambient occlusion, depth of field and chromatic aberration go up to 300%.
+- **Your own backgrounds**: on the **Background** tab, the **+** swatch adds a PNG or JPEG picture; you can also drop
+  pictures on the backgrounds. They are copied to a folder of your own, so every project offers them; hover one to
+  remove it. Background pictures are cropped to the frame, never stretched.
+- **Environment light**: on the **Light** tab, a slider sets the environment light from 0 to 300% of the preset's.
+- The **Framing** card folds under its header; it is open at first and stays as you leave it.
+
+## Create a ref sheet
+
+**Create ref sheet**, under **Open in VRChat SDK** and **Edit thumbnail**, opens the photoshoot's second mode: the
+avatar from the front, the back and the side, side by side at one scale on a 1920×1080 sheet, each view named above it
+in italic grey on a dark background. It uses the same pose, light, expression and effects (except the vignette, lens
+distortion and chromatic aberration, which would cut across the views).
+
+- **Side view** faces left or right. Drag the sheet up or down, scroll to zoom every view together, and double-click
+  or **Fit** to see the whole body in each view again. The background colour is on the **Background** tab.
+- **Capture** saves the sheet as `<avatar> ref sheet.png` beside the thumbnails and shows it in the Project window.
+- **Edit thumbnail** switches back to the thumbnail; **Done** closes the ref sheet.
+
+</alpha>
 
 ## Use it in the VRChat SDK
 

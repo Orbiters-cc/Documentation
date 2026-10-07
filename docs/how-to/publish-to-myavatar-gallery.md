@@ -8,7 +8,7 @@ id: orbiters.myavatar.publish-to-gallery
 domain: myavatar
 type: how-to
 owner: orbiters-engineering
-lastVerified: 2026-10-05
+lastVerified: 2026-10-07
 relations: orbiters.tools.myavatar-asset-gallery, orbiters.how-to.connect-store-integrations
 ---
 
@@ -88,7 +88,30 @@ buyers are asked before it is imported, unless Orbiters marked you a trusted cre
 **Test on** installs the built package on the avatar you have selected, the same way
 a buyer would, so you can check the result before publishing.
 
-## 4. Publish
+## 4. Pictures
+
+<alpha>
+
+With My Avatar 0.9.4 and Orbiters Toolkit 0.3.16 (not released yet), put the asset on your avatar and take its
+pictures here:
+
+- The step shows the **gallery card** buyers will see, with your name and price.
+- **Take pictures** opens the photoshoot on the avatar this window was opened from. The card follows the live camera,
+  and you can frame the avatar right on it. Each **Capture** adds a picture: the first goes on the card, the next ones
+  open on the asset's page (on the website and in My Avatar's details).
+- **Create ref sheet**, under the buttons, shows the avatar wearing it from the front, the back and the side on one
+  1920×1080 sheet; each capture adds the sheet to the page's pictures.
+- **Add a picture file…** adds a PNG or JPEG of your own (a wide one goes to the page, not the card).
+- In the strip, click a picture to put it on the card; hover one to save a copy or remove it.
+- For an asset already on Orbiters, the new pictures go before its current ones, or replace them with **Replace its
+  current previews**. Without new pictures, the asset keeps its own.
+
+Pictures are optional: a new asset without one gets a picture of its first prefab, as before. They are sent when you
+publish, up to eight page pictures at a time.
+
+</alpha>
+
+## 5. Publish
 
 Confirm that you own the rights to everything the version distributes, or have
 permission to share it. Publishing is refused without this confirmation. **Also
