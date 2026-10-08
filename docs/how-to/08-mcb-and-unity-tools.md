@@ -141,6 +141,10 @@ When switching between an advanced native-mesh version and an FBX-patch version,
 
 Resetting to the default base also replaces generated DynamicNormals or advanced native body meshes with the original FBX body mesh.
 
+Switching from one FBX-patch version to another first puts back the models the previous version patched and the next one does not, with their import settings. Resetting restores each changed model's own import settings, kept before a version first gave it its own humanoid Avatar; models a version never touched are left as they are. MCB keeps each original FBX as a verified `.originalbase` backup: if the base package is imported again while a version is applied, the newly imported original replaces the older backup.
+
+A version cannot be switched or reset while a refit is running on the avatar, and **Delete local files** is refused while the version is applied or its files are still used. A replaced renderer that was deleted or renamed is skipped with a warning; the rest of the avatar is still restored.
+
 MCB identifies an applied advanced native-mesh version from the generated mesh assets that are bound to the avatar renderers. This keeps the version marked as current even when the source FBX bytes have not changed. The version row and its action button use the same applied-version state, so a version cannot appear current while also offering to apply itself again.
 
 Custom Veins also follows these generated renderer bindings. Advanced native-mesh versions remain supported when their imported metadata does not contain source renderer paths.
