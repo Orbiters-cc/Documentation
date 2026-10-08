@@ -96,13 +96,35 @@ picker. The graph includes provider-reported usage from both successful and fail
 how many lack provider token counts. It does not estimate missing usage or cost.
 
 **History** filters by feature, model and initiating user ID. Select a session to
-see its initiator and the pre-prompt used for each request. Another administrator
-continuing a playground session has their user ID recorded on that request.
-Self-promotion records the actual Discord post author; someone without an Orbiters
-account appears by Discord ID. Feature histories are read-only; use **Playground**
-for new tests.
+see its initiator and the pre-prompt used for each request. Self-promotion records the
+actual Discord post author; someone without an Orbiters account appears by Discord ID.
+Feature histories are read-only. The open icon on a request whose text was kept starts a
+new playground chat with its system prompt, messages, attachments that still exist,
+model, settings and logged answer.
 
-Only administrator playground conversations retain request and response text in AI history, including malformed or truncated answers. Every other feature, including AutoFill, stores placeholders instead of source text and model answers, alongside instructions, selected image IDs, usage and safe diagnostics. Creators can inspect those records for their own draft; authorized AI administrators can inspect history. Records written before this rule keep their existing content. Provider credentials and private model reasoning are not stored in these diagnostic records.
+## Use the playground
+
+**Playground** keeps each administrator's chats; the list shows the newest first, and a
+chat can be renamed or deleted. Deleting a chat keeps the history records of its requests
+and the files they recorded.
+
+- **Chat** sends each message to one model; **Compare** sends it to up to four targets at
+  once (the same model may appear twice with other settings). Answers stream side by side
+  when they fit and one at a time with a switcher on narrow screens. **Continue with this**
+  chooses the answer the conversation continues from.
+- Each target sets its maximum output tokens (up to the provider limit), temperature and
+  reasoning level. **Auto** keeps the model configuration from **Models**.
+- Messages are markdown with a preview. Answers stream over a WebSocket at
+  `/admin/ai/playground/socket` (authenticated like the API) and show the model's
+  reasoning when the provider returns it, time to first token, total time, input,
+  output, reasoning and cached tokens, and output speed. Escape or the stop button ends
+  a running answer and keeps its partial text.
+- Editing a message or an answer, or asking again, adds a version instead of replacing
+  anything; **‹ ›** switches between versions.
+- Answers keep running on the server when the connection drops and reappear when it
+  returns. An answer interrupted by a server restart is marked as interrupted.
+
+Only administrator playground conversations retain request and response text in AI history, including malformed or truncated answers. Every other feature, including AutoFill, stores placeholders instead of source text and model answers, alongside instructions, selected image IDs, usage and safe diagnostics. Creators can inspect those records for their own draft; authorized AI administrators can inspect history. Records written before this rule keep their existing content. Provider credentials and private model reasoning are not stored in these diagnostic records; playground reasoning stays with its chat.
 
 AutoFill streams model output and reports received tokens to the draft editor. Counts marked as estimates use streamed character length until provider usage is available. DeepSeek extraction disables thinking mode to avoid spending its output budget on reasoning for structured field extraction. DeepSeek AutoFill uses a minimum 32,768-token output budget; higher administrator settings take priority. One submission makes at most three provider calls. A DeepSeek `length` finish is retried at once with a 65,536-token budget. Connection failures, provider 408/429/5xx responses, streams that end early and responses that fail the output format are retried after 1.5 and then 4 seconds; a format retry adds a reminder of the required JSON schema to the prompt. Truncation that the larger budget cannot fix, unsupported images, AI disabled for the account and missing provider keys are not retried. Retries stop when the draft is published or a newer AutoFill replaces the job. Every attempt is billed by the provider and recorded in history, with combined live token feedback and the attempt number in the draft's progress. Sources are consumed when queued and are not reused by later submissions. A retry within that submission uses the same selected inputs. The maximum request duration defaults to 180 seconds per attempt and remains bounded by `AI_REQUEST_TIMEOUT_MS` when configured. In **Models → Maximum output tokens**, DeepSeek settings support up to 393,216 and Groq up to 65,536; other providers keep their existing limits.
 AutoFill requests use structured JSON output for Gemini and JSON mode for DeepSeek, Z.ai and Groq, followed by local schema validation. GPT-OSS uses Groq's strict JSON schema output when a feature's schema allows it (all fields required, closed objects), as for My Avatar texture matching.

@@ -8,7 +8,7 @@ id: orbiters.how-to.set-up-gallery
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-10-02
+lastVerified: 2026-10-08
 ---
 
 # Gallery: connect a Discord room and import pictures
@@ -28,7 +28,7 @@ These are separate configurations. Connecting a room to an asset showcase does n
 
 - Choose a community you own or administer. Creator status is not required. Community moderators cannot change galleries.
 - [Connect a Discord integration](06-configure-discord-integrations.md) for the server under **Community → Connections**. The community owner manages connections; admins use those connected servers for galleries.
-- Use a regular Discord **text channel**. The room picker does not list forum channels, threads, voice channels or categories.
+- Use a regular Discord **text channel**. The room picker does not list forum channels, threads, voice channels or categories; a forum can feed [Topic galleries](#topic-galleries) instead.
 - Give the integration's bot **View Channel** and **Read Message History** in that room, including any channel permission overrides. For a custom bot, enable **Message Content Intent** in its Discord developer settings so image attachments are available. See Discord's [message-content requirements](https://docs.discord.com/developers/events/gateway#message-content-intent).
 - Choose a room whose pictures are appropriate for the gallery audience. Discord channel privacy does not automatically make an Orbiters gallery private.
 
@@ -71,6 +71,29 @@ record exists (sign in with Discord again, or select **Sync with Discord** in
 every gallery for administration. Development and production have separate
 saved configurations: a room set up in development must also be configured in
 production.
+
+## Topic galleries
+
+A **Topic gallery** source turns every topic (thread) of a Discord forum, such as a
+`📷-event-gallery` forum with one topic per event, into its own gallery named after
+the topic.
+
+1. In **Community → Galleries**, find **Topic galleries** and search the **Discord
+   forum** picker.
+2. Choose who can see the topic galleries, then select **Add forum**.
+3. Orbiters imports the forum's open and archived topics, then each topic's pictures,
+   starter post included. The topics appear as chips under the forum; select one to
+   open its gallery.
+
+New topics become galleries as soon as they are posted, and renamed topics rename
+their gallery. Archived topics keep their gallery and pictures. A deleted topic
+closes its gallery, and deleting the forum switches the source off. The audience
+and layout of a source apply to all of its topic galleries; the refresh button
+imports the topics again and the close button removes the source, hiding its
+galleries until the forum is added again. Topic galleries are listed with their
+forum rather than among the galleries below, and appear on the Gallery page like
+any other gallery. The bot needs **View Channel** and **Read Message History** in
+the forum.
 
 ## Change a room or recover an import
 
@@ -161,8 +184,42 @@ These changes need the matching frontend and backend deployment; publishing this
 
 </audience>
 
-## Open a picture and browse its author
+## Open a picture, its replies and its author
 
 Pictures on Gallery and homepage gallery widgets use the same expanding image viewer. The loaded thumbnail stays visible while the full image loads. Close with the inset button, Escape or a click outside; the viewer returns to its source picture, including the grid picture's angle, scale and smaller corners, and restores keyboard focus. Reduced motion removes the spatial expansion.
 
 Select the author’s avatar or name to open Gallery with an author filter across the galleries available to you. You can select a particular gallery while retaining that filter, change sorting or load further pages. **Show all authors** clears it. Private galleries and hidden images retain their existing access rules. Filtered pagination is bound to the author as well as the viewer, gallery set and sort.
+
+### Replies from Discord
+
+Messages that reply to a gallery picture in its Discord room appear under the
+picture's details as chat bubbles, oldest first: the author's Discord name and
+avatar, the time, and the text with mentions, custom emoji, spoilers, code and links.
+Authors with an Orbiters account link to their public profile. Edits and deletions
+on Discord are reflected, and replies to pictures imported earlier are collected in
+the background. Replies are shown only to people who can see the picture, so a
+members-only gallery's replies stay with its server members. The Discord button next
+to the reply count opens the picture's message; very long threads show the first 200
+replies with a link to the rest on Discord.
+
+<audience include="dev">
+
+Replies live in `GalleryReplies` (one row per Discord reply message, keyed by channel
+and message ID, linked to the picture message by `parentMessageId`). Only replies in
+the picture's own channel to a stored `DiscordImage` message are kept; authors are
+stored by Discord ID and resolved to Orbiters profiles on read. Live listeners handle
+`messageCreate`, `messageUpdate`, `messageDelete` and `messageDeleteBulk`. The
+`gallery.replies.backfill` outbox job pages a channel newest first, five pages of 100
+messages per job, stopping at the channel's oldest stored picture; it runs after each
+completed gallery crawl and once for every active room (marker
+`gallery-replies-backfill-2026-10`). `GET /galleries/images/:placementId/replies`
+applies the same access checks as the picture; feed items carry `replyCount`.
+
+Topic sources live in `GalleryTopicSources` and `GalleryTopics`. Each topic gallery
+is an ordinary gallery whose single `GalleryChannels` row is the thread; creation runs
+under a per-thread advisory lock and adopts an event's existing gallery for the same
+thread. `gallery.topics.sync` imports active, then archived topics (100 per page,
+five pages per job). Event galleries are recorded in `CommunityEventGalleries`; the
+`gallery` event delivery creates them on publication.
+
+</audience>

@@ -74,13 +74,17 @@ All routes are under the API origin. `optional` accepts anonymous callers;
 | `GET`, `POST /avatar-assets/creator/assets` | required | The creator's gallery assets; create one (multipart `metadata` + optional `thumbnail`, `Idempotency-Key` header). |
 | `PUT /avatar-assets/creator/assets/:assetId` | required | Edit an asset. |
 | `PUT /avatar-assets/creator/preferred-store` | required | The creator's default preferred store. |
-| `POST /avatar-assets/creator/assets/:assetId/versions` | required | Create a draft release. |
-| `PUT`, `DELETE /avatar-assets/creator/versions/:versionId` | required | Edit or delete a draft release. |
-| `POST /avatar-assets/creator/versions/:versionId/variants` | required | Upload a variant (multipart `metadata` + `packageFile`). |
-| `DELETE /avatar-assets/creator/variants/:variantId` | required | Delete a variant. |
-| `POST /avatar-assets/creator/versions/:versionId/publish` | required | Body `{ "rightsConfirmed": true, "publishListing": false }`; refused without the rights confirmation or a ready variant. |
-| `POST /avatar-assets/creator/versions/:versionId/withdraw` | required | Take a published release out of the gallery. |
+| `POST /avatar-assets/creator/assets/:assetId/versions` | required | Create a draft release. The version must be higher (semver) than the asset's latest published or withdrawn one. With `"resume": true`, an existing draft of the same version is returned instead of 409. |
+| `PUT`, `DELETE /avatar-assets/creator/assets/:assetId/versions/:versionId` | required | Edit or delete a draft release. A released version keeps its number, title, changelog and scope (409 on a change). |
+| `POST /avatar-assets/creator/assets/:assetId/versions/:versionId/variants` | required | Upload a variant (multipart `metadata` + `packageFile`). |
+| `DELETE /avatar-assets/creator/assets/:assetId/versions/:versionId/variants/:variantId` | required | Delete a variant. |
+| `POST /avatar-assets/creator/assets/:assetId/versions/:versionId/publish` | required | Body `{ "rightsConfirmed": true, "publishListing": false, "variantIds": [ … ] }`: the draft's other variants are deleted first (409 for an unknown id). Refused without the rights confirmation or a ready variant. |
+| `POST /avatar-assets/creator/assets/:assetId/versions/:versionId/withdraw` | required | Take a published release out of the gallery. |
 | `/admin/known-vpm` (`GET`, `POST`, `PUT /:id`, `DELETE /:id`, `POST /:id/refresh`, `PUT /packages/:id`) | admin | Known VPM administration. |
+
+Every creator route checks creator-tools access, and version routes refuse a version of another asset than the one
+in the path. Images uploaded for an asset (thumbnail and pictures) are stored re-encoded, upright, without EXIF, GPS,
+XMP or ICC metadata.
 
 ### Access and purchases
 

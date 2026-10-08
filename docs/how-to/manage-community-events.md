@@ -8,7 +8,7 @@ id: orbiters.community.events
 domain: website
 type: how-to
 owner: orbiters-docs
-lastVerified: 2026-10-02
+lastVerified: 2026-10-08
 ---
 
 # Create and manage community events
@@ -285,6 +285,33 @@ or VRChat group can edit them: **Community → Overview** lists coming events wi
 staff and prizes button, and the event page shows **Edit staff & prizes**. Changes
 to a published event update its Discord announcement. Closed accounts are removed
 from staff lists. Cancelled events can't be edited.
+
+## Event gallery
+
+Turn on **Event gallery** in the editor to collect the event's pictures in a
+gallery of the community behind the event's Discord server:
+
+- **Text room**: pictures posted in an existing room. If one of the community's
+  galleries already collects that room, the event uses it; otherwise a new gallery
+  named after the event is created.
+- **Forum**, **New topic**: Orbiters opens a forum topic named after the event,
+  with a short post linking the event page, and creates its gallery.
+- **Forum**, **Existing topic**: the gallery of a topic you pick. Topics of a
+  [Topic Gallery](17-set-up-gallery.md#topic-galleries) forum reuse that topic's gallery.
+
+Nothing is created while the event is a draft: the gallery (and the new topic) is
+created when you publish, or when you save a published event that had none. It is
+created once; its status appears with the other deliveries under **Event gallery**.
+New galleries are visible to members of the Discord server and import the room or
+topic history; change their audience in **Community → Galleries**. The bot needs
+**View Channel** and **Read Message History**, and **Send Messages** in the forum to
+open a topic.
+
+To show another gallery later, the organizer and the community's managers can use
+**Attach a gallery** on the event page, or **Existing** in the editor's gallery
+section. The small close button detaches it. The event page shows the gallery's
+latest pictures to everyone who can see that gallery; people outside a members-only
+gallery's server see which server to join instead.
 
 ## Create an event
 
