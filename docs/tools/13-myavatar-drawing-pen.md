@@ -8,7 +8,7 @@ id: orbiters.tools.myavatar-drawing-pen
 domain: myavatar
 type: how-to
 owner: orbiters-engineering
-lastVerified: 2026-10-05
+lastVerified: 2026-10-09
 ---
 
 # Add the drawing pen from the My Avatar gallery
@@ -30,13 +30,15 @@ and is held at either wrist.
 
 1. In VRChat, open **Drawing pen > Enable pen**. The pen appears in front of you.
 2. Grab its grip using VRChat's PhysBone interaction. The pen then follows your
-   wrist independently of that grab signal. Squeeze your fist, or put your thumb up
-   with the index down, to draw; relax the squeeze or point the index to stop ink
-   without dropping the pen. Either hand works. Pens added before Orbiters Toolkit
-   0.3.13 draw on the fist only until added again.
+   wrist independently of that grab signal. Squeeze your fist (pull the trigger more
+   than half way), or put your thumb up with the index down, to draw; ease the trigger
+   off past half way or point the index to stop ink at once, without dropping the pen.
+   Either hand works. Pens added before Orbiters Toolkit 0.3.19 stop ink only once the
+   trigger is almost released, and pens added before 0.3.13 draw on the fist only, until
+   added again.
 3. Guests draw while grabbing the pen. Your avatar cannot read their fist gesture,
    so their drawing does not depend on your gesture.
-4. Fully open your hand, or choose **Drop pen**, to leave it fixed in the world. Guests release their normal grab to drop it.
+4. Relax your hand (Neutral or Open), or choose **Drop pen**, to leave it fixed in the world. Guests release their normal grab to drop it.
 5. Use **Clear drawing** to erase the ink while keeping the pen available. Turning
    **Enable pen** off hides the model and erases its stored trail points.
 
@@ -72,7 +74,7 @@ consume expression parameter slots.
 
 The generated prop uses one PhysBone chain, two self-hand contact receivers,
 VRChat parent constraints, three small mesh renderers and one TrailRenderer.
-The visible model is outside the stretchable chain and pivots at the grip, 5 cm behind the ink tip. Owner pickups latch the left or right hand with local-only SDK parameter drivers and synchronize those two hold flags. The pen follows that wrist directly, with its PhysBone disabled during the owner hold. A fully squeezed fist cannot drop it when native PhysBone input ends. Ink starts above 35% fist weight and stops below 20%, avoiding pressure flicker. Fully opening the holding hand or using **Drop pen** releases the latch. Freeze-to-world captures a
+The visible model is outside the stretchable chain and pivots at the grip, 5 cm behind the ink tip. Owner pickups latch the left or right hand with local-only SDK parameter drivers and synchronize those two hold flags. The pen follows that wrist directly, with its PhysBone disabled during the owner hold. A fully squeezed fist cannot drop it when native PhysBone input ends. Ink starts above 50% fist weight and stops below 40%: the narrow band keeps a stroke steady without making the ink wait for a nearly released trigger. Relaxing the holding hand (Neutral or Open) or using **Drop pen** releases the latch. Freeze-to-world captures a
 released pen; the grab base relocates only while the visible pen is frozen, so
 stretching the chain does not stretch the model. The editor installation marker
 implements `IEditorOnly`; uploaded avatars use native components and animation.
