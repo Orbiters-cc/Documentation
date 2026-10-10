@@ -8,7 +8,7 @@ id: orbiters.community.events
 domain: website
 type: how-to
 owner: orbiters-docs
-lastVerified: 2026-10-08
+lastVerified: 2026-10-09
 ---
 
 # Create and manage community events
@@ -423,6 +423,18 @@ Cancellation checks permissions for the remaining actions. If no instance was
 created, instance-management permission is not required; closing an existing
 instance still requires it. Completed cancellation steps do not require renewed
 access to their provider.
+
+### End an event
+
+An event becomes **Ended** by itself once its end time passes. To close it early,
+use **End event** on its card in **My events** or on its event page, once it has
+started. Before the start, cancel it instead.
+
+An ended event is read-only. Invite sign-ups close, waiting invites are withdrawn
+and nothing more is sent to Discord or VRChat: the Discord event, calendar entry and
+announcements stay as they were. The event page, poll responses, staff, prizes and
+gallery stay available, but the event leaves upcoming lists. Ended events cannot be
+cancelled; delete one from its card menu to remove it from Orbiters.
 
 Provider rate limits, permission changes or disconnected accounts can delay or
 block delivery. Orbiters does not claim completion until each action is confirmed.

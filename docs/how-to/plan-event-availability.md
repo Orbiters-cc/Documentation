@@ -8,7 +8,7 @@ id: orbiters.community.event-planning
 domain: website
 type: how-to
 owner: orbiters-docs
-lastVerified: 2026-10-01
+lastVerified: 2026-10-09
 ---
 
 # Find a time, world and movie together
@@ -63,9 +63,13 @@ from another window produce a conflict instead of overwriting the newer response
 ## Compare and confirm
 
 **Group results** refreshes while the page is visible and preserves unsaved edits.
-Darker cells indicate more participants. Select names to compare a subset, inspect
-a cell to see names/copy its time, or download CSV responses. Each event supports
-up to 2,000 participants.
+Darker cells indicate more participants. Select names to compare a subset, select a
+cell to see who is and isn't free and copy its time, or download CSV responses. The
+avatars under each world and movie show who voted for it; select them for the full
+list, each name opening the member's profile. While voting is open, organizers (the
+event's creator and its community's owner and admins) can switch the grid from
+**My times** to **Who's free**, where selecting a cell only inspects it. Each event
+supports up to 2,000 participants.
 
 The organizer chooses the final start, duration, world and movie for each poll.
 A start selected from the heatmap pre-fills the decision form. **Confirm choices &

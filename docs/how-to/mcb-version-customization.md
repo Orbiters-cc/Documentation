@@ -105,6 +105,11 @@ holds the claws and teeth, so it maps to `MiscMatt`.
 - **Fallback materials**: materials for slots an original lacks, such as reduced
   Quest models. Add them to the logic prefab's dependencies.
 
+A model imported without materials (Material Creation Mode: None, as Novabeast is)
+still names its slots: MCB reads them from the FBX file and matches each submesh to the
+file slot with the same triangle count, since Unity orders submeshes its own way and
+two releases of the same base can differ.
+
 Custom renderers missing from the user's avatar are created next to its original
 pieces. Resetting or switching versions restores the original materials and carries
 materials the user changed on custom slots back to the original slots of the same
@@ -235,6 +240,26 @@ A sculpted body carries most of its size in blendshapes: Ultirex's 380 unused sh
 took 448 MB and put it over VRChat's 500 MB uncompressed limit. Without them, it
 uploads at 266 MB (106 MB to download).
 
+## Releases made before MCB
+
+If you sold the custom base before using MCB (a custom FBX inside an avatar project),
+register that release so MCB recognises the avatars built from it. Give each release
+a label, the SHA-256 of every custom model file you distributed, and what the MCB
+versions replace: avatar objects (for example the old contact groups), FX layers and
+parameters, and renderer paths that differ from the original base.
+
+When a buyer opens such an avatar, MCB's gallery shows **Migrate avatar**. One press,
+undoable:
+
+- renderers from the old model use the original base model again (bones remapped,
+  blendshape values kept by name), so MCB versions apply as on any original avatar;
+- the listed objects are removed;
+- the FX controller, expression parameters and menus are copied into
+  `Assets/MCB/migrated/` without the listed layers, parameters and menu controls, and
+  the copies replace the originals on the avatar. The buyer's own files are not edited.
+
+The original base model must be in the project (avatar projects usually include it).
+
 ## Reuse an existing store asset
 
 A custom base version belongs to an Orbiters asset. If a listing already exists
@@ -272,6 +297,14 @@ requests and responses never contain a token.
 | `preview_publish` | Validate and fingerprint an artifact; return its files and a confirmation code. |
 | `confirm_publish` | Publish the unchanged artifact after explicit user approval of the preview. |
 | `status` | Poll the job ID of a pending operation. |
+| `build_logic` | From a reference avatar prefab (its transforms and contacts) and an FX controller, write a logic prefab: each contact keeps its place and follows its bone through a `Target Bones` proxy that a VRCFury Armature Link merges into the avatar's bone (single-source Parent Constraints become proxies too); a Full Controller merges the FX. `pruneAgainst` removes clip bindings that resolve nowhere (run it on extracted copies). |
+| `prepare_custom_model` | Keep the custom FBX renderers whose paths the original base has, without materials and with every shape at 0. |
+| `validate` | Build a hidden clone of the applied avatar with VRCFury and MCB's build steps; report proxies that did not merge into bones, contact parameters missing from the built controllers, unresolved animation paths and performance. |
+| `update_listing` | Owner: turn a listing into a custom base (wizard installation, `custom_base` template), with an optional new name, description and avatar base (`avatarBaseId`, or `avatarBaseName` to find or create one). Backend: `PUT /mcb/custom-bases/:assetId/listing`. |
+| `set_media` | Owner: upload the asset's gallery thumbnail and/or banner from PNG or JPEG files (`thumbnailPath`, `bannerPath`), as the photoshoot panel does. |
+| `set_legacy_releases` | Owner: register releases made before MCB (`label`, `customModelHashes`, `cleanup` with `objects`, `layers`, `parameters`, `rendererMap`). Backend: `PUT /mcb/custom-bases/:assetId/legacy-releases`; `POST /mcb/custom-bases/identify` answers `kind: "legacy"` with the cleanup and the original files. |
+| `find_legacy` / `migrate_legacy` | Recognise and migrate an avatar built from a legacy release, as **Migrate avatar** does. |
+| `set_environment` | Switch between `development` and `production` (`inspect` shows the current one; each keeps its own login). An `Assets/MCB/assets/<asset id>` folder records the environment of its versions and refuses the other one. |
 
 `build` always uses the saved draft, even when an open creator form loaded another
 version meanwhile. Builds follow the protection of the draft's asset. A trusted

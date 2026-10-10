@@ -8,7 +8,7 @@ id: orbiters.community.event-delivery
 domain: website
 type: reference
 owner: orbiters-docs
-lastVerified: 2026-10-02
+lastVerified: 2026-10-09
 ---
 
 # Community event delivery
@@ -28,7 +28,10 @@ only closes voting. Slots store UTC instants generated from IANA timezone rules,
 including repeated hours and overnight ranges.
 
 `GET /community-events/:id/planning` returns signed-in participant results with
-private invite choices separated into the caller's own response. `PUT` and `DELETE`
+private invite choices separated into the caller's own response. Each saved response
+carries the member's ID, name and avatar URL; `responseCount` counts them.
+`canEditDetails` marks the creator and the owner and Community Admins of the event's
+community, who also get the organizer's **Who's free** grid view. `PUT` and `DELETE`
 on `/:id/planning/response` use response revisions to prevent lost updates and
 withdraw/rejoin races. A withdrawn response keeps a revision tombstone while being
 excluded from results. Voting and invite changes commit together after membership
@@ -154,6 +157,29 @@ and [Discord scheduled events API](https://docs.discord.com/developers/resources
 The Discord external-event location field is limited to 100 characters, so long
 instance links go in the description. VRChat calendar update requests omit
 creation-only access fields and disable repeat creation notifications.
+
+### Ended events
+
+`CommunityEvent.status` is a string (`draft`, `planning`, `published`, `ended`,
+`cancelling`, `cancelled`), so `ended` needs no schema change. Each worker tick first
+moves `published` events whose `data.endsAt` has passed and whose lease is free to
+`ended`, clears `nextRunAt`, increments `revision` and withdraws `pending` invite
+sign-ups, in one transaction of up to 50 events. Draft, planning, cancelling and
+cancelled events are never touched, and a second pass changes nothing. The creator
+can also call `POST /community-events/:id/end` with the current revision once a
+published event has started; before the start the API answers 409 and cancellation
+applies instead.
+
+Ended events are read-only: saves, retries, delivery recovery, announcement resends,
+step starts and cancellation answer 409, and the delivery and invite workers only pick
+up published events. Provider records stay as delivered (Discord completes the
+scheduled event at its own end time). Event pages, poll results, staff, prizes and
+the gallery keep working, and `eventVisibility` treats ended events like published
+ones. Upcoming discovery, community pages, the community dashboard and the poll feed
+query `published` or `planning` only, so ended events leave them. Ended events can be
+deleted; pending or unconfirmed receipts no longer block that because nothing more is
+delivered. MCP `get_community_events` reports the status and accepts
+`filter: upcoming | ended | all`.
 
 Cancellation uses the same durable steps. New instances are never created while
 cancelling. Failed operations require explicit retry; uncertain operations require

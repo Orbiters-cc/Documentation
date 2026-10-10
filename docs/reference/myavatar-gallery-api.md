@@ -8,7 +8,7 @@ id: orbiters.reference.myavatar-gallery-api
 domain: myavatar
 type: reference
 owner: orbiters-engineering
-lastVerified: 2026-10-05
+lastVerified: 2026-10-09
 relations: orbiters.tools.myavatar-asset-gallery, orbiters.myavatar.publish-to-gallery, orbiters.operations.known-vpm
 ---
 
@@ -57,6 +57,19 @@ A variant is at most 300 MB. Its `manifest` declares what to install:
 are rejected when the package writes outside `Assets` and `Packages`, is not a readable
 Unity package, or lacks a prefab the manifest names.
 
+<alpha>
+
+Every upload is also held to My Avatar's packager rules (`services/avatarAssets/packageCheck.js`): it is refused (400)
+with source files (`.blend`, `.blend1`, `.spp`, `.psd`, `.psb`, `.max`, `.ma`, `.mb`, `.ztl`, `.kra`, `.xcf`), with
+Poiyomi Pro files (a Poiyomi path with a `Pro` folder or named `Poiyomi Pro`), or without a prefab under `Assets`.
+Prefabs under `Packages` are never offered. When the upload's `metadata` has no `manifest`, the variant gets one
+`default` setup placing the outermost prefab (fewest path segments, then by path) with `attach.mode` `auto`; when it has
+no `dependencies`, each `Packages/<id>/…` folder except `com.unity.*` becomes `{ "id": "<id>", "range": "*" }`.
+`contents` then also records `prefabs` (`guid`, `path`; at most 200) and `warnings` (files under `Packages` that are
+not imported, code).
+
+</alpha>
+
 ## Routes
 
 All routes are under the API origin. `optional` accepts anonymous callers;
@@ -72,11 +85,14 @@ All routes are under the API origin. `optional` accepts anonymous callers;
 | `POST /avatar-assets/:assetId/purchases` | required | Body `{ "provider": "GUMROAD" }`. Returns the store URL and whether the purchase can be recognised automatically; records a pending purchase when it can. |
 | `GET /avatar-assets/:assetId/purchases/status` | required | `none`, `pending`, `redeemed` or `expired`. |
 | `GET`, `POST /avatar-assets/creator/assets` | required | The creator's gallery assets; create one (multipart `metadata` + optional `thumbnail`, `Idempotency-Key` header). |
-| `PUT /avatar-assets/creator/assets/:assetId` | required | Edit an asset. |
+| `PUT /avatar-assets/creator/assets/:assetId` | required | Edit an asset: `type`, `preferredStore`, `priceCents`/`free`/`currency`, `replacePreviews`, multipart `thumbnail` and `previews`. Also `name` (2–120 characters), `shortDescription` (up to 200) and `description` (up to 20,000), each only when sent. |
+| `GET /avatar-assets/creator/assets/:assetId` | required | The website's gallery state of one of the creator's assets: `asset` (`inGallery`, `listed`) and every release, newest first, with its variants, `contents` included. 409 for a type that cannot join the gallery. |
+| `POST /avatar-assets/creator/assets/:assetId/withdraw` | required | Withdraw every published release of the asset: `{ "withdrawn": <count> }`. |
 | `PUT /avatar-assets/creator/preferred-store` | required | The creator's default preferred store. |
 | `POST /avatar-assets/creator/assets/:assetId/versions` | required | Create a draft release. The version must be higher (semver) than the asset's latest published or withdrawn one. With `"resume": true`, an existing draft of the same version is returned instead of 409. |
 | `PUT`, `DELETE /avatar-assets/creator/assets/:assetId/versions/:versionId` | required | Edit or delete a draft release. A released version keeps its number, title, changelog and scope (409 on a change). |
 | `POST /avatar-assets/creator/assets/:assetId/versions/:versionId/variants` | required | Upload a variant (multipart `metadata` + `packageFile`). |
+| `PUT /avatar-assets/creator/assets/:assetId/versions/:versionId/variants/:variantId` | required | Change a draft variant's `label`, `platforms`, `baseScope`, `avatarBaseIds`, `parameterBits`, `dependencies` or `manifest` without a new upload, validated like an upload. A new `manifest` may name the prefabs in `contents.prefabs`; fields left out keep their value. 409 for a published version or a label another variant of the release uses. |
 | `DELETE /avatar-assets/creator/assets/:assetId/versions/:versionId/variants/:variantId` | required | Delete a variant. |
 | `POST /avatar-assets/creator/assets/:assetId/versions/:versionId/publish` | required | Body `{ "rightsConfirmed": true, "publishListing": false, "variantIds": [ … ] }`: the draft's other variants are deleted first (409 for an unknown id). Refused without the rights confirmation or a ready variant. |
 | `POST /avatar-assets/creator/assets/:assetId/versions/:versionId/withdraw` | required | Take a published release out of the gallery. |

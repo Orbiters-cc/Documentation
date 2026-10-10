@@ -8,13 +8,14 @@ id: orbiters.myavatar.publish-to-gallery
 domain: myavatar
 type: how-to
 owner: orbiters-engineering
-lastVerified: 2026-10-07
+lastVerified: 2026-10-09
 relations: orbiters.tools.myavatar-asset-gallery, orbiters.how-to.connect-store-integrations
 ---
 
 # Publish clothes and accessories to the My Avatar gallery
 
-Creators publish clothes and accessories to the My Avatar asset gallery from Unity.
+Creators publish clothes and accessories to the My Avatar asset gallery from Unity, or
+from the asset's settings on the website (see [Publish from the website](#publish-from-the-website)).
 Buyers then add them to their avatar in one click; see
 [Add clothes and accessories from the My Avatar asset gallery](../tools/14-myavatar-asset-gallery.md)
 for what buyers see.
@@ -122,6 +123,16 @@ Uploads are checked again by Orbiters: the package must be a readable Unity pack
 writes only inside `Assets` and `Packages`, and it must contain the prefabs its setups
 declare.
 
+<alpha>
+
+Orbiters also holds every upload, from Unity or the website, to the rules of **Build package**: it refuses a package
+with source files (`.blend`, `.spp`, `.psd`…), with Poiyomi Pro shader files, or without a prefab under `Assets`. Files
+under `Packages` are never imported; an upload that does not declare its dependencies gets one for each package they
+belong to. Orbiters cannot tell from the files alone which shader a material uses: switch Poiyomi Pro and locked
+materials before exporting a package by hand.
+
+</alpha>
+
 ## After publishing
 
 - The asset appears in the gallery for buyers whose platform and base it fits. Your own
@@ -130,6 +141,39 @@ declare.
   your asset's **More info**: each of your published versions has **Withdraw**, which
   asks once more before acting. A withdrawn version leaves the gallery; copies already
   installed keep working.
+
+## Publish from the website
+
+<alpha>
+
+The asset's settings on the website (`/assets/<id>/config`) have a **My Avatar** tab that does what the Unity window
+does, without Unity. It is there for accessories and clothing, and for products, textures and other assets that can
+join the gallery.
+
+1. **Add to the gallery**: choose **Accessory** or **Clothing**. Switch between the two at any time. The tab lists what
+   the gallery still needs: a published public version with a package, a published asset page, and a visible asset.
+2. **New version**: its number (the next one after your latest release is proposed), title, **What changed** and
+   **Who gets it**, as in step 2 above.
+3. **Add a package** to the draft: name it, tick its platforms and avatar bases, then drop or choose the
+   `.unitypackage` (up to 300 MB). It uploads at once.
+4. Open the package's **Settings**. Orbiters proposes one setup placing the outermost prefab of the package,
+   attached automatically, and lists the VPM packages it needs. Add setups, place other prefabs of the package, choose
+   how each attaches (**Automatic**, **Its own setup**, **Merge armature** or **Follow a bone**), adjust the package
+   versions and enter its **Parameter memory**, then **Save settings**. Settings stay open until the version is
+   published.
+5. Confirm that you own the rights to everything the version distributes and choose **Publish**. When the asset page
+   is not published yet, **Also publish the asset page on Orbiters** publishes it along with the version.
+
+The website cannot try a package on an avatar or measure its parameter memory: My Avatar does both in Unity. To try a
+package from the website, publish it as a **Beta** or **Alpha** version first: only you, your testers and staff get it.
+
+**Card** shows the gallery card buyers see. Its name, descriptions, thumbnail and price are the asset page's: **Edit
+name and descriptions** opens the asset editor.
+
+**Withdraw** takes one published version out of the gallery and **Publish again** brings it back. **Remove from the
+gallery** withdraws every published version at once. Copies already installed keep working.
+
+</alpha>
 
 ## Publish with an AI assistant (MCP)
 

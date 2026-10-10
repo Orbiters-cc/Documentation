@@ -8,7 +8,7 @@ id: orbiters.how-to.connect-store-integrations
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-20
+lastVerified: 2026-10-09
 ---
 
 # Connect Store Integrations
@@ -46,6 +46,8 @@ Use one identifiable product and a permitted test purchase when validating setup
   and shop orders, including shop-item direct-link codes.
 - **PayPal**: REST application connection and positive balance-affecting transaction
   history for the Revenues tab.
+- **Booth**: public shop address, items linked by URL, order CSV import and buyer
+  redemption by order number and order date. Booth has no seller API.
 
 ## Connect A Store
 
@@ -144,13 +146,45 @@ API-key storage used by other manual integrations. Orbiters does not present thi
 a generic OAuth button: PayPal's third-party seller onboarding is a separate partner
 capability and is not required for a creator to read their own REST application data.
 
+### Booth
+
+Booth (booth.pm, by pixiv) publishes no seller API, webhooks or license keys, so the
+connection works differently from the other stores:
+
+1. Choose the Booth icon and paste your public shop address, for example
+   `https://yourshop.booth.pm`. Orbiters never asks for your Booth password or cookies.
+2. Add items on the connected Booth card with **Add item**: paste an item link
+   (`https://yourshop.booth.pm/items/1234567` or `https://booth.pm/ja/items/1234567`).
+   A new, unpublished asset is created with the item's name, description, pictures,
+   variations and yen price. To attach an item to an existing asset instead, open the
+   asset's **Stores** tab, choose **Booth** and paste the item link. The draft editor's
+   **Store links** picker also finds a pasted Booth item of your shop. Items of
+   another shop are refused.
+3. On Booth, open **Orders** (注文一覧), choose the **All orders** tab (全ての注文) and
+   download the CSV. The **Sales CSV** (売上管理, at most 31 days per download) works
+   too and adds exact item amounts and variation names.
+4. On the Booth card choose **Import orders CSV** (or **Import Booth CSV** in
+   **Creator > Revenues**). The card then shows the last order date buyers can redeem.
+
+Re-importing is safe: known orders are updated, new ones are added, and an order
+that became **キャンセル** (cancelled) withdraws the access and Discord role it granted.
+Buyer names, addresses and phone numbers in the file are never read or kept, and the
+file itself is not stored. Files up to 10 MB are accepted, including CSVs re-saved by
+Japanese Excel.
+
+Buyers redeem with their order number and order date (see
+[Turn a purchase into Orbiters access](01-redeem-license-key.md)). Orders placed after
+your latest import cannot be redeemed until you import again, so import regularly
+after releases. **Sync** re-reads the linked items' names, pictures and prices.
+
 ## Refresh Revenue History
 
 Open **Creator > Revenues**. Use the provider sync buttons to refresh historical
 sales for Gumroad, Jinxxy, Lemon Squeezy, and PayPal. A manual sync performs a full-history
 reconciliation so older rows gain missing amount and date data; scheduled background
 sync remains incremental. Patreon relies on signed webhooks. Ko-fi combines verified
-webhooks with the optional historical CSV import described above. The graph keeps
+webhooks with the optional historical CSV import described above. Booth revenue comes
+only from imported order CSVs, in JPY; unpaid and cancelled orders count as zero. The graph keeps
 currencies separate, stacks revenue by original provider, and reports legacy sale
 rows whose amount is unknown.
 

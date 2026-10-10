@@ -97,6 +97,14 @@ blurred twice. A custom base published with **Edit asset page** also uses its pa
 banner as MCB banner, unless its MCB banner was uploaded from MCB in Unity or with
 the **MCB banner** tile.
 
+<alpha>
+
+Accessories, clothing, and the products, textures and other assets that can join My Avatar's gallery also have a
+**My Avatar** tab, to publish them to that gallery without Unity: see
+[Publish clothes and accessories to the My Avatar gallery](publish-to-myavatar-gallery.md#publish-from-the-website).
+
+</alpha>
+
 Older links ending in `?tab=showcase` open the **Page** tab at the showcase gallery.
 **Performance** shows the placement and store-click numbers described in
 [Create, publish and measure an asset](24-create-and-measure-assets.md).
