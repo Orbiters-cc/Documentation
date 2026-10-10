@@ -82,11 +82,11 @@ three existing components. The numbered cyan guides follow these actions:
    text shows an empty result state, and clicking **M** starts a fresh search.
 3. Select **My Custom Base (MCB)**. Enter selects the match; Arrow Down focuses it.
    Escape or clicking outside dismisses the picker without adding the component.
-4. The website's single **Install** button turns into **Magic Sync**, with a brief
-   glow and sheen. Click it and **Magic Sync** in the Inspector. Either order
-   works, but both actions are required before the asset appears. If the website
-   is clicked first, it shows **Synced** while waiting for the Inspector. After
-   both clicks, the same website button returns to **Install**.
+4. The Inspector asks to connect an Orbiters account, as the real tool does:
+   **Login with Discord** or **Login with Telegram**. Clicking either connects the
+   preview account (the real tool opens Orbiters in the browser, where the code is
+   checked and **Connect** confirms it). The asset then appears. The website's
+   **Install** button stays the installer throughout.
 5. Select **Apply Ultirex**. The button displays a green progress fill with download,
    avatar-definition, and blendshape stages modeled on the real tool. After loading
    completes, the muscle weight and normal intensity rise together to 100%.
@@ -95,7 +95,7 @@ The final state displays **Installed (v0.5.3)** and ReFit. **Try again** clears 
 walkthrough, returns both appearance values to zero, and retains camera navigation.
 Guides enter and leave with restrained motion. Reduced motion removes the spatial
 transitions and applies the final appearance immediately after loading. On narrow
-screens, the next sync control is brought into view when needed; completion brings
+screens, the login buttons are brought into view when needed; completion brings
 the scene back into view so the result is visible.
 
 The three-key keyboard appears only during step 2. It fades into focus while its
@@ -116,10 +116,10 @@ the fonts' OFL licenses. Narrow screens give the labels and all eight arrows
 separate positions above and below the button; the arrows remain visible down
 to a 320-pixel viewport.
 
-Outside tutorial step 4, **Install** opens the shared `MCBInstallWizard` used by
-`/my-custom-base-old`. Visitors are sent to login. Signed-in users receive the
-real VCC repository, package installation, Unity component, and account-sync
-instructions. The same mounted Dynamic Island grows from the Install button;
+**Install** opens the shared `MCBInstallWizard` used by `/my-custom-base-old`, for
+visitors and signed-in users alike: signing in happens in the tool, so the website
+asks for no login. It gives the real VCC repository, package installation, Unity
+component, and **Login with Discord/Telegram** instructions. The same mounted Dynamic Island grows from the Install button;
 the surrounding labels, arrows, and Unity frame move apart to reserve its space.
 
 On the repository step, **Or add the repo manually** displays the same repository
@@ -132,7 +132,7 @@ reference artwork on both sides: **Manage Project** is circled on the left and
 the **+** beside MCB is circled on the right. These are visual instructions for
 the desktop VCC application; the website does not operate VCC's project controls.
 
-The island's height follows the actual step content, including wrapped text and sync feedback;
+The island's height follows the actual step content, including wrapped text;
 measurements are applied outside ResizeObserver delivery. Browser resizing updates
 the surrounding layout without carrying over the expansion animation.
 Step contents slide horizontally with a blur and fade; the outgoing and incoming
@@ -141,10 +141,7 @@ panel rather than adding a separate vertical animation. Reduced motion removes
 translation and blur. An outgoing panel cannot clear the incoming panel's size observer.
 There is no modal or extra card around the island. Arrow tips remain outside its
 bounds. The expanded installer closes with its close button, Escape, or an
-outside pointer press; explicit dismissal restores focus to Install. Entering
-tutorial step 4 closes the installer and temporarily uses its trigger for the
-preview's website sync action. After both preview sync actions, Install opens
-the real wizard again.
+outside pointer press; explicit dismissal restores focus to Install.
 
 ## ReFit and file workflow illustrations
 
@@ -206,8 +203,8 @@ The `dev` badge, **Edit**, and **Create new version** buttons are absent. The ve
 starts at **0.5.3** and ends at the base node, with a short solid section followed
 by fine dashes.
 
-The guided tutorial is a browser demonstration: its sync and apply controls change only the preview state.
-They do not copy authentication tokens, link an actual Unity project, download a
+The guided tutorial is a browser demonstration: its login and apply controls change only the preview state.
+They do not open a login, link an actual Unity project, download a
 package into Unity, or mutate backend data. The installed/public badges describe
 the demonstration, not the user's real project or package access. The Inspector's
 remaining reference controls, including Logout, save/delete, and ReFit,
@@ -333,11 +330,10 @@ npm run build
 
 Browser checks should include mouse and touch entry of **M**, **C**, **B**, mixed
 physical input, key focus handoff, picker dismissal, partial cable drawing, and the
-non-retracting blurred exit. Check the single website button before, during, and
-after sync, the real installer and its dismissal/focus behavior, the Caveat notes,
+non-retracting blurred exit. Check the login step, the real installer and its dismissal/focus behavior, the Caveat notes,
 and the intermediate intro-to-header transition. Check wall loading, retry, empty
 results, hover/pause, reduced motion, and actual thumbnail links. Also include the entire
-walkthrough in both sync orders, the loading and intermediate appearance states,
+walkthrough with either login button, the loading and intermediate appearance states,
 replay, signed-in/visitor identities,
 orbit, pan, zoom, flythrough, keyboard navigation, orientation buttons, touch
 gestures, narrow-screen overflow, reduced motion, navigation away during loading,
