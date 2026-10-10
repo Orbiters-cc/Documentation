@@ -32,15 +32,16 @@ The tools can call Orbiters to:
 
 ## User Flow
 
-1. Sign in to Orbiters with Discord or Telegram. On `/my-custom-base`, **Install** expands into both login choices in place. After provider sign-in, the page returns directly to the first installation step without replaying the introduction. **Escape** or **Close installer** collapses the choices without starting installation.
-2. Open the compatible asset page or MCB page.
-3. Connect the tool when prompted (see [Connect a Unity tool](#connect-a-unity-tool)).
-4. Choose an asset and version that your account can access.
-5. Install or update through the tool.
+1. Open the compatible asset page or `/my-custom-base`, and press **Install**. The steps open in place, without signing in on the website: add the VRCFury and Orbiters repositories in Creator Companion, install My Custom Base in your avatar project, then add its component to the avatar root. **Escape** or **Close installer** closes them.
+2. Sign in inside the tool with **Login with Discord** or **Login with Telegram** (see [Connect a Unity tool](#connect-a-unity-tool)).
+3. Choose an asset and version that your account can access. A custom base appears under **Available Custom Bases** when you own it, hold a license or a Discord role for it, or claimed it for free.
+4. Install or update through the tool (**Apply** on the version).
+
+On a custom base's asset page, **Install** shows for everyone who can use it, including its creator. When the creator made it claimable, a signed-in member sees **Claim and install**: it adds a free license to their account, then opens the same steps.
 
 ## Connect a Unity tool
 
-Unity tools sign in in one of two ways:
+Unity tools sign in from the tool itself:
 
 - **Login with Discord** or **Login with Telegram** in the tool opens Orbiters in
   your browser. Sign in if needed, check that the four-character code matches the
@@ -49,13 +50,11 @@ Unity tools sign in in one of two ways:
   If it expired or was already used, click Login again in Unity. If Orbiters
   could not be reached, **Try again** rechecks the same link; if your session
   ended, the page asks you to sign in again.
-- **Magic Sync** on the website copies an `orbit-…` token to your clipboard;
-  **Magic Sync** in the tool reads it.
+- The website no longer prepares **Magic Sync** tokens. If your tool only offers
+  Magic Sync, update it to a version with Login.
 
-A credential is only released to the tool that holds that login's secret or the
-copied token. Being on the same network or IP address as your browser is not
-enough: older tool versions that waited for a token without either of these
-keep waiting. Use Login or Magic Sync instead.
+A credential is only released to the tool that holds that login's secret.
+Being on the same network or IP address as your browser is not enough.
 
 <alpha>
 

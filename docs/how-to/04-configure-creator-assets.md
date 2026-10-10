@@ -51,6 +51,17 @@ Public scope includes public releases. Beta adds beta releases. Alpha includes a
 
 If a purchase is recognized but access still looks wrong, investigate the product mapping and scope before asking the buyer to purchase again. [Connect store integrations](/documentation/orbiters.how-to.connect-store-integrations) explains where those links come from.
 
+## Let anyone claim it for free
+
+**Configuration → Access → Free claims** lets anyone signed in take a free license from the asset page. For a custom
+base, its **Install** button becomes **Claim and install**: it adds the license (source *Claim*) and opens the
+installation steps. A claim is a regular license: MCB lists the asset, downloads work, and the asset's Discord role is
+granted like after a purchase.
+
+If the asset has a price on a connected store (or on Orbiters), the switch still works, but a warning names those
+stores: buyers there pay for what others can now take for free. Turning claims off stops new claims; licenses already
+claimed stay. A license you or a store withdrew (a refund, a revoked key) is not revived by claiming.
+
 <beta>
 Use **Configuration → Access → Discord role access** for scoped, reversible rules
 per Public/Beta/Alpha scope. See [Configure Discord access to an asset](discord-asset-access.md).
