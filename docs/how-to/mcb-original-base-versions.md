@@ -130,6 +130,12 @@ releases sharing one unchanged FBX remain distinct. Download folders, version-li
 caches and persisted applied-version state also retain this identity. Two avatars
 in one project can therefore use different originals of the same custom release.
 
+A creator's local build holds every selected original. A saved version exported from
+it (**Save** on the version row) installs offline for each of those originals: MCB
+reads the matching original's files from that folder instead of downloading them
+again. A saved version exported from a user's download holds only that user's
+original.
+
 <audience include="dev">
 
 ## Delivery and validation

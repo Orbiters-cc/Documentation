@@ -8,7 +8,7 @@ id: orbiters.how-to.mcb-and-unity-tools
 domain: mcb
 type: how-to
 owner: mcb-maintainers
-lastVerified: 2026-09-28
+lastVerified: 2026-10-11
 ---
 
 # MCB and Unity Tools
@@ -171,6 +171,21 @@ Creators configure avatar base data, version metadata, banners, and package file
 For linked Blender projects, see [Sync avatar edits from Blender](mcb-blender-sync.md) for connection states, exports, and native mesh previews.
 
 </alpha>
+
+## Download Problems
+
+MCB keeps downloaded versions in `Assets/MCB/assets/<asset>/versions/`. Unity can only use file paths up to 259
+characters on Windows, whatever the system's long-path setting. Since MCB 1.12.7, version folders and the files MCB
+generates use short names, so a version fits in ordinary project folders. Before, a download into a project at a path
+of about 40 characters (such as `D:\VRChat Stuff\Unity Projects\Ultinova`) could fail with **Extraction failed: Could
+not find a part of the path**.
+
+- If a project sits so deep that a version still does not fit, MCB says so before downloading anything, and tells how
+  many characters shorter the project's folder path must be. Move the project to a shorter folder, such as
+  `D:\Unity\<project>`, and download again.
+- After updating to MCB 1.12.7, a version downloaded with an earlier MCB is downloaded again the first time it is
+  applied (an avatar that already uses it offers **Download and Update** to the same version once), and saved versions
+  exported with an earlier MCB are not recognised: export them again from the new download.
 
 ## Connection Problems
 
