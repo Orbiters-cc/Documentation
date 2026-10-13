@@ -70,7 +70,7 @@ wait until the next day or month. A cap of 0 allows only free models (OpenRouter
 from Hermes' own cost estimates on the Pi, not from your Anthropic or DeepSeek billing, so treat it as an estimate.
 **Chat and planning per month** is a separate budget Scout respects for its own work.
 
-When Scout says it will look into something, it queues the task right away. Background workers only see your owner
+Workers may queue one follow-up question per task, and at most 12 tasks per worker wait at once; the rest wait until there is room. When Scout says it will look into something, it queues the task right away. Background workers only see your owner
 brief and public web pages, never your documents, CV or Orbiters data, because free models may log prompts.
 
 ## What Scout can read in Orbiters
