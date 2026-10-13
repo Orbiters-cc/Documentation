@@ -123,7 +123,10 @@ connection or a supported historical-sales listing API. For older history, expor
 the payment-history CSV from Ko-fi's **Payments & Orders** area, then open **Creator
 > Revenues** and choose **Import Ko-fi CSV**. Orbiters reconciles matching CSV and
 webhook transactions instead of counting both, skips failed or pending rows, and
-does not retain the uploaded CSV. Imports are limited to 5 MB. Orbiters does not
+does not retain the uploaded CSV. Imports are limited to 5 MB. A membership known only
+from a CSV gives no supporter tier or Discord role: a member's CSV history counts once
+Ko-fi's webhook has reported one of their payments, so the import summary only says
+how many memberships wait for that and which tier names have no supporter tier. Orbiters does not
 send creator or customer data to third-party Ko-fi scraping or cache services.
 The current Ko-fi `Transaction_All.csv` export is recognized through its
 `DateTime (UTC)`, `Received`, `Currency`, `TransactionType`, `TransactionId`, and
@@ -153,21 +156,31 @@ connection works differently from the other stores:
 
 1. Choose the Booth icon and paste your public shop address, for example
    `https://yourshop.booth.pm`. Orbiters never asks for your Booth password or cookies.
-2. Add items on the connected Booth card with **Add item**: paste an item link
+2. Prove the shop is yours: the Booth card shows a code such as `ORB-7KQ2M9XP`. Paste it
+   anywhere in the description of one of your Booth items, paste that item's link next to
+   the code and choose **Verify**. Orbiters reads the item's public page, checks that it
+   belongs to the connected shop and contains the code, then marks the shop **Verified
+   shop**. You can remove the code from the description afterwards. Until the shop is
+   verified, adding items, importing orders and buyer redemptions are refused and the
+   shop is not shown on your profile; changing the shop address needs a new
+   verification.
+3. Add items on the connected Booth card with **Add item**: paste an item link
    (`https://yourshop.booth.pm/items/1234567` or `https://booth.pm/ja/items/1234567`).
    A new, unpublished asset is created with the item's name, description, pictures,
    variations and yen price. To attach an item to an existing asset instead, open the
    asset's **Stores** tab, choose **Booth** and paste the item link. The draft editor's
    **Store links** picker also finds a pasted Booth item of your shop. Items of
-   another shop are refused.
-3. On Booth, open **Orders** (注文一覧), choose the **All orders** tab (全ての注文) and
+   another shop and age-restricted (R-18) items are refused.
+4. On Booth, open **Orders** (注文一覧), choose the **All orders** tab (全ての注文) and
    download the CSV. The **Sales CSV** (売上管理, at most 31 days per download) works
    too and adds exact item amounts and variation names.
-4. On the Booth card choose **Import orders CSV** (or **Import Booth CSV** in
+5. On the Booth card choose **Import orders CSV** (or **Import Booth CSV** in
    **Creator > Revenues**). The card then shows the last order date buyers can redeem.
 
 Re-importing is safe: known orders are updated, new ones are added, and an order
-that became **キャンセル** (cancelled) withdraws the access and Discord role it granted.
+that became **キャンセル** (cancelled) withdraws the access and Discord role it granted,
+unless another paid order of the same buyer still grants that asset. Cancelled and
+unpaid orders never count in revenue.
 Buyer names, addresses and phone numbers in the file are never read or kept, and the
 file itself is not stored. Files up to 10 MB are accepted, including CSVs re-saved by
 Japanese Excel.
@@ -175,7 +188,13 @@ Japanese Excel.
 Buyers redeem with their order number and order date (see
 [Turn a purchase into Orbiters access](01-redeem-license-key.md)). Orders placed after
 your latest import cannot be redeemed until you import again, so import regularly
-after releases. **Sync** re-reads the linked items' names, pictures and prices.
+after releases. **Sync** re-reads the names, pictures and prices of the six linked
+items read longest ago (the hourly background sync keeps the others current).
+
+**Orders** on the Booth card looks up an order number: its date, status, items and the
+Orbiters account that redeemed it. If the wrong account took a buyer's order,
+**Release** (confirm it once more) withdraws that account's Booth access so the buyer
+can redeem the order.
 
 ## Refresh Revenue History
 

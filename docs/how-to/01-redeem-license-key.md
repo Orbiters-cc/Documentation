@@ -36,11 +36,13 @@ Booth (booth.pm) sends no license key. Use the order instead:
    sells on Orbiters is added.
 
 The creator imports their Booth orders by hand, so a purchase made after their last
-import cannot be redeemed yet; the result names the last imported day when you
-redeem from the asset page. An order belongs to the first Orbiters account that
-redeems it, an unpaid order waits until Booth shows it as paid, and a cancelled order
-is refused. Five order number and date pairs that match no imported order lock
-Booth redemption on your account for an hour.
+import cannot be redeemed yet. An order belongs to the first Orbiters account that
+redeems it (the creator can release it if another account took yours), an unpaid
+order waits until Booth shows it as paid, and a cancelled order is refused. When an
+order holds items of several shops, the items that can be added are added and the
+others are listed with the reason. Five order number and date pairs that match no
+imported order lock Booth redemption on your account for an hour (twenty for one
+network).
 
 ## Know what success gives you
 
@@ -51,7 +53,7 @@ The asset appears as owned. Public versions become available; beta and alpha ver
 | Creator selection requested | Choose the creator who sold the item |
 | Key not resolved | Check the copied key, seller and supported store |
 | Booth order not found | Check the order number and Japan-time date, or wait for the creator's next import |
-| Booth order already redeemed | The order is bound to another Orbiters account; contact the creator |
+| Booth order already redeemed | The order is bound to another Orbiters account; ask the creator to release it |
 | Asset unlocked, Discord role missing | Check your Discord connection and server membership |
 | A beta version remains locked | Check your granted scope |
 

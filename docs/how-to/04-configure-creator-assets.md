@@ -53,14 +53,17 @@ If a purchase is recognized but access still looks wrong, investigate the produc
 
 ## Let anyone claim it for free
 
-**Configuration → Access → Free claims** lets anyone signed in take a free license from the asset page. For a custom
-base, its **Install** button becomes **Claim and install**: it adds the license (source *Claim*) and opens the
+**Configuration → Access → Free claims** (custom bases only) lets anyone signed in take a free license from the
+asset page. Its **Install** button becomes **Claim and install**: it adds the license (source *Claim*) and opens the
 installation steps. A claim is a regular license: MCB lists the asset, downloads work, and the asset's Discord role is
-granted like after a purchase.
+granted like after a purchase. When other assets give access to holders of that Discord role, a warning names them:
+claiming this one unlocks them too. A listing hidden by moderation can't be claimed.
 
 If the asset has a price on a connected store (or on Orbiters), the switch still works, but a warning names those
 stores: buyers there pay for what others can now take for free. Turning claims off stops new claims; licenses already
-claimed stay. A license you or a store withdrew (a refund, a revoked key) is not revived by claiming.
+claimed stay. A license you or a store withdrew (a refund, a revoked key, or removing the person from **Public** under
+**People with early access**) is not revived by claiming. Removing someone from Alpha or Beta keeps their purchased or
+claimed license and moves it back to Public.
 
 <beta>
 Use **Configuration → Access → Discord role access** for scoped, reversible rules
