@@ -61,7 +61,7 @@ are never replayed. Your notification settings in Orbiters still decide which no
 - **Chat** answers you on Discord and Telegram.
 - **Planning** queues research for the workers every few hours, folds their findings into Scout's idea ledger and
   writes the daily digest.
-- **Background research** runs that queue around the clock, one to three tasks at a time, on cheap models. List up to
+- **Background research** runs that queue around the clock on cheap models. Choose up to 16 workers at once; the Pi runs as many as its memory holds (about 300 MB each, so 8 on a 4 GB Pi) and shows that limit under the slider. List up to
   three models in order of preference (for example Claude Haiku, DeepSeek V4.1 Flash, then a free OpenRouter model).
 
 Each provider gets a monthly cap for background work. The Pi spreads the cap evenly over the days left in the month:
@@ -70,8 +70,10 @@ wait until the next day or month. A cap of 0 allows only free models (OpenRouter
 from Hermes' own cost estimates on the Pi, not from your Anthropic or DeepSeek billing, so treat it as an estimate.
 **Chat and planning per month** is a separate budget Scout respects for its own work.
 
-Workers may queue one follow-up question per task, and at most 12 tasks per worker wait at once; the rest wait until there is room. When Scout says it will look into something, it queues the task right away. Background workers only see your owner
+When the queue runs dry between planner runs, a worker queues the next questions on the cheap model (at most every 15 minutes). Workers may also queue one follow-up question per task, and at most 12 tasks per worker wait at once; the rest wait until there is room. When Scout says it will look into something, it queues the task right away. Background workers only see your owner
 brief and public web pages, never your documents, CV or Orbiters data, because free models may log prompts.
+
+Background results are stored with each task on the Pi; the planner folds them into Scout's idea ledger every few hours and the digest reports them. Scout's instructions are fixed when a conversation starts, so after changing models or enabling background work, send `/new` to Scout to start a fresh conversation that knows about it. Saving the brief, budget or rhythm never restarts Scout; changing keys or models does.
 
 ## What Scout can read in Orbiters
 
