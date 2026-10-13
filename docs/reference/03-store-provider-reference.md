@@ -48,13 +48,22 @@ for a Booth password or session cookie and never reads the seller management sit
 
 - **Connection**: the public shop address, `https://<shop>.booth.pm`. The subdomain is
   the shop identity; items of other shops are refused.
+- **Verification**: the integration keeps a code (`metadata.boothVerification`). The
+  creator puts it in the description of any item of the shop and sends the item link
+  to `POST /creator/integrations/stores/:id/booth-verification`; Orbiters re-reads the
+  item and records the verified shop. Item import and linking, draft attach, order
+  CSV import, order lookup and release, redemptions and the profile link all require
+  the connected shop to be the verified one.
 - **Items**: `https://<shop>.booth.pm/items/<id>`, `https://booth.pm/<lang>/items/<id>`
   or the bare item id. Orbiters reads the public `https://booth.pm/ja/items/<id>.json`
   for name, description, pictures, variations and the lowest purchasable yen price
-  (JPY has no minor unit). Reads go through one queue (one request every 1.5 s), a
-  10-minute cache and a 10-second timeout; a background sync skips items read in the
-  last day, a manual **Sync** reads every linked item again. Booth cannot list a
-  shop, so items are added one by one.
+  (JPY has no minor unit). Reads go through two queues, one for creators' requests
+  and one for background syncs (one request every 1.5 s), a 10-minute cache and a
+  10-second timeout. A Booth 429 pauses every Booth read until its Retry-After ends
+  (at most one minute is waited; longer pauses fail at once). A background sync skips
+  items read in the last day; a manual **Sync** (6 per 10 minutes) re-reads the six
+  items read longest ago. Redirected item pages (such as R-18 items) are refused, not
+  cached as missing. Booth cannot list a shop, so items are added one by one.
 - **Sales**: the creator uploads a Booth CSV. Both downloads are recognized: the
   Orders CSV (宛名印刷用, one row per order, items in the
   `商品ID / 数量 / 商品名` cell, one line per item; also the unshipped-orders variant

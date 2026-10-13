@@ -179,7 +179,9 @@ ones. Upcoming discovery, community pages, the community dashboard and the poll 
 query `published` or `planning` only, so ended events leave them. Ended events can be
 deleted; pending or unconfirmed receipts no longer block that because nothing more is
 delivered. MCP `get_community_events` reports the status and accepts
-`filter: upcoming | ended | all`.
+`filter: upcoming | ended | cancelled | all`. Upcoming, ended and cancelled split every
+event: drafts and open polls stay upcoming, and a published event past its end time
+counts as ended before the worker moves it.
 
 Cancellation uses the same durable steps. New instances are never created while
 cancelling. Failed operations require explicit retry; uncertain operations require

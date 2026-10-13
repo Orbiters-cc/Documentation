@@ -30,7 +30,8 @@ The button changes to **Following** at once. Hover or focus it to see
 and you can follow up to 2,000 members.
 
 On a profile, select **followers** or **following** under the name to open
-both lists. The switch at the top of the window moves between them.
+both lists. The switch at the top of the window moves between them. The counts
+are public; the lists open for signed-in members.
 
 ## What followers receive
 
@@ -61,12 +62,15 @@ hidden. Visitors who are not signed in see the usual homepage.
 - Follows live in `UserFollows` (one row per pair, unique index
   `UserFollows_pair_key`). `GET/PUT/DELETE /users/:id/follow` returns
   `{ followers, following, isFollowing, canFollow }`;
-  `GET /users/:id/followers|following?offset=` pages 24 members.
+  `GET /users/:id/followers|following?offset=` (signed in) pages 24 members as
+  `{ id, username, avatarUrl, profileUrl }`; counts and lists leave out accounts
+  restricted by moderation. Following is capped at 2,000 under the follower's row lock.
 - Publishing writes a `FollowAnnouncements` row (unique per `kind` and
   `targetId`) and queues a `follow.announce` outbox job in the same transaction.
   The worker re-checks visibility, writes the notifications with category
   `following`, skips members already notified about the same page, then sends
-  web push.
+  web push (10 at a time, each send bounded by a timeout, the fan-out stopping new
+  sends after two minutes). An author's announcements are capped at 3 per hour.
 - `GET /galleries/images/following` returns the followed members' pictures;
   matches use the picture's Orbiters author and the author's Discord ID.
 - Account export includes `UserFollow` (both directions) and
