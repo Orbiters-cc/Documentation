@@ -34,8 +34,17 @@ orbiters.cc; the Pi picks up changes within a minute.
      bot answers only one program at a time, so stop any other tool that used the same bot.
 3. Within a minute the Scout card shows **Gateway running**. Send Scout a message to check.
 
-The daily digest goes to Telegram when it is set up, otherwise to the Discord channel you entered, otherwise to
-your Discord direct messages (after you have written to Scout once).
+Pick your **Main channel** (Telegram or Discord) in **Me → Scout → Reach and rhythm**. Scout writes there first, and
+the daily digest goes there. If the main channel is not set up, Scout uses the other one. On Discord, digests go to the
+channel you entered, otherwise to your direct messages (after you have written to Scout once).
+
+## Get Orbiters notifications on your main channel
+
+Turn on **Orbiters notifications on your main channel** and choose the categories to relay (payments and
+commissions, comments, boards, moderation, Orbiters updates and so on). Within a minute of a new notification in the
+bell, Scout's bot sends its title, text and link to your main channel. No AI model is involved, so it costs nothing.
+Only unread notifications from the last 24 hours are relayed, and notifications that arrived before you paired Scout
+are never replayed. Your notification settings in Orbiters still decide which notifications exist at all.
 
 ## Tell Scout about you
 

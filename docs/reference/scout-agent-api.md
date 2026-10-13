@@ -21,7 +21,7 @@ calls `/mcp` with the same token. Every call acts for the member who paired Scou
 
 | Scope | Grants |
 | --- | --- |
-| `agent-config:read` | `GET /config`, `POST /status`, `POST /activity`, `GET /documents`, `GET /documents/:id`. |
+| `agent-config:read` | `GET /config`, `GET /notifications`, `POST /status`, `POST /activity`, `GET /documents`, `GET /documents/:id`. |
 | `secrets:read` | `POST /secrets` for the keys whose consumers include `scout` (model keys, Discord and Telegram bot tokens). |
 | `sponsor:read` | `/mcp` with the AI app tools, run as the sponsor with the `read` scope only. |
 
@@ -33,6 +33,7 @@ Scout tokens issued before `sponsor:read` existed get it the next time Scout is 
 | --- | --- |
 | `GET /config` | `{ config, keys }`: the Me → Scout settings and which Scout keys are saved. |
 | `POST /secrets` | `{ names }` returns `{ NAME: value }` for saved keys Scout may receive. |
+| `GET /notifications?after=<id>` | `{ cursor, notifications }`: unread bell notifications after `after` from the last 24 hours, in the categories chosen in Me → Scout, oldest first, at most 20 per call (`id`, `category`, `title`, `body` up to 600 characters, absolute `url`, `createdAt`). Without `after`, or when relaying is off, it returns no notifications and the current cursor. Keep `cursor` for the next call. |
 | `POST /status` | `{ gateway, hermesVersion, appliedConfig, error }`; `gateway` is `running`, `stopped` or `not installed`. |
 | `POST /activity` | Summary shown in Me → Scout → Activity: `busy`, `lastActivityAt`, `sessions`, `subagents`, `recentTools`, `jobs`, `spend` (with `byRole`: chat, planning, background) and `background` (`state` `running`, `paused` or `off`, `reason`, `model`, `workers`, status `counts`, task titles for `running`, `queued` and `done`, and per-provider `providers` pacing: `state`, `monthUsd`, `todayUsd`, `capUsd`, `allowanceTodayUsd`). Times are Unix seconds. Lists are capped (10 sessions, 10 subagents, 20 tools, 20 jobs, 3 running, 6 queued, 8 done tasks) and texts truncated. Message contents are never sent. |
 | `GET /documents` | Document list with `sha256`, so the Pi fetches only changed files. |
