@@ -26,7 +26,7 @@ orbiters.cc; the Pi picks up changes within a minute.
 
 ## Give Scout a model and a way to reach you
 
-1. In **Me → Agents & keys**, save the key of the main model (Anthropic, DeepSeek or OpenRouter).
+1. In **Me → Agents & keys**, save the key of each provider you use (Anthropic, DeepSeek, OpenRouter).
 2. Choose at least one messaging app:
    - **Discord:** create a bot in the Discord developer portal, turn on **Message Content Intent**, invite it to a
      private server you are in, save its token, and enter your Discord user ID in **Me → Scout**.
@@ -43,7 +43,26 @@ your Discord direct messages (after you have written to Scout once).
 - **Watch list:** public accounts and pages to follow.
 - **Documents:** your CV, skills sheets or notes (PDF, Markdown or text, up to 4 MB each). Re-upload a file with
   the same name to replace it.
-- **Rhythm and budget:** digest time, how often Scout may interrupt you, and the monthly API budget it should respect.
+- **Reach and rhythm:** digest time and how often Scout may interrupt you or ask questions.
+
+## Choose models and pace background research
+
+**Me → Scout → Models and background work** sets one model per job:
+
+- **Chat** answers you on Discord and Telegram.
+- **Planning** queues research for the workers every few hours, folds their findings into Scout's idea ledger and
+  writes the daily digest.
+- **Background research** runs that queue around the clock, one to three tasks at a time, on cheap models. List up to
+  three models in order of preference (for example Claude Haiku, DeepSeek V4.1 Flash, then a free OpenRouter model).
+
+Each provider gets a monthly cap for background work. The Pi spreads the cap evenly over the days left in the month:
+once a provider has used today's share, workers move to the next model in the list, and when none is left, queued tasks
+wait until the next day or month. A cap of 0 allows only free models (OpenRouter ids ending in `:free`). Spend comes
+from Hermes' own cost estimates on the Pi, not from your Anthropic or DeepSeek billing, so treat it as an estimate.
+**Chat and planning per month** is a separate budget Scout respects for its own work.
+
+When Scout says it will look into something, it queues the task right away. Background workers only see your owner
+brief and public web pages, never your documents, CV or Orbiters data, because free models may log prompts.
 
 ## What Scout can read in Orbiters
 
@@ -54,6 +73,7 @@ at once.
 
 ## Watch what it is doing
 
-The **Activity** section shows whether Scout is working, its recent conversations, subagents, the tools it used,
-scheduled jobs and this month's API spend against your budget. Message contents stay on the Pi. "No report from your
+The **Activity** section shows whether Scout is working, its chat and planning spend against that budget, the
+background research board (busy workers, the running and queued tasks, recent results and each provider's spend
+against its cap), recent conversations, subagents, the tools it used and scheduled jobs. Message contents stay on the Pi. "No report from your
 Pi" means the Pi has not checked in for three minutes.

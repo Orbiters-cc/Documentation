@@ -34,7 +34,7 @@ Scout tokens issued before `sponsor:read` existed get it the next time Scout is 
 | `GET /config` | `{ config, keys }`: the Me → Scout settings and which Scout keys are saved. |
 | `POST /secrets` | `{ names }` returns `{ NAME: value }` for saved keys Scout may receive. |
 | `POST /status` | `{ gateway, hermesVersion, appliedConfig, error }`; `gateway` is `running`, `stopped` or `not installed`. |
-| `POST /activity` | Summary shown in Me → Scout → Activity: `busy`, `lastActivityAt`, `sessions`, `subagents`, `recentTools`, `jobs`, `spend`. Times are Unix seconds. Lists are capped (10 sessions, 10 subagents, 20 tools, 20 jobs) and texts truncated. Message contents are never sent. |
+| `POST /activity` | Summary shown in Me → Scout → Activity: `busy`, `lastActivityAt`, `sessions`, `subagents`, `recentTools`, `jobs`, `spend` (with `byRole`: chat, planning, background) and `background` (`state` `running`, `paused` or `off`, `reason`, `model`, `workers`, status `counts`, task titles for `running`, `queued` and `done`, and per-provider `providers` pacing: `state`, `monthUsd`, `todayUsd`, `capUsd`, `allowanceTodayUsd`). Times are Unix seconds. Lists are capped (10 sessions, 10 subagents, 20 tools, 20 jobs, 3 running, 6 queued, 8 done tasks) and texts truncated. Message contents are never sent. |
 | `GET /documents` | Document list with `sha256`, so the Pi fetches only changed files. |
 | `GET /documents/:id` | The file's bytes, with its `Content-Type`. |
 
