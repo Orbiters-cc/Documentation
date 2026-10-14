@@ -8,21 +8,23 @@ id: orbiters.how-to.me-job-search-worker
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-10-12
+lastVerified: 2026-10-14
 relations: orbiters.reference.job-search-worker-api, orbiters.decision.personal-agents-on-member-hardware
 ---
 
 # Run your job search worker on a Raspberry Pi
 
-The **Me** workspace keeps your job search in Orbiters: offers, lists, the Priority Quest, research queues,
-collection runs and the keys your agents use. Orbiters never visits job sites itself. A worker on your own
-Raspberry Pi takes the queued work, runs the lookups and sends the results back.
+The **Orb** workspace ([orbiters.cc/orb](https://orbiters.cc/orb), formerly Me) keeps your job search in
+Orbiters: offers, lists, the Priority Quest, research queues, collection runs and the keys your agents use.
+Orbiters never visits job sites itself. A worker on your own Raspberry Pi takes the queued work, runs the lookups
+and sends the results back. The same workspace hosts Orb, your personal assistant; see
+[Set up Orb, your personal business assistant](/documentation/orbiters.how-to.me-scout).
 
-Until a worker is paired, the Me page shows **Worker offline** and queued research waits.
+Until a worker is paired, the Orb page shows **Worker offline** and queued research waits.
 
 ## Before you start
 
-- The `me-workspace` feature is enabled for your account.
+- The `orb-workspace` feature (formerly `me-workspace`) is enabled for your account.
 - A Raspberry Pi 4 or newer with Raspberry Pi OS Bookworm (64-bit), 2 GB of free memory and SSH access.
 - A copy of `agents/job-worker` from the Orbiters repository on that Pi.
 
@@ -46,7 +48,7 @@ Run the same command again to update the worker. Updating keeps the pairing and 
 
 ## Pair it with your account
 
-1. In Orbiters, open **Me → Agents & keys** and choose **Pair** on **Job search worker**.
+1. In Orbiters, open **Orb → Agents & keys** and choose **Pair** on **Job search worker**.
 2. Copy the token. Orbiters shows it once.
 3. On the Pi, run `sudo findings-worker-pair`, keep the suggested API address and paste the token.
 
@@ -58,7 +60,7 @@ root and the worker.
 
 ## Check that it works
 
-- The Me page header shows **Worker online** within half a minute.
+- The Orb page header shows **Worker online** within half a minute.
 - **Settings → Home & commute → Find address** returns matching addresses.
 - On the Pi, `journalctl -u findings-worker -f` lists each task as it runs.
 
@@ -73,7 +75,7 @@ Keys live in Orbiters and are released only to the paired worker when a task nee
 
 ## Stop or remove the worker
 
-- Choose **Unpair** in **Me → Agents & keys** to revoke the token immediately. The worker stops getting work
+- Choose **Unpair** in **Orb → Agents & keys** to revoke the token immediately. The worker stops getting work
   at its next request.
 - On the Pi, `sudo systemctl disable --now findings-worker` stops it locally.
 

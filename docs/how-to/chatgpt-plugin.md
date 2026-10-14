@@ -75,7 +75,8 @@ site-wide or let it act as other members.
 
 Testers also get polls with a best-time suggestion, catalog audits and performance,
 commission updates, Sonas, sticker quotes, social posts, community roles, boards
-and articles.
+and articles, and read-only stats, roles, channels, messages, announcements and
+activity for the Discord servers you manage.
 
 Some answers appear as interactive cards (events with live delivery status, the
 commission inbox, sticker comparisons, creator performance).
