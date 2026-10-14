@@ -127,7 +127,9 @@ A lane whose tasks fail with rate-limit errors rests for 15 minutes.
 Paid providers (Anthropic, DeepSeek, OpenRouter) each get a monthly cap for background work. The Pi spreads the cap
 evenly over the days left in the month: once a provider has used today's share, tasks go to the other models in the list,
 and when none is left, queued tasks wait until the next day or month. A cap of 0 allows only free models. To run a paced provider past
-today's share, unlock it from the research board for 2, 6 or 12 hours; the monthly cap still applies. Spend comes from
+today's share, unlock it from the research board for 2, 6 or 12 hours; the monthly cap still applies. To stop using a
+model for a while, press its pause button in the list: it takes effect at once, without saving, and the Pi gives it no
+new tasks (running ones finish) until you resume it. Spend comes from
 Hermes' own cost estimates on the Pi, not from your provider billing, so treat it as an estimate. **Chat and planning
 per month** is a separate budget Orb respects for its own work.
 
@@ -153,7 +155,9 @@ Discord ("dig into BOOTH demand for muscular bases this afternoon"); it starts t
 A project runs in rounds on its own task board on the Pi. A lead step on the planning model splits the area into
 questions, background workers research them on the cheap models, then a report on the planning model sums up what is
 new (with links), the ideas with a value range and confidence, the open questions, and queues the next round's
-questions. Each report reaches your main channel and appears under the project. When the time is up, or you press
+questions. Each report reaches your main channel and appears in **Orb → Reports**: every project is a card there, and
+a card opens all its reports, with arrows (or ← and →) to move between them and buttons that copy one report or all of
+them as Markdown, ready to paste into another AI. When the time is up, or you press
 **Stop**, open questions are dropped and a final report follows if anything new was found. Up to three projects run
 at once, and they share the workers and the background budget with the 24/7 research.
 
@@ -186,5 +190,7 @@ Pi" means the Pi has not checked in for three minutes.
 
 The research board shows each provider's spend against its cap and the tasks from the 24/7 queue and from research
 projects. A task appears in **Up next**, moves to **Running now** when a worker takes it and stacks in **Recently
-done**, within seconds. Project tasks are tagged with the project title. If the board stops moving, check
+done**, within seconds. Project tasks are tagged with the project title. Click a task to open it: the window shows the
+question, the worker's progress live (its reasoning, each tool call and what it returned), then the result and its
+sources. The Pi sends a task's content only while its window is open. If the board stops moving, check
 `journalctl -u orb-board` on the Pi.
