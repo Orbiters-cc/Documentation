@@ -89,7 +89,7 @@ commit with the last release that completed (the commit in `backend/deployment-s
 | Changed files | Extra work |
 | --- | --- |
 | Models, migrations, `config/database`, `schemaTransitionService`, `dbDedupeIndexes`, backend `package.json` or lockfile, Compose files, `.sql` | Full encrypted backup uploaded to R2, preflight on a clone of the production database, index dedupe |
-| Backend `package.json`, lockfile, `Dockerfile` or `.dockerignore` | Backend image rebuild, with a fresh `node_modules` volume |
+| Anything under `backend/` | Backend image rebuild (the image holds the code; unchanged dependency layers come from the cache) |
 | Anything under `frontend/`, Compose files | Frontend image rebuild |
 
 An unknown previous release, or the workflow's **full_release** option, selects
@@ -99,19 +99,37 @@ everything. The steps are:
 2. Back up: a full encrypted archive uploaded to R2 when the schema may change;
    otherwise an encrypted database snapshot kept on the host in
    `backups/pre-deploy-db` (the newest three are kept; the nightly backup still goes off-site).
-3. Switch Caddy to maintenance and stop the backend. The backend source is bind-mounted,
-   so it stops before the checkout changes.
-4. Check out the release and install or verify the production credential key.
-5. When the schema may change: run two database initialization passes against a clone
-   using the running PostgreSQL image, then the index dedupe.
-6. Build the images whose inputs changed (cached layers are reused) and recreate the
-   frontend and backend containers. An unchanged frontend keeps its image and keeps
-   reporting the commit it was built from.
-7. Wait for `/readyz`, restore the production Caddy config, run the public checks and
+3. Check out the release and install or verify the production credential key. The site
+   stays up: the backend runs the code baked into its image, and only runtime data is
+   mounted from the checkout (`backend/uploads`, `backend/privacy-state`, `backend/.cache`,
+   the deployment status and event files, and the env files read at runtime).
+4. Tag the running images as `:previous` and keep their deployment status in
+   `.deploy-state/previous-status.json`, for rollback.
+5. When the schema may change: boot the new backend image twice against a clone of the
+   production database, using the running PostgreSQL image.
+6. Build the images whose inputs changed. Cached layers are reused, so a code-only
+   backend build takes seconds. An unchanged frontend keeps its image and keeps reporting
+   the commit it was built from.
+7. Switch Caddy to maintenance, run the index dedupe when the schema may change, and
+   recreate the frontend and backend containers.
+8. Wait for `/readyz`, restore the production Caddy config, run the public checks and
    write the deployment status and event. The event's `plan` records which parts ran.
-8. Release disk space: the replaced `node_modules` volume, untagged images, and build
-   cache above 6 GB (or all of it when less than 10 GB of disk is free). Named rollback
-   and recovery images are never removed.
+9. Release disk space: untagged images, a leftover `node_modules` volume from the older
+   bind-mounted layout, and build cache above 6 GB (or all of it when less than 10 GB of
+   disk is free). Named rollback and recovery images are never removed.
+
+Maintenance therefore covers only the container swap and backend start, usually about
+15 seconds. A failure before the swap leaves the running release online; the checkout
+may already show the new commit, which does not affect the running containers.
+
+### Rolling back
+
+On the production host, `scripts/deploy/rollback-prod.sh` puts the `:previous` images and
+deployment status back in service behind maintenance, keeps the replaced images as
+`:rolled-back`, and appends a `rolled_back` deployment event. The next release compares
+against the restored commit, so it rebuilds whatever changed since then. The database is
+not rolled back: when the newer release changed the schema, check the recovery procedure
+first, since older code may not run against the newer schema.
 
 The documentation impact reason can contain normal prose, quotes and line breaks. It is
 validated, with the other arguments, before the release touches the host.
