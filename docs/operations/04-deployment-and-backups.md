@@ -204,6 +204,31 @@ PostgreSQL or unrelated services. PostgreSQL and production application containe
 have restart policies; normal Compose startup waits for PostgreSQL's health check,
 which uses the configured database name as well as its user.
 
+### After a Docker daemon crash
+
+Production containers (PostgreSQL, backend, frontend, Caddy, the Cloudflare tunnel and
+mail) use `restart: always`. With `unless-stopped`, Docker 29 leaves every container
+stopped when its daemon crashes and systemd restarts it: on 2026-10-15 a BuildKit panic
+(triggered by `docker buildx history ls`, which must not be run on the host) kept the
+whole site down until the containers were started by hand. A daemon restart starts all
+containers at once rather than in Compose order; the backend retries the database for
+about 45 seconds and then exits with an error, so Docker starts it again until
+PostgreSQL accepts connections. `always` also restarts a container that was stopped on
+purpose, such as the backend during an index dedupe, once the daemon restarts.
+
+If containers are ever found stopped after a daemon restart, start PostgreSQL first,
+wait for `pg_isready`, then the rest:
+
+```bash
+docker start postgres-prod
+docker exec postgres-prod pg_isready
+docker start backend-prod frontend-prod caddy cloudflared mailserver-prod
+```
+
+Enabling Docker's live restore on the host (`"live-restore": true` in
+`/etc/docker/daemon.json`, then `sudo systemctl reload docker`) goes further: containers
+keep running while the daemon crashes or restarts, including for Docker upgrades.
+
 ## Before approving a release
 
 Production HTTPS ends at Cloudflare. The tunnel connects to Caddy over the private
