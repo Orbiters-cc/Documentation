@@ -1,0 +1,141 @@
+{
+  "schema": 1,
+  "tool": "mcb",
+  "screenshots": [
+    {
+      "file": "version-compare-side-by-side.webp",
+      "caption": "A custom base version next to the original avatar, with every mesh it changes",
+      "alt": "MCB Version compare window: the original Ultirex and version 5.1.1 side by side with textures, next to a list of eight changed meshes such as Body and the new feather parts.",
+      "window": "Version compare",
+      "feature": "Version compare",
+      "toolVersion": "1.12.5",
+      "capturedAt": "2026-10-10",
+      "translations": {
+        "ja": {
+          "caption": "カスタムベースのバージョンを元のアバターと並べ、変更されたメッシュを一覧できます",
+          "alt": "MCBのVersion compareウィンドウ：元のUltirexとバージョン5.1.1をテクスチャ付きで並べ、Bodyや新しい羽のパーツなど、変更された8つのメッシュを一覧しています。"
+        },
+        "fr": {
+          "caption": "Une version de base personnalisée à côté de l’avatar d’origine, avec chaque mesh modifié",
+          "alt": "Fenêtre Version compare de MCB : l’Ultirex d’origine et la version 5.1.1 côte à côte avec leurs textures, à côté de la liste des huit meshes modifiés comme Body et les nouvelles plumes."
+        },
+        "es": {
+          "caption": "Una versión de base personalizada junto al avatar original, con cada mesh que cambia",
+          "alt": "Ventana Version compare de MCB: el Ultirex original y la versión 5.1.1 lado a lado con texturas, junto a la lista de los ocho meshes que cambian, como Body y las nuevas plumas."
+        },
+        "pt-BR": {
+          "caption": "Uma versão de base personalizada ao lado do avatar original, com cada mesh alterado",
+          "alt": "Janela Version compare do MCB: o Ultirex original e a versão 5.1.1 lado a lado com texturas, ao lado da lista dos oito meshes alterados, como Body e as novas penas."
+        }
+      }
+    },
+    {
+      "file": "version-compare-changes.webp",
+      "caption": "The Changes view colors how far each part of the surface moves",
+      "alt": "MCB Version compare window in Changes mode: the avatar is shaded from light to deep orange where the body moves most, up to 13.6 cm, with a slider handle between original and version.",
+      "window": "Version compare",
+      "feature": "Changes view",
+      "toolVersion": "1.12.5",
+      "capturedAt": "2026-10-10",
+      "translations": {
+        "ja": {
+          "caption": "Changes表示では、表面の各部分がどれだけ動くかを色で示します",
+          "alt": "ChangesモードのMCB Version compareウィンドウ：体が大きく動く部分ほど濃いオレンジで塗られ（最大13.6cm）、スライダーで元のアバターとバージョンを分けています。"
+        },
+        "fr": {
+          "caption": "La vue Changes colore la distance parcourue par chaque partie de la surface",
+          "alt": "Fenêtre Version compare de MCB en mode Changes : l’avatar passe du clair à l’orange foncé là où le corps bouge le plus, jusqu’à 13,6 cm, avec une poignée entre l’original et la version."
+        },
+        "es": {
+          "caption": "La vista Changes colorea cuánto se mueve cada parte de la superficie",
+          "alt": "Ventana Version compare de MCB en modo Changes: el avatar va de claro a naranja intenso donde el cuerpo se mueve más, hasta 13.6 cm, con un control deslizante entre el original y la versión."
+        },
+        "pt-BR": {
+          "caption": "A visualização Changes colore quanto cada parte da superfície se move",
+          "alt": "Janela Version compare do MCB no modo Changes: o avatar vai do claro ao laranja intenso onde o corpo mais se move, até 13,6 cm, com um controle deslizante entre o original e a versão."
+        }
+      }
+    },
+    {
+      "file": "version-compare-closeup.webp",
+      "caption": "Close-up of a version next to the original Novabeast it was made from",
+      "alt": "MCB Version compare window zoomed on two heads: the original Novabeast and Ultinova 1.1.0 with goggles, next to the list of blendshapes the version adds.",
+      "window": "Version compare",
+      "feature": "Side by side",
+      "toolVersion": "1.12.5",
+      "capturedAt": "2026-10-09",
+      "translations": {
+        "ja": {
+          "caption": "バージョンと、その元になったNovabeastを並べたクローズアップ",
+          "alt": "顔に寄せたMCBのVersion compareウィンドウ：元のNovabeastと、ゴーグルを着けたUltinova 1.1.0を並べ、バージョンが追加するブレンドシェイプを一覧しています。"
+        },
+        "fr": {
+          "caption": "Gros plan d’une version à côté du Novabeast d’origine dont elle est issue",
+          "alt": "Fenêtre Version compare de MCB zoomée sur deux têtes : le Novabeast d’origine et Ultinova 1.1.0 avec des lunettes, à côté de la liste des blendshapes ajoutés par la version."
+        },
+        "es": {
+          "caption": "Primer plano de una versión junto al Novabeast original del que parte",
+          "alt": "Ventana Version compare de MCB enfocada en dos cabezas: el Novabeast original y Ultinova 1.1.0 con gafas protectoras, junto a la lista de blendshapes que agrega la versión."
+        },
+        "pt-BR": {
+          "caption": "Close de uma versão ao lado do Novabeast original de onde ela veio",
+          "alt": "Janela Version compare do MCB com zoom em duas cabeças: o Novabeast original e o Ultinova 1.1.0 com óculos de proteção, ao lado da lista de blendshapes que a versão adiciona."
+        }
+      }
+    },
+    {
+      "file": "twisting-bones.webp",
+      "caption": "Add twist bones to the forearms, with symmetry and a weight curve for each bone",
+      "alt": "MCB Twisting bones window: an X-ray view of the avatar with both elbows selected, the bone list, and the Left elbow settings with its aim, up reference and Ultirex weight curve.",
+      "window": "Twisting bones",
+      "feature": "Twist bones",
+      "toolVersion": "1.10.4",
+      "capturedAt": "2026-10-04",
+      "translations": {
+        "ja": {
+          "caption": "前腕にツイストボーンを追加。左右対称で、ボーンごとにウェイトカーブを設定できます",
+          "alt": "MCBのTwisting bonesウィンドウ：両ひじを選択したアバターのX線表示、ボーン一覧、Left elbowの向き先・上方向の基準・Ultirexのウェイトカーブの設定が表示されています。"
+        },
+        "fr": {
+          "caption": "Ajoute des bones de torsion aux avant-bras, en symétrie et avec une courbe de poids par bone",
+          "alt": "Fenêtre Twisting bones de MCB : une vue en rayons X de l’avatar avec les deux coudes sélectionnés, la liste des bones et les réglages de Left elbow avec sa cible, sa référence vers le haut et la courbe de poids Ultirex."
+        },
+        "es": {
+          "caption": "Agrega bones de torsión a los antebrazos, con simetría y una curva de peso por bone",
+          "alt": "Ventana Twisting bones de MCB: una vista de rayos X del avatar con ambos codos seleccionados, la lista de bones y la configuración de Left elbow con su objetivo, su referencia hacia arriba y la curva de peso Ultirex."
+        },
+        "pt-BR": {
+          "caption": "Adicione bones de torção aos antebraços, com simetria e uma curva de peso por bone",
+          "alt": "Janela Twisting bones do MCB: uma visualização em raio X do avatar com os dois cotovelos selecionados, a lista de bones e as configurações de Left elbow com o alvo, a referência para cima e a curva de peso Ultirex."
+        }
+      }
+    },
+    {
+      "file": "create-new-version.webp",
+      "caption": "Build a new base version from a parent version, with a Blender connector for the model",
+      "alt": "MCB Create New Version window: a Blender connector with Modify and Sync buttons, parent version 1.0.2 (Public), target model files with a custom FBX and avatar, and the avatar logic prefab.",
+      "window": "Create New Version",
+      "feature": "Version creation",
+      "toolVersion": "1.12.7",
+      "capturedAt": "2026-10-11",
+      "translations": {
+        "ja": {
+          "caption": "親バージョンから新しいベースのバージョンを作成。モデルにはBlenderコネクターを使えます",
+          "alt": "MCBのCreate New Versionウィンドウ：Modify・SyncボタンのあるBlenderコネクター、親バージョン1.0.2（Public）、カスタムFBXとアバターを指定するTarget Model Files、アバターロジックのプレハブが表示されています。"
+        },
+        "fr": {
+          "caption": "Crée une nouvelle version de la base à partir d’une version parente, avec un connecteur Blender pour le modèle",
+          "alt": "Fenêtre Create New Version de MCB : un connecteur Blender avec les boutons Modify et Sync, la version parente 1.0.2 (Public), les fichiers du modèle cible avec un FBX et un avatar personnalisés, et le prefab de logique de l’avatar."
+        },
+        "es": {
+          "caption": "Crea una nueva versión de la base a partir de una versión padre, con un conector de Blender para el modelo",
+          "alt": "Ventana Create New Version de MCB: un conector de Blender con los botones Modify y Sync, la versión padre 1.0.2 (Public), los archivos del modelo de destino con un FBX y un avatar personalizados, y el prefab de lógica del avatar."
+        },
+        "pt-BR": {
+          "caption": "Crie uma nova versão da base a partir de uma versão pai, com um conector do Blender para o modelo",
+          "alt": "Janela Create New Version do MCB: um conector do Blender com os botões Modify e Sync, a versão pai 1.0.2 (Public), os arquivos do modelo de destino com um FBX e um avatar personalizados, e o prefab de lógica do avatar."
+        }
+      }
+    }
+  ]
+}

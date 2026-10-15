@@ -1,0 +1,16 @@
+{
+  "name": "orbiters-documentation",
+  "private": true,
+  "description": "Canonical Orbiters documentation and tool screenshot galleries.",
+  "license": "UNLICENSED",
+  "scripts": {
+    "validate": "node scripts/validate-docs.js",
+    "gallery:import": "node scripts/gallery/import-screenshot.js"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.4"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

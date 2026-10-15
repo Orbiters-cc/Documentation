@@ -64,6 +64,9 @@ Tracked Caddy templates:
 - `Caddyfile.prod`
 - `Caddyfile.maintenance`
 
+Each template ends with a `*.orbiters.cc` site for creator addresses and the presentation page; it needs a
+wildcard DNS record, see [Creator Addresses and Wildcard DNS](/documentation/orbiters.operations.creator-addresses).
+
 The active `Caddyfile` is machine-specific and ignored by git. Activate a template with:
 
 ```bash

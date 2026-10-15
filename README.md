@@ -57,6 +57,8 @@ The Orbiters backend reads Markdown files from `docs/`, filters them by audience
 - `docs/operations`: moderation, deployment, backups, and incident response.
 - `docs/architecture`: architecture views, runtime flows, and data model notes.
 - `docs/decisions`: architecture decision records.
+- `media/tools`: the Unity screenshot gallery shown at the bottom of each tool page, one manifest and its WebP files
+  per tool. Tool agents maintain it as described in `AGENTS.md` (Tool screenshot galleries).
 
 The website groups Documentation pages by their `section` and `domain` metadata,
 not by folder name alone. The MCP surface retains structured metadata for agents.

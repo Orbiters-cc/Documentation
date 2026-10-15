@@ -1,0 +1,114 @@
+{
+  "schema": 1,
+  "tool": "refit",
+  "screenshots": [
+    {
+      "file": "hoodie-fit.webp",
+      "caption": "A hoodie made for another base, fitted to a canine avatar with tentacles",
+      "alt": "Unity Scene view: a grey canine avatar with purple tentacles wearing a pink and purple hoodie that sits on its shoulders and chest.",
+      "window": "Scene view",
+      "feature": "Fitted clothing",
+      "toolVersion": "0.5.2",
+      "capturedAt": "2026-10-02",
+      "translations": {
+        "ja": {
+          "caption": "別のベース用に作られたパーカーを、触手のあるイヌ系アバターにフィットさせた例",
+          "alt": "Unityのシーンビュー：紫の触手があるグレーのイヌ系アバターが、肩と胸に沿ったピンクと紫のパーカーを着ています。"
+        },
+        "fr": {
+          "caption": "Un sweat à capuche conçu pour une autre base, ajusté à un avatar canin à tentacules",
+          "alt": "Scene view d’Unity : un avatar canin gris à tentacules violettes porte un sweat à capuche rose et violet qui suit ses épaules et sa poitrine."
+        },
+        "es": {
+          "caption": "Una sudadera con capucha hecha para otra base, ajustada a un avatar canino con tentáculos",
+          "alt": "Scene view de Unity: un avatar canino gris con tentáculos morados lleva una sudadera con capucha rosa y morada que sigue sus hombros y su pecho."
+        },
+        "pt-BR": {
+          "caption": "Um moletom feito para outra base, ajustado a um avatar canino com tentáculos",
+          "alt": "Scene view do Unity: um avatar canino cinza com tentáculos roxos veste um moletom rosa e roxo que acompanha os ombros e o peito."
+        }
+      }
+    },
+    {
+      "file": "denim-jacket-fit.webp",
+      "caption": "A cropped denim jacket fitted to a canine avatar",
+      "alt": "Unity Scene view: a grey and white canine avatar in a blue cropped jacket with a yellow quilted collar, fitted without gaps at the shoulders.",
+      "window": "Scene view",
+      "feature": "Fitted clothing",
+      "toolVersion": "0.5.2",
+      "capturedAt": "2026-10-03",
+      "translations": {
+        "ja": {
+          "caption": "丈の短いデニムジャケットをイヌ系アバターにフィットさせた例",
+          "alt": "Unityのシーンビュー：グレーと白のイヌ系アバターが、黄色いキルティングの襟が付いた青い短丈ジャケットを着ています。肩に隙間はありません。"
+        },
+        "fr": {
+          "caption": "Une veste en jean courte ajustée à un avatar canin",
+          "alt": "Scene view d’Unity : un avatar canin gris et blanc porte une veste courte bleue à col matelassé jaune, ajustée sans espace aux épaules."
+        },
+        "es": {
+          "caption": "Una chaqueta corta de denim ajustada a un avatar canino",
+          "alt": "Scene view de Unity: un avatar canino gris y blanco lleva una chaqueta corta azul con cuello acolchado amarillo, ajustada sin huecos en los hombros."
+        },
+        "pt-BR": {
+          "caption": "Uma jaqueta jeans curta ajustada a um avatar canino",
+          "alt": "Scene view do Unity: um avatar canino cinza e branco veste uma jaqueta curta azul com gola acolchoada amarela, ajustada sem folgas nos ombros."
+        }
+      }
+    },
+    {
+      "file": "vest-and-shorts-fit.webp",
+      "caption": "A life vest over a T-shirt and shorts, fitted to a muscular canine avatar",
+      "alt": "Unity Scene view: a muscular grey canine avatar wearing an orange life vest over a black T-shirt, with a blue top and black cargo shorts.",
+      "window": "Scene view",
+      "feature": "Fitted outfit",
+      "toolVersion": "0.5.2",
+      "capturedAt": "2026-10-03",
+      "translations": {
+        "ja": {
+          "caption": "Tシャツとショートパンツの上に重ねたライフジャケットを、筋肉質なイヌ系アバターにフィットさせた例",
+          "alt": "Unityのシーンビュー：筋肉質なグレーのイヌ系アバターが、黒いTシャツの上にオレンジのライフジャケットを着て、青いトップスと黒いカーゴショーツを身に着けています。"
+        },
+        "fr": {
+          "caption": "Un gilet de sauvetage sur un t-shirt et un short, ajusté à un avatar canin musclé",
+          "alt": "Scene view d’Unity : un avatar canin gris et musclé porte un gilet de sauvetage orange sur un t-shirt noir, avec un haut bleu et un short cargo noir."
+        },
+        "es": {
+          "caption": "Un chaleco salvavidas sobre una camiseta y shorts, ajustado a un avatar canino musculoso",
+          "alt": "Scene view de Unity: un avatar canino gris y musculoso lleva un chaleco salvavidas naranja sobre una camiseta negra, con un top azul y shorts cargo negros."
+        },
+        "pt-BR": {
+          "caption": "Um colete salva-vidas sobre camiseta e bermuda, ajustado a um avatar canino musculoso",
+          "alt": "Scene view do Unity: um avatar canino cinza e musculoso veste um colete salva-vidas laranja sobre uma camiseta preta, com um top azul e uma bermuda cargo preta."
+        }
+      }
+    },
+    {
+      "file": "clothing-picker.webp",
+      "caption": "Pick the clothing to fit from the avatar’s list, the Hierarchy or a dropped prefab",
+      "alt": "ReFit window in Unity: an empty preview stage on the left and, on the right, the avatar’s clothing list with hair and tail items and a field for a prefab from the project files.",
+      "window": "ReFit",
+      "feature": "Clothing picker",
+      "toolVersion": "0.5.9",
+      "capturedAt": "2026-10-13",
+      "translations": {
+        "ja": {
+          "caption": "アバターのリスト、ヒエラルキー、またはドロップしたプレハブから、フィットさせる衣装を選びます",
+          "alt": "UnityのReFitウィンドウ：左に空のプレビュー、右にヘアと尻尾のアイテムが並ぶアバターの衣装リストと、プロジェクトのプレハブを指定する欄があります。"
+        },
+        "fr": {
+          "caption": "Choisis le vêtement à ajuster dans la liste de l’avatar, la Hierarchy ou en déposant un prefab",
+          "alt": "Fenêtre ReFit dans Unity : un aperçu vide à gauche et, à droite, la liste des vêtements de l’avatar avec des cheveux et des queues, et un champ pour un prefab du projet."
+        },
+        "es": {
+          "caption": "Elige la ropa que quieres ajustar en la lista del avatar, la Hierarchy o soltando un prefab",
+          "alt": "Ventana de ReFit en Unity: una vista previa vacía a la izquierda y, a la derecha, la lista de ropa del avatar con cabellos y colas, y un campo para un prefab del proyecto."
+        },
+        "pt-BR": {
+          "caption": "Escolha a roupa a ajustar na lista do avatar, na Hierarchy ou soltando um prefab",
+          "alt": "Janela do ReFit no Unity: uma pré-visualização vazia à esquerda e, à direita, a lista de roupas do avatar com cabelos e caudas, e um campo para um prefab do projeto."
+        }
+      }
+    }
+  ]
+}

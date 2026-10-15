@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const { validateExperiences } = require('./validate-experiences');
+const { validateGalleries } = require('./gallery/validate-galleries');
 
 const REPOSITORY_ROOT = path.resolve(__dirname, '..');
 const DOCS_ROOT = path.join(REPOSITORY_ROOT, 'docs');
@@ -166,6 +167,16 @@ for (const page of pages) {
     for (const error of page.errors) console.error(`  - ${error}`);
 }
 
+const galleries = validateGalleries(REPOSITORY_ROOT);
+for (const gallery of galleries) {
+    if (gallery.errors.length === 0) continue;
+    failureCount += gallery.errors.length;
+    console.error(`\n${gallery.relativePath}`);
+    for (const error of gallery.errors) console.error(`  - ${error}`);
+}
+for (const gallery of galleries) for (const warning of gallery.warnings) console.warn(`Warning: ${gallery.relativePath}: ${warning}`);
+const screenshotCount = galleries.reduce((total, gallery) => total + gallery.count, 0);
+
 const staleBefore = Date.now() - STALE_AFTER_DAYS * 86400000;
 const stale = pages.filter((page) => {
     const value = page.metadata.lastVerified;
@@ -174,8 +185,8 @@ const stale = pages.filter((page) => {
 for (const page of stale) console.warn(`Warning: ${page.relativePath} was last verified on ${page.metadata.lastVerified}`);
 
 if (failureCount > 0) {
-    console.error(`\nDocumentation validation failed with ${failureCount} error(s) across ${pages.length} page(s).`);
+    console.error(`\nDocumentation validation failed with ${failureCount} error(s) across ${pages.length} page(s) and ${galleries.length} screenshot galler${galleries.length === 1 ? 'y' : 'ies'}.`);
     process.exit(1);
 }
 
-console.log(`Documentation validation passed: ${pages.length} page(s), ${stale.length} stale warning(s).`);
+console.log(`Documentation validation passed: ${pages.length} page(s), ${galleries.length} screenshot galler${galleries.length === 1 ? 'y' : 'ies'} (${screenshotCount} screenshot(s)), ${stale.length} stale warning(s).`);

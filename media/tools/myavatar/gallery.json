@@ -1,0 +1,114 @@
+{
+  "schema": 1,
+  "tool": "myavatar",
+  "screenshots": [
+    {
+      "file": "menu-editor.webp",
+      "caption": "Edit the Expressions menu exactly as VRChat shows it, including everything VRCFury adds",
+      "alt": "My Avatar menu editor: the Quick Menu and the round Action Menu side by side with folders for Body, Face, Tail, Ears and Clothing, and a help panel for click, drag, hold and drop.",
+      "window": "VRChat Menu",
+      "feature": "Menu editor",
+      "toolVersion": "0.9.9",
+      "capturedAt": "2026-10-13",
+      "translations": {
+        "ja": {
+          "caption": "VRChatで表示されるとおりにExpressionsメニューを編集。VRCFuryが追加する項目も含みます",
+          "alt": "My Avatarのメニューエディター：Quick Menuと円形のAction Menuを並べ、Body、Face、Tail、Ears、Clothingのフォルダーと、クリック・ドラッグ・長押し・ドロップの操作を説明するパネルがあります。"
+        },
+        "fr": {
+          "caption": "Modifie le menu Expressions exactement comme VRChat l’affiche, y compris tout ce qu’ajoute VRCFury",
+          "alt": "Éditeur de menu de My Avatar : le Quick Menu et l’Action Menu circulaire côte à côte avec des dossiers Body, Face, Tail, Ears et Clothing, et un panneau d’aide pour cliquer, glisser, maintenir et déposer."
+        },
+        "es": {
+          "caption": "Edita el menú Expressions tal como lo muestra VRChat, incluido todo lo que agrega VRCFury",
+          "alt": "Editor de menú de My Avatar: el Quick Menu y el Action Menu circular lado a lado con carpetas Body, Face, Tail, Ears y Clothing, y un panel de ayuda para hacer clic, arrastrar, mantener y soltar."
+        },
+        "pt-BR": {
+          "caption": "Edite o menu Expressions exatamente como o VRChat mostra, incluindo tudo o que o VRCFury adiciona",
+          "alt": "Editor de menu do My Avatar: o Quick Menu e o Action Menu circular lado a lado com pastas Body, Face, Tail, Ears e Clothing, e um painel de ajuda para clicar, arrastar, segurar e soltar."
+        }
+      }
+    },
+    {
+      "file": "inspector-overview.webp",
+      "caption": "One Inspector for textures, the asset gallery, the thumbnail, posing, customization and face tracking",
+      "alt": "My Avatar in the Unity Inspector: 8 textures applied by drop, the asset gallery banner, the VRChat thumbnail card, posing buttons, grab and pose settings for hair, ears and tail, and face tracking ready.",
+      "window": "Inspector",
+      "feature": "Avatar Inspector",
+      "toolVersion": "0.9.9",
+      "capturedAt": "2026-10-13",
+      "translations": {
+        "ja": {
+          "caption": "テクスチャ、アセットギャラリー、サムネイル、ポーズ、カスタマイズ、フェイストラッキングをひとつのインスペクターで",
+          "alt": "UnityのインスペクターのMy Avatar：ドロップで適用した8枚のテクスチャ、アセットギャラリーのバナー、VRChatのサムネイルカード、ポーズのボタン、髪・耳・尻尾のつかむ・ポーズの設定、準備ができたフェイストラッキングが表示されています。"
+        },
+        "fr": {
+          "caption": "Un seul Inspector pour les textures, la galerie d’assets, la miniature, la pose, la personnalisation et le face tracking",
+          "alt": "My Avatar dans l’Inspector d’Unity : 8 textures appliquées par glisser-déposer, la bannière de la galerie d’assets, la miniature VRChat, les boutons de pose, les réglages de saisie et de pose des cheveux, oreilles et queue, et le face tracking prêt."
+        },
+        "es": {
+          "caption": "Un solo Inspector para texturas, la galería de assets, la miniatura, las poses, la personalización y el face tracking",
+          "alt": "My Avatar en el Inspector de Unity: 8 texturas aplicadas al soltarlas, el banner de la galería de assets, la miniatura de VRChat, los botones de pose, los ajustes para agarrar y posar cabello, orejas y cola, y el face tracking listo."
+        },
+        "pt-BR": {
+          "caption": "Um só Inspector para texturas, a galeria de assets, a miniatura, as poses, a personalização e o face tracking",
+          "alt": "My Avatar no Inspector do Unity: 8 texturas aplicadas ao soltar, o banner da galeria de assets, a miniatura do VRChat, os botões de pose, os ajustes de agarrar e posar cabelo, orelhas e cauda, e o face tracking pronto."
+        }
+      }
+    },
+    {
+      "file": "optimization-and-checks.webp",
+      "caption": "See the upload size and rank, pick an optimization level, check the avatar and export to VRM",
+      "alt": "My Avatar Inspector sections: Big optimization selected, 15% lighter, 14.5 MB on PC with the Very Poor rank and fewer bones, texture memory and blendshapes, then the upload check and Export to VRM.",
+      "window": "Inspector",
+      "feature": "Optimization",
+      "toolVersion": "0.9.9",
+      "capturedAt": "2026-10-13",
+      "translations": {
+        "ja": {
+          "caption": "アップロード時のサイズとランクを確認し、最適化レベルを選び、アバターをチェックしてVRMに書き出せます",
+          "alt": "My Avatarのインスペクター：Big最適化を選択して15%軽量化、PCで14.5MB、Very Poorランク、ボーン・テクスチャメモリ・ブレンドシェイプの削減。その下にアップロード時のチェックとVRMへのエクスポートがあります。"
+        },
+        "fr": {
+          "caption": "Vois la taille et le rang au téléversement, choisis l’optimisation, vérifie l’avatar et exporte en VRM",
+          "alt": "Sections de My Avatar dans l’Inspector : optimisation Big sélectionnée, 15 % plus léger, 14,5 Mo sur PC, rang Very Poor avec moins de bones, de mémoire de texture et de blendshapes, puis la vérification au téléversement et l’export VRM."
+        },
+        "es": {
+          "caption": "Mira el tamaño y el rango al subir, elige la optimización, revisa el avatar y exporta a VRM",
+          "alt": "Secciones de My Avatar en el Inspector: optimización Big seleccionada, 15% más ligero, 14.5 MB en PC, rango Very Poor con menos bones, memoria de texturas y blendshapes, y luego la revisión al subir y la exportación a VRM."
+        },
+        "pt-BR": {
+          "caption": "Veja o tamanho e a classificação no upload, escolha a otimização, verifique o avatar e exporte para VRM",
+          "alt": "Seções do My Avatar no Inspector: otimização Big selecionada, 15% mais leve, 14,5 MB no PC, classificação Very Poor com menos bones, memória de textura e blendshapes, depois a verificação no upload e a exportação para VRM."
+        }
+      }
+    },
+    {
+      "file": "asset-gallery-item.webp",
+      "caption": "An item from the asset gallery, ready to add to the avatar, with everything it needs listed",
+      "alt": "My Avatar asset gallery item Drawing pen by blackorbit: a pen drawing a cyan line, version 1.0.3, 29 KB, 5 bits of parameter memory, and the packages it needs, all installed.",
+      "window": "Asset gallery",
+      "feature": "Asset gallery",
+      "toolVersion": "0.9.6",
+      "capturedAt": "2026-10-09",
+      "translations": {
+        "ja": {
+          "caption": "アセットギャラリーの項目。必要なものが一覧され、そのままアバターに追加できます",
+          "alt": "My AvatarのアセットギャラリーにあるblackorbitのDrawing pen：シアンの線を描くペン、バージョン1.0.3、29KB、パラメーターメモリ5ビット、必要なパッケージ（すべてインストール済み）。"
+        },
+        "fr": {
+          "caption": "Un élément de la galerie d’assets, prêt à ajouter à l’avatar, avec tout ce dont il a besoin",
+          "alt": "Élément Drawing pen de blackorbit dans la galerie d’assets de My Avatar : un stylo qui trace une ligne cyan, version 1.0.3, 29 Ko, 5 bits de mémoire de paramètres et les packages requis, tous installés."
+        },
+        "es": {
+          "caption": "Un elemento de la galería de assets, listo para agregar al avatar, con todo lo que necesita",
+          "alt": "Elemento Drawing pen de blackorbit en la galería de assets de My Avatar: un bolígrafo que dibuja una línea cian, versión 1.0.3, 29 KB, 5 bits de memoria de parámetros y los paquetes que necesita, todos instalados."
+        },
+        "pt-BR": {
+          "caption": "Um item da galeria de assets, pronto para adicionar ao avatar, com tudo o que ele precisa",
+          "alt": "Item Drawing pen de blackorbit na galeria de assets do My Avatar: uma caneta que desenha uma linha ciano, versão 1.0.3, 29 KB, 5 bits de memória de parâmetros e os pacotes necessários, todos instalados."
+        }
+      }
+    }
+  ]
+}
