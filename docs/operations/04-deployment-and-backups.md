@@ -99,7 +99,8 @@ behavior; it then requires the Documentation gitlink to change. The command:
    repository over SSH (the host cannot read the private GitHub repository on its own).
 4. Uploads the deploy scripts and only the frontend bundle files the host does not already
    have. The bundle is built with the host's public `REACT_APP_*` values; the frontend's
-   other settings never leave the host.
+   other settings never leave the host. Production bundles carry no source maps, whether
+   built on the workstation or on the host.
 5. Runs `release-remote.sh` on the host (below) and, when `agents/` changed, reinstalls the
    Pi agent at the same time.
 
