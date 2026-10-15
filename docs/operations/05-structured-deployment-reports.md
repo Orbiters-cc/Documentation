@@ -46,7 +46,8 @@ Each schema-version-1 event can include:
   start, completion, and deployment times;
 - changed paths and the subset considered schema-sensitive;
 - documentation-impact status and the human reason;
-- backup archive, SHA-256 checksum, upload status, and object key;
+- backup archive, SHA-256 checksum, upload status (`uploaded` for a full R2 archive,
+  `local` for an encrypted database snapshot kept on the host), and object key;
 - overall preflight result, first-boot result, second-boot result, and duration;
 - backend and frontend image identifiers;
 - active Caddy mode and health-check duration;
@@ -54,7 +55,10 @@ Each schema-version-1 event can include:
 - pending and failed outbox counts plus oldest pending time, captured from the
   deployed backend container;
 - an explicit error-delta status and links or paths to retained artifacts;
-- final outcome and bounded operator-facing message.
+- the release plan (`plan.schema`, `plan.backendImage`, `plan.frontend`): which of the
+  schema checks, backend build and frontend build the release ran,
+- final outcome and bounded operator-facing message. A rollback appends its own event
+  with the outcome `rolled_back`.
 
 The deploy script derives changed paths from the previous and target commits. Model,
 schema transition, index-repair, compose, and SQL paths are flagged as

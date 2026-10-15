@@ -76,9 +76,42 @@ On Windows dev:
 .\scripts\caddy\activate-config.ps1 dev -Reload
 ```
 
+## Releasing from a workstation
+
+The usual way to release is `npm run release` from the repository root, on the `dev`
+branch with a clean tree:
+
+```bash
+npm run release -- --docs no --reason "Why documented behavior is unchanged"
+```
+
+Use `--docs yes --reason "Pages updated: ..."` when the release changes documented
+behavior; it then requires the Documentation gitlink to change. The command:
+
+1. Reads the deployed commit from the host and decides, with `scripts/deploy/release-plan.sh`'s
+   patterns, which parts changed.
+2. Runs the former CI checks for those parts side by side, typically in about 75 seconds:
+   backend tests against disposable databases in the local `postgres-dev` container, the two
+   schema boots and the account-lock check; frontend translations, tests and the production
+   bundle; deploy script tests; Pi agent tests; documentation validation. Nothing is pushed
+   when a check fails; each failure prints the end of its log.
+3. Pushes `dev` and fast-forwards `main` on GitHub, and pushes the commit to the host's
+   repository over SSH (the host cannot read the private GitHub repository on its own).
+4. Uploads the deploy scripts and only the frontend bundle files the host does not already
+   have. The bundle is built with the host's public `REACT_APP_*` values; the frontend's
+   other settings never leave the host.
+5. Runs `release-remote.sh` on the host (below) and, when `agents/` changed, reinstalls the
+   Pi agent at the same time.
+
+`--full` selects every step, `--server-build` builds the frontend on the host instead,
+`--dry-run` prints the plan, and `--skip-checks` is for emergencies only. `npm run release
+-- --rollback` runs the rollback below. The command needs the `orbiters` and `pi` SSH
+aliases, Docker with the `postgres-dev` container, and `uvx` for the Pi agent tests.
+
 ## Production Deploy Flow
 
-The manual **Deploy production** workflow uploads the selected release's `scripts/deploy`
+The manual **Deploy production** workflow is the fallback when no workstation is
+available; it runs the same host steps. It uploads the selected release's `scripts/deploy`
 folder to a temporary directory on the host and runs `release-remote.sh` from it, so a
 release always runs its own deploy scripts rather than the older checkout's copies. The
 script holds the deployment lock before changing anything.
@@ -108,8 +141,10 @@ everything. The steps are:
 5. When the schema may change: boot the new backend image twice against a clone of the
    production database, using the running PostgreSQL image.
 6. Build the images whose inputs changed. Cached layers are reused, so a code-only
-   backend build takes seconds. An unchanged frontend keeps its image and keeps reporting
-   the commit it was built from.
+   backend build takes seconds. An uploaded frontend bundle from this exact commit is
+   moved to `frontend/prebuilt` and copied into the image (`FRONTEND_BUNDLE=prebuilt`);
+   otherwise the frontend is built on the host. An unchanged frontend keeps its image and
+   keeps reporting the commit it was built from.
 7. Switch Caddy to maintenance, run the index dedupe when the schema may change, and
    recreate the frontend and backend containers.
 8. Wait for `/readyz`, restore the production Caddy config, run the public checks and
@@ -146,12 +181,13 @@ After a failed run proves an older release's incomplete final filename never upl
 pass its basename through the workflow's `discard_incomplete_backup` input. The workflow
 rejects paths and unexpected names, and refuses to continue when the named file is absent.
 
-CI runs only when started by hand. Releases run the same checks on the developer's
-machine first.
+CI runs only when started by hand, for example before a large dependency change: it is
+the only place that installs dependencies on a clean machine. Releases run the same
+checks on the workstation first.
 
-If public health checks fail, maintenance is restored. A failure after checkout
-leaves maintenance active for investigation; never restart old code against a
-migrated database without checking the recovery procedure.
+If public health checks fail, maintenance is restored. A failure during or after the
+container swap leaves maintenance active for investigation; never restart old code
+against a migrated database without checking the recovery procedure.
 
 `/healthz` checks process liveness only. `/readyz` returns 200 when the backend can
 complete a database query within two seconds, or 503 when the database connection
@@ -173,8 +209,9 @@ HTTPS scheme reaches the session middleware. Keep `Secure`, `HttpOnly` and
 `SameSite=Lax` on the OAuth state cookie. If both Discord and Telegram immediately
 report an expired login, check that each authorization redirect sets that cookie
 and that a callback from the same browser accepts its state. A healthy `/healthz`
-response alone does not validate login. CI exercises both state flows through the
-production Caddy configuration with an isolated provider fixture.
+response alone does not validate login. The release checks exercise both state flows
+through the production Caddy configuration with an isolated provider fixture whenever
+Caddy, the server entry point, authentication routes or middleware change.
 
 Configure `SMTP_PASSWORD` explicitly; email is disabled when it is missing and
 Orbiters does not use a built-in mail password. Removing credentials from the
@@ -189,8 +226,8 @@ database. Keep the age private key outside the server as well as in protected re
 storage. The backup key is separate from `API_CREDENTIAL_ENCRYPTION_KEY`.
 
 The deployment host needs Node.js on its non-interactive SSH path. The scripts also
-look in `~/.local/bin`. CI uses a disposable encryption key with its isolated database;
-production credentials must never be supplied to pull-request tests.
+look in `~/.local/bin`. Release checks and CI use a disposable encryption key with an
+isolated database; production credentials must never be supplied to tests.
 
 Check the **Backup production** workflow's last successful run, not just whether
 the schedule exists. A rejected Tailscale login prevents the runner from reaching

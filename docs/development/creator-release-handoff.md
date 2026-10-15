@@ -161,10 +161,12 @@ walkthrough until a real published extension ID is available. Do not invent one.
 
 ## 3. Deploy with the existing production workflow
 
-The approved deploy workflow creates/uploads the encrypted backup, enters
-maintenance, stops old workers, checks out the exact ref, installs the credential
-key, performs two database boots on a clone, builds/recreates app containers,
-checks readiness and writes structured release evidence. Do not bypass any gate.
+Release with `npm run release` from the release workstation, or with the deploy
+workflow below when no workstation is available. Both back up first (a full uploaded
+archive when the schema may change), check out the exact commit, boot the new backend
+twice on a database clone when the schema may change, build the changed images while
+the site stays up, swap containers behind maintenance, check readiness and write
+structured release evidence. Do not bypass any gate. See **Deployment and Backups**.
 
 ```powershell
 $releaseSha = gh api repos/blackorbit1/Orbiters/git/ref/heads/main --jq '.object.sha'
@@ -172,7 +174,7 @@ gh workflow run deploy-prod.yml --repo blackorbit1/Orbiters -f "ref=$releaseSha"
 gh run list --repo blackorbit1/Orbiters --workflow deploy-prod.yml --limit 5
 ```
 
-Before dispatch, confirm that SHA is the reviewed merge with green CI.
+Before dispatch, confirm that SHA is the reviewed merge and that its release checks passed.
 Identify the run you just started by timestamp/ref, then `gh run watch RUN_ID
 --repo blackorbit1/Orbiters --exit-status`. Record its URL and full deployed SHA.
 Read the deployment event for backup checksum/upload, both preflight boots,

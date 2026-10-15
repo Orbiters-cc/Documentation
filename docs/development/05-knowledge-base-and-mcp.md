@@ -41,7 +41,7 @@ The index adds runtime provenance without modifying the source page:
 - a stale flag when `lastVerified` is older than 180 days.
 
 Use `node scripts/validate-docs.js` in the Documentation repository before review.
-CI performs the same contract check. A documentation change is not valid merely
+Every release runs the same contract check. A documentation change is not valid merely
 because the Markdown renderer accepts it.
 
 The knowledge search index expires after 30 seconds and rebuilds on the next

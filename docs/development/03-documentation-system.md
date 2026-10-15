@@ -51,9 +51,10 @@ product area, while `type` describes the information shape. `owner` is accountab
 for correctness. Update `lastVerified` only after checking the page against current
 behavior. Run `node scripts/validate-docs.js` in this repository before review.
 
-Application pull requests must select exactly one documentation-impact state and
-give a concrete reason. When impact is declared `yes`, CI also requires the
-Documentation gitlink or content to change between the pull request base and head.
+Every release declares exactly one documentation-impact state with a concrete reason
+(`npm run release -- --docs yes|no --reason "..."`), recorded in its deployment event.
+When impact is declared `yes`, the release command also requires the Documentation
+gitlink to change between the deployed commit and the release.
 This makes the documentation update part of feature completion rather than a later
 cleanup task.
 
