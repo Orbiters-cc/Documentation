@@ -151,8 +151,10 @@ everything. The steps are:
 8. Wait for `/readyz`, restore the production Caddy config, run the public checks and
    write the deployment status and event. The event's `plan` records which parts ran.
 9. Release disk space: untagged images, a leftover `node_modules` volume from the older
-   bind-mounted layout, and build cache above 6 GB (or all of it when less than 10 GB of
-   disk is free). Named rollback and recovery images are never removed.
+   bind-mounted layout, and the least recently used build cache above 12 GB (or all of it
+   when less than 8 GB of disk is free). A smaller cap evicts the backend's dependency
+   layers and makes the next backend build reinstall them. Named rollback and recovery
+   images are never removed.
 
 Maintenance therefore covers only the container swap and backend start, usually about
 15 seconds. A failure before the swap leaves the running release online; the checkout
