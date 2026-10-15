@@ -157,9 +157,15 @@ questions, background workers research them on the cheap models, then a report o
 new (with links), the ideas with a value range and confidence, the open questions, and queues the next round's
 questions. Each report reaches your main channel and appears in **Orb → Reports**: every project is a card there, and
 a card opens all its reports, with arrows (or ← and →) to move between them and buttons that copy one report or all of
-them as Markdown, ready to paste into another AI. When the time is up, or you press
-**Stop**, open questions are dropped and a final report follows if anything new was found. Up to three projects run
-at once, and they share the workers and the background budget with the 24/7 research.
+them as Markdown, ready to paste into another AI.
+
+A report waits for its round to finish. When workers crash (usually a model provider refusing calls), Orb runs each
+crashed question once more; if most of the round is still lost, the report waits for the interval you chose instead of
+reporting almost nothing. Each report also lists the facts it verified; Orb keeps them out of the report you read and
+hands them to every later round, so rounds stop re-checking and repeating what is already known, and it archives any
+questions a report queues beyond the round's size. When the time is up, or you press **Stop**, open questions are
+dropped and a final report sums up the whole project. Up to three projects run at once, and they share the workers and
+the background budget with the 24/7 research.
 
 Orb and its workers can also look for ideas in the
 [Hermes community showcase](https://hermes-agent.nousresearch.com/docs/user-stories) (the `hermes-user-stories`
