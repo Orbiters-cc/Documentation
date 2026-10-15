@@ -8,7 +8,7 @@ id: orbiters.operations.deployment-and-backups
 domain: operations
 type: runbook
 owner: orbiters-operations
-lastVerified: 2026-09-25
+lastVerified: 2026-10-15
 ---
 
 # Deployment and Backups
@@ -78,57 +78,58 @@ On Windows dev:
 
 ## Production Deploy Flow
 
-The manual production workflow holds a deployment lock before changing the server
-checkout. Because the backend source is bind-mounted, maintenance begins before
-checkout; allow time for image builds and the database rehearsal within the window.
+The manual **Deploy production** workflow uploads the selected release's `scripts/deploy`
+folder to a temporary directory on the host and runs `release-remote.sh` from it, so a
+release always runs its own deploy scripts rather than the older checkout's copies. The
+script holds the deployment lock before changing anything.
 
-The documentation impact reason can contain normal prose, quotes and line breaks.
-The workflow preserves it as one SSH argument and checks the transferred files
-before entering maintenance. A missing-file or argument-count failure at this
-stage leaves the running release online.
+A release only does the work its changes need. `release-plan.sh` compares the target
+commit with the last release that completed (the commit in `backend/deployment-status.json`):
 
-The manual production workflow:
+| Changed files | Extra work |
+| --- | --- |
+| Models, migrations, `config/database`, `schemaTransitionService`, `dbDedupeIndexes`, backend `package.json` or lockfile, Compose files, `.sql` | Full encrypted backup uploaded to R2, preflight on a clone of the production database, index dedupe |
+| Backend `package.json`, lockfile, `Dockerfile` or `.dockerignore` | Backend image rebuild, with a fresh `node_modules` volume |
+| Anything under `frontend/`, Compose files | Frontend image rebuild |
 
-1. Connects the GitHub runner to the Tailnet.
-2. SSHes to the production host.
-3. Creates and uploads an encrypted backup of the running release.
-4. Switches Caddy to maintenance mode and stops the old backend workers.
-5. Checks out the selected ref and installs the production credential key.
-6. Runs two database initialization passes against a clone using the running PostgreSQL image.
-7. Rebuilds and recreates frontend and backend containers.
-8. Waits for `/readyz` to confirm an HTTP response and a working database query.
-9. Writes deployment status metadata.
-10. Restores the production Caddy config.
+An unknown previous release, or the workflow's **full_release** option, selects
+everything. The steps are:
 
-The workflow creates one encrypted pre-deploy archive before changing the checkout
-and passes that exact archive into the deployment report and schema preflight. It
-does not create a second full archive after checkout. After R2 confirms an object
-exists, local retention keeps the newest archive in each backup directory and may
-remove older uploaded copies. An archive without a verified remote object remains
-on the host. This bounds local disk use while preserving the encrypted recovery
-copy and its recorded checksum.
+1. Fetch the target commit and decide the plan.
+2. Back up: a full encrypted archive uploaded to R2 when the schema may change;
+   otherwise an encrypted database snapshot kept on the host in
+   `backups/pre-deploy-db` (the newest three are kept; the nightly backup still goes off-site).
+3. Switch Caddy to maintenance and stop the backend. The backend source is bind-mounted,
+   so it stops before the checkout changes.
+4. Check out the release and install or verify the production credential key.
+5. When the schema may change: run two database initialization passes against a clone
+   using the running PostgreSQL image, then the index dedupe.
+6. Build the images whose inputs changed (cached layers are reused) and recreate the
+   frontend and backend containers. An unchanged frontend keeps its image and keeps
+   reporting the commit it was built from.
+7. Wait for `/readyz`, restore the production Caddy config, run the public checks and
+   write the deployment status and event. The event's `plan` records which parts ran.
+8. Release disk space: the replaced `node_modules` volume, untagged images, and build
+   cache above 6 GB (or all of it when less than 10 GB of disk is free). Named rollback
+   and recovery images are never removed.
 
-Before creating a new pre-deploy archive, the workflow runs the same remote-object
-verification against older local archives. If disk pressure interrupted an archive,
-encryption leaves a `.partial` file rather than publishing the final archive name;
-the next verified cleanup removes those temporary files. A failed raw archive is
-also removed before the next attempt because pre-deploy backups must be encrypted
-before they are usable. The workflow transfers the reviewed backup/encryption
-helpers before checkout, so recovery receives these protections even while the
-host is still running an older release. Older releases may have
-left an incomplete final filename. After the failed run proves that exact file did
-not complete or upload, pass its basename through the deployment workflow's
-`discard_incomplete_backup` input. The workflow rejects paths and unexpected names,
-and refuses to continue when the named file is absent.
+The documentation impact reason can contain normal prose, quotes and line breaks. It is
+validated, with the other arguments, before the release touches the host.
 
-After recording the encrypted archive checksum, production deployment verifies the
-matching R2 object and releases the local copy before building images. Unverified
-archives remain local and stop the deployment. The preflight also releases Docker's
-disposable build cache after producing the tagged backend image, leaving room for
-the cloned-database checks without removing images referenced by containers.
-At the start of a later retry, the workflow performs the same remote verification
-for earlier local archives and releases disposable BuildKit cache before writing a
-new backup, so failed attempts cannot accumulate into another disk-space failure.
+The host remembers the backup recipient the workflow passes (`.deploy-state/backup-age-recipient`),
+so a release started over SSH from a trusted machine can encrypt backups without it.
+
+When a full archive is uploaded, R2 must confirm the object before the local copy is
+released; an unverified archive stays on the host and stops the deployment. Before
+creating a new archive, the release runs the same verification against older local
+archives. If disk pressure interrupted an archive, encryption leaves a `.partial` file
+rather than publishing the final archive name, and the next verified cleanup removes it.
+After a failed run proves an older release's incomplete final filename never uploaded,
+pass its basename through the workflow's `discard_incomplete_backup` input. The workflow
+rejects paths and unexpected names, and refuses to continue when the named file is absent.
+
+CI runs only when started by hand. Releases run the same checks on the developer's
+machine first.
 
 If public health checks fail, maintenance is restored. A failure after checkout
 leaves maintenance active for investigation; never restart old code against a
