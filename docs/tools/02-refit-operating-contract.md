@@ -8,7 +8,7 @@ id: orbiters.tools.refit-operating-contract
 domain: refit
 type: reference
 owner: orbiters-refit
-lastVerified: 2026-09-08
+lastVerified: 2026-10-16
 relations: orbiters.tools.mcb-operating-contract, orbiters.tools.unitgit-operating-contract, orbiters.tools.xray-gizmos-operating-contract
 ---
 
@@ -52,10 +52,32 @@ Particles fade out around the installer so they never overlap its controls.
   blendshape enabled at 100 by default.
 - Body-shape transfer adds separate shapes such as `refit_Belly_Big`.
 - Cross-avatar mode replaces the asset armature, projects target skin weights, and
-  preserves unmatched skirt, physics, or prop bones by re-parenting them.
+  preserves unmatched skirt, physics, or prop bones by re-parenting them. Clothing
+  whose armature already stands on the target's skeleton (Novabeast clothing on the
+  Ultinova or the Hypernova) keeps its armature, weights and links; only its mesh is
+  refitted.
 - Blendshape-only mode keeps the armature and writes a standalone prefab when
   possible.
 - Scene application is Undo-aware.
+
+## Prefab outfits (VRCFury, Modular Avatar)
+
+Since ReFit 0.6.0 an outfit prefab never needs unpacking, whether ReFit runs from its
+window, MCB or My Avatar. The rebuilt armature is added to the prefab instance, objects
+the prefab owns that the refit no longer uses are hidden rather than deleted (Undo shows
+them again), and the outfit's other parts keep their own bones. A VRCFury Armature Link
+that other parts still use stays theirs, and the refitted part's new armature gets its
+own copy of the link.
+
+The shapes an outfit sets while it is worn count too: ReFit reads the clothing's own
+VRCFury toggles (blendshape actions on the body or on every renderer) and Modular Avatar
+Shape Changers, and fits with them on both bodies, so a turtleneck that hides the chest
+fluff is fitted over the shrunk chest.
+
+Between two different bodies, ReFit lays the source body onto the target, moves the
+clothing with the skin under it and drapes it over the target like cloth; body shapes
+are draped the same way. Bodies sculpted far beyond the base are fitted by the earlier
+projection passes.
 
 Use `ReFitService.Validate(request)` to stage and diagnose a request without
 changing assets. Use `ExecuteCoroutine` for editor UI so geometry work does not

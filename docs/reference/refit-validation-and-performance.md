@@ -8,7 +8,7 @@ id: orbiters.refit.validation-performance
 domain: refit
 type: reference
 owner: orbiters-refit
-lastVerified: 2026-10-03
+lastVerified: 2026-10-16
 relations: orbiters.tools.refit-operating-contract
 ---
 
@@ -38,8 +38,9 @@ preflight do not repair the live scene. Explicit armature repair is a separate
 `ReFitAssetPipeline.RepairSceneAssetArmature(request, report)` operation.
 
 Scene application is a short synchronous Undo transaction after computation.
-Invalid armature application rolls back the scene, including prefab connectivity
-when unpacking was required, and removes only operation-created output assets.
+Invalid armature application rolls back the scene and removes only
+operation-created output assets. Prefab instances are never unpacked: objects the
+prefab owns are hidden instead of deleted, and shown again on rollback or Undo.
 An optional prefab-save warning can retain a valid saved mesh. Successful scene
 undo does not remove mesh files. Direct engine callers own the output mesh,
 including partial output reported on failure; the service cleans up failed output.
@@ -61,6 +62,20 @@ Same vertex/triangle counts or unchanged shape names are insufficient. Missing o
 mismatched provenance causes recomputation, not reuse of potentially stale output.
 
 ## Geometry and Performance
+
+### Body Registration and Cloth Fit (0.6.0)
+
+Between two bodies, `ReFitBodyRegistration` lays the source body onto the target
+(starting where the skeletons put it, then a Laplacian-regularized non-rigid
+registration in ten passes from stiff to loose), and `ReFitClothFit` moves each
+clothing point with the registered skin around it and drapes the fabric out of the
+target skin it covered on the source. On the reported outfits, the Novabeast latex
+catsuit on the Hypernova went from 422 spikes over 5 mm (66 mm at worst) to 45
+(15 mm) with five shapes, in 11 s instead of 17 s; the LunaVRC turtleneck and
+sweater on the Ultinova from 810 and 720 spikes to 354 and 193. When more than 2 %
+of the target's skin under the clothing is out of the registration's reach (the
+sculpted FBX fixture: 8 %), the earlier projection passes run instead. Per-case
+numbers are in the package's `Documentation~/VALIDATION.md`.
 
 ### Concurrent Shape Transfer (local, unreleased)
 

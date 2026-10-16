@@ -8,7 +8,7 @@ id: orbiters.tools.myavatar-accessories
 domain: myavatar
 type: how-to
 owner: orbiters-engineering
-lastVerified: 2026-10-03
+lastVerified: 2026-10-16
 ---
 
 # Add accessories and clothes with My Avatar
@@ -131,18 +131,14 @@ matches. Matched bones rotate toward the corresponding limb segments, so a
 T-pose sleeve follows a lowered arm while retaining the clothing rig's bone axes.
 Unmatched extra bones follow their parents.
 
-The local, unreleased cross-base update also adjusts recognized body clothing
-around the avatar's visible body after aligning its bones. It adds clearance to
-intersecting fabric, with extra room for sleeves, and smooths the displacement
-across seams without smoothing away the garment's folds. Body-region matching
-prevents an arm from expanding against the torso or the opposite limb. Props and
-clothing that already match the base do not receive this extra pass.
-
-The initial fit creates a separate mesh copy and retains the garment's original
-bone weights, texture coordinates and blendshapes. It does not transfer the custom
-base's muscle shapes; use ReFit for that subsequent step. **Cancel** restores the
-original mesh and fitted transforms where they still match the generated fit,
-preserving later manual replacements or transform edits.
+Clothing from a different base is only aligned to the avatar's bones: it keeps its
+own mesh, clipping included, ready for ReFit, which fits it to the body with a
+`refit` blendshape and transfers the custom base's muscle shapes. Up to Orbiters
+Toolkit 0.3.22 the drop also pushed intersecting fabric out by the volume of the
+bones, on a mesh copy; that made clothing look blocky and is no longer done. A garment
+fitted that way keeps its copy until its fit is cancelled: **Cancel** restores the
+original mesh and fitted transforms where they still match the fit, preserving later
+manual replacements or transform edits.
 
 Each installed item's card lists its assigned **Textures**, grouped by material,
 with the shader slot, texture name and thumbnail. Collapse the list when you do
