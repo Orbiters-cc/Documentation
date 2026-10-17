@@ -33,8 +33,9 @@ website on small hardware and storing keys there.
 - Orbiters stores the workspace, the queues and the keys, and serves the Orb page. It never performs the
   lookups.
 - Each personal agent is a Steward-style agent account sponsored by the member, with its own revocable token.
-  The job worker's token has `job-search:work` and `secrets:read`; Orb's has `agent-config:read`, `secrets:read`
-  and `sponsor:read` (read-only AI app tools as the sponsor).
+  The job worker's token has `job-search:work` and `secrets:read`; Orb's has `agent-config:read`, `secrets:read`,
+  `sponsor:read` (read-only AI app tools as the sponsor) and one write scope per kind of report (`agent-status:write`,
+  `research:write`, `board:write`), and expires after 180 days (October 2026).
 - Agents pull work: they long-poll for tasks, hold short leases, and every write carries the task generation.
   Orbiters paces each source and parks a route that asked to wait; agents only bound their own concurrency.
 - Keys are stored encrypted as owner-scoped worker secrets. Each key names the agent kinds that may receive it,

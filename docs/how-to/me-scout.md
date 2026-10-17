@@ -8,7 +8,7 @@ id: orbiters.how-to.me-scout
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-10-14
+lastVerified: 2026-10-17
 relations: orbiters.reference.scout-agent-api, orbiters.how-to.me-job-search-worker, orbiters.decision.personal-agents-on-member-hardware
 ---
 
@@ -43,6 +43,11 @@ The installer puts the sync in `/opt/orb` and its configuration in `/etc/orb/env
 
 Then open **Orb → Agents & keys**, choose **Pair** on Orb, and run `sudo orb-pair` on the Pi with the token. The card
 shows **Paired**. Run the installer again to update; it keeps the pairing.
+
+The token is valid for 180 days. From 14 days before it ends, the Orb page warns you and Orbiters sends you a
+notification (relayed to your main channel) at 14 and 3 days: choose **Pair** again and run `sudo orb-pair` with the
+new token. The old token stops working at once. An expired token is refused, and the Pi's sync log says
+`Orbiters refused Orb: This token has expired`.
 
 **Upgrading a Pi set up as Scout:** run the same installer. It stops and removes the `scout-sync` units and
 `/opt/scout`, copies `/etc/scout/env` to `/etc/orb/env` (so the pairing is kept), renames the Hermes profile
@@ -122,11 +127,19 @@ are never replayed. Your notification settings in Orbiters still decide which no
   parallel.
 - **In order** walks the list: a task takes the first model that is available.
 
-A lane whose tasks fail with rate-limit errors rests for 15 minutes.
+A lane whose tasks fail with rate-limit errors rests for 15 minutes; after 20 rate-limit errors in a row it rests an
+hour, and a free tier whose daily quota is used rests until the provider resets it (midnight Pacific for Google AI
+Studio, midnight UTC for the others). A model that refuses a request as too large sits out for six hours. Groq's free
+tier stays out of the worker lanes altogether: its per-minute token cap is smaller than one research request.
+
+OpenCode Zen's free models only answer the OpenCode app, so the Pi runs them inside the OpenCode CLI instead of as a
+Hermes worker: two queued questions at a time wait for that lane, answered one by one as a separate, unprivileged
+`orbcode` user that cannot read any of Orb's files or keys. A failed run hands the question back to the other workers.
 
 Paid providers (Anthropic, DeepSeek, OpenRouter) each get a monthly cap for background work. The Pi spreads the cap
-evenly over the days left in the month: once a provider has used today's share, tasks go to the other models in the list,
-and when none is left, queued tasks wait until the next day or month. A cap of 0 allows only free models. To run a paced provider past
+evenly over the days left in the month, and each day's share opens hour by hour (a 24th of it each hour, the first at
+midnight), so workers run through the day instead of in one burst at night. Once a provider has used the share open so
+far, tasks go to the other models in the list, and when none is left, queued tasks wait until the next hour or month. A cap of 0 allows only free models. To run a paced provider past
 today's share, unlock it from the research board for 2, 6 or 12 hours; the monthly cap still applies. To stop using a
 model for a while, press its pause button in the list: it takes effect at once, without saving, and the Pi gives it no
 new tasks (running ones finish) until you resume it. Spend comes from
@@ -135,12 +148,17 @@ per month** is a separate budget Orb respects for its own work.
 
 When the queue runs dry between planner runs, a worker queues the next questions on the cheap model (at most every 15
 minutes). Workers may also queue one follow-up question per task, and at most 12 tasks per worker wait at once; the
-rest wait until there is room. When Orb says it will look into something, it queues the task right away. Background
+rest wait until there is room. At most 10 questions per worker are created a day (40 with 4 workers): before a
+question runs, the Pi drops it when it repeats one asked in the last two weeks (same main words) or, for worker
+follow-ups and refills, when the day's limit is reached. Questions the planner or you queue are never dropped for the
+limit. When Orb says it will look into something, it queues the task right away. Background
 workers only see your owner brief and public web pages, never your documents, CV or Orbiters data, because free
 models may log prompts.
 
-Background results are stored with each task on the Pi; the planner folds them into Orb's idea ledger every few hours
-and the digest reports them. Orb stays up to date without a new conversation: when its instructions change, the next
+Every minute the Pi copies each finished task's summary into `~/orb/findings/<day>.md` and only then archives the task,
+so no result is lost unread. `findings/recent.md` holds the last 24 hours and `findings/questions.md` the queue and the
+questions of the last two weeks: the planner folds the findings into Orb's idea ledger (`ideas.md`) every few hours,
+and the daily digest reads both the ledger and the last day's findings. Day files are kept for 30 days. Orb stays up to date without a new conversation: when its instructions change, the next
 message you send carries the new version, and each message carries a short status of the background work and
 research projects when it changed (the `orb-live` hook on the Pi adds it). Your conversation history is kept. Saving the brief, budget or rhythm never
 restarts Orb; changing keys or models does.
@@ -187,6 +205,10 @@ On the Pi, Orb's chat and workers also have read-only social tools:
 | `instagram_profile` | igexport.com. Post links and media only, no captions. |
 
 These sources are unofficial, allow only a few requests a minute and may stop working at any time.
+
+Orb can also read your repositories through your Orbiters GitHub connection (**Creator → VPM**), read-only, and, once
+you set them up, up to two mailboxes and your Google Calendar, Drive, Docs and Sheets: see
+[Give Orb your email and Google Workspace](/documentation/orbiters.how-to.orb-mail-google).
 
 ## Watch what it is doing
 

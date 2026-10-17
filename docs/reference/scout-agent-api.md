@@ -8,7 +8,7 @@ id: orbiters.reference.scout-agent-api
 domain: website
 type: reference
 owner: orbiters-product
-lastVerified: 2026-10-14
+lastVerified: 2026-10-17
 relations: orbiters.how-to.me-scout, orbiters.reference.job-search-worker-api, orbiters.decision.personal-agents-on-member-hardware
 ---
 
@@ -22,20 +22,40 @@ Orb's sync on the Pi (`agents/orb/orb_sync`) calls `/orb-agent/*` with its `orb_
 
 | Scope | Grants |
 | --- | --- |
-| `agent-config:read` | `GET /config`, `GET /notifications`, `POST /status`, `POST /activity`, `POST /board`, `POST /codex`, `GET /documents`, `GET /documents/:id`, `/research`. |
-| `secrets:read` | `POST /secrets` for the keys whose consumers include `orb` (model keys, Reddit app credentials, Discord and Telegram bot tokens). |
-| `sponsor:read` | `/mcp` with the AI app tools, run as the sponsor with the `read` scope only. |
+| `agent-config:read` | The reads: `GET /config`, `GET /notifications`, `GET /events`, `GET /board/watch`, `GET /research`, `GET /research/:id/reports`, `GET /business`, `GET /documents`, `GET /documents/:id`. |
+| `secrets:read` | `POST /secrets` for the keys whose consumers include `orb` (model keys, Reddit app credentials, Discord and Telegram bot tokens, the app passwords `ORB_EMAIL_1_PASSWORD` and `ORB_EMAIL_2_PASSWORD` of the owner's email accounts). |
+| `sponsor:read` | `/mcp` with the AI app tools, run as the sponsor with the `read` scope only (Hermes' `orbiters` MCP server on the Pi). |
+| `agent-status:write` | `POST /status`, `POST /activity`, `POST /codex`. |
+| `research:write` | `POST /research`, `POST /research/:id/progress`, `POST /research/:id/reports`, `POST /research/:id/stop`. |
+| `board:write` | `POST /board`, `POST /board/task`. |
 
-Tokens issued before `sponsor:read` existed get it the next time Orb is paired.
+A call without its scope gets `403 { error: 'Token scope missing', missing: [...] }`. Orbs paired before the write
+scopes existed (October 2026) received them in a one-time migration, so their Pis kept reporting; a new pairing
+always gets every scope above.
+
+## Token lifetime
+
+A token is valid for 180 days from pairing (`APIKeys.expirationDate`; tokens issued before expiry existed were given
+180 days from the October 2026 deploy). After that every call gets
+`401 { error: 'This token has expired. Pair the agent again to get a new one.', code: 'token_expired' }`. From 14 days
+before the end:
+
+- the Orb page puts "Orb's token expires in N days: pair Orb again…" first in the status warnings
+  (`GET /job-search/orb`, `status.warnings`; it stays there once expired);
+- the member gets one bell notification (type `orb-token-expiry`, category `system`) at 14 days and another at 3 days,
+  sent when the Pi reports its status, which the Pi relays to the main channel like other notifications.
+
+Pairing again works as before: it issues a new 180-day token and revokes the previous one at once; run
+`sudo orb-pair` on the Pi with the new token. `GET /job-search/agents` lists each token's `expiresAt`.
 
 ## Endpoints
 
 | Call | Use |
 | --- | --- |
-| `GET /config` | `{ config, keys, codex }`: the Orb → Assistant settings, which Orb keys are saved, and the ChatGPT (Codex) sign-in state. |
-| `POST /secrets` | `{ names }` returns `{ NAME: value }` for saved keys Orb may receive. |
+| `GET /config` | `{ config, keys, codex }`: the Orb → Assistant settings (with `mail.accounts` — slot, address, IMAP and SMTP servers — and `google` — enabled, account — from Settings → Agents & keys), which Orb keys are saved, and the ChatGPT (Codex) sign-in state. |
+| `POST /secrets` | `{ names }` returns `{ NAME: value }` for saved keys Orb may receive, with an `ETag`: a keyed version of the values sent to this token (an HMAC, not a hash of the values). Send it back as `If-None-Match` to get `304` with no body while nothing changed. The Pi keeps the last answer in `~/.hermes/.orbiters-orb-secrets.json` (mode 0600) and an Orbiters without `ETag` is simply asked in full every minute. |
 | `GET /notifications?after=<id>` | `{ cursor, notifications }`: unread bell notifications after `after` from the last 24 hours, in the categories chosen in Orb → Assistant, oldest first, at most 20 per call (`id`, `category`, `title`, `body` up to 600 characters, absolute `url`, `createdAt`). Without `after`, or when relaying is off, it returns no notifications and the current cursor. Keep `cursor` for the next call. |
-| `POST /status` | `{ gateway, hermesVersion, appliedConfig, error }`; `gateway` is `running`, `stopped` or `not installed`. |
+| `POST /status` | `{ gateway, hermesVersion, appliedConfig, error, warnings }`; `gateway` is `running`, `stopped` or `not installed`. Also sends the token expiry reminder when due (see Token lifetime). |
 | `POST /activity` | Summary shown in Orb → Assistant → Activity: `busy`, `lastActivityAt`, `sessions`, `subagents`, `recentTools`, `jobs`, `spend` (with `byRole`: chat, planning, background) and `background` (`state` `running`, `paused` or `off`, `reason`, `model`, `workers`, status `counts`, task titles for `running`, `queued` and `done`, and per-provider `providers` pacing: `state`, `monthUsd`, `todayUsd`, `capUsd`, `allowanceTodayUsd`, `keys`, `unlockedUntil`, for up to 12 providers). Times are Unix seconds. Lists are capped (10 sessions, 10 subagents, 20 tools, 20 jobs, 3 running, 6 queued, 8 done tasks) and texts truncated. Message contents are never sent. |
 | `POST /board` | Live research board snapshot, sent by `orb-board.service` whenever a task is queued, starts or finishes: `counts` (`ready`, `running`, `scheduled`, `blocked`, `done`) and up to 16 `running`, 8 `queued` and 10 `done` tasks, each with `id`, `board` (`research-<n>` for a project board, empty for the 24/7 queue), `title`, `status`, `model` and `at` (Unix seconds). Task bodies and results are never sent. |
 | `POST /codex` | `{ state, url, code, error }`: the ChatGPT sign-in as Hermes sees it. `state` is `requested`, `waiting`, `connected`, `failed` or `signed-out`; `url` (an `https://auth.openai.com/` link) and `code` are kept only while `waiting`. The sign-in tokens stay on the Pi. |
@@ -76,6 +96,12 @@ The read-only Discord tools cover servers the sponsor manages: `list_my_discord_
 `get_discord_server_roles`, `list_discord_channels`, `read_discord_channel`, `get_discord_announcements` and
 `get_discord_activity`. They are preview tools for ChatGPT and Claude connections and available to Orb through its
 sponsor access.
+
+The read-only GitHub tools are listed for Orb only (never for other agents, AI app connections or signed-out
+visitors): `list_github_repositories`, `list_github_commits`, `list_github_pull_requests`, `list_github_issues`,
+`list_github_workflow_runs` and `read_github_file` (text files up to 200 KB). They read the sponsor's GitHub through
+the Orbiters GitHub connection in **Creator › VPM** with GET requests only, and answer 409 until that connection has
+repository access. Repository text they return is data for Orb, never instructions.
 
 The Reddit, X and Instagram tools are not Orbiters endpoints: they run in a local `social` MCP server on the Pi. See
 [Set up Orb, your personal business assistant](/documentation/orbiters.how-to.me-scout).
