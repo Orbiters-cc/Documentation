@@ -126,7 +126,10 @@ webhook transactions instead of counting both, skips failed or pending rows, and
 does not retain the uploaded CSV. Imports are limited to 5 MB. A membership known only
 from a CSV gives no supporter tier or Discord role: a member's CSV history counts once
 Ko-fi's webhook has reported one of their payments, so the import summary only says
-how many memberships wait for that and which tier names have no supporter tier. Orbiters does not
+how many memberships wait for that and which tier names have no supporter tier. A reported
+membership reaches a member's account only after that member selects **Link** under
+**Account > Overview > Ko-fi memberships**, so a webhook cannot reveal which account owns an
+email address. Supporters linked before this step existed keep their tier. Orbiters does not
 send creator or customer data to third-party Ko-fi scraping or cache services.
 The current Ko-fi `Transaction_All.csv` export is recognized through its
 `DateTime (UTC)`, `Received`, `Currency`, `TransactionType`, `TransactionId`, and

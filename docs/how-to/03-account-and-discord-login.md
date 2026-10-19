@@ -113,6 +113,15 @@ is saved to your account across devices and is used by **All (estimate)** in the
 Creator Revenues tab. It does not change checkout prices, payment currencies, or
 the original amounts recorded in revenue history.
 
+## Link A Ko-fi Membership
+
+If you support a creator through a Ko-fi membership, open **Account > Overview**. The
+**Ko-fi memberships** card lists the creators whose Ko-fi reported a membership paid
+with your verified email. Select **Link** on the ones that are yours to receive their
+supporter tier and its Discord roles, and **Unlink** to remove it. Orbiters never links
+a Ko-fi payment to your account by email alone, so a creator cannot learn which account
+owns an email address. Memberships already linked before this card existed stay linked.
+
 ## Notifications And Account Actions
 
 The avatar at the right of the navigation bar opens the account menu. Its badge is
