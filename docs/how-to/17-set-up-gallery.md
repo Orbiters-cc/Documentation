@@ -8,7 +8,7 @@ id: orbiters.how-to.set-up-gallery
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-10-08
+lastVerified: 2026-10-19
 ---
 
 # Gallery: connect a Discord room and import pictures
@@ -155,8 +155,9 @@ The September 6 optimization separates image-list delivery from Discord URL refr
 - A failed source refresh or failed image decode removes the card from the current view and closes its space. **Retry skipped images** tries those sources again. This does not delete or globally hide the pictures. Network failures are bounded rather than leaving indefinite loading tiles.
 
 The skipped-image count deliberately has no matching gray error frames: those
-cards have been removed from the current gallery layout. A homepage widget keeps
-its saved footprint and offers **Retry image** and **Open galleries** instead.
+cards have been removed from the current gallery layout. A pinned homepage widget
+keeps its saved footprint and offers **Retry image** and **Open galleries** instead;
+a suggested feed widget leaves the feed.
 
 The September 20 fix makes expired Discord attachment refreshes bypass the
 Discord.js message cache. A cached message can still contain an expired signed
@@ -188,7 +189,20 @@ These changes need the matching frontend and backend deployment; publishing this
 
 Pictures on Gallery and homepage gallery widgets use the same expanding image viewer. The loaded thumbnail stays visible while the full image loads. Close with the inset button, Escape or a click outside; the viewer returns to its source picture, including the grid picture's angle, scale and smaller corners, and restores keyboard focus. Reduced motion removes the spatial expansion.
 
+When the picture was posted with text, the viewer shows that Discord message
+under the image, with mentions, channels, links and formatting displayed as in
+Discord; long messages collapse after three lines behind **Show more**. Edits on
+Discord update it. The text is only sent with a picture you can already see.
+
 Select the author’s avatar or name to open Gallery with an author filter across the galleries available to you. You can select a particular gallery while retaining that filter, change sorting or load further pages. **Show all authors** clears it. Private galleries and hidden images retain their existing access rules. Filtered pagination is bound to the author as well as the viewer, gallery set and sort.
+
+### Deleted Discord pictures
+
+Deleting a picture's message on Discord, or editing the message to remove the
+attachment, takes the picture out of every gallery, feed and homepage widget.
+The same happens when Orbiters renews an expired link and Discord reports the
+message or attachment gone. Outages and missing bot permissions never retire a
+picture; they only show the retry state.
 
 ### Replies from Discord
 
@@ -214,6 +228,20 @@ messages per job, stopping at the channel's oldest stored picture; it runs after
 completed gallery crawl and once for every active room (marker
 `gallery-replies-backfill-2026-10`). `GET /galleries/images/:placementId/replies`
 applies the same access checks as the picture; feed items carry `replyCount`.
+
+The text of the picture's own message is kept in `DiscordImage.metadata.message`
+(`content` and resolved `mentions`), set on ingestion, crawl and `messageUpdate`,
+and serialized as the picture's caption only next to a picture the viewer may see.
+Existing pictures are filled by the same backfill job (marker
+`gallery-message-text-backfill-2026-10`); it needs the bot's message-content access.
+`services/discordImages/sourceMessage.js` deactivates pictures (`isActive = false`)
+on `messageDelete`, `messageDeleteBulk`, an edit that drops the attachment, or a
+refresh failing with Discord code 10003/10008 or a missing attachment. A client
+whose image failed to load requests the image endpoint with `failed=1`, which
+forces one Discord refresh per picture every 10 minutes at most; unsigned Discord
+URLs are renewed too. The homepage drops failed feed pictures for the browser
+session (`sessionStorage` key `orbiters:home:unavailable`); pinned ones keep the
+**Image unavailable** tile.
 
 Topic sources live in `GalleryTopicSources` and `GalleryTopics`. Each topic gallery
 is an ordinary gallery whose single `GalleryChannels` row is the thread; creation runs

@@ -8,7 +8,7 @@ id: orbiters.how-to.creator-vpm
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-10-01
+lastVerified: 2026-10-19
 ---
 
 # Publish and manage a VPM listing
@@ -33,7 +33,38 @@ not duplicate packages or reset hidden/removed versions. Repository permissions
 still apply to builds and webhook setup.
 
 The **Creator Companion listing URL** uses a copyable snippet. Copy the complete
-JSON address into VCC, or choose **Add to Creator Companion**.
+JSON address into VCC, or choose **Add to Creator Companion**. **Public page**
+opens the listing's public page, the one to share with people who install your
+packages.
+
+## Brand the listing and its packages
+
+The image area at the top of the listing card holds the listing's banner and
+logo. Use its round buttons to upload, change or remove each one (PNG, JPEG or
+WebP, up to 5 MB). They appear on the public page and on the VPM widget of your
+profile.
+
+Each package row also has a logo and a **Website** field. The logo only shows on
+Orbiters, because the VPM listing format has no logo field. The website must be
+an `http` or `https` link; it shows on the package card of the public page and
+is written into the listing JSON as the package's `documentationUrl` when its
+own `package.json` has none.
+
+The public page uses your profile personalization: background, colors, font and
+corner style. Change them in **Personalize your creator pages**.
+
+## Follow listing activity
+
+Under the listing card, four tiles show today's Creator Companion fetches,
+today's distinct clients, and the fetches and public page views of the selected
+period. The **Creator Companion fetches** chart groups them by **Day**, **Week**,
+**Month** or **Year**; hover or focus a bar for its date and count.
+
+A fetch is one read of the listing JSON, which Creator Companion does when it
+refreshes its repositories, so one installed user produces several fetches a
+day. Clients are counted per UTC day without storing any address. Package
+downloads are not counted: ZIPs download directly from GitHub or their source
+URL, not through Orbiters.
 
 ## Create a new listing
 
@@ -99,8 +130,10 @@ not deleted. A deleted upstream release becomes unavailable after a refresh.
 
 ### Hide a whole package
 
-Versions are grouped by package under each source. Select the eye button next
-to a package name to hide every version of that package, including versions that
+Versions are grouped by package under each source. When a source has one
+package, **Hide package** sits next to **Build Release**; with several packages,
+each package name has its own eye button. Hiding a package hides every version of
+it, including versions that
 later releases or refreshes add. The package disappears from the listing JSON and
 from its public page, and moves to the collapsed **Hidden packages** group below
 the sources. Open the group to select the eye button again and restore it; the
@@ -113,7 +146,9 @@ Orbiters tools read its releases from the public feed.
 Orbiters created on GitHub. Delete a manually added webhook in GitHub repository
 settings. You can add the source again intentionally.
 
-The public listing includes package search, dependencies, version downloads and
+The public page shows the banner, logo, author, **Add to Creator Companion**, a
+copyable listing URL and one card per package with its logo, website, versions
+and ZIP downloads. It also includes package search, dependencies, version downloads and
 installation guidance. MCB, ReFit and the asset installation wizard use the
 official Orbiters listing address after deployment.
 
@@ -132,6 +167,24 @@ package state in `VpmPackages` (`listingId`, `name`, `hiddenAt`; unique on
 listing and name). Listing details return `hiddenPackages`. `publicFeed`
 excludes hidden package names in SQL and again in `feed()`, so no version of a
 hidden package reaches the public JSON. Hiding never edits `VpmVersion.visibility`.
+
+Package logos and websites live on the same `VpmPackages` row (`logoFileId`,
+`websiteUrl`): `POST|DELETE /vpm/:id/packages/:name/logo` and
+`PUT /vpm/:id/packages/:name/website`. Listing images use
+`POST|DELETE /vpm/:id/logo` and `/vpm/:id/banner` (multipart field `image`).
+The public page reads `GET /vpm/:slug/page`, so page views are never counted as
+Creator Companion fetches.
+
+`services/vpm/stats.js` counts `index.json` fetches and page views in memory and
+writes one upsert per listing and UTC day into `VpmFetchDays` every 15 seconds.
+Distinct clients are HMAC hashes of address and user agent, keyed by
+`VPM_STATS_SECRET` (falling back to `JWT_SECRET`) and the day, stored in
+`VpmFetchClients` and deleted the next day. `GET /vpm/:id/stats?period=day|week|month|year`
+returns the buckets and totals. Recording never waits for the database and never
+fails the feed request.
+
+The first listing of a creator adds the profile VPM widget once (`VpmProfileWidgets`
+records it), so removing the widget later keeps it removed.
 
 See [VPM migration runbook](../development/vpm-migration.md) before changing the
 official listing or GitHub Pages address.

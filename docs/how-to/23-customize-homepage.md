@@ -8,7 +8,7 @@ id: orbiters.how-to.customize-homepage
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-10-01
+lastVerified: 2026-10-19
 ---
 
 # Customize Your Homepage
@@ -24,7 +24,7 @@ control appears when you focus the widget with the keyboard and stays visible on
 touch screens. The outline pin becomes a filled pin when saved. In customization, the crossed-out pin removes it. The widget moves into your pinned collection. Use **Undo** in the
 confirmation if you change your mind.
 
-Your initial pins are **Sona catalog**, **Latest blog post** and **Age verification**.
+Your initial pins are **Sona catalog**, **Latest blog post**, **Age verification** and **Orbiters on Discord**.
 Creators with a configured default commission board also start with **Board**. You can remove any of these. Removing all pins keeps the homepage empty
 of pins; it does not restore the defaults.
 
@@ -84,6 +84,7 @@ without dragging; the catalog stays open so you can add another widget.
 | My Avatar | 2 × 1, 1 × 1 or 2 × 2 | The avatars, texture sets and accessories you own, ready for My Avatar in Unity |
 | Orbiters in ChatGPT | 2 × 1, 1 × 1 or 2 × 2 | Whether your account is connected to ChatGPT, starter prompts, the MCP URL and setup links |
 | Orbiters in Claude | 2 × 1, 1 × 1 or 2 × 2 | The same for Claude |
+| Orbiters on Discord | 2 × 1 or 1 × 1 | A **Join server** link to the Orbiters Discord server |
 
 Boards, gallery images, assets, sticker commissions, older posts, documentation pages, creators and individual events can each have
 multiple pins with different content. The same selection can only be pinned once.
@@ -99,6 +100,11 @@ In **Creator → Overview** or **Commissions**, choose the default commission bo
 and incoming column. Once saved, **Pin board to top of homepage** adds or moves
 that board ahead of your other pins. The default routes incoming commissions;
 other pinned boards remain independent.
+
+**Orbiters on Discord** is a default pin for new layouts and appears in the
+discovery feed when you already saved your own layout. It can be pinned once.
+**Join server** opens the Orbiters invite in Discord. The site footer has the
+same Discord link on every page.
 
 **MCB** also appears in the discovery feed for visitors and signed-in users.
 Search for **MCB** or **My Custom Base** in the catalog to add it. It can be pinned
@@ -163,6 +169,17 @@ Chromium browsers such as Chrome and Edge; other browsers use a simple backgroun
 Select an image to expand its card into a larger preview with the same gentle spring as age verification. The background fades in and out. Close with the inset top-right button, **Close**, **Escape**, or a click outside; the preview returns to its card and restores keyboard focus. Reduced motion uses fades without spatial expansion. **Open gallery** takes you to the image's gallery. Images from asset galleries are also available in the feed and widget catalog; their link opens the asset and scrolls to its gallery after loading.
 
 The expanded preview fits the image's proportions and shows the same author, posted date, reaction count and image position as the gallery viewer, including **Report a problem**. Reporting does not require leaving the preview. The widget thumbnail stays visible while the full image loads, then gently fades into the sharper version. If that image cannot load, the thumbnail remains available.
+
+When an image comes from a Discord message, the preview shows the message's text
+under the picture, with mentions, channels, links and formatting displayed as in
+Discord. Long messages show three lines and a **Show more** button. The same text
+appears wherever the picture viewer opens: Home, galleries, profiles and event
+galleries.
+
+A suggested picture that cannot load is left out of the feed and the widgets
+around it close the gap; it stays hidden for the rest of your browser session.
+A picture you pinned keeps its place and shows a small **Image unavailable** tile
+with retry and open-gallery buttons, so you can decide whether to unpin it.
 
 Feed images initially use the closest available widget proportions: portrait pictures favor tall tiles, while wide pictures favor horizontal tiles. Near the end, the feed can adjust the order and supported sizes of new widgets to reduce empty space. Pictures already on screen stay in place when more load, and pinned pictures keep your chosen size. When resizing, the crop crossfades to the nearest layout during the drag, before you release the pointer. Article and guide layouts overlap during their fade so the card does not go blank between sizes.
 

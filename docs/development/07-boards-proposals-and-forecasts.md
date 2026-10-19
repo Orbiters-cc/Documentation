@@ -88,6 +88,17 @@ menu remains an explicit move fallback. A successful drop persists through
 leaving a false local position. GitHub-backed issue cards remain read-only and do
 not expose a drag action.
 
+Board drags use pointer events, not native HTML drag and drop, on both the
+homepage Board widget and the full Board page (`useBoardCardDrag.js`, geometry in
+`boardDragGeometry.js`). A floating copy follows the pointer; every column is
+stretched to the height of the tallest one, and a pointer in the gap between
+columns resolves to the nearest column span. Near the scroll container's edges
+the board (or the page) scrolls with a speed that ramps by distance, the wheel
+keeps scrolling during the drag, and Escape cancels it. A plain click still opens
+the card. A moved card is placed after the last card of its new column; item
+positions accept values up to 1e15 because Trello positions reach hundreds of
+trillions.
+
 ## Data Model
 
 See [Board Data and Route Reference](/documentation/orbiters.reference.board-data-and-routes) for the detailed contract.

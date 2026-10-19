@@ -8,7 +8,7 @@ id: orbiters.tools.unity-package-safety-fixes
 domain: mcb
 type: reference
 owner: orbiters-engineering
-lastVerified: 2026-09-28
+lastVerified: 2026-10-19
 ---
 
 # Unity package safety and avatar workflow fixes
@@ -77,6 +77,36 @@ with at least ten seconds between starts and a fifteen-second request timeout.
 Additional reports are dropped while the queue is full. Turning sharing off clears
 queued reports and aborts the current request. Reports already received by the
 server are unaffected by disabling future sharing.
+
+### ReFit and My Avatar
+
+ReFit releases after 0.7.0 and My Avatar releases after 0.9.10 add the same
+opt-in reporting. It is off by default and follows MCB's rules: the same
+redaction, queue size, one-minute duplicate folding, request spacing and timeout,
+and a default minimum severity of Warning.
+
+- **ReFit:** open ReFit's **Settings** page and use the **Diagnostics** card:
+  **Share ReFit diagnostics** and its **Send from** level (Info, Warning, Error or
+  Exception).
+- **My Avatar:** open the Orbiters settings window and use the
+  **My Avatar · Diagnostics** card: **Share My Avatar diagnostics** and **Send from**.
+
+These tools have no logger of their own, so their reporters read the Unity console
+and keep only entries raised by the tool's own code. Unity's logs, other packages'
+logs and the tools' tests are never sent. When Orbiters cannot be reached,
+sending pauses for two minutes.
+
+<audience include="dev">
+
+Reports reach `POST /bugs` tagged `tool: "ReFit"` or `tool: "My Avatar"`. The
+backend normalises tool names (`services/issueTools.js`: `refit` → `ReFit`,
+`myavatar` → `My Avatar`, `my custom base` → `MCB`). `/admin/bugs`, its counts
+and the issue chart accept a `tool` filter, shown in **Admin → Issues** as the
+**All tools / MCB / ReFit / My Avatar** switch next to the status switch; the
+chart's **Day / Week / Month / Year** switch sits on its own row under the
+summary line.
+
+</audience>
 
 ## Parameters and compression
 

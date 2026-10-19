@@ -8,7 +8,7 @@ id: orbiters.how-to.manage-commission-workspace
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-13
+lastVerified: 2026-10-19
 ---
 
 # Your Commission Workspace
@@ -56,6 +56,12 @@ Imagine moving Mika's jacket task into your review pile at the end of the day. T
 
 - Choose one of your Boards in the Home selector.
 - Drag a task between columns, or use its **Move to** menu on touch or keyboard.
+  On touch, drag a task by its handle. You can drop anywhere over a column's
+  width, including the empty space under its last task, so a short column still
+  accepts tasks while you are scrolled down a long one. A moved task goes to the
+  end of its new column. While dragging, hold the task near an edge of the board
+  to scroll it (faster closer to the edge), or use the mouse wheel. **Escape**
+  cancels the drag.
 - Select **New commission** in a column to enter a name and brief. This creates a
   private task, not a customer request, payment or asset listing.
 - Click a task to open a quick-view modal. Read the brief, requester, commission

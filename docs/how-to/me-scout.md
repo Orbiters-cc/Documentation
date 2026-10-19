@@ -8,7 +8,7 @@ id: orbiters.how-to.me-scout
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-10-17
+lastVerified: 2026-10-19
 relations: orbiters.reference.scout-agent-api, orbiters.how-to.me-job-search-worker, orbiters.decision.personal-agents-on-member-hardware
 ---
 
@@ -54,6 +54,21 @@ new token. The old token stops working at once. An expired token is refused, and
 `scout-worker` to `orb-worker` and moves its tasks on every board, and moves the notes in `~/scout` to `~/orb`.
 
 Logs: `journalctl -u orb-sync` and `journalctl -u orb-board`.
+
+### Watch the Pi
+
+**Orb → Assistant** shows a host panel under the Orb status card. With its minute
+sync the Pi also sends a host report: CPU use and load, memory and swap, disk,
+temperature and clock speed, power (the kernel's live undervoltage alarm), Wi-Fi
+signal and traffic, process count, uptime, and the state, memory, uptime and
+restarts of `hermes-gateway`, `orb-board`, `findings-worker` and Docker. Small
+charts cover the last 24 hours; hover them for a reading. A chip says **Live**,
+**Late** (no report for 3 minutes) or **Offline** (15 minutes), and old readings
+are dimmed. The Pi opens no port for this: it reads `/proc` and `/sys` and sends
+the report out with the rest of the sync.
+
+`vcgencmd` throttling history (“throttled since boot”) needs the `hermes` user in
+the `video` group; without it the panel only shows the live undervoltage alarm.
 
 ## Give Orb a model and a way to reach you
 
@@ -119,7 +134,8 @@ are never replayed. Your notification settings in Orbiters still decide which no
   writes the daily digest.
 - **Background research** runs that queue around the clock on cheap and free models. Choose up to 16 workers at
   once; the Pi runs as many as its memory holds (about 300 MB each, so 8 on a 4 GB Pi) and shows that limit under the
-  slider. List up to 12 models.
+  slider. List up to 40 models; the list shows how many of the 40 are used, and
+  **Add a model** picks a provider and model pair that is not listed yet.
 
 **Use the models** decides how the list is used:
 
@@ -184,6 +200,26 @@ hands them to every later round, so rounds stop re-checking and repeating what i
 questions a report queues beyond the round's size. When the time is up, or you press **Stop**, open questions are
 dropped and a final report sums up the whole project. Up to three projects run at once, and they share the workers and
 the background budget with the 24/7 research.
+
+### Run an SEO audit
+
+In **Orb → Assistant → Research**, switch from **Research an area** to **SEO audit**.
+Enter the **Site to audit** (a full address such as `https://orbiters.cc`), an
+optional **What to check first**, and the longest audit time (2 h, 8 h or 1 day),
+then **Start SEO audit**.
+
+The audit uses the Hermes SEO plugin, which the installer adds to Hermes and the
+`orb-worker` profile at a pinned commit. Orb queues one question per specialist on
+the background models: technical SEO, content quality, structured data, sitemaps
+and robots.txt, performance, AI search readiness, agent accessibility and search
+intent. The card shows how many of the eight have answered. When they all have,
+or the time is up, the planning model merges them into one prioritized report,
+sent to your main channel and listed in **Orb → Reports** like other projects.
+Specialists only read the site's public pages, its `robots.txt`, sitemaps and
+`llms.txt`, and public read-only services.
+
+No key is needed. A Google API key for the Hermes SEO plugin (`GOOGLE_API_KEY`) adds
+PageSpeed Insights field data to the performance check.
 
 Orb and its workers can also look for ideas in the
 [Hermes community showcase](https://hermes-agent.nousresearch.com/docs/user-stories) (the `hermes-user-stories`
