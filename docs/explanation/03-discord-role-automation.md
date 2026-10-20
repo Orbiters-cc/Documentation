@@ -8,7 +8,7 @@ id: orbiters.explanation.discord-role-automation
 domain: website
 type: explanation
 owner: orbiters-engineering
-lastVerified: 2026-09-06
+lastVerified: 2026-10-20
 ---
 
 # Why your role can arrive after your access
@@ -31,9 +31,9 @@ flowchart TD
 
 ## Grants and removals have different checks
 
-A grant needs the account's Discord identity, a configured role and a member present in the server. A removal first checks whether another enabled asset still grants the same role. Revoking one purchase must not remove access supplied by another valid asset.
+A grant needs the account's Discord identity, a configured role and a member present in the server. A buyer who has not linked Discord or not joined the server yet is not an error: the grant waits, and joining the creator's server later queues the asset roles of that server the member already owns. A removal first checks whether another enabled asset still grants the same role. Revoking one purchase must not remove access supplied by another valid asset.
 
-Discord can reject an operation when the bot lacks permission, the role is unavailable or the member has left. Those are distinct from a temporary network error.
+Discord can reject an operation when the bot lacks permission or the role is unavailable. Those are distinct from a temporary network error. Right after a restart the bot needs a few seconds to connect; role work started meanwhile is retried rather than recorded as a failure.
 
 <audience include="admin, dev">
 

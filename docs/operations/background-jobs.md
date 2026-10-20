@@ -8,17 +8,17 @@ id: orbiters.operations.background-jobs
 domain: operations
 type: runbook
 owner: orbiters-operations
-lastVerified: 2026-09-06
+lastVerified: 2026-10-20
 ---
 
 # Get background work moving again
 
 Open **Admin → Background jobs** when repeated failures or worker interruptions need investigation. This operational view is available to administrators and owners; developer rank alone does not authorize it.
 
-The list shows job IDs, operation types, state, failed attempts, interrupted attempts and the next scheduled attempt. It omits payloads and raw error text, which can contain private provider or customer details.
+Jobs are grouped by feature, largest group first. Each row shows the recorded reason for the last failure, the job ID, its attempts, when it last changed and, while recovery continues, the next scheduled attempt. The reason is one of Orbiters' fixed diagnostic sentences: the list omits payloads and raw error text, which can contain private provider or customer details.
 
 <beta>
-Select **View failure details** to inspect the operation, queued time, first and
+Expand a row to inspect the operation, queued time, first and
 latest attempt times, latest failure time, HTTP status and provider error code
 when recorded. Gallery and asset-showcase crawls can also identify their Discord
 room and initiating user. Resource references help locate other affected records.
@@ -38,8 +38,9 @@ The job keeps its identity while recovery asks what actually happened. That is w
 | State in the view | Meaning | Your next step |
 | --- | --- | --- |
 | Recovery continuing | Work is still eligible to run but has crossed an attention threshold | Check configuration and provider availability; let recovery continue |
-| Failed | Automatic attempts stopped | Resolve the cause, then select Retry job |
+| Failed | Automatic attempts stopped | Resolve the cause, then select **Retry**; or **Dismiss** it once handled |
 | Queued after manual retry | The same durable job is scheduled again | Refresh later; its flag clears after successful completion |
+| Dismissed | You marked a failure as handled or superseded | Nothing; it leaves the list, and work queued again later still runs |
 | No entries | No retained failure or attention flag matches the list | Investigate a specific user workflow if the symptom persists |
 
 Use the job ID to correlate server logs. Check the affected integration, bot permissions, payment account/mode or destination Board. Do not copy a complete provider response into a public support discussion.
@@ -65,7 +66,7 @@ flowchart TD
   G -->|Ordinary job| H[Failed and needs attention]
   G -->|Payment recovery| I[Needs attention and keeps retrying]
   I --> A
-  H -->|Cause fixed and Retry job| A
+  H -->|Cause fixed and Retry| A
 ```
 
 ## Retry deliberately
@@ -73,8 +74,10 @@ flowchart TD
 1. Read the operation type and attempt counts.
 2. Establish the cause in the corresponding service or integration view.
 3. Correct that cause.
-4. Retry only a **Failed** job. The server rejects attempts to replay a job that has already moved on.
+4. Retry only a **Failed** job. The server rejects attempts to replay a job that has already moved on. **Retry all** and **Dismiss all** act on every failed job of one feature.
 5. Refresh and verify both the queue result and the affected user workflow.
+
+Some situations are not failures and no longer appear here. Discord work started while the bot is still connecting after a restart is retried until the server is reachable. A Discord role grant for a buyer who has not linked Discord or joined the creator's server waits: joining the server later queues it again (see [Why your role can arrive after your access](/documentation/orbiters.explanation.discord-role-automation)).
 
 The page loads 50 entries at a time. Use **Load more jobs** for older entries. It is an attention queue, not a complete history of every successful operation.
 
@@ -90,7 +93,9 @@ Jobs are claimed immediately before execution, one at a time. Each run handles u
 
 **A lease fences database writes, not vendor side effects.** Payment services still need their existing idempotency and reconciliation rules. Handlers must remain safe when execution overlaps after loss of ownership.
 
-Routes: `GET /admin/outbox` and `POST /admin/outbox/:id/retry`. Both require authenticated administrative authorization and return private, non-cacheable responses.
+Routes: `GET /admin/outbox` (rows carry `reason`, read from `payload._outbox.failure.message`), `POST /admin/outbox/:id/retry` and `POST /admin/outbox/:id/dismiss` (a failed job becomes `PROCESSED` with `_outbox.dismissed`; the same idempotency key still reopens it). All require authenticated administrative authorization and return private, non-cacheable responses.
+
+Handlers may set `error.outboxReason` to a fixed sentence that becomes the recorded failure message. `services/discord/discordAvailability.assertGuildReachable` throws such a retryable error while a server's designated bot is not ready, so jobs started before the Discord clients log in are not recorded as unavailable rooms or members.
 
 </audience>
 

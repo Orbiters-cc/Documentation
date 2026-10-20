@@ -8,7 +8,7 @@ id: orbiters.how-to.connect-notion
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-13
+lastVerified: 2026-10-20
 ---
 
 # Connect Notion Task Boards
@@ -39,9 +39,17 @@ to that source. An administrator must configure the
 
 ## Work with tasks
 
-- Move a card between columns to update its Notion status. For a grouped column,
-  Orbiters chooses its first status option. Saved Notion filters and ordering are
-  reapplied on sync; moving within a column does not change Notion's manual order.
+- Move a card between columns to update its Notion status. The card stays where you
+  dropped it while Orbiters sends the change in the background, even during a sync; a
+  small dot on its Notion mark shows a move that is still waiting. Moving the same card
+  again replaces the waiting move. For a grouped column, Orbiters chooses its first
+  status option. Saved Notion filters and ordering are reapplied on sync; moving within
+  a column does not change Notion's manual order.
+- If someone changed the task's status in Notion before your move arrived, the card
+  shows **Keep my move** (apply yours anyway) and **Use Notion's status**. When Notion
+  refuses a move for another reason, use **Retry** after fixing it, or **Undo**.
+- Notion blocks Orbiters cannot display, such as bookmarks and embeds, appear as links
+  that open them in Notion; colors and layout columns keep only their text.
 - Select **Add element** to create a Notion task. A task excluded by the selected
   view's filters can leave the board on its next sync.
 - Click a card's title or description to edit, then **Save changes**. Drop or paste

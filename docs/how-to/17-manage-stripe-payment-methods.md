@@ -8,7 +8,7 @@ id: orbiters.how-to.stripe-payment-methods
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-09-08
+lastVerified: 2026-10-20
 ---
 
 # Choose Stripe Payment Methods
@@ -20,12 +20,14 @@ Creator payments are still arranged separately; artists do not need Stripe Conne
 
 1. Check the **account ID** and **Test / sandbox** or **Live payments** badge.
    The page uses the deployment's active Stripe credentials, including environment
-   overrides. **Manage credentials** opens API Keys without displaying secrets here.
-2. Search for a payment method, such as **PayPal**, and switch it on or off.
-   Unavailable methods explain what to complete in Stripe. Use **Activation &
-   eligibility in Stripe**, then **Refresh from Stripe** after completing setup.
-3. Review your unsaved changes and select **Save to Stripe**. Nothing is changed
-   while you are merely browsing or toggling the draft switches.
+   overrides. **Credentials** opens API Keys without displaying secrets here.
+2. Search for a payment method, such as **PayPal**, or filter **Enabled** / **Disabled**,
+   and switch it on or off. Methods Stripe has not activated for the account are
+   listed under **Needs activation in Stripe**: use **Activate in Stripe**, then
+   **Refresh from Stripe** after completing setup.
+3. Changed methods show **Turns on when saved** or **Turns off when saved**. Review
+   them and select **Save to Stripe** in the bar at the bottom of the page, or
+   **Discard changes**. Nothing is changed while you are merely browsing or toggling.
 4. Start a **new commission request** to check the updated payment screen.
    Existing checkout links can retain their original options.
 
@@ -54,7 +56,7 @@ and [PayPal activation and availability](https://docs.stripe.com/payments/paypal
 
 ## If saving fails
 
-Your unsaved choices remain visible. **Reload saved settings (discard edits)**
+Your unsaved choices remain visible and the bar shows **Not saved**. **Reload saved settings (discard edits)**
 reads Stripe's actual state, useful when a network failure leaves the save outcome
 uncertain. If the configuration changed after you loaded it, refresh and review
 before saving again. Restricted Stripe keys need permission to read and update

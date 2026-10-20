@@ -8,7 +8,7 @@ id: orbiters.development.notion-boards
 domain: website
 type: reference
 owner: orbiters-engineering
-lastVerified: 2026-09-13
+lastVerified: 2026-10-20
 ---
 
 # Notion Board Integration
@@ -32,10 +32,11 @@ the connected creator who owns that board. Responses use `private, no-store` cac
 | `GET /notion/sources?q=…&cursor=…` | Search accessible data sources |
 | `GET /notion/sources/:id` | Supported views, status properties and Files properties |
 | `POST /notion/boards` | Create a private board and queue its initial import |
-| `GET /notion/boards/:id` | Sync status |
+| `GET /notion/boards/:id` | Sync status and the board's queued or refused moves (`moves`) |
 | `POST /notion/boards/:id/sync` | Queue or resume synchronization |
 | `PATCH /notion/boards/:id` | Pause/resume using Boolean `paused` |
 | `DELETE /notion/boards/:id` | Detach the source while preserving editable proposals |
+| `POST /notion/boards/:id/moves/:itemId` | `{ action: 'retry' \| 'undo' }` for a refused move |
 | `POST /notion/boards/:id/tasks` | Create a page using a persisted request UUID |
 | `POST /notion/tasks/:proposalId/link` | Recover an uncertain creation using a Notion page URL/ID |
 
@@ -52,7 +53,17 @@ The three tables have named unique indexes and sync without `alter`. API-key enu
 values `NOTION_APP` and `NOTION_ACCOUNT` are registered before model sync through the
 existing explicit PostgreSQL enum migration. No existing table columns are changed.
 
-Session advisory locks serialize each board's sync and writes. The scheduler prevents
+Session advisory locks serialize each board's sync and writes. Column moves never wait
+for that lock: `notionMoveQueue.queue` updates the board item at once and records
+`snapshot.pendingMove` (`rev`, `columnKey`, `from`, `state`) under a row lock, so a later
+move of the same card replaces it. Each move adds an outbox job `notion.move` keyed
+`notion.move:<linkId>:<rev>`; it retries while the board is locked, and `runSync` also
+sends queued moves when it starts and before it releases the lock. A sync keeps a card
+with a queued or refused move in the chosen column. When the move is sent, a Notion
+status that is neither `from` nor the target stops it as `conflict` (with Notion's
+column) instead of overwriting it; 401/403/404 and missing statuses stop as
+`reconnect`, `forbidden`, `unavailable` and `missing-status`, while 429, 5xx and
+uncertain responses retry. Moves within one column change Orbiters only. The scheduler prevents
 overlapping passes, checks five due boards per pass, and spaces requests by at least
 350 ms per credential. Only explicit 429 responses are retried automatically, respecting
 Retry-After. Ambiguous page creations are preserved for reconciliation, not replayed.
@@ -64,6 +75,15 @@ the proposal and linked commission remain. Old columns are retained until a repl
 snapshot finishes. Pause/disconnect state is rechecked between task imports.
 
 ## Editing and media
+
+`GET /pages/:id/markdown` returns Notion's enhanced Markdown: XML-like tags such as
+`<empty-block/>`, `<unknown url alt="bookmark"/>`, `<columns>` or `<span color>`, and no
+blank lines between blocks, so CommonMark would read the rest of a page as one raw HTML
+block. `frontend/src/components/shared/notionMarkdown.js` converts it to plain Markdown
+(https-only links and media, text kept for unknown tags) wherever Notion content is
+rendered. Summaries are stored without tags. `savePage` records `fetchedAt` and
+downloads a page again when it was read before its edit minute ended, because Notion
+rounds `last_edited_time` to the minute.
 
 Read current remote content before saving and check its version. Notion versions
 ignore changing AWS signed-image query strings. A persisted edit intent recognizes

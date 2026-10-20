@@ -8,7 +8,7 @@ id: orbiters.operations.deployment-and-backups
 domain: operations
 type: runbook
 owner: orbiters-operations
-lastVerified: 2026-10-15
+lastVerified: 2026-10-20
 ---
 
 # Deployment and Backups
@@ -139,7 +139,7 @@ everything. The steps are:
 3. Check out the release and install or verify the production credential key. The site
    stays up: the backend runs the code baked into its image, and only runtime data is
    mounted from the checkout (`backend/uploads`, `backend/privacy-state`, `backend/.cache`,
-   the deployment status and event files, and the env files read at runtime).
+   the deployment status and event files, the backup event file, and the env files read at runtime).
 4. Tag the running images as `:previous` and keep their deployment status in
    `.deploy-state/previous-status.json`, for rollback.
 5. When the schema may change: boot the new backend image twice against a clone of the
@@ -264,6 +264,23 @@ Check the **Backup production** workflow's last successful run, not just whether
 the schedule exists. A rejected Tailscale login prevents the runner from reaching
 the backup command. Review credential validity and authentication type, repair the
 connection, then run and verify a manual backup before relying on the schedule again.
+
+## Check backups in the admin
+
+**Admin → System & operations → Backups** shows the production database size, the
+nightly backups and the backups taken before deployments, newest first, with their
+size and whether R2 holds an off-site copy. It warns when no nightly backup finished in
+the last 26 hours (the workflow starts at 03:17 UTC) and links to the **Backup
+production** workflow runs. Each finished archive is recorded by
+`scripts/deploy/create-prod-backup.sh` as one line in `backend/backup-events.jsonl`,
+mounted read-only into the backend; pre-deploy backups also come from the deployment
+events. The development database dump tool appears only where developer redirections
+are enabled (`ENABLE_DEV_REDIRECTIONS=true`). **Storage** (R2 and local usage, delivery
+mode, sync and health checks) is available in every environment.
+
+If the nightly run is refused with `orbiters-deploy-gate: refused: unreviewed stdin
+script`, a workflow's `sh -s` script changed without regenerating the deploy gate's
+allowlist: see [Remote diagnosis](/documentation/orbiters.operations.remote-diagnosis).
 
 ## Local Backup
 
