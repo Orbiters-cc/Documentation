@@ -26,7 +26,9 @@ Show where the fit fails, the pose that reveals it, and what you want to keep. A
 1. **Start in Unity.** After your ReFit, open **The ReFit doesn't look right?**,
    check the price ranges and click an artist card. ReFit captures and uploads four
    private views of your avatar wearing the refitted accessory, then opens the
-   website with that artist selected. No mesh or scene file is uploaded automatically.
+   website with that artist selected. Sign in there with the account your Unity
+   tool uses if the browser is not signed in yet; the link waits through the
+   sign-in. No mesh or scene file is uploaded automatically.
 2. **Choose who to ask.** In the browser, arrange creators in preference order
    and choose their response limits (two days each by default).
 3. **Review your request.** The asset, avatars and blendshape are already filled in.

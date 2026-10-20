@@ -44,9 +44,10 @@ On a custom base's asset page, **Install** shows for everyone who can use it, in
 Unity tools sign in from the tool itself:
 
 - **Login with Discord** or **Login with Telegram** in the tool opens Orbiters in
-  your browser. Sign in if needed, check that the four-character code matches the
-  one shown in Unity, and choose **Connect**. The tool then receives its own
-  credential; nothing is copied by hand. A link lasts ten minutes and works once.
+  your browser. Sign in if needed, type the four-character code shown in Unity,
+  and choose **Connect**. The tool then receives its own credential. Never type a
+  code for a link someone else sent you: it would connect their editor to your
+  account. Five wrong codes end the link. A link lasts ten minutes and works once.
   If it expired or was already used, click Login again in Unity. If Orbiters
   could not be reached, **Try again** rechecks the same link; if your session
   ended, the page asks you to sign in again.

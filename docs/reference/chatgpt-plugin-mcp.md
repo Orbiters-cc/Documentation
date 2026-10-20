@@ -52,11 +52,18 @@ Specs live in `backend/src/services/mcp/plugin/tools/*` and declare `category`,
 - **Audience**: `McpToolPolicy` stores `enabled` and `audience` (`everyone` or
   `testers`, null follows the stage). Testers: owner, admin and dev ranks, members in
   `settings.testerUserIds`, everyone on a development deployment.
-- **Two-step confirmation** (`confirmations.js`): a confirm tool called without
-  `confirmationCode` runs its `preview` and returns `{ confirmationRequired, action,
-  summary, preview, confirmation: { code, expiresAt } }`. The code (8 characters,
-  10 minutes, single use, stored as a SHA-256 hash in `McpPendingConfirmation`) is
-  bound to the member, connection, tool and a hash of the arguments.
+- **Two-step confirmation** (`confirmations.js`, `confirmationApprovals.js`): a
+  confirm tool called without a confirmation runs its `preview` and returns
+  `{ confirmationRequired, action, summary, preview, confirmation: { id, expiresAt,
+  approveUrl } }`. The model never receives anything that confirms on its own:
+  the single-use code (8 characters, 10 minutes, stored as a SHA-256 hash in
+  `McpPendingConfirmation`) travels only in the result's `_meta`, where the card's
+  Confirm button reads it and calls the tool itself. Hosts without the card give
+  the member `approveUrl` (`/oauth/confirm/:id`), where the signed-in member
+  approves or declines; the model's repeat call with `confirmationId` succeeds only
+  after that approval. Both are bound to the member, connection (or personal
+  token), tool and a hash of the arguments, so instructions injected into briefs or
+  messages cannot publish anything.
 - **Notifications**: tools with `notice` create an Orbiters notification after
   success.
 - **securitySchemes**: each tool lists `noauth`/`oauth2` with its scopes, on the

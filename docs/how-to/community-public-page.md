@@ -67,7 +67,7 @@ be overwritten accidentally.
 | Discord | Server name, icon, member and online counts, Verified or Partnered badge |
 | VRChat | Group name, code, join state, member and online counts, group links |
 | Events | Published events with a public audience that have not started yet |
-| Team | The owner, Community Admins and Moderators with active accounts |
+| Team | The owner, Community Admins and Moderators with active accounts who accepted their invitation |
 | Creations | Public listings by creators in the team |
 | Rules, languages | The VRChat group's rules and languages, and a Discord community's language |
 

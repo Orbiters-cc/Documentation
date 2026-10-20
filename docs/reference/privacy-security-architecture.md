@@ -42,8 +42,11 @@ configured origins. Webhooks retain their separate provider-signature contracts.
 Discord verification binds its random state to the initiating browser session and
 consumes it once before OAuth exchange. The role-changing verification endpoint
 uses POST. Production sessions use secure cookies. `TRUST_PROXY` explicitly names
-trusted proxy networks; the production Compose configuration supplies its private
-proxy network ranges. A direct installation should configure only its real proxy.
+trusted proxy networks: in production the deploy narrows it to the Compose network
+Caddy reaches the backend from, and Caddy itself trusts forwarding headers only
+from the Cloudflare tunnel's fixed address on the `edge` network. The backend,
+frontend and database ports listen on 127.0.0.1 only. A direct installation should
+configure only its real proxy.
 
 These safeguards are validated with local HTTP fixtures; they are not a claim of
 exhaustive penetration testing of every application route.

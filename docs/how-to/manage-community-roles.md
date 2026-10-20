@@ -49,10 +49,16 @@ Other members can create their own differently named communities.
 ## Manage your team
 
 The owner can connect platforms and invite
-registered users through **Management team**. Community Admins manage roles,
+registered users through **Management team**. An invited member gets a notification
+and accepts or declines from **Community**; until they accept, they have no access
+and appear nowhere public. A team member can leave at any time. Community Admins
+manage roles,
 verification, VRChat group tools and appeals. Community Moderators review appeals.
 Only the owner can change connections or the selected VRChat group and grant or
-revoke management access. These explicit management permissions are separate from
+revoke management access. Community Admins cannot map or assign Discord roles that
+carry moderation or administration permissions (Administrator, Manage Server, Manage
+Roles, Ban Members and similar); only the owner can, and such mappings apply only
+once the owner has saved them. These explicit management permissions are separate from
 membership roles, even when a role is named “Admin” or “Community manager”.
 
 **Verification** and **Appeals** operate only on Discord servers connected to the
