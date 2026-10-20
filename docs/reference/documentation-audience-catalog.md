@@ -279,6 +279,11 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Unity safety verification follow-up | creator, dev | alpha | — | — | ✓ | — | — | ✓ |
 | Read Unity's logs with the Logger | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | See what slows Unity down with Logger timings | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Capture VRChat worlds with Orbiters desktop | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Reconstruct and view sessions in Orbiters desktop | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Record your performance with Orbiters desktop | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Bake a VRChat performance with Mixer | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Show Orbiters splats in Unity with Mixer | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 ## Tutorials
 
