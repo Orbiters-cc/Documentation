@@ -8,16 +8,17 @@ id: orbiters.operations.creator-addresses
 domain: operations
 type: runbook
 owner: orbiters-operations
-lastVerified: 2026-10-15
+lastVerified: 2026-10-20
 ---
 
 # Creator Addresses and Wildcard DNS
 
 Creators can claim a short address such as `neonix.orbiters.cc` in the creator
-dashboard (Overview, **Profile address**). Opening it redirects to their profile,
+dashboard (**Preferences > Personalization**, the **Profile address** strip under the
+header, `/creator?tab=personalization`). Opening it redirects to their profile,
 `https://orbiters.cc/user/<id>`. The owner's presentation page is served on its own
-host, `enzodutra.orbiters.cc`. Both depend on one wildcard DNS record that must be
-created by hand once.
+host, `enzodutra.orbiters.cc`. Both depend on one wildcard DNS record, created on
+2026-10-20.
 
 ## How a request is routed
 
@@ -38,22 +39,28 @@ The frontend server looks addresses up with `GET https://api.orbiters.cc/profile
 and remembers answers for a minute (unknown addresses for ten seconds). When the API
 cannot answer, the visitor lands on the website's home page instead of an error.
 
-## One-time Cloudflare setup
+## Cloudflare setup
 
-Prerequisites: access to the Cloudflare dashboard of `orbiters.cc` and SSH access to the
-production host.
+The wildcard record exists: a proxied `CNAME` named `*` pointing to
+`c2b330e4-6f44-4805-bdb3-87d9e56f889e.cfargotunnel.com` (the tunnel ID from
+`cloudflared/config.yml`). It was created on 2026-10-20 from the production host, inside
+the `cloudflared` container, with the certificate stored there:
 
-1. In **DNS > Records**, add a record: type `CNAME`, name `*`, target
-   `c2b330e4-6f44-4805-bdb3-87d9e56f889e.cfargotunnel.com` (the tunnel ID from
-   `cloudflared/config.yml`), proxy status **Proxied**. From a machine where `cloudflared`
-   is logged in, `cloudflared tunnel route dns orbiters "*.orbiters.cc"` creates the same
-   record. Explicit records (`mail`, `api`, `dev`...) keep priority over the wildcard.
-2. Nothing to do for TLS: Cloudflare's Universal SSL certificate covers `orbiters.cc` and
-   one level of subdomains (`*.orbiters.cc`). Deeper names such as `a.b.orbiters.cc` are not
-   covered and are not used for addresses.
-3. After the release that contains the new `cloudflared/config.yml`, restart the tunnel so
-   it reads the wildcard ingress rule. The tunnel reloads its file only at startup, and
-   the restart interrupts all public traffic for a few seconds:
+```bash
+docker exec cloudflared cloudflared tunnel --origincert /home/nonroot/.cloudflared/cert.pem route dns orbiters "*.orbiters.cc"
+```
+
+Run the same command to recreate the record if it is deleted, or add it in the Cloudflare
+dashboard (**DNS > Records**, type `CNAME`, name `*`, the target above, proxy status
+**Proxied**). Explicit records (`mail`, `api`, `dev`...) keep priority over the wildcard.
+
+TLS needs nothing: Cloudflare's Universal SSL certificate covers `orbiters.cc` and one
+level of subdomains (`*.orbiters.cc`). Deeper names such as `a.b.orbiters.cc` are not
+covered and are not used for addresses.
+
+The wildcard ingress rule lives in `cloudflared/config.yml`. The tunnel reads that file
+only at startup, so restart it after a release that changes it. The restart interrupts
+all public traffic for a few seconds:
 
 ```bash
 docker restart cloudflared
@@ -73,9 +80,40 @@ curl -s https://enzodutra.orbiters.cc/ | grep -o '<title>[^<]*</title>'
 # <title>Enzo Dutra · Ingénieur logiciel</title>
 ```
 
-A name that does not resolve means the DNS record is missing. A plain `404` from
+A name that does not resolve means the wildcard DNS record is missing. A plain `404` from
 Cloudflare means the tunnel still runs with its previous ingress rules (restart it). An
 empty response means the active Caddyfile is not the current `Caddyfile.prod`.
+
+## Setting-up state in the creator tools
+
+A newly claimed address is shown as plain text with a progress bar and a remaining-time
+estimate (about 20 seconds) until the backend confirms that it opens the profile. Only
+then does it become a link. After two minutes the strip reads "This address does not
+open your profile yet" with **Check again** and **Copy profile link**, and keeps checking
+once a minute. A creator who reports an address stuck in that state usually points to a
+missing DNS record or a tunnel running with old ingress rules: run the checks under
+**Verify** with their address.
+
+<audience include="dev">
+The check lives in `backend/src/services/creatorTools/profileAddressLiveness.js`. An
+address is live when `<slug>.<domain>` resolves (A, AAAA or CNAME) and a `HEAD` request to
+`<slug>.<domain>/` (with the protocol of `FRONTEND_URL`) answers with a redirect to that member's `/user/<id>` (a language
+prefix is accepted). The domain is the host of `FRONTEND_URL`. Answers are cached for ten
+minutes when live and four seconds when not, and each address is probed once at a time.
+
+- `GET /users/me/profile-address` returns the address with `live`, `reason` (`dns` or
+  `http`), `checkedAt`, `pendingSince` and `serverTime`. It waits at most 1.5 seconds for the
+  check; `live: null` means the answer is not known yet.
+- `GET /users/me/profile-address/status` returns the same fields for the current address,
+  waiting for the check (120 requests per minute per member). The page polls it with
+  backoff up to every 10 seconds, then once a minute after two minutes.
+- A claim or change returns `live: null` and restarts the estimate.
+
+The backend container must be able to resolve and reach `https://<slug>.<domain>` itself,
+over public DNS and the tunnel. The lookup uses `dns.resolve*`, which queries DNS servers
+directly and ignores the hosts file, so `*.localhost` addresses on a local stack stay in the
+setting-up state.
+</audience>
 
 ## Address rules
 

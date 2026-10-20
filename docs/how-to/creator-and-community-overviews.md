@@ -56,6 +56,11 @@ their management or voting page. **Create event** uses the selected community's
 connected Discord server and VRChat group; complete their setup and permissions
 in Events if needed.
 
+**Latest events** shows the three events most recently created in the community,
+whoever organised them, with **All events** leading to the community's **Events**
+tab. Drafts never appear there, and the section is hidden while the community has
+no event.
+
 The overview also shows staff, appeals waiting for attention, Discord membership,
 VRChat group membership and verified 18+ members. Staff and counts are scoped to
 the selected community. Only people with the appropriate community permissions

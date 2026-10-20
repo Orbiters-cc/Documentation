@@ -8,7 +8,7 @@ id: orbiters.how-to.supporter-tiers
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-07-13
+lastVerified: 2026-10-20
 ---
 
 # Supporter Tiers
@@ -30,22 +30,50 @@ Good use cases:
 
 Avoid supporter tiers when a user should permanently own an asset after purchase. Use store redemption for that.
 
+## The Supporters tab
+
+Open **Creator > Audience > Supporters**. The top of the tab shows your totals
+(supporters, tiers, assets unlocked, and monthly pledges for Patreon or Fourthwall
+tiers, otherwise linked Discord roles) and one pill per supporter source: Discord,
+Patreon, Ko-fi and Fourthwall. A dimmed pill is not connected; select any pill to
+manage it in **Connections**.
+
+Below, the tier list sits beside the editor of the selected tier. The list shows tiers
+in the order supporters see them. To reorder, drag a tier by its handle, or focus the
+handle and use the up and down arrow keys.
+
+With no tier yet, the tab offers **Create your first tier**, and **Import from Patreon**
+when Patreon is connected.
+
 ## Configure Tier Access
 
-1. Open the creator supporter-tier tools.
-2. Create or update tiers.
-3. Link assets to the tiers that should grant public access.
-4. Confirm that affected users have active supporter statuses.
-5. Test the asset page with a user in the tier.
+1. Select **Add tier**, or select an existing tier in the list.
+2. Type the tier name in the editor title and add a description.
+3. Choose the **Asset discount**: **None**, 10, 25 or 50%, or type a custom percentage.
+4. Under **Discord roles that grant this tier**, search your server roles and pick
+   one or more. Remove a role with the cross on its chip.
+5. Check the preview, **What supporters of this tier get**, which follows your edits:
+   name, price, description, discount, Discord roles and unlocked assets.
+6. Select **Save changes** in the floating save bar. It saves every edited tier and
+   the new order at once; **Discard** reverts them. A tier without a name cannot be
+   saved.
+7. To unlock an asset for a tier, open the asset's **Access** tab and choose
+   **Add a supporter tier**. The tier editor then lists it under **Assets this tier
+   unlocks**, next to the members who hold the tier.
+8. Test the asset page with a user in the tier.
+
+Deleting a tier (trash button next to its name) removes the tier and its discount.
+Supporters keep their Discord roles.
 
 ## Synchronize Patreon
 
-1. Open **Creator > Integrations** and connect Patreon with OAuth or a creator
+1. Open **Creator > Connections** and connect Patreon with OAuth or a creator
    access token.
-2. Open **Creator > Supporters**.
-3. Select **Sync Patreon**.
-4. Review the number of active members, matched Orbiters accounts, ambiguous email
-   matches, and enabled statuses.
+2. Open **Creator > Audience > Supporters**. The Patreon pill shows as connected.
+3. Select **Sync Patreon** (or **Import from Patreon** when you have no tier yet).
+   The button appears only while Patreon is connected. Unsaved tier edits are
+   discarded first, after a confirmation.
+4. Review the number of Patreon members matched to your tiers.
 5. Keep Orbiters-only benefits such as discounts and Discord granting roles on the
    synchronized tier, then test one matched supporter account.
 

@@ -38,6 +38,15 @@ One Proposal can appear on multiple Boards. Moving or removing its placement doe
 not rewrite its Markdown, comments, decisions, or forecast assumptions. A Proposal
 may also link to one synchronized GitHub issue without becoming a copy of that issue.
 
+`Board.shareToken` (`STRING(64)`, nullable, unique index `Boards_share_token_key`) holds
+the read-only public link token. The model's default scope excludes it; read it with
+`Board.unscoped()` only where a share is resolved or managed.
+
+A website art commission request is attached to a card through
+`Proposal.metadata.artCommissionRequestId`: one request per card and one card per
+request. `ArtCommissionRequest.snapshot.cardDetachedAt` records a deliberate detach.
+The creator's commission board is `CreatorCommissionProfile.defaultBoardId`.
+
 `BoardItem.position` is `DECIMAL(30,8)`. External Boards can use sparse numeric
 ordering values above `10^14`; retaining that width prevents Trello import or sync
 from overflowing the database or collapsing distinct Card positions. Do not narrow
@@ -59,6 +68,20 @@ The alpha REST surface includes:
   issue and paginated discussion;
 - `/github/boards/:boardId/issues` for permissioned issue creation with a separate
   repository-write credential.
+
+Share links and commission cards:
+
+- `GET /board-shares/:token` (public, 60 per minute) returns the read-only board;
+  `GET /board-shares/:token/covers/:proposalId` (240 per minute) returns one card's
+  cover thumbnail. Both send `X-Robots-Tag` `noindex`.
+- `GET` and `PUT /board-shares/boards/:id` (`{ "enabled", "regenerate" }`) read and
+  change the link for a board manager; `PUT /board-shares/boards/:id/commission`
+  (`{ "enabled" }`) makes the owner's board their commission board. Settings changes
+  are limited to 30 per minute.
+- `GET /commission-cards/cards?q=` and `GET /commission-cards/requests?q=` search the
+  creator's cards and open art requests; `PUT /commission-cards/art/:requestId`
+  (`{ "proposalId", "removePrevious" }`) attaches a request to a card and
+  `DELETE /commission-cards/art/:requestId` detaches it. Creators only.
 
 Creator-facing Trello routes live under `/trello` for account connection, source
 Board listing, import, manual synchronization, disconnect, and signed webhook

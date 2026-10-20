@@ -29,7 +29,9 @@ development warning. In **Creator → Commissions → Your commission workspace*
 choose your **Default Board** and starting column, then save. This shared setting
 applies to art and ReFit work and selects that Board automatically on Home. You
 can temporarily browse another Board using Home's selector without changing the
-saved default.
+saved default. The **Commission board** switch in a Board's **Share** popover sets
+the same default; with a public link on, your profile shows that Board. See
+[Share a Board with a Public Link](/documentation/orbiters.how-to.share-boards).
 
 <alpha>
 

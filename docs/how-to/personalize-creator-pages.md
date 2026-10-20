@@ -54,6 +54,23 @@ links open your visitor's mail app instead of a new tab.
 who disable measurement are excluded. Reordering a link preserves its statistics.
 The profile header stays transparent over a custom background.
 
+## Claim a profile address
+
+The **Profile address** strip under the Personalization header gives you a short
+address such as `neonix.orbiters.cc` that opens your public profile. Type a name, wait
+for the check mark, then choose **Claim**. Use **Copy link** to share it, **Change** to
+pick another name and the trash button to remove it.
+
+A new address takes a few seconds to start working. Until Orbiters confirms that it
+opens your profile, the address appears as plain text with a progress bar and an
+estimate of the time left, then becomes a link. If it still does not open your profile
+after about two minutes, the strip says so and offers **Check again** and **Copy profile
+link**; it keeps checking every minute in the meantime.
+
+You can correct your first address once right away; after that you can change or
+remove it once every 30 days. The old address keeps
+redirecting to your profile for 30 days, and you can take it back during that time.
+
 ## Customize the bot in your server
 
 In your community's connected **Discord Servers**, select **Customize bot profile**

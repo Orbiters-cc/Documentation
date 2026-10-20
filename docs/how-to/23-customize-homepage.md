@@ -190,7 +190,7 @@ focus the image and use **+** to zoom or **0**/**−** to reset.
 
 ## Preview creators, assets, articles and guides
 
-On desktop windows at least 1024 pixels wide, **View profile**, **Explore**, **Read story** and **Read guide** open a preview over your homepage. Read the content without losing your place, then use the button at the bottom to open its full page. Close using the top-right button, **Escape**, or the backdrop.
+On desktop windows at least 1024 pixels wide, **View profile**, **Explore**, **Read story** and **Read guide** open a preview over your homepage. Read the content without losing your place, then use the button at the bottom to open its full page. An asset preview is a compact asset page: its gallery, the same store buttons and supporter code as the full page, and its description. Close using the top-right button, **Escape**, or the backdrop.
 
 Smaller windows open the full page directly. If you narrow the browser while a preview is open, it closes and the links return to normal navigation. Modified clicks still let you open a page in another tab.
 

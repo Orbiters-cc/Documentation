@@ -68,6 +68,33 @@ The people and releases above are fictional. The scope relationship is real: pub
 >
 > That gives the creator a concrete boundary to check. “Downloads are broken” does not. Include the real asset and version names; keep the full license key out of public comments.
 
+## Comment on an asset
+
+The **Comments** section at the bottom of an asset page holds one top-level comment
+per member, up to 2,000 characters. If you already commented, edit that comment
+instead of posting another. The asset's creator does not post a top-level comment
+on their own asset.
+
+Any signed-in member who can open the asset can **Reply** under a comment, the
+creator included; replies go one level deep and are labeled **Creator** when the
+creator writes them. The author of a comment gets a notification when someone else
+replies. You can edit or delete your own comments and replies; a deleted one is
+hidden and can be shown again from **Account > Privacy & data**. The creator and
+staff can remove any comment or reply with a reason the author receives and can
+contest; a creator's removal hides it until staff confirm or restore it.
+
+<audience include="dev">
+
+Comments are the asset's review interactions; a reply is a `COMMENT` interaction with
+`toComment` set to its review, as the MCB package already stores them
+(`backend/src/services/assets/assetReviewReplies.js`). Routes:
+`POST /assets/:id/interactions/reviews/:reviewId/replies`,
+`PUT` and `DELETE /assets/:id/interactions/replies/:replyId` (author only; `DELETE`
+hides the reply), and `POST /assets/:id/interactions/reviews/:replyId/removal` for a
+creator or staff removal. Replies never count against the one-comment rule.
+
+</audience>
+
 ## Take the release into Unity
 
 For compatible assets, follow the [MCB and Unity guide](/documentation/orbiters.how-to.mcb-and-unity-tools). The tool uses the same account access, so reinstalling Unity is rarely the first useful response to a scope restriction.

@@ -141,6 +141,46 @@ private canonical Proposals and Trello mirrors, without publishing their content
 Owners should review placed titles before publishing a Board; changing it back to
 **Private** removes the whole Board from the public-profile response.
 
+## Share Links and the Commission Board
+
+A board manager (owner or board admin) can turn on a read-only public link from the
+**Share** popover in the board toolbar (`frontend/src/components/elements/boards/share/BoardSharePopover.jsx`).
+The link is independent of Board visibility: it opens `/boards/share/:token` for
+anyone, without an account. The token lives in `Boards.shareToken`, which the `Board`
+default scope excludes; only `backend/src/services/boards/boardShareService.js` reads
+it, unscoped. Turning the link off clears the token and **New link** replaces it, so
+every older link stops at once; neither changes the board's `updatedAt`.
+
+`backend/src/services/boards/publicBoardView.js` builds the public payload from an
+allow-list: board name, description, owner and last change, columns, and per card
+the title, labels, cover, dates, checklist progress and the stage of the owner's own
+linked commission (art or ReFit). Descriptions and checklist items are added only on
+the share page, not on the profile widget. Members, authors, comments, attachments,
+visibility, payment data and commission clients are never loaded into it. Cards
+hidden by a privacy request (their own or their commission's) and non-public GitHub
+issues are dropped. The API answers with `X-Robots-Tag: noindex, nofollow` and the
+frontend marks `/boards/share` as a never-indexed route.
+
+The commission board is `CreatorCommissionProfile.defaultBoardId`, the same setting
+as **Default Board** in the commission workspace, also exposed as the **Commission
+board** switch in the Share popover for the board owner. Without it,
+`commissionBoardFor` falls back to the owned board with the most commission-linked
+cards. The public profile's `boards` widget replaces the public board list with that
+board as a compact kanban only while its share link is on
+(`profileCommissionBoard`, `frontend/src/components/profileLayout/CommissionBoardWidget.jsx`).
+
+Website art commission requests can be attached to any card on a board the creator
+owns: `Proposal.metadata.artCommissionRequestId` links one request to one card,
+enforced by locking both rows in `backend/src/services/commissions/commissionCardLinks.js`.
+The request page's **Board card** panel and the card window's **Link request** picker
+use `/commission-cards`; Trello and Notion syncs merge metadata and keep the link.
+Detaching records `snapshot.cardDetachedAt` so stage changes stop creating a card.
+See [Share a Board with a Public Link](/documentation/orbiters.how-to.share-boards)
+and [Edit Board Cards and Link Existing Commissions](/documentation/orbiters.how-to.link-board-commissions)
+for the user-facing behavior, and
+[Board Data and Route Reference](/documentation/orbiters.reference.board-data-and-routes)
+for the routes.
+
 ## Trello Boards
 
 A Creator can connect GitHub and Trello from **Creator > Integrations**; the same
@@ -345,3 +385,10 @@ parents. Keep the source export and reported checksum as migration evidence.
     changes; provider and forecast totals must remain unchanged.
 17. Enable gain continuity and confirm both selected-idea and store-continuity areas
     remain visible and add up to the combined total.
+18. Turn a board's share link on, open it signed out, confirm members, comments and
+    commission clients are absent, then select **New link** and confirm the old link
+    shows "This link doesn't work".
+19. Mark a board as the commission board with its link on and confirm the profile
+    widget shows it; turn the link off and confirm the widget lists public boards.
+20. Attach an art request to an existing card, rename the card in Trello, sync, and
+    confirm the request page still shows that card.

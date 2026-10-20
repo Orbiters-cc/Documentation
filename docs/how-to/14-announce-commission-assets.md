@@ -161,6 +161,8 @@ and its discussion from public Orbiters access but does not remove channel posts
   display name is shown without claiming an Orbiters identity.
 - Bot messages and Telegram anonymous channel identities are ignored.
 - Use **Hide Telegram comments** or **Hide Discord comments** to filter the list.
+- Authors can edit their own website comments; an edited comment shows **edited**.
+  Telegram and Discord comments change only through their source.
 - The author, asset owner or moderators can hide a comment on Orbiters. It stays
   hidden even if the source sends another update; this does not delete it upstream.
 - Discord edits/deletions and Telegram edits are mirrored while connected.
@@ -168,6 +170,14 @@ and its discussion from public Orbiters access but does not remove channel posts
 - Website comments are not posted back to either platform. Historical channel
   discussions are not backfilled; only replies associated with Orbiters posts
   received after connection are imported.
+
+<audience include="dev">
+
+A website comment is edited with `PATCH /asset-discussion/:assetId/:id`
+(`{ "content" }`, 1 to 2,000 characters, author only, 30 per minute). Hidden comments
+cannot be edited.
+
+</audience>
 
 The announcement tells commenters their display name and reply will appear on
 Orbiters. Keep personal details and character references in private requests.

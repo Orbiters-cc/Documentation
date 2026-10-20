@@ -52,6 +52,30 @@ event, the Discord announcement and the VRChat calendar entry as you type. Probl
 appear next to their field once you leave it, and all of them when you save: the
 action bar counts them and **Show** opens the right section and focuses the field.
 
+## Browse a community's events
+
+In a community you help run (moderator or above), the **Events** tab lists every
+event of that community, whoever organised it: events posted to its Discord servers
+or its VRChat group. Switch between **Upcoming** (drafts, polls and events that have
+not ended, soonest first) and **Past** (ended and cancelled events, most recent
+first).
+
+Other organisers' drafts are not listed, nor are events you could not open on their
+event page. You can edit only your own events; the others link to their event page.
+Team members without event tools can browse the list but not create events. The
+standalone `/community/events` workspace keeps listing only the events you organise.
+
+<audience include="dev">
+
+`GET /community/:communityId/events?scope=upcoming|past&page=0` (community moderator or
+above, 60 requests per minute) returns 24 cards per page with `hasMore`
+(`backend/src/services/community/communityEvents.js`). Visibility follows
+`eventVisibility.visibleIds`; only the viewer's own events carry `manageable: true`
+and the serialized `event` used by the editor. The overview's `recent` list uses the
+same cards without drafts.
+
+</audience>
+
 ## Connect your communities
 
 To collect availability, world votes or movie/episode choices before publication,

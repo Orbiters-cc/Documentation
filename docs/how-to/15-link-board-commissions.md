@@ -103,6 +103,59 @@ native website request keeps that request and its original terms; manage it
 through its commission page. Cards already tracking ReFit work cannot be
 reassigned to an art commission.
 
+## Attach a website request to an existing card
+
+A request a client sent through your commission listing gets its own card when you
+accept it. If you already track that work on another card, attach the request to it
+instead. A request sits on one card at a time, and a card tracks one request.
+
+From the request page:
+
+1. Open the request. The **Board card** panel shows its current card, the column it
+   is in among the board's columns and, while the board has a public link, **View
+   board**.
+2. Select **Attach to card** (or **Change card**) and search your cards. Cards on
+   your commission board come first. Cards that already track another commission
+   are listed but cannot be chosen.
+3. Leave **Remove the card created for this request** checked to take the card
+   Orbiters created at acceptance off your boards, or uncheck it to keep it.
+4. Select **Attach**.
+
+From a card: open the card, select **Link request** under **Track as a commission** and
+pick one of your open requests. A request already on another card moves to this one.
+**Link request** appears only on a card that tracks no commission yet.
+
+**Detach** (on the request page, or the unlink button next to the request on the
+card) takes the request off the card. The card stays on your board, the request stays
+open, and Orbiters no longer creates a card for it automatically; attach it again
+whenever you want. Declined and cancelled requests cannot be attached, and a
+commission recorded from a card (above) is managed from that card.
+
+Your client sees the card's title and column on the request page. Cards that track a
+request show its stage as a chip on your board and on a shared board. Trello and
+Notion syncs keep the link.
+
+<audience include="dev">
+
+The link is `Proposal.metadata.artCommissionRequestId`, the same field the card
+created at acceptance carries, so board actions, client access, payments and privacy
+checks read it unchanged. `backend/src/services/commissions/commissionCardLinks.js`
+locks the request and the card in one transaction, so a request never lands on two
+cards nor a card on two requests. Detaching sets `snapshot.cardDetachedAt` on the
+request, which stops automatic card creation until it is attached again.
+
+Routes (`backend/src/routes/commissionCardsRouter.js`, creators only, `no-store`):
+
+- `GET /commission-cards/cards?q=` and `GET /commission-cards/requests?q=`: pickers,
+  up to 30 results, 120 requests per minute
+  (`backend/src/services/commissions/commissionCardSearch.js`).
+- `PUT /commission-cards/art/:requestId` with `{ "proposalId": 12, "removePrevious": true }`
+  attaches; `DELETE /commission-cards/art/:requestId` detaches (30 per minute).
+  `removePrevious` removes only the acceptance card (slug `art-<request id>`) from
+  boards you own, never a card you made, and never from a Notion board.
+
+</audience>
+
 ## Prices and received payments
 
 This workflow records an existing agreement; it never charges a client or

@@ -26,6 +26,9 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Page | Audience tags | Stage | Visitor | Member | Creator | Mod | Admin | Dev / owner |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Use Orbiters from ChatGPT, Claude and other AI apps | user, creator, mod, admin, dev | beta | — | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Run your job search worker on a Raspberry Pi | admin, dev | alpha | — | — | — | — | ✓ | ✓ |
+| Set up Orb, your personal business assistant | admin, dev | alpha | — | — | — | — | ✓ | ✓ |
+| Give Orb your email and Google Workspace | admin, dev | alpha | — | — | — | — | ✓ | ✓ |
 | Manage Privacy and Shared Content | public | beta | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Understand and control AI use | public | beta | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Verify your community age status | user, creator, mod, admin, dev | beta | — | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -91,6 +94,7 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Manage Your Commission Workspace | creator, admin, dev | beta | — | — | ✓ | — | ✓ | ✓ |
 | Announce Commission Assets in Your Channels | creator, admin, dev | beta | — | — | ✓ | — | ✓ | ✓ |
 | Edit Board Cards and Link Existing Commissions | creator, admin, dev | alpha | — | — | ✓ | — | ✓ | ✓ |
+| Share a Board with a Public Link | creator, admin, dev | stable | — | — | ✓ | — | ✓ | ✓ |
 | Connect Notion Task Boards | creator, admin, dev | alpha | — | — | ✓ | — | ✓ | ✓ |
 | Write formatted content | creator, admin, dev | alpha | — | — | ✓ | — | ✓ | ✓ |
 | Create, publish and measure an asset | creator, admin, dev | beta | — | — | ✓ | — | ✓ | ✓ |
@@ -114,6 +118,7 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | ADR 0006 - Boards and Proposals | dev | alpha | — | — | — | — | — | ✓ |
 | ADR 0007 - Product Steward Identity and Local Execution Security | dev | alpha | — | — | — | — | — | ✓ |
 | ADR 0008 - Structured Deployment Evidence | dev | alpha | — | — | — | — | — | ✓ |
+| ADR 0010 - Personal Agents on Member Hardware | dev | alpha | — | — | — | — | — | ✓ |
 | ADR 0009 - Codebase Memory Context Provider | dev | alpha | — | — | — | — | — | ✓ |
 
 ## Developer Reference
@@ -203,9 +208,11 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Approve VPM dependency sources for the My Avatar gallery | admin, dev | alpha | — | — | — | — | ✓ | ✓ |
 | Deployment and Backups | admin, dev | stable | — | — | — | — | ✓ | ✓ |
 | Structured Deployment Reports | admin, dev | alpha | — | — | — | — | ✓ | ✓ |
+| Diagnose production remotely from the Pi | dev | alpha | — | — | — | — | — | ✓ |
 | Recover Background Jobs | admin, dev | stable | — | — | — | — | ✓ | ✓ |
 | Privacy and Compliance Operations | mod, admin, dev | beta | — | — | — | ✓ | ✓ | ✓ |
 | Local Development and OAuth | admin, dev | stable | — | — | — | — | ✓ | ✓ |
+| Creator Addresses and Wildcard DNS | admin, dev | stable | — | — | — | — | ✓ | ✓ |
 | Configure creator-growth integrations | admin, dev | beta | — | — | — | — | ✓ | ✓ |
 | Configure AI models, prompts and usage | admin, dev | beta | — | — | — | — | ✓ | ✓ |
 | Recover provider maintenance and shipping estimates | admin, dev | beta | — | — | — | — | ✓ | ✓ |
@@ -226,6 +233,8 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | My Avatar gallery API and installation contract | dev | alpha | — | — | — | — | — | ✓ |
 | Steward API and Token Reference | dev | alpha | — | — | — | — | — | ✓ |
 | AI apps MCP and OAuth reference | dev | beta | — | — | — | — | — | ✓ |
+| Job Search Worker API Reference | dev | alpha | — | — | — | — | — | ✓ |
+| Orb agent API | dev | alpha | — | — | — | — | — | ✓ |
 | ReFit Lower-Body Surface Coverage | dev | alpha | — | — | — | — | — | ✓ |
 | ReFit Validation and Performance | dev | alpha | — | — | — | — | — | ✓ |
 | Telegram Login Setup | admin, dev | beta | — | — | — | — | ✓ | ✓ |
@@ -265,8 +274,11 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Add the drawing pen from the My Avatar gallery | creator, dev | alpha | — | — | ✓ | — | — | ✓ |
 | Add clothes and accessories from the My Avatar asset gallery | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Unity package safety and avatar workflow fixes | creator, dev | beta | — | — | ✓ | — | — | ✓ |
+| Avoid uploading over another account's avatar with the blueprint ID check | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Unit Git history and My Avatar texture fixes | creator, dev | beta | — | — | ✓ | — | — | ✓ |
 | Unity safety verification follow-up | creator, dev | alpha | — | — | ✓ | — | — | ✓ |
+| Read Unity's logs with the Logger | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| See what slows Unity down with Logger timings | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 ## Tutorials
 
@@ -285,3 +297,4 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Art Commissions and Sonas | public, user, creator, admin, dev | beta | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Use the creator and community overviews | creator, mod, admin, dev | beta | — | — | ✓ | ✓ | ✓ | ✓ |
 | Open avatar tools and your public profile | public | beta | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Follow members and creators | public, user, creator, admin, dev | beta | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |

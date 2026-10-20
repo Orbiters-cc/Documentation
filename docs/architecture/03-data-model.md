@@ -87,6 +87,12 @@ The MCB custom-base adoption and path-identity contract is documented in [ADR 00
   stable issue linkage.
 - `Board`, `BoardMembership`, `BoardSubmissionPolicy`, and `BoardItem`: independent
   planning containers, permissions, intake policy, and object placement.
+  `Board.shareToken` (nullable, unique index `Boards_share_token_key`) is the
+  read-only public link token; the default scope excludes it so board payloads never
+  carry it.
+- `CreatorCommissionProfile.defaultBoardId`: the creator's commission board, where new
+  requests land and which the public profile shows while its link is on. A website
+  art request is tied to one card through `Proposal.metadata.artCommissionRequestId`.
 - `Proposal`, `ProposalComment`, and `ProductDecision`: Markdown product context,
   discussion, and human outcomes.
 - `ForecastScenario` and `ForecastLineItem`: private saved projections with snapshot
