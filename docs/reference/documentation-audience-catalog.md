@@ -282,6 +282,7 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Capture VRChat worlds with Orbiters desktop | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Reconstruct and view sessions in Orbiters desktop | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Record your performance with Orbiters desktop | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Share your visited worlds from Orbiters desktop | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Bake a VRChat performance with Mixer | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Show Orbiters splats in Unity with Mixer | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 
@@ -299,6 +300,7 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Find the right part of Orbiters | public, user, creator, mod, admin, dev | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Public Profile and Activity | public, user, creator, mod, admin, dev | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Customize Your Homepage | public, user, creator, admin, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Explore VRChat worlds on the Map explorer | public, user, creator, mod, admin, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Art Commissions and Sonas | public, user, creator, admin, dev | beta | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Use the creator and community overviews | creator, mod, admin, dev | beta | — | — | ✓ | ✓ | ✓ | ✓ |
 | Open avatar tools and your public profile | public | beta | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |

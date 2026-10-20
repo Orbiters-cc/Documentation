@@ -9,7 +9,7 @@ domain: desktop
 type: how-to
 owner: orbiters-engineering
 lastVerified: 2026-10-20
-relations: orbiters.tools.desktop, orbiters.tools.mixer-splats
+relations: orbiters.tools.desktop, orbiters.tools.desktop-worlds, orbiters.tools.mixer-splats
 ---
 
 # Reconstruct and view sessions in Orbiters desktop
@@ -58,6 +58,11 @@ Press **View in 3D** on a reconstructed session. The view opens on the camera of
 - **Recorded view** and the arrows step through the cameras the session was recorded from; double-click jumps back to
   the recorded view.
 - Escape or the close button leaves the view.
+
+## Share it on the Map explorer
+
+A reconstructed session can be shown in 3D on the Orbiters website's Map explorer, from **Visited worlds**: see
+[Share your visited worlds from Orbiters desktop](23-orbiters-desktop-visited-worlds.md).
 
 ## Send it to Unity
 
