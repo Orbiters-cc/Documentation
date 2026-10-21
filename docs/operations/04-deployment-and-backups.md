@@ -108,8 +108,10 @@ behavior; it then requires the Documentation gitlink to change. The command:
    Pi agent at the same time.
 
 `--full` selects every step, `--server-build` builds the frontend on the host instead,
-`--dry-run` prints the plan, and `--skip-checks` is for emergencies only. `npm run release
--- --rollback` runs the rollback below. The command needs the `orbiters` and `pi` SSH
+`--dry-run` prints the plan, and `--skip-checks` is for emergencies only. `--checks-only`
+runs the checks on the `dev` commit and stops there: nothing is pushed or released, and
+uncommitted files elsewhere in the checkout do not matter (the checks run on an export of
+the commit). `npm run release -- --rollback` runs the rollback below. The command needs the `orbiters` and `pi` SSH
 aliases, Docker with the `postgres-dev` container, and `uvx` for the Pi agent tests.
 
 ## Production Deploy Flow
@@ -187,9 +189,12 @@ After a failed run proves an older release's incomplete final filename never upl
 pass its basename through the workflow's `discard_incomplete_backup` input. The workflow
 rejects paths and unexpected names, and refuses to continue when the named file is absent.
 
-CI runs only when started by hand, for example before a large dependency change: it is
-the only place that installs dependencies on a clean machine. Releases run the same
-checks on the workstation first.
+CI runs only when started by hand and is a smoke run of about a minute: the sign-in and
+error catalog tests, the proxy login check, the deploy script tests, the translation check
+and the documentation validation. It is the only place that installs the backend's
+dependencies on a clean machine. Every other check (all backend and frontend tests, the
+database boots, the production bundle) runs on the workstation, with a release or
+`npm run release -- --checks-only`.
 
 If public health checks fail, maintenance is restored. A failure during or after the
 container swap leaves maintenance active for investigation; never restart old code
