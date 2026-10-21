@@ -91,8 +91,11 @@ The MCB custom-base adoption and path-identity contract is documented in [ADR 00
   read-only public link token; the default scope excludes it so board payloads never
   carry it.
 - `CreatorCommissionProfile.defaultBoardId`: the creator's commission board, where new
-  requests land and which the public profile shows while its link is on. A website
-  art request is tied to one card through `Proposal.metadata.artCommissionRequestId`.
+  requests land. `CreatorCommissionProfile.metadata.profileBoardId` (a key in the JSONB
+  `metadata` column) records the creator's opt-in to show that board on their public
+  profile; it counts only while it equals `defaultBoardId` and the board's link is on.
+  A website art request is tied to one card through
+  `Proposal.metadata.artCommissionRequestId`.
 - `Proposal`, `ProposalComment`, and `ProductDecision`: Markdown product context,
   discussion, and human outcomes.
 - `ForecastScenario` and `ForecastLineItem`: private saved projections with snapshot

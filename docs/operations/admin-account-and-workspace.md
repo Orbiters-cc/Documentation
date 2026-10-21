@@ -26,6 +26,12 @@ administrator must still have permission, and both account token versions must
 remain valid. Revoking either account's session prevents renewal. A transient
 network error can be retried; a revoked session requires signing in again.
 
+While impersonating, you cannot add anything that outlives the session. Linking a
+Discord or Telegram sign-in, confirming an account merge, pairing an agent in
+**Orb → Agents & keys** and connecting a GitHub account (including for VPM) are
+refused with **Stop impersonating before adding a sign-in method, agent or
+connected account to this account.**
+
 ## Find moderation and role settings
 
 - **Admin → Community moderation** contains website member review, website

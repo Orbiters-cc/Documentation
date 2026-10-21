@@ -42,6 +42,13 @@ Discord delivery is queued after the appeal is durably saved. If moderators reso
 the appeal before a delayed delivery job runs, the job completes without posting a
 stale actionable message.
 
+The **Approve** and **Reject** buttons work only on the appeal's own message, in its
+appeals room, and only while the appeal is pending. The reviewer needs an appeal
+reviewer role of that appeal's server; a website-wide appeal accepts a role of the
+server holding the website-wide room, or a website role. To correct a decision
+(the decision message's **Modify** link), or to decide an older message that Orbiters
+did not link to its appeal, use the website.
+
 ## Creator-Managed Queues
 
 Creators can manage appeal queues for guilds they own through Discord integrations. Global admins can support these queues when needed.

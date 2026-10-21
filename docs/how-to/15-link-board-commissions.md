@@ -113,17 +113,19 @@ From the request page:
 
 1. Open the request. The **Board card** panel shows its current card, the column it
    is in among the board's columns and, while the board has a public link, **View
-   board**.
-2. Select **Attach to card** (or **Change card**) and search your cards. Cards on
-   your commission board come first. Cards that already track another commission
-   are listed but cannot be chosen.
+   board**. Only you see **View board**; your clients never get it.
+2. Select **Attach to card** (or **Change card**) and search your cards. The list
+   holds only cards you wrote on your boards, not other members' cards placed there.
+   Cards on your commission board come first. Cards that already track another
+   commission are listed but cannot be chosen.
 3. Leave **Remove the card created for this request** checked to take the card
    Orbiters created at acceptance off your boards, or uncheck it to keep it.
 4. Select **Attach**.
 
 From a card: open the card, select **Link request** under **Track as a commission** and
 pick one of your open requests. A request already on another card moves to this one.
-**Link request** appears only on a card that tracks no commission yet.
+**Link request** appears only on a card that tracks no commission yet. Linking works
+only on a card you wrote: Orbiters refuses another member's card, even on your board.
 
 **Detach** (on the request page, or the unlink button next to the request on the
 card) takes the request off the card. The card stays on your board, the request stays
@@ -132,8 +134,8 @@ whenever you want. Declined and cancelled requests cannot be attached, and a
 commission recorded from a card (above) is managed from that card.
 
 Your client sees the card's title and column on the request page. Cards that track a
-request show its stage as a chip on your board and on a shared board. Trello and
-Notion syncs keep the link.
+request show its stage as a chip on your board and, when the card is public, on a
+shared board. Trello and Notion syncs keep the link.
 
 <audience include="dev">
 
@@ -151,6 +153,8 @@ Routes (`backend/src/routes/commissionCardsRouter.js`, creators only, `no-store`
   (`backend/src/services/commissions/commissionCardSearch.js`).
 - `PUT /commission-cards/art/:requestId` with `{ "proposalId": 12, "removePrevious": true }`
   attaches; `DELETE /commission-cards/art/:requestId` detaches (30 per minute).
+  Attaching a card whose `authorId` is not the creator answers `404` and leaves the
+  card unchanged; the card picker lists only the creator's own cards.
   `removePrevious` removes only the acceptance card (slug `art-<request id>`) from
   boards you own, never a card you made, and never from a Notion board.
 

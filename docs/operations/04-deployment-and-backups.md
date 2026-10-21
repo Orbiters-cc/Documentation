@@ -249,6 +249,18 @@ response alone does not validate login. The release checks exercise both state f
 through the production Caddy configuration with an isolated provider fixture whenever
 Caddy, the server entry point, authentication routes or middleware change.
 
+Express also trusts the tunnel's own address on the `edge` network, so `req.ip` is
+the visitor's address. `deploy-prod.sh` reads that address from the running caddy and
+cloudflared containers when it starts. If they are not on `edge` yet, recreate them
+before deploying:
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --no-deps caddy cloudflared
+```
+
+After the deploy, `docker exec backend-prod printenv TRUST_PROXY` ends with that
+address as `/32`, and new visit and audit rows show visitor addresses.
+
 Configure `SMTP_PASSWORD` explicitly; email is disabled when it is missing and
 Orbiters does not use a built-in mail password. Removing credentials from the
 current Git tree does not revoke values in earlier commits. Rotate any still-active

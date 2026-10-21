@@ -220,8 +220,9 @@ Scrolling below the scene reveals a locally adapted
 from `GET /mcb/showcase`. The endpoint is anonymous and returns at most 24 recent
 public custom-base avatar listings with a non-default thumbnail. A public version
 is not required: listings with beta versions or no uploaded versions also appear.
-Hidden, restricted, and commission listings are excluded. The
-response contains only IDs, titles, thumbnail URLs, and public destination links;
+Hidden, restricted, and commission listings are excluded, and so is a base its owner
+has not published yet (the Unity wizard creates it unpublished; `publishedProductWhere()`).
+The response contains only IDs, titles, thumbnail URLs, and public destination links;
 it exposes no version payloads or packages and uses `Cache-Control: no-store`.
 Clicking a tile opens the same expanding asset preview used by homepage widgets.
 The visible, raised card is the pointer target. Primary presses capture the

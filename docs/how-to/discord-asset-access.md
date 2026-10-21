@@ -27,7 +27,10 @@ membership.
 To assign roles, connect a bot for the destination server. Both you and the bot
 need **Manage Roles**, with a highest role above the role being assigned. Discord
 managed roles, the everyone role, Orbiters staff rank roles and appeal reviewer
-roles cannot be assigned through asset synchronization.
+roles cannot be assigned through asset synchronization. Neither can roles with
+moderation or administration permissions, server-wide or through a channel or
+category override; see the list in
+[Manage community roles](manage-community-roles.md#manage-your-team).
 
 ## Add a rule
 

@@ -41,6 +41,8 @@ In **Account → Overview → AI-assisted features**, turn AI off to prevent new
    structured JSON records, available uploads and shared commission attachments.
    Its manifest explains the included domains and lists unavailable originals.
 
+A sticker request you received appears as it does in **Creator → Requests**: while
+its request fee is not yet authorized, without the buyer's address or files.
 Credentials and internal security evidence are excluded. For additional personal
 information, context or a formal portability assessment, use **Ask about your data**.
 
@@ -92,6 +94,7 @@ same section to confirm closure.
 Closure removes website membership, sign-in credentials, account connections,
 profile information, private settings and private library records. It disables
 future account sync and invalidates account access and export downloads.
+Public links to your boards stop working, and your commission board settings are cleared.
 The browser returns to the homepage with website login, draft and preference storage cleared.
 
 <beta>

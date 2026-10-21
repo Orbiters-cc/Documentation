@@ -57,9 +57,15 @@ verification, VRChat group tools and appeals. Community Moderators review appeal
 Only the owner can change connections or the selected VRChat group and grant or
 revoke management access. Community Admins cannot map or assign Discord roles that
 carry moderation or administration permissions (Administrator, Manage Server, Manage
-Roles, Ban Members and similar); only the owner can, and such mappings apply only
-once the owner has saved them. These explicit management permissions are separate from
-membership roles, even when a role is named “Admin” or “Community manager”.
+Roles, Ban Members and similar, including Manage Threads, Manage Expressions, Manage
+Events, Manage Nicknames, Pin Messages, Mute, Deafen and Move Members, View Audit Log,
+Server Insights and Monetization Analytics). A channel or category override that
+allows one of these counts too. The same holds for VRChat group roles that manage the
+group: a management role, a role with `*`, or one with any permission beyond joining
+and opening group instances. Only the owner can map or assign these roles, and such
+mappings apply only once the owner has saved them. These explicit management
+permissions are separate from membership roles, even when a role is named “Admin” or
+“Community manager”.
 
 **Verification** and **Appeals** operate only on Discord servers connected to the
 selected community. Discord Verification Management is in this workspace; website

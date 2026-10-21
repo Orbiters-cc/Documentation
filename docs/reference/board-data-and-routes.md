@@ -45,7 +45,9 @@ the read-only public link token. The model's default scope excludes it; read it 
 A website art commission request is attached to a card through
 `Proposal.metadata.artCommissionRequestId`: one request per card and one card per
 request. `ArtCommissionRequest.snapshot.cardDetachedAt` records a deliberate detach.
-The creator's commission board is `CreatorCommissionProfile.defaultBoardId`.
+The creator's commission board is `CreatorCommissionProfile.defaultBoardId`. The
+profile shows it only while `CreatorCommissionProfile.metadata.profileBoardId`, set by
+the **Commission board** switch, equals that id and the board's link is on.
 
 `BoardItem.position` is `DECIMAL(30,8)`. External Boards can use sparse numeric
 ordering values above `10^14`; retaining that width prevents Trello import or sync
@@ -73,13 +75,14 @@ Share links and commission cards:
 
 - `GET /board-shares/:token` (public, 60 per minute) returns the read-only board;
   `GET /board-shares/:token/covers/:proposalId` (240 per minute) returns one card's
-  cover thumbnail. Both send `X-Robots-Tag` `noindex`.
+  cover thumbnail. Both serve only public cards and send `X-Robots-Tag` `noindex`.
 - `GET` and `PUT /board-shares/boards/:id` (`{ "enabled", "regenerate" }`) read and
-  change the link for a board manager; `PUT /board-shares/boards/:id/commission`
-  (`{ "enabled" }`) makes the owner's board their commission board. Settings changes
-  are limited to 30 per minute.
+  change the link for a board manager; turning it on or regenerating it is owner-only
+  (`403`). `PUT /board-shares/boards/:id/commission` (`{ "enabled" }`) makes the
+  owner's board their commission board and the one their profile shows. Settings
+  changes are limited to 30 per minute.
 - `GET /commission-cards/cards?q=` and `GET /commission-cards/requests?q=` search the
-  creator's cards and open art requests; `PUT /commission-cards/art/:requestId`
+  cards the creator wrote and their open art requests; `PUT /commission-cards/art/:requestId`
   (`{ "proposalId", "removePrevious" }`) attaches a request to a card and
   `DELETE /commission-cards/art/:requestId` detaches it. Creators only.
 

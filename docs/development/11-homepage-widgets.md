@@ -275,12 +275,12 @@ commission and board APIs, plus the public AI apps widget settings
 sources expose retries independently. Reads are aborted on unmount and bounded by
 timeouts. Signed URLs and private content are not stored in layout preferences.
 
-`GET /galleries/asset-images` contributes an independently paginated asset-gallery source. The homepage merges its placement identities into the gallery catalog and shuffled feed. Listing visibility, active placements, attachment eligibility and source hiding are checked; commission listings that redirect to a different detail page without this gallery are excluded. No Discord request is made while listing.
+`GET /galleries/asset-images` contributes an independently paginated asset-gallery source. The homepage merges its placement identities into the gallery catalog and shuffled feed. It loads only published assets, and only their `id` and `owner`. Listing visibility, active placements, attachment eligibility and source hiding are checked; commission listings that redirect to a different detail page without this gallery are excluded. No Discord request is made while listing.
 
 Asset-image responses include `assetId` and their existing signed-source refresh endpoint. **Open gallery** links to `/assets/:id#gallery`. `AssetGallerySection` scrolls after the asset loads, re-aligns as the gallery or preceding preview images finish loading, and stops repositioning after user input.
 
 `GET /galleries/images/:placementId` resolves a pinned image beyond the current
-feed page, including asset placements. Asset placements recheck listing and source visibility; ordinary galleries apply gallery visibility, attachment eligibility, source visibility
+feed page, including asset placements. Asset placements recheck listing and source visibility, and a picture of an unpublished asset resolves only for its owner; ordinary galleries apply gallery visibility, attachment eligibility, source visibility
 and current-user access before returning the same display shape as the gallery
 feed. Unavailable or inaccessible placements return **404**. A placement from a
 members-only gallery returns **403** with `code: GALLERY_MEMBERS_ONLY` when the

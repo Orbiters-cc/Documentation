@@ -44,7 +44,11 @@ consumes it once before OAuth exchange. The role-changing verification endpoint
 uses POST. Production sessions use secure cookies. `TRUST_PROXY` explicitly names
 trusted proxy networks: in production the deploy narrows it to the Compose network
 Caddy reaches the backend from, and Caddy itself trusts forwarding headers only
-from the Cloudflare tunnel's fixed address on the `edge` network. The backend,
+from the Cloudflare tunnel's fixed address on the `edge` network. Caddy appends that
+address to `X-Forwarded-For`, so `scripts/deploy/proxy-trust.sh` also names it in
+`TRUST_PROXY` (as `/32`) and `req.ip` is the visitor's address, not the tunnel's.
+Without an `edge` network nothing is added; when the tunnel's address cannot be read,
+the deploy falls back to the broad private ranges. The backend,
 frontend and database ports listen on 127.0.0.1 only. A direct installation should
 configure only its real proxy.
 
@@ -122,8 +126,9 @@ populated upgrades must both pass twice before release.
 Closure locks the account and makes its remaining actor row non-authenticating and
 immutable. Shared foreign keys survive. Private account rows and credentials are
 removed; provider revocation and eligible physical-file deletion use durable outbox
-jobs. Stale private-owner writes are rejected by database guards. Exports cannot
-become downloadable after closure.
+jobs. Boards stay as shared records, but closure clears their share tokens and the
+creator's commission board settings. Stale private-owner writes are rejected by
+database guards. Exports cannot become downloadable after closure.
 
 Imported discussions use provider plus external user identity independently of
 website membership. Source-image hiding uses the natural guild/message/attachment

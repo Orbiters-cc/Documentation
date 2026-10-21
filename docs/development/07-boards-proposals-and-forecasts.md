@@ -143,37 +143,55 @@ Owners should review placed titles before publishing a Board; changing it back t
 
 ## Share Links and the Commission Board
 
-A board manager (owner or board admin) can turn on a read-only public link from the
-**Share** popover in the board toolbar (`frontend/src/components/elements/boards/share/BoardSharePopover.jsx`).
+Only the board owner can turn on a read-only public link from the **Share** popover
+in the board toolbar (`frontend/src/components/elements/boards/share/BoardSharePopover.jsx`)
+or replace it; anyone else gets `403`. Board admins and staff can still turn it off.
 The link is independent of Board visibility: it opens `/boards/share/:token` for
 anyone, without an account. The token lives in `Boards.shareToken`, which the `Board`
 default scope excludes; only `backend/src/services/boards/boardShareService.js` reads
 it, unscoped. Turning the link off clears the token and **New link** replaces it, so
-every older link stops at once; neither changes the board's `updatedAt`.
+every older link stops at once; neither changes the board's `updatedAt`. Account
+closure clears the closed account's tokens the same way, and `findShared` refuses a
+board whose owner is deleted.
 
 `backend/src/services/boards/publicBoardView.js` builds the public payload from an
 allow-list: board name, description, owner and last change, columns, and per card
 the title, labels, cover, dates, checklist progress and the stage of the owner's own
 linked commission (art or ReFit). Descriptions and checklist items are added only on
 the share page, not on the profile widget. Members, authors, comments, attachments,
-visibility, payment data and commission clients are never loaded into it. Cards
-hidden by a privacy request (their own or their commission's) and non-public GitHub
-issues are dropped. The API answers with `X-Robots-Tag: noindex, nofollow` and the
+visibility, payment data and commission clients are never loaded into it. Visitors
+are signed out, so it keeps only the cards `canViewProposal` lets a signed-out viewer
+see (`visitorProposals`, batched): public cards not hidden by a privacy request (their
+own or their commission's). Private, board-members, pending-publication, unlisted and
+staff cards never appear, whoever placed them; art commission and ReFit cards are
+created private.
+Only a public GitHub issue stands in for its proposal, and non-public issues are
+dropped. The last change counts only the cards shown, and the cover route serves only
+their covers. The API answers with `X-Robots-Tag: noindex, nofollow` and the
 frontend marks `/boards/share` as a never-indexed route.
 
 The commission board is `CreatorCommissionProfile.defaultBoardId`, the same setting
 as **Default Board** in the commission workspace, also exposed as the **Commission
-board** switch in the Share popover for the board owner. Without it,
-`commissionBoardFor` falls back to the owned board with the most commission-linked
-cards. The public profile's `boards` widget replaces the public board list with that
+board** switch in the Share popover for the board owner. The profile shows a
+commission board only after the creator turns that switch on, which also stores the
+board as `CreatorCommissionProfile.metadata.profileBoardId`. `profileBoardFor` returns
+it only while it equals `defaultBoardId`, so setting the default in Commission
+settings alone never publishes a board, and nothing public falls back to another
+board. The public profile's `boards` widget replaces the public board list with that
 board as a compact kanban only while its share link is on
 (`profileCommissionBoard`, `frontend/src/components/profileLayout/CommissionBoardWidget.jsx`).
+The share page's **Commission board** eyebrow and the popover switch use the same
+opt-in. `commissionBoardFor`, which falls back to the owned board with the most
+commission-linked cards, only orders the creator's card picker and picks which
+placement a request's **Board card** panel shows.
 
-Website art commission requests can be attached to any card on a board the creator
-owns: `Proposal.metadata.artCommissionRequestId` links one request to one card,
+Website art commission requests can be attached only to a card the creator wrote on
+a board they own; another member's card on that board answers `404`.
+`Proposal.metadata.artCommissionRequestId` links one request to one card,
 enforced by locking both rows in `backend/src/services/commissions/commissionCardLinks.js`.
 The request page's **Board card** panel and the card window's **Link request** picker
 use `/commission-cards`; Trello and Notion syncs merge metadata and keep the link.
+The panel's board `sharePath` goes only to the creator, never to clients.
 Detaching records `snapshot.cardDetachedAt` so stage changes stop creating a card.
 See [Share a Board with a Public Link](/documentation/orbiters.how-to.share-boards)
 and [Edit Board Cards and Link Existing Commissions](/documentation/orbiters.how-to.link-board-commissions)

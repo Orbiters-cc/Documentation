@@ -40,6 +40,8 @@ time and reason for changes.
 Administrators and owners can enter a VRChat ID or profile URL, preview it and
 confirm the association. This action authoritatively confirms account ownership
 on the member's behalf. The visible VRChat 18+ result is evaluated separately.
+You cannot associate a VRChat account with your own Orbiters account: another staff
+member must do it, as for staff verification and review holds on your own account.
 
 If another member already owns the association, the panel identifies that
 Orbiters user ID and requires explicit reassignment. Reassignment withdraws the
