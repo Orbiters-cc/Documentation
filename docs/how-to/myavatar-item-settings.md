@@ -24,8 +24,8 @@ with Undo, and reads the current choice back from the item.
 ## Before you start
 
 - Set up the item as a prefab in your project.
-- Give each part a setting changes its own object, material slot or blendshape. A setting
-  can only change the item itself, never the buyer's avatar.
+- Give each part that a setting changes its own object, material slot or blendshape. A
+  setting can only change the item itself, never the buyer's avatar.
 - Use Orbiters Toolkit 0.4.4 and My Avatar 0.9.14 or later, so you can test the settings.
 
 ## 1. Create the settings file
@@ -168,7 +168,7 @@ buyer updates the item, My Avatar finds each setting by its label and keeps what
 
 - My Avatar reads the current choice from the item. If the buyer changes a part by hand so
   that no option matches, the choice shows no option until they pick one.
-- Give settings the parts no VRCFury toggle of your prefab animates: in VRChat, a toggle's
+- Use settings on parts that no VRCFury toggle of your prefab animates: in VRChat, a toggle's
   animation decides how its parts look, whatever the setting left.
 - Avoid blendshapes the avatar's body also has: My Avatar lets the body's shapes drive
   same-named shapes on clothing, which would override the setting.
