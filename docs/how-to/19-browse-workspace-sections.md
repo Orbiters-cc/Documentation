@@ -25,7 +25,7 @@ use **Browse documentation** or **Browse admin areas** above the page.
 | Account & community | Profiles, connected accounts, communities and privacy |
 | Assets & commissions | Licences, downloads, commission requests and Sonas |
 | Creator workspace | Publishing, versions, commissions and announcements |
-| Unity tools | My Custom Base, ReFit, XRayGizmos and UnitGit |
+| Unity tools | My Custom Base, ReFit, My Avatar, Mixer and Orbiters - N4N0 |
 | Administration | Staff workflows, payments, integrations and operations |
 | Developer resources | Architecture, APIs, documentation, AI and technical reference |
 

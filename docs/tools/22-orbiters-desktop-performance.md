@@ -1,5 +1,5 @@
 ---
-title: Record your performance with Orbiters desktop
+title: Record your performance with Orbiters - N4N0
 section: Tools
 order: 212
 audience: public, creator, dev
@@ -12,14 +12,14 @@ lastVerified: 2026-10-20
 relations: orbiters.tools.desktop, orbiters.tools.mixer-performance
 ---
 
-# Record your performance with Orbiters desktop
+# Record your performance with Orbiters - N4N0
 
 Besides the world, a session can keep what your avatar did: its parameters and face tracking, your voice, VRChat's
 sound and your body. Mixer turns that into an animation clip for the same avatar in Unity, see
 [Bake a VRChat performance with Mixer](30-mixer-performance.md). Everything is recorded on one clock with the frames, so
 the voice, the face and the camera stay in sync.
 
-**Release status:** Orbiters desktop is not released yet.
+**Release status:** Orbiters - N4N0 is not released yet.
 
 ## Choose what is recorded
 
@@ -43,7 +43,7 @@ ChilloutVR or Resonite, where Mixer has only the SteamVR devices to go on.
 
 ## Use Orbiters in SteamVR
 
-While SteamVR runs, Orbiters desktop adds an **Orbiters** tab to the SteamVR dashboard (turn it off in
+While SteamVR runs, Orbiters - N4N0 adds an **Orbiters** tab to the SteamVR dashboard (turn it off in
 **Settings › Interface › SteamVR dashboard tab**). It has the recorder, the performance switches and the T-pose
 calibration, so you can record without leaving VR. A short sound plays when the tab appears and when you press its
 buttons.

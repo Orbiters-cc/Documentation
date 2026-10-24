@@ -48,7 +48,7 @@ The Orbiters backend reads Markdown files from `docs/`, filters them by audience
 
 - `docs/general`: actionable VRChat creation knowledge curated from reviewed skills.
 - `docs/website`: Orbiters website workflows and category maps.
-- `docs/tools`: MCB, ReFit, XRay Gizmos, and Unit Git operating knowledge.
+- `docs/tools`: MCB, ReFit, My Avatar, Mixer (Mixer console, Mixer Git, Avatar Gizmos) and Orbiters - N4N0 operating knowledge.
 - `docs/start-here`: orientation pages for everyone.
 - `docs/tutorials`: first-run learning paths.
 - `docs/how-to`: task-focused guides.

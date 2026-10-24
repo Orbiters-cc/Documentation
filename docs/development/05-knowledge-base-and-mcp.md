@@ -160,11 +160,11 @@ The landing and reader use the website's normal typography, page background, car
 and hover treatment. Search sits directly in the page header without a separate
 black backdrop or decorative hero artwork. The reader uses a documentation layout:
 a section sidebar, article content, and an in-page outline when headings are
-available. Tool marks remain transparent inside their rows; MCB, ReFit, UnitGit, and
-XRayGizmos icons do not receive an extra icon-tile background.
+available. Tool marks remain transparent inside their rows; MCB, ReFit, My Avatar and
+Mixer icons do not receive an extra icon-tile background.
 
-Navigation is topic-scoped. Entering MCB, ReFit, UnitGit, XRayGizmos, Website, or
-General knowledge limits the sidebar to that topic. Selecting another page from the
+Navigation is topic-scoped. Entering MCB, ReFit, My Avatar, Mixer, Orbiters - N4N0,
+Website, or General knowledge limits the sidebar to that topic. Selecting another page from the
 sidebar must preserve that scope; it must not repopulate unrelated topics. Returning
 to the landing or explicitly choosing another category changes the scope.
 

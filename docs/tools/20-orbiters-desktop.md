@@ -1,5 +1,5 @@
 ---
-title: Capture VRChat worlds with Orbiters desktop
+title: Capture VRChat worlds with Orbiters - N4N0
 section: Tools
 order: 210
 audience: public, creator, dev
@@ -12,21 +12,21 @@ lastVerified: 2026-10-20
 relations: orbiters.tools.desktop-sessions, orbiters.tools.desktop-worlds, orbiters.tools.desktop-performance, orbiters.tools.mixer-performance, orbiters.tools.mixer-splats
 ---
 
-# Capture VRChat worlds with Orbiters desktop
+# Capture VRChat worlds with Orbiters - N4N0
 
-**Orbiters desktop** records what VRChat's camera sees together with the exact camera pose of every frame, so a world
+**Orbiters - N4N0** records what VRChat's camera sees together with the exact camera pose of every frame, so a world
 can be rebuilt as Gaussian splats and brought into Unity with Mixer. It also records what your avatar did (face,
 voice, body) for Mixer's performance import. It never asks for your VRChat login: it reads VRChat's local log, talks
 to VRChat over OSC and receives the camera through Spout, all on your own PC.
 
-**Release status:** Orbiters desktop is not released yet; it runs from a source build of the `OrbitersDesktop`
+**Release status:** Orbiters - N4N0 is not released yet; it runs from a source build of the `OrbitersDesktop`
 repository on Windows.
 
 ## Get started
 
-1. Start **Orbiters desktop**. It lives in the system tray: closing the window keeps recording and the SteamVR
+1. Start **Orbiters - N4N0**. It lives in the system tray: closing the window keeps recording and the SteamVR
    overlay running, and the tray icon opens the window again. **Quit** in the tray menu stops it.
-2. In VRChat, turn OSC on: **Action Menu › Options › OSC › Enabled**. Orbiters desktop announces itself to VRChat
+2. In VRChat, turn OSC on: **Action Menu › Options › OSC › Enabled**. Orbiters - N4N0 announces itself to VRChat
    (OSCQuery) and VRChat starts sending your avatar parameters to it within a few seconds; the sidebar's
    **Action Menu** status says **OSC ready** with the port.
 3. Install the **capture kit** on your avatar with Mixer (see
@@ -34,7 +34,7 @@ repository on Windows.
    pose into each frame and adds **Orbiters › Record** to your Action Menu.
 4. Read and confirm the capture notice the first time: record only places and people that agree to it.
 
-Signed in to the Orbiters Unity tools (MCB, My Avatar), you are signed in to Orbiters desktop too: it uses their saved
+Signed in to the Orbiters Unity tools (MCB, My Avatar), you are signed in to Orbiters - N4N0 too: it uses their saved
 sign-in and follows it, so signing in or out in either does the same in the other within seconds. Otherwise
 **Settings › Orbiters account** signs in with Discord or Telegram in your browser, as the Unity tools do: type the code
 the app shows on the Orbiters page that opens. The account is only needed to share worlds on the Map explorer
@@ -48,7 +48,7 @@ Start a recording either way:
 - **From VRChat:** toggle **Orbiters › Record** in your Action Menu (the `OrbitersRecord` parameter; change the name
   in **Settings › VRChat and OSC › Record parameter**).
 
-When a recording starts from the app, Orbiters desktop prepares VRChat for you and puts everything back afterwards:
+When a recording starts from the app, Orbiters - N4N0 prepares VRChat for you and puts everything back afterwards:
 
 - It opens VRChat's camera in **Stream** mode with **Spout Stream** on (`/usercamera/Mode`, `/usercamera/Streaming`),
   because VRChat sends its camera over Spout only in that mode. Turn this off in
@@ -75,11 +75,11 @@ A session is a folder in **Settings › Storage › Sessions folder** (`Document
   **Keyframe distance**, turns **Keyframe turn** or after **Keyframe interval**) and **depth frames** (exact metric
   depth drawn by the capture kit every few frames).
 - **Performance streams** when they are on: avatar parameters, your voice, VRChat's sound, SteamVR tracking and the
-  capture kit's skeleton. See [Record your performance with Orbiters desktop](22-orbiters-desktop-performance.md).
+  capture kit's skeleton. See [Record your performance with Orbiters - N4N0](22-orbiters-desktop-performance.md).
 - After a reconstruction, the splats in `reconstruction/`. See
-  [Reconstruct and view sessions in Orbiters desktop](21-orbiters-desktop-sessions.md).
+  [Reconstruct and view sessions in Orbiters - N4N0](21-orbiters-desktop-sessions.md).
 
-VRChat's camera sender has no frame counter, so Orbiters desktop keeps each picture once: a frame counts when its
+VRChat's camera sender has no frame counter, so Orbiters - N4N0 keeps each picture once: a frame counts when its
 picture changed (about 85 per second in VR).
 
 ## Settings
@@ -102,17 +102,17 @@ picture changed (about 85 per second in VR).
   **Stream camera** on, or open the camera that way yourself.
 - **Frames arrive but no pose decodes:** the capture kit draws only while `OrbitersRecord` is on and only on the
   uploaded avatar that carries it. Check **Orbiters › Record** in your Action Menu.
-- **The record toggle does nothing:** VRChat's OSC is off, or VRChat has not found Orbiters desktop yet. Turn OSC on,
-  then restart Orbiters desktop; VRChat's log (`%LOCALAPPDATA%Low/VRChat/VRChat/output_log_*.txt`) lists
+- **The record toggle does nothing:** VRChat's OSC is off, or VRChat has not found Orbiters - N4N0 yet. Turn OSC on,
+  then restart Orbiters - N4N0; VRChat's log (`%LOCALAPPDATA%Low/VRChat/VRChat/output_log_*.txt`) lists
   `Found new OSC Service: Orbiters-desktop-…` when it found it.
 
 <audience include="dev">
 
-## How VRChat finds Orbiters desktop
+## How VRChat finds Orbiters - N4N0
 
 VRChat sends OSC (parameters, head and wrist poses) only to services it discovered over mDNS, and its discovery
 library reads a service only from a query answer that carries the PTR record as an answer and the SRV and A records as
-additional records; it ignores RFC 6762 announcements and queries only when it starts. Orbiters desktop therefore:
+additional records; it ignores RFC 6762 announcements and queries only when it starts. Orbiters - N4N0 therefore:
 
 - announces its OSC and OSCQuery services with the address of the default route (one address: VRChat makes one client
   per address it finds), and listens on every interface while taking packets from this machine only;

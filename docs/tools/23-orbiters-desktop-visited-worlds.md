@@ -1,5 +1,5 @@
 ---
-title: Share your visited worlds from Orbiters desktop
+title: Share your visited worlds from Orbiters - N4N0
 section: Tools
 order: 213
 audience: public, creator, dev
@@ -12,26 +12,26 @@ lastVerified: 2026-10-20
 relations: orbiters.tools.desktop, orbiters.tools.desktop-sessions, orbiters.website.map-explorer
 ---
 
-# Share your visited worlds from Orbiters desktop
+# Share your visited worlds from Orbiters - N4N0
 
 **Visited worlds** lists the VRChat worlds you went to, with the pictures you took in each and the sessions you
 recorded there. From a world you choose pictures and a 3D capture to show on the
 [Map explorer](../website/03-map-explorer.md) of the Orbiters website.
 
-**Release status:** Orbiters desktop and the Map explorer are not released yet.
+**Release status:** Orbiters - N4N0 and the Map explorer are not released yet.
 
 ## Where the worlds come from
 
-Everything is read on your PC; Orbiters desktop never asks for your VRChat login.
+Everything is read on your PC; Orbiters - N4N0 never asks for your VRChat login.
 
-- **Visits:** VRChat writes each world you join in its log, and deletes old logs after a while. Orbiters desktop keeps
+- **Visits:** VRChat writes each world you join in its log, and deletes old logs after a while. Orbiters - N4N0 keeps
   what it reads there (world, name and time of each visit) while it runs in the tray, so the list keeps growing after
-  VRChat removed its logs. Visits from before you first started Orbiters desktop are only known from VRChat's remaining
+  VRChat removed its logs. Visits from before you first started Orbiters - N4N0 are only known from VRChat's remaining
   logs.
 - **Pictures:** VRChat writes the world into every picture it saves (in `Pictures/VRChat`, or the folder set in
   VRChat's `picture_output_folder`). Each picture is read once; later visits only read new ones.
 - **Captures:** the sessions recorded in the world (see
-  [Capture VRChat worlds with Orbiters desktop](20-orbiters-desktop.md)).
+  [Capture VRChat worlds with Orbiters - N4N0](20-orbiters-desktop.md)).
 
 The newest worlds come first. A card shows your latest picture of the world (or a session's preview, or VRChat's own
 picture), how many pictures and captures it has, **3D** when a capture is reconstructed, and **On Orbiters** once you
@@ -61,7 +61,7 @@ shared is recognised and not sent twice, even from another folder. Uploads keep 
 Under **3D preview**, each session recorded in the world shows its state:
 
 - **Reconstruct** rebuilds a session as Gaussian splats on your GPU (the same as in Sessions).
-- **Share in 3D** sends a reconstructed session as the world's 3D preview. Orbiters desktop first prepares a web
+- **Share in 3D** sends a reconstructed session as the world's 3D preview. Orbiters - N4N0 first prepares a web
   version of it (at most 600,000 splats, about 19 MB, the most visible ones kept). The website opens it on the same
   camera as **View in 3D**, and the world streams in around that camera first.
 - **Replace 3D preview** appears once you shared one: each member keeps one preview per world, and a new one replaces
@@ -72,7 +72,7 @@ and people that agree to it.
 
 ## Sign in
 
-Sharing uses your Orbiters account. Orbiters desktop uses the sign-in of the Orbiters Unity tools (MCB, My Avatar):
+Sharing uses your Orbiters account. Orbiters - N4N0 uses the sign-in of the Orbiters Unity tools (MCB, My Avatar):
 signed in there, you are signed in here, and signing out in either signs out both. Without one, the bar offers to sign
 in with Discord or Telegram in your browser, as the Unity tools do; **Settings › Orbiters account** shows the account.
 

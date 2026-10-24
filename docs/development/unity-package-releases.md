@@ -14,18 +14,18 @@ lastVerified: 2026-10-03
 # Publish Unity package releases
 
 A change to the root `package.json` version starts **Build Release** when pushed
-to the package repository's default branch. This publishes the package's existing
+to the package repository's default branch. Mixer includes the former Logger and Unit Git
+packages (now the Mixer console and Mixer Git); the Toolkit includes the former XRay Gizmos. This publishes the package's existing
 release artifacts and a Git tag named exactly after the version.
 
 | Package | GitHub repository | Automatic release branch |
 | --- | --- | --- |
 | MCB | `Orbiters-cc/MyCustomBase` | `master` |
 | ReFit | `Orbiters-cc/ReFit` | `master` |
-| Unit Git | `Orbiters-cc/UnitGit` | `master` |
 | Unity Package Manager | `Orbiters-cc/Unity-Package-Manager` | `main` |
-| XRayGizmos | `Orbiters-cc/XRayGizmos` | `master` |
 | Orbiters Toolkit | `Orbiters-cc/Toolkit` | `master` |
 | My Avatar | `Orbiters-cc/MyAvatar` | `master` |
+| Mixer | `Orbiters-cc/Mixer` | `master` |
 
 ## Publish a new version
 
@@ -99,7 +99,7 @@ Events caused by a workflow using its `GITHUB_TOKEN` generally do not start anot
 workflow; automation that commits version bumps needs an appropriate GitHub App
 or personal access token if it is expected to trigger this release workflow.
 
-My Avatar, Toolkit, ReFit and Unit Git use the shared Orbiters VPM feed at
+My Avatar, Toolkit, ReFit and Mixer use the shared Orbiters VPM feed at
 `https://orbiters.cc/vpm/orbiters/index.json`. Their published GitHub releases are
 imported through signed release webhooks; they do not need a separate Pages
 listing build. The VPM GitHub connection renews its GitHub App tokens

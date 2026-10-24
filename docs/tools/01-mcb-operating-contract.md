@@ -165,7 +165,7 @@ Removing its local copy removes the download, not its server availability. A fre
 server response refreshes both the shared cache and visible gallery. Source-model
 changes refresh hash state, and downloads read the selected source hash so an
 earlier garment detection cannot cause a false compatibility rejection. Downloads
-also persist their authorized metadata for local scans after reload or while offline. A Unit Git
+also persist their authorized metadata for local scans after reload or while offline. A Mixer Git
 checkpoint failure cannot turn a successful upload into an unsubmitted version.
 
 These fixes are local and unreleased. See [the measured version pipeline](../reference/mcb-version-pipeline-benchmarks.md)

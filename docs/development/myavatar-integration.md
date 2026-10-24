@@ -104,7 +104,7 @@ per user, 32 per process).
 
 The package repository is `Orbiters-cc/MyAvatar`, branch `master`, with repository
 variable `PACKAGE_NAME=MyAvatar`. It uses the standard **Build Release** workflow.
-Publish Toolkit and Unit Git dependency releases before publishing My Avatar.
+Publish Toolkit and Mixer dependency releases before publishing My Avatar.
 The first My Avatar release is 0.0.1; 0.1.0 adds the local-first texture pipeline;
 0.2.0 adds locked-shader support, convention-independent matching, the morphing drop
 field and makes Unit Git optional. The repository's release webhook is source 12 of
@@ -140,7 +140,7 @@ are rejected after another drop, slot edit, Undo/Redo or renderer change.
 
 The component keeps renderer before/after snapshots and swaps entry state for
 Undo and Redo. A new successful apply replaces the redo snapshot. Renderer
-assignment conflicts prevent overwriting subsequent user edits. Unit Git includes
+assignment conflicts prevent overwriting subsequent user edits. Mixer Git includes
 reused texture files and metadata in the scoped checkpoint.
 
 Matching considers all existing textures on each material and separates primary
@@ -164,7 +164,7 @@ older attachment. Returning to the panel still refreshes the project history.
 `UnitGitOverview.LoadAsync` accepts a cancellation token and passes cancellation
 to the service's existing superseded-read path. Toolkit's shared process runner
 also refuses new work during reload or shutdown. The same runner is used by
-Unit Git's command, merge and binary-output paths and MCB's PowerShell connectivity
+Mixer Git's command, merge and binary-output paths and MCB's PowerShell connectivity
 probe, so a timeout cannot be bypassed by waiting indefinitely for process output.
 
 The affected assemblies compile against Unity 2022.3.22f1. This source change is

@@ -14,18 +14,18 @@ relations: orbiters.tools.desktop-sessions, orbiters.tools.mixer-performance
 
 # Show Orbiters splats in Unity with Mixer
 
-A world that Orbiters desktop reconstructed as Gaussian splats can be shown in your Unity scene, where it was captured,
+A world that Orbiters - N4N0 reconstructed as Gaussian splats can be shown in your Unity scene, where it was captured,
 so you can build, light or film against it. Mixer draws the splats in the Scene and Game views of the editor; they are
 left out of builds.
 
 **Release status:** Mixer 0.1.0 is not released yet. Reconstruction is described in
-[Reconstruct and view sessions in Orbiters desktop](21-orbiters-desktop-sessions.md).
+[Reconstruct and view sessions in Orbiters - N4N0](21-orbiters-desktop-sessions.md).
 
 ## Bring splats into the scene
 
 Either way works:
 
-- **From Orbiters desktop:** open a reconstructed session and press **Send to Mixer**. The Unity editor running Mixer
+- **From Orbiters - N4N0:** open a reconstructed session and press **Send to Mixer**. The Unity editor running Mixer
   (the most recently opened one, when several are open) imports it.
 - **From Unity:** **Tools › Orbiters › Mixer › Import Splats…** and pick a session's `reconstruction/splats.ply`.
 

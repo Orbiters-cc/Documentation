@@ -52,8 +52,8 @@ policy with integrations (`0` loose, `1` tight). Primary and transferred-shape
 smoothing remain independent. Advanced **Garment type** accepts `Auto`, `UpperBody`
 or `Other`; automatic upper-body inference no longer uses avatar ancestor names.
 
-XRay Gizmos is optional. Its separate editor adapter supplies projection/island
-toggles through a narrow bridge; the main editor assembly does not reference XRay.
+Avatar Gizmos come with Orbiters Toolkit. `ReFitXRayIntegration` registers the projection-ray
+and welded-group toggles with the Toolkit's `XRayExternalGizmoRegistry`.
 Optional MCB authentication/environment reflection is centralized in one service.
 
 Cached bindings and transferred deltas validate mesh content, pose, skinning,

@@ -1,0 +1,230 @@
+{
+  "schema": 1,
+  "tool": "mixer",
+  "screenshots": [
+    {
+      "file": "sculpt-page.webp",
+      "caption": "Nine sculpt brushes with radius, strength and falloff, for the mesh or any of its blendshapes",
+      "alt": "Mixer window on the Sculpt page: the Body mesh being edited at the top, then a grid of nine brushes from Grab to Mask and the brush settings: a 15.5 cm radius, 100 % strength and the Smooth, Sphere, Linear, Sharp and Flat falloffs.",
+      "window": "Mixer",
+      "feature": "Sculpt",
+      "toolVersion": "0.2.0",
+      "capturedAt": "2026-10-24",
+      "stage": "alpha",
+      "translations": {
+        "ja": {
+          "caption": "9種類のスカルプトブラシ。半径・強さ・減衰を設定でき、メッシュ本体にもブレンドシェイプにも使えます",
+          "alt": "SculptページのMixerウィンドウ：上に編集中のBodyメッシュ、その下にGrabからMaskまでの9つのブラシと、半径15.5 cm、強さ100 %、減衰（Smooth、Sphere、Linear、Sharp、Flat）のブラシ設定が並びます。"
+        },
+        "fr": {
+          "caption": "Neuf pinceaux de sculpture, avec rayon, force et atténuation, pour le mesh ou ses blendshapes",
+          "alt": "Fenêtre Mixer sur la page Sculpt : le mesh Body en cours d’édition en haut, puis une grille de neuf pinceaux de Grab à Mask et les réglages du pinceau : un rayon de 15,5 cm, une force de 100 % et les atténuations Smooth, Sphere, Linear, Sharp et Flat."
+        },
+        "es": {
+          "caption": "Nueve pinceles de escultura con radio, fuerza y atenuación, para la malla o cualquiera de sus blendshapes",
+          "alt": "Ventana Mixer en la página Sculpt: arriba la malla Body en edición, luego una cuadrícula de nueve pinceles de Grab a Mask y los ajustes del pincel: radio de 15,5 cm, fuerza del 100 % y las atenuaciones Smooth, Sphere, Linear, Sharp y Flat."
+        },
+        "pt-BR": {
+          "caption": "Nove pincéis de escultura com raio, força e atenuação, para a malha ou qualquer um de seus blendshapes",
+          "alt": "Janela Mixer na página Sculpt: no topo a malha Body em edição, depois uma grade de nove pincéis de Grab a Mask e os ajustes do pincel: raio de 15,5 cm, força de 100 % e as atenuações Smooth, Sphere, Linear, Sharp e Flat."
+        }
+      }
+    },
+    {
+      "file": "weights-page.webp",
+      "caption": "Paint a bone's weights with Draw, Blur and Replace while every vertex keeps a total of 1",
+      "alt": "Mixer window on the Weights page: a searchable list of the avatar's bones to paint, the Draw, Blur and Replace brushes, Weight, Radius and Strength sliders, and Auto normalize switched on.",
+      "window": "Mixer",
+      "feature": "Weight paint",
+      "toolVersion": "0.2.0",
+      "capturedAt": "2026-10-24",
+      "stage": "alpha",
+      "translations": {
+        "ja": {
+          "caption": "Draw・Blur・Replaceでボーンのウェイトをペイント。各頂点のウェイトの合計は1に保たれます",
+          "alt": "WeightsページのMixerウィンドウ：ペイントするボーンを検索できるリスト、Draw・Blur・Replaceのブラシ、Weight・Radius・Strengthのスライダー、オンになったAuto normalizeが並びます。"
+        },
+        "fr": {
+          "caption": "Peins les poids d’un bone avec Draw, Blur et Replace, chaque sommet gardant un total de 1",
+          "alt": "Fenêtre Mixer sur la page Weights : la liste des bones de l’avatar à peindre, avec une recherche, les pinceaux Draw, Blur et Replace, les curseurs Weight, Radius et Strength, et Auto normalize activé."
+        },
+        "es": {
+          "caption": "Pinta los pesos de un bone con Draw, Blur y Replace mientras cada vértice mantiene un total de 1",
+          "alt": "Ventana Mixer en la página Weights: la lista de bones del avatar para pintar, con búsqueda, los pinceles Draw, Blur y Replace, los controles deslizantes Weight, Radius y Strength, y Auto normalize activado."
+        },
+        "pt-BR": {
+          "caption": "Pinte os pesos de um bone com Draw, Blur e Replace enquanto cada vértice mantém um total de 1",
+          "alt": "Janela Mixer na página Weights: a lista de bones do avatar para pintar, com busca, os pincéis Draw, Blur e Replace, os controles deslizantes Weight, Radius e Strength, e Auto normalize ativado."
+        }
+      }
+    },
+    {
+      "file": "armature-page.webp",
+      "caption": "Change the rest pose with Unity's move and rotate tools: the mesh keeps its shape",
+      "alt": "Mixer window on the Armature page: Edit rest pose and Mirror switches, Reset to bind pose and Add leaf bone buttons, and the avatar's bones with how many children each has.",
+      "window": "Mixer",
+      "feature": "Edit armature",
+      "toolVersion": "0.2.0",
+      "capturedAt": "2026-10-24",
+      "stage": "alpha",
+      "translations": {
+        "ja": {
+          "caption": "Unityの移動・回転ツールでレストポーズを変更。メッシュの形はそのまま保たれます",
+          "alt": "ArmatureページのMixerウィンドウ：Edit rest poseとMirrorのスイッチ、Reset to bind poseとAdd leaf boneのボタン、子の数が付いたアバターのボーン一覧が並びます。"
+        },
+        "fr": {
+          "caption": "Change la pose de repos avec les outils de déplacement et de rotation d’Unity : le mesh garde sa forme",
+          "alt": "Fenêtre Mixer sur la page Armature : les interrupteurs Edit rest pose et Mirror, les boutons Reset to bind pose et Add leaf bone, et les bones de l’avatar avec leur nombre d’enfants."
+        },
+        "es": {
+          "caption": "Cambia la pose de reposo con las herramientas de mover y rotar de Unity: la malla conserva su forma",
+          "alt": "Ventana Mixer en la página Armature: los interruptores Edit rest pose y Mirror, los botones Reset to bind pose y Add leaf bone, y los bones del avatar con cuántos hijos tiene cada uno."
+        },
+        "pt-BR": {
+          "caption": "Mude a pose de repouso com as ferramentas de mover e girar do Unity: a malha mantém a forma",
+          "alt": "Janela Mixer na página Armature: as chaves Edit rest pose e Mirror, os botões Reset to bind pose e Add leaf bone, e os bones do avatar com quantos filhos cada um tem."
+        }
+      }
+    },
+    {
+      "file": "join-page.webp",
+      "caption": "Join meshes into one, merging submeshes that share a material and hiding the sources",
+      "alt": "Mixer window on the Join page: Merge same materials and Hide the sources switched on above a Join button, then the edited meshes Body, ManeHair and MohawkHair, each with Select, Revert and Commit.",
+      "window": "Mixer",
+      "feature": "Join meshes",
+      "toolVersion": "0.2.0",
+      "capturedAt": "2026-10-24",
+      "stage": "alpha",
+      "translations": {
+        "ja": {
+          "caption": "メッシュを1つに結合。同じマテリアルのサブメッシュをまとめ、元のオブジェクトは無効にします",
+          "alt": "JoinページのMixerウィンドウ：オンになったMerge same materialsとHide the sources、Joinボタン、その下に編集中のメッシュ（Body、ManeHair、MohawkHair）がそれぞれSelect・Revert・Commit付きで並びます。"
+        },
+        "fr": {
+          "caption": "Fusionne des meshes en un seul, en regroupant les submeshes d’un même material et en masquant les sources",
+          "alt": "Fenêtre Mixer sur la page Join : Merge same materials et Hide the sources activés au-dessus d’un bouton Join, puis les meshes modifiés Body, ManeHair et MohawkHair, chacun avec Select, Revert et Commit."
+        },
+        "es": {
+          "caption": "Une mallas en una sola, juntando los submeshes que comparten un material y ocultando las originales",
+          "alt": "Ventana Mixer en la página Join: Merge same materials y Hide the sources activados sobre un botón Join, y luego las mallas editadas Body, ManeHair y MohawkHair, cada una con Select, Revert y Commit."
+        },
+        "pt-BR": {
+          "caption": "Junte malhas em uma só, unindo as submalhas que compartilham um material e ocultando as originais",
+          "alt": "Janela Mixer na página Join: Merge same materials e Hide the sources ativados acima de um botão Join, depois as malhas editadas Body, ManeHair e MohawkHair, cada uma com Select, Revert e Commit."
+        }
+      }
+    },
+    {
+      "file": "render-page.webp",
+      "caption": "Render the scene with Blender's Eevee or Cycles, from the Scene view or a camera, up to 4K",
+      "alt": "Mixer window on the Render page: Render with Blender settings for the engine (Eevee or Cycles), the size from 1080p to 4K, Square or Portrait, 64 samples, the Scene view camera and a Transparent background switch, then the edited meshes.",
+      "window": "Mixer",
+      "feature": "Render",
+      "toolVersion": "0.2.0",
+      "capturedAt": "2026-10-24",
+      "stage": "alpha",
+      "translations": {
+        "ja": {
+          "caption": "BlenderのEeveeまたはCyclesで、シーンビューかシーンのカメラから最大4Kでレンダリング",
+          "alt": "RenderページのMixerウィンドウ：Render with Blenderの設定として、エンジン（EeveeまたはCycles）、1080pから4K・Square・Portraitのサイズ、64サンプル、Scene viewのカメラ、Transparent backgroundのスイッチが並び、その下に編集中のメッシュがあります。"
+        },
+        "fr": {
+          "caption": "Fais le rendu de la scène avec Eevee ou Cycles de Blender, depuis la Scene view ou une caméra, jusqu’en 4K",
+          "alt": "Fenêtre Mixer sur la page Render : les réglages Render with Blender pour le moteur (Eevee ou Cycles), la taille de 1080p à 4K, Square ou Portrait, 64 échantillons, la caméra Scene view et l’interrupteur Transparent background, puis les meshes modifiés."
+        },
+        "es": {
+          "caption": "Renderiza la escena con Eevee o Cycles de Blender, desde la Scene view o una cámara, hasta 4K",
+          "alt": "Ventana Mixer en la página Render: los ajustes de Render with Blender para el motor (Eevee o Cycles), el tamaño de 1080p a 4K, Square o Portrait, 64 muestras, la cámara Scene view y el interruptor Transparent background, y luego las mallas editadas."
+        },
+        "pt-BR": {
+          "caption": "Renderize a cena com o Eevee ou o Cycles do Blender, a partir da Scene view ou de uma câmera, até 4K",
+          "alt": "Janela Mixer na página Render: os ajustes de Render with Blender para o motor (Eevee ou Cycles), o tamanho de 1080p a 4K, Square ou Portrait, 64 amostras, a câmera Scene view e a chave Transparent background, depois as malhas editadas."
+        }
+      }
+    },
+    {
+      "file": "mixer-hierarchy.webp",
+      "caption": "The Mixer Hierarchy shows each avatar's performance rank, its quick bones and every mesh's vertices and shapes",
+      "alt": "Mixer Hierarchy in Unity: the Canine scene with the MasculineCanine avatar (Very Poor, Public) beside a Drop anything field, its Armature with Chest, Head, hand and foot buttons, and meshes such as Body with 89,166 vertices and 497 shapes, each with a thumbnail.",
+      "window": "Hierarchy",
+      "feature": "Mixer Hierarchy",
+      "toolVersion": "0.2.0",
+      "capturedAt": "2026-10-24",
+      "stage": "alpha",
+      "translations": {
+        "ja": {
+          "caption": "Mixer Hierarchyでは、アバターごとのパフォーマンスランク、クイックボーン、各メッシュの頂点数とシェイプ数がわかります",
+          "alt": "UnityのMixer Hierarchy：CanineシーンにMasculineCanineアバター（Very Poor、Public）とDrop anythingの欄、Chest・Head・手・足のボタンが付いたArmature、Body（頂点89,166・シェイプ497）などサムネイル付きのメッシュが並びます。"
+        },
+        "fr": {
+          "caption": "La fenêtre Mixer Hierarchy montre le rang de performance de chaque avatar, des raccourcis vers ses bones et les sommets et shapes de chaque mesh",
+          "alt": "La fenêtre Mixer Hierarchy dans Unity : la scène Canine avec l’avatar MasculineCanine (Very Poor, Public) à côté d’une zone Drop anything, son Armature avec les boutons Chest, Head, mains et pieds, et des meshes comme Body (89 166 sommets, 497 shapes), chacun avec une vignette."
+        },
+        "es": {
+          "caption": "La ventana Mixer Hierarchy muestra el rango de rendimiento de cada avatar, accesos a sus bones y los vértices y shapes de cada malla",
+          "alt": "La ventana Mixer Hierarchy en Unity: la escena Canine con el avatar MasculineCanine (Very Poor, Public) junto a un campo Drop anything, su Armature con botones Chest, Head, manos y pies, y mallas como Body (89 166 vértices, 497 shapes), cada una con una miniatura."
+        },
+        "pt-BR": {
+          "caption": "A janela Mixer Hierarchy mostra o nível de desempenho de cada avatar, atalhos para seus bones e os vértices e shapes de cada malha",
+          "alt": "A janela Mixer Hierarchy no Unity: a cena Canine com o avatar MasculineCanine (Very Poor, Public) ao lado de um campo Drop anything, sua Armature com botões Chest, Head, mãos e pés, e malhas como Body (89.166 vértices, 497 shapes), cada uma com uma miniatura."
+        }
+      }
+    },
+    {
+      "file": "mixer-console.webp",
+      "caption": "The Mixer console groups logs by message, tags the package that wrote them and charts the session",
+      "alt": "Mixer console in Unity: error, warning and info counts, the search field, Sources, List and Groups, a session timeline marked with commits and avatar uploads, and grouped MCB logs with their counts beside a panel of keyboard shortcuts.",
+      "window": "Mixer console",
+      "feature": "Grouped logs",
+      "toolVersion": "0.2.0",
+      "capturedAt": "2026-10-24",
+      "stage": "alpha",
+      "translations": {
+        "ja": {
+          "caption": "Mixer consoleはログをメッセージごとにまとめ、出力したパッケージを表示し、セッションをグラフにします",
+          "alt": "UnityのMixer console：エラー・警告・情報の件数、検索欄、Sources、List、Groups、コミットやアバターのアップロードが記されたセッションのタイムライン、件数付きでまとめられたMCBのログと、キーボードショートカットのパネルが並びます。"
+        },
+        "fr": {
+          "caption": "La fenêtre Mixer console groupe les logs par message, indique le package qui les a écrits et trace la session",
+          "alt": "La fenêtre Mixer console dans Unity : les nombres d’erreurs, d’avertissements et d’infos, la recherche, Sources, List et Groups, une chronologie de la session marquée par les commits et les avatars téléversés, et des logs MCB groupés à côté d’un panneau de raccourcis clavier."
+        },
+        "es": {
+          "caption": "La ventana Mixer console agrupa los logs por mensaje, marca el paquete que los escribió y grafica la sesión",
+          "alt": "La ventana Mixer console en Unity: los recuentos de errores, advertencias e info, la búsqueda, Sources, List y Groups, una línea de tiempo de la sesión con commits y avatares subidos, y logs de MCB agrupados con su recuento junto a un panel de atajos de teclado."
+        },
+        "pt-BR": {
+          "caption": "A janela Mixer console agrupa os logs por mensagem, marca o pacote que os escreveu e mostra a sessão em gráfico",
+          "alt": "A janela Mixer console no Unity: as contagens de erros, avisos e informações, a busca, Sources, List e Groups, uma linha do tempo da sessão marcada com commits e uploads de avatar, e logs do MCB agrupados com sua contagem ao lado de um painel de atalhos de teclado."
+        }
+      }
+    },
+    {
+      "file": "mixer-git-history.webp",
+      "caption": "Mixer Git's history graph, with each VRChat avatar upload tagged on its commit",
+      "alt": "Mixer Git on the Log tab: the branch list (HEAD and the local master branch) beside a commit graph where MasculineCanine PC upload tags mark each VRChat avatar upload.",
+      "window": "Mixer Git",
+      "feature": "History",
+      "toolVersion": "0.2.0",
+      "capturedAt": "2026-10-24",
+      "stage": "alpha",
+      "translations": {
+        "ja": {
+          "caption": "Mixer Gitの履歴グラフ。VRChatへのアバターのアップロードごとに、そのコミットにタグが付きます",
+          "alt": "LogタブのMixer Git：ブランチ一覧（HEADとローカルのmasterブランチ）の横に、MasculineCanine PC uploadのタグでVRChatへの各アバターのアップロードを示したコミットグラフがあります。"
+        },
+        "fr": {
+          "caption": "Le graphe d’historique de la fenêtre Mixer Git, où chaque avatar téléversé dans VRChat est marqué sur son commit",
+          "alt": "La fenêtre Mixer Git sur l’onglet Log : la liste des branches (HEAD et la branche locale master) à côté d’un graphe de commits où les étiquettes MasculineCanine PC upload marquent chaque avatar téléversé dans VRChat."
+        },
+        "es": {
+          "caption": "El gráfico del historial de la ventana Mixer Git, con cada avatar subido a VRChat marcado en su commit",
+          "alt": "La ventana Mixer Git en la pestaña Log: la lista de ramas (HEAD y la rama local master) junto a un gráfico de commits donde las etiquetas MasculineCanine PC upload marcan cada avatar subido a VRChat."
+        },
+        "pt-BR": {
+          "caption": "O gráfico do histórico da janela Mixer Git, com cada upload de avatar no VRChat marcado no seu commit",
+          "alt": "A janela Mixer Git na aba Log: a lista de branches (HEAD e o branch local master) ao lado de um gráfico de commits onde as etiquetas MasculineCanine PC upload marcam cada upload de avatar no VRChat."
+        }
+      }
+    }
+  ]
+}

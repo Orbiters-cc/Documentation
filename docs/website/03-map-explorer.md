@@ -44,8 +44,8 @@ A world with no preview yet explains how to capture it.
 
 ## Add a world
 
-Previews and pictures come from Orbiters desktop, from the worlds you visited: see
-[Share your visited worlds from Orbiters desktop](../tools/23-orbiters-desktop-visited-worlds.md). Everything shared is
+Previews and pictures come from Orbiters - N4N0, from the worlds you visited: see
+[Share your visited worlds from Orbiters - N4N0](../tools/23-orbiters-desktop-visited-worlds.md). Everything shared is
 public. Only public VRChat worlds are listed.
 
 ## Report a preview or picture

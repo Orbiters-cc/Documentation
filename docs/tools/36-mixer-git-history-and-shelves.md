@@ -1,26 +1,26 @@
 ---
-title: Work with UnitGit branches, shelves, and history
+title: Work with Mixer Git branches, shelves, and history
 section: Tools
-order: 144
+order: 236
 audience: public
-stage: stable
+stage: alpha
 id: orbiters.tools.unitgit-history-and-shelves
-domain: unitgit
+domain: mixer
 type: how-to
-owner: orbiters-unitgit
-lastVerified: 2026-10-03
+owner: orbiters-engineering
+lastVerified: 2026-10-24
 relations: orbiters.tools.unitgit-get-started
 ---
 
-# Work with UnitGit branches, shelves, and history
+# Work with Mixer Git branches, shelves, and history
 
-Start with [your first checkpoint](/documentation/orbiters.tools.unitgit-get-started) if you have not yet committed through UnitGit. Save your scenes and assets before an operation that changes working files, and review **Local Changes** so you know what you are carrying with you.
+Start with [your first checkpoint](/documentation/orbiters.tools.unitgit-get-started) if you have not yet committed through Mixer Git. Save your scenes and assets before an operation that changes working files, and review **Local Changes** so you know what you are carrying with you.
 
 ## Try an idea on a branch
 
 A branch gives an experiment its own line of commits. In **Log**, inspect the commit where the experiment should begin, then use **New branch from here** and enter a descriptive name, such as `experiment/sleeve-fit`.
 
-The selected commit is the starting point when one is selected; otherwise UnitGit uses the current commit. Check the active branch before making your next commit. Use the branch's checkout action to switch your working files to that branch.
+The selected commit is the starting point when one is selected; otherwise Mixer Git uses the current commit. Check the active branch before making your next commit. Use the branch's checkout action to switch your working files to that branch.
 
 Commit or shelve unfinished edits before switching. If Git refuses a checkout because files would be overwritten, resolve those edits first rather than forcing the switch.
 
@@ -45,13 +45,13 @@ Applying a shelf keeps the shelf entry. Once you have confirmed that the work is
 | Commit | Records staged changes locally |
 | Push | Sends local commits to the configured remote |
 
-UnitGit's Update uses fast-forward-only behavior. If your branch and the remote both gained different commits, Update stops instead of creating a merge automatically. Review the histories and use your normal Git workflow to reconcile them before trying again.
+Mixer Git's Update uses fast-forward-only behavior. If your branch and the remote both gained different commits, Update stops instead of creating a merge automatically. Review the histories and use your normal Git workflow to reconcile them before trying again.
 
 Remote repository creation, where available, is also separate from publishing commits. Creating a repository or configuring a remote does not push the project.
 
 ## Amend the last checkpoint
 
-Use **Amend** when the last local commit needs a correction, such as a missed file or a better message. Include the correction, enable **Amend**, and use **Commit**. UnitGit confirms operations that rewrite history.
+Use **Amend** when the last local commit needs a correction, such as a missed file or a better message. Include the correction, enable **Amend**, and use **Commit**. Mixer Git confirms operations that rewrite history.
 
 Amending rewrites the previous commit. Prefer a new follow-up commit when other people already rely on that history; coordinate any deliberate history rewrite through your existing Git workflow.
 
@@ -67,9 +67,9 @@ Amending rewrites the previous commit. Prefer a new follow-up commit when other 
 | A file has no readable text diff | Binary assets cannot be reviewed like text; inspect the asset in its appropriate editor. |
 | A command fails | Read Console for the actual Git error before repeating the action. |
 
-UnitGit operates on real project files and Git history. Review the action's confirmation, especially before deleting a shelf or rewriting a commit.
+Mixer Git operates on real project files and Git history. Review the action's confirmation, especially before deleting a shelf or rewriting a commit.
 
-Unit Git 0.1.3 protects Rename and Squash from concurrent checkouts, refreshes
+Mixer Git protects Rename and Squash from concurrent checkouts, refreshes
 selected branch state before Update, loads older history through Next, preserves
 header-like diff content and identifies all unresolved conflict states. See
 [Unit Git history and My Avatar texture fixes](unity-history-and-texture-fixes.md).

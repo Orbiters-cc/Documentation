@@ -7,7 +7,7 @@ const path = require('path');
 const { webpInfo } = require('./webp-info');
 
 const GALLERY = Object.freeze({
-    tools: ['refit', 'myavatar', 'mcb', 'logger', 'unitgit', 'xraygizmos', 'toolkit'],
+    tools: ['refit', 'myavatar', 'mcb', 'mixer', 'toolkit'],
     locales: ['ja', 'fr', 'es', 'pt-BR'],
     stages: ['stable', 'beta', 'alpha'],
     manifest: 'gallery.json',

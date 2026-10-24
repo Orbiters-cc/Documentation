@@ -37,8 +37,18 @@ These tool guides are public and do not require a creator account.
 
 | Tool | Start here | Keep nearby |
 | --- | --- | --- |
-| XRayGizmos | [Inspect an avatar](/documentation/orbiters.tools.xraygizmos-get-started) | [Controls and troubleshooting](/documentation/orbiters.tools.xraygizmos-controls) |
-| UnitGit | [Make your first checkpoint](/documentation/orbiters.tools.unitgit-get-started) | [Branches, shelves, and history](/documentation/orbiters.tools.unitgit-history-and-shelves) |
+| Avatar Gizmos | [Inspect an avatar](/documentation/orbiters.tools.xraygizmos-get-started) | [Controls and troubleshooting](/documentation/orbiters.tools.xraygizmos-controls) |
+
+<alpha>
+
+Mixer's windows, in alpha until Mixer 0.2.0 is released:
+
+| Tool | Start here | Keep nearby |
+| --- | --- | --- |
+| Mixer Git | [Make your first checkpoint](/documentation/orbiters.tools.unitgit-get-started) | [Branches, shelves, and history](/documentation/orbiters.tools.unitgit-history-and-shelves) |
+| Mixer console | [Read Unity's logs](/documentation/orbiters.tools.logger) | [See what slows Unity down](/documentation/orbiters.tools.logger-timings) |
+
+</alpha>
 
 <audience include="creator, admin, dev">
 

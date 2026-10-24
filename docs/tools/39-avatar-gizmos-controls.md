@@ -1,20 +1,20 @@
 ---
-title: XRayGizmos controls and troubleshooting
+title: Avatar Gizmos controls and troubleshooting
 section: Tools
-order: 142
+order: 239
 audience: public
 stage: stable
 id: orbiters.tools.xraygizmos-controls
-domain: xraygizmos
+domain: mixer
 type: reference
-owner: orbiters-xraygizmos
-lastVerified: 2026-10-06
+owner: orbiters-engineering
+lastVerified: 2026-10-24
 relations: orbiters.tools.xraygizmos-get-started
 ---
 
-# XRayGizmos controls and troubleshooting
+# Avatar Gizmos controls and troubleshooting
 
-Open **Tools > Orbiters > XRay Gizmos** for the full controls. For a first walkthrough, start with [Inspect an avatar with XRayGizmos](/documentation/orbiters.tools.xraygizmos-get-started).
+Open **Tools > Orbiters > Avatar Gizmos** for the full controls. For a first walkthrough, start with [Inspect an avatar with Avatar Gizmos](/documentation/orbiters.tools.xraygizmos-get-started).
 
 ## Choose a target
 
@@ -30,7 +30,7 @@ Armatures come from usable skinned-mesh bone arrays. Multiple renderers sharing 
 
 | Control | Effect |
 | --- | --- |
-| Show XRay armatures | Displays skeleton overlays through the model |
+| Show armatures | Displays skeleton overlays through the model |
 | Shape, Thickness, Color | Adjusts bone appearance |
 | Clickable scene bones | Highlights hovered bones and selects their source transforms; Shift adds to the selection and Ctrl/Cmd toggles a bone |
 | Show weight paint | Previews selected bone or root influence on skinned meshes |
@@ -44,17 +44,17 @@ Weight visualization uses a blue, cyan, green, yellow, red ramp from low to high
 
 ## Scene-view toolbar
 
-The **XRay Gizmos** Scene-view overlay provides **Bones**, **Weight paint**, **Mesh edges**, and **Extra** controls without keeping the full window open.
+The **Avatar Gizmos** Scene-view overlay, at the right end of the Scene view's top toolbar, provides **Bones**, **Mirror**, **Weight paint**, **Mesh edges**, and **Extra** controls without keeping the full window open (**Clothing** too when the VRChat SDK is in the project).
 
-Turning on **Bones** from this toolbar enables **Whole scene** and clickable bones. Its dropdown lets you choose **Whole scene**, **Selected object**, **Disable**, or **Open XRay Gizmos Window**. Turn Bones off to disable both armature display and bone picking.
+Turning on **Bones** from this toolbar enables **Whole scene** and clickable bones. Its dropdown lets you choose **Whole scene**, **Selected object**, **Disable**, or **Open Avatar Gizmos Window**. Turn Bones off to disable both armature display and bone picking.
 
 **Extra** controls gizmos registered by other installed tools. Its dropdown can enable or disable entries individually or together. **No extra gizmos registered** simply means no tool has supplied an entry.
 
-XRayGizmos can discover ReFit debug labels from available snapshots. ReFit is optional; enabling XRayGizmos does not create a ReFit run or a debug snapshot.
+Avatar Gizmos can discover ReFit debug labels from available snapshots. ReFit is optional; turning the gizmos on does not create a ReFit run or a debug snapshot.
 
 ## Avatar budget
 
-With the VRChat avatar SDK in the project, XRayGizmos 0.2.8 adds an **Avatar budget**
+With the VRChat avatar SDK in the project, the Toolkit adds an **Avatar budget**
 panel to the Scene view (bottom right; show or hide it from the Scene view's Overlays
 menu). It follows the selected avatar, or the scene's only active avatar, and estimates
 without building:
@@ -81,9 +81,9 @@ PhysBones its build adds and the bones it removes are included.
 
 ## Scene selection and handles
 
-XRayGizmos 0.2.6 participates in Unity's normal handle picking. Bone selection yields to an active drag or camera navigation, and only the visible part of a bone in front of the camera's near plane can receive clicks. Empty-space clicks remain available to Unity. Each Scene view keeps its own hover target.
+Avatar Gizmos take part in Unity's normal handle picking. Bone selection yields to an active drag or camera navigation, and only the visible part of a bone in front of the camera's near plane can receive clicks. Empty-space clicks remain available to Unity. Each Scene view keeps its own hover target.
 
-If an older installation appears to intercept Scene-view clicks, turn **Bones** off in the toolbar, then update XRayGizmos and Toolkit together. See [Restore Scene-view interaction](unity-scene-interaction-fixes.md).
+If an older installation appears to intercept Scene-view clicks, turn **Bones** off in the toolbar, then update Orbiters Toolkit. See [Restore Scene-view interaction](unity-scene-interaction-fixes.md).
 
 ## When something is missing
 
@@ -103,14 +103,13 @@ The overlay is a diagnostic view. A visible skeleton or weight gradient does not
 
 ## Mirror posing
 
-Requires XRay Gizmos 0.2.1 and Orbiters Toolkit 0.2.5. Toolkit owns the posing
-service; MCP for Unity is optional. My Avatar's **Symmetry** switch uses the same mode.
+Part of Orbiters Toolkit, which owns the posing service; MCP for Unity is optional. My Avatar's **Symmetry** switch uses the same mode.
 
-Enable **Mirror** in the Scene-view XRay Gizmos toolbar (the butterfly icon) or the
+Enable **Mirror** in the Scene-view Avatar Gizmos toolbar (the butterfly icon) or the
 full window. The toolbar icon has no text label; hover it for Mirror status. Mirror is
 a mode: it stays on while nothing can be mirrored and mirrors the rig of the next
-avatar or bone you select, the nearest humanoid above the selection, or the XRay
-armature when there is none. Selecting something outside any rig, such as a light,
+avatar or bone you select, the nearest humanoid above the selection, or the Avatar
+Gizmos armature when there is none. Selecting something outside any rig, such as a light,
 keeps the current rig. Rotate or move one paired bone; its partner follows across
 the avatar root's local X plane. The window identifies the active rig, pair count,
 reference strategy and selected partner.
@@ -134,7 +133,7 @@ their ancestors have positive, uniform scale (tiny imported differences, up to 0
 between components, are tolerated); other pairs are skipped and counted in the
 status. Scaled props or accessories elsewhere in the hierarchy do not block Mirror.
 **Clear** still controls the display overlays; switch **Mirror** off separately.
-For a manual installation, install both packages together.
+For a manual installation, install the Toolkit with the tool that needs it.
 
 
 
@@ -142,7 +141,7 @@ For a manual installation, install both packages together.
 
 ### Pose symmetrically in Play Mode
 
-The local working version enables the XRay Gizmos **Mirror** control in Play Mode.
+The local working version enables the Avatar Gizmos **Mirror** control in Play Mode.
 Select an avatar bone and rotate or move it with Unity's normal handles. Only
 explicit edits are mirrored; ordinary animation is not copied across the body.
 The edited channels on both bones hold after animation and LateUpdate, leaving
@@ -151,6 +150,6 @@ explicit edits.
 
 Switch **Mirror** off to release the holds. Exiting Play Mode discards the test
 pose. Play Mode edits do not record prefab overrides. My Avatar's inspector is
-still disabled in Play Mode; use the XRay Gizmos toolbar for live posing.
+still disabled in Play Mode; use the Avatar Gizmos toolbar for live posing.
 
 </alpha>

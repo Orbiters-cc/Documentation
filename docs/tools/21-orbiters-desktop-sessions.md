@@ -1,5 +1,5 @@
 ---
-title: Reconstruct and view sessions in Orbiters desktop
+title: Reconstruct and view sessions in Orbiters - N4N0
 section: Tools
 order: 211
 audience: public, creator, dev
@@ -12,13 +12,13 @@ lastVerified: 2026-10-20
 relations: orbiters.tools.desktop, orbiters.tools.desktop-worlds, orbiters.tools.mixer-splats
 ---
 
-# Reconstruct and view sessions in Orbiters desktop
+# Reconstruct and view sessions in Orbiters - N4N0
 
 Every recording ends up in **Sessions**: one card per world, with its preview, length, frame, keyframe and depth frame
 counts and size. From a session you rebuild the world as Gaussian splats on your GPU, walk through it in 3D and send
-it to Unity. Recording itself is described in [Capture VRChat worlds with Orbiters desktop](20-orbiters-desktop.md).
+it to Unity. Recording itself is described in [Capture VRChat worlds with Orbiters - N4N0](20-orbiters-desktop.md).
 
-**Release status:** Orbiters desktop is not released yet.
+**Release status:** Orbiters - N4N0 is not released yet.
 
 ## Find a session
 
@@ -62,7 +62,7 @@ Press **View in 3D** on a reconstructed session. The view opens on the camera of
 ## Share it on the Map explorer
 
 A reconstructed session can be shown in 3D on the Orbiters website's Map explorer, from **Visited worlds**: see
-[Share your visited worlds from Orbiters desktop](23-orbiters-desktop-visited-worlds.md).
+[Share your visited worlds from Orbiters - N4N0](23-orbiters-desktop-visited-worlds.md).
 
 ## Send it to Unity
 

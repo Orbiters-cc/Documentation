@@ -1,32 +1,32 @@
 ---
-title: Inspect an avatar with XRayGizmos
+title: Inspect an avatar with Avatar Gizmos
 section: Tools
-order: 141
+order: 238
 audience: public
 stage: stable
 id: orbiters.tools.xraygizmos-get-started
-domain: xraygizmos
+domain: mixer
 type: tutorial
-owner: orbiters-xraygizmos
-lastVerified: 2026-09-07
+owner: orbiters-engineering
+lastVerified: 2026-10-24
 relations: orbiters.tools.xraygizmos-controls
 ---
 
-# Inspect an avatar with XRayGizmos
+# Inspect an avatar with Avatar Gizmos
 
-XRayGizmos helps you see an avatar's skeleton through its mesh, inspect which bones influence a surface, and follow mesh edges as the avatar deforms. Everything appears in Unity's **Scene view**. The overlays are editor-only and leave the source meshes unchanged.
+Avatar Gizmos help you see an avatar's skeleton through its mesh, inspect which bones influence a surface, and follow mesh edges as the avatar deforms. Everything appears in Unity's **Scene view**. The overlays are editor-only and leave the source meshes unchanged.
 
 ## Before you start
 
-Use a Unity 2022.3 project with the **XRay Gizmos** package installed. Open a scene containing a rigged model with a `SkinnedMeshRenderer`. The package does not require MCB, ReFit, or the VRChat SDK.
+Use a Unity 2022.3 project with **Orbiters Toolkit** installed: Avatar Gizmos (formerly XRay Gizmos) are part of it, and it comes with every Orbiters tool, such as Mixer. Open a scene containing a rigged model with a `SkinnedMeshRenderer`. They do not require MCB, ReFit, or the VRChat SDK.
 
-This guide starts with the package already installed. If **Tools > Orbiters > XRay Gizmos** is missing, check that Unity has finished compiling and that the package appears in the project's Package Manager. Resolve compiler errors in the Console before continuing.
+This guide starts with the package already installed. If **Tools > Orbiters > Avatar Gizmos** is missing, check that Unity has finished compiling and that the package appears in the project's Package Manager. Resolve compiler errors in the Console before continuing.
 
 ## See the skeleton through the avatar
 
 1. Select the avatar's root object in the Hierarchy.
-2. Open **Tools > Orbiters > XRay Gizmos**.
-3. Choose **Selected object** and enable **Show XRay armatures**.
+2. Open **Tools > Orbiters > Avatar Gizmos**.
+3. Choose **Selected object** and enable **Show armatures**.
 4. Adjust **Thickness** and **Color** until the bones are easy to read against your scene.
 5. Enable **Clickable scene bones**. Hover a bone in the Scene view to highlight it in white, then click it to select the actual bone in the Hierarchy.
 
@@ -34,11 +34,11 @@ For a stable inspection target while selecting other objects, choose **Pinned ob
 
 ## Find what a bone influences
 
-Enable **Show weight paint**, then select a bone. XRayGizmos finds skinned meshes influenced by that bone and colors them with a blue-to-red weight ramp: blue means little influence, red means strong influence. Adjust **Weight alpha** to see more or less of the underlying surface.
+Enable **Show weight paint**, then select a bone. Avatar Gizmos find skinned meshes influenced by that bone and colors them with a blue-to-red weight ramp: blue means little influence, red means strong influence. Adjust **Weight alpha** to see more or less of the underlying surface.
 
 For example, select an elbow bone while investigating an unexpected sleeve deformation. Check whether the colored influence reaches the area that bends incorrectly. Selecting an armature or renderer root shows combined influence under that root; select an individual bone again when you need to isolate its contribution.
 
-Despite the control's name, this is a **weight preview**. It does not paint or change skin weights. Make the actual correction in your mesh or rig authoring workflow.
+This is a **weight preview**: it does not change skin weights. Paint them with Mixer's **Weight Paint** mode, or in your mesh or rig authoring workflow.
 
 ## Inspect the surface as it moves
 

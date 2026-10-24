@@ -1,23 +1,23 @@
 ---
-title: See what slows Unity down with Logger timings
+title: See what slows Unity down with Mixer console timings
 section: Tools
-order: 201
+order: 233
 audience: public, creator, dev
 stage: alpha
 id: orbiters.tools.logger-timings
-domain: logger
+domain: mixer
 type: how-to
 owner: orbiters-engineering
-lastVerified: 2026-10-07
+lastVerified: 2026-10-24
 relations: orbiters.tools.logger
 ---
 
-# See what slows Unity down with Logger timings
+# See what slows Unity down with Mixer console timings
 
-The Logger times each **script reload**, each **entry into Play Mode** and each **avatar build and upload**, and shows
+The Mixer console times each **script reload**, each **entry into Play Mode** and each **avatar build and upload**, and shows
 what each package took. When a reload suddenly takes twice as long, you see which package started costing more.
 
-**Release status:** Logger 0.2.0, not released yet.
+**Release status:** part of Mixer 0.2.0, not released yet.
 
 ## Read a timing
 
@@ -38,18 +38,18 @@ Each timing is a log under the **Timings** source, such as "Script reload took 6
 | Entering Play Mode | Leaving Edit Mode to the first frames | Leaving Edit Mode, the script reload by package, each tool's avatar build step (VRCFury runs them on each avatar of the scene), the scene load |
 | Avatar build and upload | Build & Publish or Build & Test, to the end of the upload | Each tool's VRChat SDK build step (VRCFury, MCB, My Avatar, ReFit, Orbiters Toolkit, the SDK's own…), the asset bundle, the upload |
 
-Avatar builds and uploads need the VRChat Avatars SDK; the Logger adds its timing there only when the SDK is in the
-project.
+Avatar builds and uploads need the VRChat Avatars SDK; the Mixer console adds its timing there only when the SDK is
+in the project.
 
 ## Turn timings on or off
 
-All three are on by default. In the Logger's settings, **Timings** has one switch for script reloads, one for Play
+All three are on by default. In the Mixer console's settings, **Timings** has one switch for script reloads, one for Play
 Mode and one for avatar builds and uploads.
 
 <audience include="dev">
 Script reload parts come from the "Domain Reload Profiling" tree Unity writes to Editor.log after each reload. Unity
-lists types and methods only while its `EnableDomainReloadTimings` diagnostic switch is on, so the Logger turns that
-switch on while reloads are measured and off when you turn measuring off. Unity then posts a "Diagnostic switches are
-active" notice after each reload; the Logger hides it while that switch is the only one on. Builds are timed by probes
+lists types and methods only while its `EnableDomainReloadTimings` diagnostic switch is on, so the Mixer console turns
+that switch on while reloads are measured and off when you turn measuring off. Unity then posts a "Diagnostic switches are
+active" notice after each reload; the Mixer console hides it while that switch is the only one on. Builds are timed by probes
 placed in front of each group of build steps in the SDK's callback list, without touching the steps themselves.
 </audience>

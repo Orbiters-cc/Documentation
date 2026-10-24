@@ -14,13 +14,13 @@ relations: orbiters.reference.job-search-worker-api, orbiters.decision.personal-
 
 # Run your job search worker on a Raspberry Pi
 
-The **Orb** workspace ([orbiters.cc/orb](https://orbiters.cc/orb), formerly Me) keeps your job search in
+The **N4N0** workspace ([orbiters.cc/orb](https://orbiters.cc/orb), formerly Me) keeps your job search in
 Orbiters: offers, lists, the Priority Quest, research queues, collection runs and the keys your agents use.
 Orbiters never visits job sites itself. A worker on your own Raspberry Pi takes the queued work, runs the lookups
-and sends the results back. The same workspace hosts Orb, your personal assistant; see
-[Set up Orb, your personal business assistant](/documentation/orbiters.how-to.me-scout).
+and sends the results back. The same workspace hosts N4N0, your personal assistant; see
+[Set up N4N0, your personal business assistant](/documentation/orbiters.how-to.me-scout).
 
-Until a worker is paired, the Orb page shows **Worker offline** and queued research waits.
+Until a worker is paired, the N4N0 page shows **Worker offline** and queued research waits.
 
 ## Before you start
 
@@ -48,7 +48,7 @@ Run the same command again to update the worker. Updating keeps the pairing and 
 
 ## Pair it with your account
 
-1. In Orbiters, open **Orb → Agents & keys** and choose **Pair** on **Job search worker**.
+1. In Orbiters, open **N4N0 → Agents & keys** and choose **Pair** on **Job search worker**.
 2. Copy the token. Orbiters shows it once.
 3. On the Pi, run `sudo findings-worker-pair`, keep the suggested API address and paste the token.
 
@@ -60,7 +60,7 @@ root and the worker.
 
 ## Check that it works
 
-- The Orb page header shows **Worker online** within half a minute.
+- The N4N0 page header shows **Worker online** within half a minute.
 - **Settings → Home & commute → Find address** returns matching addresses.
 - On the Pi, `journalctl -u findings-worker -f` lists each task as it runs.
 
@@ -75,7 +75,7 @@ Keys live in Orbiters and are released only to the paired worker when a task nee
 
 ## Stop or remove the worker
 
-- Choose **Unpair** in **Orb → Agents & keys** to revoke the token immediately. The worker stops getting work
+- Choose **Unpair** in **N4N0 → Agents & keys** to revoke the token immediately. The worker stops getting work
   at its next request.
 - On the Pi, `sudo systemctl disable --now findings-worker` stops it locally.
 

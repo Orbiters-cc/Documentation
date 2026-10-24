@@ -14,19 +14,19 @@ relations: orbiters.tools.desktop-performance, orbiters.tools.desktop, orbiters.
 
 # Bake a VRChat performance with Mixer
 
-Mixer's **Performance** window turns a session recorded by Orbiters desktop into an animation clip for the avatar you
+Mixer's **Performance** window turns a session recorded by Orbiters - N4N0 into an animation clip for the avatar you
 wore: the face, gestures and toggles your avatar's own animator showed, lip sync from your voice, your body, where the
 joystick moved you, and the voice and VRChat's sound lined up with it. It also installs the **capture kit**, which lets
-Orbiters desktop record exact camera poses and your exact pose.
+Orbiters - N4N0 record exact camera poses and your exact pose.
 
 **Release status:** Mixer 0.1.0 is not released yet. Recording is described in
-[Record your performance with Orbiters desktop](22-orbiters-desktop-performance.md).
+[Record your performance with Orbiters - N4N0](22-orbiters-desktop-performance.md).
 
 ## Install the capture kit
 
 The capture kit is a small hidden mesh with an Orbiters shader. While you record, it draws the camera's pose and,
 every few frames, exact depth into the frames VRChat's camera streams, plus your avatar's final bone rotations. Without
-it, Orbiters desktop still records parameters, audio and SteamVR tracking, but frames carry no pose.
+it, Orbiters - N4N0 still records parameters, audio and SteamVR tracking, but frames carry no pose.
 
 1. Add VRCFury to the project: the kit's Action Menu toggles are merged by VRCFury.
 2. Open **Tools › Orbiters › Mixer Performance** and pick your avatar in **Avatar**.

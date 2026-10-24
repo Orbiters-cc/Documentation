@@ -1,5 +1,5 @@
 ---
-title: Orb agent API
+title: N4N0 agent API
 section: Reference
 order: 81
 audience: dev
@@ -12,10 +12,10 @@ lastVerified: 2026-10-19
 relations: orbiters.how-to.me-scout, orbiters.reference.job-search-worker-api, orbiters.decision.personal-agents-on-member-hardware
 ---
 
-# Orb agent API
+# N4N0 agent API
 
-Orb's sync on the Pi (`agents/orb/orb_sync`) calls `/orb-agent/*` with its `orb_agent_…` token, and Hermes calls
-`/mcp` with the same token. Every call acts for the member who paired Orb. Orb was called Scout: the old base path
+N4N0's sync on the Pi (`agents/orb/orb_sync`) calls `/orb-agent/*` with its `orb_agent_…` token, and Hermes calls
+`/mcp` with the same token. Every call acts for the member who paired N4N0. N4N0 was called Scout: the old base path
 `/me-agent/scout/*` serves the same routes for Pis that have not been updated yet.
 
 ## Scopes
@@ -40,7 +40,7 @@ A token is valid for 180 days from pairing (`APIKeys.expirationDate`; tokens iss
 `401 { error: 'This token has expired. Pair the agent again to get a new one.', code: 'token_expired' }`. From 14 days
 before the end:
 
-- the Orb page puts "Orb's token expires in N days: pair Orb again…" first in the status warnings
+- the N4N0 page puts "N4N0's token expires in N days: pair N4N0 again…" first in the status warnings
   (`GET /job-search/orb`, `status.warnings`; it stays there once expired);
 - the member gets one bell notification (type `orb-token-expiry`, category `system`) at 14 days and another at 3 days,
   sent when the Pi reports its status, which the Pi relays to the main channel like other notifications.
@@ -52,11 +52,11 @@ Pairing again works as before: it issues a new 180-day token and revokes the pre
 
 | Call | Use |
 | --- | --- |
-| `GET /config` | `{ config, keys, codex }`: the Orb → Assistant settings (with `mail.accounts` — slot, address, IMAP and SMTP servers — and `google` — enabled, account — from Settings → Agents & keys), which Orb keys are saved, and the ChatGPT (Codex) sign-in state. |
-| `POST /secrets` | `{ names }` returns `{ NAME: value }` for saved keys Orb may receive, with an `ETag`: a keyed version of the values sent to this token (an HMAC, not a hash of the values). Send it back as `If-None-Match` to get `304` with no body while nothing changed. The Pi keeps the last answer in `~/.hermes/.orbiters-orb-secrets.json` (mode 0600) and an Orbiters without `ETag` is simply asked in full every minute. |
-| `GET /notifications?after=<id>` | `{ cursor, notifications }`: unread bell notifications after `after` from the last 24 hours, in the categories chosen in Orb → Assistant, oldest first, at most 20 per call (`id`, `category`, `title`, `body` up to 600 characters, absolute `url`, `createdAt`). Without `after`, or when relaying is off, it returns no notifications and the current cursor. Keep `cursor` for the next call. |
+| `GET /config` | `{ config, keys, codex }`: the N4N0 → Assistant settings (with `mail.accounts` — slot, address, IMAP and SMTP servers — and `google` — enabled, account — from Settings → Agents & keys), which N4N0 keys are saved, and the ChatGPT (Codex) sign-in state. |
+| `POST /secrets` | `{ names }` returns `{ NAME: value }` for saved keys N4N0 may receive, with an `ETag`: a keyed version of the values sent to this token (an HMAC, not a hash of the values). Send it back as `If-None-Match` to get `304` with no body while nothing changed. The Pi keeps the last answer in `~/.hermes/.orbiters-orb-secrets.json` (mode 0600) and an Orbiters without `ETag` is simply asked in full every minute. |
+| `GET /notifications?after=<id>` | `{ cursor, notifications }`: unread bell notifications after `after` from the last 24 hours, in the categories chosen in N4N0 → Assistant, oldest first, at most 20 per call (`id`, `category`, `title`, `body` up to 600 characters, absolute `url`, `createdAt`). Without `after`, or when relaying is off, it returns no notifications and the current cursor. Keep `cursor` for the next call. |
 | `POST /status` | `{ gateway, hermesVersion, appliedConfig, error, warnings }`; `gateway` is `running`, `stopped` or `not installed`. Also sends the token expiry reminder when due (see Token lifetime). |
-| `POST /activity` | Summary shown in Orb → Assistant → Activity: `busy`, `lastActivityAt`, `sessions`, `subagents`, `recentTools`, `jobs`, `spend` (with `byRole`: chat, planning, background) and `background` (`state` `running`, `paused` or `off`, `reason`, `model`, `workers`, status `counts`, task titles for `running`, `queued` and `done`, and per-provider `providers` pacing: `state`, `monthUsd`, `todayUsd`, `capUsd`, `allowanceTodayUsd`, `keys`, `unlockedUntil`, for up to 12 providers). Times are Unix seconds. Lists are capped (10 sessions, 10 subagents, 20 tools, 20 jobs, 3 running, 6 queued, 8 done tasks) and texts truncated. Message contents are never sent. |
+| `POST /activity` | Summary shown in N4N0 → Assistant → Activity: `busy`, `lastActivityAt`, `sessions`, `subagents`, `recentTools`, `jobs`, `spend` (with `byRole`: chat, planning, background) and `background` (`state` `running`, `paused` or `off`, `reason`, `model`, `workers`, status `counts`, task titles for `running`, `queued` and `done`, and per-provider `providers` pacing: `state`, `monthUsd`, `todayUsd`, `capUsd`, `allowanceTodayUsd`, `keys`, `unlockedUntil`, for up to 12 providers). Times are Unix seconds. Lists are capped (10 sessions, 10 subagents, 20 tools, 20 jobs, 3 running, 6 queued, 8 done tasks) and texts truncated. Message contents are never sent. |
 | `POST /host` | The Pi's host report, sent with the minute sync (`orb_sync/host.py`): `hostname`, `model`, `kernel`, uptime, CPU use since the last report, load averages, memory and swap, disk, temperature, clock speed, undervoltage, Wi-Fi signal and traffic, process count and the `hermes-gateway`, `orb-board`, `findings-worker` and Docker services (state, memory, uptime, restarts). Orbiters validates it and keeps the latest report plus one point every 5 minutes for 24 hours (288 points) in the `orb-host` workspace setting; `GET /job-search/orb` returns it as `host`. |
 | `POST /board` | Live research board snapshot, sent by `orb-board.service` whenever a task is queued, starts or finishes: `counts` (`ready`, `running`, `scheduled`, `blocked`, `done`) and up to 16 `running`, 8 `queued` and 10 `done` tasks, each with `id`, `board` (`research-<n>` for a project board, empty for the 24/7 queue), `title`, `status`, `model` and `at` (Unix seconds). Task bodies and results are never sent. |
 | `POST /codex` | `{ state, url, code, error }`: the ChatGPT sign-in as Hermes sees it. `state` is `requested`, `waiting`, `connected`, `failed` or `signed-out`; `url` (an `https://auth.openai.com/` link) and `code` are kept only while `waiting`. The sign-in tokens stay on the Pi. |
@@ -70,7 +70,7 @@ Pairing again works as before: it issues a new 180-day token and revokes the pre
 
 ## Member endpoints
 
-The Orb workspace uses these with the member's session (they replace `/job-search/scout/*`):
+The N4N0 workspace uses these with the member's session (they replace `/job-search/scout/*`):
 
 | Call | Use |
 | --- | --- |
@@ -89,20 +89,20 @@ exported and deleted with the member's account.
 
 With `sponsor:read`, `POST /mcp` serves the AI app tool set as the sponsor with only the `read` scope: tools that
 draft, publish, schedule, pay or change data are not listed. Calls appear in the AI app activity log as
-**Orb (personal agent)** and count against the sponsor's AI app budget. The staff-only tool
+**N4N0 (personal agent)** and count against the sponsor's AI app budget. The staff-only tool
 `get_platform_overview` returns platform totals for the last N days: members, follows, assets, store sale records,
 commission payments, managed communities and page traffic, with no individual member, buyer or message data.
 
 The read-only Discord tools cover servers the sponsor manages: `list_my_discord_servers`, `get_discord_server_stats`,
 `get_discord_server_roles`, `list_discord_channels`, `read_discord_channel`, `get_discord_announcements` and
-`get_discord_activity`. They are preview tools for ChatGPT and Claude connections and available to Orb through its
+`get_discord_activity`. They are preview tools for ChatGPT and Claude connections and available to N4N0 through its
 sponsor access.
 
-The read-only GitHub tools are listed for Orb only (never for other agents, AI app connections or signed-out
+The read-only GitHub tools are listed for N4N0 only (never for other agents, AI app connections or signed-out
 visitors): `list_github_repositories`, `list_github_commits`, `list_github_pull_requests`, `list_github_issues`,
 `list_github_workflow_runs` and `read_github_file` (text files up to 200 KB). They read the sponsor's GitHub through
 the Orbiters GitHub connection in **Creator › VPM** with GET requests only, and answer 409 until that connection has
-repository access. Repository text they return is data for Orb, never instructions.
+repository access. Repository text they return is data for N4N0, never instructions.
 
 The Reddit, X and Instagram tools are not Orbiters endpoints: they run in a local `social` MCP server on the Pi. See
-[Set up Orb, your personal business assistant](/documentation/orbiters.how-to.me-scout).
+[Set up N4N0, your personal business assistant](/documentation/orbiters.how-to.me-scout).

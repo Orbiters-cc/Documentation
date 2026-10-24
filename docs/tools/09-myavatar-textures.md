@@ -19,7 +19,7 @@ Your settings and last material snapshot are saved with the scene.
 
 This page describes texture matching in My Avatar 0.2.0 and later: locked-shader
 support, name matching that works with any naming convention, the morphing drop
-field and optional Unit Git. For thumbnails, see
+field and optional Mixer Git checkpoints. For thumbnails, see
 [Create a VRChat thumbnail with My Avatar](10-myavatar-thumbnail.md); for posing,
 hair/tail/toe physics and parameters, see
 [Pose, physics and parameters with My Avatar](11-myavatar-posing-and-physics.md).
@@ -34,7 +34,7 @@ To add clothing and props, see
 ## Install and apply a texture set
 
 1. Install **My Avatar** through the Orbiters VPM listing. It needs Orbiters
-   Toolkit and the VRChat avatar SDK on Unity 2022.3. Unit Git 0.1.3 or newer is optional.
+   Toolkit and the VRChat avatar SDK on Unity 2022.3. Mixer is optional: its Mixer Git records the checkpoints.
 2. Select your avatar root in an open scene and add **Orbiters > My Avatar** from
    Add Component. The GameObject menu has the same command.
 3. Drop your PNG, JPG or TGA images into the dashed field. You can drop several
@@ -105,9 +105,9 @@ AI matches as their own step.
 If renderer assignments were changed separately since the apply, My Avatar asks
 you to resolve those edits before restoring its snapshot.
 
-**Save** saves the avatar scene and the generated assets. When Unit Git is installed
+**Save** saves the avatar scene and the generated assets. When Mixer is installed
 it also commits `texture change` in the Unity project's Git repository, once the
-repository is initialized in Unit Git. The commit includes this scene's current changes, generated files, reused texture assets and their Unity
+repository is initialized in Mixer Git. The commit includes this scene's current changes, generated files, reused texture assets and their Unity
 metadata. Other project paths and staged changes are excluded. If a required
 generated file is ignored by Git, fix the ignore rule and try again. Save does
 not push. Undo after saving creates another local change; it does not rewrite

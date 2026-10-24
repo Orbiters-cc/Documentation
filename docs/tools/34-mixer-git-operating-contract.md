@@ -1,30 +1,30 @@
 ---
-title: Unit Git Operating Contract
+title: Mixer Git Operating Contract
 section: Tools
-order: 130
+order: 234
 audience: creator, dev
-stage: stable
+stage: alpha
 id: orbiters.tools.unitgit-operating-contract
-domain: unitgit
+domain: mixer
 type: reference
-owner: orbiters-unitgit
-lastVerified: 2026-09-08
+owner: orbiters-engineering
+lastVerified: 2026-10-24
 relations: orbiters.general.vpm-package-contract, orbiters.tools.refit-operating-contract
 ---
 
-# Unit Git Operating Contract
+# Mixer Git Operating Contract
 
 For the public workflow, start with [your first project checkpoint](/documentation/orbiters.tools.unitgit-get-started) and [branches, shelves, and history](/documentation/orbiters.tools.unitgit-history-and-shelves).
 
-Unit Git operates on the Git repository at the Unity project root. Open it from
-`Tools > Orbiters > Unit Git`.
+Mixer Git operates on the Git repository at the Unity project root. It is part of Mixer (formerly the Unit Git
+package). Open it from `Tools > Orbiters > Mixer Git`.
 
 It can inspect history and changes, stage and unstage, commit, fetch, pull, switch
 branches, shelve work, and initialize a missing project repository with a VRChat
 Unity ignore file.
 
-Unit Git deliberately has no push action. Publishing remains an explicit external
-workflow so a Unity UI action cannot silently update a remote repository.
+Mixer Git pushes only when asked (**Push**, **Commit and Push**) and never force-pushes, so no other action
+silently updates a remote repository.
 
 <alpha>
 
@@ -85,7 +85,7 @@ commits. The result is the union of paths touched by those commits, including a
 file changed and later reverted within the selection.
 
 Large repositories can still take time to read from disk or process in Git.
-Loading happens without a modal progress dialog from Unit Git; repository
+Loading happens without a modal progress dialog from Mixer Git; repository
 mutations retain their existing confirmations.
 
 <audience include="dev">
@@ -105,10 +105,10 @@ using Unity batch mode.
 </audience>
 
 Before a release or after changing Git parsing/process behavior, run
-`Tools > Orbiters > Unit Git > Health Checks > All Deterministic`. The batch hook is
+`Tools > Orbiters > Mixer Git > Health Checks > All Deterministic`. The batch hook is
 `Orbiters.UnitGit.Editor.UnitGitEditorHealthChecks.RunAllBatchmode`.
 
-The package directory is its own repository. Validate and version it independently
+Mixer's package directory is its own repository. Validate and version it independently
 from the parent Unity project.
 
 
@@ -126,7 +126,7 @@ included in a published package release.
 
 ## My Avatar texture checkpoints
 
-My Avatar uses `CommitProjectFilesAsync` from Unit Git 0.1.1 to create a scoped
+My Avatar uses Mixer Git's `CommitProjectFilesAsync` to create a scoped
 `texture change` commit. The explicit project root lets Git run off the Unity
 main thread. Paths must remain within that project, ignored checkpoint files
 cause a clear error, and unrelated staged files are preserved. The selected
@@ -158,7 +158,7 @@ operation instead of reporting success.
 Run `ProcessRunnerTests` from `Orbiters.Toolkit.Editor.Processes.Tests`. These
 tests cover large simultaneous stdout/stderr, Unicode boundaries, final lines,
 binary output, closed stdin, cancellation, timeouts, callback exceptions and
-Windows inherited-pipe cleanup. Keep the Unit Git deterministic health checks
+Windows inherited-pipe cleanup. Keep the Mixer Git deterministic health checks
 and repository tests when changing this shared integration. Standalone Windows
 Mono regression and domain-unload checks passed for this local fix; a reload of
 the affected live Unity project has not yet been verified.

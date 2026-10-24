@@ -85,7 +85,7 @@ freeze the main thread. Batch validation uses
 `Orbiters.ReFit.Editor.Tests.ReFitDeterministicTestRunner.RunBatchMode`.
 
 When MCB invokes ReFit, the default base is model A, the applied custom base is
-model B, generated files are committed through Unit Git, and reset must restore the
+model B, generated files are committed through Mixer Git, and reset must restore the
 original meshes after a Unity restart.
 
 <alpha>

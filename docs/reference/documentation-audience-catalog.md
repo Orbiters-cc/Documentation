@@ -27,8 +27,8 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Use Orbiters from ChatGPT, Claude and other AI apps | user, creator, mod, admin, dev | beta | — | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Run your job search worker on a Raspberry Pi | admin, dev | alpha | — | — | — | — | ✓ | ✓ |
-| Set up Orb, your personal business assistant | admin, dev | alpha | — | — | — | — | ✓ | ✓ |
-| Give Orb your email and Google Workspace | admin, dev | alpha | — | — | — | — | ✓ | ✓ |
+| Set up N4N0, your personal business assistant | admin, dev | alpha | — | — | — | — | ✓ | ✓ |
+| Give N4N0 your email and Google Workspace | admin, dev | alpha | — | — | — | — | ✓ | ✓ |
 | Manage Privacy and Shared Content | public | beta | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Understand and control AI use | public | beta | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Verify your community age status | user, creator, mod, admin, dev | beta | — | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -234,7 +234,7 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Steward API and Token Reference | dev | alpha | — | — | — | — | — | ✓ |
 | AI apps MCP and OAuth reference | dev | beta | — | — | — | — | — | ✓ |
 | Job Search Worker API Reference | dev | alpha | — | — | — | — | — | ✓ |
-| Orb agent API | dev | alpha | — | — | — | — | — | ✓ |
+| N4N0 agent API | dev | alpha | — | — | — | — | — | ✓ |
 | ReFit Lower-Body Surface Coverage | dev | alpha | — | — | — | — | — | ✓ |
 | ReFit Validation and Performance | dev | alpha | — | — | — | — | — | ✓ |
 | Telegram Login Setup | admin, dev | beta | — | — | — | — | ✓ | ✓ |
@@ -260,13 +260,6 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Sync avatar edits from Blender | creator, dev | alpha | — | — | ✓ | — | — | ✓ |
 | MCB Operating Contract | creator, dev | stable | — | — | ✓ | — | — | ✓ |
 | ReFit Operating Contract | creator, dev | stable | — | — | ✓ | — | — | ✓ |
-| Unit Git Operating Contract | creator, dev | stable | — | — | ✓ | — | — | ✓ |
-| XRay Gizmos Operating Contract | creator, dev | stable | — | — | ✓ | — | — | ✓ |
-| Inspect an avatar with XRayGizmos | public | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| XRayGizmos controls and troubleshooting | public | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Make your first project checkpoint with UnitGit | public | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Work with UnitGit branches, shelves, and history | public | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Restore Scene-view interaction | public, creator, dev | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Change avatar textures with My Avatar | public, creator, dev | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Create a VRChat thumbnail with My Avatar | public, creator, dev | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Pose, physics and parameters with My Avatar | public, creator, dev | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -277,14 +270,21 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Avoid uploading over another account's avatar with the blueprint ID check | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Unit Git history and My Avatar texture fixes | creator, dev | beta | — | — | ✓ | — | — | ✓ |
 | Unity safety verification follow-up | creator, dev | alpha | — | — | ✓ | — | — | ✓ |
-| Read Unity's logs with the Logger | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| See what slows Unity down with Logger timings | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Capture VRChat worlds with Orbiters desktop | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Reconstruct and view sessions in Orbiters desktop | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Record your performance with Orbiters desktop | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Share your visited worlds from Orbiters desktop | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Capture VRChat worlds with Orbiters - N4N0 | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Reconstruct and view sessions in Orbiters - N4N0 | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Record your performance with Orbiters - N4N0 | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Share your visited worlds from Orbiters - N4N0 | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Bake a VRChat performance with Mixer | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Show Orbiters splats in Unity with Mixer | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Read Unity's logs with the Mixer console | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| See what slows Unity down with Mixer console timings | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Mixer Git Operating Contract | creator, dev | alpha | — | — | ✓ | — | — | ✓ |
+| Make your first project checkpoint with Mixer Git | public | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Work with Mixer Git branches, shelves, and history | public | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Avatar Gizmos Operating Contract | creator, dev | stable | — | — | ✓ | — | — | ✓ |
+| Inspect an avatar with Avatar Gizmos | public | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Avatar Gizmos controls and troubleshooting | public | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Restore Scene-view interaction | public, creator, dev | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 ## Tutorials
 

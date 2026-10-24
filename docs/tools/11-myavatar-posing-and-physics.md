@@ -18,18 +18,18 @@ card each for **Hair**, **Tail** and **Toes** (and **Parameters** before My Avat
 0.9.1). A bottom toolbar opens
 **Settings** (production or development server; production is the default) and, when
 MCB is installed, the **Blendshape Links** tool. This page describes My Avatar 0.4.0 with
-Orbiters Toolkit 0.2.5 and XRay Gizmos 0.2.1.
+Orbiters Toolkit 0.2.5 and XRay Gizmos 0.2.1 (now Avatar Gizmos, part of the Toolkit).
 
 ## Posing
 
 Three switches help while posing the avatar in the Scene view. Hover one for a short
 explanation.
 
-- **Bones** draws the avatar's bones through XRay Gizmos. Click a bone to select it,
+- **Bones** draws the avatar's bones through Avatar Gizmos. Click a bone to select it,
   then rotate it with the Rotate tool (E).
 - **Symmetry** mirrors each rotation or move of a left or right bone onto the other
   side. It stays on while nothing can be mirrored and starts as soon as you select a
-  bone or an avatar. See [XRay Gizmos controls](06-xray-gizmos-controls.md) for the
+  bone or an avatar. See [Avatar Gizmos controls](39-avatar-gizmos-controls.md) for the
   details it shares with **Mirror**.
 - **Clothing** (beta) keeps clothing and accessories that are not merged yet in the
   avatar's pose. It follows each accessory as it will be attached at build: VRCFury
@@ -89,7 +89,7 @@ remain eligible for discovery, and clothing offsets follow scale changes. See
 
 ### Avatar budget
 
-My Avatar 0.9.1 removes the section. XRay Gizmos 0.2.8 shows the avatar budget in a
+My Avatar 0.9.1 removes the section. Avatar Gizmos show the avatar budget in a
 panel over the Scene view instead: parameters as built, including what VRCFury's
 compression leaves, and the bones, PhysBones and contacts that set the PC performance
-rank. See [XRayGizmos controls](/documentation/orbiters.tools.xraygizmos-controls).
+rank. See [Avatar Gizmos controls](/documentation/orbiters.tools.xraygizmos-controls).

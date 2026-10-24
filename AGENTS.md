@@ -129,12 +129,12 @@ and placeholder markers.
 
 ## Tool screenshot galleries
 
-Each tool page on the website (`/refit`, `/my-avatar`, `/my-custom-base`, `/logger`) ends with a gallery of real Unity
+Each tool page on the website (`/refit`, `/my-avatar`, `/my-custom-base`, `/mixer`) ends with a gallery of real Unity
 screenshots read from `media/tools/<tool>/`. The tool agent that changes a tool's visible behavior keeps its gallery
 current in the same change, like the tool's pages under `docs/`. A tool with no folder shows no gallery.
 
 ```text
-media/tools/<tool>/gallery.json      ordered manifest (tool: refit, myavatar, mcb, logger, unitgit, xraygizmos, toolkit)
+media/tools/<tool>/gallery.json      ordered manifest (tool: refit, myavatar, mcb, mixer, toolkit)
 media/tools/<tool>/<kebab-name>.webp  the screenshots it lists, nothing else
 ```
 

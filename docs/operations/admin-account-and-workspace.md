@@ -28,7 +28,7 @@ network error can be retried; a revoked session requires signing in again.
 
 While impersonating, you cannot add anything that outlives the session. Linking a
 Discord or Telegram sign-in, confirming an account merge, pairing an agent in
-**Orb → Agents & keys** and connecting a GitHub account (including for VPM) are
+**N4N0 → Agents & keys** and connecting a GitHub account (including for VPM) are
 refused with **Stop impersonating before adding a sign-in method, agent or
 connected account to this account.**
 

@@ -1,40 +1,40 @@
 ---
-title: Make your first project checkpoint with UnitGit
+title: Make your first project checkpoint with Mixer Git
 section: Tools
-order: 143
+order: 235
 audience: public
-stage: stable
+stage: alpha
 id: orbiters.tools.unitgit-get-started
-domain: unitgit
+domain: mixer
 type: tutorial
-owner: orbiters-unitgit
-lastVerified: 2026-10-02
+owner: orbiters-engineering
+lastVerified: 2026-10-24
 relations: orbiters.tools.unitgit-history-and-shelves
 ---
 
-# Make your first project checkpoint with UnitGit
+# Make your first project checkpoint with Mixer Git
 
-UnitGit brings Git status, commits, branches, history, and shelves into Unity. Open **Tools > Orbiters > Unit Git** to work with the repository at the root of the current Unity project.
+Mixer Git brings Git status, commits, branches, history, and shelves into Unity. Open **Tools > Orbiters > Mixer Git** to work with the repository at the root of the current Unity project.
 
-A commit is a named checkpoint of selected files on disk. It lets you inspect what changed and build a history of your project. **A local commit is not a remote backup:** use **Push** or **Commit and Push** to send it to a configured remote. UnitGit 0.2.2 never force-pushes.
+A commit is a named checkpoint of selected files on disk. It lets you inspect what changed and build a history of your project. **A local commit is not a remote backup:** use **Push** or **Commit and Push** to send it to a configured remote. Mixer Git never force-pushes.
 
 ## Before you start
 
-Use a Unity 2022.3 project with the **Unit Git** package installed and Git available to the editor. If the window reports **Git unavailable**, install/configure Git and restart Unity so it can see the updated environment. Git also needs an author name and email configured before it can create commits.
+Use a Unity 2022.3 project with **Mixer** installed (Mixer Git comes with it) and Git available to the editor. If the window reports **Git unavailable**, install/configure Git and restart Unity so it can see the updated environment. Git also needs an author name and email configured before it can create commits.
 
 Save your Unity scenes and assets before making a checkpoint. Unsaved Inspector or scene changes are not yet files that Git can record.
 
 ## Commit progress and interruptions
 
-In Unit Git 0.2.3, clicking **Commit** while files are being included queues the
-commit immediately after staging finishes. The commit panel lists the files Git
+Clicking **Commit** while files are being included queues the commit immediately
+after staging finishes. The commit panel lists the files Git
 is preparing and the elapsed time. Preparation errors stay visible in the panel;
 **Console** contains the command output. Large files, Git filters, hooks or signing
 can take time, so a click does not promise an instantaneous Git operation.
 
 If Unity reloads during a requested commit, the draft message is retained and the
 panel explains the interruption. Check **Log** before retrying: Git may already
-have written the commit. Unit Git does not automatically repeat a commit or push
+have written the commit. Mixer Git does not automatically repeat a commit or push
 after a reload. The checkboxes refresh from Git's actual index.
 
 ## Prepare the repository
@@ -44,10 +44,10 @@ If the project already has a root Git repository with commits, continue to Local
 For a new repository, review the project contents first: initialization stages the current project and creates its first commit. Keep credentials and files you do not want recorded out of the staged project using appropriate ignore rules.
 
 1. Click **Initialize Project Git**. If a root repository exists but has no commits, the button is **Create First Commit**.
-2. Review the initialization confirmation. UnitGit ensures Unity/VRChat ignore rules, stages the project, and creates the initial checkpoint. Large projects can take several minutes.
+2. Review the initialization confirmation. Mixer Git ensures Unity/VRChat ignore rules, stages the project, and creates the initial checkpoint. Large projects can take several minutes.
 3. If you use **Do not include the project-root Package folder in the first commit**, understand that this applies to the singular `Package` folder, including lowercase `package`. It does not exclude Unity's `Packages` folder.
 
-UnitGit operates on the project-root repository. A separate repository inside an embedded package has its own history and is not automatically managed as another UnitGit workspace.
+Mixer Git operates on the project-root repository. A separate repository inside an embedded package has its own history and is not automatically managed as another Mixer Git workspace.
 
 ## Record one meaningful change
 
