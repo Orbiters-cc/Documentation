@@ -89,6 +89,10 @@ buyers are asked before it is imported, unless Orbiters marked you a trusted cre
 **Test on** installs the built package on the avatar you have selected, the same way
 a buyer would, so you can check the result before publishing.
 
+To give buyers switches and choices on the item's card, such as a hood on or off or a
+colour, add a settings file beside the prefab with **Add settings**. See
+[Give your asset settings on its My Avatar card](myavatar-item-settings.md).
+
 ## 4. Pictures
 
 <alpha>

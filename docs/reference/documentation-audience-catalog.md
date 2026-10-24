@@ -104,6 +104,7 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Publish a Monthly Orbiters magazine | creator, admin, dev | beta | — | — | ✓ | — | ✓ | ✓ |
 | Publish and manage a VPM listing | creator, admin, dev | beta | — | — | ✓ | — | ✓ | ✓ |
 | Publish clothes and accessories to the My Avatar gallery | creator, admin, dev | alpha | — | — | ✓ | — | ✓ | ✓ |
+| Give your asset settings on its My Avatar card | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Edit releases in the version workspace | creator, admin, dev | beta | — | — | ✓ | — | ✓ | ✓ |
 
 ## Decisions
