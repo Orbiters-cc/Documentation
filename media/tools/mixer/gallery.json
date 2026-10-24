@@ -10,7 +10,6 @@
       "feature": "Sculpt",
       "toolVersion": "0.2.0",
       "capturedAt": "2026-10-24",
-      "stage": "alpha",
       "translations": {
         "ja": {
           "caption": "9種類のスカルプトブラシ。半径・強さ・減衰を設定でき、メッシュ本体にもブレンドシェイプにも使えます",
@@ -38,7 +37,6 @@
       "feature": "Weight paint",
       "toolVersion": "0.2.0",
       "capturedAt": "2026-10-24",
-      "stage": "alpha",
       "translations": {
         "ja": {
           "caption": "Draw・Blur・Replaceでボーンのウェイトをペイント。各頂点のウェイトの合計は1に保たれます",
@@ -66,7 +64,6 @@
       "feature": "Edit armature",
       "toolVersion": "0.2.0",
       "capturedAt": "2026-10-24",
-      "stage": "alpha",
       "translations": {
         "ja": {
           "caption": "Unityの移動・回転ツールでレストポーズを変更。メッシュの形はそのまま保たれます",
@@ -94,7 +91,6 @@
       "feature": "Join meshes",
       "toolVersion": "0.2.0",
       "capturedAt": "2026-10-24",
-      "stage": "alpha",
       "translations": {
         "ja": {
           "caption": "メッシュを1つに結合。同じマテリアルのサブメッシュをまとめ、元のオブジェクトは無効にします",
@@ -122,7 +118,6 @@
       "feature": "Render",
       "toolVersion": "0.2.0",
       "capturedAt": "2026-10-24",
-      "stage": "alpha",
       "translations": {
         "ja": {
           "caption": "BlenderのEeveeまたはCyclesで、シーンビューかシーンのカメラから最大4Kでレンダリング",
@@ -150,7 +145,6 @@
       "feature": "Mixer Hierarchy",
       "toolVersion": "0.2.0",
       "capturedAt": "2026-10-24",
-      "stage": "alpha",
       "translations": {
         "ja": {
           "caption": "Mixer Hierarchyでは、アバターごとのパフォーマンスランク、クイックボーン、各メッシュの頂点数とシェイプ数がわかります",
@@ -172,29 +166,28 @@
     },
     {
       "file": "mixer-console.webp",
-      "caption": "The Mixer console groups logs by message, tags the package that wrote them and charts the session",
-      "alt": "Mixer console in Unity: error, warning and info counts, the search field, Sources, List and Groups, a session timeline marked with commits and avatar uploads, and grouped MCB logs with their counts beside a panel of keyboard shortcuts.",
-      "window": "Mixer console",
+      "caption": "The Mixer console groups logs by message, tags the package that wrote them and explains them first",
+      "alt": "Mixer console in Unity: error, warning and info counts, the search field, Sources, List and Groups, a session timeline marked with commits and uploads, grouped logs, and a selected MCB log whose explanation (Safe to ignore) comes before its message.",
+      "window": "Console",
       "feature": "Grouped logs",
       "toolVersion": "0.2.0",
       "capturedAt": "2026-10-24",
-      "stage": "alpha",
       "translations": {
         "ja": {
-          "caption": "Mixer consoleはログをメッセージごとにまとめ、出力したパッケージを表示し、セッションをグラフにします",
-          "alt": "UnityのMixer console：エラー・警告・情報の件数、検索欄、Sources、List、Groups、コミットやアバターのアップロードが記されたセッションのタイムライン、件数付きでまとめられたMCBのログと、キーボードショートカットのパネルが並びます。"
+          "caption": "Mixer consoleはログをメッセージごとにまとめ、出力したパッケージを表示し、最初に説明を見せます",
+          "alt": "UnityのMixer console：エラー・警告・情報の件数、検索欄、Sources、List、Groups、コミットやアップロードが記されたセッションのタイムライン、まとめられたログ、そして選択したMCBのログ。メッセージの前に説明（Safe to ignore）が表示されています。"
         },
         "fr": {
-          "caption": "La fenêtre Mixer console groupe les logs par message, indique le package qui les a écrits et trace la session",
-          "alt": "La fenêtre Mixer console dans Unity : les nombres d’erreurs, d’avertissements et d’infos, la recherche, Sources, List et Groups, une chronologie de la session marquée par les commits et les avatars téléversés, et des logs MCB groupés à côté d’un panneau de raccourcis clavier."
+          "caption": "La fenêtre Mixer console groupe les logs par message, indique le package qui les a écrits et les explique d’abord",
+          "alt": "La fenêtre Mixer console dans Unity : les nombres d’erreurs, d’avertissements et d’infos, la recherche, Sources, List et Groups, une chronologie marquée par les commits et les téléversements, des logs groupés et un log MCB sélectionné dont l’explication (Safe to ignore) précède le message."
         },
         "es": {
-          "caption": "La ventana Mixer console agrupa los logs por mensaje, marca el paquete que los escribió y grafica la sesión",
-          "alt": "La ventana Mixer console en Unity: los recuentos de errores, advertencias e info, la búsqueda, Sources, List y Groups, una línea de tiempo de la sesión con commits y avatares subidos, y logs de MCB agrupados con su recuento junto a un panel de atajos de teclado."
+          "caption": "La ventana Mixer console agrupa los logs por mensaje, marca el paquete que los escribió y los explica primero",
+          "alt": "La ventana Mixer console en Unity: los recuentos de errores, advertencias e info, la búsqueda, Sources, List y Groups, una línea de tiempo de la sesión con commits y subidas, logs agrupados y un log de MCB seleccionado cuya explicación (Safe to ignore) aparece antes del mensaje."
         },
         "pt-BR": {
-          "caption": "A janela Mixer console agrupa os logs por mensagem, marca o pacote que os escreveu e mostra a sessão em gráfico",
-          "alt": "A janela Mixer console no Unity: as contagens de erros, avisos e informações, a busca, Sources, List e Groups, uma linha do tempo da sessão marcada com commits e uploads de avatar, e logs do MCB agrupados com sua contagem ao lado de um painel de atalhos de teclado."
+          "caption": "A janela Mixer console agrupa os logs por mensagem, marca o pacote que os escreveu e os explica primeiro",
+          "alt": "A janela Mixer console no Unity: as contagens de erros, avisos e informações, a busca, Sources, List e Groups, uma linha do tempo da sessão marcada com commits e uploads, logs agrupados e um log do MCB selecionado cuja explicação (Safe to ignore) vem antes da mensagem."
         }
       }
     },
@@ -202,11 +195,10 @@
       "file": "mixer-git-history.webp",
       "caption": "Mixer Git's history graph, with each VRChat avatar upload tagged on its commit",
       "alt": "Mixer Git on the Log tab: the branch list (HEAD and the local master branch) beside a commit graph where MasculineCanine PC upload tags mark each VRChat avatar upload.",
-      "window": "Mixer Git",
+      "window": "Git",
       "feature": "History",
       "toolVersion": "0.2.0",
       "capturedAt": "2026-10-24",
-      "stage": "alpha",
       "translations": {
         "ja": {
           "caption": "Mixer Gitの履歴グラフ。VRChatへのアバターのアップロードごとに、そのコミットにタグが付きます",

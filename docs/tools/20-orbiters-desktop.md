@@ -19,7 +19,7 @@ can be rebuilt as Gaussian splats and brought into Unity with Mixer. It also rec
 voice, body) for Mixer's performance import. It never asks for your VRChat login: it reads VRChat's local log, talks
 to VRChat over OSC and receives the camera through Spout, all on your own PC.
 
-**Release status:** Orbiters - N4N0 is not released yet; it runs from a source build of the `OrbitersDesktop`
+**Release status:** Orbiters - N4N0 is not released yet; it runs from a source build of the `Orbiters-N4N0`
 repository on Windows.
 
 ## Get started

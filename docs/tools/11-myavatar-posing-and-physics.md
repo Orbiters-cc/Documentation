@@ -18,7 +18,7 @@ card each for **Hair**, **Tail** and **Toes** (and **Parameters** before My Avat
 0.9.1). A bottom toolbar opens
 **Settings** (production or development server; production is the default) and, when
 MCB is installed, the **Blendshape Links** tool. This page describes My Avatar 0.4.0 with
-Orbiters Toolkit 0.2.5 and XRay Gizmos 0.2.1 (now Avatar Gizmos, part of the Toolkit).
+Orbiters Toolkit 0.2.5.
 
 ## Posing
 
@@ -92,4 +92,4 @@ remain eligible for discovery, and clothing offsets follow scale changes. See
 My Avatar 0.9.1 removes the section. Avatar Gizmos show the avatar budget in a
 panel over the Scene view instead: parameters as built, including what VRCFury's
 compression leaves, and the bones, PhysBones and contacts that set the PC performance
-rank. See [Avatar Gizmos controls](/documentation/orbiters.tools.xraygizmos-controls).
+rank. See [Avatar Gizmos controls](/documentation/orbiters.tools.avatar-gizmos-controls).

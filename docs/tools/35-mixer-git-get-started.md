@@ -4,12 +4,12 @@ section: Tools
 order: 235
 audience: public
 stage: alpha
-id: orbiters.tools.unitgit-get-started
+id: orbiters.tools.mixer-git-get-started
 domain: mixer
 type: tutorial
 owner: orbiters-engineering
 lastVerified: 2026-10-24
-relations: orbiters.tools.unitgit-history-and-shelves
+relations: orbiters.tools.mixer-git-history-and-shelves
 ---
 
 # Make your first project checkpoint with Mixer Git
@@ -76,4 +76,4 @@ Open **Settings** from the top bar to configure integrations. **Ctrl+K** opens c
 
 The branch and ahead/behind indicators help you compare local history with known remote history. **Fetch** refreshes remote information; it does not publish your commits or update your working files.
 
-Continue with [branches, shelves, and recovery](/documentation/orbiters.tools.unitgit-history-and-shelves) before switching branches, pulling updates, or amending history.
+Continue with [branches, shelves, and recovery](/documentation/orbiters.tools.mixer-git-history-and-shelves) before switching branches, pulling updates, or amending history.

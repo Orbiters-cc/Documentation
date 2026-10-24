@@ -140,7 +140,7 @@ The alpha server registers permission-filtered tools for:
 
 The website groups results into General knowledge, Website, and Tools. General maps
 to the reviewed `general` domain, Website includes `website` and `operations`, and
-Tools includes `mcb`, `refit`, `unitgit`, and `xraygizmos`. MCP callers can apply the
+Tools includes `mcb`, `refit`, `myavatar`, `mixer` and `desktop`. MCP callers can apply the
 same category filter or request an exact domain.
 
 ## Human Documentation Experience

@@ -21,7 +21,7 @@ lastVerified: 2026-09-28
   surface, vector logo renderer, account UI, authentication store and API roots.
   MCB 1.7.2 consumes the same shared services. The `Orbiters.Toolkit` assembly
   guards its editor services with `UNITY_EDITOR`; no editor logic enters players.
-- `orbiters.unitgit` 0.1.1 is optional since My Avatar 0.2.0. When installed, the
+- `orbiters.mixer` 0.2 is optional (Mixer Git keeps the checkpoints). When installed, the
   `MYAVATAR_UNITGIT` version define enables the commit step, which calls
   `CommitProjectFilesAsync(projectRoot, title, paths)`. It validates paths under the project, rejects ignored checkpoint files,
   performs Git work off the main thread and notifies consumers after completion.
@@ -107,7 +107,7 @@ variable `PACKAGE_NAME=MyAvatar`. It uses the standard **Build Release** workflo
 Publish Toolkit and Mixer dependency releases before publishing My Avatar.
 The first My Avatar release is 0.0.1; 0.1.0 adds the local-first texture pipeline;
 0.2.0 adds locked-shader support, convention-independent matching, the morphing drop
-field and makes Unit Git optional. The repository's release webhook is source 12 of
+field and makes its Git checkpoints optional. The repository's release webhook is source 12 of
 the canonical listing, created automatically when the source was added.
 The release webhook refreshes the canonical Orbiters VPM source; an Actions success
 alone does not prove VCC installation.

@@ -59,8 +59,7 @@ homepage point at Orbiters. Do not delete old release archives.
 ## Orbiters package release notifications
 
 As of 2026-09-26, the canonical Orbiters listing has active GitHub `release`
-webhooks for MyCustomBase, ReFit, UnitGit, Unity-Package-Manager, XRayGizmos and
-Toolkit. From 2026-09-27, adding a GitHub source creates its webhook automatically,
+webhooks for its package repositories. From 2026-09-27, adding a GitHub source creates its webhook automatically,
 which is how My Avatar receives one. Each repository uses its own source endpoint and signing secret,
 configured through the VPM webhook service. Do not copy another source's URL or
 secret. ReFit's existing configuration was retained when adding the other hooks.

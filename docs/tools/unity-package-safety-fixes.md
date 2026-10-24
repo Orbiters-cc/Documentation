@@ -15,8 +15,8 @@ lastVerified: 2026-10-19
 
 These fixes ship in **My Custom Base 1.7.6**, **Orbiters Toolkit 0.2.6** and
 **My Avatar 0.5.1**. MCB and My Avatar require Toolkit 0.2.6 or newer in the 0.2
-series. Additional Unit Git and My Avatar changes are covered in
-[Unit Git history and My Avatar texture fixes](unity-history-and-texture-fixes.md).
+series. Additional Mixer Git and My Avatar changes are covered in
+[Mixer Git history and My Avatar texture fixes](unity-history-and-texture-fixes.md).
 
 ## Version storage and downloads
 

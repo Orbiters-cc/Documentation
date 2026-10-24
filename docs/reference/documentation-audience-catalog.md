@@ -268,7 +268,7 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Add clothes and accessories from the My Avatar asset gallery | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Unity package safety and avatar workflow fixes | creator, dev | beta | — | — | ✓ | — | — | ✓ |
 | Avoid uploading over another account's avatar with the blueprint ID check | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Unit Git history and My Avatar texture fixes | creator, dev | beta | — | — | ✓ | — | — | ✓ |
+| Mixer Git history and My Avatar texture fixes | creator, dev | beta | — | — | ✓ | — | — | ✓ |
 | Unity safety verification follow-up | creator, dev | alpha | — | — | ✓ | — | — | ✓ |
 | Capture VRChat worlds with Orbiters - N4N0 | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Reconstruct and view sessions in Orbiters - N4N0 | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |

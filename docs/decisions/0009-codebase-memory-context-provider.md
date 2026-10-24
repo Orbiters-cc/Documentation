@@ -21,7 +21,7 @@ Accepted for local coding-agent context.
 ## Decision
 
 Use `codebase-memory-mcp` 0.9.0 as the structural code-context provider for the
-Orbiters server, MCB, ReFit, Unit Git, and XRay Gizmos repositories. Keep the
+Orbiters server, MCB, ReFit, Mixer and Orbiters Toolkit repositories. Keep the
 Orbiters Knowledge Base MCP separate: codebase-memory explains code structure;
 Orbiters MCP exposes reviewed product knowledge, reports, comments, proposals,
 decisions, boards, and deployment evidence.

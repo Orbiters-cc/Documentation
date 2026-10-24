@@ -14,8 +14,8 @@ lastVerified: 2026-10-24
 # Restore Scene-view interaction
 
 If you can navigate the Scene view but clicks or transform handles stop working,
-update Orbiters Toolkit: Avatar Gizmos, formerly the XRay Gizmos package (fixed in **0.2.6** with Toolkit **0.3.7**),
-are part of it since Toolkit 0.4.0. My Avatar **0.8.2** requires the fixed versions. ReFit **0.5.1** also keeps its gravity wire preview
+update Orbiters Toolkit to **0.3.7** or later: Avatar Gizmos are part of it. My Avatar **0.8.2** requires the
+fixed version. ReFit **0.5.1** also keeps its gravity wire preview
 confined to repaint events and restores shared handle drawing state after drawing.
 
 ## Recover an older installation

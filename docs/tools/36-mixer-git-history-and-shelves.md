@@ -4,17 +4,17 @@ section: Tools
 order: 236
 audience: public
 stage: alpha
-id: orbiters.tools.unitgit-history-and-shelves
+id: orbiters.tools.mixer-git-history-and-shelves
 domain: mixer
 type: how-to
 owner: orbiters-engineering
 lastVerified: 2026-10-24
-relations: orbiters.tools.unitgit-get-started
+relations: orbiters.tools.mixer-git-get-started
 ---
 
 # Work with Mixer Git branches, shelves, and history
 
-Start with [your first checkpoint](/documentation/orbiters.tools.unitgit-get-started) if you have not yet committed through Mixer Git. Save your scenes and assets before an operation that changes working files, and review **Local Changes** so you know what you are carrying with you.
+Start with [your first checkpoint](/documentation/orbiters.tools.mixer-git-get-started) if you have not yet committed through Mixer Git. Save your scenes and assets before an operation that changes working files, and review **Local Changes** so you know what you are carrying with you.
 
 ## Try an idea on a branch
 
@@ -72,7 +72,7 @@ Mixer Git operates on real project files and Git history. Review the action's co
 Mixer Git protects Rename and Squash from concurrent checkouts, refreshes
 selected branch state before Update, loads older history through Next, preserves
 header-like diff content and identifies all unresolved conflict states. See
-[Unit Git history and My Avatar texture fixes](unity-history-and-texture-fixes.md).
+[Mixer Git history and My Avatar texture fixes](unity-history-and-texture-fixes.md).
 
 
 <alpha>

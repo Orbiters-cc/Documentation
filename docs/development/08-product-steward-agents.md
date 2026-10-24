@@ -51,9 +51,9 @@ runs do not require server-side model inference.
 The `/admin/agents` routes require the `admin-agents` feature. An administrator can:
 
 1. Create or update a Product Steward and its visible User identity.
-2. Ensure the six standard Product Stewards exist through
+2. Ensure the five standard Product Stewards exist through
    `POST /admin/agents/seed-presets`: Orbiters Website / Platform, MCB, ReFit,
-   UnitGit, XRayGizmos, and Documentation (knowledge base).
+   Mixer, and Documentation (knowledge base).
 3. Issue a scoped, expiring, rate-limited token and reveal it once.
 4. Create an `AgentRun` with one explicit research objective.
 5. Copy the returned versioned research brief to a local agent.

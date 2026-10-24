@@ -4,7 +4,7 @@ section: Tools
 order: 237
 audience: creator, dev
 stage: stable
-id: orbiters.tools.xray-gizmos-operating-contract
+id: orbiters.tools.avatar-gizmos-operating-contract
 domain: mixer
 type: reference
 owner: orbiters-engineering
@@ -14,10 +14,10 @@ relations: orbiters.tools.refit-operating-contract
 
 # Avatar Gizmos Operating Contract
 
-For the public workflow, start with [Inspect an avatar with Avatar Gizmos](/documentation/orbiters.tools.xraygizmos-get-started) and [controls and troubleshooting](/documentation/orbiters.tools.xraygizmos-controls).
+For the public workflow, start with [Inspect an avatar with Avatar Gizmos](/documentation/orbiters.tools.avatar-gizmos-get-started) and [controls and troubleshooting](/documentation/orbiters.tools.avatar-gizmos-controls).
 
 Avatar Gizmos render editor-only armature, bone-weight, and mesh-edge overlays in the
-Unity Scene view. They are part of Orbiters Toolkit (formerly the XRay Gizmos package), which comes with every
+Unity Scene view. They are part of Orbiters Toolkit, which comes with every
 Orbiters tool, Mixer included. Open the window from `Tools > Orbiters > Avatar Gizmos`.
 
 - Display the active selection, a pinned object, or all skinned armatures in loaded
@@ -68,8 +68,7 @@ fix is local and has not been released.
 ## Releases
 
 Avatar Gizmos ship in Orbiters Toolkit releases (`Orbiters-cc/Toolkit`); see
-[Unity package releases](../development/unity-package-releases.md). The Toolkit's manifest lists
-`orbiters.xraygizmos` under `legacyPackages`, so Creator Companion replaces the former package with it.
+[Unity package releases](../development/unity-package-releases.md).
 
 </audience>
 
@@ -102,7 +101,7 @@ It does not continuously drive scene bones. Humanoid mappings precede unambiguou
 mirrored hierarchy paths. It uses mesh bind frames, or an enable-time relative
 reference for pairs missing complete bind data. Both-side edits take precedence
 over mirroring. Rotation and movement are supported; scale and animation recording
-are excluded. See [controls and troubleshooting](/documentation/orbiters.tools.xraygizmos-controls)
+are excluded. See [controls and troubleshooting](/documentation/orbiters.tools.avatar-gizmos-controls)
 for usage and boundaries.
 
 </alpha>

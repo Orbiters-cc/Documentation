@@ -4,12 +4,12 @@ section: Tools
 order: 232
 audience: public, creator, dev
 stage: alpha
-id: orbiters.tools.logger
+id: orbiters.tools.mixer-console
 domain: mixer
 type: how-to
 owner: orbiters-engineering
 lastVerified: 2026-10-24
-relations: orbiters.tools.logger-timings, orbiters.tools.unitgit-get-started
+relations: orbiters.tools.mixer-console-timings, orbiters.tools.mixer-git-get-started
 ---
 
 # Read Unity's logs with the Mixer console
@@ -18,8 +18,7 @@ The **Mixer console** replaces Unity's Console. It shows every log of the editor
 says where each one comes from (VRChat SDK, VRCFury, MCB, ReFit, Unity, the compiler…), and since which commit a
 message keeps coming back.
 
-**Release status:** part of Mixer 0.2.0, which is not released yet. Up to Logger 0.2.7 it was a package of its own,
-the Logger.
+**Release status:** part of Mixer 0.2.0, which is not released yet.
 
 ## Get started
 

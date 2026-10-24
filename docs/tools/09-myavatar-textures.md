@@ -164,7 +164,7 @@ matches stay applied.
 My Avatar 0.5.1 cancels pending AI answers when AI is turned off or the
 Inspector closes, serializes preference writes, keeps same-named textures from
 different sources separate, and treats unchanged saves as successful. See
-[Unit Git history and My Avatar texture fixes](unity-history-and-texture-fixes.md).
+[Mixer Git history and My Avatar texture fixes](unity-history-and-texture-fixes.md).
 
 <alpha>
 

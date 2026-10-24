@@ -4,17 +4,17 @@ section: Tools
 order: 239
 audience: public
 stage: stable
-id: orbiters.tools.xraygizmos-controls
+id: orbiters.tools.avatar-gizmos-controls
 domain: mixer
 type: reference
 owner: orbiters-engineering
 lastVerified: 2026-10-24
-relations: orbiters.tools.xraygizmos-get-started
+relations: orbiters.tools.avatar-gizmos-get-started
 ---
 
 # Avatar Gizmos controls and troubleshooting
 
-Open **Tools > Orbiters > Avatar Gizmos** for the full controls. For a first walkthrough, start with [Inspect an avatar with Avatar Gizmos](/documentation/orbiters.tools.xraygizmos-get-started).
+Open **Tools > Orbiters > Avatar Gizmos** for the full controls. For a first walkthrough, start with [Inspect an avatar with Avatar Gizmos](/documentation/orbiters.tools.avatar-gizmos-get-started).
 
 ## Choose a target
 

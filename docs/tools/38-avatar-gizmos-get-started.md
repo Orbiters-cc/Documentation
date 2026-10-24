@@ -4,12 +4,12 @@ section: Tools
 order: 238
 audience: public
 stage: stable
-id: orbiters.tools.xraygizmos-get-started
+id: orbiters.tools.avatar-gizmos-get-started
 domain: mixer
 type: tutorial
 owner: orbiters-engineering
 lastVerified: 2026-10-24
-relations: orbiters.tools.xraygizmos-controls
+relations: orbiters.tools.avatar-gizmos-controls
 ---
 
 # Inspect an avatar with Avatar Gizmos
@@ -18,7 +18,7 @@ Avatar Gizmos help you see an avatar's skeleton through its mesh, inspect which 
 
 ## Before you start
 
-Use a Unity 2022.3 project with **Orbiters Toolkit** installed: Avatar Gizmos (formerly XRay Gizmos) are part of it, and it comes with every Orbiters tool, such as Mixer. Open a scene containing a rigged model with a `SkinnedMeshRenderer`. They do not require MCB, ReFit, or the VRChat SDK.
+Use a Unity 2022.3 project with **Orbiters Toolkit** installed: Avatar Gizmos are part of it, and it comes with every Orbiters tool, such as Mixer. Open a scene containing a rigged model with a `SkinnedMeshRenderer`. They do not require MCB, ReFit, or the VRChat SDK.
 
 This guide starts with the package already installed. If **Tools > Orbiters > Avatar Gizmos** is missing, check that Unity has finished compiling and that the package appears in the project's Package Manager. Resolve compiler errors in the Console before continuing.
 
@@ -50,7 +50,7 @@ Tune **Edge opacity** and **Edge color** if the lines obscure the model. Weight 
 
 Use **Clear** to turn off the armature, weight, and edge overlays. It does not delete the avatar or modify its mesh. Use **Refresh** if the visible result needs rebuilding after scene changes.
 
-Continue with the [controls and troubleshooting reference](/documentation/orbiters.tools.xraygizmos-controls) for toolbar shortcuts and missing-overlay checks.
+Continue with the [controls and troubleshooting reference](/documentation/orbiters.tools.avatar-gizmos-controls) for toolbar shortcuts and missing-overlay checks.
 
 ## Development showcases
 

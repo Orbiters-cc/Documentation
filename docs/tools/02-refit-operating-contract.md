@@ -9,7 +9,7 @@ domain: refit
 type: reference
 owner: orbiters-refit
 lastVerified: 2026-10-16
-relations: orbiters.tools.mcb-operating-contract, orbiters.tools.unitgit-operating-contract, orbiters.tools.xray-gizmos-operating-contract
+relations: orbiters.tools.mcb-operating-contract, orbiters.tools.mixer-git-operating-contract, orbiters.tools.avatar-gizmos-operating-contract
 ---
 
 # ReFit Operating Contract

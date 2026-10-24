@@ -1,5 +1,5 @@
 ---
-title: Unit Git history and My Avatar texture fixes
+title: Mixer Git history and My Avatar texture fixes
 section: Tools
 order: 196
 audience: creator, dev
@@ -11,22 +11,21 @@ owner: orbiters-engineering
 lastVerified: 2026-09-28
 ---
 
-# Unit Git history and My Avatar texture fixes
+# Mixer Git history and My Avatar texture fixes
 
-These fixes ship in **Unit Git 0.1.3** and **My Avatar 0.5.1**. My Avatar requires
-Toolkit 0.2.6 or newer in the 0.2 series. Its optional Git checkpoint integration
-requires Unit Git 0.1.3 or newer; without that version, Save still saves the scene
+These fixes ship in **Mixer Git** and **My Avatar 0.5.1**. My Avatar requires
+Toolkit 0.2.6 or newer in the 0.2 series. Its optional Git checkpoints come from
+Mixer Git; without it, Save still saves the scene
 and assets. Earlier storage, reporting, physics and photoshoot changes are covered
 in [Unity package safety and avatar workflow fixes](unity-package-safety-fixes.md).
 
 | Package | Release |
 | --- | --- |
 | Orbiters Toolkit | [0.2.6](https://github.com/Orbiters-cc/Toolkit/releases/tag/0.2.6) |
-| Unit Git | [0.1.3](https://github.com/Orbiters-cc/UnitGit/releases/tag/0.1.3) |
 | My Avatar | [0.5.1](https://github.com/Orbiters-cc/MyAvatar/releases/tag/0.5.1) |
 | My Custom Base | [1.7.6](https://github.com/Orbiters-cc/MyCustomBase/releases/tag/1.7.6) |
 
-## Unit Git branches and history
+## Mixer Git branches and history
 
 - **Rename and Squash:** the operation captures the current branch and commit before
   preparing the replacement history. If another Git client checks out a different
@@ -34,7 +33,7 @@ in [Unity package safety and avatar workflow fixes](unity-package-safety-fixes.m
   checked-out branch, working files and index are left intact. If the original
   branch itself advances, the rewrite fails instead of overwriting that change.
   Check out a branch before rewriting; detached HEAD is rejected.
-- **Update selected branch:** Unit Git reads the selected branch and upstream again,
+- **Update selected branch:** Mixer Git reads the selected branch and upstream again,
   checks out that branch, then pulls with fast-forward-only behavior. Stale selection
   flags no longer decide which branch is pulled. A deleted branch or missing
   upstream produces an actionable error.
@@ -84,7 +83,7 @@ identity, so choose its slot again if needed.
 ## Save when nothing changed
 
 Save still saves the scene and assets first. If the selected checkpoint files are
-unchanged, Unit Git reports success without creating an empty commit, and My Avatar
+unchanged, Mixer Git reports success without creating an empty commit, and My Avatar
 shows **Saved · no new changes to checkpoint.** Unrelated staged changes remain
 untouched. If Git encounters a real error, the feedback states that the scene and
 assets were saved but the Git checkpoint failed.
@@ -95,7 +94,7 @@ assets were saved but the Git checkpoint failed.
 
 MCB 1.7.6 corrects the package download URL to match GitHub's normalized ZIP
 filename. Its safety code is unchanged from 1.7.5. The other package versions
-remain Toolkit 0.2.6, Unit Git 0.1.3 and My Avatar 0.5.1.
+remain Toolkit 0.2.6 and My Avatar 0.5.1.
 
 Focused EditMode regressions exercise concurrent checkouts during Rename and
 Squash, concurrent branch advancement, stale branch selections, a 602-commit
@@ -103,7 +102,7 @@ history, header-like diff content, all seven conflict pairs and an unchanged sav
 with unrelated staged files. My Avatar regressions exercise thumbnail pixel
 restoration through Undo/Redo, independent texture mappings, delayed AI responses,
 Inspector disposal during the completion delay, and ordered preference writes.
-The focused regressions and existing Unit Git suite passed all 63 selected
+The focused regressions and existing Mixer Git suite passed all 63 selected
 EditMode tests in Unity 2022.3.22f1. Git fixtures use temporary local repositories.
 AI tests use controlled responses and do not send requests to the production service.
 

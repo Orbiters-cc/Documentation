@@ -4,12 +4,12 @@ section: Tools
 order: 233
 audience: public, creator, dev
 stage: alpha
-id: orbiters.tools.logger-timings
+id: orbiters.tools.mixer-console-timings
 domain: mixer
 type: how-to
 owner: orbiters-engineering
 lastVerified: 2026-10-24
-relations: orbiters.tools.logger
+relations: orbiters.tools.mixer-console
 ---
 
 # See what slows Unity down with Mixer console timings

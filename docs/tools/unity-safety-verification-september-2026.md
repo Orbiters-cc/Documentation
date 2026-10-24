@@ -50,9 +50,9 @@ normal-map, linear-data or color import settings. Repeated optimization restores
 the original material in reverse application order. Scoped changes split a
 generated material again if another avatar begins sharing it.
 
-## XRay blendshape overlays
+## Avatar Gizmos blendshape overlays
 
-With legacy blendshape clamping enabled, XRay follows the native renderer for
+With legacy blendshape clamping enabled, Avatar Gizmos follow the native renderer for
 negative, zero and out-of-range weights, including single-frame and multi-frame
 shapes. The verification compares 77 combinations against Unity BakeMesh. The
 editor retained native clamping after the project flag was temporarily disabled,

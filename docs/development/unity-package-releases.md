@@ -14,8 +14,7 @@ lastVerified: 2026-10-03
 # Publish Unity package releases
 
 A change to the root `package.json` version starts **Build Release** when pushed
-to the package repository's default branch. Mixer includes the former Logger and Unit Git
-packages (now the Mixer console and Mixer Git); the Toolkit includes the former XRay Gizmos. This publishes the package's existing
+to the package repository's default branch. This publishes the package's existing
 release artifacts and a Git tag named exactly after the version.
 
 | Package | GitHub repository | Automatic release branch |
@@ -55,11 +54,8 @@ posing and capture fixes from Toolkit:
 | MCB | 1.10.4 | Native custom-base humanoid definitions, comparison placement, original-body reuse, player compilation |
 | My Avatar | 0.8.5 | Fit review actions, material repair, unchanged-thumbnail upload guard, drawing pen section and empty clothing section handling |
 | ReFit | 0.5.3 | Cross-base coverage, smoothing, separated-leg fitting, parallel work and preparation caching |
-| Unit Git | 0.2.4 | Material comparison spheres and temporary material naming |
-| XRayGizmos | 0.2.7 | Symmetry controls during Play Mode |
 
-The consumers require Toolkit 0.3.10 or newer within the 0.3 series. My Avatar
-requires XRayGizmos 0.2.7 or newer within the 0.2 series. Optional ReFit and MCB
+The consumers require Toolkit 0.3.10 or newer within the 0.3 series. Optional ReFit and MCB
 prompts now request versions containing these coordinated fixes.
 
 Publish Toolkit before its consumers, then verify each GitHub release ZIP against

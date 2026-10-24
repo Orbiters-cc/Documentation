@@ -4,7 +4,7 @@ section: Tools
 order: 234
 audience: creator, dev
 stage: alpha
-id: orbiters.tools.unitgit-operating-contract
+id: orbiters.tools.mixer-git-operating-contract
 domain: mixer
 type: reference
 owner: orbiters-engineering
@@ -14,10 +14,10 @@ relations: orbiters.general.vpm-package-contract, orbiters.tools.refit-operating
 
 # Mixer Git Operating Contract
 
-For the public workflow, start with [your first project checkpoint](/documentation/orbiters.tools.unitgit-get-started) and [branches, shelves, and history](/documentation/orbiters.tools.unitgit-history-and-shelves).
+For the public workflow, start with [your first project checkpoint](/documentation/orbiters.tools.mixer-git-get-started) and [branches, shelves, and history](/documentation/orbiters.tools.mixer-git-history-and-shelves).
 
-Mixer Git operates on the Git repository at the Unity project root. It is part of Mixer (formerly the Unit Git
-package). Open it from `Tools > Orbiters > Mixer Git`.
+Mixer Git operates on the Git repository at the Unity project root. It is part of Mixer.
+Open it from `Tools > Orbiters > Mixer Git`.
 
 It can inspect history and changes, stage and unstage, commit, fetch, pull, switch
 branches, shelve work, and initialize a missing project repository with a VRChat

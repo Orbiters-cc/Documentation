@@ -108,8 +108,8 @@ A redownload with an intentionally stale garment hash then succeeded. Downloaded
 metadata is now persisted locally as well, so repository scans after reload or
 while offline recognize the downloaded version.
 
-All 52 MCB and 29 Unit Git EditMode tests passed, along with both packages'
-deterministic health checks. Unit Git tests verify ignored archive handling and
+All 52 MCB and 29 Mixer Git EditMode tests passed, along with both packages'
+deterministic health checks. The Mixer Git tests verify ignored archive handling and
 preservation of unrelated staged/unstaged changes. Aggregate local evidence is
 `Editor/Benchmarks/results/2026-09-07-creator-regression.json`; the reusable reference
 comparison is `MCBMeshRoundTripVerifier.Compare`. Existing uploaded incomplete
