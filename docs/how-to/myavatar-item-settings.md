@@ -3,7 +3,7 @@ title: Give your asset settings on its My Avatar card
 section: Creator Tools
 order: 68
 audience: public, creator, dev
-stage: alpha
+stage: stable
 id: orbiters.myavatar.item-settings
 domain: myavatar
 type: how-to
@@ -20,9 +20,6 @@ N4N0 has: switches and choices the buyer sets before uploading, such as a hood o
 a long or short version, a colour or a slimmer fit. You describe them in one file beside
 your prefab. Nothing runs in the buyer's project: My Avatar changes the item in their scene,
 with Undo, and reads the current choice back from the item.
-
-**Release status:** comes with Orbiters Toolkit 0.4.4 and My Avatar 0.9.14, which are not
-released yet. This guide does not announce a release.
 
 ## Before you start
 
