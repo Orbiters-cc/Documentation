@@ -8,7 +8,7 @@ id: orbiters.tools.desktop
 domain: desktop
 type: how-to
 owner: orbiters-engineering
-lastVerified: 2026-10-20
+lastVerified: 2026-10-25
 relations: orbiters.tools.desktop-sessions, orbiters.tools.desktop-worlds, orbiters.tools.desktop-performance, orbiters.tools.mixer-performance, orbiters.tools.mixer-splats
 ---
 
@@ -36,8 +36,8 @@ repository on Windows.
 
 Signed in to the Orbiters Unity tools (MCB, My Avatar), you are signed in to Orbiters - N4N0 too: it uses their saved
 sign-in and follows it, so signing in or out in either does the same in the other within seconds. Otherwise
-**Settings › Orbiters account** signs in with Discord or Telegram in your browser, as the Unity tools do: type the code
-the app shows on the Orbiters page that opens. The account is only needed to share worlds on the Map explorer
+**Settings › Orbiters account** › **Sign in** opens Orbiters in your browser, as the Unity tools do: sign in there if
+needed and choose **Connect**. The account is only needed to share worlds on the Map explorer
 ([Share your visited worlds](23-orbiters-desktop-visited-worlds.md)).
 
 ## Record a world
@@ -84,8 +84,8 @@ picture changed (about 85 per second in VR).
 
 ## Settings
 
-- **Orbiters account:** who is signed in (the account the Unity tools share), **Sign out**, or **Sign in with Discord**
-  and **Sign in with Telegram** with the code to type in the browser.
+- **Orbiters account:** who is signed in (the account the Unity tools share), **Sign out**, or **Sign in**, which
+  finishes with **Connect** in the browser.
 - **Capture:** keyframe distance, turn and interval; a new session on each world change; the **Spout sender** (empty
   picks VRChat's Stream camera).
 - **Storage:** library usage, **Storage limit** (recording stops when the library reaches it; 0 means no limit),

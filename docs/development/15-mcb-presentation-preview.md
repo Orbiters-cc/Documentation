@@ -8,7 +8,7 @@ id: orbiters.development.mcb-presentation-preview
 domain: mcb
 type: reference
 owner: mcb-maintainers
-lastVerified: 2026-09-14
+lastVerified: 2026-10-25
 ---
 
 # MCB Presentation Preview
@@ -83,10 +83,9 @@ three existing components. The numbered cyan guides follow these actions:
 3. Select **My Custom Base (MCB)**. Enter selects the match; Arrow Down focuses it.
    Escape or clicking outside dismisses the picker without adding the component.
 4. The Inspector asks to connect an Orbiters account, as the real tool does:
-   **Login with Discord** or **Login with Telegram**. Clicking either connects the
-   preview account (the real tool opens Orbiters in the browser, where the code is
-   checked and **Connect** confirms it). The asset then appears. The website's
-   **Install** button stays the installer throughout.
+   **Sign in**. Clicking it connects the preview account (the real tool opens
+   Orbiters in the browser, where **Connect** finishes it). The asset then appears.
+   The website's **Install** button stays the installer throughout.
 5. Select **Apply Ultirex**. The button displays a green progress fill with download,
    avatar-definition, and blendshape stages modeled on the real tool. After loading
    completes, the muscle weight and normal intensity rise together to 100%.
@@ -119,7 +118,7 @@ to a 320-pixel viewport.
 **Install** opens the shared `MCBInstallWizard` used by `/my-custom-base-old`, for
 visitors and signed-in users alike: signing in happens in the tool, so the website
 asks for no login. It gives the real VCC repository, package installation, Unity
-component, and **Login with Discord/Telegram** instructions. The same mounted Dynamic Island grows from the Install button;
+component, and **Sign in** instructions. The same mounted Dynamic Island grows from the Install button;
 the surrounding labels, arrows, and Unity frame move apart to reserve its space.
 
 On the repository step, **Or add the repo manually** displays the same repository

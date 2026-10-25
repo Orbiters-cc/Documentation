@@ -8,7 +8,7 @@ id: orbiters.how-to.mcb-and-unity-tools
 domain: mcb
 type: how-to
 owner: mcb-maintainers
-lastVerified: 2026-10-11
+lastVerified: 2026-10-25
 ---
 
 # MCB and Unity Tools
@@ -33,7 +33,7 @@ The tools can call Orbiters to:
 ## User Flow
 
 1. Open the compatible asset page or `/my-custom-base`, and press **Install**. The steps open in place, without signing in on the website: add the VRCFury and Orbiters repositories in Creator Companion, install My Custom Base in your avatar project, then add its component to the avatar root. **Escape** or **Close installer** closes them.
-2. Sign in inside the tool with **Login with Discord** or **Login with Telegram** (see [Connect a Unity tool](#connect-a-unity-tool)).
+2. Sign in inside the tool with **Sign in** (see [Connect a Unity tool](#connect-a-unity-tool)).
 3. Choose an asset and version that your account can access. A custom base appears under **Available Custom Bases** when you own it, hold a license or a Discord role for it, or claimed it for free.
 4. Install or update through the tool (**Apply** on the version).
 
@@ -43,19 +43,22 @@ On a custom base's asset page, **Install** shows for everyone who can use it, in
 
 Unity tools sign in from the tool itself:
 
-- **Login with Discord** or **Login with Telegram** in the tool opens Orbiters in
-  your browser. Sign in if needed, type the four-character code shown in Unity,
-  and choose **Connect**. The tool then receives its own credential. Never type a
-  code for a link someone else sent you: it would connect their editor to your
-  account. Five wrong codes end the link. A link lasts ten minutes and works once.
-  If it expired or was already used, click Login again in Unity. If Orbiters
-  could not be reached, **Try again** rechecks the same link; if your session
-  ended, the page asks you to sign in again.
+- **Sign in** in the tool opens Orbiters in your browser. Sign in there with
+  Discord or Telegram if needed and choose **Connect**: there is no code to type.
+  The browser hands the tool its own credential on your computer, and the page then
+  says the tool is connected. A link someone else sends you connects nothing: what
+  Connect hands back only reaches the computer whose browser chose it. A link lasts
+  ten minutes and works once. If it expired or was already used, click **Sign in**
+  again in Unity. If Orbiters could not be reached, **Try again** rechecks the same
+  link; if your session ended, the page asks you to sign in again.
+- A tool version that still shows a code to type can no longer sign in: update it in
+  the Creator Companion.
 - The website no longer prepares **Magic Sync** tokens. If your tool only offers
-  Magic Sync, update it to a version with Login.
+  Magic Sync, update it to a version with Sign in.
 
-A credential is only released to the tool that holds that login's secret.
-Being on the same network or IP address as your browser is not enough.
+A credential is only released to the tool that holds that sign-in's secret and
+the code its browser handed back. Being on the same network or IP address as your
+browser is not enough.
 
 <alpha>
 
@@ -207,7 +210,10 @@ response contracts through one shared WizardToken lifecycle service. IP-based
 discovery is removed: `token=notoken` never returns a credential and always answers
 425 with a message to copy the token or use Login, so older tools keep waiting
 instead of failing. Credentials are released only to a caller that presents the
-clipboard `orbit-…` token or the browser login's poll secret (`editorLinkService`).
+clipboard `orbit-…` token or the browser sign-in's exchange secret together with the
+one-time code the website's Connect handed to the tool's loopback listener
+(`editorLinkService`: the tool registers `127.0.0.1:<port>/<path>`, Connect answers
+that address with the code, `POST /editor-links/exchange` trades both once).
 Direct token reuse records each IP address and user agent in `WizardTokenUses`. Change lifecycle behavior in
 the shared service so the two route families cannot drift. Avatar versions are
 uploaded only through `POST /mcb/newVersion`; the `unity-wizard` routes no longer

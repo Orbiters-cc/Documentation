@@ -8,7 +8,7 @@ id: orbiters.tools.myavatar-textures
 domain: myavatar
 type: how-to
 owner: orbiters-engineering
-lastVerified: 2026-09-28
+lastVerified: 2026-10-25
 ---
 
 # Change avatar textures with My Avatar
@@ -131,12 +131,11 @@ it is installed, **Add to avatar** adds it to the avatar root.
 
 ## Orbiters account and automatic AI assistance
 
-To connect, click **Login with Discord** or **Login with Telegram** at the top of
-the component. Your browser opens on that login; Orbiters then asks you to confirm
-the connection once and shows a four-letter code, the same one Unity shows while it
-waits. Only confirm when you just clicked Login in Unity. The link works once and
-expires after ten minutes. The account is shared with the other Orbiters tools;
-Logout clears it for all of them.
+To connect, click **Sign in** at the top of the component. Your browser opens
+Orbiters: sign in with Discord or Telegram if needed and choose **Connect**. There is
+no code to type, and a link someone else sends you connects nothing. The link works
+once and expires after ten minutes. The account is shared with the other Orbiters
+tools; Logout clears it for all of them.
 
 The robot in the top-right corner of the drop field shows AI assistance: crossed out
 while you are not connected or AI is off. Once connected, click it to turn AI
