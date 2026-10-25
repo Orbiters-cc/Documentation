@@ -8,7 +8,7 @@ id: orbiters.tools.desktop-sessions
 domain: desktop
 type: how-to
 owner: orbiters-engineering
-lastVerified: 2026-10-20
+lastVerified: 2026-10-25
 relations: orbiters.tools.desktop, orbiters.tools.desktop-worlds, orbiters.tools.mixer-splats
 ---
 
@@ -69,6 +69,20 @@ A reconstructed session can be shown in 3D on the Orbiters website's Map explore
 **Send to Mixer** copies the splats into the Unity project open with Mixer and shows them where the world was
 captured; see [Show Orbiters splats in Unity with Mixer](31-mixer-splats.md). The button asks you to reconstruct first
 when the session has no splats yet, and to open the project with Mixer when no Unity editor runs it.
+
+## Free up space
+
+Captures take room: the keyframes, depth frames, video and recordings of a session are only needed to reconstruct it
+again. **Free up space** at the top of **Sessions** (also **Settings › Storage**) shows what the library takes, in
+three parts: the capture files of reconstructed sessions, the sessions without a 3D view, and the 3D views.
+**Free** deletes the capture files of every reconstructed session at once; their 3D views stay, so you can still
+walk through them, share them on the Map explorer and send them to Mixer. Sessions without a 3D view are deleted
+only if you turn on their switch, and then nothing of them stays. The confirmation lists what goes, with sizes:
+the files are deleted for good, not moved to the recycle bin, so the space really comes back.
+
+**Keep only the 3D view** in a session's detail does the same for one session. Afterwards the session shows
+**3D view only** and can no longer be reconstructed; sound, parameters and tracking are gone too, so Mixer can't
+import its performance. Sessions being recorded or reconstructed are never touched.
 
 ## Delete a session
 

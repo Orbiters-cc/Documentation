@@ -275,6 +275,7 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Reconstruct and view sessions in Orbiters - N4N0 | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Record your performance with Orbiters - N4N0 | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Share your visited worlds from Orbiters - N4N0 | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Save avatar states and drop link cards with N4N0 | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Bake a VRChat performance with Mixer | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Show Orbiters splats in Unity with Mixer | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Read Unity's logs with the Mixer console | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
