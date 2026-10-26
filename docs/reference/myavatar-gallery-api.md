@@ -9,7 +9,7 @@ domain: myavatar
 type: reference
 owner: orbiters-engineering
 lastVerified: 2026-10-09
-relations: orbiters.tools.myavatar-asset-gallery, orbiters.myavatar.publish-to-gallery, orbiters.operations.known-vpm
+relations: orbiters.tools.myavatar-asset-gallery, orbiters.myavatar.publish-to-gallery, orbiters.operations.known-vpm, orbiters.myavatar.customizable-parts
 ---
 
 # My Avatar gallery API and installation contract
@@ -29,8 +29,9 @@ not reuse `AvatarVersions`.
 
 | Table | Purpose | Key fields |
 | --- | --- | --- |
-| `AvatarAssetVersions` | A release of an asset | `assetId`, `version` (unique per asset), `title`, `changelog`, `scope` (`public`, `beta`, `alpha`), `status` (`draft`, `published`, `withdrawn`), `publishedAt`, `rightsConfirmedAt`, `rightsConfirmedById` |
+| `AvatarAssetVersions` | A release of an asset | `assetId`, `version` (unique per asset), `title`, `changelog`, `scope` (`public`, `beta`, `alpha`), `status` (`draft`, `published`, `withdrawn`), `publishedAt`, `rightsConfirmedAt`, `rightsConfirmedById`, `parts` (nullable JSONB: the checked parts definition) |
 | `AvatarAssetVariants` | A downloadable package of a release | `versionId`, `label` (unique per release), `platforms` (`pc`, `android`, `ios`), `baseScope` (`any`, `bases`), `avatarBaseIds`, `fileId`, `sizeBytes`, `sha256`, `dependencies`, `manifest`, `contents`, `parameterBits`, `containsCode` |
+| `PartVariants` | A variant of one of an asset's customizable parts | `assetId`, `versionId` (the release it was checked against), `partKey`, `kind` (`values`, `model`, `strings`), `name`, `description`, `language`, `authorId`, `official`, `status` (`published`, `withdrawn`, `removed`), `fileId` (private zip), `thumbnailFileId`, `thumbnail`, `sizeBytes`, `sha256`, `files`, `downloads`, `removedById`, `removedAt` |
 | `AvatarAssetPurchases` | A purchase the gallery is watching | `userId` + `assetId` (unique), `provider`, `storeIntegrationId`, `status` (`pending`, `redeemed`, `expired`), `expiresAt` (7 days), `storeSaleId` |
 | `KnownVpmRepositories` | Admin-approved dependency sources | `url` (unique), `status` (`approved`, `disabled`), `packageCount`, `lastValidatedAt`, `lastCheckedAt`, `lastError` |
 | `KnownVpmPackages` | Packages of a known repository | `repositoryId` + `name` (unique), `status` (`pending`, `approved`, `disabled`), `supportedRange`, `versions`, `latestVersion` |
@@ -94,8 +95,14 @@ All routes are under the API origin. `optional` accepts anonymous callers;
 | `POST /avatar-assets/creator/assets/:assetId/versions/:versionId/variants` | required | Upload a variant (multipart `metadata` + `packageFile`). |
 | `PUT /avatar-assets/creator/assets/:assetId/versions/:versionId/variants/:variantId` | required | Change a draft variant's `label`, `platforms`, `baseScope`, `avatarBaseIds`, `parameterBits`, `dependencies` or `manifest` without a new upload, validated like an upload. A new `manifest` may name the prefabs in `contents.prefabs`; fields left out keep their value. 409 for a published version or a label another variant of the release uses. |
 | `DELETE /avatar-assets/creator/assets/:assetId/versions/:versionId/variants/:variantId` | required | Delete a variant. |
-| `POST /avatar-assets/creator/assets/:assetId/versions/:versionId/publish` | required | Body `{ "rightsConfirmed": true, "publishListing": false, "variantIds": [ … ] }`: the draft's other variants are deleted first (409 for an unknown id). Refused without the rights confirmation or a ready variant. |
+| `POST /avatar-assets/creator/assets/:assetId/versions/:versionId/publish` | required | Body `{ "rightsConfirmed": true, "publishListing": false, "variantIds": [ … ], "parts": { … } }`: the draft's other variants are deleted first (409 for an unknown id). Refused without the rights confirmation or a ready variant. `parts` is optional; see [Customizable parts](#customizable-parts). |
 | `POST /avatar-assets/creator/assets/:assetId/versions/:versionId/withdraw` | required | Take a published release out of the gallery. |
+| `GET /avatar-assets/:assetId/parts` | optional | The asset's customizable parts and their variant counts. |
+| `GET /avatar-assets/:assetId/parts/:part/variants?query=&language=&sort=popular\|new&cursor=&limit=` | optional | A part's published variants, the creator's first. |
+| `POST /avatar-assets/:assetId/parts/:part/variants` | required | Post a variant (multipart `variantFile` + `metadata`). |
+| `GET /avatar-assets/part-variants/:variantId` | optional | One variant. |
+| `GET /avatar-assets/part-variants/:variantId/download` | required | The variant's zip. Header `X-Orbiters-Variant-Sha256`. |
+| `DELETE /avatar-assets/part-variants/:variantId` | required | Withdraw (author) or remove (asset creator, staff). |
 | `/admin/known-vpm` (`GET`, `POST`, `PUT /:id`, `DELETE /:id`, `POST /:id/refresh`, `PUT /packages/:id`) | admin | Known VPM administration. |
 
 Every creator route checks creator-tools access, and version routes refuse a version of another asset than the one
@@ -114,6 +121,40 @@ buyer's account email, Gumroad emails or linked Jinxxy account, and is not refun
 The store webhook redeems pending purchases immediately; otherwise status checks
 refresh the creator's sales at most every two minutes, and a background check runs for
 pending purchases. A refund revokes access granted this way.
+
+### Customizable parts
+
+The creator-facing rules (the `<Prefab>.parts.json` file, the three kinds, variant contents and limits) are in
+[Customizable parts and variants](../how-to/myavatar-customizable-parts.md). The server side:
+
+- **Publishing.** `parts` in the publish body is `{ "file": "Assets/…/N4N0.parts.json", "definition": { …the file as
+  written… }, "strings": { "<strings part key>": { "<text key>": "<text>" | { "text": "<text>", "max": 24 } } } }`.
+  `services/avatarAssets/partsDefinition.js` checks it (unknown fields refused at every level, at most 512 KB) and
+  requires every package the release keeps to contain `file` and every JSON file the definition names (strings files,
+  base variant files; resolved like Toolkit's `ItemSettings.AssetPath`), using `contents.jsonFiles`, the JSON files
+  under `Assets/` an upload records (at most 1000). The release stores `{ schema: 1, file, parts }`, each strings part
+  with `texts` (`{ key: { text, max } }`, `max` defaulting to twice the text's length). Without `parts`, a release has
+  none. A member's parts are those of the newest published release in a scope they reach (`public` without access).
+- **`GET …/:assetId/parts`** → `{ assetId, release: { id, version } | null, parts: [{ key, label, description, kind,
+  renderer, base: [{ name, file, language? }], variantCount, …kind fields }] }`: values parts add `fields` and `targets`,
+  model parts `slots`, `blendshapes`, `maxTriangles`, `maxTextureSize`, `maxRadius`, `shaders`, strings parts
+  `strings` and `texts`. 404 when the caller cannot see the asset.
+- **A variant** answers `{ id, assetId, part, kind, name, description, language, official, author: { id, username,
+  trusted, avatarUrl } | null, thumbnail (absolute PNG URL), downloads, sizeBytes, sha256, files: [{ name, bytes, type,
+  width?, height? }], status, createdAt, updatedAt, mine, canRemove }`.
+- **Lists** answer `{ part, kind, sort, variants, nextCursor }`, official first, then by downloads (`popular`, default)
+  or creation (`new`), then newest id; `limit` 1 to 60 (30); `query` searches name, description and author; `language`
+  matches the tag and its subtags (`pt` finds `pt-BR`); `cursor` is the previous answer's `nextCursor` (400 when it is
+  not one). Only `published` variants of the part's current kind are listed.
+- **Posting** needs download access to the asset (403 otherwise) and runs that check before the body is read. The zip
+  is at most 16 MB (413) and checked by `partVariantCheck.js` (zip structure in `variantZip.js`, pictures and FBX in
+  `variantFiles.js`); a refusal is 400 with the rule in `error`. `metadata.official: true` is for the asset's creator
+  only (403 otherwise): an official post replaces the creator's official variant of the same name (200, same id), or
+  answers 200 with it unchanged when the bytes are the same; any other post answers 201. 409 for bytes already
+  published in the part, or a member's variant named like one of the creator's. 30 posts per member per hour.
+- **Downloads** need download access to the asset; each counts once, except the author's own. **Delete** answers
+  `{ id, status }`: `withdrawn` for the author, `removed` (with `removedById`) for the asset's creator or staff; 403
+  for anyone else, 409 when it is no longer published. The zip and thumbnail leave storage then, and with the asset.
 
 ## Unity installation contract
 

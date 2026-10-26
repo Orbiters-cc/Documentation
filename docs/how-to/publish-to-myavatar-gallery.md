@@ -93,6 +93,10 @@ To give buyers switches and choices on the item's card, such as a hood on or off
 colour, add a settings file beside the prefab with **Add settings**. See
 [Give your asset settings on its My Avatar card](myavatar-item-settings.md).
 
+To let buyers pick and share variants of parts of the item, such as a theme, a model or a
+translation, add a parts file beside the prefab. See
+[Customizable parts and variants](myavatar-customizable-parts.md).
+
 ## 4. Pictures
 
 <alpha>
