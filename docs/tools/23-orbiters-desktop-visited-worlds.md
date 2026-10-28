@@ -63,7 +63,10 @@ Under **3D preview**, each session recorded in the world shows its state:
 - **Reconstruct** rebuilds a session as Gaussian splats on your GPU (the same as in Sessions).
 - **Share in 3D** sends a reconstructed session as the world's 3D preview. Orbiters - N4N0 first prepares a web
   version of it (at most 600,000 splats, about 19 MB, the most visible ones kept). The website opens it on the same
-  camera as **View in 3D**, and the world streams in around that camera first.
+  camera as **View in 3D**, and the world streams in around that camera first. It also prepares the versions the
+  N4N0 - 3D picture viewer VRChat world loads: the splats as a tree of boxes whose far parts are drawn with fewer,
+  merged splats (tuned on your GPU to look like the full ones), for PC (about 32 MB at most), Quest (about 16 MB) and a
+  small first view shown while the full one downloads.
 - **Replace 3D preview** appears once you shared one: each member keeps one preview per world, and a new one replaces
   yours.
 
