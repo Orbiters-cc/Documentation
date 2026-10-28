@@ -68,7 +68,9 @@ Routes in `backend/src/routes/mapsRouter.js` (services in `backend/src/services/
   deduplicated per member by the original's SHA-256), `DELETE /maps/previews/:id` and `DELETE /maps/pictures/:id`.
 - VRChat worlds (N4N0 - 3D picture viewer): every shown preview with splat trees holds one of 1,024 slots, freed when it
   is replaced or removed. `GET /maps/vrchat/previews` lists them (slot, key, world name, uploader, splat counts, start
-  view, sky), and `GET /maps/vrchat/slots/:slot/pc|quest|coarse|sky.jpg` redirects to that slot's file in storage.
+  view, sky). A slot's files are also published at fixed keys of the public bucket
+  (`public/vrchat/slots/<slot>/pc|quest|coarse|sky.jpg`, cached a minute), which worlds download from storage
+  directly, since VRChat's loaders follow no redirect.
 - A preview's files (web `.splat`, splat trees, sky maps) are kept in R2 only, never on the server's disk.
 - World details are VRChat's public details, cached 24 hours (`MapWorlds`); VRChat search runs through the shared
   service account. The website draws previews with GaussianSplats3D (MIT) on three.js.
