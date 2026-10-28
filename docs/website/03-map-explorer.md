@@ -70,7 +70,11 @@ Routes in `backend/src/routes/mapsRouter.js` (services in `backend/src/services/
   is replaced or removed. `GET /maps/vrchat/previews` lists them (slot, key, world name, uploader, splat counts, start
   view, sky). A slot's files are also published at fixed keys of the public bucket
   (`public/vrchat/slots/<slot>/pc|quest|coarse|sky.jpg`, cached a minute), which worlds download from storage
-  directly, since VRChat's loaders follow no redirect.
+  directly, since VRChat's loaders follow no redirect. The listing also gives each world's author, description,
+  capacity, visits, favorites and public picture count. World thumbnails are published 112 slots an atlas
+  (`public/vrchat/thumbs/<n>.jpg`, 256 × 144 tiles) and each slot's gallery of the world's shown pictures six a page
+  (`public/vrchat/slots/<slot>/gallery/<page>.jpg`, 1024 × 576 tiles, eight pages at most), redone after pictures are
+  added or removed and after moderation decisions.
 - A preview's files (web `.splat`, splat trees, sky maps) are kept in R2 only, never on the server's disk.
 - World details are VRChat's public details, cached 24 hours (`MapWorlds`); VRChat search runs through the shared
   service account. The website draws previews with GaussianSplats3D (MIT) on three.js.
