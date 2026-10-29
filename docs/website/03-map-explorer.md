@@ -66,14 +66,15 @@ Routes in `backend/src/routes/mapsRouter.js` (services in `backend/src/services/
   Cloudflare's 100 MB),
   `POST /maps/worlds/:worldId/pictures` (at most 12, 25 MB each, re-encoded to WebP with a 640-pixel thumbnail,
   deduplicated per member by the original's SHA-256), `DELETE /maps/previews/:id` and `DELETE /maps/pictures/:id`.
-- VRChat worlds (N4N0 - 3D picture viewer): every shown preview with splat trees holds one of 1,024 slots, freed when it
-  is replaced or removed. `GET /maps/vrchat/previews` lists them (slot, key, world name, uploader, splat counts, start
+- VRChat worlds (N4N0 - 3D picture viewer): every shown preview with splat trees holds one of 10,000 slots, freed when
+  it is replaced or removed. `GET /maps/vrchat/previews` lists them (slot, key, world name, uploader, splat counts, start
   view, sky). A slot's files are also published at fixed keys of the public bucket
   (`public/vrchat/slots/<slot>/pc|quest|coarse|sky.jpg`, cached a minute), which worlds download from storage
   directly, since VRChat's loaders follow no redirect. The listing also gives each world's author, description,
-  capacity, visits, favorites and public picture count. World thumbnails are published 112 slots an atlas
-  (`public/vrchat/thumbs/<n>.jpg`, 256 × 144 tiles) and each slot's gallery of the world's shown pictures six a page
-  (`public/vrchat/slots/<slot>/gallery/<page>.jpg`, 1024 × 576 tiles, eight pages at most), redone after pictures are
+  capacity, visits, favorites, public picture count and gallery. World thumbnails are published 112 slots an atlas
+  (`public/vrchat/thumbs/<n>.jpg`, 256 × 144 tiles). A world whose previews hold slots holds one of 1,024 galleries
+  (`MapVrchatGalleries`, the one wanted longest ago taken back when none is free), its shown pictures six a page
+  (`public/vrchat/galleries/<gallery>/<page>.jpg`, 1024 × 576 tiles, eight pages at most), redone after pictures are
   added or removed and after moderation decisions.
 - A preview's files (web `.splat`, splat trees, sky maps) are kept in R2 only, never on the server's disk.
 - World details are VRChat's public details, cached 24 hours (`MapWorlds`); VRChat search runs through the shared
