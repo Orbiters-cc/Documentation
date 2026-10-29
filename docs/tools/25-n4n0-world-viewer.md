@@ -68,6 +68,7 @@ My World adds **Orbiters › My World › Platform variant** to scene objects. C
 the component. Its Inspector lists the scene's variants. My World applies their active states when the editor's
 build target changes and before world builds, including inactive objects, and removes the authoring marker from
 processed builds. A parent can still keep a matching variant inactive.
+Queued refreshes run on editor updates, including while Unity stays in the background; an Inspector repaint is not required.
 
 The generated viewer has **Display settings - PC** and **Display settings - Quest**, each containing
 `SplatDisplaySettings` with the pre-existing rendering, quality-ladder and auto-quality values. The viewer uses the
