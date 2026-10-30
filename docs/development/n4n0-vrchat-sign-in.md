@@ -1,6 +1,11 @@
 ---
 title: N4N0 VRChat sign-in eligibility
 section: Development
+order: 97
+domain: desktop
+type: reference
+owner: orbiters-engineering
+lastVerified: 2026-10-30
 audience: dev, admin
 stage: beta
 id: orbiters.development.n4n0-vrchat-sign-in
