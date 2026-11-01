@@ -16,44 +16,44 @@ relations: orbiters.reference.scout-agent-api, orbiters.how-to.me-job-search-wor
 
 N4N0 is a Hermes assistant running on your Raspberry Pi. It looks for realistic ways to earn more, reads your
 Orbiters numbers, and writes to you on Discord or Telegram. You configure everything in **N4N0 → Assistant** on
-[orbiters.cc/orb](https://orbiters.cc/orb); the Pi picks up changes within a minute.
+[orbiters.cc/n4n0/workspace](https://orbiters.cc/n4n0/workspace); the Pi picks up changes within a minute.
 
 N4N0 was called Scout, and the workspace was called Me. Old `/me` links and `?tab=scout` still open the right tab.
 
 ## Before you start
 
-- The `orb-workspace` feature is enabled for your account (accounts that had `me-workspace` were moved over).
-- Hermes is installed on the Pi, and you have a copy of `agents/orb` from the Orbiters repository on it.
+- The `n4n0-workspace` feature is enabled for your account (accounts that had `me-workspace` were moved over).
+- Hermes is installed on the Pi, and you have a copy of `agents/n4n0` from the Orbiters repository on it.
 - Pair and configure on **orbiters.cc**, not on a development site: the Pi only talks to the site it is paired with.
 
 ## Install or upgrade N4N0 on the Pi
 
-From the copy of `agents/orb`, run:
+From the copy of `agents/n4n0`, run:
 
 ```bash
 sudo bash install/install.sh
 ```
 
-The installer puts the sync in `/opt/orb` and its configuration in `/etc/orb/env`, and starts two services:
+The installer puts the sync in `/opt/n4n0` and its configuration in `/etc/n4n0/env`, and starts two services:
 
 | Unit | Does |
 | --- | --- |
-| `orb-sync.service` with `orb-sync.timer` | Applies your settings, sends the status and relays notifications every minute. |
-| `orb-board.service` | Runs all the time and keeps the research board on the site live. |
+| `n4n0-sync.service` with `n4n0-sync.timer` | Applies your settings, sends the status and relays notifications every minute. |
+| `n4n0-board.service` | Runs all the time and keeps the research board on the site live. |
 
-Then open **N4N0 → Agents & keys**, choose **Pair** on N4N0, and run `sudo orb-pair` on the Pi with the token. The card
+Then open **N4N0 → Agents & keys**, choose **Pair** on N4N0, and run `sudo n4n0-pair` on the Pi with the token. The card
 shows **Paired**. Run the installer again to update; it keeps the pairing.
 
 The token is valid for 180 days. From 14 days before it ends, the N4N0 page warns you and Orbiters sends you a
-notification (relayed to your main channel) at 14 and 3 days: choose **Pair** again and run `sudo orb-pair` with the
+notification (relayed to your main channel) at 14 and 3 days: choose **Pair** again and run `sudo n4n0-pair` with the
 new token. The old token stops working at once. An expired token is refused, and the Pi's sync log says
 `Orbiters refused N4N0: This token has expired`.
 
 **Upgrading a Pi set up as Scout:** run the same installer. It stops and removes the `scout-sync` units and
-`/opt/scout`, copies `/etc/scout/env` to `/etc/orb/env` (so the pairing is kept), renames the Hermes profile
-`scout-worker` to `orb-worker` and moves its tasks on every board, and moves the notes in `~/scout` to `~/orb`.
+`/opt/scout`, copies `/etc/scout/env` to `/etc/n4n0/env` (so the pairing is kept), renames the Hermes profile
+`scout-worker` to `n4n0-worker` and moves its tasks on every board, and moves the notes in `~/scout` to `~/n4n0`.
 
-Logs: `journalctl -u orb-sync` and `journalctl -u orb-board`.
+Logs: `journalctl -u n4n0-sync` and `journalctl -u n4n0-board`.
 
 ### Watch the Pi
 
@@ -61,7 +61,7 @@ Logs: `journalctl -u orb-sync` and `journalctl -u orb-board`.
 sync the Pi also sends a host report: CPU use and load, memory and swap, disk,
 temperature and clock speed, power (the kernel's live undervoltage alarm), Wi-Fi
 signal and traffic, process count, uptime, and the state, memory, uptime and
-restarts of `hermes-gateway`, `orb-board`, `findings-worker` and Docker. Small
+restarts of `hermes-gateway`, `n4n0-board`, `findings-worker` and Docker. Small
 charts cover the last 24 hours; hover them for a reading. A chip says **Live**,
 **Late** (no report for 3 minutes) or **Offline** (15 minutes), and old readings
 are dimmed. The Pi opens no port for this: it reads `/proc` and `/sys` and sends
@@ -150,7 +150,7 @@ tier stays out of the worker lanes altogether: its per-minute token cap is small
 
 OpenCode Zen's free models only answer the OpenCode app, so the Pi runs them inside the OpenCode CLI instead of as a
 Hermes worker: two queued questions at a time wait for that lane, answered one by one as a separate, unprivileged
-`orbcode` user that cannot read any of N4N0's files or keys. A failed run hands the question back to the other workers.
+`n4n0code` user that cannot read any of N4N0's files or keys. A failed run hands the question back to the other workers.
 
 Paid providers (Anthropic, DeepSeek, OpenRouter) each get a monthly cap for background work. The Pi spreads the cap
 evenly over the days left in the month, and each day's share opens hour by hour (a 24th of it each hour, the first at
@@ -171,12 +171,12 @@ limit. When N4N0 says it will look into something, it queues the task right away
 workers only see your owner brief and public web pages, never your documents, CV or Orbiters data, because free
 models may log prompts.
 
-Every minute the Pi copies each finished task's summary into `~/orb/findings/<day>.md` and only then archives the task,
+Every minute the Pi copies each finished task's summary into `~/n4n0/findings/<day>.md` and only then archives the task,
 so no result is lost unread. `findings/recent.md` holds the last 24 hours and `findings/questions.md` the queue and the
 questions of the last two weeks: the planner folds the findings into N4N0's idea ledger (`ideas.md`) every few hours,
 and the daily digest reads both the ledger and the last day's findings. Day files are kept for 30 days. N4N0 stays up to date without a new conversation: when its instructions change, the next
 message you send carries the new version, and each message carries a short status of the background work and
-research projects when it changed (the `orb-live` hook on the Pi adds it). Your conversation history is kept. Saving the brief, budget or rhythm never
+research projects when it changed (the `ui-live` hook on the Pi adds it). Your conversation history is kept. Saving the brief, budget or rhythm never
 restarts N4N0; changing keys or models does.
 
 ## Hand N4N0 a research project
@@ -184,7 +184,7 @@ restarts N4N0; changing keys or models does.
 For anything bigger than a quick question, start a research project in **N4N0 → Assistant → Research**: the area, what
 you want to learn, how long (2 hours to a week) and how often you want a report. You can also ask N4N0 in Telegram or
 Discord ("dig into BOOTH demand for muscular bases this afternoon"); it starts the project for you with the
-`orb-research` command on the Pi (`start`, `list`, `show`, `stop`).
+`n4n0-research` command on the Pi (`start`, `list`, `show`, `stop`).
 
 A project runs in rounds on its own task board on the Pi. A lead step on the planning model splits the area into
 questions, background workers research them on the cheap models, then a report on the planning model sums up what is
@@ -209,7 +209,7 @@ optional **What to check first**, and the longest audit time (2 h, 8 h or 1 day)
 then **Start SEO audit**.
 
 The audit uses the Hermes SEO plugin, which the installer adds to Hermes and the
-`orb-worker` profile at a pinned commit. N4N0 queues one question per specialist on
+`n4n0-worker` profile at a pinned commit. N4N0 queues one question per specialist on
 the background models: technical SEO, content quality, structured data, sitemaps
 and robots.txt, performance, AI search readiness, agent accessibility and search
 intent. The card shows how many of the eight have answered. When they all have,
@@ -244,7 +244,7 @@ These sources are unofficial, allow only a few requests a minute and may stop wo
 
 N4N0 can also read your repositories through your Orbiters GitHub connection (**Creator → VPM**), read-only, and, once
 you set them up, up to two mailboxes and your Google Calendar, Drive, Docs and Sheets: see
-[Give N4N0 your email and Google Workspace](/documentation/orbiters.how-to.orb-mail-google).
+[Give N4N0 your email and Google Workspace](/documentation/orbiters.how-to.n4n0-mail-google).
 
 ## Watch what it is doing
 
@@ -257,4 +257,4 @@ projects. A task appears in **Up next**, moves to **Running now** when a worker 
 done**, within seconds. Project tasks are tagged with the project title. Click a task to open it: the window shows the
 question, the worker's progress live (its reasoning, each tool call and what it returned), then the result and its
 sources. The Pi sends a task's content only while its window is open. If the board stops moving, check
-`journalctl -u orb-board` on the Pi.
+`journalctl -u n4n0-board` on the Pi.

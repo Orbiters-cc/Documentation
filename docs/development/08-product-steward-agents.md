@@ -80,7 +80,7 @@ plain HTTP is accepted only for localhost development.
 Store the separately revealed token in the local secret environment as:
 
 ```text
-ORBITERS_AGENT_TOKEN=orb_agent_example-not-a-real-token
+ORBITERS_AGENT_TOKEN=orbiters_agent_example-not-a-real-token
 ```
 
 Never paste a real token into the brief, report, comment, source citation, project

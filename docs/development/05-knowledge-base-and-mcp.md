@@ -114,7 +114,7 @@ because there is no server session or event stream.
 Authenticate with a reveal-once scoped bearer token:
 
 ```text
-Authorization: Bearer orb_mcp_example-not-a-real-token
+Authorization: Bearer orbiters_mcp_example-not-a-real-token
 ```
 
 MCP tokens are stored in the existing `APIKeys` structure as hashes. The database

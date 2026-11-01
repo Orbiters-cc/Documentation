@@ -14,7 +14,7 @@ relations: orbiters.reference.job-search-worker-api, orbiters.decision.personal-
 
 # Run your job search worker on a Raspberry Pi
 
-The **N4N0** workspace ([orbiters.cc/orb](https://orbiters.cc/orb), formerly Me) keeps your job search in
+The **N4N0** workspace ([orbiters.cc/n4n0/workspace](https://orbiters.cc/n4n0/workspace), formerly Me) keeps your job search in
 Orbiters: offers, lists, the Priority Quest, research queues, collection runs and the keys your agents use.
 Orbiters never visits job sites itself. A worker on your own Raspberry Pi takes the queued work, runs the lookups
 and sends the results back. The same workspace hosts N4N0, your personal assistant; see
@@ -24,7 +24,7 @@ Until a worker is paired, the N4N0 page shows **Worker offline** and queued rese
 
 ## Before you start
 
-- The `orb-workspace` feature (formerly `me-workspace`) is enabled for your account.
+- The `n4n0-workspace` feature (formerly `me-workspace`) is enabled for your account.
 - A Raspberry Pi 4 or newer with Raspberry Pi OS Bookworm (64-bit), 2 GB of free memory and SSH access.
 - A copy of `agents/job-worker` from the Orbiters repository on that Pi.
 

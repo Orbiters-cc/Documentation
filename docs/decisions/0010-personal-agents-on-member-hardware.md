@@ -47,7 +47,7 @@ website on small hardware and storing keys there.
 flowchart LR
   accTitle: Personal agents on member hardware
   accDescr: The N4N0 page and Orbiters keep data and keys; the Pi agent pulls tasks, calls the internet, and returns results.
-  orb[N4N0 page] --> api[Orbiters API]
+  n4n0[N4N0 page] --> api[Orbiters API]
   api --> db[(Workspace, queues, encrypted keys)]
   pi[Agent on the member's Pi] -- claim, report, complete --> api
   pi -- public lookups --> web[Job sites, geocoders, routing APIs]

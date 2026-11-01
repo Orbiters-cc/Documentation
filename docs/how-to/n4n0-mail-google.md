@@ -4,7 +4,7 @@ section: Account
 order: 39
 audience: admin, dev
 stage: alpha
-id: orbiters.how-to.orb-mail-google
+id: orbiters.how-to.n4n0-mail-google
 domain: website
 type: how-to
 owner: orbiters-product
@@ -23,7 +23,7 @@ which you do once on the Pi.
 
 N4N0's chat normally has no terminal. The mail and Google skills need one, so while an account or Google Workspace is
 set up the chat gets a terminal that runs only `himalaya` (mail) and the `google-workspace` skill's scripts, one plain
-command at a time. A guard on the Pi (`/usr/local/bin/orb-guard`) checks every command before it runs:
+command at a time. A guard on the Pi (`/usr/local/bin/n4n0-guard`) checks every command before it runs:
 
 - Reading runs at once. Reading a message never marks it as read.
 - Sending, replying, forwarding, moving, deleting or flagging mail, creating or deleting calendar events, editing Docs or
@@ -48,7 +48,7 @@ password. The Pi applies changes within a minute: it writes `~/.config/himalaya/
 passwords sit in separate `0600` files next to it) and removes it when no account is left.
 
 Install or upgrade N4N0 on the Pi once after this feature arrives (`sudo bash install/install.sh` from your copy of
-`agents/orb`): it installs `himalaya` 1.2.0 (checksum-pinned) and the guard. Until then N4N0 keeps its terminal off.
+`agents/n4n0`): it installs `himalaya` 1.2.0 (checksum-pinned) and the guard. Until then N4N0 keeps its terminal off.
 
 ## Connect Google Workspace
 
@@ -57,7 +57,7 @@ Hermes' `google-workspace` skill uses your own Google Cloud OAuth client. It wor
 ### Create the OAuth client (once, about 10 minutes)
 
 1. Create a project at [console.cloud.google.com/projectcreate](https://console.cloud.google.com/projectcreate), for
-   example `orb-assistant`.
+   example `n4n0-assistant`.
 2. In **APIs & Services → Library**, enable: **Gmail API**, **Google Calendar API**, **Google Drive API**,
    **Google Sheets API**, **Google Docs API** and **People API**.
 3. In **Google Auth Platform → Branding**, set the app name (`N4N0`) and your email as support and developer contact.
@@ -75,13 +75,13 @@ Hermes' `google-workspace` skill uses your own Google Cloud OAuth client. It wor
 Copy the JSON file to the Pi and hand it to Hermes:
 
 ```bash
-scp client_secret_*.json pi:/tmp/orb-google-client.json
+scp client_secret_*.json pi:/tmp/n4n0-google-client.json
 ssh pi
-sudo install -o hermes -g hermes -m 0600 /tmp/orb-google-client.json /home/hermes/orb-google-client.json && rm /tmp/orb-google-client.json
+sudo install -o hermes -g hermes -m 0600 /tmp/n4n0-google-client.json /home/hermes/n4n0-google-client.json && rm /tmp/n4n0-google-client.json
 sudo -u hermes -H bash
 cd ~ && source ~/.hermes/hermes-agent/activate
 GSETUP="python ~/.hermes/skills/productivity/google-workspace/scripts/setup.py"
-$GSETUP --client-secret ~/orb-google-client.json && rm ~/orb-google-client.json
+$GSETUP --client-secret ~/n4n0-google-client.json && rm ~/n4n0-google-client.json
 $GSETUP --auth-url --services all --format json
 ```
 

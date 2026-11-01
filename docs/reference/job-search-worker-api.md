@@ -14,7 +14,7 @@ relations: orbiters.how-to.me-job-search-worker, orbiters.decision.personal-agen
 
 # Job Search Worker API Reference
 
-The paired job worker calls `/job-search/worker/*` with `Authorization: Bearer orb_agent_…`. The token
+The paired job worker calls `/job-search/worker/*` with `Authorization: Bearer orbiters_agent_…`. The token
 belongs to a personal agent account sponsored by the member (see
 [Steward API and Token Reference](/documentation/orbiters.reference.steward-api-and-token)) and needs the
 `job-search:work` scope. Every call acts for the sponsor; the worker cannot read or write another member's

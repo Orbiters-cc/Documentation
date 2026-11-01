@@ -22,7 +22,7 @@ One MCP server and one OAuth 2.1 authorization server serve ChatGPT, Codex, Clau
 
 | Path | Purpose |
 | --- | --- |
-| `POST /mcp` | Stateless Streamable HTTP MCP (JSON responses). `orb_oat_` OAuth tokens get the plugin tools; `orb_mcp_` personal connector tokens (`metadata.toolSet=plugin`) get scoped plugin tools; other `orb_mcp_`/`orb_agent_` tokens get the Knowledge tools. Without a token, `initialize` and `tools/list` work and only tools marked `auth: 'none'` can be called; calling another tool answers HTTP `401` with `WWW-Authenticate: Bearer error="invalid_token", …, resource_metadata="…", scope="read <tool scope>"` (lazy authentication). |
+| `POST /mcp` | Stateless Streamable HTTP MCP (JSON responses). `orbiters_oat_` OAuth tokens get the plugin tools; `orbiters_mcp_` personal connector tokens (`metadata.toolSet=plugin`) get scoped plugin tools; other `orbiters_mcp_`/`orbiters_agent_` tokens get the Knowledge tools. Without a token, `initialize` and `tools/list` work and only tools marked `auth: 'none'` can be called; calling another tool answers HTTP `401` with `WWW-Authenticate: Bearer error="invalid_token", …, resource_metadata="…", scope="read <tool scope>"` (lazy authentication). |
 | `POST /mcp/connect` | Authenticated connector bootstrap for Grok and Vibe. Anonymous initialize/list calls receive a `401` OAuth discovery challenge. OAuth and personal connector tokens use the same plugin tools. |
 | `GET /.well-known/oauth-protected-resource[/mcp[/connect]]` | RFC 9728 metadata with the matching resource URL. Both MCP resources are accepted by OAuth resource validation. |
 | `GET/POST /oauth/connector-tokens`, `DELETE /oauth/connector-tokens/:id` | Human-member JWT API to list, generate and revoke personal Grok/Vibe tokens. POST accepts `app` and chosen `scopes`; `read` is required. Secrets are returned only by generation. |
@@ -131,7 +131,7 @@ tokens alongside OAuth connections and disconnects them through the owner-scoped
 revocation endpoint. Publishing retains the same two-step confirmation flow.
 
 
-- Access tokens (`orb_oat_…`) last 60 minutes and refresh tokens (`orb_ort_…`) 60
+- Access tokens (`orbiters_oat_…`) last 60 minutes and refresh tokens (`orbiters_ort_…`) 60
   days by default. Only SHA-256 hashes are stored; reuse of a rotated refresh
   token or replay of a code revokes the whole family.
 - Tokens are bound to the member's `tokenVersion`.

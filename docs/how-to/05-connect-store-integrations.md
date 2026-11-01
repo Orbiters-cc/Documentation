@@ -159,7 +159,7 @@ connection works differently from the other stores:
 
 1. Choose the Booth icon and paste your public shop address, for example
    `https://yourshop.booth.pm`. Orbiters never asks for your Booth password or cookies.
-2. Prove the shop is yours: the Booth card shows a code such as `ORB-7KQ2M9XP`. Paste it
+2. Prove the shop is yours: the Booth card shows a code such as `ORBITERS-7KQ2M9XP`. Paste it
    anywhere in the description of one of your Booth items, paste that item's link next to
    the code and choose **Verify**. Orbiters reads the item's public page, checks that it
    belongs to the connected shop and contains the code, then marks the shop **Verified

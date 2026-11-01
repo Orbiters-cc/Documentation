@@ -65,7 +65,7 @@ learns which world or instance it is.
 States live in `avatar-states.json` beside the desktop's settings. Values are read from VRChat's OSCQuery `/avatar`
 tree (writable nodes only) and sent back in bundles; `/avatar/eyeheight` carries the size. Link cards use the screen's
 page 15 and freeze through `N4N0/Screen/Drop` (owner) and text pointer 253 (everyone else); hands report
-`N4N0/Card/TouchL` and `TouchR`; the server endpoints are `POST /orb/drops` and `GET /orb/drops/latest`. Contract:
-Orbiters-N4N0 contracts, `Docs/orb.md` (Saved states, Link card).
+`N4N0/Card/TouchL` and `TouchR`; the server endpoints are `POST /n4n0/drops` and `GET /n4n0/drops/latest`. Contract:
+Orbiters-N4N0 contracts, `Docs/n4n0.md` (Saved states, Link card).
 
 </audience>
