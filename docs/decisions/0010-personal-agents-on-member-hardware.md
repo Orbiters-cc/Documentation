@@ -8,8 +8,8 @@ id: orbiters.decision.personal-agents-on-member-hardware
 domain: website
 type: decision
 owner: orbiters-product
-lastVerified: 2026-10-14
-relations: orbiters.reference.job-search-worker-api, orbiters.how-to.me-job-search-worker, orbiters.reference.scout-agent-api, orbiters.decision.product-steward-security
+lastVerified: 2026-11-02
+relations: orbiters.reference.job-search-worker-api, orbiters.how-to.me-job-search-worker, orbiters.how-to.n4n0-job-search, orbiters.reference.scout-agent-api, orbiters.decision.product-steward-security
 ---
 
 # ADR 0010 - Personal Agents on Member Hardware
@@ -17,6 +17,7 @@ relations: orbiters.reference.job-search-worker-api, orbiters.how-to.me-job-sear
 ## Status
 
 Accepted for the alpha N4N0 workspace (called Me when this was decided; its assistant N4N0 was called Scout).
+Amended in November 2026: the features that run on member hardware need a paired machine, and the chat does not.
 
 ## Context
 
@@ -42,6 +43,16 @@ website on small hardware and storing keys there.
   and a key is released only to the paired agent of that kind when it asks for it. The N4N0 page never shows a
   saved key again.
 - On the Pi, each agent runs under its own system account with nftables rules that refuse the local network.
+- N4N0 has two tiers (November 2026). **Talk to N4N0**, the chat that answers with Orbiters' own tools, is free for every
+  member and needs no flag or machine. Everything that runs on the member's machine (job search and its research
+  lanes, the profile read from their documents, N4N0's board, research projects and reports) needs the
+  `n4n0-workspace` feature **and** a paired Hermes machine: a job worker or N4N0 agent with an active, unexpired token
+  (`services/jobSearch/hermesAccess.js`). Member routes answer `409 HERMES_MACHINE_REQUIRED` without one, except pairing
+  and keys, which are how a machine gets paired. The machines' own APIs and their MCP access refuse a sponsor whose
+  feature was removed.
+- Work that reads the member's documents (the job-search profile) runs on the member's planning model on their
+  machine; Orbiters only extracts a deterministic first reading. Background workers, which may use free models that log
+  prompts, never receive the documents.
 
 ```mermaid
 flowchart LR
@@ -62,3 +73,5 @@ flowchart LR
 - A stolen agent token can read only the keys meant for that agent and write only to its sponsor's workspace;
   unpairing revokes it at once.
 - Work waits while the Pi is offline. The N4N0 page says so instead of failing.
+- Without a paired machine, the Hermes pages show **Pair your Hermes machine** instead of empty or failing views, and the
+  data already stored is kept. Members who only want the chat are not asked to set up hardware.

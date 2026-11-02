@@ -8,8 +8,8 @@ id: orbiters.reference.scout-agent-api
 domain: website
 type: reference
 owner: orbiters-product
-lastVerified: 2026-10-19
-relations: orbiters.how-to.me-scout, orbiters.reference.job-search-worker-api, orbiters.decision.personal-agents-on-member-hardware
+lastVerified: 2026-11-02
+relations: orbiters.how-to.me-scout, orbiters.how-to.n4n0-job-search, orbiters.reference.job-search-worker-api, orbiters.decision.personal-agents-on-member-hardware
 ---
 
 # N4N0 agent API
@@ -18,15 +18,21 @@ N4N0's sync on the Pi (`agents/n4n0/n4n0_sync`) calls `/n4n0-agent/*` with its `
 `/mcp` with the same token. Every call acts for the member who paired N4N0. N4N0 was called Scout: the old base path
 `/me-agent/scout/*` serves the same routes for Pis that have not been updated yet.
 
+N4N0 runs on the member's Hermes machine, so every call also needs the sponsor's `n4n0-workspace` feature (read at most
+once a minute per sponsor). Without it `/n4n0-agent/*` answers
+`403 { error: "This account does not have N4N0's Hermes features.", code: 'FEATURE_REQUIRED' }` and `/mcp` gives the
+token no sponsor access. Talk to N4N0, the chat on the website, is a separate feature open to every member and does
+not use these routes.
+
 ## Scopes
 
 | Scope | Grants |
 | --- | --- |
-| `agent-config:read` | The reads: `GET /config`, `GET /notifications`, `GET /events`, `GET /board/watch`, `GET /research`, `GET /research/:id/reports`, `GET /business`, `GET /documents`, `GET /documents/:id`. |
+| `agent-config:read` | The reads: `GET /config`, `GET /notifications`, `GET /events`, `GET /board/watch`, `GET /research`, `GET /research/:id/reports`, `GET /business`, `GET /profile/request`, `GET /documents`, `GET /documents/:id`. |
 | `secrets:read` | `POST /secrets` for the keys whose consumers include `n4n0` (model keys, Reddit app credentials, Discord and Telegram bot tokens, the app passwords `N4N0_EMAIL_1_PASSWORD` and `N4N0_EMAIL_2_PASSWORD` of the owner's email accounts). |
 | `sponsor:read` | `/mcp` with the AI app tools, run as the sponsor with the `read` scope only (Hermes' `orbiters` MCP server on the Pi). |
 | `agent-status:write` | `POST /status`, `POST /activity`, `POST /codex`, `POST /host`. |
-| `research:write` | `POST /research`, `POST /research/:id/progress`, `POST /research/:id/reports`, `POST /research/:id/stop`. |
+| `research:write` | `POST /research`, `POST /research/:id/progress`, `POST /research/:id/reports`, `POST /research/:id/stop`, `POST /profile`. |
 | `board:write` | `POST /board`, `POST /board/task`. |
 
 A call without its scope gets `403 { error: 'Token scope missing', missing: [...] }`. N4N0s paired before the write
@@ -65,12 +71,17 @@ Pairing again works as before: it issues a new 180-day token and revokes the pre
 | `POST /research/:id/progress` | `{ status, progress }`: the Pi moves a project from `queued` to `running` (Orbiters sets `startedAt` and `endsAt`), from `running` to `done` and from `stopping` to `stopped`; `progress` holds `round`, `done`, `open`. |
 | `POST /research/:id/reports` | `{ round, final, body }` stores a report (Markdown, up to 20,000 characters, 200 per project). |
 | `GET /research/:id/reports`, `POST /research/:id/stop` | The project's reports, newest first; stopping a running project marks it `stopping`. |
+| `GET /profile/request` | The job-search profile to read: `{ documentsVersion, requestedAt, documents, fields }` while Orbiters waits for N4N0's reading of the current documents, otherwise `null`. |
+| `POST /profile` | `{ documentsVersion, profile }` or `{ documentsVersion, error }`. The profile replaces Orbiters' own reading, except the fields the member edited; an error is shown as **N4N0 could not read them** and keeps Orbiters' reading. A `documentsVersion` that no longer matches the documents gets `409`: read the new request. |
 | `GET /documents` | Document list with `sha256`, so the Pi fetches only changed files. |
 | `GET /documents/:id` | The file's bytes, with its `Content-Type`. |
 
 ## Member endpoints
 
-The N4N0 workspace uses these with the member's session (they replace `/job-search/scout/*`):
+The N4N0 workspace uses these with the member's session (they replace `/job-search/scout/*`). Like every
+`/job-search` route except pairing and keys, they need a paired Hermes machine and otherwise answer
+`409 { code: 'HERMES_MACHINE_REQUIRED' }`; see
+[Job Search Worker API Reference](/documentation/orbiters.reference.job-search-worker-api#member-access):
 
 | Call | Use |
 | --- | --- |
@@ -79,11 +90,21 @@ The N4N0 workspace uses these with the member's session (they replace `/job-sear
 | `GET /job-search/n4n0/board` | `{ board }`: the latest snapshot from `POST /board`. |
 | `POST /job-search/n4n0/unlock` | `{ provider, hours }` runs a paced provider past today's share for `hours` (0 to 24, 0 ends the unlock); its monthly cap still applies. |
 | `POST /job-search/n4n0/codex` | Asks the Pi to start a ChatGPT sign-in (rate limited). |
-| `PUT /job-search/n4n0/documents/:name`, `DELETE /job-search/n4n0/documents/:id` | Upload (raw `application/octet-stream` body, PDF, Markdown or text, up to 4 MB, 12 files and 20 MB in total) or remove a document. |
+| `PUT /job-search/n4n0/documents/:name`, `DELETE /job-search/n4n0/documents/:id` | Upload (raw `application/octet-stream` body, PDF, Word `.docx`, Markdown, text or CSV, up to 4 MB, 12 files and 20 MB in total) or remove a document. Each change rebuilds the job-search profile and asks N4N0 to read the documents. |
 | `POST /job-search/n4n0/research`, `GET /job-search/n4n0/research/:id/reports`, `POST /job-search/n4n0/research/:id/stop` | Start a project (origin `site`), read its reports, stop it. `{ kind: 'seo', target, brief, hours }` starts an SEO audit: the title becomes `SEO audit: <site>` and the Pi runs one task per Hermes SEO specialist role, then one merged report. |
 
 Documents and research are stored in `N4N0AgentDocuments`, `N4N0ResearchProjects` and `N4N0ResearchReports`, and are
 exported and deleted with the member's account.
+
+### Job-search profile on the Pi
+
+`n4n0_sync/profile.py` asks `GET /profile/request` every minute. For a new `documentsVersion` it creates one task on the
+`job-profile` Hermes board, assigned to `n4n0-worker` on the **planning** model (never a background model, since free
+models may log prompts), with the documents' text (as `documents.py` converted it for the `owner-documents` skill, at
+most 60,000 characters) in its body and the profile's JSON schema. When the task finishes, the next run posts the JSON
+object it returned; a task unfinished after three hours is reported as an error. The documents count as data, never
+instructions, and the profile leaves out addresses, phone numbers and emails. An Orbiters without these routes answers
+`404`, which the sync logs as `Job-search profile not read` without stopping its other steps.
 
 ## Orbiters data through MCP
 

@@ -27,6 +27,7 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Use Orbiters from ChatGPT, Claude and other AI apps | user, creator, mod, admin, dev | beta | — | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Run your job search worker on a Raspberry Pi | admin, dev | alpha | — | — | — | — | ✓ | ✓ |
+| Search for jobs with your profile in N4N0 | admin, dev | alpha | — | — | — | — | ✓ | ✓ |
 | Set up N4N0, your personal business assistant | admin, dev | alpha | — | — | — | — | ✓ | ✓ |
 | Give N4N0 your email and Google Workspace | admin, dev | alpha | — | — | — | — | ✓ | ✓ |
 | Manage Privacy and Shared Content | public | beta | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -105,6 +106,7 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Publish and manage a VPM listing | creator, admin, dev | beta | — | — | ✓ | — | ✓ | ✓ |
 | Publish clothes and accessories to the My Avatar gallery | creator, admin, dev | alpha | — | — | ✓ | — | ✓ | ✓ |
 | Give your asset settings on its My Avatar card | public, creator, dev | stable | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Customizable parts and variants | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Edit releases in the version workspace | creator, admin, dev | beta | — | — | ✓ | — | ✓ | ✓ |
 
 ## Decisions
@@ -149,7 +151,11 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Publish Unity package releases | dev, admin | stable | — | — | — | — | ✓ | ✓ |
 | Capture Unity editor windows through MCP | dev, admin | stable | — | — | — | — | ✓ | ✓ |
 | My Avatar integration contract | dev, admin | beta | — | — | — | — | ✓ | ✓ |
+| Avatar build profiling and polygon reduction | dev | alpha | — | — | — | — | — | ✓ |
+| N4N0 menu input and placement recovery | dev, creator | alpha | — | — | ✓ | — | — | ✓ |
 | Stripe integration review, September 2026 | dev | alpha | — | — | — | — | — | ✓ |
+| N4N0 3D capture overlay timing | dev, creator | alpha | — | — | ✓ | — | — | ✓ |
+| N4N0 VRChat sign-in eligibility | dev, admin | beta | — | — | — | — | ✓ | ✓ |
 | Navbar logo motion | dev | alpha | — | — | — | — | — | ✓ |
 | MCB Presentation Preview | dev | alpha | — | — | — | — | — | ✓ |
 | Community age verification reference | dev, admin | beta | — | — | — | — | ✓ | ✓ |
@@ -276,6 +282,7 @@ Regenerate this catalog with `node scripts/generate-audience-catalog.js` after c
 | Record your performance with Orbiters - N4N0 | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Share your visited worlds from Orbiters - N4N0 | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Save avatar states and drop link cards with N4N0 | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| View and make 3D captures in the N4N0 world | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Bake a VRChat performance with Mixer | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Show Orbiters splats in Unity with Mixer | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Read Unity's logs with the Mixer console | public, creator, dev | alpha | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |

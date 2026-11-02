@@ -8,8 +8,8 @@ id: orbiters.how-to.me-scout
 domain: website
 type: how-to
 owner: orbiters-product
-lastVerified: 2026-10-19
-relations: orbiters.reference.scout-agent-api, orbiters.how-to.me-job-search-worker, orbiters.decision.personal-agents-on-member-hardware
+lastVerified: 2026-11-02
+relations: orbiters.reference.scout-agent-api, orbiters.how-to.me-job-search-worker, orbiters.how-to.n4n0-job-search, orbiters.decision.personal-agents-on-member-hardware
 ---
 
 # Set up N4N0, your personal business assistant
@@ -20,9 +20,15 @@ Orbiters numbers, and writes to you on Discord or Telegram. You configure everyt
 
 N4N0 was called Scout, and the workspace was called Me. Old `/me` links and `?tab=scout` still open the right tab.
 
+This page is about N4N0 on your own machine. **Talk to N4N0**, the chat on the website, is free for every signed-in
+member and needs none of this. Once N4N0 or the job search worker is paired, your Pi is your Hermes machine: it opens
+**Assistant**, **Reports**, job search and the **General**, **Owner brief** and **Research** settings, which show
+**Pair your Hermes machine** until then.
+
 ## Before you start
 
-- The `n4n0-workspace` feature is enabled for your account (accounts that had `me-workspace` were moved over).
+- The `n4n0-workspace` feature is enabled for your account (accounts that had `me-workspace` were moved over). Without
+  it Orbiters refuses the Pi's requests and gives N4N0 no access to your Orbiters data, even with a valid token.
 - Hermes is installed on the Pi, and you have a copy of `agents/n4n0` from the Orbiters repository on it.
 - Pair and configure on **orbiters.cc**, not on a development site: the Pi only talks to the site it is paired with.
 
@@ -41,7 +47,7 @@ The installer puts the sync in `/opt/n4n0` and its configuration in `/etc/n4n0/e
 | `n4n0-sync.service` with `n4n0-sync.timer` | Applies your settings, sends the status and relays notifications every minute. |
 | `n4n0-board.service` | Runs all the time and keeps the research board on the site live. |
 
-Then open **N4N0 → Agents & keys**, choose **Pair** on N4N0, and run `sudo n4n0-pair` on the Pi with the token. The card
+Then open **N4N0 → Settings → Agents & keys**, choose **Pair** on N4N0, and run `sudo n4n0-pair` on the Pi with the token. The card
 shows **Paired**. Run the installer again to update; it keeps the pairing.
 
 The token is valid for 180 days. From 14 days before it ends, the N4N0 page warns you and Orbiters sends you a
@@ -72,7 +78,7 @@ the `video` group; without it the panel only shows the live undervoltage alarm.
 
 ## Give N4N0 a model and a way to reach you
 
-1. In **N4N0 → Agents & keys**, add a key or sign-in for each provider you use (see
+1. In **N4N0 → Settings → Agents & keys**, add a key or sign-in for each provider you use (see
    [Choose providers and keys](#choose-providers-and-keys)).
 2. Choose at least one messaging app:
    - **Discord:** create a bot in the Discord developer portal, turn on **Message Content Intent**, invite it to a
@@ -100,7 +106,7 @@ start sooner.
 | Google AI Studio (Gemini), Groq, Cerebras, Mistral, NVIDIA NIM, SambaNova | Free tier. |
 | ChatGPT (Codex) | Your ChatGPT plan. |
 
-For ChatGPT, choose **Sign in with ChatGPT** in **N4N0 → Agents & keys**. The page shows a code: enter it at OpenAI
+For ChatGPT, choose **Sign in with ChatGPT** in **N4N0 → Settings → Agents & keys**. The page shows a code: enter it at OpenAI
 when asked. The sign-in tokens stay on the Pi.
 
 Each provider takes up to five API keys: choose **+** on the provider's last key to add another. Extra keys are
@@ -121,8 +127,10 @@ are never replayed. Your notification settings in Orbiters still decide which no
 
 - **Owner brief:** who you are, what you sell, your capacity, goals, red lines and voice.
 - **Watch list:** public accounts and pages to follow.
-- **Documents:** your CV, skills sheets or notes (PDF, Markdown or text, up to 4 MB each). Re-upload a file with
-  the same name to replace it.
+- **Documents:** your CV, résumé, cover letters, LinkedIn export, skills sheets or notes (PDF, Word `.docx`, Markdown,
+  text or CSV, up to 4 MB each). Re-upload a file with the same name to replace it. The same documents build your
+  job-search profile: each change asks N4N0 to read them on the planning model, and **Job search → Profile** shows the
+  result (see [Search for jobs with your profile in N4N0](/documentation/orbiters.how-to.n4n0-job-search)).
 - **Reach and rhythm:** digest time and how often N4N0 may interrupt you or ask questions.
 
 ## Choose models and pace background research
@@ -230,13 +238,14 @@ skill, refreshed daily); the planner queues one look at it a day.
 N4N0 uses the Orbiters AI app tools as you, with read access only: your account, assets and creator performance,
 commission inbox, events, boards and articles, the Discord servers you manage (stats, roles, channels, messages,
 announcements and activity), plus the staff-only **platform overview** (platform-wide totals, no individual member
-data). It can never draft, publish, schedule, pay or change anything. **Unpair** removes the access at once.
+data). It can never draft, publish, schedule, pay or change anything. **Unpair** removes the access at once, and so
+does removing the `n4n0-workspace` feature from the account.
 
 On the Pi, N4N0's chat and workers also have read-only social tools:
 
 | Tools | Source and limits |
 | --- | --- |
-| `reddit_search`, `reddit_subreddit`, `reddit_find_subreddits`, `reddit_post` | The Reddit API. Reddit refuses unauthenticated use: create a "script" app at [reddit.com/prefs/apps](https://www.reddit.com/prefs/apps) and save its app ID and secret in **N4N0 → Agents & keys**. |
+| `reddit_search`, `reddit_subreddit`, `reddit_find_subreddits`, `reddit_post` | The Reddit API. Reddit refuses unauthenticated use: create a "script" app at [reddit.com/prefs/apps](https://www.reddit.com/prefs/apps) and save its app ID and secret in **N4N0 → Settings → Agents & keys**. |
 | `x_profile`, `x_post` | Public X embed pages, then twitter-viewer.com or archivlyx.com. No keyword search. |
 | `instagram_profile` | igexport.com. Post links and media only, no captions. |
 
