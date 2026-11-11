@@ -108,6 +108,33 @@ factory reset or unregister its WSL data storage to resolve an application conne
 error: those operations can destroy the database. After Docker recovers, restart the
 backend with Node.js 22.12 or newer.
 
+## World feedback returns HTTP 500
+
+Check `http://127.0.0.1:4100/readyz` before changing feedback tables. A response of
+`503 Database unavailable`, together with connection refusal on `localhost:5433`,
+means the development database cannot be reached. Likes, labels, comments and the
+world page's pictures all need PostgreSQL; an HTTP listener alone is not readiness.
+
+On 2026-11-11 the Docker engine was unavailable while the native Node backend
+continued listening. Restoring Docker Desktop and its existing `postgres-dev`
+container restored feedback without a backend restart or schema change. Allow
+PostgreSQL crash recovery to finish and wait for `/readyz` to return `200 Ready`.
+Use the database recovery procedure above; do not reset Docker or replace volumes.
+If Desktop's CLI restart hangs, inspect its host logs and orphaned Desktop/build
+processes before relaunching it. Do not stop unrelated services.
+
+Verify both anonymous and authenticated `GET /maps/worlds/<worldId>/feedback`,
+then post to `/maps/worlds/<worldId>/comments` with `text` and a unique `clientId`.
+Read again and confirm the comment appears. `PUT /maps/worlds/<worldId>/feedback`
+sets `liked` and the label booleans; repeat the read to verify their counts and
+the member's `mine` values. Use a dedicated QA account and remove its feedback
+after checking. Close personal QA accounts through the privacy lifecycle rather
+than deleting their database row.
+
+`backend/test/worldFeedbackDatabase.test.js` includes this HTTP round trip with
+real JWT authentication and PostgreSQL. Its header documents the isolated,
+opt-in database setup. It must never run against development or production data.
+
 ## Port Conflicts
 
 Do not kill processes blindly. First check whether the port belongs to the main development environment.
