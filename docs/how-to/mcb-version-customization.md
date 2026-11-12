@@ -248,8 +248,7 @@ a label, the SHA-256 of every custom model file you distributed, and what the MC
 versions replace: avatar objects (for example the old contact groups), FX layers and
 parameters, and renderer paths that differ from the original base.
 
-When a buyer opens such an avatar, MCB's gallery shows **Migrate avatar**. One press,
-undoable:
+When a buyer opens such an avatar, MCB's gallery shows **Migrate avatar**. Installing or applying a version of the same asset also migrates it automatically. An in-flight legacy lookup finishes before the install continues. After migration, MCB refreshes the offers for the original base and selects the same version number, downloading its files when needed. If migration cannot proceed, its explanation is shown before the avatar changes. The separate **Migrate avatar** button remains available. Migration is undoable:
 
 - renderers from the old model use the original base model again (bones remapped,
   blendshape values kept by name), so MCB versions apply as on any original avatar;
