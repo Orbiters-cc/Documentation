@@ -344,3 +344,13 @@ The twist weight-distribution implementation derives from Haï's MIT-licensed
 Prefabulous Universal; the package includes its license and attribution.
 
 </audience>
+
+<audience include="dev">
+
+`POST /mcb/custom-bases/identify` also accepts `{ "hashes": [], "assetId": 7 }` for the asset whose version is being installed. `assetId` must be a positive integer JSON number; invalid values return 400. The hash array remains required, with at most 32 entries; it may be empty only when `assetId` is supplied. The existing 60 requests per minute limit applies.
+
+The response keeps `matches` unchanged and adds `asset` only for an avatar asset visible under the same policy as legacy hash recognition. Unknown, non-avatar and inaccessible assets all omit `asset` without an error. The asset contains `assetId`, `assetName`, `avatarBase` (the same `{ id, name }` summary as a legacy match, or null), `originals` and `legacyReleases`.
+
+`originals` uses the legacy match's active SOURCE FBX query, ordered by file ID, limited to 256 rows and deduplicated by hash, returning `{ path, hash }` entries even when there are no releases. `legacyReleases` includes every release as `{ label, cleanup }`; `customModelHashes` are never returned. The editor can compare cleanup layer names locally without sending avatar layer names to the server.
+
+</audience>
