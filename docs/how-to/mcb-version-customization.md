@@ -354,3 +354,12 @@ The response keeps `matches` unchanged and adds `asset` only for an avatar asset
 `originals` uses the legacy match's active SOURCE FBX query, ordered by file ID, limited to 256 rows and deduplicated by hash, returning `{ path, hash }` entries even when there are no releases. `legacyReleases` includes every release as `{ label, cleanup }`; `customModelHashes` are never returned. The editor can compare cleanup layer names locally without sending avatar layer names to the server.
 
 </audience>
+
+
+### Installing on a personal custom body
+
+When an avatar uses a different body model at the original base renderer paths, installing a version first records that body and temporarily restores the original base meshes. No custom-model hash registration is needed. Import a supported original base model when prompted; missing models or unresolved bones stop preparation before the avatar changes.
+
+Returning to the original base restores the personal body, materials, bone pose, Animator Avatar and descriptor assets. If no release is recognised, preparation performs no release cleanup: existing animator layers, parameters and objects stay. A recognised release supplies its cleanup as before.
+
+Discovery's `sourceFiles` may contain only a matching original set. The editor uses all `sourceVersions` when checking supported originals, with `sourceFiles` used by `OriginalBaseLibrary.Versions` when no version groups are present. A version's selected source files alone cannot establish every supported original.
