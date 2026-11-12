@@ -242,6 +242,19 @@ uploads at 266 MB (106 MB to download).
 
 ## Releases made before MCB
 
+<alpha>
+Local unreleased package change: restoring a model's armature during installation,
+version switching or return to the original base skips model transforms the avatar
+does not have, together with their children. A transform that would reuse an already
+mapped avatar transform is skipped too. The remaining transforms are restored;
+skipped paths are reported together in one informational log entry. Restoration
+still stops if no transforms match or a mapping would create a hierarchy cycle.
+Renderer restoration separately refuses meshes whose required bones cannot be
+resolved. This permits custom-body models to contain extra lights or leaf bones
+without those unused objects blocking the armature restore; it does not identify
+or remove an old release's animation layers or objects.
+</alpha>
+
 If you sold the custom base before using MCB (a custom FBX inside an avatar project),
 register that release so MCB recognises the avatars built from it. Give each release
 a label, the SHA-256 of every custom model file you distributed, and what the MCB
