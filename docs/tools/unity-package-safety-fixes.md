@@ -57,12 +57,17 @@ If restoring a file fails, MCB retains temporary recovery copies, reports the
 failure and clears the applied-version marker instead of claiming the transition
 succeeded. Inspect the local diagnostic for the recovery paths before retrying.
 
-## Optional diagnostic reporting
+## Diagnostic reporting
 
-**Advanced > Share MCB diagnostics** is off by default. An explicit saved opt-in
-remains honored. Enabling it shares diagnostics emitted through MCB's own logger;
-it does not subscribe to the global Unity console. Console visibility and sharing
-are separate settings. The default minimum severity is Warning.
+Since MCB 1.14.1, MCB's own warnings and errors are sent to Orbiters unless the
+person turns that off (from 1.7.5 to 1.14.0 it was an opt-in under Advanced
+Settings, and no report ever arrived). MCB's inspector says so once per computer,
+with **Got it** and **Turn off**; nothing is sent before that card has been shown,
+and a choice already made with **Advanced Settings > Share MCB diagnostics** is
+kept. The switch stays there. Sharing covers diagnostics emitted through MCB's own
+logger; it does not subscribe to the global Unity console. Console visibility and
+sharing are separate settings. The default minimum severity is Warning. My Avatar
+and ReFit keep their opt-in.
 
 Messages and stack traces are capped and scrubbed for recognized credentials,
 URLs, email addresses and filesystem paths. The current authentication token is
