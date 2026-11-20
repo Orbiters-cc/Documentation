@@ -413,6 +413,16 @@ model package in the project: MCB looks for it among the avatar's models and the
 in `Assets/MCB/migrated` and migrated. If anything fails after this preparation started, the body is put back before the
 error is shown.
 
+A body on another base than the one the version was made on is not migrated (MCB 1.14.3): a newer release of the base
+with other bones, such as a Rexouium 1.7 avatar under a version made on Rexouium 1.6. When the version brings its own
+skeleton (every model change is a plain advanced mesh) and no older release of the asset is recognised on the avatar,
+MCB installs it on the body as it is whenever none of the version's original models is in the project, or the avatar
+lacks bones that original's body is skinned to. Nothing has to be imported: the bones the version needs are added,
+clothing and accessories keep their place, a Digitigrade rig keeps its own humanoid, and going back puts every object
+and mesh back. A personal edit of an original (the original in the project, all of its bones on the avatar) is migrated
+as described above. An avatar whose model was exported in another unit than the version (an armature at scale 100) is
+refused with a message that says so, unless MCB migrated its body.
+
 Going back to the original base brings back the personal body: meshes (an empty one stays empty), materials (empty slots
 included), the Animator's Avatar and the descriptor's controllers, parameters and menus, but only slots that still hold
 what MCB put there; a controller or menu you chose since stays. A migrated avatar with no version installed shows **Put
