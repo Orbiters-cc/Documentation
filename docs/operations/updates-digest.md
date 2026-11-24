@@ -28,7 +28,8 @@ Two rules hold whatever else happens:
 - **A room posts news only after its own test.** You send a test there and say in the tab that
   you saw it. Scheduled digests and **Send now** both need that. It is undone by itself when the
   channel is disconnected, also if it is connected again after that, when its account changes, or
-  when another bot posts there. Connecting a channel that is still connected changes nothing.
+  when another bot posts there. Connecting a channel that is still connected changes nothing
+  unless its stored details, such as its name, changed meanwhile: then it has to be tested again.
 - **Send now and tests post exactly what their confirmation showed.** The confirmation lists the
   messages, every address in them, and the rooms. If anything is different when they are sent,
   what differs is not posted and the tab shows what it would be then. A confirmation is used once:
@@ -94,21 +95,23 @@ day without news.
   published after it is turned on, and a kind of update after that kind is turned on. Earlier
   history is never posted.
 - Two rooms can have the same name. The tab shows, wherever a room is added, listed or
-  confirmed: its platform, its server, who can read it as far as the platform says, the id
-  that messages are sent to, and a link that opens it where the platform has one. The id is what
-  decides. What is not shown is not known: a platform that does not answer leaves the server's id
-  and nothing about the readers. Discord's readers are who may view the channel in its server.
+  confirmed: its platform, its server, who can read it as far as the platform says, and the id
+  that messages are sent to. The name, the server and the readers are read back from the platform
+  for that id at every look at the tab; when the platform does not answer, the tab says that the
+  name is the stored one. Discord rooms have a link that opens them. Telegram rooms have none, and
+  none can be put together from an id. The id is what decides. Discord's readers are who may view the channel in its server.
 - A version is announced once in a room. Deleting a release and publishing it again under
   the same version does not announce it again. A pre-release that becomes a stable release
   is announced as a stable release.
 - **No message is posted more than ten minutes after it was prepared.** A scheduled one is then
   prepared again from what is published at that moment, also after the server was stopped, after
-  the platform refused it for a while, and after you answered for a message before it. A release
+  the platform refused it for a while, and, however recent it is, after you answered for a message
+  before it. A release
   that was withdrawn, turned into a draft or reclassified before that is not posted as it was. What
   you confirmed with **Send now** is not posted later than ten minutes after it was accepted; it and
   tests are tried once.
 - A scheduled message that is refused for the moment is tried eight times in all, at growing
-  intervals. **A scheduled digest that is not through six hours after it was made is over**; what is
+  intervals; the messages behind it have their own eight. **A scheduled digest that is not through six hours after it was made is over**; what is
   left and still published goes with the next one. So does what a refused message holds:
   **Next digest** and **Send now** show it.
 - The whole list of desktop releases is read, through every page GitHub links to, and its first
@@ -142,26 +145,32 @@ Use a private channel first, then repeat steps 2 to 8 for the real one.
    listed, if the switch is on, or if a setting does not survive a refresh.
 2. Under **What a digest says** keep **Versions and links**. Set **Daily time** to a time that is
    still to come today and leaves you time for the steps below, and choose **Save time**; the button
-   stays grey while the time is the saved one. Refresh and check the time and the time zone. **Do this again for every room you add**: a time that has
-   passed today is due at once in a room that is tested later the same day.
-3. In the platform, open the channel you mean and note its id. On Discord: **Copy Channel ID**,
-   or the last number of its link. On Telegram: the number that starts with -100, from a client
-   that shows ids or from a message link of that channel (the number in it, with -100 before it).
-   With the digest still off, choose **Connect another room** and connect that channel. Connecting
-   only makes it available. A channel that is connected already is listed without this step; an
-   account can have ten connected channels.
+   stays grey while the time is the saved one. Refresh and check the time and the time zone. **Do
+   this again for every room you add**: a time that has passed today is due at once in a room that is tested later the same day.
+3. In the platform, open the channel you mean and make sure you can recognize it in the tab.
+   - Discord: note its id with **Copy Channel ID**.
+   - Telegram: **rename the channel for now to a title nothing else has**, such as "Rehearsal" with
+     today's date and time. The tab reads the title back from Telegram for the id that messages are
+     sent to, so a row with exactly that title is that channel. Do not take an id from a link and
+     do not put one together: a message link holds two numbers, and a public one none.
+   With the digest still off, choose **Connect another room** and connect that channel. On Telegram
+   choose it from the list that Telegram reported, or paste the whole link of one of its messages;
+   never type a number. Connecting only makes it available. A channel that is connected already is
+   listed without this step; an account can have ten connected channels.
    - Discord: a text or announcement channel. The account that connects it needs View Channel
      and Manage Channels; the bot needs View Channel, Send Messages, Embed Links, Attach
      Files, Read Message History, Create Public Threads and Send Messages in Threads.
    - Telegram: a channel your linked account administers, where the bot is an administrator
      that may post. The bot's Orbiters webhook must be registered, and if the channel has a
      linked discussion group the bot must be an administrator there too.
-4. Find the row with that id under **Add a room** and choose its **Add**. Compare the whole id,
-   the server and who can read it with the channel you noted. Where there is an **Open**, follow
-   it: it must open that channel. A private Telegram channel has none: compare its number only.
-   Stop if any of them differs, even when the name matches. The name alone never tells two
-   channels apart.
-5. The room's card is off and says **Not tested**. Check the id once more, its language, the kinds
+4. Refresh the tab and find the row under **Add a room**. On Discord compare the whole id, the
+   server and who can read it, and follow **Open**: it must open that channel. On Telegram compare
+   the title, which must be the new one, whether it is public or private, and its public name if
+   it has one; then note its id. Stop if anything differs, if two rows have that title, or if the
+   tab says that the platform did not answer. Then choose its **Add**. From here on the id is what
+   you compare. You can give a Telegram channel its old title back after step 7; renaming it changes
+   neither its id nor its test, as long as you do not connect it again.
+5. The room's card is off and says **Not tested**, or that the bot is not connected: stop then. Check the id once more, its language, the kinds
    of updates and the pre-release switch, and that every other room is off. Turn on **Receives the
    daily digest**. Its **Next digest** shows the messages as they would be sent: nothing, or only
    what was published in the minutes since you turned it on. Stop if it shows older versions,
@@ -198,8 +207,11 @@ nothing else is posted in that room**: no digest, no **Send now**, no test. Othe
    it is. The wrong answer can post a message twice, or never.
    - A **scheduled digest** of the last six hours that did not appear: what is published now is read
      again and posted, not the old message. After that, what it held goes with the next digest.
-   - A **scheduled digest** that did appear: its other messages are read again and posted, or go with
-     the next digest, by the same six hours. They are not posted as they were prepared.
+   - A **scheduled digest** that did appear: its other messages are dropped, at once, however
+     recently they were prepared. What they held is read again and posted, or goes with the next
+     digest, by the same six hours.
+   - A **Send now** that did appear is over: its other messages are dropped, and what they held is in
+     the next digest.
    - A **test** that did not appear is over: nothing replaces it. Send another one. A test that
      did appear does not make the room receive news by itself: after the answer choose **I saw it
      in this room** too.
