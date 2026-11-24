@@ -174,6 +174,9 @@ against the restored commit, so it rebuilds whatever changed since then. The dat
 not rolled back: when the newer release changed the schema, check the recovery procedure
 first, since older code may not run against the newer schema.
 
+While a room receives the daily updates digest, turn the digest off before rolling back:
+[Run the daily updates digest](updates-digest.md#before-rolling-images-back).
+
 The documentation impact reason can contain normal prose, quotes and line breaks. It is
 validated, with the other arguments, before the release touches the host.
 
