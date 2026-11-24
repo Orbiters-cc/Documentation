@@ -27,12 +27,12 @@ Two rules hold whatever else happens:
 
 - **A room posts news only after its own test.** You send a test there and say in the tab that
   you saw it. Scheduled digests and **Send now** both need that. It is undone by itself when the
-  channel is connected again or disconnected, when its owner account changes, or when another
-  bot posts there.
+  channel is disconnected, also if it is connected again after that, when its account changes, or
+  when another bot posts there. Connecting a channel that is still connected changes nothing.
 - **Send now and tests post exactly what their confirmation showed.** The confirmation lists the
   messages, every address in them, and the rooms. If anything is different when they are sent,
-  nothing that differs is posted and the tab shows what it would be then. A scheduled digest has
-  no confirmation: it reads the news at its time.
+  what differs is not posted and the tab shows what it would be then. A confirmation is used once:
+  sent twice, it posts once. A scheduled digest has no confirmation: it reads the news at its time.
 
 ## To stop all posting
 
@@ -64,7 +64,11 @@ there. Leave the digest off while you investigate, and the rooms on if you want 
 
 **Look at the tab regularly**: after each scheduled time at first, then at least once a week.
 Nothing outside the tab says that a room waits for an answer, for a test or for GitHub, and an
-open tab does not refresh itself.
+open tab does not refresh itself. Each room's card says why it receives nothing, where somebody
+can do something about it: not tested, disconnected, an account that is no longer an owner, a bot
+that cannot be reached, a message that waits for your answer, and what stopped its last scheduled
+digest. A day without news leaves a **Nothing new** row under **Recent posts**; a day without a row
+is a day on which nothing ran.
 
 ## What a digest says
 
@@ -83,8 +87,9 @@ day without news.
 ## Rules worth knowing
 
 - The digest is off, and no room receives it, until an owner adds a room, turns that room on,
-  turns the digest on, sends a test there and confirms that it appeared. **Receiving the digest**
-  counts the rooms that are on and tested.
+  turns the digest on, sends a test there and confirms that it appeared. **Can receive the digest**
+  counts the rooms that are on and tested and that nothing the tab knows of keeps from being posted
+  in.
 - Connecting a room and adding it post nothing. An added room is always off. It starts with what is
   published after it is turned on, and a kind of update after that kind is turned on. Earlier
   history is never posted.
@@ -96,22 +101,34 @@ day without news.
 - A version is announced once in a room. Deleting a release and publishing it again under
   the same version does not announce it again. A pre-release that becomes a stable release
   is announced as a stable release.
-- What is published is read again each time a digest is prepared, for every confirmation, and
-  once more for **Try again** and after **It did not appear**. A release that was withdrawn,
-  turned into a draft or reclassified before that is not posted as it was. Between preparation and
-  posting nothing is read: a scheduled message that is refused for the moment is tried again by
-  itself for about three hours, or as long as the platform asks, as it was prepared. **Send now**
-  and tests are tried once, within ten minutes of their confirmation.
+- **No message is posted more than ten minutes after it was prepared.** A scheduled one is then
+  prepared again from what is published at that moment, also after the server was stopped, after
+  the platform refused it for a while, and after you answered for a message before it. A release
+  that was withdrawn, turned into a draft or reclassified before that is not posted as it was. What
+  you confirmed with **Send now** is not posted later than ten minutes after it was accepted; it and
+  tests are tried once.
+- A scheduled message that is refused for the moment is tried eight times in all, at growing
+  intervals. **A scheduled digest that is not through six hours after it was made is over**; what is
+  left and still published goes with the next one. So does what a refused message holds:
+  **Next digest** and **Send now** show it.
 - The whole list of desktop releases is read, through every page GitHub links to, and its first
-  page once more at the end. If a page fails, takes too long, the list moved meanwhile or has more
-  than 100 pages, that room's digest waits, tools included, says why under **Recent posts**, and
-  tries again. A change in the middle of the list, in the seconds in which it is read, can go
-  unnoticed: what was missed is in the next digest, and a withdrawal can be missed once.
-- GitHub allows a server 60 requests an hour without an account and far more with one. Reading
-  the list takes one request for every 100 releases, and one more, for each room. The tab says
-  when the hour's limit is used up, and the digest waits until it starts again. When the list can
-  never be read within it, the tab asks to connect GitHub for the account that owns the Orbiters
-  VPM listing.
+  page once more at the end. Drafts are left out. If a page fails, takes too long, the list moved
+  meanwhile or has more than 100 pages, that room's digest waits, tools included, says why on the
+  room's card, and tries again. If two published releases have one tag, the card names the tag, and
+  no room that receives desktop releases is posted in until one of them is removed or renamed. A
+  change in the middle of the list, in the seconds in which it is read, can go unnoticed: what was
+  missed is in the next digest, and a withdrawal can be missed once.
+- Tools are read from the Orbiters VPM listing. If that listing does not exist, the rooms that
+  receive tools say so and are not posted in.
+- GitHub allows a server 60 requests an hour without an account and far more with one. One reading
+  of the list takes one request for every 100 releases, and one more if there is more than one page:
+  four requests for 220 releases. Every look at the tab and every **Refresh** is one reading for all
+  rooms together, also while the digest is off. **Send now** takes one reading to show, one to check
+  and one for each room that is posted. Each scheduled digest takes one for its room, and one more
+  each time it is prepared again. **Release notes** adds up to two for each new version of a tool. The
+  tab says when the hour's limit is used up, and the digest waits until it starts again. When the
+  list can never be read within it, the tab asks to connect GitHub for the account that owns the
+  Orbiters VPM listing. Connect it before the first room.
 - Only a room that an owner connected receives the digest. A room that another account
   connected cannot be taken over, not even after it was disconnected there: use another
   room. A digest that was added for such a room before is refused; remove it.
@@ -124,8 +141,8 @@ Use a private channel first, then repeat steps 2 to 8 for the real one.
    **Updates digest** is off and that no room is listed. Stop if a room you did not add is
    listed, if the switch is on, or if a setting does not survive a refresh.
 2. Under **What a digest says** keep **Versions and links**. Set **Daily time** to a time that is
-   still to come today and leaves you time for the steps below, and choose **Save time**. Refresh
-   and check the time and the time zone. **Do this again for every room you add**: a time that has
+   still to come today and leaves you time for the steps below, and choose **Save time**; the button
+   stays grey while the time is the saved one. Refresh and check the time and the time zone. **Do this again for every room you add**: a time that has
    passed today is due at once in a room that is tested later the same day.
 3. In the platform, open the channel you mean and note its id. On Discord: **Copy Channel ID**,
    or the last number of its link. On Telegram: the number that starts with -100, from a client
@@ -149,17 +166,20 @@ Use a private channel first, then repeat steps 2 to 8 for the real one.
    daily digest**. Its **Next digest** shows the messages as they would be sent: nothing, or only
    what was published in the minutes since you turned it on. Stop if it shows older versions,
    lines of text with **Versions and links**, or an unexpected address.
-6. Look at the daily time again. Turn **Updates digest** on and refresh. **Receiving the digest**
+6. Look at the daily time again. Turn **Updates digest** on and refresh. **Can receive the digest**
    still says 0: nothing but a test can be posted. Choose **Send a test here**, compare the id and
-   read the message in the confirmation, then **Post the test**.
+   read the message in the confirmation, then **Post the test**. If no answer arrives, look at the
+   room first. **Post the test** in the same dialog posts no second one, it says what became of the
+   first; a dialog you open again asks for another test.
 7. Look at the platform. Exactly that message must be there, once, in that channel only, from the
    Orbiters bot: on Discord one message with a small card, on Telegram one line. Only then choose
-   **I saw it in this room**. From that moment the room receives news; if today's time has passed,
-   today's digest follows within a minute. **Receiving the digest** now says 1. If the test is
+   **I saw it in this room**. From that moment the room receives news; if today's time has passed and
+   today's digest has not run there, it follows within minutes. **Can receive the digest** now says 1. If the test is
    missing, twice, or anywhere else: do not confirm it, and turn the digest off.
 8. After something new was published, choose **Send now**. Its confirmation lists every room with
    its id and, for each, the messages exactly as they are sent. Read them, then choose **Post in N
-   rooms**. If the tab says that something changed, nothing that changed was posted: read it again.
+   rooms**. If the tab says that something changed, what changed was not posted, and it says what was:
+   read it again.
    Or let the daily time pass; a scheduled digest posts what is new at its time. Then check the
    message in the room, **Posted** in the tab, and that **Next digest**, after its **Refresh**, no
    longer holds it.
@@ -176,8 +196,10 @@ nothing else is posted in that room**: no digest, no **Send now**, no test. Othe
 1. Look at the room itself. Give the platform some minutes.
 2. Choose **It appeared in the room** or **It did not appear** only when you saw which one
    it is. The wrong answer can post a message twice, or never.
-   - A **scheduled digest** that did not appear: what is published now is read again and posted,
-     not the old message.
+   - A **scheduled digest** of the last six hours that did not appear: what is published now is read
+     again and posted, not the old message. After that, what it held goes with the next digest.
+   - A **scheduled digest** that did appear: its other messages are read again and posted, or go with
+     the next digest, by the same six hours. They are not posted as they were prepared.
    - A **test** that did not appear is over: nothing replaces it. Send another one. A test that
      did appear does not make the room receive news by itself: after the answer choose **I saw it
      in this room** too.
@@ -188,8 +210,13 @@ nothing else is posted in that room**: no digest, no **Send now**, no test. Othe
    turn the room off instead, what is published until it is on again is never posted there.
 
 A scheduled message that was **Refused** for good (a missing permission, a deleted channel)
-waits for **Try again**, or goes with the next digest. Repair the cause first. A test or a
+waits for **Try again**, which reads what is published and posts it within its six hours and leaves
+it to the next digest after them. It goes with the next digest either way. Repair the cause first. A test or a
 **Send now** that was refused needs no answer.
+
+A card that says it **cannot be checked right now** which bot posts there keeps its test: the bot
+is not connected, or Telegram's settings cannot be read. It comes back by itself; nobody changed the
+room.
 
 A digest that says the room **has no confirmed test** was stopped because the room, its
 connection or its bot changed. Send a test there and confirm it; today's scheduled digest is not
